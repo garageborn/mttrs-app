@@ -4,7 +4,7 @@ class Story extends Component {
   render() {
     const {story, onClick} = this.props
     return (
-      <li onClick={ () => { onClick(story) }}>
+      <li onClick={() => { onClick(story) }}>
         {story.title}
       </li>
     )

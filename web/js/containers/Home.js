@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as HomeActions from 'actions/HomeActions'
 import StoryListContainer from 'containers/StoryListContainer'
+import Header from 'components/Header'
 
 class Home extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class Home extends Component {
     const {stories} = this.props
     return (
       <main>
+        <Header />
         <StoryListContainer stories={stories}/>
       </main>
     )
