@@ -4,6 +4,6 @@ import * as ENDPOINTS from 'constants/APIEndpoints'
 export function getStories(query={}, callback) {
   request
     .get(ENDPOINTS.STORIES)
-    .query(...query)
+    .query(query)
     .end(callback)
 }

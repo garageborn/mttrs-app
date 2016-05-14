@@ -10,7 +10,8 @@ export function receiveStories(stories) {
 
 export function getStories() {
   return dispatch => {
-    API.getStories({ recent: true }, (error, response) => {
+    let query = { recent: true, today: true }
+    API.getStories(query, (error, response) => {
       if (error || !response.ok) return
       dispatch(receiveStories(response.body))
     })
