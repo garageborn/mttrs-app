@@ -11,7 +11,8 @@ module.exports = {
   entry: [
     'eventsource-polyfill',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    './js/index.js'
+    './js/index.js',
+    './css/index.sass'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -24,17 +25,19 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css', { allChunks: true })
   ],
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') }
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') }
     ]
   },
   resolve: {
     alias: {
       actions: path.resolve('js/actions'),
+      api: path.resolve('js/api'),
       components: path.resolve('js/components'),
       constants: path.resolve('js/constants'),
       containers: path.resolve('js/containers'),
