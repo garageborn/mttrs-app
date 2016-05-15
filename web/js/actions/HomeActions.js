@@ -1,5 +1,6 @@
-import {HOME_STORIES_RECEIVED} from 'constants/ActionTypes'
+import {HOME_STORIES_RECEIVED, OPEN_HOME} from 'constants/ActionTypes'
 import * as API from 'api/index'
+import {push} from 'react-router-redux'
 
 export function receiveStories(stories) {
   return {
@@ -10,10 +11,16 @@ export function receiveStories(stories) {
 
 export function getStories() {
   return dispatch => {
-    let query = { recent: true, today: true }
+    let query = { recent: true }
     API.getStories(query, (error, response) => {
       if (error || !response.ok) return
       dispatch(receiveStories(response.body))
     })
+  }
+}
+
+export function openHome() {
+  return dispatch => {
+    dispatch(push('/'))
   }
 }

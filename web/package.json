@@ -13,6 +13,8 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
+    "react-router": "^2.4.0",
+    "react-router-redux": "^4.0.4",
     "redux": "^3.0.4",
     "redux-devtools": "^2.1.5",
     "redux-thunk": "^1.0.0",

@@ -1,10 +1,10 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
-});
+})
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -47,4 +47,4 @@ module.exports = {
     },
     extensions: ['', '.js', '.json']
   }
-};
+}

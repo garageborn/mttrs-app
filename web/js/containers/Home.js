@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as HomeActions from 'actions/HomeActions'
+import Header from 'containers/Header'
 import StoryListContainer from 'containers/StoryListContainer'
-import Header from 'components/Header'
 
 class Home extends Component {
   componentDidMount() {
