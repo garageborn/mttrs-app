@@ -6,26 +6,27 @@ import StoryListContainer from 'containers/StoryListContainer'
 
 class Category extends Component {
   componentDidMount() {
-    this.fetchStories(this.props.params.slug)
+    this.fetchCategory(this.props.params.slug)
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.slug !== this.props.params.slug) {
-      this.fetchStories(nextProps.params.slug)
+      this.fetchCategory(nextProps.params.slug)
     }
   }
 
   render() {
-    const {stories} = this.props
+    const {category, stories} = this.props
     return (
       <main>
-        <Header />
+        <Header currentCategory={category}/>
         <StoryListContainer stories={stories}/>
       </main>
     )
   }
 
-  fetchStories(slug) {
+  fetchCategory(slug) {
+    this.props.dispatch(CategoryActions.getCategory(slug))
     this.props.dispatch(CategoryActions.getStories(slug))
   }
 }

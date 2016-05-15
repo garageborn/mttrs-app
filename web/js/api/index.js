@@ -8,6 +8,12 @@ export function getCategories(query={}, callback) {
     .end(callback)
 }
 
+export function getCategory(id, callback) {
+  request
+    .get(ENDPOINTS.CATEGORY(id))
+    .end(callback)
+}
+
 export function getStories(query={}, callback) {
   request
     .get(ENDPOINTS.STORIES)

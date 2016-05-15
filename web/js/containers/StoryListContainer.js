@@ -13,7 +13,13 @@ class StoryListContainer extends Component {
     return (
       <ol>
         {stories.map((story) => {
-          return <Story key={story.id} story={story} onClick={this.openStory.bind(this)}/>
+          return (
+            <Story
+              key={story.id}
+              story={story}
+              onClick={this.openStory.bind(this)}
+              />
+            )
         })}
       </ol>
     )

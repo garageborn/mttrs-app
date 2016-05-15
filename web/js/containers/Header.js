@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import * as HeaderActions from 'actions/HeaderActions'
 import * as HomeActions from 'actions/HomeActions'
@@ -12,36 +12,62 @@ class Header extends Component {
   }
 
   render() {
-    const {categories, state, store} = this.props
     return (
       <header>
         <h1>
           <a onClick={this.openHome.bind(this)}>MTTRS</a>
-          </h1>
+        </h1>
         <ol>
-          {categories.map((category) => {
-            return (
-              <HeaderItem
-                key={category.id}
-                category={category}
-                onClick={this.openCategory.bind(this)}
-                />
-              )
-          })}
+          {this.defaultItem}
+          {this.categoriesItems}
         </ol>
       </header>
     )
   }
 
+  get defaultItem() {
+    return (
+      <HeaderItem
+        category={{name: 'All'}}
+        isSelected={!this.props.currentCategory}
+        onClick={this.openHome.bind(this)}
+        />
+      )
+  }
+
+  get categoriesItems() {
+    return this.props.categories.map((category) => {
+      return this.categoryItem(category)
+    })
+  }
+
+  categoryItem(category) {
+    return (
+      <HeaderItem
+        key={category.id}
+        category={category}
+        isSelected={this.isSelected(category)}
+        onClick={this.openCategory.bind(this)}
+        />
+      )
+  }
+
   openCategory(category) {
-    const {dispatch} = this.props
-    dispatch(CategoryActions.openCategory(category))
+    this.props.dispatch(CategoryActions.openCategory(category))
   }
 
   openHome() {
-    const {dispatch} = this.props
-    dispatch(HomeActions.openHome())
+    this.props.dispatch(HomeActions.openHome())
   }
+
+  isSelected(category) {
+    if (!this.props.currentCategory) return false
+    return category.slug === this.props.currentCategory.slug
+  }
+}
+
+Header.propTypes = {
+  currentCategory: PropTypes.any
 }
 
 export default connect(state => state.HeaderReducers)(Header)
