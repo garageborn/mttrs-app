@@ -21,10 +21,19 @@ class Story extends Component {
   }
 
   get footer() {
-    let createdAt = moment(this.props.story.created_at).format('hA')
-    let publisher = this.publisher
-    if (!this.publisher) return (<p>@{createdAt}</p>)
-    return (<p>@{createdAt} from {this.publisher}</p>)
+    if (!this.publisher) return (<p>@{this.createdAt}</p>)
+    return (<p>@{this.createdAt} from {this.publisher}</p>)
+  }
+
+  get createdAt() {
+    let createdAt = moment(this.props.story.created_at)
+
+    return createdAt.calendar(null, {
+      lastDay : '[Yesterday] hA',
+      sameDay : '[] hA',
+      lastWeek : 'MMMM D, hA',
+      sameElse : 'MMMM D, hA'
+    })
   }
 
   get publisher() {
