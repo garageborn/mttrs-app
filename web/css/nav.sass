@@ -1,0 +1,32 @@
+nav
+  ul
+    list-style-type: none
+    border-top: 1px solid #EB4F06
+    padding: 5px 0
+
+    li
+      display: inline
+
+      a, span.active
+        display: inline-block
+        margin: 0 3px
+        padding: 8px 7px
+        color: #fff
+        text-decoration: none
+        cursor: pointer
+
+      a:before, span.active:before
+        content: ''
+        display: inline-block
+        width: 4px
+        height: 4px
+        border: 2px solid #fff
+        border-radius: 3px
+        vertical-align: middle
+        margin: 0 5px 2px 0
+
+      a:hover
+        text-decoration: underline
+
+      span.active
+        font-weight: bold

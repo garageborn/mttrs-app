@@ -1,20 +1,20 @@
 import React, {Component, PropTypes} from 'react'
 
-class HeaderItem extends Component {
+class NavItem extends Component {
   render() {
     const {category, isSelected, onClick} = this.props
     return (
-      <h2>
+      <li>
         {isSelected
-          ? <span>{category.name}**</span>
+          ? <span className="active">{category.name}</span>
           : <a onClick={e => onClick(category)}>{category.name}</a>
         }
-      </h2>
+      </li>
     )
   }
 }
 
-HeaderItem.propTypes = {
+NavItem.propTypes = {
   category: PropTypes.shape({
     name: PropTypes.string.isRequired
   }).isRequired,
@@ -22,4 +22,4 @@ HeaderItem.propTypes = {
   onClick: PropTypes.func.isRequired
 }
 
-export default HeaderItem
+export default NavItem

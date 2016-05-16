@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import * as HeaderActions from 'actions/HeaderActions'
 import * as HomeActions from 'actions/HomeActions'
 import * as CategoryActions from 'actions/CategoryActions'
-import HeaderItem from 'components/HeaderItem'
-import Filters from 'containers/Filters'
+import NavItem from 'components/NavItem'
 
 class Header extends Component {
   componentDidMount() {
@@ -16,21 +15,25 @@ class Header extends Component {
     console.log('render header', this.props)
     return (
       <header>
-        <h1>
-          <a onClick={this.openHome.bind(this)}>MTTRS</a>
-        </h1>
-        <ol>
-          {this.defaultItem}
-          {this.categoriesItems}
-        </ol>
-      <Filters currentCategory={this.props.currentCategory}/>
+        <div className="container">
+          <h1>
+            <a onClick={this.openHome.bind(this)}>Mttrs - Read What Matters</a>
+          </h1>
+
+          <nav>
+            <ul>
+              {this.defaultItem}
+              {this.categoriesItems}
+            </ul>
+          </nav>
+        </div>
       </header>
     )
   }
 
   get defaultItem() {
     return (
-      <HeaderItem
+      <NavItem
         category={{name: 'All'}}
         isSelected={!this.props.currentCategory}
         onClick={this.openHome.bind(this)}
@@ -46,7 +49,7 @@ class Header extends Component {
 
   categoryItem(category) {
     return (
-      <HeaderItem
+      <NavItem
         key={category.id}
         category={category}
         isSelected={this.isSelected(category)}

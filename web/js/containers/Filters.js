@@ -6,10 +6,13 @@ class Filters extends Component {
   render() {
     console.log('render filters', this.props)
     return (
-      <div>
-        <h2>Filters</h2>
-        {this.sorting} {this.currentCategory}
-      </div>
+      <h2>
+        <div className="dropdown">
+          {this.sorting}
+        </div>
+
+        <i>in</i> {this.currentCategory}
+      </h2>
     )
   }
 

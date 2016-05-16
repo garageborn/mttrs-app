@@ -5,11 +5,13 @@ class Story extends Component {
   render() {
     const {story, onClick} = this.props
     return (
-      <li onClick={() => { onClick(story) }}>
-        {this.image}
-        {story.title}
-        {this.footer}
-      </li>
+      <div className="story" onClick={() => { onClick(story) }}>
+        <a onClick={() => { onClick(story) }}>{this.image}</a>
+        <div className="story-text">
+          <h3><a onClick={() => { onClick(story) }}>{story.title}</a></h3>
+          <p>{this.storyInfo}</p>
+        </div>
+      </div>
     )
   }
 
@@ -20,9 +22,9 @@ class Story extends Component {
     )
   }
 
-  get footer() {
+  get storyInfo() {
     if (!this.publisher) return (<p>@{this.createdAt}</p>)
-    return (<p>@{this.createdAt} from {this.publisher}</p>)
+    return (<p>@{this.createdAt} <i>from</i> {this.publisher}</p>)
   }
 
   get createdAt() {

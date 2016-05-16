@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
 import Story from 'components/Story'
+import Filters from 'containers/Filters'
 
 class StoryListContainer extends Component {
   render() {
     const {stories, dispatch} = this.props
     if (stories.length === 0) {
-      return (<div>...</div>)
+      return (<div className="loading">Hang on...</div>)
     }
     return (
-      <ol>
+      <main>
+        <Filters currentCategory={this.props.currentCategory}/>
+
         {stories.map((story) => {
           return (
             <Story
@@ -18,7 +21,7 @@ class StoryListContainer extends Component {
               />
             )
         })}
-      </ol>
+      </main>
     )
   }
 

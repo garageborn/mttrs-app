@@ -18,10 +18,10 @@ class Category extends Component {
   render() {
     const {category, stories} = this.props
     return (
-      <main>
+      <div>
         <Header currentCategory={category}/>
         <StoryListContainer stories={stories}/>
-      </main>
+      </div>
     )
   }
 

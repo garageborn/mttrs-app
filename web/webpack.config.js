@@ -12,7 +12,7 @@ module.exports = {
     'eventsource-polyfill',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     './js/index.js',
-    './css/index.sass'
+    './css/app.sass'
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -31,7 +31,9 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
-      { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') }
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') },
+      { test: /\.png$/, loader: 'file-loader' },
+      { test: /\.svg$/, loader: 'file-loader' }
     ]
   },
   resolve: {

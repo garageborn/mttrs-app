@@ -13,10 +13,10 @@ class Home extends Component {
   render() {
     const {stories} = this.props
     return (
-      <main>
+      <div>
         <Header />
         <StoryListContainer stories={stories}/>
-      </main>
+      </div>
     )
   }
 }
