@@ -9,7 +9,7 @@ export function receiveCategory(category) {
   }
 }
 
-export function receiveStories(stories) {
+export function receiveStories(stories, sorting) {
   return {
     type: CATEGORY_STORIES_RECEIVED,
     stories: stories
@@ -23,12 +23,14 @@ export function openCategory(category) {
   }
 }
 
-export function getStories(slug) {
+export function getStories(categorySlug, filter) {
   return dispatch => {
-    let query = { recent: true, category_slug: slug }
+    let query = { category_slug: categorySlug }
+    query[filter] = true
+
     API.getStories(query, (error, response) => {
       if (error || !response.ok) return
-      dispatch(receiveStories(response.body))
+      dispatch(receiveStories(response.body, filter))
     })
   }
 }

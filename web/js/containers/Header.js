@@ -4,6 +4,7 @@ import * as HeaderActions from 'actions/HeaderActions'
 import * as HomeActions from 'actions/HomeActions'
 import * as CategoryActions from 'actions/CategoryActions'
 import HeaderItem from 'components/HeaderItem'
+import Filters from 'containers/Filters'
 
 class Header extends Component {
   componentDidMount() {
@@ -12,6 +13,7 @@ class Header extends Component {
   }
 
   render() {
+    console.log('render header', this.props)
     return (
       <header>
         <h1>
@@ -21,6 +23,7 @@ class Header extends Component {
           {this.defaultItem}
           {this.categoriesItems}
         </ol>
+      <Filters currentCategory={this.props.currentCategory}/>
       </header>
     )
   }

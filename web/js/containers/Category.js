@@ -10,9 +10,9 @@ class Category extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.slug !== this.props.params.slug) {
-      this.fetchCategory(nextProps.params.slug)
-    }
+    let slugChanged = nextProps.params.slug !== this.props.params.slug
+    let filterChanged = nextProps.filter !== this.props.filter
+    if (slugChanged || filterChanged) this.fetchCategory(nextProps.params.slug, nextProps.filter)
   }
 
   render() {
@@ -25,10 +25,16 @@ class Category extends Component {
     )
   }
 
-  fetchCategory(slug) {
+  fetchCategory(slug, filter) {
     this.props.dispatch(CategoryActions.getCategory(slug))
-    this.props.dispatch(CategoryActions.getStories(slug))
+    this.props.dispatch(CategoryActions.getStories(slug, filter))
   }
 }
 
-export default connect(state => state.CategoriesReducers)(Category)
+let mapStateToProps = (state) => {
+  return {
+    ...state.CategoriesReducers,
+    filter: state.FilterReducers.filter
+  }
+}
+export default connect(mapStateToProps)(Category)
