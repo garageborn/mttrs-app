@@ -2,6 +2,7 @@ deployment:
   production:
     branch: features/capistrano
     commands:
+      - cd web && bundle install
       - cd web && bundle exec cap production deploy branch=features/capistrano
 
 test:
