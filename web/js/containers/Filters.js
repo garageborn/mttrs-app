@@ -4,7 +4,6 @@ import * as FilterActions from 'actions/FilterActions'
 
 class Filters extends Component {
   render() {
-    console.log('render filters', this.props)
     return (
       <h2>
         <div className="dropdown">

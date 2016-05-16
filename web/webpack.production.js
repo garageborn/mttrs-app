@@ -19,7 +19,12 @@ module.exports = {
   plugins: [
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
-    new ExtractTextPlugin('app.css')
+    new ExtractTextPlugin('app.css'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'API_URL': JSON.stringify(process.env.API_URL)
+      }
+    })
   ],
   module: {
     loaders: [
