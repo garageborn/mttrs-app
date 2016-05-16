@@ -8,10 +8,11 @@ var devFlagPlugin = new webpack.DefinePlugin({
 
 module.exports = {
   entry: [
-    './js/index.js'
+    './js/index.js',
+    './css/app.sass'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'static'),
     publicPath: '/static/',
     filename: 'bundle.js',
   },
@@ -23,10 +24,23 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') }
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
+      { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') },
+      { test: /\.png$/, loader: 'file-loader' },
+      { test: /\.svg$/, loader: 'file-loader' }
     ]
   },
   resolve: {
+    alias: {
+      actions: path.resolve('js/actions'),
+      api: path.resolve('js/api'),
+      components: path.resolve('js/components'),
+      constants: path.resolve('js/constants'),
+      containers: path.resolve('js/containers'),
+      reducers: path.resolve('js/reducers'),
+      store: path.resolve('js/store'),
+      utils: path.resolve('js/utils')
+    },
     extensions: ['', '.js', '.json']
   }
 };

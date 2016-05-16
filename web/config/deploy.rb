@@ -12,7 +12,21 @@ set :log_level, :info
 set :ssh_options, { forward_agent: true }
 
 # passenger
-set :passenger_restart_options, -> { "#{deploy_to}/web --ignore-app-not-running" }
+# set :passenger_restart_options, -> { "#{deploy_to}/web --ignore-app-not-running" }
+
+# npm
+set :npm_flags, '--only-dev --silent --no-progress'
+
+# assets
+after 'deploy:finalize_update', 'assets:precompile'
+namespace :assets do
+  task :precompile do
+    on roles(:all) do
+      within release_path do
+        execute "NODE_ENV=#{ fetch(:stage) } ./node_modules/webpack/bin/webpack.js -p --config webpack.production.js"
+      end
+  end
+end
 
 # slack
 set :slack_webhook, "https://hooks.slack.com/services/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"
