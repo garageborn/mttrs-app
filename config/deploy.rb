@@ -2,10 +2,8 @@ lock '3.5.0'
 
 set :application, 'mttrs-frontend'
 set :repo_url, 'git@github.com:alexandrebini/mttrs-frontend.git'
-set :linked_dirs, fetch(:linked_dirs, []).push(
-  'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system',
-  'node_modules', 'web/node_modules'
-)
+set :repo_tree, 'web'
+set :linked_dirs, fetch(:linked_dirs, []).push('node_modules')
 set :deploy_to, '/home/ubuntu/mttrs-frontend'
 set :branch, -> {
   ENV['branch'] || ask(:branch, `git rev-parse --abbrev-ref HEAD`.chomp)
