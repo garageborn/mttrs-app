@@ -1,4 +1,4 @@
-server 'app.server.mtt.rs', user: 'ubuntu', roles: %w{app db web worker scheduler}
+server 'app.server.mtt.rs', user: 'ubuntu', roles: %w{app web}
 
 set :stage, :production
 set :rails_env, 'production'
