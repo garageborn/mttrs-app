@@ -19,7 +19,7 @@ after 'deploy:updated', 'assets:precompile'
 namespace :assets do
   task :precompile do
     on roles(:all) do
-      execute "NODE_ENV=#{ fetch(:stage) } cd #{ release_path } && ./node_modules/webpack/bin/webpack.js -p --config webpack.production.js"
+      execute "NODE_ENV=#{ fetch(:stage) } cd #{ release_path } && ./node_modules/webpack/bin/webpack.js --define process.env.NODE_ENV='\"#{ fetch(:stage) }\"' -p --config webpack.production.js"
     end
   end
 end
