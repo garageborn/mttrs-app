@@ -1,9 +1,9 @@
 deployment:
   production:
-    branch: features/capistrano
+    branch: master
     commands:
       - cd web && bundle install
-      - cd web && bundle exec cap production deploy branch=features/capistrano
+      - cd web && bundle exec cap production deploy branch=master
 
 test:
   override:
