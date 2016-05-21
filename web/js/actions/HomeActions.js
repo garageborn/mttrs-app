@@ -11,7 +11,7 @@ export function receiveStories(stories) {
 
 export function getStories() {
   return dispatch => {
-    let query = { recent: true }
+    let query = { recent: true, popular: true, limit: 100 }
     API.getStories(query, (error, response) => {
       if (error || !response.ok) return
       dispatch(receiveStories(response.body))

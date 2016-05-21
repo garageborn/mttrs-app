@@ -25,7 +25,7 @@ export function openCategory(category) {
 
 export function getStories(categorySlug, filter) {
   return dispatch => {
-    let query = { category_slug: categorySlug }
+    let query = { category_slug: categorySlug, popular: true, limit: 100 }
     query[filter] = true
 
     API.getStories(query, (error, response) => {
