@@ -9,9 +9,11 @@ export function receiveStories(stories) {
   }
 }
 
-export function getStories() {
+export function getStories(filter) {
   return dispatch => {
-    let query = { recent: true, popular: true, limit: 100 }
+    let query = { limit: 100 }
+    if (query) query[filter] = true
+
     API.getStories(query, (error, response) => {
       if (error || !response.ok) return
       dispatch(receiveStories(response.body))

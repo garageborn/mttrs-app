@@ -6,8 +6,14 @@ import StoryListContainer from 'containers/StoryListContainer'
 
 class Home extends Component {
   componentDidMount() {
-    const {dispatch} = this.props
-    dispatch(HomeActions.getStories())
+    const {dispatch, filter} = this.props
+    dispatch(HomeActions.getStories(filter))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.filter !== this.props.filter) {
+      this.props.dispatch(HomeActions.getStories(nextProps.filter))
+    }
   }
 
   render() {
@@ -21,4 +27,12 @@ class Home extends Component {
   }
 }
 
-export default connect(state => state.HomeReducers)(Home)
+let mapStateToProps = (state) => {
+  return {
+    ...state.HomeReducers,
+    filter: state.FilterReducers.filter
+  }
+}
+export default connect(mapStateToProps)(Home)
+
+// export default connect(state => state.HomeReducers)(Home)
