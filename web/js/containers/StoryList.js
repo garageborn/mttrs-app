@@ -12,18 +12,17 @@ class Category extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps)
-    // let slugChanged = nextProps.params.slug !== this.props.params.slug
-    // let filterChanged = nextProps.filter !== this.props.filter
-    // if (slugChanged || filterChanged) this.fetchCategory(nextProps)
+    let slugChanged = nextProps.params.slug !== this.props.params.slug
+    let filterChanged = nextProps.filter !== this.props.filter
+    if (slugChanged || filterChanged) this.fetchCategory(nextProps)
   }
 
   render() {
-    const {category, stories} = this.props
+    const {category, stories, filter} = this.props
     return (
       <div>
-        <Header currentCategory={category}/>
-        <Filters currentCategory={category}/>
+        <Header currentCategory={category} currentFilter={filter}/>
+        <Filters currentCategory={category} currentFilter={filter}/>
         <StoryList stories={stories} onClick={this.openStory.bind(this)}/>
       </div>
     )
@@ -33,7 +32,7 @@ class Category extends Component {
     let categorySlug = props.params.slug
     let filter = props.filter
 
-    if (categorySlug) this.props.dispatch(CategoryActions.getCategory(categorySlug))
+    this.props.dispatch(CategoryActions.getCategory(categorySlug))
 
     let options = {}
     if (categorySlug) options.category_slug = categorySlug
@@ -46,11 +45,11 @@ class Category extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state, ownProps) => {
   return {
     category: state.CategoriesReducers.category,
     stories: state.StoryReducers.stories,
-    filter: state.FilterReducers.filter
+    filter: ownProps.route.filter
   }
 }
 export default connect(mapStateToProps)(Category)

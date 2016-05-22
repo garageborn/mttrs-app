@@ -19,7 +19,10 @@ export default React.createClass({
             <Route path='/yesterday' component={StoryList} filter='yesterday'/>
             <Route path='/last-week' component={StoryList} filter='last_week'/>
             <Route path='/last-month' component={StoryList} filter='last_month'/>
-            {/*<Route path='/categories/:slug' component={StoryList}/>*/}
+            <Route path='/:slug' component={StoryList} filter='today'/>
+            <Route path='/:slug/yesterday' component={StoryList} filter='yesterday'/>
+            <Route path='/:slug/last-week' component={StoryList} filter='last_week'/>
+            <Route path='/:slug/last-month' component={StoryList} filter='last_month'/>
           </Router>
         </Provider>
 

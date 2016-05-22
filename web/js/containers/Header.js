@@ -4,6 +4,7 @@ import * as HeaderActions from 'actions/HeaderActions'
 import * as CategoryActions from 'actions/CategoryActions'
 import NavItem from 'components/NavItem'
 import {push} from 'react-router-redux'
+import {categoryPath, storiesPath} from 'utils/RoutesHelper'
 
 class Header extends Component {
   componentDidMount() {
@@ -58,12 +59,13 @@ class Header extends Component {
   }
 
   openCategory(category) {
-    this.props.dispatch(CategoryActions.openCategory(category))
+    let path = categoryPath(category.slug, this.props.currentFilter)
+    this.props.dispatch(push(path))
   }
 
   openHome() {
-    this.props.dispatch(CategoryActions.resetCategory())
-    this.props.dispatch(push('/'))
+    let path = storiesPath(this.props.currentFilter)
+    this.props.dispatch(push(path))
   }
 
   isSelected(category) {

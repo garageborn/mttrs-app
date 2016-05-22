@@ -1,6 +1,5 @@
-import {OPEN_CATEGORY, CATEGORY_RECEIVED, RESET_CATEGORY} from 'constants/ActionTypes'
+import {OPEN_CATEGORY, CATEGORY_RECEIVED} from 'constants/ActionTypes'
 import * as API from 'api/index'
-import {push} from 'react-router-redux'
 
 export function receiveCategory(category) {
   return {
@@ -9,23 +8,10 @@ export function receiveCategory(category) {
   }
 }
 
-export function openCategory(category) {
+export function getCategory(slug = null) {
   return dispatch => {
-    let path = `/categories/${ category.slug }`
-    dispatch(push(path))
-  }
-}
+    if (!slug) return dispatch(receiveCategory(null))
 
-export function resetCategory() {
-  return dispatch => {
-    dispatch({
-      type: RESET_CATEGORY
-    })
-  }
-}
-
-export function getCategory(slug) {
-  return dispatch => {
     API.getCategory(slug, (error, response) => {
       if (error || !response.ok) return
       dispatch(receiveCategory(response.body))

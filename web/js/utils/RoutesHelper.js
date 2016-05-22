@@ -1,7 +1,12 @@
 import React from 'react'
 
+export function categoryPath(slug, filter = null) {
+  let filterPath = storiesPath(filter)
+  if (filterPath && filterPath !== '/') return `/${ slug }${ filterPath }`
+  return `/${ slug }`
+}
+
 export function storiesPath(filter = null) {
-  console.log('switch', filter)
   switch(filter) {
     case 'yesterday':
       return '/yesterday'
