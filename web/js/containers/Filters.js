@@ -15,6 +15,10 @@ class Filters extends Component {
     )
   }
 
+  componentWillUnmount() {
+    this.props.dispatch(FilterActions.resetFilter())
+  }
+
   get sorting() {
     return (
       <select value={this.props.name} onChange={(e) => this.onSortingChange(e)}>

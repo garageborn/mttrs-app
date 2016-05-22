@@ -6,7 +6,7 @@ import StoryListContainer from 'containers/StoryListContainer'
 
 class Category extends Component {
   componentDidMount() {
-    this.fetchCategory(this.props.params.slug)
+    this.fetchCategory(this.props.params.slug, this.props.filter)
   }
 
   componentWillReceiveProps(nextProps) {
