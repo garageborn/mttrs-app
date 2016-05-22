@@ -1,12 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import * as FilterActions from 'actions/FilterActions'
+import {push} from 'react-router-redux'
+import {categoryPath, storiesPath} from 'utils/RoutesHelper'
 
 class Filters extends Component {
   render() {
     return (
       <h2>
-        <div className="dropdown">
+        <div className='dropdown'>
           {this.sorting}
         </div>
 
@@ -15,13 +16,9 @@ class Filters extends Component {
     )
   }
 
-  componentWillUnmount() {
-    this.props.dispatch(FilterActions.resetFilter())
-  }
-
   get sorting() {
     return (
-      <select value={this.props.name} onChange={(e) => this.onSortingChange(e)}>
+      <select value={this.props.currentFilter} onChange={(e) => this.onSortingChange(e)}>
         <option value='today'>Today</option>
         <option value='yesterday'>Yesterday</option>
         <option value='last_week'>Last Week</option>
@@ -31,13 +28,19 @@ class Filters extends Component {
   }
 
   get currentCategory() {
-    if (!this.props.currentCategory) return <span>All Topics</span>
+    if (!this.props.currentCategory) return (<span>All Topics</span>)
     return (<span>{this.props.currentCategory.name}</span>)
   }
 
   onSortingChange(option) {
     let filter = option.target.value
-    this.props.dispatch(FilterActions.setFilter(filter))
+    if (this.props.currentCategory) {
+      let path = categoryPath(this.props.currentCategory.slug, filter)
+      this.props.dispatch(push(path))
+    } else {
+      let path = storiesPath(filter)
+      this.props.dispatch(push(path))
+    }
   }
 }
 
@@ -45,4 +48,4 @@ Filters.propTypes = {
   currentCategory: PropTypes.any
 }
 
-export default connect(state => state.FilterReducers)(Filters)
+export default connect()(Filters)

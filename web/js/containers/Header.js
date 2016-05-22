@@ -1,9 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import * as HeaderActions from 'actions/HeaderActions'
-import * as HomeActions from 'actions/HomeActions'
 import * as CategoryActions from 'actions/CategoryActions'
 import NavItem from 'components/NavItem'
+import {push} from 'react-router-redux'
+import {categoryPath, storiesPath} from 'utils/RoutesHelper'
 
 class Header extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="container">
+        <div className='container'>
           <h1>
             <a onClick={this.openHome.bind(this)}>Mttrs - Read What Matters</a>
           </h1>
@@ -58,11 +59,13 @@ class Header extends Component {
   }
 
   openCategory(category) {
-    this.props.dispatch(CategoryActions.openCategory(category))
+    let path = categoryPath(category.slug, this.props.currentFilter)
+    this.props.dispatch(push(path))
   }
 
   openHome() {
-    this.props.dispatch(HomeActions.openHome())
+    let path = storiesPath(this.props.currentFilter)
+    this.props.dispatch(push(path))
   }
 
   isSelected(category) {
