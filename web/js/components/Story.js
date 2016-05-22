@@ -5,11 +5,11 @@ class Story extends Component {
   render() {
     const {story, onClick} = this.props
     return (
-      <div className="story" onClick={() => { onClick(story) }}>
-        <a onClick={() => { onClick(story) }}>{this.image}</a>
-        <div className="story-text">
-          <h3><a onClick={() => { onClick(story) }}>{story.title}</a></h3>
-          <p>{this.storyInfo}</p>
+      <div className='story' onClick={onClick.bind(this, story)}>
+        <a>{this.image}</a>
+        <div className='story-text'>
+          <h3><a>{story.title}</a></h3>
+          {this.storyInfo}
         </div>
       </div>
     )
@@ -17,9 +17,7 @@ class Story extends Component {
 
   get image() {
     if (!this.props.story.image) return
-    return (
-      <img src={this.props.story.image.thumb} />
-    )
+    return (<img src={this.props.story.image.thumb}/>)
   }
 
   get storyInfo() {
@@ -40,9 +38,7 @@ class Story extends Component {
 
   get publisher() {
     if (!this.props.story.publisher) return
-    return (
-      <span>{this.props.story.publisher.name}</span>
-    )
+    return (<span>{this.props.story.publisher.name}</span>)
   }
 }
 

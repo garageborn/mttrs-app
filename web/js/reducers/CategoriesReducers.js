@@ -1,15 +1,15 @@
-import {CATEGORY_RECEIVED, CATEGORY_STORIES_RECEIVED} from 'constants/ActionTypes'
+import {CATEGORY_RECEIVED, RESET_CATEGORY} from 'constants/ActionTypes'
 
 let defaultState = {
-  stories: []
+  category: null
 }
 
 export default function(state = defaultState, action) {
   switch (action.type) {
     case CATEGORY_RECEIVED:
       return {...state, category: action.category}
-    case CATEGORY_STORIES_RECEIVED:
-      return {...state, stories: action.stories}
+    case RESET_CATEGORY:
+      return {...state, category: defaultState.category}
     default:
       return state
   }

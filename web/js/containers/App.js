@@ -3,9 +3,8 @@ import {Provider} from 'react-redux'
 import configureStore from 'store/configureStore'
 import {renderDevTools} from 'utils/devTools'
 import {Router, Route, browserHistory} from 'react-router'
-import {syncHistoryWithStore, routerReducer} from 'react-router-redux'
-import Home from 'containers/Home'
-import Category from 'containers/Category'
+import {syncHistoryWithStore} from 'react-router-redux'
+import StoryList from 'containers/StoryList'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)
@@ -16,8 +15,11 @@ export default React.createClass({
       <div>
         <Provider store={store}>
           <Router history={history}>
-            <Route path='/' component={Home}/>
-            <Route path='/categories/:slug' component={Category}/>
+            <Route path='/' component={StoryList} filter='today'/>
+            <Route path='/yesterday' component={StoryList} filter='yesterday'/>
+            <Route path='/last-week' component={StoryList} filter='last_week'/>
+            <Route path='/last-month' component={StoryList} filter='last_month'/>
+            {/*<Route path='/categories/:slug' component={StoryList}/>*/}
           </Router>
         </Provider>
 
