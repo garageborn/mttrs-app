@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "start": "DEBUG=true node server.js",
-    "build": "webpack -p --config webpack.production.js",
-    "build-dev": "webpack -p"
+    "build": "./node_modules/webpack/bin/webpack.js -p --config webpack.production.js --progress --colors",
+    "build-dev": "./node_modules/webpack/bin/webpack.js -p"
   },
   "dependencies": {
     "babel-core": "^6.3.15",

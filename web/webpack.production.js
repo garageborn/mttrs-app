@@ -7,6 +7,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     './js/index.js',
     './css/app.sass'
@@ -20,6 +21,10 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     devFlagPlugin,
     new ExtractTextPlugin('app.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: { warnings: false }
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         'API_URL': JSON.stringify(process.env.API_URL)
