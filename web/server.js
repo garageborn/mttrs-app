@@ -4,7 +4,7 @@ var port = (process.env.PORT || 3001)
 var app = express()
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/static', express.static('static'))
+  app.use('/static', express.static('public/static'))
 } else {
   var config = require('./webpack.config')
   var webpack = require('webpack')

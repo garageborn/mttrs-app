@@ -13,9 +13,9 @@ module.exports = {
     './css/app.sass'
   ],
   output: {
-    path: path.join(__dirname, 'static'),
+    path: path.join(__dirname, 'public', 'static'),
     publicPath: '/static/',
-    filename: 'bundle.js',
+    filename: 'app.js',
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
