@@ -6,13 +6,15 @@ import {categoryPath, storiesPath} from 'utils/RoutesHelper'
 class Filters extends Component {
   render() {
     return (
-      <h2>
-        <div className='dropdown'>
-          {this.sorting}
-        </div>
+      <main>
+        <h2>
+          <div className='dropdown'>
+            {this.sorting}
+          </div>
 
-        <i>in</i> {this.currentCategory}
-      </h2>
+          <i>in</i> {this.currentCategory}
+        </h2>
+      </main>
     )
   }
 

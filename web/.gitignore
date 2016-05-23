@@ -1,5 +1,4 @@
 node_modules/
-static/
-dist/
+public/static/
 log/
 .bundle/
