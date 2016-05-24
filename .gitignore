@@ -25,9 +25,13 @@ project.xcworkspace
 .gradle
 local.properties
 
+# Web
+web/public/static
+
 # node.js
 node_modules/
 npm-debug.log
+log/
 
 # BUCK
 buck-out/

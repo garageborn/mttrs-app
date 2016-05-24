@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start-web": "DEBUG=true node ./web/server.js",
-    "build-web": "./node_modules/webpack/bin/webpack.js -p --define process.env.NODE_ENV='\"production\"' --config webpack.production.js --progress --colors",
+    "build-web": "./node_modules/webpack/bin/webpack.js -p --define process.env.NODE_ENV='\"production\"' --config ./web/webpack.production.js --progress --colors",
     "start-native": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
