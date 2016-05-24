@@ -6,12 +6,12 @@ import React, {
   ScrollView,
   StatusBar,
   Text,
-  TouchableHighlight,
   View,
 } from 'react-native'
 import SafariView from 'react-native-safari-view'
 import styles from 'mttrs/app/native/styles/app'
 import stories from 'mttrs/app/native/assets/stories.json'
+import Story from 'mttrs/app/native/components/Story'
 
 export default class App extends Component {
   constructor(props) {
@@ -30,31 +30,23 @@ export default class App extends Component {
     return ds.cloneWithRows(stories.slice(0, 20))
   }
 
-  openStory(storyURL) {
+  openStory(story) {
     SafariView.isAvailable()
       .then(
-        SafariView.show({ url: storyURL, readerMode: true })
+        SafariView.show({ url: story.url, readerMode: true })
       )
       .then(
         StatusBar.setBarStyle('default')
       )
       .catch(error => {
         // iOS 8 - Fuck it?
-        Linking.openURL(storyURL)
+        Linking.openURL(story.url)
       })
   }
 
   renderRow(rowData, sectionId, rowId) {
     return (
-      <TouchableHighlight activeOpacity={0.7} underlayColor='white' onPress={this.openStory.bind(this, rowData.url)}>
-        <View style={styles.story}>
-          <Image source={{uri: rowData.image.thumb}} style={styles.storyThumb} />
-          <View style={styles.storyTitleContainer}>
-            <Text numberOfLines={3}>{rowData.title}</Text>
-            <Text style={styles.storyInfo}>@4AM <Text style={styles.storyInfoFrom}>from</Text> {rowData.publisher.name}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
+      <Story story={rowData} onClick={this.openStory.bind(this)} />
     )
   }
 
@@ -90,7 +82,11 @@ export default class App extends Component {
           </ScrollView>
         </View>
 
-        <ListView dataSource={this.dataSource} renderRow={this.renderRow.bind(this)} style={styles.storyList} />
+        <ListView
+          dataSource={this.dataSource}
+          renderRow={this.renderRow.bind(this)}
+          style={styles.storyList}
+          />
       </View>
     )
   }
