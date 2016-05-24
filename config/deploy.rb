@@ -2,7 +2,6 @@ lock '3.5.0'
 
 set :application, 'mttrs-frontend'
 set :repo_url, 'git@github.com:alexandrebini/mttrs-frontend.git'
-set :repo_tree, 'web'
 set :linked_dirs, fetch(:linked_dirs, []).push('node_modules')
 set :deploy_to, '/home/ubuntu/mttrs-frontend'
 set :branch, -> {
@@ -14,12 +13,15 @@ set :ssh_options, { forward_agent: true }
 # npm
 set :npm_flags, '--only-dev --silent --no-progress'
 
+# passenger
+set :passenger_restart_options, -> { "#{ deploy_to }/web --ignore-app-not-running" }
+
 # assets
 after 'deploy:updated', 'assets:precompile'
 namespace :assets do
   task :precompile do
     on roles(:all) do
-      execute "NODE_ENV=#{ fetch(:stage) } cd #{ release_path } && NODE_ENV=#{ fetch(:stage) } npm run build"
+      execute "NODE_ENV=#{ fetch(:stage) } cd #{ release_path } && NODE_ENV=#{ fetch(:stage) } npm run build-web"
     end
   end
 end

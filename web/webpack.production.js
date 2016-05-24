@@ -9,8 +9,8 @@ var devFlagPlugin = new webpack.DefinePlugin({
 module.exports = {
   devtool: 'source-map',
   entry: [
-    './js/index.js',
-    './css/app.sass'
+    path.resolve('index.web.js'),
+    path.resolve('app/web/styles/app.sass')
   ],
   output: {
     path: path.join(__dirname, 'public', 'static'),
@@ -42,14 +42,15 @@ module.exports = {
   },
   resolve: {
     alias: {
-      actions: path.resolve('js/actions'),
-      api: path.resolve('js/api'),
-      components: path.resolve('js/components'),
-      constants: path.resolve('js/constants'),
-      containers: path.resolve('js/containers'),
-      reducers: path.resolve('js/reducers'),
-      store: path.resolve('js/store'),
-      utils: path.resolve('js/utils')
+      actions: path.resolve('app/actions'),
+      api: path.resolve('app/api'),
+      assets: path.resolve('app/web/assets'),
+      components: path.resolve('app/web/components'),
+      constants: path.resolve('app/constants'),
+      containers: path.resolve('app/web/containers'),
+      reducers: path.resolve('app/reducers'),
+      store: path.resolve('app/web/store'),
+      utils: path.resolve('app/web/utils')
     },
     extensions: ['', '.js', '.json']
   }

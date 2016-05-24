@@ -1,10 +1,10 @@
 {
-  "name": "mttrs-web",
+  "name": "mttrs",
   "version": "0.1.0",
   "scripts": {
-    "start": "DEBUG=true node server.js",
-    "build": "./node_modules/webpack/bin/webpack.js -p --define process.env.NODE_ENV='\"production\"' --config webpack.production.js --progress --colors",
-    "build-dev": "./node_modules/webpack/bin/webpack.js -p"
+    "start-web": "DEBUG=true node ./web/server.js",
+    "build-web": "./node_modules/webpack/bin/webpack.js -p --define process.env.NODE_ENV='\"production\"' --config ./web/webpack.production.js --progress --colors",
+    "start-native": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
     "babel-core": "^6.3.15",
@@ -14,6 +14,8 @@
     "moment": "^2.13.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
+    "react-native": "^0.25.1",
+    "react-native-safari-view": "^0.4.0",
     "react-redux": "^4.0.0",
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.4",

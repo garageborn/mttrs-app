@@ -1,27 +1,25 @@
-import React, { Component } from 'react';
-
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
+import React, {
+  Component,
   Image,
-  ScrollView,
-  ListView,
-  StatusBar,
   Linking,
-  TouchableHighlight
-} from 'react-native';
-import SafariView from 'react-native-safari-view';
-import stories from './stories.json'
+  ListView,
+  ScrollView,
+  StatusBar,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native'
+import SafariView from 'react-native-safari-view'
+import styles from 'mttrs/app/native/styles/app'
+import stories from 'mttrs/app/native/assets/stories.json'
 
-class mttrs extends Component {
+export default class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     StatusBar.setBarStyle('light-content')
 
     this.dismissSubscription = () => {
-      StatusBar.setBarStyle("light-content");
+      StatusBar.setBarStyle("light-content")
     }
 
     SafariView.addEventListener("onDismiss", this.dismissSubscription)
@@ -43,7 +41,7 @@ class mttrs extends Component {
       .catch(error => {
         // iOS 8 - Fuck it?
         Linking.openURL(storyURL)
-      });
+      })
   }
 
   renderRow(rowData, sectionId, rowId) {
@@ -65,108 +63,35 @@ class mttrs extends Component {
       <View style={styles.container}>
         <View>
           <View style={styles.header}>
-            <Image source={require('./img/mttrs.png')} style={styles.logo} />
+            <Image source={require('mttrs/app/native/assets/mttrs.png')} style={styles.logo} />
           </View>
 
           <ScrollView style={styles.nav} contentContainerStyle={styles.navContainer} horizontal={true} showsHorizontalScrollIndicator={false}>
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem}>All</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem} style={styles.navItem} style={styles.navItem} style={styles.navItem}>World News</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem} style={styles.navItem} style={styles.navItem}>Business</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem} style={styles.navItem}>Technlogy</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem}>Entertainment</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem}>Humor</Text>
 
-            <Image source={require('./img/bullet.png')} style={styles.navBullet} />
+            <Image source={require('mttrs/app/native/assets/bullet.png')} style={styles.navBullet} />
             <Text style={styles.navItem}>Science</Text>
           </ScrollView>
         </View>
 
         <ListView dataSource={this.dataSource} renderRow={this.renderRow.bind(this)} style={styles.storyList} />
       </View>
-    );
+    )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-
-  header: {
-    backgroundColor: '#ff5607',
-    paddingTop: 27,
-    alignItems: 'center'
-  },
-
-  logo: {
-    width: 113,
-    height: 28,
-    marginBottom: 12
-  },
-
-  nav: {
-    backgroundColor: '#ff5607',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#EB4F06',
-    padding: 11
-  },
-
-  navItem: {
-    color: '#fff',
-    marginRight: 14,
-    fontSize: 15
-  },
-
-  navBullet: {
-    marginTop: 6,
-    marginRight: 4,
-    width: 7,
-    height: 7
-  },
-
-  storyList: {
-
-  },
-
-  story: {
-    marginTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    flexDirection: 'row'
-  },
-
-  storyThumb: {
-    width: 100,
-    height: 75,
-    marginRight: 10
-  },
-
-  storyTitleContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-
-  storyInfo: {
-    marginTop: 5,
-    fontWeight: 'bold',
-    color: '#aaa',
-    fontSize: 12
-  },
-
-  storyInfoFrom: {
-    fontWeight: 'normal'
-  }
-});
-
-AppRegistry.registerComponent('mttrs', () => mttrs);
