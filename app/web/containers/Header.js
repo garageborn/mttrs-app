@@ -1,10 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import * as HeaderActions from 'actions/HeaderActions'
-import * as CategoryActions from 'actions/CategoryActions'
-import NavItem from 'components/NavItem'
+import * as HeaderActions from 'mttrs/app/actions/HeaderActions'
+import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
+import NavItem from 'mttrs/app/web/components/NavItem'
 import {push} from 'react-router-redux'
-import {categoryPath, storiesPath} from 'utils/RoutesHelper'
+import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
 
 class Header extends Component {
   componentDidMount() {

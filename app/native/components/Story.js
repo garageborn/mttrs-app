@@ -1,4 +1,11 @@
-import React, {Component, Image, Text, TouchableHighlight, PropTypes, View} from 'react-native'
+import React, {
+  Component,
+  Image,
+  Text,
+  TouchableHighlight,
+  PropTypes,
+  View
+} from 'react-native'
 import styles from 'mttrs/app/native/styles/app'
 
 class Story extends Component {

@@ -1,4 +1,4 @@
-import {STORIES_RECEIVED} from 'constants/ActionTypes'
+import {STORIES_RECEIVED} from 'mttrs/app/constants/ActionTypes'
 
 let defaultState = {
   stories: []

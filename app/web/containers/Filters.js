@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
-import {categoryPath, storiesPath} from 'utils/RoutesHelper'
+import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
 
 class Filters extends Component {
   render() {

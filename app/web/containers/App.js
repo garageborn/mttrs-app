@@ -1,10 +1,10 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import configureStore from 'store/configureStore'
-import {renderDevTools} from 'utils/devTools'
+import configureStore from 'mttrs/app/web/store/configureStore'
+import {renderDevTools} from 'mttrs/app/web/utils/devTools'
 import {Router, Route, browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
-import StoryList from 'containers/StoryList'
+import StoryList from 'mttrs/app/web/containers/StoryList'
 
 const store = configureStore()
 const history = syncHistoryWithStore(browserHistory, store)

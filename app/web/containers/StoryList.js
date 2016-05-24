@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as CategoryActions from 'actions/CategoryActions'
-import * as StoryActions from 'actions/StoryActions'
-import Header from 'containers/Header'
-import Filters from 'containers/Filters'
-import StoryList from 'components/StoryList'
+import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
+import * as StoryActions from 'mttrs/app/actions/StoryActions'
+import Header from 'mttrs/app/web/containers/Header'
+import Filters from 'mttrs/app/web/containers/Filters'
+import StoryList from 'mttrs/app/web/components/StoryList'
 
-class Category extends Component {
+class StoryListContainer extends Component {
   componentDidMount() {
     this.fetchCategory(this.props)
   }
@@ -52,4 +52,4 @@ let mapStateToProps = (state, ownProps) => {
     filter: ownProps.route.filter
   }
 }
-export default connect(mapStateToProps)(Category)
+export default connect(mapStateToProps)(StoryListContainer)

@@ -1,4 +1,4 @@
-import {CATEGORY_RECEIVED} from 'constants/ActionTypes'
+import {CATEGORY_RECEIVED} from 'mttrs/app/constants/ActionTypes'
 
 let defaultState = {
   category: null

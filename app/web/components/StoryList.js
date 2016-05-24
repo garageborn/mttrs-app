@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Story from 'components/Story'
+import Story from 'mttrs/app/web/components/Story'
 
 class StoryList extends Component {
   render() {

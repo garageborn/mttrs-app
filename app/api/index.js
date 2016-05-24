@@ -1,5 +1,5 @@
 import request from 'superagent/lib/client'
-import * as ENDPOINTS from 'constants/APIEndpoints'
+import * as ENDPOINTS from 'mttrs/app/constants/APIEndpoints'
 
 export function getCategories(query={}, callback) {
   request

@@ -3,7 +3,7 @@ import thunkMiddleware from 'redux-thunk'
 import {browserHistory} from 'react-router'
 import {routerMiddleware} from 'react-router-redux'
 import {devTools, persistState} from 'redux-devtools'
-import * as reducers from 'reducers/index'
+import * as reducers from 'mttrs/app/reducers/index'
 
 let createStoreWithMiddleware
 const routeMiddleware = routerMiddleware(browserHistory)

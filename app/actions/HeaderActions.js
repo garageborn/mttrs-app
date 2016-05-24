@@ -1,5 +1,5 @@
-import {HEADER_CATEGORIES_RECEIVED} from 'constants/ActionTypes'
-import * as API from 'api/index'
+import {HEADER_CATEGORIES_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import * as API from 'mttrs/app/api/index'
 
 export function receiveCategories(categories) {
   return {

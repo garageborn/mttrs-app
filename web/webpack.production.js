@@ -42,15 +42,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      actions: path.resolve('app/actions'),
-      api: path.resolve('app/api'),
-      assets: path.resolve('app/web/assets'),
-      components: path.resolve('app/web/components'),
-      constants: path.resolve('app/constants'),
-      containers: path.resolve('app/web/containers'),
-      reducers: path.resolve('app/reducers'),
-      store: path.resolve('app/web/store'),
-      utils: path.resolve('app/web/utils')
+      mttrs: path.resolve('./'),
+      assets: path.resolve('app/web/assets')
     },
     extensions: ['', '.js', '.json']
   }
