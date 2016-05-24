@@ -16,7 +16,7 @@ module.exports = {
     path.resolve('app/web/styles/app.sass')
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'public', 'static'),
     publicPath: '/static/',
     filename: 'app.js',
     hot: true
@@ -39,8 +39,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      mttrs: path.resolve('./'),
-      assets: path.resolve('app/web/assets')
+      mttrs: path.resolve('./')
     },
     extensions: ['', '.js', '.json']
   }
