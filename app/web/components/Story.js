@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import moment from 'moment'
+import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
 
 class Story extends Component {
   render() {
@@ -16,8 +17,9 @@ class Story extends Component {
   }
 
   get image() {
-    if (!this.props.story.image) return
-    return (<img src={this.props.story.image.thumb}/>)
+    if (!this.props.story.image_source_url) return
+    let options = { type: 'fetch', width: 200, height: 200, crop: 'fit' }
+    return (<img src={cloudinary.url(this.props.story.image_source_url, options)}/>)
   }
 
   get storyInfo() {

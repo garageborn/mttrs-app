@@ -27,7 +27,8 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'API_URL': JSON.stringify(process.env.API_URL)
+        'API_URL': JSON.stringify(process.env.API_URL),
+        'CLOUDINARY_CLOUD_NAME', JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME)
       }
     })
   ],
@@ -42,8 +43,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      mttrs: path.resolve('./'),
-      assets: path.resolve('app/web/assets')
+      mttrs: path.resolve('./')
     },
     extensions: ['', '.js', '.json']
   }
