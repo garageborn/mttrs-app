@@ -28,7 +28,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'API_URL': JSON.stringify(process.env.API_URL),
-        'CLOUDINARY_CLOUD_NAME', JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME)
+        'CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME)
       }
     })
   ],
