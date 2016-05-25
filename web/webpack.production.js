@@ -43,6 +43,7 @@ module.exports = {
   },
   resolve: {
     alias: {
+      assets: path.resolve('app/web/assets'),
       mttrs: path.resolve('./')
     },
     extensions: ['', '.js', '.json']
