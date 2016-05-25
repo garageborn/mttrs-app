@@ -9,7 +9,10 @@ class Story extends Component {
       <div className='story' onClick={onClick.bind(this, story)}>
         <a>{this.image}</a>
         <div className='story-text'>
-          <h3><a>{story.title}</a></h3>
+          <h3>
+            <a>{story.title}</a>
+            <small> ({story.total_social})</small>
+          </h3>
           {this.storyInfo}
         </div>
       </div>
