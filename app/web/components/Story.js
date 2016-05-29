@@ -7,7 +7,7 @@ class Story extends Component {
     const {story, onClick} = this.props
     return (
       <div className='story' onClick={onClick.bind(this, story)}>
-        {/*<a>{this.image}</a>*/}
+        <a>{this.image}</a>
         <div className='story-text'>
           <h3>
             <a>{story.title}</a>

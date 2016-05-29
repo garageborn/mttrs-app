@@ -9,7 +9,7 @@ export function receiveCategory(category) {
 }
 
 export function getCategory(slug = null) {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (!slug) return dispatch(receiveCategory(null))
 
     return API.getCategory(slug)
