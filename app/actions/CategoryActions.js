@@ -12,9 +12,10 @@ export function getCategory(slug = null) {
   return dispatch => {
     if (!slug) return dispatch(receiveCategory(null))
 
-    API.getCategory(slug, (error, response) => {
-      if (error || !response.ok) return
-      dispatch(receiveCategory(response.body))
-    })
+    return API.getCategory(slug)
+      .then((response) => {
+        if (!response.ok) return
+        dispatch(receiveCategory(response.body))
+      })
   }
 }

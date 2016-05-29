@@ -12,15 +12,10 @@ export function getStories(options) {
   return dispatch => {
     let query = Object.assign({ popular: true, limit: 10 }, options)
 
-    return API.getStories(query).then((response) => {
-      if (!response.ok) return
-      dispatch(receiveStories(response.body))
-    })
-
-    // return API.getStories(query, (error, response) => {
-    //     console.log('batata')
-    //   if (error || !response.ok) return
-    //   dispatch(receiveStories(response.body))
-    // })
+    return API.getStories(query)
+      .then((response) => {
+        if (!response.ok) return
+        dispatch(receiveStories(response.body))
+      })
   }
 }

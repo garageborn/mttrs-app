@@ -5,18 +5,15 @@ export function getCategories(query={}, callback) {
   return request
     .get(ENDPOINTS.CATEGORIES)
     .query(query)
-    .end(callback)
 }
 
 export function getCategory(id, callback) {
   return request
     .get(ENDPOINTS.CATEGORY(id))
-    .end(callback)
 }
 
-export function getStories(query={}, callback) {
+export function getStories(query={}) {
   return request
     .get(ENDPOINTS.STORIES)
     .query(query)
-    // .end(callback)
 }

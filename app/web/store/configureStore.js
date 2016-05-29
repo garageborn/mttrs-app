@@ -7,10 +7,19 @@ import * as reducers from 'mttrs/app/reducers/index'
 let createStoreWithMiddleware
 const routeMiddleware = routerMiddleware(browserHistory)
 
-createStoreWithMiddleware = compose(
-  applyMiddleware(thunkMiddleware),
-  applyMiddleware(routeMiddleware)
-)(createStore)
+if (typeof __DEV__ !== 'undefined' && __DEV__) {
+  createStoreWithMiddleware = compose(
+    applyMiddleware(thunkMiddleware),
+    applyMiddleware(routeMiddleware),
+    devTools(),
+    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+  )(createStore)
+} else {
+  createStoreWithMiddleware = compose(
+    applyMiddleware(thunkMiddleware),
+    applyMiddleware(routeMiddleware)
+  )(createStore)
+}
 
 const rootReducer = combineReducers(reducers)
 
