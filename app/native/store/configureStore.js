@@ -12,4 +12,9 @@ const rootReducer = combineReducers(reducers)
 
 export default function configureStore(initialState) {
   return createStoreWithMiddleware(rootReducer, initialState);
+  // return createStore(
+  //   rootReducer,
+  //   applyMiddleware(thunkMiddleware),
+  //   applyMiddleware(loggerMiddleware)
+  // )(initialState)
 }

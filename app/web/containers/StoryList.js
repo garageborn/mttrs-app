@@ -7,11 +7,18 @@ import Filters from 'mttrs/app/web/containers/Filters'
 import StoryList from 'mttrs/app/web/components/StoryList'
 
 class StoryListContainer extends Component {
+  static fetchData(store, route) {
+    let options = {}
+    if (route.filter) options[route.filter] = true
+    return store.dispatch(StoryActions.getStories(options))
+  }
   componentDidMount() {
+    console.log('component did mount', this.props)
     this.fetchCategory(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', this.props)
     let slugChanged = nextProps.params.slug !== this.props.params.slug
     let filterChanged = nextProps.filter !== this.props.filter
     if (slugChanged || filterChanged) this.fetchCategory(nextProps)
@@ -21,8 +28,8 @@ class StoryListContainer extends Component {
     const {category, stories, filter} = this.props
     return (
       <div>
-        <Header currentCategory={category} currentFilter={filter}/>
-        <Filters currentCategory={category} currentFilter={filter}/>
+        {/*<Header currentCategory={category} currentFilter={filter}/>
+        <Filters currentCategory={category} currentFilter={filter}/>*/}
         <StoryList stories={stories} onClick={this.openStory.bind(this)}/>
       </div>
     )

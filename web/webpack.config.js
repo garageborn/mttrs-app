@@ -1,3 +1,5 @@
+require('babel-register')
+
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -6,7 +8,6 @@ var devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 })
 
-console.log(path.resolve('index.web.js'))
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
@@ -30,7 +31,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loaders: ['babel'], exclude: /node_modules/ },
+      { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
       { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') },
       { test: /\.png$/, loader: 'file-loader' },
