@@ -1,15 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import * as HeaderActions from 'mttrs/app/actions/HeaderActions'
-import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
 import NavItem from 'mttrs/app/web/components/NavItem'
 import {push} from 'react-router-redux'
 import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
 
-class Header extends Component {
-  componentDidMount() {
-    const {dispatch} = this.props
-    dispatch(HeaderActions.getCategories())
+class HeaderContainer extends Component {
+  static fetchData({ dispatch, params, route }) {
+    return dispatch(HeaderActions.getCategories())
   }
 
   render() {
@@ -74,8 +72,12 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
-  currentCategory: PropTypes.any
+let mapStateToProps = (state) => {
+  return {
+    categories: state.HeaderReducers.categories,
+    currentCategory: state.CategoriesReducers.category,
+    currentFilter: state.FilterReducers.filter
+  }
 }
 
-export default connect(state => state.HeaderReducers)(Header)
+export default connect(mapStateToProps)(HeaderContainer)

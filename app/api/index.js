@@ -1,22 +1,19 @@
-import request from 'superagent/lib/client'
+import request from 'superagent'
 import * as ENDPOINTS from 'mttrs/app/constants/APIEndpoints'
 
 export function getCategories(query={}, callback) {
-  request
+  return request
     .get(ENDPOINTS.CATEGORIES)
     .query(query)
-    .end(callback)
 }
 
 export function getCategory(id, callback) {
-  request
+  return request
     .get(ENDPOINTS.CATEGORY(id))
-    .end(callback)
 }
 
-export function getStories(query={}, callback) {
-  request
+export function getStories(query={}) {
+  return request
     .get(ENDPOINTS.STORIES)
     .query(query)
-    .end(callback)
 }

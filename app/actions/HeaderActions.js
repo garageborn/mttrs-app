@@ -10,9 +10,10 @@ export function receiveCategories(categories) {
 
 export function getCategories() {
   return dispatch => {
-    API.getCategories({}, (error, response) => {
-      if (error || !response.ok) return
-      dispatch(receiveCategories(response.body))
-    })
+    return API.getCategories()
+      .then((response) => {
+        if (!response.ok) return
+        dispatch(receiveCategories(response.body))
+      })
   }
 }

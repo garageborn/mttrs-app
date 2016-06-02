@@ -2,19 +2,17 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {browserHistory} from 'react-router'
 import {routerMiddleware} from 'react-router-redux'
-import {devTools, persistState} from 'redux-devtools'
+import DevTools from 'mttrs/app/web/utils/DevTools'
 import * as reducers from 'mttrs/app/reducers/index'
 
 let createStoreWithMiddleware
 const routeMiddleware = routerMiddleware(browserHistory)
 
-// Configure the dev tools when in DEV mode
-if (__DEV__) {
+if (typeof __DEV__ !== 'undefined' && __DEV__) {
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
     applyMiddleware(routeMiddleware),
-    devTools(),
-    persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+    DevTools.instrument()
   )(createStore)
 } else {
   createStoreWithMiddleware = compose(

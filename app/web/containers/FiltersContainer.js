@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {push} from 'react-router-redux'
 import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
 
-class Filters extends Component {
+class FiltersContainer extends Component {
   render() {
     return (
       <main>
@@ -46,8 +46,12 @@ class Filters extends Component {
   }
 }
 
-Filters.propTypes = {
-  currentCategory: PropTypes.any
+let mapStateToProps = (state) => {
+  return {
+    currentCategory: state.CategoriesReducers.category,
+    currentFilter: state.FilterReducers.filter
+  }
 }
 
-export default connect()(Filters)
+export default connect(mapStateToProps)(FiltersContainer)
+
