@@ -3,8 +3,6 @@ import {Provider} from 'react-redux'
 import _ from 'lodash'
 import {renderToString} from 'react-dom/server'
 import {Router, RouterContext} from 'react-router'
-// import configureStore from 'mttrs/app/web/store/configureStore'
-// const store = configureStore()
 
 let handleRender = (store, renderProps) => {
   let promises = mapPromises(store, renderProps)
