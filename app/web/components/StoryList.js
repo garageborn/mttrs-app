@@ -3,10 +3,8 @@ import Story from 'mttrs/app/web/components/Story'
 
 class StoryList extends Component {
   render() {
-    const {stories} = this.props
-    if (stories.length === 0) {
-      return (<div className='loading'>Hang on...</div>)
-    }
+    const {stories, isFetching} = this.props
+    if (isFetching) return (<div className='loading'>Hang on...</div>)
 
     return (
       <main>
@@ -28,6 +26,7 @@ class StoryList extends Component {
 
 StoryList.propTypes = {
   stories: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired
 }
 

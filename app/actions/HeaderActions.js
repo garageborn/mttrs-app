@@ -9,7 +9,9 @@ export function receiveCategories(categories) {
 }
 
 export function getCategories() {
-  return dispatch => {
+  return (dispatch, getState) => {
+    if (getState().HeaderReducers.categories.length) return
+
     return API.getCategories()
       .then((response) => {
         if (!response.ok) return

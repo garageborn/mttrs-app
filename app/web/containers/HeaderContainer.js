@@ -6,7 +6,7 @@ import {push} from 'react-router-redux'
 import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
 
 class HeaderContainer extends Component {
-  static fetchData({ dispatch, params, route }) {
+  static fetchData({ dispatch }) {
     return dispatch(HeaderActions.getCategories())
   }
 

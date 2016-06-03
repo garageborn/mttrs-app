@@ -1,7 +1,7 @@
 import {SET_FILTER} from 'mttrs/app/constants/ActionTypes'
 
 let defaultState = {
-  filter: null
+  filter: 'today'
 }
 
 export default function(state = defaultState, action) {

@@ -17,9 +17,13 @@ class StoryListContainer extends Component {
   }
 
   render() {
-    const {stories} = this.props
+    const {stories, isFetching} = this.props
     return (
-      <StoryList stories={stories} onClick={this.openStory.bind(this)}/>
+      <StoryList
+        stories={stories}
+        isFetching={isFetching}
+        onClick={this.openStory.bind(this)}
+        />
     )
   }
 
