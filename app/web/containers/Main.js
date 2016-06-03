@@ -9,7 +9,7 @@ import StoryListContainer from 'mttrs/app/web/containers/StoryListContainer'
 
 class Main extends Component {
   static fetchData({ dispatch, params, route }) {
-    let categorySlug = params.slug
+    let categorySlug = route.categorySlug
     let filter = route.filter
 
     return [
@@ -21,7 +21,7 @@ class Main extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let slugChanged = nextProps.params.slug !== this.props.params.slug
+    let slugChanged = nextProps.categorySlug !== this.props.categorySlug
     let filterChanged = nextProps.filter !== this.props.filter
     if (slugChanged || filterChanged) this.constructor.fetchData(nextProps)
   }
@@ -39,6 +39,7 @@ class Main extends Component {
 
 let mapStateToProps = (state, ownProps) => {
   return {
+    categorySlug: ownProps.route.categorySlug,
     filter: ownProps.route.filter
   }
 }

@@ -5,8 +5,8 @@ import * as StoryActions from 'mttrs/app/actions/StoryActions'
 import StoryList from 'mttrs/app/web/components/StoryList'
 
 class StoryListContainer extends Component {
-  static fetchData({ dispatch, params, route }) {
-    let categorySlug = params.slug
+  static fetchData({ dispatch, route }) {
+    let categorySlug = route.categorySlug
     let filter = route.filter
 
     let options = {}
