@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import {Provider} from 'react-redux'
 import {Router, browserHistory} from 'react-router'
 import {syncHistoryWithStore} from 'react-router-redux'
-import routes from 'mttrs/app/web/routes'
+import Routes from 'mttrs/app/web/config/Routes'
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <Router history={history} routes={routes}/>
+        <Router history={history} routes={Routes.all(store)}/>
       </Provider>
     )
   }
