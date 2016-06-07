@@ -5,7 +5,6 @@ import requestHandler from 'mttrs/app/web/server/requestHandler'
 
 const port = (process.env.PORT || 4001)
 const app = express()
-const publicPath = path.resolve('../web/public')
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static('public/static'))
@@ -25,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(webpackHotMiddleware(compiler))
 }
 
-app.use(favicon(publicPath + '/favicon.ico'))
+app.use(favicon(path.resolve('web/public/favicon.ico')))
 app.use(requestHandler)
 
 app.listen(port, 'localhost', (err, result) => {
