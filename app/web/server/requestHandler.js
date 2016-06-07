@@ -1,6 +1,6 @@
 import React from 'react'
 import {match} from 'react-router'
-import configureStore from 'mttrs/app/web/store/configureStore'
+import configureStore from 'mttrs/app/web/config/configureStore'
 import Routes from 'mttrs/app/web/config/Routes'
 import renderEngine from 'mttrs/app/web/server/renderEngine'
 import _ from 'lodash'
