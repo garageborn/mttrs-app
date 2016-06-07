@@ -4,7 +4,7 @@
   "scripts": {
     "start-web": "DEBUG=true ./node_modules/nodemon/bin/nodemon.js --exec ./node_modules/babel-cli/bin/babel-node.js ./app/web/server/server.js -w ./app",
     "build-web-webpack": "./node_modules/webpack/bin/webpack.js -p --define process.env.NODE_ENV='\"production\"' --config ./app/web/server/webpack.production.js --progress --colors",
-    "build-web-babel": "./node_modules/babel-cli/bin/babel.js ./app -d ./build/app -s",
+    "build-web-babel": "./node_modules/babel-cli/bin/babel.js ./app -d ./build -s",
     "build-web": "npm run build-web-webpack && npm run build-web-babel",
     "start-native": "node node_modules/react-native/local-cli/cli.js start"
   },
