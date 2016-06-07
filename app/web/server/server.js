@@ -5,10 +5,10 @@ import requestHandler from 'mttrs/app/web/server/requestHandler'
 
 const port = (process.env.PORT || 4001)
 const app = express()
-const publicPath = path.resolve('web/public')
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static('public/static'))
+  app.use(favicon(path.resolve('../web/public/favicon.ico')))
 } else {
   let config = require('./webpack.config')
   let webpack = require('webpack')
@@ -16,16 +16,15 @@ if (process.env.NODE_ENV === 'production') {
   let webpackDevMiddleware = require('webpack-dev-middleware')
   let webpackHotMiddleware = require('webpack-hot-middleware')
 
+  app.use(favicon(path.resolve('web/public/favicon.ico')))
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
     historyApiFallback: true
   }))
-
   app.use(webpackHotMiddleware(compiler))
 }
 
-app.use(favicon(publicPath + '/favicon.ico'))
 app.use(requestHandler)
 
 app.listen(port, 'localhost', (err, result) => {
