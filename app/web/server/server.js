@@ -5,7 +5,7 @@ import requestHandler from 'mttrs/app/web/server/requestHandler'
 
 const port = (process.env.PORT || 4001)
 const app = express()
-const publicPath = path.resolve('web/public')
+const publicPath = path.resolve('../web/public')
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static('public/static'))
