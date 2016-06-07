@@ -14,7 +14,7 @@ set :ssh_options, { forward_agent: true }
 set :npm_flags, '--only-dev --silent --no-progress'
 
 # passenger
-set :passenger_restart_options, -> { "#{ deploy_to }/current/web/public --ignore-app-not-running" }
+set :passenger_restart_options, -> { "#{ deploy_to }/current/web --ignore-app-not-running" }
 
 # assets
 after 'deploy:updated', 'assets:precompile'
