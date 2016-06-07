@@ -5,6 +5,10 @@ deployment:
       - bundle install
       - bundle exec cap production deploy branch=master
 
+machine:
+  node:
+    version: v6.1.0
+
 test:
   override:
     - echo 'Skip'
