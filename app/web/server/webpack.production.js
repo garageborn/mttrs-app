@@ -7,13 +7,13 @@ var devFlagPlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  devtool: 'source-map',
+  // devtool: 'source-map',
   entry: [
     path.resolve('index.web.js'),
     path.resolve('app/web/styles/app.sass')
   ],
   output: {
-    path: path.join(__dirname, 'public', 'static'),
+    path: path.join(__dirname, '../../../web', 'public', 'static'),
     publicPath: '/static/',
     filename: 'app.js',
   },
