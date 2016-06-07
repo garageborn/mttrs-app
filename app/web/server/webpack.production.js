@@ -7,7 +7,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  // devtool: 'source-map',
+  devtool: 'source-map',
   entry: [
     path.resolve('index.web.js'),
     path.resolve('app/web/styles/app.sass')
