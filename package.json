@@ -22,6 +22,8 @@
     "react-router": "^2.4.0",
     "react-router-redux": "^4.0.4",
     "redux": "^3.0.4",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11",
     "redux-thunk": "^2.1.0",
     "serve-favicon": "^2.3.0",
     "superagent": "^2.0.0",
