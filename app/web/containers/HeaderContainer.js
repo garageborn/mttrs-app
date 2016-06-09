@@ -32,7 +32,7 @@ class HeaderContainer extends Component {
   get defaultItem() {
     return (
       <NavItem
-        category={{name: 'All'}}
+        category={{name: 'Top Stories'}}
         isSelected={!this.props.currentCategory}
         onClick={this.openHome.bind(this)}
         />

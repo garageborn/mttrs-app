@@ -30,7 +30,7 @@ class Main extends Component {
     return (
       <div>
         <HeaderContainer />
-        <FiltersContainer />
+        {/*<FiltersContainer />*/}
         <StoryListContainer />
       </div>
     )

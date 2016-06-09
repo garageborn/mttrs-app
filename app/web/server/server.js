@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(requestHandler)
 
-app.listen(port, 'localhost', (err, result) => {
+app.listen(port, '0.0.0.0', (err, result) => {
   if (err) console.log(err)
   console.log(`Listening at localhost ${ port }`)
 })
