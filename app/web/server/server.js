@@ -8,7 +8,7 @@ const app = express()
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static('public/static'))
-  app.use(favicon(path.resolve('../web/public/favicon.ico')))
+  app.use(favicon(path.resolve('app/web/assets/favicon.ico')))
 } else {
   let config = require('./webpack.config')
   let webpack = require('webpack')
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'production') {
   let webpackDevMiddleware = require('webpack-dev-middleware')
   let webpackHotMiddleware = require('webpack-hot-middleware')
 
-  app.use(favicon(path.resolve('web/public/favicon.ico')))
+  app.use(favicon(path.resolve('app/web/assets/favicon.ico')))
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
     publicPath: config.output.publicPath,
