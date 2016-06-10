@@ -1,32 +1,29 @@
 nav
+  font-family: Cabin
+  font-weight: 500
+  font-size: 17px
+
   ul
     list-style-type: none
-    border-top: 1px solid #EB4F06
-    padding: 5px 0
+    border-top: 1px solid #1B2F67
+    padding: 0 5px 15px 5px
 
     li
-      display: inline
+      display: inline-block
+      margin: 15px 20px 0 0
 
-      a, span.active
-        display: inline-block
-        margin: 0 3px
-        padding: 8px 7px
-        color: #fff
-        text-decoration: none
+      a
         cursor: pointer
 
-      a:before, span.active:before
-        content: ''
-        display: inline-block
-        width: 4px
-        height: 4px
-        border: 2px solid #fff
-        border-radius: 3px
-        vertical-align: middle
-        margin: 0 5px 2px 0
+      a, span.active
+        display: block
+        color: #fff
+        text-decoration: none
+        padding-bottom: 4px
 
-      a:hover
-        text-decoration: underline
+      a:hover, span.active
+        border-bottom: 4px solid #070C1A
+        padding-bottom: 0
 
-      span.active
-        font-weight: bold
+      &:last-child
+        margin-right: 0

@@ -8,6 +8,8 @@ class StoryList extends Component {
 
     return (
       <main>
+        <h2>Today</h2>
+
         {stories.map((story) => { return this.renderStory(story) })}
       </main>
     )
