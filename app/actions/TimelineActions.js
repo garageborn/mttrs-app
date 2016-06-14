@@ -55,9 +55,8 @@ function getDateStories(date, options) {
 
 function dateInterval() {
   let days = []
-  let today = moment()
-  for (let i = 0; i < 5; i++) {
-    let date = today.subtract(1, 'days').startOf('day').unix()
+  for (let i = 0; i < 7; i++) {
+    let date = moment().subtract(i, 'days').startOf('day').unix()
     days.push(date)
   }
   return days
