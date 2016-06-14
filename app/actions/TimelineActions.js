@@ -21,23 +21,52 @@ export function receiveTimeline() {
 export function getTimeline(options) {
   return dispatch => {
     dispatch(requestTimeline())
-    let dates = dateInterval()
+    let promise = null
 
-    let promises = dateInterval().map((date) => {
-      return dispatch(getDateStories(date, options))
-    })
+    if (options.filter) {
+      promise = dispatch(getFilterStories(options))
+    } else {
+      promise = dispatch(getDatesStories(options))
+    }
 
-    return Promise.all(promises).then(() => {
-      return dispatch(receiveTimeline())
-    })
+    return promise.then(() => { return dispatch(receiveTimeline()) })
   }
 }
 
-export function receiveDateStories(date, stories) {
+function receiveStories(date, stories) {
   return {
     type: TIMELINE_DATE_RECEIVED,
     date: date,
     stories: stories
+  }
+}
+
+function getFilterStories(options) {
+  return dispatch => {
+    let filter = options.filter
+    delete options.filter
+    let query = Object.assign({ popular: true, limit: 30 }, options)
+    query[filter] = true
+
+    return API.getStories(query)
+      .then((response) => {
+        if (!response.ok) return
+        dispatch(receiveStories(filter, response.body))
+      })
+  }
+}
+
+function getDatesStories(options) {
+  return dispatch => {
+    let days = []
+    for (let i = 0; i < 7; i++)
+      days.push(moment().subtract(i, 'days').startOf('day').unix())
+
+    let promises = days.map((date) => {
+      return dispatch(getDateStories(date, options))
+    })
+
+    return Promise.all(promises)
   }
 }
 
@@ -48,16 +77,7 @@ function getDateStories(date, options) {
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveDateStories(date, response.body))
+        dispatch(receiveStories(date, response.body))
       })
   }
-}
-
-function dateInterval() {
-  let days = []
-  for (let i = 0; i < 7; i++) {
-    let date = moment().subtract(i, 'days').startOf('day').unix()
-    days.push(date)
-  }
-  return days
 }

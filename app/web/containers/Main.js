@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
-import * as StoryActions from 'mttrs/app/actions/StoryActions'
 import HeaderContainer from 'mttrs/app/web/containers/HeaderContainer'
 import TimelineContainer from 'mttrs/app/web/containers/TimelineContainer'
 

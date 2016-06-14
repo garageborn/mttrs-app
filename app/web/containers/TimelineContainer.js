@@ -5,13 +5,10 @@ import Timeline from 'mttrs/app/web/components/Timeline'
 
 class TimelineContainer extends Component {
   static fetchData({ dispatch, route }) {
-    let categorySlug = route.categorySlug
-    // let filter = route.filter
-
-    let options = {}
-    if (categorySlug) options.category_slug = categorySlug
-    // if (filter) options[filter] = true
-
+    let options = {
+      category_slug: route.categorySlug,
+      filter: route.filter
+    }
     return dispatch(TimelineActions.getTimeline(options))
   }
 
