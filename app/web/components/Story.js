@@ -4,9 +4,9 @@ import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
 
 class Story extends Component {
   render() {
-    const {story, onClick} = this.props
+    const {story} = this.props
     return (
-      <div className='story' onClick={onClick.bind(this, story)}>
+      <div className='story'>
         <a href={story.url} target='_blank'>{this.image}</a>
         <div className='story-text'>
           <h3>
@@ -51,8 +51,7 @@ Story.propTypes = {
   story: PropTypes.shape({
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired
-  }).isRequired,
-  onClick: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default Story

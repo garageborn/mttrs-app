@@ -1,35 +1,36 @@
 import React, {Component, PropTypes} from 'react'
 import Story from 'mttrs/app/web/components/Story'
+import moment from 'moment'
 
 class StoryList extends Component {
   render() {
-    const {stories, isFetching} = this.props
-    if (isFetching) return (<div className='loading'>Hang on...</div>)
+    const {stories} = this.props
 
     return (
-      <main>
-        <h2>Today</h2>
+      <div>
+        <h2>{this.day}</h2>
 
-        {stories.map((story) => { return this.renderStory(story) })}
-      </main>
+        {stories.map((story) => {
+          return <Story key={story.id} story={story} />
+        })}
+      </div>
     )
   }
 
-  renderStory(story) {
-    return (
-      <Story
-        key={story.id}
-        story={story}
-        onClick={this.props.onClick.bind(this)}
-        />
-    )
+  get day() {
+    console.log(this.props.date)
+    return moment.unix(this.props.date).calendar(null, {
+      sameDay : '[Today]',
+      lastDay : '[Yesterday]',
+      lastWeek : 'MMMM D',
+      sameElse : 'MMMM D'
+    })
   }
 }
 
 StoryList.propTypes = {
   stories: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired
+  date: PropTypes.number.isRequired
 }
 
 export default StoryList
