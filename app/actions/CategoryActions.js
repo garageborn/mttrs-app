@@ -1,4 +1,4 @@
-import {OPEN_CATEGORY, CATEGORY_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import {CATEGORY_RECEIVED} from 'mttrs/app/constants/ActionTypes'
 import * as API from 'mttrs/app/api/index'
 
 export function receiveCategory(category) {

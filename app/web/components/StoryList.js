@@ -18,18 +18,25 @@ class StoryList extends Component {
   }
 
   get day() {
-    return moment.unix(this.props.date).calendar(null, {
-      sameDay : '[Today]',
-      lastDay : '[Yesterday]',
-      lastWeek : 'MMMM D',
-      sameElse : 'MMMM D'
-    })
+    switch (this.props.date) {
+      case 'last_week':
+        return 'Last Week'
+      case 'last_month':
+        return 'Last Month'
+      default:
+        return moment.unix(this.props.date).calendar(null, {
+          sameDay : '[Today]',
+          lastDay : '[Yesterday]',
+          lastWeek : 'MMMM D',
+          sameElse : 'MMMM D'
+        })
+    }
   }
 }
 
 StoryList.propTypes = {
   stories: PropTypes.array.isRequired,
-  date: PropTypes.number.isRequired
+  date: PropTypes.any.isRequired
 }
 
 export default StoryList

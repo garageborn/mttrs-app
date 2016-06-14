@@ -20,8 +20,7 @@ class Routes {
 
   static defaultRoutes() {
     return [
-      <Route path='/' component={Main} filter='today'/>,
-      <Route path='/yesterday' component={Main} filter='yesterday'/>,
+      <Route path='/' component={Main} />,
       <Route path='/last-week' component={Main} filter='last_week'/>,
       <Route path='/last-month' component={Main} filter='last_month'/>
     ]
@@ -30,8 +29,7 @@ class Routes {
   static categoriesRoutes(categories) {
     return categories.map((category) => {
       return [
-        <Route path={`/${category.slug}`} component={Main} filter='today' categorySlug={category.slug}/>,
-        <Route path={`/${category.slug}/yesterday`} component={Main} filter='yesterday' categorySlug={category.slug}/>,
+        <Route path={`/${category.slug}`} component={Main} categorySlug={category.slug}/>,
         <Route path={`/${category.slug}/last-week`} component={Main} filter='last_week' categorySlug={category.slug}/>,
         <Route path={`/${category.slug}/last-month`} component={Main} filter='last_month' categorySlug={category.slug}/>
       ]
