@@ -4,3 +4,4 @@ export {default as CategoriesReducers} from 'mttrs/app/reducers/CategoriesReduce
 export {default as FilterReducers} from 'mttrs/app/reducers/FilterReducers'
 export {default as HeaderReducers} from 'mttrs/app/reducers/HeaderReducers'
 export {default as StoryReducers} from 'mttrs/app/reducers/StoryReducers'
+export {default as TimelineReducers} from 'mttrs/app/reducers/TimelineReducers'

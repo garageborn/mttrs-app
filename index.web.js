@@ -7,7 +7,4 @@ import DevTools from 'mttrs/app/web/utils/DevTools'
 const store = configureStore(window.__INITIAL_STATE__)
 
 ReactDOM.render(<App store={store}/>, document.getElementById('mttrs'))
-
-if (__DEV__) {
-  ReactDOM.render(<DevTools store={store}/>, document.getElementById('dev-tools'))
-}
+ReactDOM.render(<DevTools store={store}/>, document.getElementById('dev-tools'))

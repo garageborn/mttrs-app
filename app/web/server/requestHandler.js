@@ -1,6 +1,6 @@
 import React from 'react'
 import {match} from 'react-router'
-import configureStore from 'mttrs/app/web/config/configureStore'
+import configureStore from 'mttrs/app/web/config/configureStore.production'
 import Routes from 'mttrs/app/web/config/Routes'
 import renderEngine from 'mttrs/app/web/server/renderEngine'
 import _ from 'lodash'
@@ -14,9 +14,12 @@ let handleRequest = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      renderEngine(store, renderProps).then((html) => {
-        res.status(200).send(html)
-      })
+      renderEngine(store, renderProps)
+        .then((html) => { res.status(200).send(html) })
+        .catch(exception => {
+          console.log(exception)
+          res.status(500).send(exception.message)
+        })
     } else {
       res.status(404).send('Not found')
     }
