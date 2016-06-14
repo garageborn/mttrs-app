@@ -18,7 +18,6 @@ class StoryList extends Component {
   }
 
   get day() {
-    console.log(this.props.date)
     return moment.unix(this.props.date).calendar(null, {
       sameDay : '[Today]',
       lastDay : '[Yesterday]',
