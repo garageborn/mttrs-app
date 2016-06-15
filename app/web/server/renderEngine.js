@@ -6,7 +6,6 @@ import {Router, RouterContext} from 'react-router'
 
 let handleRender = (store, renderProps) => {
   let promises = mapPromises(store, renderProps)
-
   return Promise.all(promises).then(() => {
     return render(store, renderProps)
   })

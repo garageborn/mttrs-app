@@ -1,25 +1,30 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
+import * as CurrentCategoryActions from 'mttrs/app/actions/CurrentCategoryActions'
+import * as PublishersActions from 'mttrs/app/actions/PublishersActions'
 import HeaderContainer from 'mttrs/app/web/containers/HeaderContainer'
 import TimelineContainer from 'mttrs/app/web/containers/TimelineContainer'
 
-class Main extends Component {
+class MainContainer extends Component {
   static fetchData({ dispatch, params, route }) {
     let categorySlug = route.categorySlug
     let filter = route.filter
 
     return [
-      dispatch(CategoryActions.getCategory(categorySlug)),
-      HeaderContainer.fetchData.apply(this, arguments),
+      dispatch(CurrentCategoryActions.getCategory(categorySlug)),
+      dispatch(CategoryActions.getCategories()),
+      dispatch(PublishersActions.getPublishers()),
       TimelineContainer.fetchData.apply(this, arguments)
     ]
   }
 
   componentWillReceiveProps(nextProps) {
-    let slugChanged = nextProps.categorySlug !== this.props.categorySlug
+    let categorySlugChanged = nextProps.categorySlug !== this.props.categorySlug
+    let publisherSlugChanged = nextProps.publisherSlug !== this.props.publisherSlug
     let filterChanged = nextProps.filter !== this.props.filter
-    if (slugChanged || filterChanged) this.constructor.fetchData(nextProps)
+    if (categorySlugChanged || publisherSlugChanged || filterChanged)
+      this.constructor.fetchData(nextProps)
   }
 
   render() {
@@ -38,4 +43,4 @@ let mapStateToProps = (state, ownProps) => {
     filter: ownProps.route.filter
   }
 }
-export default connect(mapStateToProps)(Main)
+export default connect(mapStateToProps)(MainContainer)

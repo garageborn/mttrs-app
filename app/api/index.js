@@ -12,6 +12,12 @@ export function getCategory(id, callback) {
     .get(ENDPOINTS.CATEGORY(id))
 }
 
+export function getPublishers(query={}, callback) {
+  return request
+    .get(ENDPOINTS.PUBLISHERS)
+    .query(query)
+}
+
 export function getStories(query={}) {
   return request
     .get(ENDPOINTS.STORIES)
