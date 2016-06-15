@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
+import {Link} from 'react-router'
 import moment from 'moment'
 import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
+import {publisherPath} from 'mttrs/app/web/utils/RoutesHelper'
 
 class Story extends Component {
   render() {
@@ -43,14 +45,17 @@ class Story extends Component {
 
   get publisher() {
     if (!this.props.story.publisher) return
-    return (<span>{this.props.story.publisher.name}</span>)
+    return (
+      <Link to={publisherPath(this.props.story.publisher.slug)}>
+        <span>{this.props.story.publisher.name}</span>
+      </Link>
+    )
   }
 }
 
 Story.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
   }).isRequired
 }
 

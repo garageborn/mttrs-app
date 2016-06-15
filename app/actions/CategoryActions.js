@@ -1,28 +1,21 @@
-import {CATEGORY_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import {CATEGORIES_RECEIVED} from 'mttrs/app/constants/ActionTypes'
 import * as API from 'mttrs/app/api/index'
 
-export function receiveCategory(category) {
+export function receiveCategories(categories) {
   return {
-    type: CATEGORY_RECEIVED,
-    category: category
+    type: CATEGORIES_RECEIVED,
+    categories: categories
   }
 }
 
-export function getCategory(slug = null) {
+export function getCategories() {
   return (dispatch, getState) => {
-    if (!slug) return dispatch(receiveCategory(null))
-    if (isCurrentCategory(getState, slug)) return
+    if (getState().CategoriesReducers.categories.length) return
 
-    return API.getCategory(slug)
+    return API.getCategories()
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveCategory(response.body))
+        dispatch(receiveCategories(response.body))
       })
   }
-}
-
-function isCurrentCategory(getState, slug) {
-  let category = getState().CategoriesReducers.category
-  if (!category) return false
-  return category.slug === slug
 }

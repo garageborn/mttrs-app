@@ -7,7 +7,8 @@ class TimelineContainer extends Component {
   static fetchData({ dispatch, route }) {
     let options = {
       category_slug: route.categorySlug,
-      filter: route.filter
+      filter: route.filter,
+      publisher_slug: route.publisherSlug
     }
     return dispatch(TimelineActions.getTimeline(options))
   }

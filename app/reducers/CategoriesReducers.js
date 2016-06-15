@@ -1,13 +1,13 @@
-import {CATEGORY_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import {CATEGORIES_RECEIVED} from 'mttrs/app/constants/ActionTypes'
 
 let defaultState = {
-  category: null
+  categories: []
 }
 
 export default function(state = defaultState, action) {
   switch (action.type) {
-    case CATEGORY_RECEIVED:
-      return {...state, category: action.category}
+    case CATEGORIES_RECEIVED:
+      return {...state, categories: action.categories}
     default:
       return state
   }
