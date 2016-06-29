@@ -28,8 +28,8 @@ class Story extends Component {
   }
 
   get storyInfo() {
-    if (!this.publisher) return (<p>@{this.createdAt}</p>)
-    return (<div>@{this.createdAt} <i>from</i> {this.publisher}</div>)
+    if (!this.publishers) return (<p>@{this.createdAt}</p>)
+    return (<div>@{this.createdAt} <i>from</i> {this.publishers}</div>)
   }
 
   get createdAt() {
@@ -43,17 +43,17 @@ class Story extends Component {
     })
   }
 
-  get publisher() {
-    if (!this.props.story.publishers) return
+  get publishers() {
+    if (!this.props.story.links) return
+
+    let publishers = this.props.story.links.map((link) => {
+      return <Link key={link.id} to={link.url} target='_blank' title={link.title}>
+        <span>{link.publisher.name} </span>
+      </Link>
+    })
 
     return (
-      <div>
-        { this.props.story.publishers.map((publisher) => {
-          return <Link key={publisher.id} to={publisherPath(publisher.slug)}>
-            <span>{publisher.name}</span>
-          </Link>
-        }) }
-      </div>
+      <div>{publishers}</div>
     )
   }
 }

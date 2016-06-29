@@ -4,15 +4,14 @@ import moment from 'moment'
 
 class StoryList extends Component {
   render() {
-    const {stories} = this.props
+    let stories = this.props.stories.map((story) => {
+      return <Story key={story.id} story={story} />
+    })
 
     return (
       <div>
         <h2>{this.day}</h2>
-
-        {stories.map((story) => {
-          return <Story key={story.id} story={story} />
-        })}
+        {stories}
       </div>
     )
   }
