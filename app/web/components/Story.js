@@ -28,14 +28,14 @@ class Story extends Component {
   }
 
   get storyInfo() {
-    if (!this.publishers) return (<p>@{this.createdAt}</p>)
-    return (<div>@{this.createdAt} <i>from</i> {this.publishers}</div>)
+    if (!this.publishers) return (<p>@{this.publishedAt}</p>)
+    return (<div>@{this.publishedAt} <i>from</i> {this.publishers}</div>)
   }
 
-  get createdAt() {
-    let createdAt = moment(this.props.story.created_at)
+  get publishedAt() {
+    let publishedAt = moment(this.props.story.published_at)
 
-    return createdAt.calendar(null, {
+    return publishedAt.calendar(null, {
       lastDay : '[Yesterday] hA',
       sameDay : '[] hA',
       lastWeek : 'MMMM D, hA',
