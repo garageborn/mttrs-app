@@ -23,7 +23,7 @@ class StoryList extends Component {
       case 'last_month':
         return 'Last Month'
       default:
-        return moment.unix(this.props.date).calendar(null, {
+        return moment.unix(this.props.date).utc().calendar(null, {
           sameDay : '[Today]',
           lastDay : '[Yesterday]',
           lastWeek : 'MMMM D',

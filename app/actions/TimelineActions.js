@@ -60,7 +60,7 @@ function getDatesStories(options) {
   return dispatch => {
     let days = []
     for (let i = 0; i < 7; i++)
-      days.push(moment().subtract(i, 'days').startOf('day').unix())
+      days.push(moment().subtract(i, 'days').startOf('day').utc().unix())
 
     let promises = days.map((date) => {
       return dispatch(getDateStories(date, options))
