@@ -4,7 +4,7 @@ import {
   TIMELINE_DATE_RECEIVED
 } from 'mttrs/app/constants/ActionTypes'
 import * as API from 'mttrs/app/api/index'
-import moment from 'moment'
+import moment from 'mttrs/app/web/utils/Moment'
 
 export function requestTimeline() {
   return {
@@ -60,7 +60,7 @@ function getDatesStories(options) {
   return dispatch => {
     let days = []
     for (let i = 0; i < 7; i++)
-      days.push(moment().subtract(i, 'days').startOf('day').utc().unix())
+      days.push(moment().subtract(i, 'days').startOf('day').unix())
 
     let promises = days.map((date) => {
       return dispatch(getDateStories(date, options))

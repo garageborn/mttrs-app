@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
-import moment from 'moment'
+import moment from 'mttrs/app/web/utils/Moment'
 import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
 import {publisherPath} from 'mttrs/app/web/utils/RoutesHelper'
 

@@ -38,7 +38,8 @@ module.exports = {
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?module!cssnext-loader') },
       { test: /\.sass$/, loader: ExtractTextPlugin.extract('css!sass') },
       { test: /\.png$/, loader: 'file-loader' },
-      { test: /\.svg$/, loader: 'file-loader' }
+      { test: /\.svg$/, loader: 'file-loader' },
+      { test: /\.json$/, loader: 'json-loader' }
     ]
   },
   resolve: {
