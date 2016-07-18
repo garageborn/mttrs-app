@@ -1,13 +1,18 @@
-deployment:
-  production:
-    branch: master
-    commands:
-      - bundle install
-      - bundle exec cap production deploy branch=master
-
 machine:
   node:
     version: v6.1.0
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - /tmp/docker
+
+deployment:
+  production:
+    branch: features/docker
+    commands:
+      - bundle exec rake deploy
 
 test:
   override:
