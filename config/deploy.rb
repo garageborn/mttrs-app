@@ -1,7 +1,7 @@
 lock '3.5.0'
 
 set :application, 'mttrs-frontend'
-set :repo_url, 'git@github.com:alexandrebini/mttrs-frontend.git'
+set :repo_url, 'git@github.com:garageborn/mttrs-frontend.git'
 set :linked_dirs, fetch(:linked_dirs, []).push('node_modules')
 set :deploy_to, '/home/ubuntu/mttrs-frontend'
 set :branch, -> {
