@@ -28,7 +28,10 @@ namespace :deploy do
 
   desc 'Publish application'
   task :publish do
-    # todo
+    circle_url = 'https://circleci.com/api/v1.1/project/github/' \
+             'garageborn/server/tree/master' \
+             '?circle-token=66745267a877024ad3be6dd5a321b3af459873f8'
+    HTTParty.post(circle_url)
   end
 
   task :run do
