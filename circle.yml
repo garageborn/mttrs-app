@@ -10,7 +10,7 @@ dependencies:
 
 deployment:
   production:
-    branch: features/docker
+    branch: master
     commands:
       - bundle exec rake deploy
 
