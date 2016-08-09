@@ -59,7 +59,7 @@ class Story extends Component {
           <Link key={link.id} to={link.url} target='_blank' title={link.title}>
             <span>{link.publisher.name}</span>
           </Link>,
-          <span key={link.id + Math.random}>, </span>
+          <span key={link.id + Math.random()}>, </span>
         ]
       }
 
@@ -68,7 +68,7 @@ class Story extends Component {
           <Link key={link.id} to={link.url} target='_blank' title={link.title}>
             <span>{link.publisher.name}</span>
           </Link>,
-          <span key={link.id + Math.random}> and </span>
+          <span key={link.id + Math.random()}> and </span>
         ]
       }
 
