@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import moment from 'mttrs/app/web/utils/Moment'
+import flatten from 'mttrs/app/web/utils/Flatten'
+import PublisherTag from 'mttrs/app/web/components/PublisherTag'
 import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
 import {publisherPath} from 'mttrs/app/web/utils/RoutesHelper'
 
@@ -49,34 +51,25 @@ class Story extends Component {
 
     if (!links) return
 
-    const flatten = list => list.reduce(
-      (a, b) => a.concat(Array.isArray(b) ? flatten(b) : b), []
-    )
-
     let publishers = links.map((link, index) => {
       if (index < links.length - 2) {
-        return [
-          <Link key={link.id} to={link.url} target='_blank' title={link.title}>
-            <span>{link.publisher.name}</span>
-          </Link>,
-          <span key={link.id + Math.random()}>, </span>
-        ]
+        return (
+          <PublisherTag key={link.id} url={link.url} title={link.title}
+            name={link.publisher.name} separator=', &nbsp;' />
+        )
       }
 
       if (index === links.length - 2) {
-        return [
-          <Link key={link.id} to={link.url} target='_blank' title={link.title}>
-            <span>{link.publisher.name}</span>
-          </Link>,
-          <span key={link.id + Math.random()}> and </span>
-        ]
+        return (
+          <PublisherTag key={link.id} url={link.url} title={link.title}
+            name={link.publisher.name} separator=' and &nbsp;' />
+        )
       }
 
-      return [
-        <Link key={link.id} to={link.url} target='_blank' title={link.title}>
-          <span>{link.publisher.name}</span>
-        </Link>
-      ]
+      return (
+        <PublisherTag key={link.id} url={link.url} title={link.title}
+          name={link.publisher.name} />
+      )
     })
 
     return (
