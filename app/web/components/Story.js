@@ -45,7 +45,6 @@ class Story extends Component {
   }
 
   get publishers() {
-
     let links = this.props.story.links
 
     if (!links) return
