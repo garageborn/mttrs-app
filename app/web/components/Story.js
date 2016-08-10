@@ -53,23 +53,17 @@ class Story extends Component {
 
     let publishers = links.map((link, index) => {
       if (index < links.length - 2) {
-        return (
-          <PublisherTag key={link.id} url={link.url} title={link.title}
+        return <PublisherTag key={link.id} url={link.url} title={link.title}
             name={link.publisher.name} separator=',&nbsp;' />
-        )
       }
 
       if (index === links.length - 2) {
-        return (
-          <PublisherTag key={link.id} url={link.url} title={link.title}
+        return <PublisherTag key={link.id} url={link.url} title={link.title}
             name={link.publisher.name} separator=' and&nbsp;' />
-        )
       }
 
-      return (
-        <PublisherTag key={link.id} url={link.url} title={link.title}
+      return <PublisherTag key={link.id} url={link.url} title={link.title}
           name={link.publisher.name} />
-      )
     })
 
     return (
