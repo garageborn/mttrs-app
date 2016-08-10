@@ -12,7 +12,7 @@ namespace :deploy do
     repo = `git config --get remote.origin.url`.chomp
 
     system <<-CMD
-      mkdir -p ~/docker ~/docker/repo
+      mkdir -p ~/docker/repo
       if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
       git clone -b #{ branch } #{ repo } ~/docker/repo
       cd ~/docker/repo && docker build --tag mttrs-frontend .
