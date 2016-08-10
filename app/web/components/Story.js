@@ -55,14 +55,14 @@ class Story extends Component {
       if (index < links.length - 2) {
         return (
           <PublisherTag key={link.id} url={link.url} title={link.title}
-            name={link.publisher.name} separator=', &nbsp;' />
+            name={link.publisher.name} separator=',&nbsp;' />
         )
       }
 
       if (index === links.length - 2) {
         return (
           <PublisherTag key={link.id} url={link.url} title={link.title}
-            name={link.publisher.name} separator=' and &nbsp;' />
+            name={link.publisher.name} separator=' and&nbsp;' />
         )
       }
 
