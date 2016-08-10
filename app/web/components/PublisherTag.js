@@ -8,12 +8,9 @@ class PublisherTag extends Component {
 
   render() {
     return (
-      <div>
-        <Link to={this.props.url} title={this.props.title} target='_blank'>
-          <span>{this.props.name}</span>
-        </Link>
-        <span>{this.props.separator}</span>
-      </div>
+      <Link to={this.props.url} title={this.props.title} target='_blank'>
+        <span>{this.props.name}</span>
+      </Link>
     )
   }
 }
@@ -21,8 +18,7 @@ class PublisherTag extends Component {
 PublisherTag.propTypes = {
   url: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  separator: PropTypes.string
+  name: PropTypes.string.isRequired
 }
 
 export default PublisherTag

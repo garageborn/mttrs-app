@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import moment from 'mttrs/app/web/utils/Moment'
-import flatten from 'mttrs/app/web/utils/Flatten'
+import ComponentsJoiner from 'mttrs/app/web/utils/ComponentsJoiner'
 import PublisherTag from 'mttrs/app/web/components/PublisherTag'
 import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
 import {publisherPath} from 'mttrs/app/web/utils/RoutesHelper'
@@ -52,22 +52,17 @@ class Story extends Component {
     if (!links) return
 
     let publishers = links.map((link, index) => {
-      if (index < links.length - 2) {
-        return <PublisherTag key={link.id} url={link.url} title={link.title}
-            name={link.publisher.name} separator=',&nbsp;' />
-      }
+      let args = [links, index, link.id]
+      let props = { url: link.url, title: link.title, name: link.publisher.name }
 
-      if (index === links.length - 2) {
-        return <PublisherTag key={link.id} url={link.url} title={link.title}
-            name={link.publisher.name} separator=' and&nbsp;' />
-      }
-
-      return <PublisherTag key={link.id} url={link.url} title={link.title}
-          name={link.publisher.name} />
+      return ComponentsJoiner(
+        ...args,
+        <PublisherTag {...props} />
+      )
     })
 
     return (
-      <div className='story-publishers'>{flatten(publishers)}</div>
+      <div className='story-publishers'>{publishers}</div>
     )
   }
 }
