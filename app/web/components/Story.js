@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
 import moment from 'mttrs/app/web/utils/Moment'
 import ComponentsJoiner from 'mttrs/app/web/utils/ComponentsJoiner'
 import PublisherTag from 'mttrs/app/web/components/PublisherTag'
