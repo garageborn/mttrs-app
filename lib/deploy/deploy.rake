@@ -15,7 +15,7 @@ namespace :deploy do
       mkdir -p ~/docker/repo
       if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
       git clone -b #{ branch } #{ repo } ~/docker/repo
-      cd ~/docker/repo && docker build --tag mttrs-frontend .
+      docker build --tag mttrs-frontend ~/docker/repo
       docker save mttrs-frontend > ~/docker/image.tar
     CMD
   end
