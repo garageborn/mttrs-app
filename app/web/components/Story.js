@@ -50,17 +50,12 @@ class Story extends Component {
     if (!links) return
 
     let publishers = links.map((link, index) => {
-      let args = [links, index, link.id]
       let props = { url: link.url, title: link.title, name: link.publisher.name }
-
-      return ComponentsJoiner(
-        ...args,
-        <PublisherTag {...props} />
-      )
+      return <PublisherTag {...props} />
     })
 
     return (
-      <div className='story-publishers'>{publishers}</div>
+      <div className='story-publishers'>{ComponentsJoiner(publishers)}</div>
     )
   }
 }
