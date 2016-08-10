@@ -3,7 +3,7 @@ import express from 'express'
 import favicon from 'serve-favicon'
 import requestHandler from 'mttrs/app/web/server/requestHandler'
 
-const port = (process.env.PORT || 4001)
+const port = (process.env.MTTRS_FRONTEND_PORT || 4001)
 const app = express()
 
 if (process.env.NODE_ENV === 'production') {
