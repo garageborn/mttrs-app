@@ -25,12 +25,6 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: { warnings: false }
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'MTTRS_API_URL': JSON.stringify(process.env.MTTRS_API_URL),
-        'CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME)
-      }
     })
   ],
   module: {
