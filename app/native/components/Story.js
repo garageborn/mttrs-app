@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   Image,
   Text,
   TouchableHighlight,
-  PropTypes,
   View
 } from 'react-native'
 import styles from '../styles/app'
