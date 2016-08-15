@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as TimelineActions from 'mttrs/app/actions/TimelineActions'
-import Timeline from 'mttrs/app/web/components/Timeline'
+import * as TimelineActions from '../../actions/TimelineActions'
+import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
   static fetchData({ dispatch, route }) {

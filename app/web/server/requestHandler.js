@@ -1,8 +1,8 @@
 import React from 'react'
 import {match} from 'react-router'
-import configureStore from 'mttrs/app/web/config/configureStore.production'
-import Routes from 'mttrs/app/web/config/Routes'
-import renderEngine from 'mttrs/app/web/server/renderEngine'
+import configureStore from '../config/configureStore.production'
+import Routes from '../config/Routes'
+import renderEngine from './renderEngine'
 import _ from 'lodash'
 const store = configureStore()
 

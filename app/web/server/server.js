@@ -1,7 +1,7 @@
 import path from 'path'
 import express from 'express'
 import favicon from 'serve-favicon'
-import requestHandler from 'mttrs/app/web/server/requestHandler'
+import requestHandler from './requestHandler'
 
 const port = (process.env.MTTRS_FRONTEND_PORT || 4001)
 const app = express()

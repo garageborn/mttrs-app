@@ -5,10 +5,10 @@ import React, {
   StatusBar
 } from 'react-native'
 import SafariView from 'react-native-safari-view'
-import styles from 'mttrs/app/native/styles/app'
-import Story from 'mttrs/app/native/components/Story'
+import styles from '../styles/app'
+import Story from '../components/Story'
 import {connect} from 'react-redux'
-import * as StoryActions from 'mttrs/app/actions/StoryActions'
+import * as StoryActions from '../../actions/StoryActions'
 
 class StoryList extends Component {
   componentDidMount() {

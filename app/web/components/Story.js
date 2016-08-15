@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react'
-import moment from 'mttrs/app/web/utils/Moment'
-import ComponentsJoiner from 'mttrs/app/web/utils/ComponentsJoiner'
-import PublisherTag from 'mttrs/app/web/components/PublisherTag'
-import * as cloudinary from 'mttrs/app/web/utils/Cloudinary'
-import {publisherPath} from 'mttrs/app/web/utils/RoutesHelper'
+import moment from '../utils/Moment'
+import ComponentsJoiner from '../utils/ComponentsJoiner'
+import PublisherTag from './PublisherTag'
+import * as cloudinary from '../utils/Cloudinary'
+import {publisherPath} from '../utils/RoutesHelper'
 
 class Story extends Component {
   render() {

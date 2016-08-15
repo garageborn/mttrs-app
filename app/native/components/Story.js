@@ -6,7 +6,7 @@ import React, {
   PropTypes,
   View
 } from 'react-native'
-import styles from 'mttrs/app/native/styles/app'
+import styles from '../styles/app'
 
 class Story extends Component {
   render() {

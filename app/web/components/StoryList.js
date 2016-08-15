@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import Story from 'mttrs/app/web/components/Story'
-import moment from 'mttrs/app/web/utils/Moment'
+import Story from './Story'
+import moment from '../utils/Moment'
 
 class StoryList extends Component {
   render() {

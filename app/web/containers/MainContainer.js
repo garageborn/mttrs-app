@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
-import * as CurrentCategoryActions from 'mttrs/app/actions/CurrentCategoryActions'
-import * as PublishersActions from 'mttrs/app/actions/PublishersActions'
-import HeaderContainer from 'mttrs/app/web/containers/HeaderContainer'
-import TimelineContainer from 'mttrs/app/web/containers/TimelineContainer'
+import * as CategoryActions from '../../actions/CategoryActions'
+import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
+import * as PublishersActions from '../../actions/PublishersActions'
+import HeaderContainer from './HeaderContainer'
+import TimelineContainer from './TimelineContainer'
 
 class MainContainer extends Component {
   static fetchData({ dispatch, params, route }) {

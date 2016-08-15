@@ -2,8 +2,8 @@ import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {browserHistory} from 'react-router'
 import {routerMiddleware} from 'react-router-redux'
-import DevTools from 'mttrs/app/web/utils/DevTools'
-import * as reducers from 'mttrs/app/reducers/index'
+import DevTools from '../utils/DevTools'
+import * as reducers from '../../reducers/index'
 
 const routeMiddleware = routerMiddleware(browserHistory)
 
