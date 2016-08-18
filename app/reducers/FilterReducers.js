@@ -1,4 +1,4 @@
-import {SET_FILTER} from 'mttrs/app/constants/ActionTypes'
+import {SET_FILTER} from '../constants/ActionTypes'
 
 let defaultState = {
   filter: null

@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import NavItem from 'mttrs/app/web/components/NavItem'
+import NavItem from '../components/NavItem'
 import {push} from 'react-router-redux'
-import {categoryPath, storiesPath} from 'mttrs/app/web/utils/RoutesHelper'
+import {categoryPath, storiesPath} from '../utils/RoutesHelper'
 
 class HeaderContainer extends Component {
   render() {

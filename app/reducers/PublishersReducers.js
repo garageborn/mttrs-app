@@ -1,4 +1,4 @@
-import {PUBLISHERS_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import {PUBLISHERS_RECEIVED} from '../constants/ActionTypes'
 
 let defaultState = {
   publishers: []

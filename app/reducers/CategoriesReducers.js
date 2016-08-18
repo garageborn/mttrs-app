@@ -1,4 +1,4 @@
-import {CATEGORIES_RECEIVED} from 'mttrs/app/constants/ActionTypes'
+import {CATEGORIES_RECEIVED} from '../constants/ActionTypes'
 
 let defaultState = {
   categories: []

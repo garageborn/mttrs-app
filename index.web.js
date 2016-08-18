@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from 'mttrs/app/web/containers/App'
-import configureStore from 'mttrs/app/web/config/configureStore'
-import DevTools from 'mttrs/app/web/utils/DevTools'
+import App from './app/web/containers/App'
+import configureStore from './app/web/config/configureStore'
+import DevTools from './app/web/utils/DevTools'
 
 const store = configureStore(window.__INITIAL_STATE__)
 

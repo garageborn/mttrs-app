@@ -2,9 +2,9 @@ import {
   REQUEST_TIMELINE,
   TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED
-} from 'mttrs/app/constants/ActionTypes'
-import * as API from 'mttrs/app/api/index'
-import moment from 'mttrs/app/web/utils/Moment'
+} from '../constants/ActionTypes'
+import * as API from '../api/index'
+import moment from '../web/utils/Moment'
 
 export function requestTimeline() {
   return {

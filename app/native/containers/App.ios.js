@@ -1,5 +1,5 @@
-import React, {
-  Component,
+import React, { Component } from 'react'
+import {
   Image,
   ScrollView,
   StatusBar,
@@ -7,10 +7,10 @@ import React, {
   View,
 } from 'react-native'
 import SafariView from 'react-native-safari-view'
-import styles from 'mttrs/app/native/styles/app'
-import StoryList from 'mttrs/app/native/containers/StoryList'
+import styles from '../styles/app'
+import StoryList from './StoryList'
 import {Provider} from 'react-redux'
-import configureStore from 'mttrs/app/native/store/configureStore'
+import configureStore from '../store/configureStore'
 const store = configureStore()
 
 export default class App extends Component {

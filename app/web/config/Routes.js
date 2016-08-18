@@ -1,8 +1,8 @@
 import React from 'react'
-import MainContainer from 'mttrs/app/web/containers/MainContainer'
+import MainContainer from '../containers/MainContainer'
 import {Route} from 'react-router'
-import * as CategoryActions from 'mttrs/app/actions/CategoryActions'
-import * as PublishersActions from 'mttrs/app/actions/PublishersActions'
+import * as CategoryActions from '../../actions/CategoryActions'
+import * as PublishersActions from '../../actions/PublishersActions'
 
 class Routes {
   static fetchData({ dispatch }) {

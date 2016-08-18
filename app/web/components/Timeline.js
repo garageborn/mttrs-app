@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import StoryList from 'mttrs/app/web/components/StoryList'
+import StoryList from './StoryList'
 
 class Timeline extends Component {
   render() {
