@@ -19,7 +19,7 @@ class HeaderContainer extends Component {
   }
 
   categoryItem (category) {
-    return <CategoryNavItem category={category} />
+    return <CategoryNavItem key={category.id} category={category} />
   }
 
   render () {

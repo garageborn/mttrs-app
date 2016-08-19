@@ -24,7 +24,7 @@ class Story extends Component {
 
   get image() {
     if (!this.props.story.image_source_url) return
-    let options = { type: 'fetch', width: 200, height: 200, crop: 'fit' }
+    let options = { type: 'fetch', width: 200, height: 200, crop: 'fit', secure: true }
     return (<img src={cloudinary.url(this.props.story.image_source_url, options)}/>)
   }
 
