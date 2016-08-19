@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import StoryList from './StoryList'
 
 class Timeline extends Component {
-  render() {
+  render () {
     const {items, isFetching} = this.props
     if (isFetching) return (<div className='loading'>Hang on...</div>)
 
@@ -18,7 +18,7 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired
 }
 
 export default Timeline

@@ -1,5 +1,4 @@
-import React from 'react'
 import { AppRegistry } from 'react-native'
-import App from './app/native/containers/App'
+import Root from './app/native/containers/Root'
 
-AppRegistry.registerComponent('mttrs', () => App)
+AppRegistry.registerComponent('mttrs', () => Root)

@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
-  static fetchData({ dispatch, route }) {
+  static fetchData ({ dispatch, route }) {
     let options = {
       category_slug: route.categorySlug,
       filter: route.filter,
@@ -13,7 +13,7 @@ class TimelineContainer extends Component {
     return dispatch(TimelineActions.getTimeline(options))
   }
 
-  render() {
+  render () {
     const {items, isFetching} = this.props
     return (
       <Timeline items={items} isFetching={isFetching} />
