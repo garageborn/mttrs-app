@@ -3,18 +3,7 @@ import { Provider } from 'react-redux'
 import App from './App'
 import configureStore from '../store/configureStore'
 
-const getInitialState = () => ({
-  routing: {},
-  CategoriesReducers: {
-    categories: [{name: 'Tech'}, {name: 'Science'}, {name: 'Weather'}]
-  },
-  CurrentCategoryReducers: {},
-  FilterReducers: {},
-  PublishersReducers: {},
-  TimelineReducers: {}
-})
-
-const store = configureStore(getInitialState())
+const store = configureStore()
 
 export default class Root extends Component {
   render () {
