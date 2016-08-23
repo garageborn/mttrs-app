@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, ListView, View, Text } from 'react-native'
+import _ from 'lodash'
 import StoryList from './StoryList'
 
 class Timeline extends Component {
@@ -7,7 +8,7 @@ class Timeline extends Component {
     const { items } = this.props
 
     return items.map((item) => {
-      return <StoryList key={item.date} date={item.date} stories={item.stories} />
+      return <StoryList key={_.uniqueId('s_')} date={item.date} stories={item.stories} />
     })
   }
 

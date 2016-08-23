@@ -4,7 +4,7 @@ import {
   TIMELINE_DATE_RECEIVED
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
-import moment from '../web/utils/Moment'
+import moment from '../common/utils/Moment'
 
 export function requestTimeline() {
   return {

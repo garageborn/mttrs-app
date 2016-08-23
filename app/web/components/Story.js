@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react'
-import moment from '../utils/Moment'
+import moment from '../../common/utils/Moment'
 import ComponentsJoiner from '../utils/ComponentsJoiner'
 import PublisherTag from './PublisherTag'
-import * as cloudinary from '../utils/Cloudinary'
+import * as cloudinary from '../../common/utils/Cloudinary'
 import {publisherPath} from '../utils/RoutesHelper'
 
 class Story extends Component {
