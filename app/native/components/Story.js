@@ -37,8 +37,7 @@ class Story extends Component {
 Story.propTypes = {
   story: PropTypes.shape({
     title: PropTypes.string.isRequired
-  }).isRequired,
-  // onClick: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default Story

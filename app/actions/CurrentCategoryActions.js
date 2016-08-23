@@ -22,7 +22,7 @@ export function getCategory(slug = null) {
 }
 
 function isCurrentCategory(getState, slug) {
-  let category = getState().CurrentCategoryReducers.category
+  let category = getState().CurrentCategoryReducer.category
   if (!category) return false
   return category.slug === slug
 }

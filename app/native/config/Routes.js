@@ -13,12 +13,9 @@ class Routes {
   }
 
   static all(store) {
-    let categories = store.getState().CategoriesReducers.categories
-
     return Actions.create(
       <Scene key='root' hideNavBar={true}>
         { Routes.defaultRoutes() }
-        { Routes.categoriesRoutes(categories) }
       </Scene>
     )
   }
@@ -26,12 +23,6 @@ class Routes {
   static defaultRoutes() {
     return [
       <Scene key='home' component={Root}/>
-    ]
-  }
-
-  static categoriesRoutes(categories) {
-    return [
-      <Scene key='category' component={Root}/>
     ]
   }
 }
