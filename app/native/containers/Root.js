@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import App from './App'
-import configureStore from '../config/configureStore'
+import { View } from 'react-native'
+import HeaderContainer from './HeaderContainer'
+import TimelineContainer from './TimelineContainer'
 
-import mock from '../store/mock.json'
-
-const store = configureStore(mock)
-
-export default class Root extends Component {
+class Root extends Component {
   static fetchData({ dispatch, params, route }) {
     console.log('fetch data')
     // let categorySlug = route.categorySlug
@@ -15,7 +11,7 @@ export default class Root extends Component {
 
     return [
       // dispatch(CurrentCategoryActions.getCategory(categorySlug)),
-      dispatch(CategoryActions.getCategories())
+      // dispatch(CategoryActions.getCategories())
       // dispatch(PublishersActions.getPublishers()),
       // TimelineContainer.fetchData.apply(this, arguments)
     ]
@@ -23,9 +19,12 @@ export default class Root extends Component {
 
   render () {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <View>
+        <HeaderContainer />
+        <TimelineContainer />
+      </View>
     )
   }
 }
+
+export default Root

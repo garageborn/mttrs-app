@@ -1,36 +1,26 @@
-import React, { Component } from 'react'
-import {
-  StatusBar,
-  View,
-  TouchableHighlight,
-  Image,
-  Text
-} from 'react-native'
-import SafariView from 'react-native-safari-view'
-import styles from '../styles/app'
-import HeaderContainer from './HeaderContainer'
-import TimelineContainer from './TimelineContainer'
+import React, { Component, PropTypes } from 'react'
+import { Router } from 'react-native-router-flux'
+import { Provider, connect } from 'react-redux'
+import { Text } from 'react-native'
+import Root from './Root'
+import Routes from '../config/Routes'
 
-export default class App extends Component {
-  constructor (props) {
-    super(props)
-    StatusBar.setBarStyle('light-content')
+const RouterWithRedux = connect()(Router)
 
-    this.dismissSubscription = () => {
-      StatusBar.setBarStyle('light-content')
-    }
+class App extends Component {
+  render() {
+    const {store} = this.props
 
-    SafariView.addEventListener('onDismiss', this.dismissSubscription)
-  }
-
-  render () {
     return (
-      <View style={styles.container}>
-        <View>
-          <HeaderContainer />
-          <TimelineContainer />
-        </View>
-      </View>
+      <Provider store={store}>
+        <RouterWithRedux scenes={Routes.all(store)} />
+      </Provider>
     )
   }
 }
+
+App.propTypes = {
+  store: PropTypes.object.isRequired
+}
+
+export default App
