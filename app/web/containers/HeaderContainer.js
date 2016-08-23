@@ -70,7 +70,7 @@ class HeaderContainer extends Component {
 let mapStateToProps = (state) => {
   return {
     categories: state.CategoriesReducers.categories,
-    currentCategory: state.CurrentCategoryReducers.category,
+    currentCategory: state.CurrentCategoryReducer.category,
     currentFilter: state.FilterReducers.filter
   }
 }

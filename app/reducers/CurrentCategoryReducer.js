@@ -1,7 +1,7 @@
-import {CURRENT_CATEGORY_RECEIVED} from '../constants/ActionTypes'
+import { CURRENT_CATEGORY_RECEIVED } from '../constants/ActionTypes'
 
 let defaultState = {
-  category: null
+  category: {}
 }
 
 export default function(state = defaultState, action) {
