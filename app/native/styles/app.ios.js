@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: '#ff5607',
-    paddingTop: 27,
+    backgroundColor: '#2C2E4A',
+    paddingTop: 28,
     alignItems: 'center'
   },
 
@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   },
 
   nav: {
-    backgroundColor: '#ff5607',
+    backgroundColor: '#EA4340',
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#EB4F06',
-    padding: 11
+    borderTopColor: '#EA4340',
+    padding: 12
   },
 
   navItem: {

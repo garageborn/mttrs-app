@@ -1,11 +1,11 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import {connect} from 'react-redux'
 import NavItem from '../components/NavItem'
 import {push} from 'react-router-redux'
 import {categoryPath, storiesPath} from '../utils/RoutesHelper'
 
 class HeaderContainer extends Component {
-  render() {
+  render () {
     return (
       <header>
         <div className='container'>
@@ -24,7 +24,7 @@ class HeaderContainer extends Component {
     )
   }
 
-  get defaultItem() {
+  get defaultItem () {
     return (
       <NavItem
         category={{name: 'Top Stories'}}
@@ -34,13 +34,13 @@ class HeaderContainer extends Component {
       )
   }
 
-  get categoriesItems() {
+  get categoriesItems () {
     return this.props.categories.map((category) => {
       return this.categoryItem(category)
     })
   }
 
-  categoryItem(category) {
+  categoryItem (category) {
     return (
       <NavItem
         key={category.id}
@@ -51,17 +51,17 @@ class HeaderContainer extends Component {
       )
   }
 
-  openCategory(category) {
+  openCategory (category) {
     let path = categoryPath(category.slug, this.props.currentFilter)
     this.props.dispatch(push(path))
   }
 
-  openHome() {
+  openHome () {
     let path = storiesPath(this.props.currentFilter)
     this.props.dispatch(push(path))
   }
 
-  isSelected(category) {
+  isSelected (category) {
     if (!this.props.currentCategory) return false
     return category.slug === this.props.currentCategory.slug
   }

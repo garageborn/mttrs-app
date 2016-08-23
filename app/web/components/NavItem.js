@@ -1,12 +1,12 @@
 import React, {Component, PropTypes} from 'react'
 
 class NavItem extends Component {
-  render() {
+  render () {
     const {category, isSelected, onClick} = this.props
     return (
       <li>
         {isSelected
-          ? <span className="active">{category.name}</span>
+          ? <span className='active'>{category.name}</span>
           : <a onClick={e => onClick(category)}>{category.name}</a>
         }
       </li>

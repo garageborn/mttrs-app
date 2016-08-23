@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import {
   Image,
   Text,
@@ -6,30 +6,39 @@ import {
   View
 } from 'react-native'
 import styles from '../styles/app'
+import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
   render() {
-    const {story, onClick} = this.props
+    const { story } = this.props
     return (
-      <TouchableHighlight activeOpacity={0.7} underlayColor='white' onPress={onClick.bind(this, story)}>
+      <TouchableHighlight activeOpacity={0.7} underlayColor='white'>
         <View style={styles.story}>
-          <Image source={{uri: story.image.thumb}} style={styles.storyThumb} />
+          <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
           <View style={styles.storyTitleContainer}>
             <Text numberOfLines={3}>{story.title}</Text>
-            <Text style={styles.storyInfo}>@4AM <Text style={styles.storyInfoFrom}>from</Text> {story.publisher.name}</Text>
+            <Text style={styles.storyInfo}>@4AM <Text style={styles.storyInfoFrom}>from</Text> Publisher</Text>
           </View>
         </View>
       </TouchableHighlight>
     )
   }
+
+  getImage () {
+    const { story } = this.props
+
+    if (!story.image_source_url) return
+    let options = { type: 'fetch', width: 200, height: 200, crop: 'fit', secure: true }
+
+    return cloudinary.url(story.image_source_url, options)
+  }
 }
 
 Story.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  // onClick: PropTypes.func.isRequired
 }
 
 export default Story
