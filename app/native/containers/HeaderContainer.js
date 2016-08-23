@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 import { getCategories } from '../../actions/CategoryActions'
-import CategoryNavItem from '../components/CategoryNavItem'
+import NavItem from '../components/NavItem'
 import styles from '../styles/app.ios'
 
 class HeaderContainer extends Component {
-  componentDidMount () {
-    const { dispatch } = this.props
-    dispatch(getCategories())
-  }
-
-  getCategoriesItems () {
+  getCategoriesItems() {
     const { categories } = this.props
     return categories.map((category) => {
       return this.categoryItem(category)
     })
   }
 
-  categoryItem (category) {
-    return <CategoryNavItem key={category.id} category={category} />
+  categoryItem(category) {
+    return (
+      <NavItem
+        key={category.id}
+        category={category}
+        onPress={this.openCategory.bind(this)}
+        />
+      )
   }
 
-  render () {
+  render() {
     return (
       <View>
         <View style={styles.header}>
@@ -36,13 +38,16 @@ class HeaderContainer extends Component {
       </View>
     )
   }
+
+  openCategory(category) {
+    console.log('open category', category)
+    Actions.category({ categorySlug: category.slug })
+  }
 }
 
 let mapStateToProps = (state) => {
-  const { categories } = state.CategoriesReducers
-
   return {
-    categories
+    categories: state.CategoriesReducers.categories
   }
 }
 
