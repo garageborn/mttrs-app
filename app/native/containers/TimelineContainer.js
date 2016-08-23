@@ -1,21 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { getTimeline } from '../../actions/TimelineActions'
+import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
-  static fetchData({dispatch, route}) {
+  static fetchData({dispatch, categorySlug}) {
     let options = {
-      category_slug: route.categorySlug,
-      filter: route.filter,
-      publisher_slug: route.publisherSlug
+      category_slug: categorySlug
     }
-    return dispatch(getTimeline(options))
+    return dispatch(TimelineActions.getTimeline(options))
   }
 
   render() {
     const { items, isFetching } = this.props
-
     return (
       <Timeline items={items} isFetching={isFetching} />
     )

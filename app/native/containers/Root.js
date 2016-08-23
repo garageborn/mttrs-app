@@ -1,18 +1,43 @@
 import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import App from './App'
-import configureStore from '../store/configureStore'
+import { View } from 'react-native'
+import { connect } from 'react-redux'
+import HeaderContainer from './HeaderContainer'
+import TimelineContainer from './TimelineContainer'
+import * as CategoryActions from '../../actions/CategoryActions'
+import * as PublishersActions from '../../actions/PublishersActions'
 
-import mock from '../store/mock.json'
+class Root extends Component {
+  static fetchData({ dispatch, params, route }) {
+    // let categorySlug = route.categorySlug
 
-const store = configureStore(mock)
+    return [
+      // dispatch(CurrentCategoryActions.getCategory(categorySlug)),
+      dispatch(CategoryActions.getCategories()),
+      dispatch(PublishersActions.getPublishers()),
+      TimelineContainer.fetchData.apply(this, arguments)
+    ]
+  }
 
-export default class Root extends Component {
+  componentDidMount() {
+    this.constructor.fetchData(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+  }
+
   render () {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <View>
+        <HeaderContainer />
+        <TimelineContainer />
+      </View>
     )
   }
 }
+
+let mapStateToProps = (state, ownProps) => {
+  return {
+    categorySlug: ownProps.categorySlug,
+  }
+}
+export default connect(mapStateToProps)(Root)

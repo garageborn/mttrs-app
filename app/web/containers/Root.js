@@ -6,7 +6,7 @@ import * as PublishersActions from '../../actions/PublishersActions'
 import HeaderContainer from './HeaderContainer'
 import TimelineContainer from './TimelineContainer'
 
-class MainContainer extends Component {
+class Root extends Component {
   static fetchData({ dispatch, params, route }) {
     let categorySlug = route.categorySlug
     let filter = route.filter
@@ -43,4 +43,4 @@ let mapStateToProps = (state, ownProps) => {
     filter: ownProps.route.filter
   }
 }
-export default connect(mapStateToProps)(MainContainer)
+export default connect(mapStateToProps)(Root)
