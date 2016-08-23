@@ -19,12 +19,10 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount', this.props)
     this.constructor.fetchData(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps)
   }
 
   render () {
