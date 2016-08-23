@@ -39,6 +39,7 @@
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-native": "^0.30.0",
+    "react-native-router-flux": "^3.35.0",
     "react-native-safari-view": "^1.0.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.1",

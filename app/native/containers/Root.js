@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import App from './App'
-import configureStore from '../store/configureStore'
+import configureStore from '../config/configureStore'
 
 const store = configureStore()
 
 export default class Root extends Component {
+  static fetchData({ dispatch, params, route }) {
+    console.log('fetch data')
+    // let categorySlug = route.categorySlug
+    // let filter = route.filter
+
+    return [
+      // dispatch(CurrentCategoryActions.getCategory(categorySlug)),
+      dispatch(CategoryActions.getCategories())
+      // dispatch(PublishersActions.getPublishers()),
+      // TimelineContainer.fetchData.apply(this, arguments)
+    ]
+  }
+
   render () {
     return (
       <Provider store={store}>
