@@ -17,7 +17,7 @@ class Story extends Component {
           <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
           <View style={styles.storyTitleContainer}>
             <Text numberOfLines={3}>{story.title}</Text>
-            <Text style={styles.storyInfo}>@4AM <Text style={styles.storyInfoFrom}>from</Text> Publisher</Text>
+            <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> Publisher</Text>
           </View>
         </View>
       </TouchableHighlight>

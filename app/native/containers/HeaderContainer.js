@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Image } from 'react-native'
+import { View, ScrollView, Image, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
@@ -36,6 +36,7 @@ class HeaderContainer extends Component {
   render() {
     return (
       <View>
+        <StatusBar barStyle='light-content' />
         <View style={styles.header}>
           <Image source={require('../assets/logo.png')} style={styles.logo} />
         </View>
