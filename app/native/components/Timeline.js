@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, ListView, View, Text } from 'react-native'
 import _ from 'lodash'
+import styles from '../styles/app'
 import StoryList from './StoryList'
 
 class Timeline extends Component {
@@ -17,7 +18,7 @@ class Timeline extends Component {
 
     if (isFetching) {
       return (
-        <View><Text>Hang on...</Text></View>
+        <View style={styles.container}><Text>Hang on...</Text></View>
       )
     }
 

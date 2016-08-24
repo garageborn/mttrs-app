@@ -35,7 +35,7 @@ class Story extends Component {
   }
 
   getPublishers() {
-    let links = this.props.story.links
+    const { links } = this.props.story
 
     if (!links) return
 
