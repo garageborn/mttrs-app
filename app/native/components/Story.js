@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native'
 import styles from '../styles/app'
+import ComponentsJoiner from '../utils/ComponentsJoiner'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
@@ -17,7 +18,7 @@ class Story extends Component {
           <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
           <View style={styles.storyTitleContainer}>
             <Text numberOfLines={3}>{story.title}</Text>
-            <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> Publisher</Text>
+            <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> {this.getPublishers()}</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -31,6 +32,18 @@ class Story extends Component {
     let options = { type: 'fetch', width: 200, height: 200, crop: 'fit', secure: true }
 
     return cloudinary.url(story.image_source_url, options)
+  }
+
+  getPublishers() {
+    let links = this.props.story.links
+
+    if (!links) return
+
+    let publishers = links.map((link, index) => {
+      return link.publisher.name
+    })
+
+    return ComponentsJoiner(publishers)
   }
 }
 
