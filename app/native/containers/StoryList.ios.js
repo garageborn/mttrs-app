@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Linking, ListView, StatusBar } from 'react-native'
-import SafariView from 'react-native-safari-view'
+import { ListView } from 'react-native'
 import styles from '../styles/app'
 import Story from '../components/Story'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 class StoryList extends Component {
   render() {
@@ -18,28 +17,13 @@ class StoryList extends Component {
 
   renderRow(rowData, sectionId, rowId) {
     return (
-      <Story story={rowData} onPress={this.openStory.bind(this)} />
+      <Story story={rowData} />
     )
   }
 
   get dataSource() {
     let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     return ds.cloneWithRows(this.props.stories.slice(0, 20))
-  }
-
-  openStory(story) {
-    console.log('open story')
-    SafariView.isAvailable()
-      .then(
-        SafariView.show({ url: story.url, readerMode: true })
-      )
-      .then(
-        StatusBar.setBarStyle('default')
-      )
-      .catch(error => {
-        // iOS 8 - Fuck it?
-        Linking.openURL(story.url)
-      })
   }
 }
 

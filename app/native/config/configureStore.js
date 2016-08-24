@@ -7,7 +7,7 @@ const loggerMiddleware = createLogger()
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
-  // applyMiddleware(loggerMiddleware)
+  applyMiddleware(loggerMiddleware)
 )(createStore)
 
 const rootReducer = combineReducers(reducers)
