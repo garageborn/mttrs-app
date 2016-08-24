@@ -16,11 +16,8 @@ class HeaderContainer extends Component {
     this.constructor.fetchData(this.props)
   }
 
-  getCategoriesItems() {
-    const { categories } = this.props
-    return categories.map((category) => {
-      return this.categoryItem(category)
-    })
+  openCategory(category) {
+    this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
   }
 
   categoryItem(category) {
@@ -31,6 +28,13 @@ class HeaderContainer extends Component {
         onPress={this.openCategory.bind(this)}
         />
       )
+  }
+
+  getCategoriesItems() {
+    const { categories } = this.props
+    return categories.map((category) => {
+      return this.categoryItem(category)
+    })
   }
 
   render() {
@@ -47,10 +51,6 @@ class HeaderContainer extends Component {
         </ScrollView>
       </View>
     )
-  }
-
-  openCategory(category) {
-    this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
   }
 }
 
