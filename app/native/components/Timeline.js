@@ -1,16 +1,64 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, ListView, View, Text } from 'react-native'
-import _ from 'lodash'
+import { ListView, View, Text } from 'react-native'
 import styles from '../styles/app'
-import StoryList from './StoryList'
+import Story from './Story'
+import ListViewHeader from './ListViewHeader'
+import moment from '../../common/utils/Moment'
 
 class Timeline extends Component {
-  getTimelineItems() {
+  constructor(props) {
+    super(props)
+
+    this.getTimelineItem = this.getTimelineItem.bind(this)
+    this.renderSeparator = this.renderSeparator.bind(this)
+  }
+
+  getTimelineItem(item) {
+    return <Story story={item} />
+  }
+
+  renderSeparator(sectionData, sectionID) {
+    return <ListViewHeader date={this.parseDay(sectionID).toUpperCase()} />
+  }
+
+  parseDay(date) {
+    switch (date) {
+      case 'last_week':
+        return 'Last Week'
+      case 'last_month':
+        return 'Last Month'
+      default:
+        return moment.unix(date).calendar(null, {
+          sameDay: '[Today]',
+          lastDay: '[Yesterday]',
+          lastWeek: 'MMMM D',
+          sameElse: 'MMMM D'
+        })
+    }
+  }
+
+  dataSource() {
+    let ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
+    })
+
+    let { rows, sections } = this.rowsAndSections()
+    return ds.cloneWithRowsAndSections(rows, sections)
+  }
+
+  rowsAndSections() {
+    let rows = {}
+    let sections = []
     const { items } = this.props
 
-    return items.map((item) => {
-      return <StoryList key={_.uniqueId('s_')} date={item.date} stories={item.stories} />
+    items.map((item) => {
+      let section = item.date
+      sections.push(section)
+      rows[section] = item.stories
     })
+
+    return {rows, sections}
   }
 
   render() {
@@ -18,14 +66,19 @@ class Timeline extends Component {
 
     if (isFetching) {
       return (
-        <View style={styles.container}><Text>Hang on...</Text></View>
+        <View style={styles.loading}>
+          <Text>Hang on...</Text>
+        </View>
       )
     }
 
     return (
-      <ScrollView>
-        {this.getTimelineItems()}
-      </ScrollView>
+      <ListView
+        style={styles.listView}
+        dataSource={this.dataSource()}
+        renderRow={this.getTimelineItem}
+        renderSectionHeader={this.renderSeparator}
+        />
     )
   }
 }

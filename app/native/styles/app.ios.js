@@ -1,9 +1,16 @@
-import React from 'react'
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from 'react-native'
+import Dimensions from 'Dimensions'
+const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+
+  loading: {
+    height: height - 120,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   header: {
@@ -25,50 +32,9 @@ const styles = StyleSheet.create({
     padding: 12
   },
 
-  navItem: {
-    color: '#fff',
-    marginRight: 14,
-    fontSize: 15
-  },
-
-  navBullet: {
-    marginTop: 6,
-    marginRight: 4,
-    width: 7,
-    height: 7
-  },
-
-  storyList: {
-
-  },
-
-  story: {
-    marginTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    flexDirection: 'row'
-  },
-
-  storyThumb: {
-    width: 100,
-    height: 75,
-    marginRight: 10
-  },
-
-  storyTitleContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-
-  storyInfo: {
-    marginTop: 5,
-    fontWeight: 'bold',
-    color: '#aaa',
-    fontSize: 12
-  },
-
-  storyInfoFrom: {
-    fontWeight: 'normal'
+  listView: {
+    backgroundColor: '#FFF',
+    height: height - 120
   }
 })
 
