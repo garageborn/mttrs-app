@@ -60,7 +60,7 @@ class Story extends Component {
 
     if (!links) return
 
-    let publishers = links.map((link, index) => {
+    let publishers = links.map(link => {
       return link.publisher.name
     })
 

@@ -3,6 +3,7 @@ import { ListView, View, Text } from 'react-native'
 import styles from '../styles/app'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
+import ParseDate from '../../common/utils/ParseDate'
 import moment from '../../common/utils/Moment'
 
 class Timeline extends Component {
@@ -18,7 +19,7 @@ class Timeline extends Component {
   }
 
   renderSeparator(sectionData, date) {
-    return <ListViewHeader date={this.parseDay(date).toUpperCase()} />
+    return <ListViewHeader date={ParseDate(date).toUpperCase()} />
   }
 
   parseDay(date) {

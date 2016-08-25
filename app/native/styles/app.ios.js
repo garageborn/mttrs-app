@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import Dimensions from 'Dimensions'
 const { height } = Dimensions.get('window')
+const headerSpacing = 120
 
 const styles = StyleSheet.create({
   container: {
@@ -8,7 +9,7 @@ const styles = StyleSheet.create({
   },
 
   loading: {
-    height: height - 120,
+    height: height - headerSpacing,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
 
   listView: {
     backgroundColor: '#FFF',
-    height: height - 120
+    height: height - headerSpacing
   }
 })
 

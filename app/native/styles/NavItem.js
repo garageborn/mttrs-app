@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   navItem: {
-    color: '#fff',
+    color: '#FFF',
     marginRight: 14,
     fontSize: 15
   }

@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   storyInfo: {
     marginTop: 5,
     fontWeight: 'bold',
-    color: '#aaa',
+    color: '#AAA',
     fontSize: 12
   },
 

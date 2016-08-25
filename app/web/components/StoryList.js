@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import Story from './Story'
 import moment from '../../common/utils/Moment'
+import ParseDate from '../../common/utils/ParseDate'
 
 class StoryList extends Component {
   render() {
@@ -10,26 +11,10 @@ class StoryList extends Component {
 
     return (
       <div>
-        <h2>{this.day}</h2>
+        <h2>{ParseDate(this.props.date)}</h2>
         {stories}
       </div>
     )
-  }
-
-  get day() {
-    switch (this.props.date) {
-      case 'last_week':
-        return 'Last Week'
-      case 'last_month':
-        return 'Last Month'
-      default:
-        return moment.unix(this.props.date).calendar(null, {
-          sameDay : '[Today]',
-          lastDay : '[Yesterday]',
-          lastWeek : 'MMMM D',
-          sameElse : 'MMMM D'
-        })
-    }
   }
 }
 
