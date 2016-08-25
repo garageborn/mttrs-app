@@ -6,14 +6,14 @@ const ComponentsJoiner = (componentArr) => {
     if (index < componentArr.length - 2) {
       return (
         <div key={_.uniqueId('c_')}>
-          {component}<span>,&nbsp;</span>
+          {component},&nbsp;
         </div>
       )
     }
     if (index === componentArr.length - 2) {
       return (
         <div key={_.uniqueId('c_')}>
-          {component}<span>&nbsp;and&nbsp;</span>
+          {component}&nbsp;and&nbsp;
         </div>
       )
     }

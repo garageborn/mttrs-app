@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, ScrollView, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
 import * as CategoryActions from '../../actions/CategoryActions'
 import NavItem from '../components/NavItem'
@@ -16,11 +15,8 @@ class HeaderContainer extends Component {
     this.constructor.fetchData(this.props)
   }
 
-  getCategoriesItems() {
-    const { categories } = this.props
-    return categories.map((category) => {
-      return this.categoryItem(category)
-    })
+  openCategory(category) {
+    this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
   }
 
   categoryItem(category) {
@@ -31,6 +27,13 @@ class HeaderContainer extends Component {
         onPress={this.openCategory.bind(this)}
         />
       )
+  }
+
+  getCategoriesItems() {
+    const { categories } = this.props
+    return categories.map((category) => {
+      return this.categoryItem(category)
+    })
   }
 
   render() {
@@ -46,10 +49,6 @@ class HeaderContainer extends Component {
         </ScrollView>
       </View>
     )
-  }
-
-  openCategory(category) {
-    this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
   }
 }
 

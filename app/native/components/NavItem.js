@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Text } from 'react-native'
-import styles from '../styles/app.ios'
+import styles from '../styles/NavItem'
 
 class NavItem extends Component {
   render() {
