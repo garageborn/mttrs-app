@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     paddingTop: 12,
     paddingBottom: 10,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     backgroundColor: '#FFF',
     borderBottomColor: '#DDD',
     justifyContent: 'center'
