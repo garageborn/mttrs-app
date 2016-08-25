@@ -17,8 +17,8 @@ class Timeline extends Component {
     return <Story story={item} />
   }
 
-  renderSeparator(sectionData, sectionID) {
-    return <ListViewHeader date={this.parseDay(sectionID).toUpperCase()} />
+  renderSeparator(sectionData, date) {
+    return <ListViewHeader date={this.parseDay(date).toUpperCase()} />
   }
 
   parseDay(date) {
