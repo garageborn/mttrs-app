@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text } from 'react-native'
-import styles from '../styles/app'
+import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'

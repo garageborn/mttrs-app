@@ -6,7 +6,7 @@ import TimelineContainer from './TimelineContainer'
 class App extends Component {
   render () {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <HeaderContainer />
         <TimelineContainer />
       </View>
