@@ -1,21 +1,3 @@
-// import React, { Component } from 'react'
-// import { View } from 'react-native'
-// import HeaderContainer from './HeaderContainer'
-// import TimelineContainer from './TimelineContainer'
-//
-// class Root extends Component {
-//   render () {
-//     return (
-//       <View>
-//         <HeaderContainer />
-//         <TimelineContainer />
-//       </View>
-//     )
-//   }
-// }
-//
-// export default Root
-
 import React, { Component, PropTypes } from 'react'
 import { Router } from 'react-native-router-flux'
 import { Provider, connect } from 'react-redux'
