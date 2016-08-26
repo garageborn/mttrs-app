@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#EA4340',
     padding: 12
-  },
+  }
 })
 
 export default styles
