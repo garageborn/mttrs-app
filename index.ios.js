@@ -1,8 +1,8 @@
 import React from 'react'
 import { AppRegistry } from 'react-native'
-import App from './app/native/containers/App'
+import Root from './app/native/containers/Root'
 import configureStore from './app/native/config/configureStore'
 
 const store = configureStore()
-const mttrs = () => <App store={store}/>
+const mttrs = () => <Root store={store}/>
 AppRegistry.registerComponent('mttrs', () => mttrs)

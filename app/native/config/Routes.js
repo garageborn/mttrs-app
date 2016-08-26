@@ -1,6 +1,6 @@
 import React from 'react'
 import { Actions, Scene } from 'react-native-router-flux'
-import Root from '../containers/Root'
+import App from '../containers/App'
 import * as CategoryActions from '../../actions/CategoryActions'
 import * as PublishersActions from '../../actions/PublishersActions'
 
@@ -22,7 +22,7 @@ class Routes {
 
   static defaultRoutes() {
     return [
-      <Scene key='home' component={Root}/>
+      <Scene key='home' component={App}/>
     ]
   }
 }
