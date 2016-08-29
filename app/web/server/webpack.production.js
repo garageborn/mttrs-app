@@ -30,7 +30,8 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         'MTTRS_API_URL': JSON.stringify(process.env.MTTRS_API_URL),
-        'CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME)
+        'CLOUDINARY_CLOUD_NAME': JSON.stringify(process.env.CLOUDINARY_CLOUD_NAME),
+        'MTTRS_FRONTEND_SENTRY_PUBLIC_DSN': JSON.stringify(process.env.MTTRS_FRONTEND_SENTRY_PUBLIC_DSN)
       }
     })
   ],

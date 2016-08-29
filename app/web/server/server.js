@@ -2,12 +2,16 @@ import path from 'path'
 import express from 'express'
 import favicon from 'serve-favicon'
 import requestHandler from './requestHandler'
+import raven from 'raven'
+import sentry from './sentry'
 
 const port = (process.env.MTTRS_FRONTEND_PORT || 4001)
 const app = express()
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/static', express.static('public/static'))
+  app.use(raven.middleware.express.requestHandler(process.env.MTTRS_FRONTEND_SENTRY_DSN));
+  app.use(raven.middleware.express.errorHandler(process.env.MTTRS_FRONTEND_SENTRY_DSN));
 } else {
   let config = require('./webpack.config')
   let webpack = require('webpack')

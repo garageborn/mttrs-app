@@ -3,6 +3,10 @@ import {Provider} from 'react-redux'
 import _ from 'lodash'
 import {renderToString} from 'react-dom/server'
 import {Router, RouterContext} from 'react-router'
+import path from 'path'
+import jade from 'jade'
+
+const templatePath = path.resolve(__dirname, 'templates/index.jade')
 
 let handleRender = (store, renderProps) => {
   let promises = mapPromises(store, renderProps)
@@ -34,27 +38,14 @@ let render = (store, renderProps) => {
   return renderFullPage(html, finalState)
 }
 
+let defaultData = {
+  MTTRS_FRONTEND_SENTRY_PUBLIC_DSN: process.env.MTTRS_FRONTEND_SENTRY_PUBLIC_DSN
+}
+
 let renderFullPage = (html, state) => {
   let initialState = JSON.stringify(state).replace(/\//g, '\\/') || 'null'
-  return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset='utf-8'>
-      <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-      <title>Mttrs</title>
-      <link href='/static/app.css' rel='stylesheet' type='text/css'/>
-    </head>
-    <body>
-      <div id='mttrs'>${ html }</div>
-      <div id='dev-tools'></div>
-      <script type='text/javascript'>
-        window.__INITIAL_STATE__ = ${ initialState }
-      </script>
-      <script src='/static/app.js'></script>
-    </body>
-    </html>
-  `
+  let data = Object.assign({}, defaultData, { html: html, initialState: initialState })
+  return jade.renderFile(templatePath, data)
 }
 
 export default handleRender
