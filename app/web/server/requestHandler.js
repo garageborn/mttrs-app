@@ -6,6 +6,20 @@ import renderEngine from './renderEngine'
 import _ from 'lodash'
 const store = configureStore()
 
+let render = (renderProps, req, res) => {
+  try {
+    renderEngine(store, renderProps)
+      .then((html) => {
+        res.status(200).send(html)
+      })
+      .catch(exception => {
+        res.status(500).send(exception.message)
+      })
+  } catch(exception) {
+    res.status(500).send(exception.message)
+  }
+}
+
 let handleRequest = (req, res) => {
   let routes = Routes.all(store)
   match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
@@ -14,12 +28,7 @@ let handleRequest = (req, res) => {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      renderEngine(store, renderProps)
-        .then((html) => { res.status(200).send(html) })
-        .catch(exception => {
-          console.log(exception)
-          res.status(500).send(exception.message)
-        })
+      render(renderProps, req, res)
     } else {
       res.status(404).send('Not found')
     }

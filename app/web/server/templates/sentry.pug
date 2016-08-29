@@ -1,0 +1,5 @@
+if MTTRS_FRONTEND_SENTRY_PUBLIC_DSN
+  script(src='https://cdn.ravenjs.com/3.5.1/raven.min.js')
+
+  script(type='text/javascript').
+    Raven.config("#{ MTTRS_FRONTEND_SENTRY_PUBLIC_DSN }").install()
