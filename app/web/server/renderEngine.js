@@ -4,9 +4,9 @@ import _ from 'lodash'
 import {renderToString} from 'react-dom/server'
 import {Router, RouterContext} from 'react-router'
 import path from 'path'
-import jade from 'jade'
+import pug from 'pug'
 
-const templatePath = path.resolve(__dirname, 'templates/index.jade')
+const templatePath = path.resolve(__dirname, 'templates/index.pug')
 
 let handleRender = (store, renderProps) => {
   let promises = mapPromises(store, renderProps)
@@ -45,7 +45,7 @@ let defaultData = {
 let renderFullPage = (html, state) => {
   let initialState = JSON.stringify(state).replace(/\//g, '\\/') || 'null'
   let data = Object.assign({}, defaultData, { html: html, initialState: initialState })
-  return jade.renderFile(templatePath, data)
+  return pug.renderFile(templatePath, data)
 }
 
 export default handleRender
