@@ -22,22 +22,6 @@ class Timeline extends Component {
     return <ListViewHeader date={ParseDate(date).toUpperCase()} />
   }
 
-  parseDay(date) {
-    switch (date) {
-      case 'last_week':
-        return 'Last Week'
-      case 'last_month':
-        return 'Last Month'
-      default:
-        return moment.unix(date).calendar(null, {
-          sameDay: '[Today]',
-          lastDay: '[Yesterday]',
-          lastWeek: 'MMMM D',
-          sameElse: 'MMMM D'
-        })
-    }
-  }
-
   dataSource() {
     let ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
