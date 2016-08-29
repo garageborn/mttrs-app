@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
 import * as CategoryActions from '../../actions/CategoryActions'
 import NavItem from '../components/NavItem'
-import styles from '../styles/app.ios'
+import styles from '../styles/Header'
 
 class HeaderContainer extends Component {
   static fetchData({dispatch, categorySlug}) {

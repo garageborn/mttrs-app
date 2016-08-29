@@ -33,9 +33,8 @@ let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
-    currentCategory: state.CurrentCategoryReducer.category,
+    currentCategory: state.CurrentCategoryReducer.category
   }
 }
-export default connect(mapStateToProps)(TimelineContainer)
 
-// export default connect(state => state.TimelineReducers)(TimelineContainer)
+export default connect(mapStateToProps)(TimelineContainer)

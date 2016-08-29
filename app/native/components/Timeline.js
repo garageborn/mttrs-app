@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView, View, Text } from 'react-native'
-import styles from '../styles/app'
+import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
@@ -20,22 +20,6 @@ class Timeline extends Component {
 
   renderSeparator(sectionData, date) {
     return <ListViewHeader date={ParseDate(date).toUpperCase()} />
-  }
-
-  parseDay(date) {
-    switch (date) {
-      case 'last_week':
-        return 'Last Week'
-      case 'last_month':
-        return 'Last Month'
-      default:
-        return moment.unix(date).calendar(null, {
-          sameDay: '[Today]',
-          lastDay: '[Yesterday]',
-          lastWeek: 'MMMM D',
-          sameElse: 'MMMM D'
-        })
-    }
   }
 
   dataSource() {
