@@ -4,6 +4,14 @@ import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      isRefreshing: false
+    }
+  }
+
   static fetchData({dispatch, currentCategory}) {
     let options = {
       category_slug: currentCategory.slug
@@ -21,10 +29,26 @@ class TimelineContainer extends Component {
       this.constructor.fetchData(nextProps)
   }
 
+  onPullToRefresh() {
+    this.setState({
+      isRefreshing: true
+    })
+    setTimeout(() => {
+      this.constructor.fetchData(this.props)
+      this.setState({
+        isRefreshing: false
+      })
+    }, 1000)
+  }
+
   render() {
     const { items, isFetching } = this.props
     return (
-      <Timeline items={items} isFetching={isFetching} />
+      <Timeline
+        items={items}
+        isFetching={isFetching}
+        isRefreshing={this.state.isRefreshing}
+        onRefresh={this.onPullToRefresh.bind(this)} />
     )
   }
 }

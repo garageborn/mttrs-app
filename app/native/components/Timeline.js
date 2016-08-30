@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, View, Text } from 'react-native'
+import { ListView, View, Text, RefreshControl } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -47,7 +47,7 @@ class Timeline extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
+    const { isFetching, isRefreshing, onRefresh } = this.props
 
     if (isFetching) {
       return (
@@ -63,6 +63,17 @@ class Timeline extends Component {
         dataSource={this.dataSource()}
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor='#2C2E4A'
+            title='Refreshing...'
+            titleColor='#000'
+            colors={['#2C2E4A']}
+            progressBackgroundColor='#000'
+           />
+        }
         />
     )
   }
@@ -70,7 +81,9 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  isRefreshing: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired
 }
 
 export default Timeline
