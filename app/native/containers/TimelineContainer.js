@@ -4,17 +4,17 @@ import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      isRefreshing: false
-    }
-  }
-
   static fetchData({dispatch, currentCategory}) {
     let options = {
       category_slug: currentCategory.slug
+    }
+    return dispatch(TimelineActions.getTimeline(options))
+  }
+
+  static pullFetchData({dispatch, currentCategory}) {
+    let options = {
+      category_slug: currentCategory.slug,
+      pullToRefresh: true
     }
     return dispatch(TimelineActions.getTimeline(options))
   }
@@ -25,29 +25,26 @@ class TimelineContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
-    if (categoryChanged)
-      this.constructor.fetchData(nextProps)
+    if (categoryChanged) {
+      if (this.props.isRefreshing) {
+        this.constructor.pullFetchData(nextProps)
+      } else {
+        this.constructor.fetchData(nextProps)
+      }
+    }
   }
 
   onPullToRefresh() {
-    this.setState({
-      isRefreshing: true
-    })
-    setTimeout(() => {
-      this.constructor.fetchData(this.props)
-      this.setState({
-        isRefreshing: false
-      })
-    }, 1000)
+    this.constructor.pullFetchData(this.props)
   }
 
   render() {
-    const { items, isFetching } = this.props
+    const { items, isFetching, isRefreshing } = this.props
     return (
       <Timeline
         items={items}
         isFetching={isFetching}
-        isRefreshing={this.state.isRefreshing}
+        isRefreshing={isRefreshing}
         onRefresh={this.onPullToRefresh.bind(this)} />
     )
   }
@@ -57,6 +54,7 @@ let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
+    isRefreshing: state.TimelineReducers.isRefreshing,
     currentCategory: state.CurrentCategoryReducer.category
   }
 }

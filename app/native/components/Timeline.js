@@ -69,9 +69,9 @@ class Timeline extends Component {
             onRefresh={onRefresh}
             tintColor='#2C2E4A'
             title='Refreshing...'
-            titleColor='#000'
-            colors={['#2C2E4A']}
-            progressBackgroundColor='#000'
+            titleColor='#2C2E4A'
+            colors={['#FFF']}
+            progressBackgroundColor='#2C2E4A'
            />
         }
         />
