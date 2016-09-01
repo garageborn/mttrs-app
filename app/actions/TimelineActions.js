@@ -25,21 +25,25 @@ export function pullToRefreshTimeline() {
   }
 }
 
+export function dispatchRequestPull() {
+  return (dispatch, getState) => {
+    getState().TimelineReducers.isRefreshing
+      ? dispatch(pullToRefreshTimeline())
+      : dispatch(requestTimeline())
+  }
+}
+
 export function getTimeline(options) {
   return dispatch => {
-    if (options.pullToRefresh) {
-      dispatch(pullToRefreshTimeline())
-    } else {
-      dispatch(requestTimeline())
-    }
+    options.pullToRefresh
+      ? dispatch(pullToRefreshTimeline())
+      : dispatch(requestTimeline())
 
     let promise = null
 
-    if (options.filter) {
-      promise = dispatch(getFilterStories(options))
-    } else {
-      promise = dispatch(getDatesStories(options))
-    }
+    options.filter
+      ? promise = dispatch(getFilterStories(options))
+      : promise = dispatch(getDatesStories(options))
 
     return promise.then(() => { return dispatch(receiveTimeline()) })
   }

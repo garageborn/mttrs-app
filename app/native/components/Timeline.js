@@ -4,7 +4,6 @@ import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
-import moment from '../../common/utils/Moment'
 
 class Timeline extends Component {
   constructor(props) {
@@ -46,8 +45,23 @@ class Timeline extends Component {
     return {rows, sections}
   }
 
+  refreshControl() {
+    const { isRefreshing, onRefresh } = this.props
+    return (
+      <RefreshControl
+        refreshing={isRefreshing}
+        onRefresh={onRefresh}
+        tintColor='#2C2E4A'
+        title='Refreshing...'
+        titleColor='#2C2E4A'
+        colors={['#FFF']}
+        progressBackgroundColor='#2C2E4A'
+       />
+    )
+  }
+
   render() {
-    const { isFetching, isRefreshing, onRefresh } = this.props
+    const { isFetching } = this.props
 
     if (isFetching) {
       return (
@@ -63,17 +77,7 @@ class Timeline extends Component {
         dataSource={this.dataSource()}
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            tintColor='#2C2E4A'
-            title='Refreshing...'
-            titleColor='#2C2E4A'
-            colors={['#FFF']}
-            progressBackgroundColor='#2C2E4A'
-           />
-        }
+        refreshControl={this.refreshControl()}
         />
     )
   }
