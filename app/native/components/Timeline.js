@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, View, Text } from 'react-native'
+import { ListView, View, Text, RefreshControl } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
-import moment from '../../common/utils/Moment'
 
 class Timeline extends Component {
   constructor(props) {
@@ -46,6 +45,21 @@ class Timeline extends Component {
     return {rows, sections}
   }
 
+  refreshControl() {
+    const { isRefreshing, onRefresh } = this.props
+    return (
+      <RefreshControl
+        refreshing={isRefreshing}
+        onRefresh={onRefresh}
+        tintColor='#2C2E4A'
+        title='Refreshing...'
+        titleColor='#2C2E4A'
+        colors={['#FFF']}
+        progressBackgroundColor='#2C2E4A'
+       />
+    )
+  }
+
   render() {
     const { isFetching } = this.props
 
@@ -63,6 +77,7 @@ class Timeline extends Component {
         dataSource={this.dataSource()}
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
+        refreshControl={this.refreshControl()}
         />
     )
   }
@@ -70,7 +85,9 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  isRefreshing: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired
 }
 
 export default Timeline

@@ -1,15 +1,13 @@
 import { StyleSheet } from 'react-native'
-import Dimensions from 'Dimensions'
-const { height } = Dimensions.get('window')
-const headerSpacing = 120
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFF'
   },
 
   loading: {
-    height: height - headerSpacing,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },

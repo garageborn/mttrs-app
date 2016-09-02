@@ -1,7 +1,8 @@
 import {
   REQUEST_TIMELINE,
   TIMELINE_RECEIVED,
-  TIMELINE_DATE_RECEIVED
+  TIMELINE_DATE_RECEIVED,
+  TIMELINE_PULL_TO_REFRESH
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -18,16 +19,31 @@ export function receiveTimeline() {
   }
 }
 
+export function pullToRefreshTimeline() {
+  return {
+    type: TIMELINE_PULL_TO_REFRESH
+  }
+}
+
+export function dispatchRequestPull() {
+  return (dispatch, getState) => {
+    getState().TimelineReducers.isRefreshing
+      ? dispatch(pullToRefreshTimeline())
+      : dispatch(requestTimeline())
+  }
+}
+
 export function getTimeline(options) {
   return dispatch => {
-    dispatch(requestTimeline())
+    options.pullToRefresh
+      ? dispatch(pullToRefreshTimeline())
+      : dispatch(requestTimeline())
+
     let promise = null
 
-    if (options.filter) {
-      promise = dispatch(getFilterStories(options))
-    } else {
-      promise = dispatch(getDatesStories(options))
-    }
+    options.filter
+      ? promise = dispatch(getFilterStories(options))
+      : promise = dispatch(getDatesStories(options))
 
     return promise.then(() => { return dispatch(receiveTimeline()) })
   }

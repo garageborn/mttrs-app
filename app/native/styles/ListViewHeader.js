@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    marginLeft: 10,
-    marginRight: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
     paddingTop: 12,
     paddingBottom: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -11,9 +11,11 @@ const styles = StyleSheet.create({
     borderBottomColor: '#DDD',
     justifyContent: 'center'
   },
+
   title: {
     fontWeight: 'bold'
   }
+
 })
 
 export default styles
