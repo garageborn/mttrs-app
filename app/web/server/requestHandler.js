@@ -11,11 +11,9 @@ let render = (renderProps, response) => {
   try {
     renderEngine(renderProps, store)
       .then((html) => {
-        console.log('render then')
         response.status(200).send(html)
       })
       .catch(exception => {
-        console.log('render catch', exception)
         response.status(500).send(exception.message)
       })
   } catch(exception) {
