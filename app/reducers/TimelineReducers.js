@@ -21,8 +21,8 @@ export default function(state = defaultState, action) {
       return { ...state, isFetching: false, isRefreshing: false }
     case TIMELINE_DATE_RECEIVED:
       let newItem = Object.assign({}, { date: action.date, stories: action.stories })
-      state.items.push(newItem)
-      let sortedItems = state.items.sort((a, b) => { return b.date - a.date })
+      let newItems = state.items.concat(newItem)
+      let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
       return { ...state, items: sortedItems }
     default:
       return state

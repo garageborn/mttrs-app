@@ -1,12 +1,10 @@
 import {CURRENT_CATEGORY_RECEIVED} from '../constants/ActionTypes'
 import * as API from '../api/index'
 
-export function receiveCategory(category) {
-  return {
-    type: CURRENT_CATEGORY_RECEIVED,
-    category: category
-  }
-}
+export const receiveCategory = (category) => ({
+  type: CURRENT_CATEGORY_RECEIVED,
+  category
+})
 
 export function getCategory(slug = null) {
   return (dispatch, getState) => {

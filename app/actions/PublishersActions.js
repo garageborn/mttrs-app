@@ -1,12 +1,10 @@
 import {PUBLISHERS_RECEIVED} from '../constants/ActionTypes'
 import * as API from '../api/index'
 
-export function receivePublishers(publishers) {
-  return {
-    type: PUBLISHERS_RECEIVED,
-    publishers: publishers
-  }
-}
+export const receivePublishers = (publishers) => ({
+  type: PUBLISHERS_RECEIVED,
+  publishers
+})
 
 export function getPublishers() {
   return (dispatch, getState) => {

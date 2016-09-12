@@ -1,4 +1,4 @@
-import {PUBLISHERS_RECEIVED} from '../constants/ActionTypes'
+import { PUBLISHERS_RECEIVED } from '../constants/ActionTypes'
 
 let defaultState = {
   publishers: []
@@ -7,7 +7,7 @@ let defaultState = {
 export default function(state = defaultState, action) {
   switch (action.type) {
     case PUBLISHERS_RECEIVED:
-      return {...state, publishers: action.publishers}
+      return { ...state, publishers: action.publishers }
     default:
       return state
   }

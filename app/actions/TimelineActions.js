@@ -7,23 +7,17 @@ import {
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 
-export function requestTimeline() {
-  return {
-    type: REQUEST_TIMELINE
-  }
-}
+export const requestTimeline = () => ({
+  type: REQUEST_TIMELINE
+})
 
-export function receiveTimeline() {
-  return {
-    type: TIMELINE_RECEIVED
-  }
-}
+export const receiveTimeline = () => ({
+  type: TIMELINE_RECEIVED
+})
 
-export function pullToRefreshTimeline() {
-  return {
-    type: TIMELINE_PULL_TO_REFRESH
-  }
-}
+export const pullToRefreshTimeline = () => ({
+  type: TIMELINE_PULL_TO_REFRESH
+})
 
 export function dispatchRequestPull() {
   return (dispatch, getState) => {
@@ -49,13 +43,11 @@ export function getTimeline(options) {
   }
 }
 
-function receiveStories(date, stories) {
-  return {
-    type: TIMELINE_DATE_RECEIVED,
-    date: date,
-    stories: stories
-  }
-}
+const receiveStories = (date, stories) => ({
+  type: TIMELINE_DATE_RECEIVED,
+  date,
+  stories
+})
 
 function getFilterStories(options) {
   return dispatch => {
