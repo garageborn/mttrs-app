@@ -13,7 +13,7 @@ export default class Namespace {
     let namespace = NAMESPACES.find((item) => {
       return item.domain.test(domain)
     })
-    if (!namespace) namespace = namespace[0]
+    if (!namespace) namespace = NAMESPACES[0]
 
     this.current = namespace.id
   }

@@ -12,7 +12,7 @@ let createStoreWithMiddleware
 if (typeof __DEV__ !== 'undefined' && __DEV__) {
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
-    applyMiddleware(routeMiddleware)
+    applyMiddleware(routeMiddleware),
     DevTools.instrument()
   )(createStore)
 } else {

@@ -4,7 +4,7 @@ import configureStore from '../config/configureStore.production'
 import Routes from '../config/Routes'
 import renderEngine from './renderEngine'
 import _ from 'lodash'
-import Setup from './setup'
+import Setup from './Setup'
 const store = configureStore()
 
 let render = (renderProps, response) => {
