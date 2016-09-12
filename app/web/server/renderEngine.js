@@ -8,7 +8,7 @@ import pug from 'pug'
 
 const templatePath = path.resolve(__dirname, 'templates/index.pug')
 
-let handleRender = (store, renderProps) => {
+let handleRender = (renderProps, store) => {
   let promises = mapPromises(store, renderProps)
   return Promise.all(promises).then(() => {
     return render(store, renderProps)
