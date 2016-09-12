@@ -19,14 +19,6 @@ export const pullToRefreshTimeline = () => ({
   type: TIMELINE_PULL_TO_REFRESH
 })
 
-export function dispatchRequestPull() {
-  return (dispatch, getState) => {
-    getState().TimelineReducers.isRefreshing
-      ? dispatch(pullToRefreshTimeline())
-      : dispatch(requestTimeline())
-  }
-}
-
 export function getTimeline(options) {
   return dispatch => {
     options.pullToRefresh
