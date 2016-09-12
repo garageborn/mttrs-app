@@ -4,41 +4,45 @@ import configureStore from '../config/configureStore.production'
 import Routes from '../config/Routes'
 import renderEngine from './renderEngine'
 import _ from 'lodash'
+import Setup from './setup'
 const store = configureStore()
 
-let render = (renderProps, req, res) => {
+let render = (renderProps, response) => {
   try {
-    renderEngine(store, renderProps)
+    renderEngine(renderProps, store)
       .then((html) => {
-        res.status(200).send(html)
+        console.log('render then')
+        response.status(200).send(html)
       })
       .catch(exception => {
-        res.status(500).send(exception.message)
+        console.log('render catch', exception)
+        response.status(500).send(exception.message)
       })
   } catch(exception) {
-    res.status(500).send(exception.message)
+    response.status(500).send(exception.message)
   }
 }
 
-let handleRequest = (req, res) => {
+let handleRequest = (request, response) => {
   let routes = Routes.all(store)
-  match({ routes: routes, location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ routes: routes, location: request.url }, (error, redirectLocation, renderProps) => {
     if (error) {
-      res.status(500).send(error.message)
+      response.status(500).send(error.message)
     } else if (redirectLocation) {
-      res.redirect(302, redirectLocation.pathname + redirectLocation.search)
+      response.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      render(renderProps, req, res)
+      render(renderProps, response)
     } else {
-      res.status(404).send('Not found')
+      response.status(404).send('Not found')
     }
   })
 }
 
-let requestHandler = (req, res) => {
+let requestHandler = (request, response) => {
+  Setup.run(request)
   let promises = _.flattenDeep(Routes.fetchData(store))
   Promise.all(promises).then(() => {
-    return handleRequest(req, res)
+    return handleRequest(request, response)
   })
 }
 

@@ -18,7 +18,7 @@ if (typeof __DEV__ !== 'undefined' && __DEV__) {
 } else {
   createStoreWithMiddleware = compose(
     applyMiddleware(thunkMiddleware),
-    applyMiddleware(routeMiddleware)
+    applyMiddleware(routeMiddleware),
   )(createStore)
 }
 const rootReducer = combineReducers(reducers)
