@@ -1,4 +1,4 @@
-import {PUBLISHERS_RECEIVED} from '../constants/ActionTypes'
+import { PUBLISHERS_RECEIVED } from '../constants/ActionTypes'
 import * as API from '../api/index'
 
 export const receivePublishers = (publishers) => ({

@@ -1,4 +1,4 @@
-import {CURRENT_CATEGORY_RECEIVED} from '../constants/ActionTypes'
+import { CURRENT_CATEGORY_RECEIVED } from '../constants/ActionTypes'
 import * as API from '../api/index'
 
 export const receiveCategory = (category) => ({
