@@ -29,6 +29,13 @@ export default function(state = defaultState, action) {
       let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
       console.log(state)
       return { ...state, items: sortedItems }
+    case TIMELINE_STORIES_REQUEST:
+      return { ...state, items: [{ isFetching: true }] }
+    case TIMELINE_STORIES_RECEIVED:
+      let newStory = Object.assign({}, { stories: action.stories })
+      let newStories = state.items.concat(newStory)
+      let sortedStories = newStories.sort((a, b) => { return b.date - a.date })
+      return { ...state, items: sortedStories }
     // case TIMELINE_DATE_RECEIVED:
     //   let newItem = Object.assign({}, { date: action.date, stories: action.stories })
     //   let newItems = state.items.concat(newItem)
