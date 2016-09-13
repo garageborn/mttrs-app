@@ -7,7 +7,7 @@ let defaultState = {
 export default function(state = defaultState, action) {
   switch (action.type) {
     case ActionConst.FOCUS:
-      return {...state, scene: action.scene}
+      return { ...state, scene: action.scene }
     default:
       return state
   }
