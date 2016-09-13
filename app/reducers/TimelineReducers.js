@@ -6,7 +6,10 @@ import {
 } from '../constants/ActionTypes'
 
 let defaultState = {
-  items: [],
+  items: [
+    { date: null, stories: [], isFetching: false }
+  ],
+  // items: [],
   isFetching: false,
   isRefreshing: false
 }
@@ -20,10 +23,17 @@ export default function(state = defaultState, action) {
     case TIMELINE_RECEIVED:
       return { ...state, isFetching: false, isRefreshing: false }
     case TIMELINE_DATE_RECEIVED:
-      let newItem = Object.assign({}, { date: action.date, stories: action.stories })
+      // Get date in some way...
+      let newItem = Object.assign({}, { date: action.date, stories: [], isFetching: false })
       let newItems = state.items.concat(newItem)
       let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
+      console.log(state)
       return { ...state, items: sortedItems }
+    // case TIMELINE_DATE_RECEIVED:
+    //   let newItem = Object.assign({}, { date: action.date, stories: action.stories })
+    //   let newItems = state.items.concat(newItem)
+    //   let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
+    //   return { ...state, items: sortedItems }
     default:
       return state
   }

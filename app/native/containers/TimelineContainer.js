@@ -26,11 +26,7 @@ class TimelineContainer extends Component {
   componentWillReceiveProps(nextProps) {
     let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
     if (categoryChanged) {
-      if (this.props.isRefreshing) {
-        this.constructor.pullFetchData(nextProps)
-      } else {
-        this.constructor.fetchData(nextProps)
-      }
+      this.constructor.fetchData(nextProps)
     }
   }
 
