@@ -1,8 +1,10 @@
 import {
-  REQUEST_TIMELINE, TIMELINE_RECEIVED,
-  TIMELINE_DATE_RECEIVED, TIMELINE_DATES_REQUEST,
-  TIMELINE_DATES_RECEIVED, TIMELINE_STORIES_REQUEST,
-  TIMELINE_STORIES_RECEIVED, TIMELINE_PULL_TO_REFRESH
+  REQUEST_TIMELINE,
+  TIMELINE_RECEIVED,
+  TIMELINE_DATE_RECEIVED,
+  TIMELINE_PULL_TO_REFRESH,
+  TIMELINE_REQUEST_TODAY,
+  TIMELINE_RECEIVED_TODAY
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -15,20 +17,26 @@ export const receiveTimeline = () => ({
   type: TIMELINE_RECEIVED
 })
 
-export const requestDates = dates => ({
-  type: TIMELINE_DATES_REQUEST,
-  dates
-})
-
-export const receiveDates = dates => ({
-  type: TIMELINE_DATES_RECEIVED,
-  dates,
-  receivedAt: Date.now()
-})
-
 export const pullToRefreshTimeline = () => ({
   type: TIMELINE_PULL_TO_REFRESH
 })
+
+export const requestTodayTimeline = () => ({
+  type: TIMELINE_REQUEST_TODAY
+})
+
+export const receiveTodayTimeline = () => ({
+  type: TIMELINE_RECEIVED_TODAY
+})
+
+export function getTodayTimeline(options) {
+  return dispatch => {
+    dispatch(requestTodayTimeline())
+    dispatch(getTodayStories(options))
+    let promise = null
+    return promise.then(() => { return dispatch(receiveTodayTimeline()) })
+  }
+}
 
 export function getTimeline(options) {
   return dispatch => {
@@ -45,12 +53,6 @@ export function getTimeline(options) {
     return promise.then(() => { return dispatch(receiveTimeline()) })
   }
 }
-
-const requestStories = (date, stories) => ({
-  type: TIMELINE_STORIES_REQUEST,
-  date,
-  stories
-})
 
 const receiveStories = (date, stories) => ({
   type: TIMELINE_DATE_RECEIVED,
@@ -82,6 +84,15 @@ function getDatesStories(options) {
     let promises = days.map((date) => {
       return dispatch(getDateStories(date, options))
     })
+
+    return Promise.all(promises)
+  }
+}
+
+function getTodayStories(options) {
+  return dispatch => {
+    let date = moment().startOf('day').unix()
+    let promises = dispatch(getDateStories(date, options))
 
     return Promise.all(promises)
   }
