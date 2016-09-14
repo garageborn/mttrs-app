@@ -2,33 +2,30 @@ import {
   REQUEST_TIMELINE,
   TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED,
+  TIMELINE_DATES_REQUEST,
+  TIMELINE_DATES_RECEIVED,
+  TIMELINE_STORIES_REQUEST,
+  TIMELINE_STORIES_RECEIVED,
   TIMELINE_PULL_TO_REFRESH
 } from '../constants/ActionTypes'
 
 let defaultState = {
-  items: [
-    // { date: null, stories: [], isFetching: false }
-  ],
-  // items: [],
+  items: [],
   isFetching: false,
   isRefreshing: false
 }
 
-const dates = (state = defaultState, action) => {
+const getDate = (state = defaultState, action) => {
   switch (action.type) {
-    case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, items: [], isRefreshing: true }
-    case TIMELINE_DATE_REQUEST:
+    case TIMELINE_DATES_REQUEST:
       return { ...state, items: [], isFetching: true }
-    case TIMELINE_DATE_RECEIVED:
+    case TIMELINE_DATES_RECEIVED:
       return { ...state, items: action.date }
   }
 }
 
-const stories = (state = defaultState, action) => {
+const getStories = (state = defaultState, action) => {
   switch (action.type) {
-    case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, items: [], isRefreshing: true }
     case TIMELINE_STORIES_REQUEST:
       return { ...state, items: [], isFetching: true }
     case TIMELINE_STORIES_RECEIVED:
@@ -53,8 +50,16 @@ export default function(state = defaultState, action) {
       return { ...state, items: [], isRefreshing: true }
     case REQUEST_TIMELINE:
       return { ...state, items: [], isFetching: true }
+    // case TIMELINE_RECEIVED:
+    //   return { ...state, isFetching: false, isRefreshing: false }
     case TIMELINE_RECEIVED:
-      return { ...state, isFetching: false, isRefreshing: false }
+      return {
+        ...state,
+        isFetching: false,
+        isRefreshing: false,
+        [action.date]: getDate(state[action.date], action),
+        [action.stories]: getStories(state[action.stories], action)
+      }
     // case TIMELINE_DATE_RECEIVED:
     //   // Get date in some way...
     //   let newItem = Object.assign({}, { date: action.date, stories: [], isFetching: false })
