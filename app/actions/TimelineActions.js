@@ -1,8 +1,8 @@
 import {
-  REQUEST_TIMELINE,
-  TIMELINE_RECEIVED,
-  TIMELINE_DATE_RECEIVED,
-  TIMELINE_PULL_TO_REFRESH
+  REQUEST_TIMELINE, TIMELINE_RECEIVED,
+  TIMELINE_DATE_RECEIVED, TIMELINE_DATES_REQUEST,
+  TIMELINE_DATES_RECEIVED, TIMELINE_STORIES_REQUEST,
+  TIMELINE_STORIES_RECEIVED, TIMELINE_PULL_TO_REFRESH
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -13,6 +13,17 @@ export const requestTimeline = () => ({
 
 export const receiveTimeline = () => ({
   type: TIMELINE_RECEIVED
+})
+
+export const requestDates = dates => ({
+  type: TIMELINE_DATES_REQUEST,
+  dates
+})
+
+export const receiveDates = dates => ({
+  type: TIMELINE_DATES_RECEIVED,
+  dates,
+  receivedAt: Date.now()
 })
 
 export const pullToRefreshTimeline = () => ({
@@ -34,6 +45,12 @@ export function getTimeline(options) {
     return promise.then(() => { return dispatch(receiveTimeline()) })
   }
 }
+
+const requestStories = (date, stories) => ({
+  type: TIMELINE_STORIES_REQUEST,
+  date,
+  stories
+})
 
 const receiveStories = (date, stories) => ({
   type: TIMELINE_DATE_RECEIVED,

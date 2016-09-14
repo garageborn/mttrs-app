@@ -11,6 +11,7 @@ class Timeline extends Component {
 
     this.getTimelineItem = this.getTimelineItem.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
+    this.onEndReached = this.onEndReached.bind(this)
   }
 
   getTimelineItem(item) {
@@ -43,6 +44,10 @@ class Timeline extends Component {
     })
 
     return {rows, sections}
+  }
+
+  onEndReached() {
+    console.log('THE END!')
   }
 
   refreshControl() {
@@ -78,6 +83,7 @@ class Timeline extends Component {
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
         refreshControl={this.refreshControl()}
+        onEndReached={this.onEndReached}
         />
     )
   }
