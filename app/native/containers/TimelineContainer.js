@@ -16,7 +16,7 @@ class TimelineContainer extends Component {
       category_slug: currentCategory.slug,
       pullToRefresh: true
     }
-    return dispatch(TimelineActions.getTodayStories(options))
+    return dispatch(TimelineActions.getTimeline(options))
   }
 
   componentDidMount() {

@@ -17,13 +17,19 @@ export const requestDate = () => ({
   requestAt: Date.now()
 })
 
+export const receiveDate = () => ({
+  type: TIMELINE_DATE_RECEIVED,
+  receivedAt: Date.now()
+})
+
 export const pullToRefreshTimeline = () => ({
   type: TIMELINE_PULL_TO_REFRESH
 })
 
-export const getTodayStories = (options) => {
+const getTodayStories = (options) => {
   return dispatch => {
     dispatch(requestDate())
+    dispatch(pullToRefreshTimeline())
     let today = moment().startOf('day').unix()
     return dispatch(getDateStories(today, options))
   }
@@ -31,9 +37,15 @@ export const getTodayStories = (options) => {
 
 export function getTimeline(options) {
   return dispatch => {
-    options.pullToRefresh
-      ? dispatch(pullToRefreshTimeline())
-      : dispatch(requestTimeline())
+    // options.pullToRefresh
+    //   ? dispatch(pullToRefreshTimeline())
+    //   : dispatch(requestTimeline())
+
+    if (options.pullToRefresh) {
+      dispatch(getTodayStories(options))
+    } else {
+      dispatch(requestTimeline())
+    }
 
     let promise = null
 
@@ -41,8 +53,7 @@ export function getTimeline(options) {
       ? promise = dispatch(getFilterStories(options))
       : promise = dispatch(getDatesStories(options))
 
-    // return promise.then(() => { return dispatch(receiveTimeline()) })
-    return Promise.all(promise)
+    return promise.then(() => { return dispatch(receiveDate()) })
   }
 }
 
