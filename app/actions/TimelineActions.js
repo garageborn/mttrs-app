@@ -2,9 +2,8 @@ import {
   REQUEST_TIMELINE,
   TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED,
-  TIMELINE_PULL_TO_REFRESH,
-  TIMELINE_REQUEST_TODAY,
-  TIMELINE_RECEIVED_TODAY
+  TIMELINE_DATE_REQUEST,
+  TIMELINE_PULL_TO_REFRESH
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -13,28 +12,20 @@ export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
 
-export const receiveTimeline = () => ({
-  type: TIMELINE_RECEIVED
+export const requestDate = () => ({
+  type: TIMELINE_DATE_REQUEST,
+  requestAt: Date.now()
 })
 
 export const pullToRefreshTimeline = () => ({
   type: TIMELINE_PULL_TO_REFRESH
 })
 
-export const requestTodayTimeline = () => ({
-  type: TIMELINE_REQUEST_TODAY
-})
-
-export const receiveTodayTimeline = () => ({
-  type: TIMELINE_RECEIVED_TODAY
-})
-
-export function getTodayTimeline(options) {
+export const getTodayStories = (options) => {
   return dispatch => {
-    dispatch(requestTodayTimeline())
-    dispatch(getTodayStories(options))
-    let promise = null
-    return promise.then(() => { return dispatch(receiveTodayTimeline()) })
+    dispatch(requestDate())
+    let today = moment().startOf('day').unix()
+    return dispatch(getDateStories(today, options))
   }
 }
 
@@ -50,15 +41,23 @@ export function getTimeline(options) {
       ? promise = dispatch(getFilterStories(options))
       : promise = dispatch(getDatesStories(options))
 
-    return promise.then(() => { return dispatch(receiveTimeline()) })
+    // return promise.then(() => { return dispatch(receiveTimeline()) })
+    return Promise.all(promise)
   }
 }
 
-const receiveStories = (date, stories) => ({
-  type: TIMELINE_DATE_RECEIVED,
+const receiveTimeline = (date, stories) => ({
+  type: TIMELINE_RECEIVED,
   date,
-  stories
+  stories,
+  receivedAt: Date.now()
 })
+
+// const receiveStories = (date, stories) => ({
+//   type: TIMELINE_DATE_RECEIVED,
+//   date,
+//   stories
+// })
 
 function getFilterStories(options) {
   return dispatch => {
@@ -70,7 +69,7 @@ function getFilterStories(options) {
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveStories(filter, response.body))
+        dispatch(receiveTimeline(filter, response.body))
       })
   }
 }
@@ -89,15 +88,6 @@ function getDatesStories(options) {
   }
 }
 
-function getTodayStories(options) {
-  return dispatch => {
-    let date = moment().startOf('day').unix()
-    let promises = dispatch(getDateStories(date, options))
-
-    return Promise.all(promises)
-  }
-}
-
 function getDateStories(date, options) {
   return dispatch => {
     let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
@@ -105,7 +95,7 @@ function getDateStories(date, options) {
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveStories(date, response.body))
+        dispatch(receiveTimeline(date, response.body))
       })
   }
 }

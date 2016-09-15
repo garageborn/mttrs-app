@@ -2,9 +2,8 @@ import {
   REQUEST_TIMELINE,
   TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED,
-  TIMELINE_PULL_TO_REFRESH,
-  TIMELINE_REQUEST_TODAY,
-  TIMELINE_RECEIVED_TODAY
+  TIMELINE_DATE_REQUEST,
+  TIMELINE_PULL_TO_REFRESH
 } from '../constants/ActionTypes'
 
 let defaultState = {
@@ -13,51 +12,24 @@ let defaultState = {
   isRefreshing: false
 }
 
-const dates = (state = defaultState, action) => {
-  switch (action.type) {
-    case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, items: [], isRefreshing: true }
-    case TIMELINE_DATE_REQUEST:
-      return { ...state, items: [], isFetching: true }
-    case TIMELINE_DATE_RECEIVED:
-      return { ...state, items: action.date }
-  }
-}
-
-const stories = (state = defaultState, action) => {
-  switch (action.type) {
-    case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, items: [], isRefreshing: true }
-    case TIMELINE_STORIES_REQUEST:
-      return { ...state, items: [], isFetching: true }
-    case TIMELINE_STORIES_RECEIVED:
-      return { ...state, items: action.stories }
-  }
-}
-
-// Something like:
-
-/*
-  case TIMELINE_RECEIVED:
-    return { ...state, [action.date]: date() }
-*/
-
 export default function(state = defaultState, action) {
   switch (action.type) {
-    case TIMELINE_REQUEST_TODAY:
+    case TIMELINE_DATE_REQUEST:
     case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, items: [], isRefreshing: true }
-    case TIMELINE_RECEIVED_TODAY:
-      return { ...state, items: [], isFetching: false }
+      return { ...state, items: [], isRefreshing: true, updatedAt: action.requestAt }
     case REQUEST_TIMELINE:
       return { ...state, items: [], isFetching: true }
     case TIMELINE_RECEIVED:
-      return { ...state, isFetching: false, isRefreshing: false }
-    case TIMELINE_DATE_RECEIVED:
       let newItem = Object.assign({}, { date: action.date, stories: action.stories })
       let newItems = state.items.concat(newItem)
       let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
-      return { ...state, items: sortedItems }
+      let stateProps = { isFetching: false, isRefreshing: false, updatedAt: action.receivedAt }
+      return { ...state, items: sortedItems, ...stateProps }
+    // case TIMELINE_DATE_RECEIVED:
+    //   let newItem = Object.assign({}, { date: action.date, stories: action.stories })
+    //   let newItems = state.items.concat(newItem)
+    //   let sortedItems = newItems.sort((a, b) => { return b.date - a.date })
+    //   return { ...state, items: sortedItems, isRefreshing: false }
     default:
       return state
   }
