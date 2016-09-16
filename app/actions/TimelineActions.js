@@ -6,6 +6,7 @@ import {
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
+import _last from 'lodash/last'
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
@@ -48,12 +49,12 @@ export const pullToRefresh = (options) => {
 
 export const infiniteToRefresh = (options) => {
   return (dispatch, getState) => {
-    let items = getState().TimelineReducers.items
-    let lastDay = [...items].pop()
+    let lastDay = _last(getState().TimelineReducers.items)
     let lastDayNext = moment().subtract(lastDay, 'days').startOf('day').unix()
     dispatch(pullToInfiniteTimeline())
-
-    console.log('ITEMS', items)
+    console.log('DATE_ITEMS', getState().TimelineReducers.items)
+    console.log('LAST', lastDay.date)
+    console.log('LAST MINUS 1', lastDayNext)
 
     let promise = dispatch(getDateStories(lastDayNext, options))
     return promise.then(() => dispatch(pullToInfiniteTimelineCompleted()))
@@ -112,7 +113,7 @@ function getDatesStories(options) {
 function getDateStories(date, options) {
   return dispatch => {
     dispatch(requestDate(date))
-    let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
+    let query = Object.assign({ published_at: date, popular: true, limit: 2 }, options)
 
     return API.getStories(query)
       .then((response) => {
