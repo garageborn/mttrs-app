@@ -51,10 +51,10 @@ class Timeline extends Component {
   }
 
   refreshControl() {
-    const { isRefreshing, onRefresh } = this.props
+    const { isFetchingTop, onRefresh } = this.props
     return (
       <RefreshControl
-        refreshing={isRefreshing}
+        refreshing={isFetchingTop}
         onRefresh={onRefresh}
         tintColor='#2C2E4A'
         title='Refreshing...'
@@ -66,7 +66,7 @@ class Timeline extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
+    const { isFetching, onEndReached } = this.props
 
     if (isFetching) {
       return (
@@ -83,7 +83,7 @@ class Timeline extends Component {
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
         refreshControl={this.refreshControl()}
-        onEndReached={this.onEndReached}
+        onEndReached={onEndReached}
         />
     )
   }
@@ -92,8 +92,9 @@ class Timeline extends Component {
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isRefreshing: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired
+  isFetchingTop: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+  onEndReached: PropTypes.func.isRequired
 }
 
 export default Timeline

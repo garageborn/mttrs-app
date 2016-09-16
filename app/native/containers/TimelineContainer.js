@@ -18,6 +18,13 @@ class TimelineContainer extends Component {
     return dispatch(TimelineActions.pullToRefresh(options))
   }
 
+  static infiniteFetchData({dispatch, currentCategory}) {
+    let options = {
+      category_slug: currentCategory.slug
+    }
+    return dispatch(TimelineActions.infiniteToRefresh(options))
+  }
+
   componentDidMount() {
     this.constructor.fetchData(this.props)
   }
@@ -33,13 +40,19 @@ class TimelineContainer extends Component {
     this.constructor.pullFetchData(this.props)
   }
 
+  onEndReached() {
+    console.log('THIS IS THE END!')
+    this.constructor.infiniteFetchData(this.props)
+  }
+
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
       <Timeline
         items={items}
         isFetching={isFetching}
-        isRefreshing={isFetchingTop}
+        isFetchingTop={isFetchingTop}
+        onEndReached={this.onEndReached.bind(this)}
         onRefresh={this.onPullToRefresh.bind(this)} />
     )
   }

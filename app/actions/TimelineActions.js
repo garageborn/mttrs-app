@@ -1,7 +1,8 @@
 import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
-  TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED
+  TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -23,6 +24,14 @@ export const pullToRefreshTimelineCompleted = () => ({
   type: TIMELINE_PULL_TO_REFRESH_COMPLETED
 })
 
+export const pullToInfiniteTimeline = () => ({
+  type: TIMELINE_PULL_TO_INFINITE
+})
+
+export const pullToInfiniteTimelineCompleted = () => ({
+  type: TIMELINE_PULL_TO_INFINITE_COMPLETED
+})
+
 export const timelineReceived = () => ({
   type: TIMELINE_RECEIVED
 })
@@ -33,7 +42,22 @@ export const pullToRefresh = (options) => {
     dispatch(pullToRefreshTimeline())
 
     let promise = dispatch(getDateStories(today, options))
-    return promise.then(() => { return dispatch(pullToRefreshTimelineCompleted()) })
+    return promise.then(() => dispatch(pullToRefreshTimelineCompleted()))
+  }
+}
+
+export const infiniteToRefresh = (options) => {
+  return (dispatch, getState) => {
+    let items = getState().TimelineReducers.items
+    let clonedItems = [...items]
+    let lastDay = clonedItems.pop()
+    let lastDayNext = moment().subtract(lastDay, 'days').startOf('day').unix()
+    dispatch(pullToInfiniteTimeline())
+
+    console.log('ITEMS', items)
+
+    let promise = dispatch(getDateStories(lastDayNext, options))
+    return promise.then(() => dispatch(pullToInfiniteTimelineCompleted()))
   }
 }
 
@@ -47,7 +71,7 @@ export function getTimeline(options) {
       ? promise = dispatch(getFilterStories(options))
       : promise = dispatch(getDatesStories(options))
 
-    return promise.then(() => { return dispatch(timelineReceived()) })
+    return promise.then(() => dispatch(timelineReceived()))
   }
 }
 

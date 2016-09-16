@@ -1,10 +1,8 @@
 import {
-  REQUEST_TIMELINE,
-  TIMELINE_RECEIVED,
-  TIMELINE_DATE_RECEIVED,
-  TIMELINE_DATE_REQUEST,
-  TIMELINE_PULL_TO_REFRESH,
-  TIMELINE_PULL_TO_REFRESH_COMPLETED
+  REQUEST_TIMELINE, TIMELINE_RECEIVED,
+  TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
+  TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 
 let defaultState = {
@@ -45,6 +43,10 @@ export default function(state = defaultState, action) {
       return { ...state, isFetchingTop: true }
     case TIMELINE_PULL_TO_REFRESH_COMPLETED:
       return { ...state, isFetchingTop: false }
+    case TIMELINE_PULL_TO_INFINITE:
+      return { ...state, isFetchingBottom: true }
+    case TIMELINE_PULL_TO_INFINITE_COMPLETED:
+      return { ...state, isFetchingBottom: false }
     case REQUEST_TIMELINE:
       return { ...state, items: [], isFetching: true }
     default:
