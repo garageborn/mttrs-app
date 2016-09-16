@@ -33,7 +33,7 @@ export default function(state = defaultState, action) {
       let sortedItems = timelineDateItems.sort((a, b) => { return b.date - a.date })
       return { ...state, items: sortedItems }
     case TIMELINE_DATE_RECEIVED:
-      let items = state.items.slice(0)
+      let items = [...state.items]
       let dateItem = items.find((item) => item.date === action.date)
       Object.assign(dateItem, { stories: action.stories, isFetching: false })
       return { ...state, items: items }

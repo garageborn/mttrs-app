@@ -49,8 +49,7 @@ export const pullToRefresh = (options) => {
 export const infiniteToRefresh = (options) => {
   return (dispatch, getState) => {
     let items = getState().TimelineReducers.items
-    let clonedItems = [...items]
-    let lastDay = clonedItems.pop()
+    let lastDay = [...items].pop()
     let lastDayNext = moment().subtract(lastDay, 'days').startOf('day').unix()
     dispatch(pullToInfiniteTimeline())
 
