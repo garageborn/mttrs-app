@@ -41,7 +41,6 @@ class TimelineContainer extends Component {
   }
 
   onEndReached() {
-    console.log('THIS IS THE END!')
     this.constructor.infiniteFetchData(this.props)
   }
 

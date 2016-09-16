@@ -23,18 +23,21 @@ const replaceItem = (source, index, item) => {
   }
 }
 
+const sortDate = items => {
+  return items.sort((a, b) => b.date - a.date)
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case TIMELINE_DATE_REQUEST:
-      let timelineDateItem = state.items.find((item) => item.date === action.date)
+      let timelineDateItem = state.items.find(item => item.date === action.date)
       let index = state.items.indexOf(timelineDateItem)
-      let newTimelineDateItem = Object.assign({}, timelineDateItem, { date: action.date, isFetching: true })
+      let newTimelineDateItem = Object.assign({ stories: [] }, timelineDateItem, { date: action.date, isFetching: true })
       let timelineDateItems = replaceItem(state.items, index, newTimelineDateItem)
-      let sortedItems = timelineDateItems.sort((a, b) => { return b.date - a.date })
-      return { ...state, items: sortedItems }
+      return { ...state, items: sortDate(timelineDateItems) }
     case TIMELINE_DATE_RECEIVED:
       let items = [...state.items]
-      let dateItem = items.find((item) => item.date === action.date)
+      let dateItem = items.find(item => item.date === action.date)
       Object.assign(dateItem, { stories: action.stories, isFetching: false })
       return { ...state, items: items }
     case TIMELINE_RECEIVED:

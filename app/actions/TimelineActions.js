@@ -49,13 +49,10 @@ export const pullToRefresh = (options) => {
 
 export const infiniteToRefresh = (options) => {
   return (dispatch, getState) => {
+    // TODO: if (lastDay.isFetching) return
     let lastDay = _last(getState().TimelineReducers.items)
-    let lastDayNext = moment().subtract(lastDay, 'days').startOf('day').unix()
+    let lastDayNext = moment.unix(lastDay.date).subtract(1, 'days').startOf('day').unix()
     dispatch(pullToInfiniteTimeline())
-    console.log('DATE_ITEMS', getState().TimelineReducers.items)
-    console.log('LAST', lastDay.date)
-    console.log('LAST MINUS 1', lastDayNext)
-
     let promise = dispatch(getDateStories(lastDayNext, options))
     return promise.then(() => dispatch(pullToInfiniteTimelineCompleted()))
   }
@@ -113,7 +110,7 @@ function getDatesStories(options) {
 function getDateStories(date, options) {
   return dispatch => {
     dispatch(requestDate(date))
-    let query = Object.assign({ published_at: date, popular: true, limit: 2 }, options)
+    let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
 
     return API.getStories(query)
       .then((response) => {

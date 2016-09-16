@@ -11,7 +11,6 @@ class Timeline extends Component {
 
     this.getTimelineItem = this.getTimelineItem.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
-    this.onEndReached = this.onEndReached.bind(this)
   }
 
   getTimelineItem(item) {
@@ -36,18 +35,13 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-
-    items.map((item) => {
+    items.map(item => {
       let section = item.date
       sections.push(section)
       rows[section] = item.stories
     })
 
     return {rows, sections}
-  }
-
-  onEndReached() {
-    console.log('THE END!')
   }
 
   refreshControl() {
