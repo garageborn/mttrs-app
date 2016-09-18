@@ -1,13 +1,13 @@
 import _ from 'lodash'
-import Namespace from '../../common/utils/Namespace'
+import Tenant from '../../common/utils/Tenant'
 
 export default class Setup {
   static run(request) {
-    this.namespace(request)
+    this.tenant(request)
   }
 
-  static namespace(request) {
+  static tenant(request) {
     let domain = request.headers.host.split(':')[0]
-    Namespace.fromDomain(domain)
+    Tenant.fromDomain(domain)
   }
 }

@@ -1,6 +1,6 @@
 import request from 'superagent'
-import Namespace from './Namespace'
+import Tenant from './Tenant'
 
 export default function(method, url) {
-  return request(method, url).set('X-Namespace', Namespace.current)
+  return request(method, url).set('X-Tenant', Tenant.current)
 }
