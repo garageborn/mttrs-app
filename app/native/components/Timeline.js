@@ -35,8 +35,7 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-
-    items.map((item) => {
+    items.map(item => {
       let section = item.date
       sections.push(section)
       rows[section] = item.stories
@@ -46,10 +45,10 @@ class Timeline extends Component {
   }
 
   refreshControl() {
-    const { isRefreshing, onRefresh } = this.props
+    const { isFetchingTop, onRefresh } = this.props
     return (
       <RefreshControl
-        refreshing={isRefreshing}
+        refreshing={isFetchingTop}
         onRefresh={onRefresh}
         tintColor='#2C2E4A'
         title='Refreshing...'
@@ -61,7 +60,7 @@ class Timeline extends Component {
   }
 
   render() {
-    const { isFetching } = this.props
+    const { isFetching, onEndReached } = this.props
 
     if (isFetching) {
       return (
@@ -78,6 +77,7 @@ class Timeline extends Component {
         renderRow={this.getTimelineItem}
         renderSectionHeader={this.renderSeparator}
         refreshControl={this.refreshControl()}
+        onEndReached={onEndReached}
         />
     )
   }
@@ -86,8 +86,9 @@ class Timeline extends Component {
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isRefreshing: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired
+  isFetchingTop: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired,
+  onEndReached: PropTypes.func.isRequired
 }
 
 export default Timeline
