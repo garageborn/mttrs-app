@@ -4,7 +4,7 @@ import configureStore from '../config/configureStore.production'
 import Routes from '../config/Routes'
 import renderEngine from './renderEngine'
 import _ from 'lodash'
-import Setup from './Setup'
+import Setup from '../config/Setup'
 const store = configureStore()
 
 let render = (renderProps, response) => {
@@ -37,7 +37,7 @@ let handleRequest = (request, response) => {
 }
 
 let requestHandler = (request, response) => {
-  Setup.run(request)
+  Setup.fromRequest(request)
   let promises = _.flattenDeep(Routes.fetchData(store))
   Promise.all(promises).then(() => {
     return handleRequest(request, response)

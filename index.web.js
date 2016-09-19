@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom'
 import App from './app/web/containers/App'
 import configureStore from './app/web/config/configureStore'
 import DevTools from './app/web/utils/DevTools'
+import Setup from './app/web/config/Setup'
 
+if (window) Setup.fromWindow(window)
 const store = configureStore(window.__INITIAL_STATE__)
 
 ReactDOM.render(<App store={store}/>, document.getElementById('mttrs'))
