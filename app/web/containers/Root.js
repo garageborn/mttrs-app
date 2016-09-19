@@ -13,8 +13,6 @@ class Root extends Component {
 
     return [
       dispatch(CurrentCategoryActions.getCategory(categorySlug)),
-      dispatch(CategoryActions.getCategories()),
-      dispatch(PublishersActions.getPublishers()),
       TimelineContainer.fetchData.apply(this, arguments)
     ]
   }

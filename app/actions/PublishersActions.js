@@ -8,7 +8,6 @@ export const receivePublishers = (publishers) => ({
 
 export function getPublishers() {
   return (dispatch, getState) => {
-    if (getState().PublishersReducers.publishers.length) return
 
     return API.getPublishers()
       .then((response) => {
