@@ -13,10 +13,16 @@ class TimelineContainer extends Component {
 
   static pullFetchData({dispatch, currentCategory}) {
     let options = {
-      category_slug: currentCategory.slug,
-      pullToRefresh: true
+      category_slug: currentCategory.slug
     }
-    return dispatch(TimelineActions.getTimeline(options))
+    return dispatch(TimelineActions.pullToRefresh(options))
+  }
+
+  static infiniteFetchData({dispatch, currentCategory}) {
+    let options = {
+      category_slug: currentCategory.slug
+    }
+    return dispatch(TimelineActions.infiniteToRefresh(options))
   }
 
   componentDidMount() {
@@ -26,11 +32,7 @@ class TimelineContainer extends Component {
   componentWillReceiveProps(nextProps) {
     let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
     if (categoryChanged) {
-      if (this.props.isRefreshing) {
-        this.constructor.pullFetchData(nextProps)
-      } else {
-        this.constructor.fetchData(nextProps)
-      }
+      this.constructor.fetchData(nextProps)
     }
   }
 
@@ -38,13 +40,18 @@ class TimelineContainer extends Component {
     this.constructor.pullFetchData(this.props)
   }
 
+  onEndReached() {
+    this.constructor.infiniteFetchData(this.props)
+  }
+
   render() {
-    const { items, isFetching, isRefreshing } = this.props
+    const { items, isFetching, isFetchingTop } = this.props
     return (
       <Timeline
         items={items}
         isFetching={isFetching}
-        isRefreshing={isRefreshing}
+        isFetchingTop={isFetchingTop}
+        onEndReached={this.onEndReached.bind(this)}
         onRefresh={this.onPullToRefresh.bind(this)} />
     )
   }
@@ -54,7 +61,7 @@ let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
-    isRefreshing: state.TimelineReducers.isRefreshing,
+    isFetchingTop: state.TimelineReducers.isFetchingTop,
     currentCategory: state.CurrentCategoryReducer.category
   }
 }

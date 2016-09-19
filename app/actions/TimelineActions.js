@@ -1,29 +1,66 @@
 import {
-  REQUEST_TIMELINE,
-  TIMELINE_RECEIVED,
-  TIMELINE_DATE_RECEIVED,
-  TIMELINE_PULL_TO_REFRESH
+  REQUEST_TIMELINE, TIMELINE_RECEIVED,
+  TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
+  TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
+import _last from 'lodash/last'
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
 
-export const receiveTimeline = () => ({
-  type: TIMELINE_RECEIVED
+export const requestDate = (date) => ({
+  type: TIMELINE_DATE_REQUEST,
+  date
 })
 
 export const pullToRefreshTimeline = () => ({
   type: TIMELINE_PULL_TO_REFRESH
 })
 
+export const pullToRefreshTimelineCompleted = () => ({
+  type: TIMELINE_PULL_TO_REFRESH_COMPLETED
+})
+
+export const pullToInfiniteTimeline = () => ({
+  type: TIMELINE_PULL_TO_INFINITE
+})
+
+export const pullToInfiniteTimelineCompleted = () => ({
+  type: TIMELINE_PULL_TO_INFINITE_COMPLETED
+})
+
+export const timelineReceived = () => ({
+  type: TIMELINE_RECEIVED
+})
+
+export const pullToRefresh = (options) => {
+  return dispatch => {
+    let today = moment().startOf('day').unix()
+    dispatch(pullToRefreshTimeline())
+
+    let promise = dispatch(getDateStories(today, options))
+    return promise.then(() => dispatch(pullToRefreshTimelineCompleted()))
+  }
+}
+
+export const infiniteToRefresh = (options) => {
+  return (dispatch, getState) => {
+    // TODO: if (lastDay.isFetching) return
+    let lastDay = _last(getState().TimelineReducers.items)
+    let lastDayNext = moment.unix(lastDay.date).subtract(1, 'days').startOf('day').unix()
+    dispatch(pullToInfiniteTimeline())
+    let promise = dispatch(getDateStories(lastDayNext, options))
+    return promise.then(() => dispatch(pullToInfiniteTimelineCompleted()))
+  }
+}
+
 export function getTimeline(options) {
   return dispatch => {
-    options.pullToRefresh
-      ? dispatch(pullToRefreshTimeline())
-      : dispatch(requestTimeline())
+    dispatch(requestTimeline())
 
     let promise = null
 
@@ -31,11 +68,11 @@ export function getTimeline(options) {
       ? promise = dispatch(getFilterStories(options))
       : promise = dispatch(getDatesStories(options))
 
-    return promise.then(() => { return dispatch(receiveTimeline()) })
+    return promise.then(() => dispatch(timelineReceived()))
   }
 }
 
-const receiveStories = (date, stories) => ({
+const receiveDateStories = (date, stories) => ({
   type: TIMELINE_DATE_RECEIVED,
   date,
   stories
@@ -51,7 +88,7 @@ function getFilterStories(options) {
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveStories(filter, response.body))
+        dispatch(receiveDateStories(filter, response.body))
       })
   }
 }
@@ -72,12 +109,13 @@ function getDatesStories(options) {
 
 function getDateStories(date, options) {
   return dispatch => {
+    dispatch(requestDate(date))
     let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
 
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveStories(date, response.body))
+        dispatch(receiveDateStories(date, response.body))
       })
   }
 }
