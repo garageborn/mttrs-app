@@ -7,14 +7,6 @@ import NavItem from '../components/NavItem'
 import styles from '../styles/Header'
 
 class HeaderContainer extends Component {
-  static fetchData({dispatch, categorySlug}) {
-    return dispatch(CategoryActions.getCategories())
-  }
-
-  componentDidMount() {
-    this.constructor.fetchData(this.props)
-  }
-
   openCategory(category) {
     this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
   }

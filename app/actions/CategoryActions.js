@@ -8,7 +8,6 @@ export const receiveCategories = (categories) => ({
 
 export function getCategories () {
   return (dispatch, getState) => {
-    if (getState().CategoriesReducers.categories.length) return
 
     return API.getCategories()
       .then((response) => {
