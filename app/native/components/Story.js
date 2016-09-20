@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { Image, Linking, StatusBar, Text, TouchableHighlight, View } from 'react-native'
 import SafariView from 'react-native-safari-view'
-import { Actions } from 'react-native-router-flux'
+import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import ComponentsJoiner from '../utils/ComponentsJoiner'
 import * as cloudinary from '../../common/utils/Cloudinary'
@@ -26,9 +26,9 @@ class Story extends Component {
           </View>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
-              {/* <View style={styles.coverOverlay}> */}
+              <LinearGradient style={styles.coverOverlay} colors={['rgba(255, 255, 255, .5)', 'rgba(0, 0, 0, .5)']}>
                 <Text style={styles.title} numberOfLines={3}>{story.title}</Text>
-              {/* </View> */}
+              </LinearGradient>
             </Image>
           </View>
         </View>

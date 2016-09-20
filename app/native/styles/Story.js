@@ -14,11 +14,14 @@ const styles = StyleSheet.create({
   cardHeader: {
     flexDirection: 'row',
     backgroundColor: '#FFF',
-    padding: 10,
+    height: 44,
+    paddingLeft: 10,
+    paddingRight: 10,
     borderTopWidth: 2,
     borderTopColor: '#0076FF',
     borderTopLeftRadius: 3,
     borderTopRightRadius: 3,
+    alignItems: 'center',
     justifyContent: 'space-between'
   },
 
@@ -36,13 +39,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
-  // coverOverlay: {
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   width: width,
-  //   height: 225 / 2,
-  //   backgroundColor: 'rgba(0, 0, 0, .4)'
-  // },
+  coverOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    width: width,
+    height: 225
+  },
 
   title: {
     position: 'absolute',
