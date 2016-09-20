@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import ComponentsJoiner from '../utils/ComponentsJoiner'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import nyt from '../assets/nyt.png'
 
 class Story extends Component {
   constructor(props) {
@@ -21,27 +22,21 @@ class Story extends Component {
       <TouchableHighlight onPress={this.openStory} activeOpacity={0.7} underlayColor='white'>
         <View style={styles.card}>
           <View style={styles.cardHeader}>
-            <Text style={styles.category}>Category</Text>
-            <Text style={styles.publisher}>{this.getFirstPublisher()}</Text>
+            <View style={styles.category}>
+              <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
+              <Text style={styles.categoryTitle}>Category</Text>
+            </View>
+            {this.getPublishers()}
           </View>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
-              <LinearGradient style={styles.coverOverlay} colors={['rgba(255, 255, 255, .5)', 'rgba(0, 0, 0, .5)']}>
+              <LinearGradient style={styles.coverOverlay} colors={['transparent', 'rgba(0, 0, 0, .6)']}>
                 <Text style={styles.title} numberOfLines={3}>{story.title}</Text>
               </LinearGradient>
             </Image>
           </View>
         </View>
       </TouchableHighlight>
-      // <TouchableHighlight onPress={this.openStory} activeOpacity={0.7} underlayColor='white'>
-      //   <View style={styles.story}>
-      //     <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
-      //     <View style={styles.storyTitleContainer}>
-      //       <Text numberOfLines={3}>{story.title}</Text>
-      //       <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> {this.getPublishers()}</Text>
-      //     </View>
-      //   </View>
-      // </TouchableHighlight>
     )
   }
 
@@ -49,7 +44,7 @@ class Story extends Component {
     const { story } = this.props
 
     if (!story.image_source_url) return
-    let options = { type: 'fetch', width: 200, height: 200, crop: 'fit', secure: true }
+    let options = { type: 'fetch', width: 350, height: 255, crop: 'fit', secure: true }
 
     return cloudinary.url(story.image_source_url, options)
   }
@@ -70,25 +65,27 @@ class Story extends Component {
     Linking.openURL(this.props.story.url)
   }
 
-  getFirstPublisher() {
-    const { links } = this.props.story
-
-    if (!links) return
-
-    let link = links[0]
-    return link.publisher.name
-  }
-
   getPublishers() {
     const { links } = this.props.story
 
     if (!links) return
 
-    let publishers = links.map(link => {
-      return link.publisher.name
-    })
+    if (links.length === 1) {
+      return (
+        <View style={styles.publisher}>
+          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
+        </View>
+      )
+    }
 
-    return ComponentsJoiner(publishers)
+    if (links.length >= 2) {
+      return (
+        <View style={styles.publisher}>
+          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
+          <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
+        </View>
+      )
+    }
   }
 }
 

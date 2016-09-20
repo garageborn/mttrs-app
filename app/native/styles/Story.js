@@ -26,7 +26,32 @@ const styles = StyleSheet.create({
   },
 
   category: {
-    color: '#0076FF'
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  categoryIcon: {
+    marginRight: 10
+  },
+
+  categoryTitle: {
+    color: '#0076FF',
+    fontSize: 12
+  },
+
+  publisher: {
+    flexDirection: 'row'
+  },
+
+  publisherLogo: {
+    width: 12,
+    height: 15
+  },
+
+  publisherTitle: {
+    fontSize: 12,
+    color: 'gray',
+    marginLeft: 10
   },
 
   cover: {
@@ -42,7 +67,7 @@ const styles = StyleSheet.create({
   coverOverlay: {
     position: 'absolute',
     bottom: 0,
-    width: width,
+    width: width - 24,
     height: 225
   },
 
