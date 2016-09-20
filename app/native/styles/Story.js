@@ -1,6 +1,57 @@
 import { StyleSheet } from 'react-native'
+import Dimensions from 'Dimensions'
+
+let { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
+  card: {
+    flex: 1,
+    marginTop: 16,
+    paddingLeft: 12,
+    paddingRight: 12
+  },
+
+  cardHeader: {
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    padding: 10,
+    borderTopWidth: 2,
+    borderTopColor: '#0076FF',
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    justifyContent: 'space-between'
+  },
+
+  category: {
+    color: '#0076FF'
+  },
+
+  cover: {
+    width: width - 24,
+    height: 225
+  },
+
+  coverImage: {
+    position: 'relative',
+    flex: 1
+  },
+
+  // coverOverlay: {
+  //   position: 'absolute',
+  //   bottom: 0,
+  //   width: width,
+  //   height: 225 / 2,
+  //   backgroundColor: 'rgba(0, 0, 0, .4)'
+  // },
+
+  title: {
+    position: 'absolute',
+    fontSize: 22,
+    bottom: 20,
+    padding: 10,
+    color: '#FFF'
+  },
+
   story: {
     marginTop: 10,
     paddingLeft: 10,

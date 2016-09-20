@@ -19,14 +19,29 @@ class Story extends Component {
     const { story } = this.props
     return (
       <TouchableHighlight onPress={this.openStory} activeOpacity={0.7} underlayColor='white'>
-        <View style={styles.story}>
-          <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
-          <View style={styles.storyTitleContainer}>
-            <Text numberOfLines={3}>{story.title}</Text>
-            <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> {this.getPublishers()}</Text>
+        <View style={styles.card}>
+          <View style={styles.cardHeader}>
+            <Text style={styles.category}>Category</Text>
+            <Text style={styles.publisher}>{this.getFirstPublisher()}</Text>
+          </View>
+          <View style={styles.cover}>
+            <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
+              {/* <View style={styles.coverOverlay}> */}
+                <Text style={styles.title} numberOfLines={3}>{story.title}</Text>
+              {/* </View> */}
+            </Image>
           </View>
         </View>
       </TouchableHighlight>
+      // <TouchableHighlight onPress={this.openStory} activeOpacity={0.7} underlayColor='white'>
+      //   <View style={styles.story}>
+      //     <Image source={{uri: this.getImage()}} style={styles.storyThumb} />
+      //     <View style={styles.storyTitleContainer}>
+      //       <Text numberOfLines={3}>{story.title}</Text>
+      //       <Text style={styles.storyInfo}><Text style={styles.storyInfoFrom}>From</Text> {this.getPublishers()}</Text>
+      //     </View>
+      //   </View>
+      // </TouchableHighlight>
     )
   }
 
@@ -53,6 +68,15 @@ class Story extends Component {
 
   openLinkingView(){
     Linking.openURL(this.props.story.url)
+  }
+
+  getFirstPublisher() {
+    const { links } = this.props.story
+
+    if (!links) return
+
+    let link = links[0]
+    return link.publisher.name
   }
 
   getPublishers() {

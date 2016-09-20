@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 
   listView: {
-    backgroundColor: '#FFF'
+    backgroundColor: '#1B2A45'
   }
 })
 
