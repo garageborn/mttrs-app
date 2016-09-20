@@ -3,9 +3,9 @@ import { Image, Linking, StatusBar, Text, TouchableHighlight, View } from 'react
 import SafariView from 'react-native-safari-view'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
-import ComponentsJoiner from '../utils/ComponentsJoiner'
+import Publishers from './Publishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
-import nyt from '../assets/nyt.png'
+
 
 class Story extends Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class Story extends Component {
               <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
               <Text style={styles.categoryTitle}>Category</Text>
             </View>
-            {this.getPublishers()}
+            <Publishers styles={styles} links={story.links} />
           </View>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
@@ -63,27 +63,6 @@ class Story extends Component {
 
   openLinkingView(){
     Linking.openURL(this.props.story.url)
-  }
-
-  getPublishers() {
-    const { links } = this.props.story
-
-    if (!links) return
-
-    if (links.length === 1) {
-      return (
-        <View style={styles.publisher}>
-          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-        </View>
-      )
-    }
-
-    return (
-      <View style={styles.publisher}>
-        <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-        <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
-      </View>
-    )
   }
 }
 
