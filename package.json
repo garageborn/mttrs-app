@@ -41,6 +41,7 @@
     "react": "~15.3.2",
     "react-dom": "~15.3.2",
     "react-native": "^0.33.0",
+    "react-native-linear-gradient": "^1.5.12",
     "react-native-router-flux": "^3.35.0",
     "react-native-safari-view": "^1.1.0",
     "react-redux": "^4.4.5",
