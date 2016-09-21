@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import Dimensions from 'Dimensions'
 
-let { width, height } = Dimensions.get('window')
+let { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   card: {
@@ -77,35 +77,6 @@ const styles = StyleSheet.create({
     bottom: 20,
     padding: 10,
     color: '#FFF'
-  },
-
-  story: {
-    marginTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    flexDirection: 'row'
-  },
-
-  storyThumb: {
-    width: 100,
-    height: 75,
-    marginRight: 10
-  },
-
-  storyTitleContainer: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-
-  storyInfo: {
-    marginTop: 5,
-    fontWeight: 'bold',
-    color: '#AAA',
-    fontSize: 12
-  },
-
-  storyInfoFrom: {
-    fontWeight: 'normal'
   }
 })
 
