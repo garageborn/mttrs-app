@@ -11,13 +11,6 @@ const styles = StyleSheet.create({
     width: 113,
     height: 28,
     marginBottom: 12
-  },
-
-  nav: {
-    backgroundColor: '#EA4340',
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#EA4340',
-    padding: 12
   }
 })
 

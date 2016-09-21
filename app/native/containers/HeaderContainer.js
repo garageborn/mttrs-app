@@ -1,54 +1,29 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Image } from 'react-native'
-import { connect } from 'react-redux'
-import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
-import * as CategoryActions from '../../actions/CategoryActions'
-import NavItem from '../components/NavItem'
+import { View, Image, TouchableHighlight } from 'react-native'
 import styles from '../styles/Header'
+import { Actions } from 'react-native-router-flux'
 
 class HeaderContainer extends Component {
-  openCategory(category) {
-    this.props.dispatch(CurrentCategoryActions.getCategory(category.slug))
-  }
-
-  categoryItem(category) {
-    return (
-      <NavItem
-        key={category.id}
-        category={category}
-        onPress={this.openCategory.bind(this)}
-        />
-      )
-  }
-
-  getCategoriesItems() {
-    const { categories } = this.props
-    return categories.map((category) => {
-      return this.categoryItem(category)
-    })
+  constructor(props) {
+    super(props)
+    this.toggleMenu = this.toggleMenu.bind(this)
   }
 
   render() {
     return (
       <View>
         <View style={styles.header}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <TouchableHighlight onPress={this.toggleMenu}>
+            <Image source={require('../assets/logo.png')} style={styles.logo} />
+          </TouchableHighlight>
         </View>
-        <ScrollView style={styles.nav}
-          contentContainerStyle={styles.navContainer}
-          showsHorizontalScrollIndicator={false} horizontal>
-          {this.getCategoriesItems()}
-        </ScrollView>
       </View>
     )
   }
-}
 
-let mapStateToProps = (state) => {
-  return {
-    categories: state.CategoriesReducers.categories,
-    currentCategory: state.CurrentCategoryReducer.category
+  toggleMenu() {
+    Actions.menu()
   }
 }
 
-export default connect(mapStateToProps)(HeaderContainer)
+export default HeaderContainer

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Actions, Scene } from 'react-native-router-flux'
 import App from '../containers/App'
+import MenuContainer from '../containers/MenuContainer'
 import * as CategoryActions from '../../actions/CategoryActions'
 import * as PublishersActions from '../../actions/PublishersActions'
 
@@ -22,6 +23,7 @@ class Routes {
 
   static defaultRoutes() {
     return [
+      <Scene key='menu' component={MenuContainer}/>,
       <Scene key='home' component={App}/>
     ]
   }
