@@ -69,6 +69,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  categoryTouch: {
+    height: 105
+  },
+
   categoryIcon: {
     marginBottom: 12
   },
