@@ -11,6 +11,9 @@ export function getCategory(slug = null) {
     if (!slug) return dispatch(receiveCategory(null))
     if (isCurrentCategory(getState, slug)) return
 
+    let stateCategory = findCategory(getState, slug)
+    if (stateCategory) return dispatch(receiveCategory(stateCategory))
+
     return API.getCategory(slug)
       .then((response) => {
         if (!response.ok) return
@@ -19,8 +22,11 @@ export function getCategory(slug = null) {
   }
 }
 
+function findCategory(getState, slug) {
+  return getState().CategoriesReducers.categories.find(category => category.slug === slug)
+}
+
 function isCurrentCategory(getState, slug) {
   let category = getState().CurrentCategoryReducer.category
-  if (!category) return false
-  return category.slug === slug
+  return category && category.slug === slug
 }

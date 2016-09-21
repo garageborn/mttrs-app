@@ -35,10 +35,12 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-    items.map(item => {
-      let section = item.date
-      sections.push(section)
-      rows[section] = item.stories
+    items.forEach(item => {
+      if (item.stories.length) {
+        let section = item.date
+        sections.push(section)
+        rows[section] = item.stories
+      }
     })
 
     return {rows, sections}
