@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import HeaderContainer from './HeaderContainer'
+import HomeHeaderContainer from './HomeHeaderContainer'
 import TimelineContainer from './TimelineContainer'
 import styles from '../styles/App'
 
-class App extends Component {
-  render () {
+class HomeSceneContainer extends Component {
+  render() {
     return (
       <View style={styles.container}>
-        <HeaderContainer />
+        <HomeHeaderContainer />
         <TimelineContainer />
       </View>
     )
   }
 }
 
-export default App
+export default HomeSceneContainer

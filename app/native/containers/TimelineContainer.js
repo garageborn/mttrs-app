@@ -4,25 +4,26 @@ import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
-  static fetchData({dispatch, currentCategory}) {
-    let options = {
-      category_slug: currentCategory.slug
-    }
-    return dispatch(TimelineActions.getTimeline(options))
+  static fetchData(props) {
+    let action = TimelineActions.getTimeline(this.fetchQuery(props))
+    return props.dispatch(action)
   }
 
-  static pullFetchData({dispatch, currentCategory}) {
-    let options = {
-      category_slug: currentCategory.slug
-    }
-    return dispatch(TimelineActions.pullToRefresh(options))
+  static pullFetchData(props) {
+    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
   }
 
-  static infiniteFetchData({dispatch, currentCategory}) {
-    let options = {
-      category_slug: currentCategory.slug
+  static infiniteFetchData(props) {
+    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
+  }
+
+  static fetchQuery(props) {
+    return {
+      category_slug: props.currentCategory.slug,
+      publisher_slug: props.currentPublisher.slug
     }
-    return dispatch(TimelineActions.infiniteToRefresh(options))
   }
 
   componentDidMount() {
@@ -31,9 +32,7 @@ class TimelineContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
-    if (categoryChanged) {
-      this.constructor.fetchData(nextProps)
-    }
+    if (categoryChanged) this.constructor.fetchData(nextProps)
   }
 
   onPullToRefresh() {
@@ -62,7 +61,8 @@ let mapStateToProps = (state) => {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
-    currentCategory: state.CurrentCategoryReducer.category
+    currentCategory: state.CurrentCategoryReducer.category,
+    currentPublisher: state.CurrentPublisherReducer.publisher
   }
 }
 
