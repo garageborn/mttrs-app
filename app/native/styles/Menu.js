@@ -17,11 +17,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  headerTitle: {
+    marginLeft: 10,
+    marginRight: 10
+  },
+
   selector: {
+    paddingLeft: 60,
+    paddingRight: 60,
     height: 70,
-    borderWidth: 1,
-    borderColor: 'red',
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },

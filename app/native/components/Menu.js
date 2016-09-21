@@ -1,25 +1,38 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import Category from './CategoryTile'
+import ButtonGroup from './ButtonGroup'
 import styles from '../styles/Menu'
 
 class Menu extends Component {
+  constructor () {
+    super()
+    this.state = {
+      selectedIndex: 0
+    }
+    this.updateIndex = this.updateIndex.bind(this)
+  }
+  updateIndex (selectedIndex) {
+    this.setState({selectedIndex})
+  }
+
   render() {
+    const buttons = ['Categories', 'Publishers']
+    const { selectedIndex } = this.state
     return (
       <View style={styles.menu}>
         <View style={styles.header}>
           <Image source={require('../assets/icons/icon-top-stories.png')} />
-          <Text>Top Stories</Text>
+          <Text style={styles.headerTitle}>Top Stories</Text>
           <Image source={require('../assets/arrow.png')} />
         </View>
 
         <View style={styles.selector}>
-          <TouchableHighlight style={styles.selectorButton}>
-            <Text>Categories</Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={styles.selectorButton}>
-            <Text>Publishers</Text>
-          </TouchableHighlight>
+          <ButtonGroup
+            selectedBackgroundColor='#42729B'
+            onPress={this.updateIndex}
+            selectedIndex={selectedIndex}
+            buttons={buttons} />
         </View>
 
         <View style={styles.menuContainer}>
