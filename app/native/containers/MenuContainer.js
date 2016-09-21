@@ -12,7 +12,7 @@ class MenuContainer extends Component {
           <Text>Category</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => Actions.publisher('forbes')}>
+        <TouchableHighlight onPress={() => Actions.publisher({ publisherSlug: 'forbes' })}>
           <Text>Publisher</Text>
         </TouchableHighlight>
       </View>

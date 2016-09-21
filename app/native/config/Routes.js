@@ -27,8 +27,8 @@ class Routes {
     return [
       <Scene key='menu' component={MenuContainer}/>,
       <Scene key='home' component={HomeSceneContainer}/>,
-      <Scene key='category' component={CategorySceneContainer}/>,
-      <Scene key='publisher' component={PublisherSceneContainer}/>,
+      <Scene key='category' type='replace' component={CategorySceneContainer}/>,
+      <Scene key='publisher' type='replace' component={PublisherSceneContainer}/>,
       <Scene key='menu' component={MenuContainer}/>,
     ]
   }

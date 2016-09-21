@@ -20,7 +20,10 @@ class TimelineContainer extends Component {
   }
 
   static fetchQuery(props) {
-    return { category_slug: props.currentCategory.slug }
+    return {
+      category_slug: props.currentCategory.slug,
+      publisher_slug: props.currentPublisher.slug
+    }
   }
 
   componentDidMount() {
@@ -58,7 +61,8 @@ let mapStateToProps = (state) => {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
-    currentCategory: state.CurrentCategoryReducer.category
+    currentCategory: state.CurrentCategoryReducer.category,
+    currentPublisher: state.CurrentPublisherReducer.publisher
   }
 }
 

@@ -13,6 +13,10 @@ export function getPublishers(query={}) {
   return request('GET', ENDPOINTS.PUBLISHERS).query(query)
 }
 
+export function getPublisher(id) {
+  return request('GET', ENDPOINTS.PUBLISHER(id))
+}
+
 export function getStories(query={}) {
   return request('GET', ENDPOINTS.STORIES).query(query)
 }
