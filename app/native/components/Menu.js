@@ -8,7 +8,9 @@ class Menu extends Component {
     return (
       <View style={styles.menu}>
         <View style={styles.header}>
+          <Image source={require('../assets/icons/icon-top-stories.png')} />
           <Text>Top Stories</Text>
+          <Image source={require('../assets/arrow.png')} />
         </View>
 
         <View style={styles.selector}>
@@ -21,21 +23,23 @@ class Menu extends Component {
         </View>
 
         <View style={styles.menuContainer}>
-          <View style={styles.topStories}>
-            <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
-            <Text>Top Stories</Text>
-            <Image style={styles.selectedMarker} source={require('../assets/icons/icon-selected.png')} />
-          </View>
+          <TouchableHighlight onPress={() => console.log(123)}>
+            <View style={styles.topStories} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={5}>
+              <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
+              <Text style={styles.topStoriesTitle}>Top Stories</Text>
+              <Image style={styles.selectedMarker} source={require('../assets/icons/icon-selected.png')} />
+            </View>
+          </TouchableHighlight>
 
           <View style={styles.categories}>
-            <Category styles={styles} name='Business' icon={require('../assets/icons/icon-business.png')} />
-            <Category styles={styles} name='Sports' icon={require('../assets/icons/icon-sports.png')} />
-            <Category styles={styles} name='Technology' icon={require('../assets/icons/icon-technology.png')} />
-            <Category styles={styles} name='Entertainment' icon={require('../assets/icons/icon-entertainment.png')} />
-            <Category styles={styles} name='Science' icon={require('../assets/icons/icon-science.png')} />
-            <Category styles={styles} name={'Gaming'} icon={require('../assets/icons/icon-gaming.png')} />
-            <Category styles={styles} name={'World News'} icon={require('../assets/icons/icon-world.png')} />
-            <Category styles={styles} name={'Humour'} icon={require('../assets/icons/icon-humour.png')} />
+            <Category color='#1D74FE' name='Business' icon={require('../assets/icons/icon-business.png')} />
+            <Category color='#F75453' name='Sports' icon={require('../assets/icons/icon-sports.png')} />
+            <Category color='#77C62B' name='Technology' icon={require('../assets/icons/icon-technology.png')} />
+            <Category color='#E0349D' name='Entertainment' icon={require('../assets/icons/icon-entertainment.png')} />
+            <Category color='#757575' name='Science' icon={require('../assets/icons/icon-science.png')} />
+            <Category color='#1DC786' name='Gaming' icon={require('../assets/icons/icon-gaming.png')} />
+            <Category color='#3537C8' name='World News' icon={require('../assets/icons/icon-world.png')} />
+            <Category color='#EF7846' name='Humour' icon={require('../assets/icons/icon-humour.png')} />
           </View>
         </View>
       </View>

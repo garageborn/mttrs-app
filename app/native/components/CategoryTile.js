@@ -1,12 +1,15 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableHighlight } from 'react-native'
+import styles from '../styles/Menu'
 
-const CategoryTile = ({ styles, name, icon }) => {
+const CategoryTile = ({ name, icon, color }) => {
   return (
-    <View style={styles.category}>
-      <Image style={styles.categoryIcon} source={icon} />
-      <Text style={styles.categoryName}>{name}</Text>
-    </View>
+    // <TouchableHighlight>
+      <View style={styles.category} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
+        <Image style={styles.categoryIcon} source={icon} />
+        <Text style={[styles.categoryName, {color: color}]}>{name}</Text>
+      </View>
+    // </TouchableHighlight>
   )
 }
 

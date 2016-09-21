@@ -9,18 +9,42 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F8FA'
   },
 
+  header: {
+    height: 65,
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  selector: {
+    height: 70,
+    borderWidth: 1,
+    borderColor: 'red',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
   menuContainer: {
     flex: 1
   },
 
   topStories: {
     backgroundColor: '#FFF',
-    margin: 5,
+    marginLeft: 5,
+    marginRight: 5,
     borderRadius: 5,
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  topStoriesTitle: {
+    marginLeft: 20,
+    marginRight: 20,
+    color: '#373737'
   },
 
   categories: {
@@ -33,11 +57,25 @@ const styles = StyleSheet.create({
   category: {
     backgroundColor: '#FFF',
     borderRadius: 5,
-    width: (width - 20) / 2,
+    width: (width - 15) / 2,
     height: 100,
-    margin: 5,
+    marginTop: 5,
+    marginLeft: 5,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  categoryContainer: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  categoryIcon: {
+    marginBottom: 12
+  },
+
+  categoryName: {
+    fontSize: 14
   }
 })
 
