@@ -69,11 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
-  categoryContainer: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
   categoryIcon: {
     marginBottom: 12
   },
