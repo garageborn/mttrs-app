@@ -5,6 +5,7 @@ import Timeline from '../components/Timeline'
 
 class TimelineContainer extends Component {
   static fetchData(props) {
+    console.log(this.fetchQuery(props))
     let action = TimelineActions.getTimeline(this.fetchQuery(props))
     return props.dispatch(action)
   }

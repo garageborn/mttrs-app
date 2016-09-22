@@ -1,5 +1,5 @@
 import React from 'react'
-import { Actions, Scene } from 'react-native-router-flux'
+import { Actions, ActionConst, Scene } from 'react-native-router-flux'
 import HomeSceneContainer from '../containers/HomeSceneContainer'
 import CategorySceneContainer from '../containers/CategorySceneContainer'
 import PublisherSceneContainer from '../containers/PublisherSceneContainer'
@@ -26,9 +26,9 @@ class Routes {
   static defaultRoutes() {
     return [
       <Scene key='menu' component={MenuContainer}/>,
-      <Scene key='home' component={HomeSceneContainer}/>,
-      <Scene key='category' type='replace' component={CategorySceneContainer}/>,
-      <Scene key='publisher' type='replace' component={PublisherSceneContainer}/>,
+      <Scene key='home' component={HomeSceneContainer} type={ActionConst.REPLACE}/>,
+      <Scene key='category' type='replace' component={CategorySceneContainer} type={ActionConst.REPLACE}/>,
+      <Scene key='publisher' type='replace' component={PublisherSceneContainer} type={ActionConst.REPLACE}/>,
     ]
   }
 }
