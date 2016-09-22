@@ -5,6 +5,7 @@ import Routes from '../config/Routes'
 import renderEngine from './renderEngine'
 import _ from 'lodash'
 import Setup from '../config/Setup'
+import sentry from './sentry'
 const store = configureStore()
 
 let render = (renderProps, response) => {
@@ -14,9 +15,11 @@ let render = (renderProps, response) => {
         response.status(200).send(html)
       })
       .catch(exception => {
+        sentry.captureException(exception)
         response.status(500).send(exception.message)
       })
   } catch(exception) {
+    sentry.captureException(exception)
     response.status(500).send(exception.message)
   }
 }

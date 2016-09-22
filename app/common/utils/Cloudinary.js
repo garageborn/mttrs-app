@@ -6,5 +6,10 @@ cl.config('cloud_name', 'dciwwp9y9')
 const defaultOptions = { fetch_format: 'auto', dpr: 2 }
 
 export function url(url, options = {}) {
-  return cl.url(url, Object.assign(defaultOptions, options))
+  return cl.url(absolutize(url), Object.assign({}, defaultOptions, options))
 }
+
+function absolutize(url) {
+  if (url.match(/^https?:\//)) return url
+  return `http://${ url }`
+};
