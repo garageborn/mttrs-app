@@ -32,8 +32,8 @@ class MenuContainer extends Component {
         </View>
 
         <View style={styles.menuContainer}>
-          <CategoryMenuContainer />
-          {/*<MenuPublishers />*/}
+          {/* <CategoryMenuContainer /> */}
+          <MenuPublishers />
         </View>
       </View>
     )

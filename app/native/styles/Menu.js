@@ -79,31 +79,6 @@ const styles = StyleSheet.create({
 
   categoryName: {
     fontSize: 14
-  },
-
-  search: {
-    position: 'relative',
-    backgroundColor: '#FFF',
-    marginLeft: 20,
-    marginRight: 20,
-    borderRadius: 5
-  },
-
-  searchIcon: {
-    position: 'absolute',
-    top: 10,
-    left: 15
-  },
-
-  searchInput: {
-    position: 'relative',
-    backgroundColor: '#FFF',
-    color: '#373737',
-    fontSize: 14,
-    height: 33,
-    borderRadius: 5,
-    padding: 5,
-    marginLeft: 35
   }
 })
 
