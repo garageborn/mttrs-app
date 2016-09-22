@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
   searchInput: {
     position: 'relative',
     backgroundColor: '#FFF',
+    color: '#373737',
     fontSize: 14,
     height: 33,
     borderRadius: 5,

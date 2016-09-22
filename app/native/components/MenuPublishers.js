@@ -6,7 +6,7 @@ class MenuPublishers extends Component {
   render() {
     return (
       <View>
-        <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} style={styles.search}>
+        <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
           <Image style={styles.searchIcon} source={require('../assets/icons/icon-search.png')} />
           <TextInput style={styles.searchInput} placeholder='Search for publishers' />
         </View>
