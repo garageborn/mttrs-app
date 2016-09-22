@@ -79,6 +79,19 @@ const styles = StyleSheet.create({
 
   categoryName: {
     fontSize: 14
+  },
+
+  search: {
+    marginLeft: 30,
+    marginRight: 30,
+    // borderColor: 'blue',
+    // borderWidth: 1
+  },
+
+  searchInput: {
+    height: 33,
+    borderRadius: 5,
+    backgroundColor: '#FFF'
   }
 })
 

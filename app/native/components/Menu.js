@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, Image } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 import ButtonGroup from './ButtonGroup'
 import MenuCategory from './MenuCategory'
+import MenuPublishers from './MenuPublishers'
 import styles from '../styles/Menu'
 
 class Menu extends Component {
@@ -36,7 +38,8 @@ class Menu extends Component {
         </View>
 
         <View style={styles.menuContainer}>
-          <MenuCategory />
+          {/* <MenuCategory /> */}
+          <MenuPublishers />
         </View>
       </View>
     )
