@@ -43,7 +43,6 @@
     "react-native": "^0.33.0",
     "react-native-linear-gradient": "^1.5.12",
     "react-native-router-flux": "^3.35.0",
-    "react-native-safari-view": "^1.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.5",
