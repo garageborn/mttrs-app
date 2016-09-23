@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 
+  loadingText: {
+    color: '#FFF'
+  },
+
   listView: {
     backgroundColor: '#1B2A45'
   },

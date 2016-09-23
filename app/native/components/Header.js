@@ -10,7 +10,7 @@ class Header extends Component {
         <TouchableHighlight onPress={openMenu}>
           <View style={styles.headerContainer}>
             <Image source={require('../assets/icons/icon-top-stories.png')} />
-            <Text style={styles.headerTitle}>{title || 'Top Stories'}</Text>
+            <Text style={styles.headerTitle}>{title}</Text>
             <Image source={require('../assets/arrow.png')} />
           </View>
         </TouchableHighlight>
@@ -20,7 +20,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   openMenu: PropTypes.func
 }
 

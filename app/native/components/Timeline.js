@@ -68,7 +68,7 @@ class Timeline extends Component {
     if (isFetching) {
       return (
         <View style={styles.loading}>
-          <Text>Hang on...</Text>
+          <Text style={styles.loadingText}>Hang on...</Text>
         </View>
       )
     }
