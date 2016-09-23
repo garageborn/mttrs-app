@@ -9,19 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F8FA'
   },
 
-  header: {
-    height: 65,
-    paddingTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  headerTitle: {
-    marginLeft: 10,
-    marginRight: 10
-  },
-
   selector: {
     paddingLeft: 60,
     paddingRight: 60,

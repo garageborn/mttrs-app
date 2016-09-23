@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import styles from '../styles/Header'
 import { Actions } from 'react-native-router-flux'
+import Header from '../components/Header'
 
 class CategoryHeaderContainer extends Component {
   constructor(props) {
@@ -13,13 +12,7 @@ class CategoryHeaderContainer extends Component {
   render() {
     const { name } = this.props.currentCategory
     return (
-      <View>
-        <View style={styles.header}>
-          <TouchableHighlight onPress={this.toggleMenu}>
-            <Text>{name}</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      <Header openMenu={this.toggleMenu} title={name} />
     )
   }
 

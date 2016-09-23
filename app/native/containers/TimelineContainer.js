@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
+import { Actions } from 'react-native-router-flux'
 
 class TimelineContainer extends Component {
   static fetchData(props) {
@@ -26,6 +27,12 @@ class TimelineContainer extends Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+    this.onEndReached = this.onEndReached.bind(this)
+    this.onPullToRefresh = this.onPullToRefresh.bind(this)
+  }
+
   componentDidMount() {
     this.constructor.fetchData(this.props)
   }
@@ -43,6 +50,10 @@ class TimelineContainer extends Component {
     this.constructor.infiniteFetchData(this.props)
   }
 
+  openStory(story) {
+    Actions.story({ story: story })
+  }
+
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
@@ -50,8 +61,10 @@ class TimelineContainer extends Component {
         items={items}
         isFetching={isFetching}
         isFetchingTop={isFetchingTop}
-        onEndReached={this.onEndReached.bind(this)}
-        onRefresh={this.onPullToRefresh.bind(this)} />
+        onEndReached={this.onEndReached}
+        onRefresh={this.onPullToRefresh}
+        openStory={this.openStory}
+        />
     )
   }
 }

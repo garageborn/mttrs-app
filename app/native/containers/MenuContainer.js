@@ -33,7 +33,7 @@ class MenuContainer extends Component {
 
         <View style={styles.menuContainer}>
           <CategoryMenuContainer />
-          {/* <MenuPublishers /> */}
+          {/*<MenuPublishers />*/}
         </View>
       </View>
     )
