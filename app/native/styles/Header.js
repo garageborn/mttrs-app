@@ -2,15 +2,20 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#2C2E4A',
-    paddingTop: 28,
-    alignItems: 'center'
+    height: 65,
+    paddingTop: 30,
+    backgroundColor: '#F5F8FA'
   },
 
-  logo: {
-    width: 113,
-    height: 28,
-    marginBottom: 12
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+
+  headerTitle: {
+    marginLeft: 10,
+    marginRight: 10
   }
 })
 

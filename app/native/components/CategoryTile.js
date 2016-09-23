@@ -21,7 +21,7 @@ class CategoryTile extends Component {
 CategoryTile.propTypes = {
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    slug: PropTypes.any.isRequired,
+    slug: PropTypes.any.isRequired
   }),
   onPress: PropTypes.func.isRequired
 }

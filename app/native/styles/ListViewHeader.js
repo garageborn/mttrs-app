@@ -2,18 +2,16 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 12,
-    paddingBottom: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    backgroundColor: '#FFF',
-    borderBottomColor: '#DDD',
+    backgroundColor: '#1B2A45',
+    height: 40,
+    alignItems: 'center',
     justifyContent: 'center'
   },
 
   title: {
-    fontWeight: 'bold'
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#FFF'
   }
 
 })
