@@ -49,7 +49,6 @@ export const pullToRefresh = (options) => {
 
 export const infiniteToRefresh = (options) => {
   return (dispatch, getState) => {
-    // TODO: if (lastDay.isFetching) return
     let lastDay = _last(getState().TimelineReducers.items)
     let lastDayNext = moment.unix(lastDay.date).subtract(1, 'days').startOf('day').unix()
     dispatch(pullToInfiniteTimeline())

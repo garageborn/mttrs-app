@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     marginLeft: 5,
     marginRight: 5,
-    borderRadius: 5,
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
 
   category: {
     backgroundColor: '#FFF',
-    borderRadius: 5,
     width: (width - 15) / 2,
     height: 100,
     marginTop: 5,
