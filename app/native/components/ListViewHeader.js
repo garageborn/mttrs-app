@@ -7,7 +7,7 @@ class ListViewHeader extends Component {
     const { date } = this.props
 
     return (
-      <View style={styles.header}>
+      <View style={[styles.header, { marginTop: date === 'Today' ? 10 : null }]}>
         <Text style={styles.title}>{date}</Text>
       </View>
     )

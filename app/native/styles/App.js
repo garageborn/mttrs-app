@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
 
   listView: {
     backgroundColor: '#1B2A45'
+  },
+
+  hideRefreshControl: {
+    left: 20
   }
 })
 

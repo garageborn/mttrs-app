@@ -6,7 +6,8 @@ let { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    marginTop: 16,
+    marginTop: 8,
+    marginBottom: 8,
     paddingLeft: 12,
     paddingRight: 12
   },
