@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
-import styles from '../styles/Header'
+import styles from '../styles/HeaderPublisher'
 import { Actions } from 'react-native-router-flux'
 
 class StoryHeaderContainer extends Component {
@@ -11,10 +11,22 @@ class StoryHeaderContainer extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.header}>
+      <View style={styles.header} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .5)'} shadowOpacity={1.0} elevation={5}>
+        <View style={styles.publisher}>
+          <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+          <View style={styles.publisherInfo}>
+            <Text style={styles.title}>New York Times</Text>
+            <Text style={styles.time}>Ontem às 7:01</Text>
+          </View>
+        </View>
+        <View style={styles.actions}>
+          {/* onPress Mockup! */}
           <TouchableHighlight onPress={this.toggleMenu}>
-            <Text>aaaaaaaaaaaaaaaaaaaaaaaaaaa</Text>
+            <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
+          </TouchableHighlight>
+          {/* onPress Mockup! */}
+          <TouchableHighlight onPress={this.toggleMenu}>
+            <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>
       </View>

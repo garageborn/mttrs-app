@@ -10,7 +10,7 @@ class HomeHeaderContainer extends Component {
 
   render() {
     return (
-      <Header openMenu={this.toggleMenu} />
+      <Header openMenu={this.toggleMenu} title='Top Stories' />
     )
   }
 
