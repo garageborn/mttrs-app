@@ -1,5 +1,5 @@
 import React from 'react'
-import { Actions, Scene } from 'react-native-router-flux'
+import { Actions, ActionConst, Scene } from 'react-native-router-flux'
 import HomeSceneContainer from '../containers/HomeSceneContainer'
 import CategorySceneContainer from '../containers/CategorySceneContainer'
 import PublisherSceneContainer from '../containers/PublisherSceneContainer'

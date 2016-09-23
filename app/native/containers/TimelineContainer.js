@@ -51,8 +51,7 @@ class TimelineContainer extends Component {
   }
 
   openStory(story) {
-    console.log('open story', story)
-    Actions.story(story)
+    Actions.story({ story: story })
   }
 
   render() {

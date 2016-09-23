@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Linking, StatusBar, Text, TouchableHighlight, View } from 'react-native'
+import { Image, Text, TouchableHighlight, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
-import Publishers from './Publishers'
+import PublishersIconCount from './PublishersIconCount'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
@@ -15,9 +15,9 @@ class Story extends Component {
             <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
             <Text style={styles.categoryTitle}>Category</Text>
           </View>
-          <Publishers styles={styles} links={story.links} />
+          <PublishersIconCount styles={styles} links={story.links} />
         </View>
-        <TouchableHighlight onPress={e => openStory(story) } activeOpacity={0.7} underlayColor='white'>
+        <TouchableHighlight onPress={e => openStory(story)} activeOpacity={0.7} underlayColor='white'>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
               <LinearGradient style={styles.coverOverlay} colors={['transparent', 'rgba(0, 0, 0, .6)']}>
@@ -42,8 +42,7 @@ class Story extends Component {
 
 Story.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
   }).isRequired,
   openStory: PropTypes.func.isRequired
 }

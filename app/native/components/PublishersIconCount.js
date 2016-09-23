@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
 
-const Publishers = ({ styles, links }) => {
+const PublishersIconCount = ({ styles, links }) => {
   if (!links) return
 
   if (links.length === 1) {
@@ -20,4 +20,4 @@ const Publishers = ({ styles, links }) => {
   )
 }
 
-export default Publishers
+export default PublishersIconCount

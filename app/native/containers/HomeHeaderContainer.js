@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View, Image, TouchableHighlight } from 'react-native'
-import styles from '../styles/Header'
+import { View, Image, TouchableHighlight, Text } from 'react-native'
+import styles from '../styles/Menu'
 import { Actions } from 'react-native-router-flux'
 
 class HomeHeaderContainer extends Component {
@@ -11,12 +11,14 @@ class HomeHeaderContainer extends Component {
 
   render() {
     return (
-      <View>
-        <View style={styles.header}>
-          <TouchableHighlight onPress={this.toggleMenu}>
-            <Image source={require('../assets/logo.png')} style={styles.logo} />
-          </TouchableHighlight>
-        </View>
+      <View style={styles.menu}>
+        <TouchableHighlight style={styles.header} onPress={this.toggleMenu}>
+          <View>
+            <Image source={require('../assets/icons/icon-top-stories.png')} />
+            <Text style={styles.headerTitle}>Top Stories</Text>
+            <Image source={require('../assets/arrow.png')} />
+          </View>
+        </TouchableHighlight>
       </View>
     )
   }
