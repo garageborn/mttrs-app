@@ -2,12 +2,12 @@ import React, { PropTypes, Component } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
-import PublishersIconCount from './PublishersIconCount'
+import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
   render() {
-    const { story, openStory } = this.props
+    const { story, openStory, openStoryLinks } = this.props
     return (
       <View style={styles.card}>
         <View style={styles.cardHeader}>
@@ -15,7 +15,7 @@ class Story extends Component {
             <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
             <Text style={styles.categoryTitle}>Category</Text>
           </View>
-          <PublishersIconCount styles={styles} links={story.links} />
+          <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
         </View>
         <TouchableHighlight onPress={e => openStory(story)} activeOpacity={0.7} underlayColor='white'>
           <View style={styles.cover}>
@@ -44,7 +44,8 @@ Story.propTypes = {
   story: PropTypes.shape({
     title: PropTypes.string.isRequired
   }).isRequired,
-  openStory: PropTypes.func.isRequired
+  openStory: PropTypes.func.isRequired,
+  openStoryLinks: PropTypes.func.isRequired
 }
 
 export default Story

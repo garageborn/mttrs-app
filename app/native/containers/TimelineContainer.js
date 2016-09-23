@@ -31,6 +31,8 @@ class TimelineContainer extends Component {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
+    this.openStory = this.openStory.bind(this)
+    this.openStoryLinks = this.openStoryLinks.bind(this)
   }
 
   componentDidMount() {
@@ -54,6 +56,10 @@ class TimelineContainer extends Component {
     Actions.story({ story: story })
   }
 
+  openStoryLinks(story) {
+    Actions.storyLinks({ story: story })
+  }
+
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
@@ -64,6 +70,7 @@ class TimelineContainer extends Component {
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
         openStory={this.openStory}
+        openStoryLinks={this.openStoryLinks}
         />
     )
   }
