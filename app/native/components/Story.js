@@ -3,7 +3,7 @@ import { Image, Linking, StatusBar, Text, TouchableHighlight, View } from 'react
 import SafariView from 'react-native-safari-view'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
-import Publishers from './Publishers'
+import PublishersIconCount from './PublishersIconCount'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
@@ -25,7 +25,7 @@ class Story extends Component {
               <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
               <Text style={styles.categoryTitle}>Category</Text>
             </View>
-            <Publishers styles={styles} links={story.links} />
+            <PublishersIconCount styles={styles} links={story.links} />
           </View>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>

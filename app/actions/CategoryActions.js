@@ -6,7 +6,7 @@ export const receiveCategories = (categories) => ({
   categories
 })
 
-export function getCategories () {
+export function getCategories() {
   return (dispatch, getState) => {
 
     return API.getCategories()
