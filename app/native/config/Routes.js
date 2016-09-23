@@ -31,24 +31,6 @@ class Routes {
       </Scene>
     )
   }
-
-  // static defaultRoutes() {
-  //   console.log(ActionConst)
-  //   return [
-  //     <Scene key='home' type={ActionConst.REPLACE} component={HomeSceneContainer} initial={true}/>,
-  //     <Scene key='menu' component={MenuContainer} direction='vertical'/>,
-  //     <Scene key='category' type={ActionConst.REPLACE} component={CategorySceneContainer}/>,
-  //     <Scene key='publisher' type={ActionConst.REPLACE} component={PublisherSceneContainer}/>,
-  //     <Scene key='story' type={ActionConst.REPLACE} component={StorySceneContainer}/>,
-  //     <Scene key="modal" component={Modal} direction='vertical' type='modal'>
-  //       <Scene key='storyLinks' component={StoryLinksSceneContainer}/>
-  //     </Scene>
-  //   ]
-  // }
-
-  // static modalRoutes() {
-
-  // }
 }
 
 export default Routes
