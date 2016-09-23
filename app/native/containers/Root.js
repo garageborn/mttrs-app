@@ -9,7 +9,7 @@ const RouterWithRedux = connect()(Router)
 class Root extends Component {
   render() {
     if (Platform.OS === 'ios') {
-      StatusBar.setBarStyle('light-content')
+      StatusBar.setBarStyle('default')
     }
 
     const {store} = this.props

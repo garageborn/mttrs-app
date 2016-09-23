@@ -18,7 +18,7 @@ class Timeline extends Component {
   }
 
   renderSectionHeader(sectionData, date) {
-    return <ListViewHeader date={ParseDate(date).toUpperCase()} />
+    return <ListViewHeader date={ParseDate(date)} />
   }
 
   dataSource() {
@@ -50,13 +50,14 @@ class Timeline extends Component {
     const { isFetchingTop, onRefresh } = this.props
     return (
       <RefreshControl
+        style={styles.hideRefreshControl}
         refreshing={isFetchingTop}
         onRefresh={onRefresh}
-        tintColor='#2C2E4A'
+        tintColor='#FFF'
         title='Refreshing...'
-        titleColor='#2C2E4A'
+        titleColor='#FFF'
         colors={['#FFF']}
-        progressBackgroundColor='#2C2E4A'
+        progressBackgroundColor='#FFF'
        />
     )
   }
