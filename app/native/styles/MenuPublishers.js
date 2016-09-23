@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     marginLeft: 15,
     marginRight: 15,
+    marginBottom: 2,
     borderRadius: 5
   },
 
@@ -42,11 +43,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 23,
     paddingLeft: 15,
-    marginTop: 32,
-    marginBottom: 16
-  },
-
-  listView: {
+    marginTop: 8,
+    paddingTop: 8,
+    marginBottom: 8,
+    paddingBottom: 8
   },
 
   publisher: {

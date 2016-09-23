@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, TouchableHighlight } from 'react-native'
+import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/Menu'
 import { Actions } from 'react-native-router-flux'
 

@@ -48,7 +48,11 @@ class MenuPublishers extends Component {
   }
 
   renderSeparator(sectionData, section) {
-    return <Text style={styles.listHeader}>{section}</Text>
+    return (
+      <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
+        <Text style={styles.listHeader}>{section}</Text>
+      </View>
+    )
   }
 
   getPublisherItem(item) {
@@ -58,6 +62,7 @@ class MenuPublishers extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
         <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
           <Image style={styles.searchIcon} source={require('../assets/icons/icon-search.png')} />
           <TextInput style={styles.searchInput} placeholder='Search for publishers' />
