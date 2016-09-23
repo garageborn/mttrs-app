@@ -9,15 +9,15 @@ class Timeline extends Component {
   constructor(props) {
     super(props)
 
-    this.getTimelineItem = this.getTimelineItem.bind(this)
-    this.renderSeparator = this.renderSeparator.bind(this)
+    this.renderRow = this.renderRow.bind(this)
+    this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
 
-  getTimelineItem(item) {
-    return <Story story={item} />
+  renderRow(item) {
+    return <Story story={item} openStory={this.props.openStory}/>
   }
 
-  renderSeparator(sectionData, date) {
+  renderSectionHeader(sectionData, date) {
     return <ListViewHeader date={ParseDate(date).toUpperCase()} />
   }
 
@@ -76,8 +76,8 @@ class Timeline extends Component {
       <ListView
         style={styles.listView}
         dataSource={this.dataSource()}
-        renderRow={this.getTimelineItem}
-        renderSectionHeader={this.renderSeparator}
+        renderRow={this.renderRow}
+        renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
         onEndReached={onEndReached}
         />
@@ -90,7 +90,8 @@ Timeline.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
-  onEndReached: PropTypes.func.isRequired
+  onEndReached: PropTypes.func.isRequired,
+  openStory: PropTypes.func.isRequired,
 }
 
 export default Timeline

@@ -13,9 +13,11 @@ class HomeHeaderContainer extends Component {
     return (
       <View style={styles.menu}>
         <TouchableHighlight style={styles.header} onPress={this.toggleMenu}>
-          <Image source={require('../assets/icons/icon-top-stories.png')} />
-          <Text style={styles.headerTitle}>Top Stories</Text>
-          <Image source={require('../assets/arrow.png')} />
+          <View>
+            <Image source={require('../assets/icons/icon-top-stories.png')} />
+            <Text style={styles.headerTitle}>Top Stories</Text>
+            <Image source={require('../assets/arrow.png')} />
+          </View>
         </TouchableHighlight>
       </View>
     )
