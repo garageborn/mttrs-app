@@ -8,7 +8,6 @@ class StoryLinksSceneContainer extends Component {
   constructor(props) {
     super(props)
     this.openLink = this.openLink.bind(this)
-    this.renderLink = this.renderLink.bind(this)
     this.dataSource = this.dataSource.bind(this)
   }
 
@@ -20,22 +19,24 @@ class StoryLinksSceneContainer extends Component {
     return ds.cloneWithRows(links)
   }
 
-  renderRow(rowData) {
+  renderRow(rowData, sectionID, rowID) {
     return (
-      <TouchableHighlight style={styles.publisherTouch} onPress={e => this.openLink(link)}>
-        <View>
-          <View style={styles.publisher}>
-            <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
-            <View style={styles.publisherInfo}>
-              <Text style={styles.title}>{rowData.publisher.name}</Text>
-              <Text style={styles.time}>Ontem às 7:01</Text>
+      <View style={[styles.row, {backgroundColor: rowID === '0' ? '#F5F8FA' : '#FFF'}]}>
+        <TouchableHighlight style={styles.publisherTouch} onPress={e => this.openLink(link)}>
+          <View>
+            <View style={styles.publisher}>
+              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+              <View style={styles.publisherInfo}>
+                <Text style={styles.title}>{rowData.publisher.name}</Text>
+                <Text style={styles.time}>Ontem às 7:01 {rowID}</Text>
+              </View>
+            </View>
+            <View style={styles.story}>
+              <Text numberOfLines={2} style={styles.storyTitle}>{rowData.title}</Text>
             </View>
           </View>
-          <View style={styles.story}>
-            <Text numberOfLines={2} style={styles.storyTitle}>{rowData.title}</Text>
-          </View>
-        </View>
-      </TouchableHighlight>
+        </TouchableHighlight>
+      </View>
     )
   }
 
@@ -49,7 +50,7 @@ class StoryLinksSceneContainer extends Component {
         </View>
         <ListView
           dataSource={this.dataSource()}
-          renderRow={(rowData) => this.renderRow(rowData)} />
+          renderRow={(rowData, sectionID, rowID) => this.renderRow(rowData, sectionID, rowID)} />
         {this.renderCloseButton()}
       </View>
     )

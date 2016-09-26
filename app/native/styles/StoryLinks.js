@@ -7,9 +7,20 @@ const styles = StyleSheet.create({
     flex: 1,
     width: width,
     height: height - 220,
-    padding: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
     marginBottom: 100,
     backgroundColor: '#FFF',
+  },
+
+  row: {
+    backgroundColor: '#FFF',
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 16,
+    paddingBottom: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#ECECEC'
   },
 
   header: {
@@ -17,10 +28,6 @@ const styles = StyleSheet.create({
   },
 
   publisherTouch: {
-    paddingTop: 16,
-    paddingBottom: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ECECEC'
   },
 
   publisher: {
