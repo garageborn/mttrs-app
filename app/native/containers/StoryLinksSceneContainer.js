@@ -19,23 +19,31 @@ class StoryLinksSceneContainer extends Component {
     return ds.cloneWithRows(links)
   }
 
+  isFirst(id, x, y) {
+    return id === '0' ? x : y
+  }
+
   renderRow(rowData, sectionID, rowID) {
     return (
-      <View style={[styles.row, {backgroundColor: rowID === '0' ? '#F5F8FA' : '#FFF'}]}>
-        <TouchableHighlight style={styles.publisherTouch} onPress={e => this.openLink(link)}>
-          <View>
-            <View style={styles.publisher}>
-              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
-              <View style={styles.publisherInfo}>
-                <Text style={styles.title}>{rowData.publisher.name}</Text>
-                <Text style={styles.time}>Ontem às 7:01 {rowID}</Text>
-              </View>
-            </View>
-            <View style={styles.story}>
-              <Text numberOfLines={2} style={styles.storyTitle}>{rowData.title}</Text>
+      <View
+        shadowOffset={{width: 1, height: 2}}
+        shadowColor={'rgba(0, 0, 0, .1)'}
+        shadowOpacity={1.0}
+        style={this.isFirst(rowID, styles.rowFirst, styles.row)}>
+        <View style={this.isFirst(rowID, styles.rowContainerFirst, styles.rowContainer)}>
+          <View style={styles.publisher}>
+            <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+            <View style={styles.publisherInfo}>
+              <Text style={styles.title}>{rowData.publisher.name}</Text>
+              <Text style={styles.time}>Ontem às 7:01 {rowID}</Text>
             </View>
           </View>
-        </TouchableHighlight>
+          <View style={styles.story}>
+            <TouchableHighlight style={styles.rowTouch} onPress={e => this.openLink(rowData)}>
+              <Text numberOfLines={2} style={styles.storyTitle}>{rowData.title}</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
       </View>
     )
   }
@@ -59,9 +67,7 @@ class StoryLinksSceneContainer extends Component {
   renderCloseButton() {
     return (
       <TouchableHighlight onPress={this.close}>
-        <View>
-          <Text>Close</Text>
-        </View>
+        <Image source={require('../assets/icons/icon-close-modal@3x.png')} />
       </TouchableHighlight>
     )
   }

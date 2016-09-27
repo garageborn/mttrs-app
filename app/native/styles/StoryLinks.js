@@ -14,20 +14,27 @@ const styles = StyleSheet.create({
   },
 
   row: {
-    backgroundColor: '#FFF',
-    paddingLeft: 20,
-    paddingRight: 20,
+    backgroundColor: '#FFF'
+  },
+
+  rowFirst: {
+    backgroundColor: '#F5F8FA'
+  },
+
+  rowContainer: {
+    marginLeft: 20,
+    marginRight: 20,
     paddingTop: 16,
     paddingBottom: 16,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#ECECEC'
   },
 
-  header: {
-
-  },
-
-  publisherTouch: {
+  rowContainerFirst: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    paddingTop: 16,
+    paddingBottom: 16
   },
 
   publisher: {
