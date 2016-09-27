@@ -1,7 +1,4 @@
 import { StyleSheet } from 'react-native'
-import Dimensions from 'Dimensions'
-
-let { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {

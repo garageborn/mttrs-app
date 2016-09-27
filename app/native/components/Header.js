@@ -20,7 +20,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   openMenu: PropTypes.func
 }
 
