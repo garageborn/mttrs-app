@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
 
-  rowFirst: {
+  firstRow: {
     backgroundColor: '#F5F8FA'
   },
 
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ECECEC'
   },
 
-  rowContainerFirst: {
+  firstRowContainer: {
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 16,

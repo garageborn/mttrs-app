@@ -51,7 +51,7 @@ class StoryLinksSceneContainer extends Component {
         <ListView
           dataSource={this.dataSource()}
           renderRow={this.renderRow} />
-        <CloseButton onClose={this.close} />
+        <CloseButton onPress={this.close} />
       </View>
     )
   }

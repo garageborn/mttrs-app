@@ -1,9 +1,9 @@
 import React from 'react'
 import { Image, TouchableHighlight } from 'react-native'
 
-const CloseButton = ({ onClose }) => {
+const CloseButton = ({onPress}) => {
   return (
-    <TouchableHighlight onPress={onClose}>
+    <TouchableHighlight onPress={onPress}>
       <Image source={require('../assets/icons/icon-close-modal@3x.png')} />
     </TouchableHighlight>
   )
