@@ -4,12 +4,25 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
+import Share, {ShareSheet, Button} from 'react-native-share'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
     super(props)
     this.close = this.close.bind(this)
     this.share = this.share.bind(this)
+  }
+
+  share() {
+    const { link } = this.props
+
+    let shareOptions = {
+      title: link.title,
+      message: link.title,
+      url: link.url
+    }
+
+    return Share.open(shareOptions)
   }
 
   render() {
@@ -25,7 +38,6 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          {/* onPress Mockup! */}
           <TouchableHighlight onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
@@ -41,10 +53,6 @@ class LinkHeaderContainer extends Component {
   close() {
     const { dispatch, navigation } = this.props
     dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
-  }
-
-  share() {
-
   }
 }
 
