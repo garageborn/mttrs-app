@@ -4,7 +4,6 @@ import createLogger from 'redux-logger'
 import * as reducers from '../reducers/index'
 import { createNavigationEnabledStore } from '@exponent/ex-navigation';
 
-console.log(reducers)
 const loggerMiddleware = createLogger({ collapsed: true })
 
 const createStoreWithNavigation = createNavigationEnabledStore({

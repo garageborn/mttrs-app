@@ -13,6 +13,7 @@ const Routes = {
   publisher: () => PublisherSceneContainer,
   menu: () => MenuContainer,
   story: () => StorySceneContainer,
+  storyLinks: () => StoryLinksSceneContainer,
 }
 
 const Router = createRouter(() => Routes)

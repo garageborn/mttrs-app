@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/HeaderPublisher'
+import Router from '../config/Router'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class StoryHeaderContainer extends Component {
   constructor(props) {
     super(props)
-    this.toggleMenu = this.toggleMenu.bind(this)
+    this.close = this.close.bind(this)
+    this.share = this.share.bind(this)
   }
 
   render() {
@@ -20,11 +24,11 @@ class StoryHeaderContainer extends Component {
         </View>
         <View style={styles.actions}>
           {/* onPress Mockup! */}
-          <TouchableHighlight onPress={this.toggleMenu}>
+          <TouchableHighlight onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
           {/* onPress Mockup! */}
-          <TouchableHighlight onPress={this.toggleMenu}>
+          <TouchableHighlight onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>
@@ -32,9 +36,19 @@ class StoryHeaderContainer extends Component {
     )
   }
 
-  toggleMenu() {
-    Actions.menu()
+  close() {
+    const { dispatch, navigation } = this.props
+    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+  }
+
+  share() {
+
   }
 }
 
-export default StoryHeaderContainer
+let mapStateToProps = (state) => {
+  return {
+    navigation: state.navigation
+  }
+}
+export default connect(mapStateToProps)(StoryHeaderContainer)
