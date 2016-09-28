@@ -7,23 +7,30 @@ import { NavigationActions } from '@exponent/ex-navigation'
 class HomeHeaderContainer extends Component {
   constructor(props) {
     super(props)
-    this.toggleMenu = this.toggleMenu.bind(this)
+    this.closeMenu = this.closeMenu.bind(this)
+    this.openMenu = this.openMenu.bind(this)
   }
 
   render() {
+    const { action } = this.props
     return (
-      <Header openMenu={this.toggleMenu} title='Top Stories' />
+      <Header
+        openMenu={this.openMenu}
+        closeMenu={this.closeMenu}
+        action={action}
+        title='Top Stories' />
     )
   }
 
-  toggleMenu() {
+  closeMenu() {
+    const { dispatch, navigation } = this.props
+    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+  }
+
+  openMenu() {
     const { dispatch, navigation, action } = this.props
-    if (action === 'close') {
-      dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
-    } else {
-      let route = Router.getRoute('menu', { scene: 'home', tab: 'categories' })
-      dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
-    }
+    let route = Router.getRoute('menu', { scene: 'home', tab: 'categories' })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 }
 

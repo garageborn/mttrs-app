@@ -4,10 +4,17 @@ import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
 import * as CategoryActions from '../../actions/CategoryActions'
+import Router from '../config/Router'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {
     return dispatch(CategoryActions.getCategories())
+  }
+
+  constructor(props) {
+    super(props)
+    this.openCategory = this.openCategory.bind(this)
   }
 
   componentDidMount() {
@@ -34,7 +41,7 @@ class CategoryMenuContainer extends Component {
 
   renderCategories() {
     if (!this.props.categories.length) return
-    return this.props.categories.map((category, index) => {
+    return this.props.categories.map((category) => {
       return (
         <CategoryTile key={category.id} category={category} onPress={this.openCategory}/>
       )
@@ -42,14 +49,17 @@ class CategoryMenuContainer extends Component {
   }
 
   openCategory(category) {
-    Actions.category({ categorySlug: category.slug })
+    const { dispatch, navigation } = this.props
+    let route = Router.getRoute('category', { categorySlug: category.slug })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 }
 
 let mapStateToProps = (state) => {
   return {
     categories: state.CategoriesReducers.categories,
-    currentCategory: state.CurrentCategoryReducer.category
+    currentCategory: state.CurrentCategoryReducer.category,
+    navigation: state.navigation
   }
 }
 export default connect(mapStateToProps)(CategoryMenuContainer)

@@ -8,27 +8,31 @@ import * as CurrentCategoryActions from '../../actions/CurrentCategoryActions'
 import * as CurrentPublisherActions from '../../actions/CurrentPublisherActions'
 
 class CategorySceneContainer extends Component {
-  static fetchData({ dispatch, categorySlug }) {
+  static route = {
+    navigationBar: {
+      renderTitle: () => <CategoryHeaderContainer />
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.categorySlug === this.props.categorySlug) return
+    this.fetchData(nextProps)
+  }
+
+  fetchData({ dispatch, categorySlug }) {
     return [
       dispatch(CurrentPublisherActions.clear()),
       dispatch(CurrentCategoryActions.getCategory(categorySlug))
     ]
   }
 
-  componentDidMount() {
-    this.constructor.fetchData(this.props)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.categorySlug !== this.props.categorySlug) {
-      this.constructor.fetchData(nextProps)
-    }
-  }
-
   render() {
     return (
       <View style={styles.container}>
-        <CategoryHeaderContainer />
         <TimelineContainer />
       </View>
     )
