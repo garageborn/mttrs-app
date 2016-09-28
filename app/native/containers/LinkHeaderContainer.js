@@ -13,7 +13,7 @@ class LinkHeaderContainer extends Component {
     this.share = this.share.bind(this)
   }
 
-  render() {
+  share() {
     const { link } = this.props
 
     let shareOptions = {
@@ -21,6 +21,12 @@ class LinkHeaderContainer extends Component {
       message: link.title,
       url: link.url
     }
+
+    return Share.open(shareOptions)
+  }
+
+  render() {
+    const { link } = this.props
 
     return (
       <View style={styles.header} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .5)'} shadowOpacity={1.0} elevation={5}>
@@ -32,7 +38,7 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight onPress={() => Share.open(shareOptions)}>
+          <TouchableHighlight onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
           {/* onPress Mockup! */}
@@ -47,10 +53,6 @@ class LinkHeaderContainer extends Component {
   close() {
     const { dispatch, navigation } = this.props
     dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
-  }
-
-  share() {
-
   }
 }
 
