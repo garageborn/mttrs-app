@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableHighlight, Text, ListView } from 'react-native'
 import { connect } from 'react-redux'
-import StoryLinks from '../components/StoryLinks'
+import StoryLink from '../components/StoryLink'
 import CloseButton from '../components/CloseButton'
 import styles from '../styles/StoryLinks'
+import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 class StoryLinksSceneContainer extends Component {
@@ -11,7 +12,7 @@ class StoryLinksSceneContainer extends Component {
     super(props)
 
     this.openLink = this.openLink.bind(this)
-    this.rendeRow = this.renderRow.bind(this)
+    this.renderRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
     this.close = this.close.bind(this)
   }
@@ -26,10 +27,10 @@ class StoryLinksSceneContainer extends Component {
 
   renderRow(rowData, sectionID, rowID) {
     return (
-      <StoryLinks
+      <StoryLink
         rowID={rowID}
-        rowData={rowData}
-        openLink={e => this.openLink(rowData)} />
+        link={rowData}
+        openLink={this.openLink} />
     )
   }
 
@@ -39,7 +40,9 @@ class StoryLinksSceneContainer extends Component {
   }
 
   openLink(link) {
-    console.log('openlink', link)
+    const { dispatch, navigation } = this.props
+    let route = Router.getRoute('link', { link: link })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 
   render() {

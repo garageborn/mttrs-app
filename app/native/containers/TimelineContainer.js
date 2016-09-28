@@ -32,7 +32,7 @@ class TimelineContainer extends Component {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
-    this.openStory = this.openStory.bind(this)
+    this.openLink = this.openLink.bind(this)
     this.openStoryLinks = this.openStoryLinks.bind(this)
   }
 
@@ -53,9 +53,9 @@ class TimelineContainer extends Component {
     this.constructor.infiniteFetchData(this.props)
   }
 
-  openStory(story) {
+  openLink(link) {
     const { dispatch, navigation } = this.props
-    let route = Router.getRoute('story', { story: story })
+    let route = Router.getRoute('link', { link: link })
     dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 
@@ -74,7 +74,7 @@ class TimelineContainer extends Component {
         isFetchingTop={isFetchingTop}
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
-        openStory={this.openStory}
+        openLink={this.openLink}
         openStoryLinks={this.openStoryLinks}
         />
     )

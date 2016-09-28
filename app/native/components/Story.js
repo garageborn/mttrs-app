@@ -7,7 +7,7 @@ import * as cloudinary from '../../common/utils/Cloudinary'
 
 class Story extends Component {
   render() {
-    const { story, openStory, openStoryLinks } = this.props
+    const { story, openLink, openStoryLinks } = this.props
     return (
       <View style={styles.card}>
         <View style={styles.cardHeader}>
@@ -17,7 +17,7 @@ class Story extends Component {
           </View>
           <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
         </View>
-        <TouchableHighlight onPress={e => openStory(story)} activeOpacity={0.7} underlayColor='white'>
+        <TouchableHighlight onPress={e => openLink(this.mainLink)} activeOpacity={0.7} underlayColor='white'>
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
               <LinearGradient style={styles.coverOverlay} colors={['transparent', 'rgba(0, 0, 0, .6)']}>
@@ -38,13 +38,17 @@ class Story extends Component {
 
     return cloudinary.url(story.image_source_url, options)
   }
+
+  get mainLink() {
+    return this.props.story.links[0]
+  }
 }
 
 Story.propTypes = {
   story: PropTypes.shape({
     title: PropTypes.string.isRequired
   }).isRequired,
-  openStory: PropTypes.func.isRequired,
+  openLink: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 
