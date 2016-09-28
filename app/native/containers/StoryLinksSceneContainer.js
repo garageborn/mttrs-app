@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { View, Image, TouchableHighlight, Text, ListView } from 'react-native'
-import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import StoryLinks from '../components/StoryLinks'
 import CloseButton from '../components/CloseButton'
 import styles from '../styles/StoryLinks'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class StoryLinksSceneContainer extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class StoryLinksSceneContainer extends Component {
     this.openLink = this.openLink.bind(this)
     this.rendeRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
+    this.close = this.close.bind(this)
   }
 
   dataSource() {
@@ -33,7 +34,8 @@ class StoryLinksSceneContainer extends Component {
   }
 
   close() {
-    Actions.pop()
+    const { dispatch, navigation } = this.props
+    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
   }
 
   openLink(link) {
@@ -57,9 +59,9 @@ class StoryLinksSceneContainer extends Component {
   }
 }
 
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = (state) => {
   return {
-    story: ownProps.story
+    navigation: state.navigation
   }
 }
 export default connect(mapStateToProps)(StoryLinksSceneContainer)

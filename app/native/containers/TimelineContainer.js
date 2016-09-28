@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
-import { Actions } from 'react-native-router-flux'
+import Router from '../config/Router'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class TimelineContainer extends Component {
   static fetchData(props) {
@@ -53,11 +54,15 @@ class TimelineContainer extends Component {
   }
 
   openStory(story) {
-    Actions.story({ story: story })
+    const { dispatch, navigation } = this.props
+    let route = Router.getRoute('story', { story: story })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 
   openStoryLinks(story) {
-    Actions.storyLinks({ story: story })
+    const { dispatch, navigation } = this.props
+    let route = Router.getRoute('storyLinks', { story: story })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 
   render() {
@@ -82,7 +87,8 @@ let mapStateToProps = (state) => {
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
     currentCategory: state.CurrentCategoryReducer.category,
-    currentPublisher: state.CurrentPublisherReducer.publisher
+    currentPublisher: state.CurrentPublisherReducer.publisher,
+    navigation: state.navigation
   }
 }
 

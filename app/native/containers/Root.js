@@ -1,21 +1,21 @@
 import React, { Component, PropTypes } from 'react'
-import { Router } from 'react-native-router-flux'
 import { Provider, connect } from 'react-redux'
 import { StatusBar, Platform } from 'react-native'
-import Routes from '../config/Routes'
-
-const RouterWithRedux = connect()(Router)
+import { NavigationContext, NavigationProvider, StackNavigation, } from '@exponent/ex-navigation'
+import Router from '../config/Router'
 
 class Root extends Component {
   render() {
-    if (Platform.OS === 'ios') {
-      StatusBar.setBarStyle('default')
-    }
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('default')
 
-    const {store} = this.props
+    const { store } = this.props
+    const navigationContext = new NavigationContext({ router: Router, store: store })
+
     return (
       <Provider store={store}>
-        <RouterWithRedux scenes={Routes.all(store)} />
+        <NavigationProvider context={navigationContext}>
+          <StackNavigation initialRoute={Router.getRoute('home')} />
+        </NavigationProvider>
       </Provider>
     )
   }

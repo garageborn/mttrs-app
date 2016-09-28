@@ -1,5 +1,6 @@
-export {default as RouterReducer} from './RouterReducer'
+import { NavigationReducer } from '@exponent/ex-navigation'
 
+export const navigation = NavigationReducer
 export {default as CategoriesReducers} from '../../reducers/CategoriesReducers'
 export {default as CurrentCategoryReducer} from '../../reducers/CurrentCategoryReducer'
 export {default as CurrentPublisherReducer} from '../../reducers/CurrentPublisherReducer'

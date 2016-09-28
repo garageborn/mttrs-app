@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import styles from '../styles/Header'
-import { Actions } from 'react-native-router-flux'
 
 class PublisherHeaderContainer extends Component {
   constructor(props) {
