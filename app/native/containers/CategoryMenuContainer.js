@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
 import * as CategoryActions from '../../actions/CategoryActions'
-import { Actions } from 'react-native-router-flux'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {

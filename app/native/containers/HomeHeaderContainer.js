@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-import { Actions } from 'react-native-router-flux'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Header from '../components/Header'
+import Router from '../config/Router'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class HomeHeaderContainer extends Component {
   constructor(props) {
@@ -15,8 +17,23 @@ class HomeHeaderContainer extends Component {
   }
 
   toggleMenu() {
-    Actions.menu()
+    const { dispatch, navigation, action } = this.props
+    if (action === 'close') {
+      dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+    } else {
+      let route = Router.getRoute('menu', { scene: 'home', tab: 'categories' })
+      dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    }
   }
 }
 
-export default HomeHeaderContainer
+HomeHeaderContainer.propTypes = {
+  action: PropTypes.string
+}
+
+let mapStateToProps = (state) => {
+  return {
+    navigation: state.navigation
+  }
+}
+export default connect(mapStateToProps)(HomeHeaderContainer)

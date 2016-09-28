@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 import Header from '../components/Header'
 
 class CategoryHeaderContainer extends Component {

@@ -5,10 +5,15 @@ import TimelineContainer from './TimelineContainer'
 import styles from '../styles/App'
 
 class HomeSceneContainer extends Component {
+  static route = {
+    navigationBar: {
+      renderTitle: () => <HomeHeaderContainer />
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <HomeHeaderContainer />
         <TimelineContainer />
       </View>
     )

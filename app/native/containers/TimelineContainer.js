@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
-import { Actions } from 'react-native-router-flux'
 
 class TimelineContainer extends Component {
   static fetchData(props) {

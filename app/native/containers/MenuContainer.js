@@ -5,8 +5,26 @@ import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import MenuPublishers from '../components/MenuPublishers'
 import styles from '../styles/Menu'
+import HomeHeaderContainer from './HomeHeaderContainer'
+import CategoryHeaderContainer from './CategoryHeaderContainer'
+import PublisherHeaderContainer from './PublisherHeaderContainer'
 
 class MenuContainer extends Component {
+  static route = {
+    navigationBar: {
+      renderTitle: (route) => {
+        switch(route.params.scene) {
+          case 'category':
+            return <CategoryHeaderContainer action='close'/>
+          case 'publisher':
+            return <PublisherHeaderContainer action='close'/>
+          default:
+            return <HomeHeaderContainer action='close'/>
+        }
+      }
+    }
+  }
+
   constructor () {
     super()
     this.state = {
