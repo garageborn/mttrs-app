@@ -14,8 +14,8 @@ class Timeline extends Component {
   }
 
   renderRow(item) {
-    const { openStory, openStoryLinks } = this.props
-    return <Story story={item} openStory={openStory} openStoryLinks={openStoryLinks} />
+    const { openLink, openStoryLinks } = this.props
+    return <Story story={item} openLink={openLink} openStoryLinks={openStoryLinks} />
   }
 
   renderSectionHeader(sectionData, date) {
@@ -93,7 +93,7 @@ Timeline.propTypes = {
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
-  openStory: PropTypes.func.isRequired,
+  openLink: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 
