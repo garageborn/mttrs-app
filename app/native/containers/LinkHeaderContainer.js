@@ -4,6 +4,7 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
+import Share, {ShareSheet, Button} from 'react-native-share'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
@@ -15,6 +16,12 @@ class LinkHeaderContainer extends Component {
   render() {
     const { link } = this.props
 
+    let shareOptions = {
+      title: link.title,
+      message: link.title,
+      url: link.url
+    }
+
     return (
       <View style={styles.header} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .5)'} shadowOpacity={1.0} elevation={5}>
         <View style={styles.publisher}>
@@ -25,8 +32,7 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          {/* onPress Mockup! */}
-          <TouchableHighlight onPress={this.share}>
+          <TouchableHighlight onPress={() => Share.open(shareOptions)}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
           {/* onPress Mockup! */}
