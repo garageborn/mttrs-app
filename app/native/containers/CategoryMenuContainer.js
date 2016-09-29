@@ -58,7 +58,6 @@ class CategoryMenuContainer extends Component {
 let mapStateToProps = (state) => {
   return {
     categories: state.CategoriesReducers.categories,
-    currentCategory: state.CurrentCategoryReducer.category,
     navigation: state.navigation
   }
 }

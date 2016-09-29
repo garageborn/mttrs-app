@@ -12,9 +12,10 @@ class TimelineSceneContainer extends Component {
   }
 
   render() {
+    const { route } = this.props
     return (
       <View style={styles.container}>
-        <TimelineContainer />
+        <TimelineContainer params={route.params}/>
       </View>
     )
   }

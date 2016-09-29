@@ -19,42 +19,49 @@ class MenuContainer extends Component {
   }
 
   changeCurrentTab(selectedIndex) {
-    // const { dispatch, navigation, route } = this.props
-    // const selectedTab = TABS[selectedIndex]
+    const { dispatch, navigation, params } = this.props
+    const selectedTab = TABS[selectedIndex]
 
-    // let params = Object.assign({}, route.params, { tab: selectedTab.id })
-    // dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, params))
+    let menuParams = Object.assign({}, params.menu, { tab: selectedTab.id })
+    let newParams = Object.assign({}, params, { menu: menuParams })
+    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 
   render() {
-    console.log('render menucontainer')
-    const buttons = TABS.map(tab => tab.label)
-    // const currentTab = TABS.find(tab => tab.id === this.props.route.params.tab)
-    const currentTab = TABS[0]
-
     return (
       <View style={styles.menu}>
         <View style={styles.selector}>
           <ButtonGroup
             selectedBackgroundColor='#42729B'
             onPress={this.changeCurrentTab}
-            selectedIndex={TABS.indexOf(currentTab)}
-            buttons={buttons} />
+            selectedIndex={this.currentTabIndex}
+            buttons={this.labels} />
         </View>
 
         <View style={styles.menuContainer}>
-          { currentTab.component }
+          { this.currentTab.component }
         </View>
       </View>
     )
   }
+
+  get labels() {
+    return TABS.map(tab => tab.label)
+  }
+
+  get currentTab() {
+    const { tab } = this.props.params.menu
+    return TABS.find(t => t.id === tab) || TABS[0]
+  }
+
+  get currentTabIndex() {
+    return TABS.indexOf(this.currentTab)
+  }
 }
 
-// let mapStateToProps = (state, ownProps) => {
-//   return {
-//     navigation: state.navigation,
-//     publisherSlug: ownProps.publisherSlug
-//   }
-// }
-// export default connect(mapStateToProps)(MenuContainer)
-export default MenuContainer
+let mapStateToProps = (state, ownProps) => {
+  return {
+    navigation: state.navigation
+  }
+}
+export default connect(mapStateToProps)(MenuContainer)

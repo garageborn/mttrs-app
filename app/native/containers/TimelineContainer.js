@@ -6,28 +6,6 @@ import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 class TimelineContainer extends Component {
-  static fetchData(props) {
-    let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static pullFetchData(props) {
-    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static infiniteFetchData(props) {
-    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static fetchQuery(props) {
-    return {
-      category_slug: props.currentCategory.slug,
-      publisher_slug: props.currentPublisher.slug
-    }
-  }
-
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -37,20 +15,44 @@ class TimelineContainer extends Component {
   }
 
   componentDidMount() {
-    this.constructor.fetchData(this.props)
+    this.fetchData(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
-    if (categoryChanged) this.constructor.fetchData(nextProps)
+    // let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
+    // if (categoryChanged) this.fetchData(nextProps)
+  }
+
+  fetchData(props) {
+    let action = TimelineActions.getTimeline(this.fetchQuery(props))
+    return props.dispatch(action)
+  }
+
+  pullFetchData(props) {
+    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
+  }
+
+  infiniteFetchData(props) {
+    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
+  }
+
+  fetchQuery(props) {
+    console.log('fetchQuery', props)
+    return {}
+    // return {
+    //   category_slug: props.currentCategory.slug,
+    //   publisher_slug: props.currentPublisher.slug
+    // }
   }
 
   onPullToRefresh() {
-    this.constructor.pullFetchData(this.props)
+    this.pullFetchData(this.props)
   }
 
   onEndReached() {
-    this.constructor.infiniteFetchData(this.props)
+    this.infiniteFetchData(this.props)
   }
 
   openLink(link) {
@@ -81,13 +83,11 @@ class TimelineContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state, ownProps) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
-    currentCategory: state.CurrentCategoryReducer.category,
-    currentPublisher: state.CurrentPublisherReducer.publisher,
     navigation: state.navigation
   }
 }

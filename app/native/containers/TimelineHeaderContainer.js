@@ -18,23 +18,30 @@ class TimelineHeaderContainer extends Component {
   render() {
     return (
       <View>
-        <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+        { this.renderHeader() }
         { this.renderMenu() }
       </View>
     )
   }
 
+  renderHeader() {
+    return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+  }
+
   renderMenu() {
-    console.log('render menu', this.props.params)
-    const { openMenu } = this.props.params
-    if (openMenu) return <MenuContainer />
+    const { params } = this.props
+    if (params.menu && params.menu.open) return <MenuContainer params={params}/>
   }
 
   toggleMenu() {
     const { dispatch, navigation, params } = this.props
-    let newParams = Object.assign({}, params, { openMenu: !params.openMenu })
-    console.log('---------------', newParams)
+    let menuParams = Object.assign({}, params.menu, { open: !this.isMenuOpened })
+    let newParams = Object.assign({}, params, { menu: menuParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+  }
+
+  get isMenuOpened() {
+    return this.props.params.menu && this.props.params.menu.open
   }
 }
 

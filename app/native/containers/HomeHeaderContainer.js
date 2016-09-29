@@ -8,7 +8,11 @@ class HomeHeaderContainer extends Component {
   render() {
     const { toggleMenu } = this.props
     return (
-      <Header toggleMenu={toggleMenu} title='Top Stories' />
+      <Header
+        toggleMenu={toggleMenu}
+        title='Top Stories'
+        icon={require('../assets/icons/icon-top-stories.png')}
+        />
     )
   }
 }
