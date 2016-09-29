@@ -25,7 +25,15 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader() {
-    return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+    const { params } = this.props
+    const headerParams = { params: params, toggleMenu: this.toggleMenu }
+    if (!params.section) return <HomeHeaderContainer {...headerParams } />
+    switch(params.section.name) {
+      case 'category':
+        return <CategoryHeaderContainer { ...headerParams } />
+      case 'publisher':
+        return <PublisherHeaderContainer { ...headerParams } />
+    }
   }
 
   renderMenu() {
@@ -41,7 +49,8 @@ class TimelineHeaderContainer extends Component {
   }
 
   get isMenuOpened() {
-    return this.props.params.menu && this.props.params.menu.open
+    const { params } = this.props
+    return params.menu && params.menu.open
   }
 }
 

@@ -19,8 +19,8 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
-    // if (categoryChanged) this.fetchData(nextProps)
+    let sectionChanged = nextProps.params.section !== this.props.params.section
+    if (sectionChanged) this.fetchData(nextProps)
   }
 
   fetchData(props) {
@@ -39,12 +39,14 @@ class TimelineContainer extends Component {
   }
 
   fetchQuery(props) {
-    console.log('fetchQuery', props)
-    return {}
-    // return {
-    //   category_slug: props.currentCategory.slug,
-    //   publisher_slug: props.currentPublisher.slug
-    // }
+    const { section } = props.params
+    if (!section) return {}
+    switch(section.name) {
+      case 'category':
+        return { category_slug: section.model.slug }
+      case 'publisher':
+        return { publisher_slug: section.model.slug }
+    }
   }
 
   onPullToRefresh() {

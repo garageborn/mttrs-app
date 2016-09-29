@@ -49,9 +49,12 @@ class CategoryMenuContainer extends Component {
   }
 
   openCategory(category) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('category', { categorySlug: category.slug })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    const { dispatch, navigation, params } = this.props
+    let menuParams = params ? params.menu : {}
+    menuParams.open = false
+    let sectionParams = { name: 'category', model: category }
+    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
+    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
 
