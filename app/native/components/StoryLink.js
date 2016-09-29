@@ -10,8 +10,8 @@ class StoryLink extends Component {
         shadowOffset={{width: 1, height: 2}}
         shadowColor={'rgba(0, 0, 0, .1)'}
         shadowOpacity={1.0}
-        style={this.rowStyle}>
-        <View style={this.rowContainerStyle}>
+        style={rowID === '0' ? styles.firstRow : styles.row}>
+        <View style={rowID === '0' ? styles.firstRowContainer : styles.rowContainer}>
           <View style={styles.publisher}>
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
@@ -27,18 +27,6 @@ class StoryLink extends Component {
         </View>
       </View>
     )
-  }
-
-  isFirstRow(id) {
-    return id === '0'
-  }
-
-  get rowStyle() {
-    return this.isFirstRow(this.props.rowId) ? styles.firstRow : styles.row
-  }
-
-  get rowContainerStyle() {
-    return this.isFirstRow(this.props.rowId) ? styles.firstRowContainer : styles.rowContainer
   }
 }
 
