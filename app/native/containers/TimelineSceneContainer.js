@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import HomeHeaderContainer from './HomeHeaderContainer'
+import TimelineHeaderContainer from './TimelineHeaderContainer'
 import TimelineContainer from './TimelineContainer'
 import styles from '../styles/App'
 
-class HomeSceneContainer extends Component {
+class TimelineSceneContainer extends Component {
   static route = {
     navigationBar: {
-      renderTitle: () => <HomeHeaderContainer />
+      renderTitle: (route) => <TimelineHeaderContainer params={route.params}/>
     }
   }
 
@@ -20,4 +20,4 @@ class HomeSceneContainer extends Component {
   }
 }
 
-export default HomeSceneContainer
+export default TimelineSceneContainer

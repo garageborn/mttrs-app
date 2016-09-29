@@ -14,7 +14,7 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <NavigationProvider context={navigationContext}>
-          <StackNavigation initialRoute={Router.getRoute('home')} />
+          <StackNavigation initialRoute={Router.getRoute('timeline')} />
         </NavigationProvider>
       </Provider>
     )
