@@ -3,13 +3,13 @@ import { View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
-import MenuPublishers from '../components/MenuPublishers'
+import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 const TABS = [
   { id: 'categories', label: 'Categories', component: <CategoryMenuContainer /> },
-  { id: 'publishers', label: 'Publishers', component: <MenuPublishers /> }
+  { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
 ]
 
 class MenuContainer extends Component {
