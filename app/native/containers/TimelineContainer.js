@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import * as TimelineActions from '../../actions/TimelineActions'
 import Timeline from '../components/Timeline'
+import StoryContainer from './StoryContainer'
+import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
@@ -10,8 +13,7 @@ class TimelineContainer extends Component {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
-    this.openLink = this.openLink.bind(this)
-    this.openStoryLinks = this.openStoryLinks.bind(this)
+    this.renderStory = this.renderStory.bind(this)
   }
 
   componentDidMount() {
@@ -19,8 +21,12 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    let sectionChanged = nextProps.params.section !== this.props.params.section
-    if (sectionChanged) this.fetchData(nextProps)
+    let nextSection = nextProps.params.section || {}
+    let currentSection = this.props.params.section || {}
+
+    let sectionNameChanged = nextSection.name !== currentSection.name
+    let sectionModelChanged = nextSection.model !== currentSection.model
+    if (sectionNameChanged && sectionModelChanged) this.fetchData(nextProps)
   }
 
   fetchData(props) {
@@ -29,13 +35,13 @@ class TimelineContainer extends Component {
   }
 
   pullFetchData(props) {
-    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
+    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
   }
 
   infiniteFetchData(props) {
-    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
+    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
   }
 
   fetchQuery(props) {
@@ -57,31 +63,33 @@ class TimelineContainer extends Component {
     this.infiniteFetchData(this.props)
   }
 
-  openLink(link) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('link', { link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
-  }
-
-  openStoryLinks(story) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('storyLinks', { story: story })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
-  }
-
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
-      <Timeline
-        items={items}
-        isFetching={isFetching}
-        isFetchingTop={isFetchingTop}
-        onEndReached={this.onEndReached}
-        onRefresh={this.onPullToRefresh}
-        openLink={this.openLink}
-        openStoryLinks={this.openStoryLinks}
-        />
+      <View>
+        { this.renderStoryLinks() }
+        <Timeline
+          items={items}
+          isFetching={isFetching}
+          isFetchingTop={isFetchingTop}
+          onEndReached={this.onEndReached}
+          onRefresh={this.onPullToRefresh}
+          storyRenderer={this.renderStory}
+          />
+        </View>
     )
+  }
+
+  renderStory(story) {
+    return <StoryContainer story={story} params={this.props.params}/>
+  }
+
+  renderStoryLinks() {
+    const { params } = this.props
+    let section = params.section || {}
+    let storyLinks = section.storyLinks || {}
+    if (!storyLinks.open) return
+    return <StoryLinksContainer params={params} story={storyLinks.story}/>
   }
 }
 

@@ -5,25 +5,22 @@ import styles from '../styles/Story'
 class StoryPublishers extends Component {
   render() {
     const { story, openStoryLinks } = this.props
-    const { links } = story
-    if (!links) return
-
-    if (links.length === 1) {
-      return (
-        <View style={styles.publisher}>
-          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-        </View>
-      )
-    }
+    if (!story.links) return
 
     return (
-      <TouchableHighlight onPress={e => openStoryLinks(story)}>
+      <TouchableHighlight onPress={openStoryLinks}>
         <View style={styles.publisher}>
           <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-          <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
+          { this.renderCounter() }
         </View>
       </TouchableHighlight>
     )
+  }
+
+  renderCounter() {
+    const { links } = this.props.story
+    if (links.length <= 1) return
+    return <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
   }
 }
 

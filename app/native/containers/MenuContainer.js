@@ -59,7 +59,7 @@ class MenuContainer extends Component {
   }
 }
 
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = (state) => {
   return {
     navigation: state.navigation
   }

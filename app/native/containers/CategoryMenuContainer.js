@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
@@ -57,6 +57,10 @@ class CategoryMenuContainer extends Component {
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
+
+// CategoryMenuContainer.propTypes = {
+//   params: PropTypes.object.isRequired
+// }
 
 let mapStateToProps = (state) => {
   return {
