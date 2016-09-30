@@ -51,7 +51,7 @@ class StoryLinksSceneContainer extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text>Also published in</Text>
+          <Text style={styles.headerText}>Also published in</Text>
         </View>
         <ListView
           dataSource={this.dataSource()}
