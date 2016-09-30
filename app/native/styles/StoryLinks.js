@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, StatusBar } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 let { width, height } = Dimensions.get('window')
 
@@ -9,8 +9,22 @@ const styles = StyleSheet.create({
     height: height - 220,
     paddingTop: 20,
     paddingBottom: 20,
-    marginBottom: 100,
+    marginBottom: 50,
+    borderRadius: 4,
     backgroundColor: '#FFF',
+  },
+
+  header: {
+    paddingTop: 24,
+    paddingRight: 16,
+    paddingBottom: 16,
+    paddingLeft: 16,
+  },
+
+  headerText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#3A7EFE'
   },
 
   row: {

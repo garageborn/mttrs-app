@@ -4,7 +4,7 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
-import Share, {ShareSheet, Button} from 'react-native-share'
+import Share from 'react-native-share'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class LinkHeaderContainer extends Component {
 
     let shareOptions = {
       title: link.title,
-      message: link.title,
+      message: link.description || link.title,
       url: link.url
     }
 
