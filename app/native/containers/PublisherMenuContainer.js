@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import * as PublishersActions from '../../actions/PublishersActions'
+import { PublishersActions } from '../actions/index'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 class PublisherMenuContainer extends Component {

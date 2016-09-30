@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import * as TimelineActions from '../../actions/TimelineActions'
+import { TimelineActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'

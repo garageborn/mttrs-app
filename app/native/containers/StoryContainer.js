@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
 import Story from '../components/Story'
+import { NavigationActions } from '../actions/index'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -31,10 +30,10 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    console.log('openLink')
-    // const { dispatch, navigation } = this.props
+    const { dispatch } = this.props
     // let route = Router.getRoute('link', { link: link })
     // dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    dispatch(NavigationActions.link(link))
   }
 
   openCategory() {
@@ -46,7 +45,6 @@ class StoryContainer extends Component {
   }
 
   openStoryLinks() {
-    console.log('openStoryLinks')
     const { dispatch, navigation, params, story } = this.props
     let storyLinksParams = { open: true, story: story }
     let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })

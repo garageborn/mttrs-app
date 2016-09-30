@@ -3,7 +3,8 @@ import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import * as CategoryActions from '../../actions/CategoryActions'
+import { CategoryActions } from '../actions/index'
+
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
