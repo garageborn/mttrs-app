@@ -3,6 +3,18 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
 
 class StoryLink extends Component {
+  isFirstRow(id) {
+    return id === '0'
+  }
+
+  get rowStyle() {
+    return this.isFirstRow(this.props.rowID) ? styles.firstRow : styles.row
+  }
+
+  get rowContainerStyle() {
+    return this.isFirstRow(this.props.rowID) ? styles.firstRowContainer : styles.rowContainer
+  }
+
   render() {
     const { link, rowID, openLink } = this.props
     return (
@@ -10,8 +22,8 @@ class StoryLink extends Component {
         shadowOffset={{width: 1, height: 2}}
         shadowColor={'rgba(0, 0, 0, .1)'}
         shadowOpacity={1.0}
-        style={rowID === '0' ? styles.firstRow : styles.row}>
-        <View style={rowID === '0' ? styles.firstRowContainer : styles.rowContainer}>
+        style={this.rowStyle}>
+        <View style={this.rowContainerStyle}>
           <View style={styles.publisher}>
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
