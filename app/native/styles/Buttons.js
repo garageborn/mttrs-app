@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   closeButton: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 16
   },
 
   closeButtonIcon: {
