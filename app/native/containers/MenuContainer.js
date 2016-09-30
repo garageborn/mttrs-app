@@ -6,6 +6,9 @@ import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
 import { NavigationActions } from '@exponent/ex-navigation'
+import { createAnimatableComponent } from 'react-native-animatable'
+
+const AnimateView = createAnimatableComponent(View)
 
 const TABS = [
   { id: 'categories', label: 'Categories', component: <CategoryMenuContainer /> },
@@ -29,7 +32,7 @@ class MenuContainer extends Component {
 
   render() {
     return (
-      <View style={styles.menu}>
+      <AnimateView animation='bounceInDown' style={styles.menu}>
         <View style={styles.selector}>
           <ButtonGroup
             selectedBackgroundColor='#42729B'
@@ -41,7 +44,7 @@ class MenuContainer extends Component {
         <View style={styles.menuContainer}>
           { this.currentTab.component }
         </View>
-      </View>
+      </AnimateView>
     )
   }
 
