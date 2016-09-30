@@ -27,12 +27,15 @@ class TimelineHeaderContainer extends Component {
   renderHeader() {
     const { params } = this.props
     const headerParams = { params: params, toggleMenu: this.toggleMenu }
-    if (!params.section) return <HomeHeaderContainer {...headerParams } />
-    switch(params.section.name) {
+
+    let section = params.section || {}
+    switch(section.name) {
       case 'category':
         return <CategoryHeaderContainer { ...headerParams } />
       case 'publisher':
         return <PublisherHeaderContainer { ...headerParams } />
+      default:
+        return <HomeHeaderContainer {...headerParams } />
     }
   }
 

@@ -8,14 +8,7 @@ import ParseDate from '../../common/utils/ParseDate'
 class Timeline extends Component {
   constructor(props) {
     super(props)
-
-    this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
-  }
-
-  renderRow(item) {
-    const { openLink, openStoryLinks } = this.props
-    return <Story story={item} openLink={openLink} openStoryLinks={openStoryLinks} />
   }
 
   renderSectionHeader(sectionData, date) {
@@ -78,7 +71,7 @@ class Timeline extends Component {
       <ListView
         style={styles.listView}
         dataSource={this.dataSource()}
-        renderRow={this.renderRow}
+        renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
         onEndReached={onEndReached}
@@ -93,8 +86,7 @@ Timeline.propTypes = {
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
-  openLink: PropTypes.func.isRequired,
-  openStoryLinks: PropTypes.func.isRequired
+  storyRenderer: PropTypes.func.isRequired
 }
 
 export default Timeline
