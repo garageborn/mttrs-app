@@ -3,8 +3,7 @@ import { View, Text, Image, TextInput, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { PublishersActions } from '../actions/index'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { PublishersActions, NavigationActions } from '../actions/index'
 
 class PublisherMenuContainer extends Component {
   constructor() {
@@ -100,19 +99,13 @@ class PublisherMenuContainer extends Component {
   }
 
   openPublisher(publisher) {
-    const { dispatch, navigation, params } = this.props
-    let menuParams = params ? params.menu : {}
-    menuParams.open = false
-    let sectionParams = { name: 'publisher', model: publisher }
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    this.props.dispatch(NavigationActions.publisher(publisher))
   }
 }
 
 let mapStateToProps = (state) => {
   return {
-    publishers: state.PublishersReducers.publishers,
-    navigation: state.navigation
+    publishers: state.PublishersReducers.publishers
   }
 }
 export default connect(mapStateToProps)(PublisherMenuContainer)

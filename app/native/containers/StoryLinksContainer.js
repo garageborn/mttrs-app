@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import StoryLink from '../components/StoryLink'
 import CloseButton from '../components/CloseButton'
 import styles from '../styles/StoryLinks'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { NavigationActions } from '../actions/index'
 
 class StoryLinksContainer extends Component {
   constructor(props) {
@@ -35,16 +34,12 @@ class StoryLinksContainer extends Component {
   }
 
   close() {
-    const { dispatch, navigation, params, story } = this.props
-    let sectionParams = Object.assign({}, params.section, { storyLinks: null })
-    let newParams = Object.assign({}, params, { section: sectionParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    this.props.dispatch(NavigationActions.storyLinks({ open: false }))
   }
 
   openLink(link) {
-    // const { dispatch, navigation } = this.props
-    // let route = Router.getRoute('link', { link: link })
-    // dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.close()
+    this.props.dispatch(NavigationActions.link(link))
   }
 
   render() {

@@ -1,28 +1,24 @@
-import React, { Component } from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
-import styles from '../styles/Header'
+import React, { Component, PropTypes } from 'react'
+import Header from '../components/Header'
+import { NavigationActions } from '@exponent/ex-navigation'
 
 class PublisherHeaderContainer extends Component {
-  constructor(props) {
-    super(props)
-    this.toggleMenu = this.toggleMenu.bind(this)
-  }
-
   render() {
+    const { toggleMenu, publisher } = this.props
     return (
-      <View>
-        <View style={styles.header}>
-          <TouchableHighlight onPress={this.toggleMenu}>
-            <Text>Publisher</Text>
-          </TouchableHighlight>
-        </View>
-      </View>
+      <Header
+        toggleMenu={toggleMenu}
+        title={publisher.name}
+        icon={require('../assets/icons/icon-top-stories.png')}
+        />
     )
-  }
-
-  toggleMenu() {
-    Actions.menu()
   }
 }
 
+PublisherHeaderContainer.propTypes = {
+  publisher: PropTypes.shape({
+    name: PropTypes.string.isRequired
+  }).isRequired,
+  toggleMenu: PropTypes.func.isRequired
+}
 export default PublisherHeaderContainer
