@@ -3,13 +3,18 @@ import { StyleSheet, Dimensions } from 'react-native'
 let { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  container: {
+  modal: {
     flex: 1,
-    width: width,
-    height: height - 220,
+    backgroundColor: '#1B2A45'
+  },
+
+  container: {
+    width: width - 16,
+    height: height - 120,
     paddingTop: 20,
     paddingBottom: 20,
-    marginBottom: 50,
+    marginTop: 20,
+    marginLeft: 8,
     borderRadius: 4,
     backgroundColor: '#FFF',
   },

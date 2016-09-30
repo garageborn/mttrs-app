@@ -51,21 +51,23 @@ class StoryLinksContainer extends Component {
     const { links } = this.props.story
 
     return (
-      <Modal
-        animationType={'slide'}
-        transparent={false}
-        visible={true}
-        onRequestClose={this.close} >
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Also published in</Text>
+      <View style={styles.modal}>
+        <Modal
+          animationType={'slide'}
+          transparent={true}
+          visible={true}
+          onRequestClose={this.close}>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>Also published in</Text>
+            </View>
+            <ListView
+              dataSource={this.dataSource()}
+              renderRow={this.renderRow} />
           </View>
-          <ListView
-            dataSource={this.dataSource()}
-            renderRow={this.renderRow} />
           <CloseButton onPress={this.close} />
-        </View>
-      </Modal>
+        </Modal>
+      </View>
     )
   }
 }
