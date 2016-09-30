@@ -1,11 +1,9 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import * as CategoryActions from '../../actions/CategoryActions'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { CategoryActions, NavigationActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {
@@ -49,23 +47,13 @@ class CategoryMenuContainer extends Component {
   }
 
   openCategory(category) {
-    const { dispatch, navigation, params } = this.props
-    let menuParams = params ? params.menu : {}
-    menuParams.open = false
-    let sectionParams = { name: 'category', model: category }
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    this.props.dispatch(NavigationActions.category(category))
   }
 }
 
-// CategoryMenuContainer.propTypes = {
-//   params: PropTypes.object.isRequired
-// }
-
 let mapStateToProps = (state) => {
   return {
-    categories: state.CategoriesReducers.categories,
-    navigation: state.navigation
+    categories: state.CategoriesReducers.categories
   }
 }
 export default connect(mapStateToProps)(CategoryMenuContainer)
