@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from '@exponent/ex-navigation'
 import { TimelineActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import styles from '../styles/App'
 
 class TimelineContainer extends Component {
   constructor(props) {
@@ -66,8 +67,8 @@ class TimelineContainer extends Component {
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
-      <View>
-        { this.renderStoryLinks() }
+      <View style={styles.container}>
+        {this.renderStoryLinks()}
         <Timeline
           items={items}
           isFetching={isFetching}
@@ -76,7 +77,7 @@ class TimelineContainer extends Component {
           onRefresh={this.onPullToRefresh}
           storyRenderer={this.renderStory}
           />
-        </View>
+      </View>
     )
   }
 

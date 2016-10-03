@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import TimelineHeaderContainer from './TimelineHeaderContainer'
 import TimelineContainer from './TimelineContainer'
-import styles from '../styles/App'
 
 class TimelineSceneContainer extends Component {
   static route = {
@@ -13,11 +12,7 @@ class TimelineSceneContainer extends Component {
 
   render() {
     const { route } = this.props
-    return (
-      <View style={styles.container}>
-        <TimelineContainer params={route.params}/>
-      </View>
-    )
+    return <TimelineContainer params={route.params}/>
   }
 }
 
