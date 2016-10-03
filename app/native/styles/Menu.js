@@ -64,6 +64,11 @@ const styles = StyleSheet.create({
 
   categoryName: {
     fontSize: 14
+  },
+
+  isActive: {
+    borderWidth: 6,
+    borderColor: '#373737'
   }
 })
 
