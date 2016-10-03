@@ -12,6 +12,7 @@ class CategoryMenuContainer extends Component {
 
   constructor(props) {
     super(props)
+    this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
   }
 
@@ -22,7 +23,7 @@ class CategoryMenuContainer extends Component {
   render() {
     return (
       <View>
-        <TouchableHighlight onPress={() => console.log(123)}>
+        <TouchableHighlight onPress={this.openHome}>
           <View style={styles.topStories} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={5}>
             <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
             <Text style={styles.topStoriesTitle}>Top Stories</Text>
@@ -44,6 +45,10 @@ class CategoryMenuContainer extends Component {
         <CategoryTile key={category.id} category={category} onPress={this.openCategory}/>
       )
     })
+  }
+
+  openHome() {
+    this.props.dispatch(NavigationActions.home())
   }
 
   openCategory(category) {

@@ -1,6 +1,18 @@
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
+export function home() {
+  console.log('home')
+  return (dispatch, getState) => {
+    const navigation = getNavigation(getState)
+    const params = getCurrentParams(getState)
+
+    let menuParams = Object.assign({}, params.menu, { open: false })
+    let newParams = Object.assign({}, params, { section: null, menu: menuParams })
+    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+  }
+}
+
 export function link(link) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
@@ -63,6 +75,23 @@ export function toggleMenu(menuParams) {
     let menuParams = Object.assign({}, params.menu, { open: !isMenuOpened })
 
     return dispatch(menu(menuParams))
+  }
+}
+
+export function changeMenuTab(tab) {
+  return (dispatch, getState) => {
+    const navigation = getNavigation(getState)
+    const params = getCurrentParams(getState)
+
+    let menuParams = Object.assign({}, params.menu, { tab: tab })
+    return dispatch(menu(menuParams))
+  }
+}
+
+export function back() {
+  return (dispatch, getState) => {
+    const navigation = getNavigation(getState)
+    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
   }
 }
 

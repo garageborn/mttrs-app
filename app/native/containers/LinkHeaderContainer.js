@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { NavigationActions } from '../actions/index'
 import Share from 'react-native-share'
 
 class LinkHeaderContainer extends Component {
@@ -41,7 +41,6 @@ class LinkHeaderContainer extends Component {
           <TouchableHighlight onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          {/* onPress Mockup! */}
           <TouchableHighlight onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
@@ -51,14 +50,8 @@ class LinkHeaderContainer extends Component {
   }
 
   close() {
-    const { dispatch, navigation } = this.props
-    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+    this.props.dispatch(NavigationActions.back())
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    navigation: state.navigation
-  }
-}
-export default connect(mapStateToProps)(LinkHeaderContainer)
+export default connect()(LinkHeaderContainer)
