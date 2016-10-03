@@ -28,6 +28,7 @@ class TimelineContainer extends Component {
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
     if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+
   }
 
   fetchData(props) {
@@ -98,8 +99,7 @@ let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
-    isFetchingTop: state.TimelineReducers.isFetchingTop,
-    navigation: state.navigation
+    isFetchingTop: state.TimelineReducers.isFetchingTop
   }
 }
 
