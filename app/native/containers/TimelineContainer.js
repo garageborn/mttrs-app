@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import * as TimelineActions from '../../actions/TimelineActions'
+import { TimelineActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -26,7 +26,7 @@ class TimelineContainer extends Component {
 
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
-    if (sectionNameChanged && sectionModelChanged) this.fetchData(nextProps)
+    if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
   }
 
   fetchData(props) {
@@ -89,11 +89,11 @@ class TimelineContainer extends Component {
     let section = params.section || {}
     let storyLinks = section.storyLinks || {}
     if (!storyLinks.open) return
-    return <StoryLinksContainer params={params} story={storyLinks.story}/>
+    return <StoryLinksContainer story={storyLinks.story}/>
   }
 }
 
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,

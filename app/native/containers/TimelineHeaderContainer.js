@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import Header from '../components/Header'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { NavigationActions } from '../actions/index'
 import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
@@ -25,30 +23,24 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader() {
-    const { params } = this.props
-    const headerParams = { params: params, toggleMenu: this.toggleMenu }
+    const { section } = this.props.params
 
-    let section = params.section || {}
+    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
     switch(section.name) {
       case 'category':
-        return <CategoryHeaderContainer { ...headerParams } />
+        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
       case 'publisher':
-        return <PublisherHeaderContainer { ...headerParams } />
-      default:
-        return <HomeHeaderContainer {...headerParams } />
+        return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
     }
   }
 
   renderMenu() {
     const { params } = this.props
-    if (params.menu && params.menu.open) return <MenuContainer params={params}/>
+    if (this.isMenuOpened) return <MenuContainer params={params}/>
   }
 
   toggleMenu() {
-    const { dispatch, navigation, params } = this.props
-    let menuParams = Object.assign({}, params.menu, { open: !this.isMenuOpened })
-    let newParams = Object.assign({}, params, { menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    this.props.dispatch(NavigationActions.toggleMenu())
   }
 
   get isMenuOpened() {
@@ -61,10 +53,4 @@ TimelineHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
-  return {
-    navigation: state.navigation
-  }
-}
-
-export default connect(mapStateToProps)(TimelineHeaderContainer)
+export default connect()(TimelineHeaderContainer)

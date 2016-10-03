@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
 import Story from '../components/Story'
+import { NavigationActions } from '../actions/index'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -10,12 +9,8 @@ class StoryContainer extends Component {
     this.openLink = this.openLink.bind(this)
     this.openStoryLinks = this.openStoryLinks.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
-  }
-
-  openLink(link) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('link', { link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.openCategory = this.openCategory.bind(this)
+    this.openPublisher = this.openPublisher.bind(this)
   }
 
   render() {
@@ -31,27 +26,21 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    console.log('openLink')
-    // const { dispatch, navigation } = this.props
-    // let route = Router.getRoute('link', { link: link })
-    // dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.props.dispatch(NavigationActions.link(link))
   }
 
   openCategory() {
-    console.log('openCategory')
+    this.props.dispatch(NavigationActions.category(this.mainCategory))
   }
 
   openPublisher() {
-    console.log('openPublisher')
+    this.props.dispatch(NavigationActions.publisher(this.mainLink.publisher))
   }
 
   openStoryLinks() {
-    console.log('openStoryLinks')
-    const { dispatch, navigation, params, story } = this.props
-    let storyLinksParams = { open: true, story: story }
-    let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })
-    let newParams = Object.assign({}, params, { section: sectionParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    const { dispatch, story } = this.props
+    if (story.links.length <= 1) return this.openPublisher()
+    dispatch(NavigationActions.storyLinks({ story: story, open: true }))
   }
 
   openMainLink() {
@@ -60,6 +49,10 @@ class StoryContainer extends Component {
 
   get mainLink() {
     return this.props.story.links[0]
+  }
+
+  get mainCategory() {
+    return this.mainLink.categories[0]
   }
 }
 
@@ -70,10 +63,4 @@ StoryContainer.propTypes = {
   params: PropTypes.object.isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
-  return {
-    navigation: state.navigation
-  }
-}
-
-export default connect(mapStateToProps)(StoryContainer)
+export default connect()(StoryContainer)
