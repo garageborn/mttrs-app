@@ -43,7 +43,7 @@ class CategoryMenuContainer extends Component {
     return categories.map((category) => {
       let isActive = false;
       if (params.section != null)
-        isActive = category.slug === params.section.model.slug;
+        isActive = category.slug === params.section.model.slug
 
       return (
         <CategoryTile key={category.id} category={category} onPress={this.openCategory} isActive={isActive}/>

@@ -24,7 +24,7 @@ class MenuContainer extends Component {
 
   changeCurrentTab(selectedIndex) {
     const { dispatch, navigation, params } = this.props
-    const selectedTab = TABS[selectedIndex]
+    const selectedTab = this.state.tabs[selectedIndex]
 
     let menuParams = Object.assign({}, params.menu, { tab: selectedTab.id })
     let newParams = Object.assign({}, params, { menu: menuParams })
