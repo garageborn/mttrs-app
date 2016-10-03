@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { View, Image, TouchableHighlight, Text, ListView } from 'react-native'
+import { View, Text, ListView, Modal } from 'react-native'
 import { connect } from 'react-redux'
 import StoryLink from '../components/StoryLink'
 import CloseButton from '../components/CloseButton'
 import styles from '../styles/StoryLinks'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { NavigationActions } from '../actions/index'
 
-class StoryLinksSceneContainer extends Component {
+class StoryLinksContainer extends Component {
   constructor(props) {
     super(props)
 
@@ -35,29 +34,35 @@ class StoryLinksSceneContainer extends Component {
   }
 
   close() {
-    const { dispatch, navigation } = this.props
-    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+    this.props.dispatch(NavigationActions.storyLinks({ open: false }))
   }
 
   openLink(link) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('link', { link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.close()
+    this.props.dispatch(NavigationActions.link(link))
   }
 
   render() {
     const { links } = this.props.story
 
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Also published in</Text>
+      <Modal
+        animationType={'slide'}
+        transparent={true}
+        visible={true}
+        onRequestClose={this.close}>
+        <View style={styles.modal}>
+          <View style={styles.container}>
+            <View style={styles.header}>
+              <Text style={styles.headerText}>Also published in</Text>
+            </View>
+            <ListView
+              dataSource={this.dataSource()}
+              renderRow={this.renderRow} />
+          </View>
+          <CloseButton onPress={this.close} />
         </View>
-        <ListView
-          dataSource={this.dataSource()}
-          renderRow={this.renderRow} />
-        <CloseButton onPress={this.close} />
-      </View>
+      </Modal>
     )
   }
 }
@@ -67,4 +72,4 @@ let mapStateToProps = (state) => {
     navigation: state.navigation
   }
 }
-export default connect(mapStateToProps)(StoryLinksSceneContainer)
+export default connect(mapStateToProps)(StoryLinksContainer)

@@ -8,6 +8,8 @@ import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 import _last from 'lodash/last'
 
+const startDays = 1
+
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
@@ -95,7 +97,7 @@ function getFilterStories(options) {
 function getDatesStories(options) {
   return dispatch => {
     let days = []
-    for (let i = 0; i < 7; i++)
+    for (let i = 0; i < startDays; i++)
       days.push(moment().subtract(i, 'days').startOf('day').unix())
 
     let promises = days.map((date) => {

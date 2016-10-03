@@ -1,83 +1,96 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
-import * as TimelineActions from '../../actions/TimelineActions'
-import Timeline from '../components/Timeline'
-import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
+import { TimelineActions } from '../actions/index'
+import Timeline from '../components/Timeline'
+import StoryContainer from './StoryContainer'
+import StoryLinksContainer from './StoryLinksContainer'
+import Router from '../config/Router'
+import styles from '../styles/App'
 
 class TimelineContainer extends Component {
-  static fetchData(props) {
-    let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static pullFetchData(props) {
-    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static infiniteFetchData(props) {
-    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  static fetchQuery(props) {
-    return {
-      category_slug: props.currentCategory.slug,
-      publisher_slug: props.currentPublisher.slug
-    }
-  }
-
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
-    this.openLink = this.openLink.bind(this)
-    this.openStoryLinks = this.openStoryLinks.bind(this)
+    this.renderStory = this.renderStory.bind(this)
   }
 
   componentDidMount() {
-    this.constructor.fetchData(this.props)
+    this.fetchData(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    let categoryChanged = nextProps.currentCategory.id !== this.props.currentCategory.id
-    if (categoryChanged) this.constructor.fetchData(nextProps)
+    let nextSection = nextProps.params.section || {}
+    let currentSection = this.props.params.section || {}
+
+    let sectionNameChanged = nextSection.name !== currentSection.name
+    let sectionModelChanged = nextSection.model !== currentSection.model
+    if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+  }
+
+  fetchData(props) {
+    let action = TimelineActions.getTimeline(this.fetchQuery(props))
+    return props.dispatch(action)
+  }
+
+  pullFetchData(props) {
+    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
+  }
+
+  infiniteFetchData(props) {
+    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
+  }
+
+  fetchQuery(props) {
+    const { section } = props.params
+    if (!section) return {}
+    switch(section.name) {
+      case 'category':
+        return { category_slug: section.model.slug }
+      case 'publisher':
+        return { publisher_slug: section.model.slug }
+    }
   }
 
   onPullToRefresh() {
-    this.constructor.pullFetchData(this.props)
+    this.pullFetchData(this.props)
   }
 
   onEndReached() {
-    this.constructor.infiniteFetchData(this.props)
-  }
-
-  openLink(link) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('link', { link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
-  }
-
-  openStoryLinks(story) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('storyLinks', { story: story })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.infiniteFetchData(this.props)
   }
 
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
-      <Timeline
-        items={items}
-        isFetching={isFetching}
-        isFetchingTop={isFetchingTop}
-        onEndReached={this.onEndReached}
-        onRefresh={this.onPullToRefresh}
-        openLink={this.openLink}
-        openStoryLinks={this.openStoryLinks}
-        />
+      <View style={styles.container}>
+        {this.renderStoryLinks()}
+        <Timeline
+          items={items}
+          isFetching={isFetching}
+          isFetchingTop={isFetchingTop}
+          onEndReached={this.onEndReached}
+          onRefresh={this.onPullToRefresh}
+          storyRenderer={this.renderStory}
+          />
+      </View>
     )
+  }
+
+  renderStory(story) {
+    return <StoryContainer story={story} params={this.props.params}/>
+  }
+
+  renderStoryLinks() {
+    const { params } = this.props
+    let section = params.section || {}
+    let storyLinks = section.storyLinks || {}
+    if (!storyLinks.open) return
+    return <StoryLinksContainer story={storyLinks.story}/>
   }
 }
 
@@ -86,8 +99,6 @@ let mapStateToProps = (state) => {
     items: state.TimelineReducers.items,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
-    currentCategory: state.CurrentCategoryReducer.category,
-    currentPublisher: state.CurrentPublisherReducer.publisher,
     navigation: state.navigation
   }
 }

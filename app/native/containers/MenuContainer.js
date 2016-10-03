@@ -3,73 +3,68 @@ import { View, Text, Image } from 'react-native'
 import { connect } from 'react-redux'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
-import MenuPublishers from '../components/MenuPublishers'
+import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
-import HomeHeaderContainer from './HomeHeaderContainer'
-import CategoryHeaderContainer from './CategoryHeaderContainer'
-import PublisherHeaderContainer from './PublisherHeaderContainer'
 import { NavigationActions } from '@exponent/ex-navigation'
+import { createAnimatableComponent } from 'react-native-animatable'
+
+const AnimateView = createAnimatableComponent(View)
 
 const TABS = [
   { id: 'categories', label: 'Categories', component: <CategoryMenuContainer /> },
-  { id: 'publishers', label: 'Publishers', component: <MenuPublishers /> }
+  { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
 ]
 
 class MenuContainer extends Component {
-  static route = {
-    navigationBar: {
-      renderTitle: (route) => {
-        switch(route.params.scene) {
-          case 'category':
-            return <CategoryHeaderContainer action='close'/>
-          case 'publisher':
-            return <PublisherHeaderContainer action='close'/>
-          default:
-            return <HomeHeaderContainer action='close'/>
-        }
-      }
-    }
-  }
-
   constructor(props) {
     super(props)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
   }
 
   changeCurrentTab(selectedIndex) {
-    const { dispatch, navigation, route } = this.props
+    const { dispatch, navigation, params } = this.props
     const selectedTab = TABS[selectedIndex]
 
-    let params = Object.assign({}, route.params, { tab: selectedTab.id })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, params))
+    let menuParams = Object.assign({}, params.menu, { tab: selectedTab.id })
+    let newParams = Object.assign({}, params, { menu: menuParams })
+    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 
   render() {
-    const buttons = TABS.map(tab => tab.label)
-    const currentTab = TABS.find(tab => tab.id === this.props.route.params.tab)
-
     return (
-      <View style={styles.menu}>
+      <AnimateView animation='bounceInDown' style={styles.menu}>
         <View style={styles.selector}>
           <ButtonGroup
             selectedBackgroundColor='#42729B'
             onPress={this.changeCurrentTab}
-            selectedIndex={TABS.indexOf(currentTab)}
-            buttons={buttons} />
+            selectedIndex={this.currentTabIndex}
+            buttons={this.labels} />
         </View>
 
         <View style={styles.menuContainer}>
-          { currentTab.component }
+          { this.currentTab.component }
         </View>
-      </View>
+      </AnimateView>
     )
+  }
+
+  get labels() {
+    return TABS.map(tab => tab.label)
+  }
+
+  get currentTab() {
+    const { tab } = this.props.params.menu
+    return TABS.find(t => t.id === tab) || TABS[0]
+  }
+
+  get currentTabIndex() {
+    return TABS.indexOf(this.currentTab)
   }
 }
 
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = (state) => {
   return {
-    navigation: state.navigation,
-    publisherSlug: ownProps.publisherSlug
+    navigation: state.navigation
   }
 }
 export default connect(mapStateToProps)(MenuContainer)

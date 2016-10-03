@@ -3,9 +3,7 @@ import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import * as CategoryActions from '../../actions/CategoryActions'
-import Router from '../config/Router'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { CategoryActions, NavigationActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {
@@ -49,17 +47,13 @@ class CategoryMenuContainer extends Component {
   }
 
   openCategory(category) {
-    const { dispatch, navigation } = this.props
-    let route = Router.getRoute('category', { categorySlug: category.slug })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    this.props.dispatch(NavigationActions.category(category))
   }
 }
 
 let mapStateToProps = (state) => {
   return {
-    categories: state.CategoriesReducers.categories,
-    currentCategory: state.CurrentCategoryReducer.category,
-    navigation: state.navigation
+    categories: state.CategoriesReducers.categories
   }
 }
 export default connect(mapStateToProps)(CategoryMenuContainer)

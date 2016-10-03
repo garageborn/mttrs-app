@@ -5,7 +5,8 @@ let { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
-    backgroundColor: '#F5F8FA'
+    backgroundColor: '#F5F8FA',
+    zIndex: 1
   },
 
   selector: {
