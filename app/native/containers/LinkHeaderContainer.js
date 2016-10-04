@@ -6,7 +6,7 @@ import Router from '../config/Router'
 import { NavigationActions } from '../actions/index'
 import Share from 'react-native-share'
 
-const underlayColor = 'rgba(255, 255, 255, .5)';
+const underlayColor = 'rgba(255, 255, 255, .5)'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
