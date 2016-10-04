@@ -10,19 +10,20 @@ import { createAnimatableComponent } from 'react-native-animatable'
 
 const AnimateView = createAnimatableComponent(View)
 
-const TABS = [
-  { id: 'categories', label: 'Categories', component: <CategoryMenuContainer /> },
-  { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
-]
-
 class MenuContainer extends Component {
   constructor(props) {
     super(props)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
+    this.state = {
+      tabs: [
+        { id: 'categories', label: 'Categories', component: <CategoryMenuContainer params={ this.props.params }/> },
+        { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
+      ]
+    }
   }
 
   changeCurrentTab(selectedIndex) {
-    const selectedTab = TABS[selectedIndex]
+    const selectedTab = this.state.tabs[selectedIndex]
     this.props.dispatch(NavigationActions.changeMenuTab(selectedTab.id))
   }
 
@@ -45,16 +46,16 @@ class MenuContainer extends Component {
   }
 
   get labels() {
-    return TABS.map(tab => tab.label)
+    return this.state.tabs.map(tab => tab.label)
   }
 
   get currentTab() {
     const { tab } = this.props.params.menu
-    return TABS.find(t => t.id === tab) || TABS[0]
+    return this.state.tabs.find(t => t.id === tab) || this.state.tabs[0]
   }
 
   get currentTabIndex() {
-    return TABS.indexOf(this.currentTab)
+    return this.state.tabs.indexOf(this.currentTab)
   }
 }
 

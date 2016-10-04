@@ -39,12 +39,17 @@ class CategoryMenuContainer extends Component {
   }
 
   renderCategories() {
-    if (!this.props.categories.length) return
-    return this.props.categories.map((category) => {
+    const { categories, params } = this.props;
+    if (!categories.length) return
+    return categories.map((category) => {
+      let isActive = false;
+      if (params.section != null)
+        isActive = category.slug === params.section.model.slug
+
       return (
-        <CategoryTile key={category.id} category={category} onPress={this.openCategory}/>
+        <CategoryTile key={category.id} category={category} onPress={this.openCategory} isActive={isActive}/>
       )
-    })
+    }, this)
   }
 
   openHome() {

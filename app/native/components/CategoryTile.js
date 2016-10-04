@@ -9,12 +9,16 @@ class CategoryTile extends Component {
     let icon = require('../assets/icons/icon-business.png')
     return (
       <TouchableHighlight style={styles.categoryTouch} onPress={e => onPress(category)}>
-        <View style={styles.category} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
+        <View style={this.categoryStyle} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
           <Image style={styles.categoryIcon} source={icon} />
           <Text style={[styles.categoryName, {color: '#373737'}]}>{name}</Text>
         </View>
       </TouchableHighlight>
     )
+  }
+
+  get categoryStyle() {
+    return this.props.isActive ? [styles.category, styles.isActive] : styles.category
   }
 }
 
@@ -23,7 +27,8 @@ CategoryTile.propTypes = {
     name: PropTypes.string.isRequired,
     slug: PropTypes.any.isRequired
   }),
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired
 }
 
 export default CategoryTile
