@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    height: 75,
-    paddingTop: 30,
+    height: 55,
     paddingLeft: 30,
     paddingRight: 30,
     flexDirection: 'row',

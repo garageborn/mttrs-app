@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 class LinkSceneContainer extends Component {
   static route = {
     navigationBar: {
+      renderLeft: () => <View />,
       renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>
     }
   }
@@ -16,7 +17,7 @@ class LinkSceneContainer extends Component {
 
     return (
       <View style={styles.container}>
-        <WebView source={{uri: url}} />
+        <WebView source={{uri: url}} contentInset={{top: 12}}/>
       </View>
     )
   }
