@@ -6,6 +6,8 @@ import Router from '../config/Router'
 import { NavigationActions } from '../actions/index'
 import Share from 'react-native-share'
 
+const underlayColor = 'rgba(255, 255, 255, .5)'
+
 class LinkHeaderContainer extends Component {
   constructor(props) {
     super(props)
@@ -29,7 +31,7 @@ class LinkHeaderContainer extends Component {
     const { link } = this.props
 
     return (
-      <View style={styles.header} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .5)'} shadowOpacity={1.0} elevation={5}>
+      <View style={styles.header} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
         <View style={styles.publisher}>
           <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
           <View style={styles.publisherInfo}>
@@ -38,10 +40,10 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight onPress={this.share}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={underlayColor} onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          <TouchableHighlight onPress={this.close}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={underlayColor} onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>
