@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   container: {
     width: width - 16,
     height: height - 120,
-    paddingTop: 20,
     paddingBottom: 20,
     marginTop: 20,
     marginLeft: 8,
@@ -20,15 +19,21 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    paddingTop: 24,
-    paddingRight: 16,
-    paddingBottom: 16,
-    paddingLeft: 16,
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    paddingTop: 2
+    // paddingTop: 24,
+    // paddingRight: 16,
+    // paddingBottom: 16,
+    // paddingLeft: 16,
   },
 
   headerText: {
     fontSize: 18,
     fontWeight: '500',
+    marginTop: 12,
+    marginBottom: 5,
+    marginHorizontal: 15,
     color: '#3A7EFE'
   },
 
@@ -36,7 +41,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF'
   },
 
-  firstRow: {
+  header: {
     backgroundColor: '#F5F8FA'
   },
 
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ECECEC'
   },
 
-  firstRowContainer: {
+  headerContainer: {
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 16,

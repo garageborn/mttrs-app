@@ -3,20 +3,21 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
 
 class StoryLink extends Component {
-  isFirstRow(id) {
-    return id === '0'
+  isHeader(storyType) {
+    return storyType === 'header'
   }
 
   get rowStyle() {
-    return this.isFirstRow(this.props.rowID) ? styles.firstRow : styles.row
+    return this.isHeader(this.props.storyType) ? styles.header : styles.row
   }
 
   get rowContainerStyle() {
-    return this.isFirstRow(this.props.rowID) ? styles.firstRowContainer : styles.rowContainer
+    return this.isHeader(this.props.storyType) ? styles.headerContainer : styles.rowContainer
   }
 
   render() {
     const { link, rowID, openLink } = this.props
+    if (this.props.storyType === 'list' && this.props.rowID === '0') return <View />
     return (
       <View
         shadowOffset={{width: 1, height: 2}}

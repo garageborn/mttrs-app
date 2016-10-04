@@ -27,6 +27,7 @@ class StoryLinksContainer extends Component {
   renderRow(rowData, sectionID, rowID) {
     return (
       <StoryLink
+        storyType='list'
         rowID={rowID}
         link={rowData}
         openLink={this.openLink} />
@@ -52,6 +53,10 @@ class StoryLinksContainer extends Component {
         <View style={styles.modal}>
           <View style={styles.container}>
             <View style={styles.header}>
+              <StoryLink
+                storyType='header'
+                link={this.props.story.links[0]}
+                openLink={this.openLink} />
               <Text style={styles.headerText}>Also published in</Text>
             </View>
             <ListView
