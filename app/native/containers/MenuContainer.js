@@ -5,7 +5,7 @@ import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
-import { NavigationActions } from '@exponent/ex-navigation'
+import { NavigationActions } from '../actions/index'
 import { createAnimatableComponent } from 'react-native-animatable'
 
 const AnimateView = createAnimatableComponent(View)
@@ -23,12 +23,8 @@ class MenuContainer extends Component {
   }
 
   changeCurrentTab(selectedIndex) {
-    const { dispatch, navigation, params } = this.props
     const selectedTab = this.state.tabs[selectedIndex]
-
-    let menuParams = Object.assign({}, params.menu, { tab: selectedTab.id })
-    let newParams = Object.assign({}, params, { menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    this.props.dispatch(NavigationActions.changeMenuTab(selectedTab.id))
   }
 
   render() {
@@ -63,9 +59,4 @@ class MenuContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    navigation: state.navigation
-  }
-}
-export default connect(mapStateToProps)(MenuContainer)
+export default connect()(MenuContainer)

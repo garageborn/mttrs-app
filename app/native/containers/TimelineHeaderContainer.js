@@ -31,6 +31,8 @@ class TimelineHeaderContainer extends Component {
         return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
       case 'publisher':
         return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
+      default:
+        return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
     }
   }
 

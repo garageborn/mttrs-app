@@ -43,8 +43,6 @@ class StoryLinksContainer extends Component {
   }
 
   render() {
-    const { links } = this.props.story
-
     return (
       <Modal
         animationType={'slide'}
@@ -67,9 +65,4 @@ class StoryLinksContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    navigation: state.navigation
-  }
-}
-export default connect(mapStateToProps)(StoryLinksContainer)
+export default connect()(StoryLinksContainer)
