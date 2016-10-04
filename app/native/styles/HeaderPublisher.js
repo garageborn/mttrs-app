@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   header: {
     height: 55,
     paddingLeft: 30,
-    paddingRight: 30,
+    paddingRight: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -33,11 +33,15 @@ const styles = StyleSheet.create({
 
   actions: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'flex-end'
+  },
+
+  iconHighlight: {
+    marginHorizontal: 15
   },
 
   iconClose: {
-    marginLeft: 20
+    marginBottom: 1
   }
 })
 
