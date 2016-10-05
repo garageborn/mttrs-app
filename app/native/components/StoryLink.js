@@ -44,7 +44,7 @@ StoryLink.propTypes = {
   link: PropTypes.shape({
     url: PropTypes.string.isRequired
   }).isRequired,
-  rowID: PropTypes.string.isRequired,
+  rowID: PropTypes.string,
   openLink: PropTypes.func.isRequired
 }
 
