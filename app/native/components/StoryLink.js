@@ -28,7 +28,7 @@ class StoryLink extends Component {
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
               <Text style={styles.title}>{link.publisher.name}</Text>
-              <Text style={styles.time}>{ParseDate(moment(this.props.link.created_at).unix())}</Text>
+              <Text style={styles.time}>{ParseDate(moment(link.created_at).unix())}</Text>
             </View>
           </View>
           <View style={styles.story}>
