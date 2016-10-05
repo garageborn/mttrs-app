@@ -3,21 +3,21 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
 
 class StoryLink extends Component {
-  isHeader(storyType) {
-    return storyType === 'header'
+  isHeader(linkType) {
+    return linkType === 'header'
   }
 
   get rowStyle() {
-    return this.isHeader(this.props.storyType) ? styles.header : styles.row
+    return this.isHeader(this.props.linkType) ? styles.header : styles.row
   }
 
   get rowContainerStyle() {
-    return this.isHeader(this.props.storyType) ? styles.headerContainer : styles.rowContainer
+    return this.isHeader(this.props.linkType) ? styles.headerContainer : styles.rowContainer
   }
 
   render() {
     const { link, rowID, openLink } = this.props
-    if (this.props.storyType === 'list' && this.props.rowID === '0') return <View />
+    if (this.props.linkType === 'list' && this.props.rowID === '0') return <View />
     return (
       <View
         style={this.rowStyle}>

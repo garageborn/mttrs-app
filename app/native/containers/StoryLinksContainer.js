@@ -54,7 +54,7 @@ class StoryLinksContainer extends Component {
           <View style={styles.container}>
             <View style={styles.header} shadowOffset={{width: 0, height: 4}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.06}>
               <StoryLink
-                storyType='header'
+                linkType='header'
                 link={this.props.story.links[0]}
                 openLink={this.openLink} />
             </View>
