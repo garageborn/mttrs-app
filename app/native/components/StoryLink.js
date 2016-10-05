@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
+import moment from '../../common/utils/Moment'
+import ParseDate from '../../common/utils/ParseDate'
 
 class StoryLink extends Component {
   isHeader(linkType) {
@@ -26,7 +28,7 @@ class StoryLink extends Component {
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
               <Text style={styles.title}>{link.publisher.name}</Text>
-              <Text style={styles.time}>Yesterday 07:01</Text>
+              <Text style={styles.time}>{ParseDate(moment(this.props.link.created_at).unix())}</Text>
             </View>
           </View>
           <View style={styles.story}>
