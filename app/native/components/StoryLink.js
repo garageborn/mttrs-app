@@ -20,9 +20,6 @@ class StoryLink extends Component {
     if (this.props.storyType === 'list' && this.props.rowID === '0') return <View />
     return (
       <View
-        shadowOffset={{width: 1, height: 2}}
-        shadowColor={'rgba(0, 0, 0, .1)'}
-        shadowOpacity={1.0}
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
           <View style={styles.publisher}>

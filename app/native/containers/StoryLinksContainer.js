@@ -52,14 +52,14 @@ class StoryLinksContainer extends Component {
         onRequestClose={this.close}>
         <View style={styles.modal}>
           <View style={styles.container}>
-            <View style={styles.header}>
+            <View style={styles.header} shadowOffset={{width: 0, height: 4}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.06}>
               <StoryLink
                 storyType='header'
                 rowID='0'
                 link={this.props.story.links[0]}
                 openLink={this.openLink} />
             </View>
-            <Text style={styles.headerText}>Also published in</Text>
+            <Text style={styles.subHeaderText}>Also published in</Text>
             <ListView
               dataSource={this.dataSource()}
               renderRow={this.renderRow} />

@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F8FA',
   },
 
-  headerText: {
+  subHeaderText: {
     fontSize: 18,
     fontWeight: '500',
-    marginTop: 12,
+    marginTop: 18,
     marginBottom: 5,
     marginHorizontal: 15,
     color: '#3A7EFE',
