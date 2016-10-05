@@ -1,34 +1,34 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
+import moment from '../../common/utils/Moment'
+import ParseDate from '../../common/utils/ParseDate'
 
 class StoryLink extends Component {
-  isFirstRow(id) {
-    return id === '0'
+  isHeader(linkType) {
+    return linkType === 'header'
   }
 
   get rowStyle() {
-    return this.isFirstRow(this.props.rowID) ? styles.firstRow : styles.row
+    return this.isHeader(this.props.linkType) ? styles.header : styles.row
   }
 
   get rowContainerStyle() {
-    return this.isFirstRow(this.props.rowID) ? styles.firstRowContainer : styles.rowContainer
+    return this.isHeader(this.props.linkType) ? styles.headerContainer : styles.rowContainer
   }
 
   render() {
     const { link, rowID, openLink } = this.props
+    if (this.props.linkType === 'list' && this.props.rowID === '0') return <View />
     return (
       <View
-        shadowOffset={{width: 1, height: 2}}
-        shadowColor={'rgba(0, 0, 0, .1)'}
-        shadowOpacity={1.0}
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
           <View style={styles.publisher}>
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
               <Text style={styles.title}>{link.publisher.name}</Text>
-              <Text style={styles.time}>Yesterday 07:01</Text>
+              <Text style={styles.time}>{ParseDate(moment(link.created_at).unix())}</Text>
             </View>
           </View>
           <View style={styles.story}>
@@ -46,7 +46,7 @@ StoryLink.propTypes = {
   link: PropTypes.shape({
     url: PropTypes.string.isRequired
   }).isRequired,
-  rowID: PropTypes.string.isRequired,
+  rowID: PropTypes.string,
   openLink: PropTypes.func.isRequired
 }
 

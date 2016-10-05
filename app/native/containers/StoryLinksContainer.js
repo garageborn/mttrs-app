@@ -27,6 +27,7 @@ class StoryLinksContainer extends Component {
   renderRow(rowData, sectionID, rowID) {
     return (
       <StoryLink
+        linkType='list'
         rowID={rowID}
         link={rowData}
         openLink={this.openLink} />
@@ -51,9 +52,13 @@ class StoryLinksContainer extends Component {
         onRequestClose={this.close}>
         <View style={styles.modal}>
           <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={styles.headerText}>Also published in</Text>
+            <View style={styles.header} shadowOffset={{width: 0, height: 4}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.06}>
+              <StoryLink
+                linkType='header'
+                link={this.props.story.links[0]}
+                openLink={this.openLink} />
             </View>
+            <Text style={styles.subHeaderText}>Also published in</Text>
             <ListView
               dataSource={this.dataSource()}
               renderRow={this.renderRow} />
