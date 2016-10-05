@@ -8,7 +8,8 @@ class LinkSceneContainer extends Component {
   static route = {
     navigationBar: {
       renderLeft: () => <View />,
-      renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>
+      renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
+      backgroundColor: '#F5F8FA'
     }
   }
 
