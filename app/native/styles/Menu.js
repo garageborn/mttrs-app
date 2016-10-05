@@ -59,9 +59,8 @@ const styles = StyleSheet.create({
   },
 
   categoryIcon: {
-    marginBottom: 12,
-    width: 24,
-    height: 18
+    width: 60,
+    height: 60
   },
 
   categoryName: {
