@@ -27,7 +27,7 @@ class StoryLinksContainer extends Component {
   renderRow(rowData, sectionID, rowID) {
     return (
       <StoryLink
-        storyType='list'
+        linkType='list'
         rowID={rowID}
         link={rowData}
         openLink={this.openLink} />
