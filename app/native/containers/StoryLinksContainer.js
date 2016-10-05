@@ -55,10 +55,11 @@ class StoryLinksContainer extends Component {
             <View style={styles.header}>
               <StoryLink
                 storyType='header'
+                rowID='0'
                 link={this.props.story.links[0]}
                 openLink={this.openLink} />
-              <Text style={styles.headerText}>Also published in</Text>
             </View>
+            <Text style={styles.headerText}>Also published in</Text>
             <ListView
               dataSource={this.dataSource()}
               renderRow={this.renderRow} />

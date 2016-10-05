@@ -21,11 +21,8 @@ const styles = StyleSheet.create({
   header: {
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
-    paddingTop: 2
-    // paddingTop: 24,
-    // paddingRight: 16,
-    // paddingBottom: 16,
-    // paddingLeft: 16,
+    paddingTop: 2,
+    backgroundColor: '#F5F8FA',
   },
 
   headerText: {
@@ -34,15 +31,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     marginBottom: 5,
     marginHorizontal: 15,
-    color: '#3A7EFE'
+    color: '#3A7EFE',
   },
 
   row: {
     backgroundColor: '#FFF'
-  },
-
-  header: {
-    backgroundColor: '#F5F8FA'
   },
 
   rowContainer: {
