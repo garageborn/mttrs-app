@@ -59,16 +59,18 @@ const styles = StyleSheet.create({
   },
 
   categoryIcon: {
-    marginBottom: 12
+    marginBottom: 12,
+    width: 24,
+    height: 18
   },
 
   categoryName: {
-    fontSize: 14
+    fontSize: 14,
+    fontWeight: 'bold'
   },
 
   isActive: {
-    borderWidth: 6,
-    borderColor: '#373737'
+    borderWidth: 3
   }
 })
 

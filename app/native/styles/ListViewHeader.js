@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#1B2A45',
     height: 40,
+    paddingTop: 5,
     alignItems: 'center',
     justifyContent: 'center'
   },

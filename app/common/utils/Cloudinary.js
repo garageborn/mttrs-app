@@ -5,6 +5,10 @@ cl.config('cloud_name', 'dciwwp9y9')
 
 const defaultOptions = { fetch_format: 'auto', dpr: 2 }
 
+export function id(id, options = {}) {
+  return cl.url(id, Object.assign({}, defaultOptions, options))
+}
+
 export function url(url, options = {}) {
   return cl.url(absolutize(url), Object.assign({}, defaultOptions, options))
 }
