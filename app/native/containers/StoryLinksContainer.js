@@ -17,11 +17,10 @@ class StoryLinksContainer extends Component {
   }
 
   dataSource() {
-    const { links } = this.props.story
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
-    return ds.cloneWithRows(links)
+    return ds.cloneWithRows(this.otherLinks)
   }
 
   renderRow(rowData, sectionID, rowID) {
@@ -55,7 +54,7 @@ class StoryLinksContainer extends Component {
             <View style={styles.header} shadowOffset={{width: 0, height: 4}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.06}>
               <StoryLink
                 linkType='header'
-                link={this.props.story.links[0]}
+                link={this.mainLink}
                 openLink={this.openLink} />
             </View>
             <Text style={styles.subHeaderText}>Also published in</Text>
@@ -67,6 +66,14 @@ class StoryLinksContainer extends Component {
         </View>
       </Modal>
     )
+  }
+
+  get mainLink() {
+    return this.props.story.main_link
+  }
+
+  get otherLinks() {
+    return this.props.story.other_links
   }
 }
 

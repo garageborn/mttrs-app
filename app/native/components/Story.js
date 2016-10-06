@@ -8,13 +8,14 @@ import * as cloudinary from '../../common/utils/Cloudinary'
 class Story extends Component {
   render() {
     const { story, openLink, openCategory, openStoryLinks } = this.props
+
     return (
       <View style={styles.card}>
         <View style={styles.cardHeader}>
           <TouchableHighlight onPress={openCategory} >
             <View style={styles.category}>
               <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
-              <Text style={styles.categoryTitle}>Category</Text>
+              <Text style={styles.categoryTitle}>{this.mainCategory.name}</Text>
             </View>
           </TouchableHighlight>
           <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
@@ -23,7 +24,7 @@ class Story extends Component {
           <View style={styles.cover}>
             <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
               <LinearGradient style={styles.coverOverlay} colors={['transparent', 'rgba(0, 0, 0, .6)']}>
-                <Text style={styles.title} numberOfLines={3}>{story.title}</Text>
+                <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
               </LinearGradient>
             </Image>
           </View>
@@ -33,19 +34,23 @@ class Story extends Component {
   }
 
   getImage() {
-    const { story } = this.props
-
-    if (!story.image_source_url) return
+    if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 350, height: 255, crop: 'fit', secure: true }
 
-    return cloudinary.url(story.image_source_url, options)
+    return cloudinary.url(this.mainLink.image_source_url, options)
+  }
+
+  get mainLink() {
+    return this.props.story.main_link
+  }
+
+  get mainCategory() {
+    return this.mainLink.categories[0]
   }
 }
 
 Story.propTypes = {
-  story: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired,
+  story: PropTypes.object.isRequired,
   openLink: PropTypes.func.isRequired,
   openCategory: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired

@@ -4,8 +4,7 @@ import styles from '../styles/Story'
 
 class StoryPublishers extends Component {
   render() {
-    const { story, openStoryLinks } = this.props
-    if (!story.links) return
+    const { openStoryLinks } = this.props
 
     return (
       <TouchableHighlight onPress={openStoryLinks}>
@@ -18,16 +17,21 @@ class StoryPublishers extends Component {
   }
 
   renderCounter() {
-    const { links } = this.props.story
-    if (links.length <= 1) return
-    return <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
+    if (this.otherLinks.length === 0) return
+    return <Text style={styles.publisherTitle}>+{this.otherLinks.length}</Text>
+  }
+
+  get mainLink() {
+    return this.props.story.main_link
+  }
+
+  get otherLinks() {
+    return this.props.story.other_links
   }
 }
 
 StoryPublishers.propTypes = {
-  story: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired,
+  story: PropTypes.object.isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 
