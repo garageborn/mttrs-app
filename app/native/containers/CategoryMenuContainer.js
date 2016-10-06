@@ -23,13 +23,14 @@ class CategoryMenuContainer extends Component {
   render() {
     return (
       <View>
-        <TouchableHighlight onPress={this.openHome}>
-          <View style={styles.topStories} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={5}>
-            <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
-            <Text style={styles.topStoriesTitle}>Top Stories</Text>
-            <Image style={styles.selectedMarker} source={require('../assets/icons/icon-selected.png')} />
-          </View>
-        </TouchableHighlight>
+        <View style={styles.topStoriesContainer}>
+          <TouchableHighlight underlayColor={'rgba(0,0,0,.1)'} onPress={this.openHome}>
+            <View style={styles.topStories} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
+              <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
+              <Text style={styles.topStoriesTitle}>Top Stories</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
 
         <View style={styles.categories}>
           { this.renderCategories() }

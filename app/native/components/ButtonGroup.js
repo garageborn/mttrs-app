@@ -64,7 +64,7 @@ styles = StyleSheet.create({
     flex: 1
   },
   borderRight: {
-    borderRightColor: '#A3B6C6',
+    borderRightColor: '#2672D7',
     borderRightWidth: 1
   },
   container: {
@@ -72,8 +72,8 @@ styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 5,
     marginTop: 5,
-    borderColor: '#A3B6C6',
-    borderWidth: 1,
+    borderColor: '#2672D7',
+    borderWidth: 2,
     flexDirection: 'row',
     borderRadius: 5,
     overflow: 'hidden',
@@ -85,7 +85,7 @@ styles = StyleSheet.create({
     paddingBottom: 5,
     textAlign: 'center',
     fontSize: 13,
-    color: '#A3B6C6',
+    color: '#FFF',
     ...Platform.select({
       ios: {
         fontWeight: '500'

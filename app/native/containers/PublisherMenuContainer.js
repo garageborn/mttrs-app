@@ -31,7 +31,6 @@ class PublisherMenuContainer extends Component {
     let { publishers } = this.props
     let rows = {}
     let sections = []
-
     publishers.forEach(publisher => {
       let section = publisher.name.substring(0, 1).toUpperCase()
       if (sections.indexOf(section) === -1) {

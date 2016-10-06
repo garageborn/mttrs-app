@@ -1,18 +1,21 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
-let { width } = Dimensions.get('window')
+let { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
-    backgroundColor: '#F5F8FA',
-    zIndex: 1
+    backgroundColor: '#262C5B',
+    zIndex: 1,
+    padding: 10,
+    marginTop: -12,
+    height
   },
 
   selector: {
     paddingLeft: 60,
     paddingRight: 60,
-    height: 70,
+    height: height * .1,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -21,20 +24,25 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
+  topStoriesContainer: {
+    marginHorizontal: (width * .02),
+    marginBottom: height * .02
+  },
+
   topStories: {
-    backgroundColor: '#FFF',
-    marginLeft: 5,
-    marginRight: 5,
-    height: 100,
+    backgroundColor: '#2672D7',
+    width: width - 35,
+    height: height / 7.5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   topStoriesTitle: {
-    marginLeft: 20,
-    marginRight: 20,
-    color: '#373737'
+    marginLeft: 12,
+    marginTop: -4,
+    color: 'white',
+    fontSize: 18
   },
 
   categories: {
@@ -46,21 +54,21 @@ const styles = StyleSheet.create({
 
   category: {
     backgroundColor: '#FFF',
-    width: (width - 15) / 2,
-    height: 100,
-    marginTop: 5,
-    marginLeft: 5,
+    width: (width - 51) / 2,
+    height: height / 7.5,
     alignItems: 'center',
     justifyContent: 'center'
   },
 
-  categoryTouch: {
-    height: 105
+  categoryContainer: {
+    height: height / 6.5,
+    marginHorizontal: 7.5,
+    marginVertical: 2.5
   },
 
   categoryIcon: {
-    width: 60,
-    height: 60
+    width: 42,
+    height: 42
   },
 
   categoryName: {
