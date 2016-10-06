@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 5
+    marginTop: 3
   },
 
   image: {
@@ -60,9 +60,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 5,
+    marginTop: 8,
+    paddingTop: 5,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#F1F1F1'
+  },
+
+  textLight: {
+    fontSize: 13,
+    color: '#999'
+  },
+
+  textDark: {
+    fontSize: 13,
+    color: '#666'
   },
 
   publisher: {
@@ -80,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  shareFire: {
+  shareIcon: {
     width: 8,
     height: 16,
     marginRight: 5
@@ -89,76 +100,8 @@ const styles = StyleSheet.create({
   shareCount: {
     fontSize: 13,
     fontWeight: '500',
-    color: '#999999'
+    color: '#999'
   }
-
-  // cardHeader: {
-  //   flexDirection: 'row',
-  //   backgroundColor: '#FFF',
-  //   height: 44,
-  //   paddingLeft: 10,
-  //   paddingRight: 10,
-  //   borderTopWidth: 2,
-  //   borderTopColor: '#0076FF',
-  //   borderTopLeftRadius: 3,
-  //   borderTopRightRadius: 3,
-  //   alignItems: 'center',
-  //   justifyContent: 'space-between'
-  // },
-  //
-  // category: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center'
-  // },
-  //
-  // categoryIcon: {
-  //   marginRight: 10
-  // },
-  //
-  // categoryTitle: {
-  //   color: '#0076FF',
-  //   fontSize: 12
-  // },
-  //
-  // publisher: {
-  //   flexDirection: 'row'
-  // },
-  //
-  // publisherLogo: {
-  //   width: 12,
-  //   height: 15
-  // },
-  //
-  // publisherTitle: {
-  //   fontSize: 12,
-  //   color: 'gray',
-  //   marginLeft: 10
-  // },
-  //
-  // cover: {
-  //   width: width - 24,
-  //   height: 225
-  // },
-  //
-  // coverImage: {
-  //   position: 'relative',
-  //   flex: 1
-  // },
-  //
-  // coverOverlay: {
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   width: width - 24,
-  //   height: 225
-  // },
-  //
-  // title: {
-  //   position: 'absolute',
-  //   fontSize: 22,
-  //   bottom: 20,
-  //   padding: 10,
-  //   color: '#FFF'
-  // }
 })
 
 export default styles

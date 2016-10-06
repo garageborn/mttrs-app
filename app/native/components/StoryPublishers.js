@@ -8,20 +8,12 @@ class StoryPublishers extends Component {
     if (!story.links) return
 
     return (
-      // <TouchableHighlight>
-      //   <View style={styles.publishers}>
-      //     <Text>From</Text>
-      //     <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
-      //     <Text>New York Times</Text>
-      //     <Text>and 3 others</Text>
-      //   </View>
-      // </TouchableHighlight>
       <TouchableHighlight onPress={openStoryLinks}>
         <View style={styles.publisher}>
-          <Text>From</Text>
+          <Text style={styles.textLight}>From </Text>
           <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
           {this.getMainPublisher()}
-          {this.renderCounter()}
+          {this.getCounter()}
         </View>
       </TouchableHighlight>
     )
@@ -29,18 +21,20 @@ class StoryPublishers extends Component {
 
   getMainPublisher() {
     const { main_link } = this.props.story
-
-    return <Text>{main_link.publisher.name}</Text>
+    return <Text style={styles.textDark}> {main_link.publisher.name}</Text>
   }
 
-  getMainPublisherLogo() {
+  getCounter() {
+    const { other_links } = this.props.story
+    let linksLength = other_links.length
 
-  }
+    if (!linksLength) return
 
-  renderCounter() {
-    const { links } = this.props.story
-    if (links.length <= 1) return
-    return <Text style={styles.publisherTitle}> and +{links.length - 1}</Text>
+    return (
+      <Text style={styles.textLight}> and
+        <Text style={styles.textDark}> {linksLength} {linksLength === 1 ? 'other' : 'others'}</Text>
+      </Text>
+    )
   }
 }
 

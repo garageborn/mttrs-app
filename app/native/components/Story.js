@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import KFormat from '../../common/utils/KFormat'
 
 class Story extends Component {
   render() {
@@ -26,8 +27,8 @@ class Story extends Component {
         <View style={styles.footer}>
           <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
           <View style={styles.shares}>
-            <Image style={styles.shareFire} source={require('../assets/icons/icon-hot.png')} />
-            <Text style={styles.shareCount}>4.5k+</Text>
+            <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
+            <Text style={styles.shareCount}>{KFormat(story.total_social)}</Text>
           </View>
         </View>
       </View>
