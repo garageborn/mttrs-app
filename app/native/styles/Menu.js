@@ -24,15 +24,18 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
+  topStoriesContainer: {
+    marginHorizontal: (width * .02),
+    marginBottom: height * .02
+  },
+
   topStories: {
     backgroundColor: '#2672D7',
-    width: (width - 35),
+    width: width - 35,
     height: height / 7.5,
-    marginHorizontal: (width * .02),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: height * .01
   },
 
   topStoriesTitle: {
@@ -54,12 +57,13 @@ const styles = StyleSheet.create({
     width: (width - 51) / 2,
     height: height / 7.5,
     alignItems: 'center',
-    margin: 7.5,
     justifyContent: 'center'
   },
 
-  categoryTouch: {
-    height: height / 6.5
+  categoryContainer: {
+    height: height / 6.5,
+    marginHorizontal: 7.5,
+    marginVertical: 2.5
   },
 
   categoryIcon: {
