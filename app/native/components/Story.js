@@ -4,39 +4,42 @@ import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import KFormat from '../../common/utils/KFormat'
 
 class Story extends Component {
   render() {
     const { story, openLink, openCategory, openStoryLinks } = this.props
 
     return (
-      <View style={styles.card}>
-        <View style={styles.cardHeader}>
-          <TouchableHighlight onPress={openCategory} >
-            <View style={styles.category}>
-              <Image style={styles.categoryIcon} source={require('../assets/business.png')} />
-              <Text style={styles.categoryTitle}>{this.mainCategory.name}</Text>
-            </View>
+      <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
+        <View style={styles.category}>
+          <TouchableHighlight onPress={openCategory}>
+            <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
           </TouchableHighlight>
-          <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
         </View>
         <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
-          <View style={styles.cover}>
-            <Image style={styles.coverImage} resizeMode='cover' source={{uri: this.getImage()}}>
-              <LinearGradient style={styles.coverOverlay} colors={['transparent', 'rgba(0, 0, 0, .6)']}>
-                <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
-              </LinearGradient>
-            </Image>
+          <View style={styles.content}>
+            <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
+            <View style={styles.storyTitle}>
+              <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
+            </View>
           </View>
         </TouchableHighlight>
+        <View style={styles.footer}>
+          <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
+          <View style={styles.shares}>
+            <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
+            <Text style={styles.shareCount}>{KFormat(story.total_social)}+</Text>
+          </View>
+        </View>
       </View>
     )
   }
 
   getImage() {
     if (!this.mainLink.image_source_url) return
-    let options = { type: 'fetch', width: 350, height: 255, crop: 'fit', secure: true }
-
+    let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
+    console.log(cloudinary.url(this.mainLink.image_source_url, options));
     return cloudinary.url(this.mainLink.image_source_url, options)
   }
 
