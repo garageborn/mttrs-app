@@ -28,7 +28,7 @@ class Story extends Component {
           <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
           <View style={styles.shares}>
             <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
-            <Text style={styles.shareCount}>{KFormat(story.total_social)}</Text>
+            <Text style={styles.shareCount}>{KFormat(story.total_social)}+</Text>
           </View>
         </View>
       </View>
