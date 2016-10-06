@@ -27,7 +27,6 @@ class CategoryMenuContainer extends Component {
           <View style={styles.topStories} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.2} elevation={1}>
             <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
             <Text style={styles.topStoriesTitle}>Top Stories</Text>
-            <Image style={styles.selectedMarker} source={require('../assets/icons/icon-selected.png')} />
           </View>
         </TouchableHighlight>
 
