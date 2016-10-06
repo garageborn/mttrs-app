@@ -58,7 +58,8 @@ class StoryContainer extends Component {
 
 StoryContainer.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    main_link: PropTypes.object.isRequired,
+    other_links: PropTypes.array.isRequired,
   }).isRequired,
   params: PropTypes.object.isRequired
 }

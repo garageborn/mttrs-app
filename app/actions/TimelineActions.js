@@ -8,7 +8,7 @@ import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 import _last from 'lodash/last'
 
-const startDays = 1
+const startDays = 3
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE

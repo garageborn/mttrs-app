@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import apolloClient from './apolloClient'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 import * as reducers from '../reducers/index'
@@ -13,7 +14,8 @@ const createStoreWithNavigation = createNavigationEnabledStore({
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
-  applyMiddleware(loggerMiddleware)
+  applyMiddleware(loggerMiddleware),
+  applyMiddleware(apolloClient.middleware())
 )(createStoreWithNavigation)
 
 const rootReducer = combineReducers(reducers)

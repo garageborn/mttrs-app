@@ -17,7 +17,7 @@ class Story extends Component {
               <Text style={styles.categoryTitle}>Category</Text>
             </View>
           </TouchableHighlight>
-          <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
+          {/*<StoryPublishers story={story} openStoryLinks={openStoryLinks}/>*/}
         </View>
         <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
           <View style={styles.cover}>
@@ -44,7 +44,7 @@ class Story extends Component {
 
 Story.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    mainLink: PropTypes.isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
   openCategory: PropTypes.func.isRequired,

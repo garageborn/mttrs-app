@@ -18,15 +18,16 @@ class StoryPublishers extends Component {
   }
 
   renderCounter() {
-    const { links } = this.props.story
-    if (links.length <= 1) return
-    return <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
+    const { other_links } = this.props.story
+    if (other_links.length <= 1) return
+    return <Text style={styles.publisherTitle}>+{other_links.length - 1}</Text>
   }
 }
 
 StoryPublishers.propTypes = {
   story: PropTypes.shape({
-    title: PropTypes.string.isRequired
+    main_link: PropTypes.object.isRequired,
+    other_links: PropTypes.array.isRequired,
   }).isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
