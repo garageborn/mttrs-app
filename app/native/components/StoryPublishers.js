@@ -10,17 +10,31 @@ class StoryPublishers extends Component {
     return (
       <TouchableHighlight onPress={openStoryLinks}>
         <View style={styles.publisher}>
-          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-          { this.renderCounter() }
+          <Text style={styles.lightText}>From </Text>
+          <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
+          {this.getMainPublisher()}
+          {this.getCounter()}
         </View>
       </TouchableHighlight>
     )
   }
 
-  renderCounter() {
-    const { links } = this.props.story
-    if (links.length <= 1) return
-    return <Text style={styles.publisherTitle}>+{links.length - 1}</Text>
+  getMainPublisher() {
+    const { main_link } = this.props.story
+    return <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+  }
+
+  getCounter() {
+    const { other_links } = this.props.story
+    let linksLength = other_links.length
+
+    if (!linksLength) return
+
+    return (
+      <Text style={styles.lightText}> and
+        <Text style={styles.darkText}> {linksLength} {linksLength === 1 ? 'other' : 'others'}</Text>
+      </Text>
+    )
   }
 }
 
