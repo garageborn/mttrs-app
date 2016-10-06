@@ -31,9 +31,11 @@ class PublisherMenuContainer extends Component {
     let { publishers } = this.props
     let rows = {}
     let sections = []
+    Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
+
     publishers.forEach(publisher => {
-      let section = publisher.name.substring(0, 1).toUpperCase()
-      if (sections.indexOf(section) === -1) {
+      let section = publisher.starred ? 'starred' : publisher.name.substring(0, 1).toUpperCase()
+      if (publisher.starred || sections.indexOf(section) === -1) {
         sections.push(section)
         rows[section] = []
       }
@@ -44,9 +46,13 @@ class PublisherMenuContainer extends Component {
   }
 
   renderSeparator(sectionData, section) {
+    let renderSection = section === 'starred'
+      ? <Image source={require('../assets/star.png')} style={styles.listHeaderImage}/>
+      : <Text style={styles.listHeaderText}>{section}</Text>
+
     return (
       <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1}>
-        <Text style={styles.listHeader}>{section}</Text>
+        <View style={styles.listHeader}>{renderSection}</View>
       </View>
     )
   }
