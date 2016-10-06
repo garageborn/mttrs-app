@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TextInput, ListView } from 'react-native'
 import { connect } from 'react-redux'
-import _ from 'lodash';
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { PublishersActions, NavigationActions } from '../actions/index'
