@@ -7,10 +7,9 @@ class CategoryTile extends Component {
   render() {
     const { onPress, category } = this.props
     const { name, color, slug } = category
-
     return (
       <TouchableHighlight style={styles.categoryTouch} onPress={e => onPress(category)}>
-        <View style={this.categoryStyle} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
+        <View style={this.categoryStyle} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.2} elevation={1}>
           <Image style={styles.categoryIcon} source={{uri: this.categoryIcon}} />
           <Text style={[styles.categoryName, {color}]}>{name}</Text>
         </View>

@@ -32,7 +32,7 @@ class MenuContainer extends Component {
       <AnimateView animation='bounceInDown' style={styles.menu}>
         <View style={styles.selector}>
           <ButtonGroup
-            selectedBackgroundColor='#42729B'
+            selectedBackgroundColor='#2672D7'
             onPress={this.changeCurrentTab}
             selectedIndex={this.currentTabIndex}
             buttons={this.labels} />
