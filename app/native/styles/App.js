@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1B2A45'
+    backgroundColor: '#F1F1F1'
   },
 
   loading: {
@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
   },
 
   loadingText: {
-    color: '#FFF'
+    color: '#999999'
   },
 
   listView: {
-    backgroundColor: '#1B2A45'
+    backgroundColor: '#F1F1F1'
   },
 
   hideRefreshControl: {
