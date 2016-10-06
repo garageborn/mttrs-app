@@ -4,52 +4,44 @@ import ComponentsJoiner from '../utils/ComponentsJoiner'
 import PublisherTag from './PublisherTag'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import {publisherPath} from '../utils/RoutesHelper'
+import ParseDate from '../../common/utils/ParseDate'
 
 class Story extends Component {
   render() {
     const {story} = this.props
     return (
       <div className='story'>
-        <a href={story.url} target='_blank'>{this.image}</a>
+        <a href={this.mainLink.url} target='_blank'>{this.renderImage()}</a>
         <div className='story-text'>
           <h3>
-            <a href={story.url} target='_blank'>{story.title}</a>
+            <a href={this.mainLink.url} target='_blank'>{this.mainLink.title}</a>
             <sup>({story.total_social})</sup>
           </h3>
-          {this.storyInfo}
+          { this.renderStoryInfo() }
         </div>
       </div>
     )
   }
 
-  get image() {
-    if (!this.props.story.image_source_url) return
+  renderImage() {
+    if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 200, height: 200, crop: 'fit', secure: true }
-    return (<img src={cloudinary.url(this.props.story.image_source_url, options)}/>)
+    return (<img src={cloudinary.url(this.mainLink.image_source_url, options)}/>)
   }
 
-  get storyInfo() {
-    if (!this.publishers) return (<p>@{this.publishedAt}</p>)
-    return (<div>@{this.publishedAt} <i>from</i> {this.publishers}</div>)
+  renderStoryInfo() {
+    return (
+      <div>
+        @{ ParseDate(moment(this.mainLink.published_at).unix()) }
+        <i> from </i> { this.renderPublishers() }
+      </div>
+    )
   }
 
-  get publishedAt() {
-    let publishedAt = moment(this.props.story.published_at)
+  renderPublishers() {
+    let links = [this.mainLink].concat(this.otherLinks)
 
-    return publishedAt.calendar(null, {
-      lastDay : '[Yesterday] hA',
-      sameDay : '[] hA',
-      lastWeek : 'MMMM D, hA',
-      sameElse : 'MMMM D, hA'
-    })
-  }
-
-  get publishers() {
-    let links = this.props.story.links
-
-    if (!links) return
-
-    let publishers = links.map((link, index) => {
+    let publishers = links.map((link) => {
       let props = { url: link.url, title: link.title, name: link.publisher.name }
       return <PublisherTag {...props} />
     })
@@ -58,12 +50,18 @@ class Story extends Component {
       <div className='story-publishers'>{ComponentsJoiner(publishers)}</div>
     )
   }
+
+  get mainLink() {
+    return this.props.story.main_link
+  }
+
+  get otherLinks() {
+    return this.props.story.other_links
+  }
 }
 
 Story.propTypes = {
-  story: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired
+  story: PropTypes.object.isRequired
 }
 
 export default Story
