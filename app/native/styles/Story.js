@@ -66,12 +66,12 @@ const styles = StyleSheet.create({
     borderTopColor: '#F1F1F1'
   },
 
-  textLight: {
+  lightText: {
     fontSize: 13,
     color: '#999'
   },
 
-  textDark: {
+  darkText: {
     fontSize: 13,
     color: '#666'
   },
