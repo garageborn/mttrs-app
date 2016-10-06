@@ -12,7 +12,7 @@ class Story extends Component {
 
     return (
       <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
-        <View style={styles.category}>
+        <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
           <TouchableHighlight onPress={openCategory}>
             <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
           </TouchableHighlight>
@@ -39,7 +39,6 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
-    console.log(cloudinary.url(this.mainLink.image_source_url, options));
     return cloudinary.url(this.mainLink.image_source_url, options)
   }
 
