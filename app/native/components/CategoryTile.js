@@ -6,12 +6,13 @@ import * as cloudinary from '../../common/utils/Cloudinary'
 class CategoryTile extends Component {
   render() {
     const { onPress, category } = this.props
-    const { name, color, slug } = category
+    const { name, color } = category
+
     return (
       <View style={styles.categoryContainer}>
         <TouchableHighlight underlayColor={'rgba(255,255,255,.1)'} onPress={e => onPress(category)}>
           <View style={this.categoryStyle} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
-            <Image style={styles.categoryIcon} source={{uri: this.categoryIcon}} />
+            { this.renderIcon() }
             <Text style={[styles.categoryName, {color}]}>{name}</Text>
           </View>
         </TouchableHighlight>
@@ -19,11 +20,11 @@ class CategoryTile extends Component {
     )
   }
 
-  get categoryIcon() {
+  renderIcon() {
     const { category } = this.props
-    let options = { secure: true }
-
-    return cloudinary.id(category.icon_id, options)
+    if (!category.icon_id) return
+    const uri = cloudinary.id(category.icon_id, { secure: true })
+    return <Image style={styles.categoryIcon} source={{uri: uri}} />
   }
 
   get categoryStyle() {
@@ -33,10 +34,7 @@ class CategoryTile extends Component {
 }
 
 CategoryTile.propTypes = {
-  category: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.any.isRequired
-  }),
+  category: PropTypes.object.isRequired,
   onPress: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired
 }

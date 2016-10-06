@@ -38,8 +38,8 @@ class StoryContainer extends Component {
   }
 
   openStoryLinks() {
+    if (this.otherLinks.length === 0) return this.openPublisher()
     const { dispatch, story } = this.props
-    if (story.links.length <= 1) return this.openPublisher()
     dispatch(NavigationActions.storyLinks({ story: story, open: true }))
   }
 
@@ -48,7 +48,11 @@ class StoryContainer extends Component {
   }
 
   get mainLink() {
-    return this.props.story.links[0]
+    return this.props.story.main_link
+  }
+
+  get otherLinks() {
+    return this.props.story.other_links
   }
 
   get mainCategory() {
@@ -57,10 +61,7 @@ class StoryContainer extends Component {
 }
 
 StoryContainer.propTypes = {
-  story: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired,
-  params: PropTypes.object.isRequired
+  story: PropTypes.object.isRequired
 }
 
 export default connect()(StoryContainer)

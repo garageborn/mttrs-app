@@ -4,8 +4,7 @@ import styles from '../styles/Story'
 
 class StoryPublishers extends Component {
   render() {
-    const { story, openStoryLinks } = this.props
-    if (!story.links) return
+    const { openStoryLinks } = this.props
 
     return (
       <TouchableHighlight onPress={openStoryLinks}>
@@ -39,9 +38,7 @@ class StoryPublishers extends Component {
 }
 
 StoryPublishers.propTypes = {
-  story: PropTypes.shape({
-    title: PropTypes.string.isRequired
-  }).isRequired,
+  story: PropTypes.object.isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 

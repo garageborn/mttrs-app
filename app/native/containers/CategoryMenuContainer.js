@@ -40,10 +40,10 @@ class CategoryMenuContainer extends Component {
   }
 
   renderCategories() {
-    const { categories, params } = this.props;
+    const { categories, params } = this.props
     if (!categories.length) return
     return categories.map((category) => {
-      let isActive = false;
+      let isActive = false
       if (params.section != null && typeof params.section.model !== 'undefined')
         isActive = category.slug === params.section.model.slug
 
