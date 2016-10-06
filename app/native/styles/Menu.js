@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
   },
 
   topStoriesTitle: {
-    marginLeft: 30,
-    marginRight: 30,
+    marginLeft: 12,
+    marginTop: -4,
     color: 'white',
     fontSize: 18
   },
