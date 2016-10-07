@@ -3,13 +3,28 @@ import { View, Text, Image, TouchableHighlight } from 'react-native'
 import styles from '../styles/Header'
 
 class Header extends Component {
+  getIconStyles() {
+    const { icon } = this.props
+    let iconStyles = {}
+
+    if (typeof icon === 'object') {
+      iconStyles = {
+        width: 35,
+        height: 35
+      }
+    }
+
+    return iconStyles
+  }
+
   render() {
     const { title, icon, toggleMenu } = this.props
+
     return (
       <View style={styles.header}>
         <TouchableHighlight onPress={toggleMenu}>
           <View style={styles.headerContainer}>
-            <Image source={icon} />
+            <Image style={this.getIconStyles()} source={icon} />
             <Text style={styles.headerTitle}>{title}</Text>
             <Image source={require('../assets/arrow.png')} />
           </View>
@@ -21,7 +36,7 @@ class Header extends Component {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.number.isRequired,
+  icon: PropTypes.any.isRequired,
   toggleMenu: PropTypes.func.isRequired
 }
 
