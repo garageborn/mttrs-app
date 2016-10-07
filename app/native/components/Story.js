@@ -8,15 +8,11 @@ import KFormat from '../../common/utils/KFormat'
 
 class Story extends Component {
   render() {
-    const { story, openLink, openCategory, openStoryLinks } = this.props
+    const { story, openLink, openStoryLinks } = this.props
 
     return (
       <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
-        <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
-          <TouchableHighlight onPress={openCategory}>
-            <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
-          </TouchableHighlight>
-        </View>
+        {this.renderCategoryLabel()}
         <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
           <View style={styles.content}>
             <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
@@ -34,6 +30,20 @@ class Story extends Component {
         </View>
       </View>
     )
+  }
+
+  renderCategoryLabel() {
+    const { section, openCategory } = this.props
+
+    if (typeof section === 'undefined') {
+      return (
+        <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
+          <TouchableHighlight onPress={openCategory}>
+            <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
+          </TouchableHighlight>
+        </View>
+      )
+    }
   }
 
   getImage() {
