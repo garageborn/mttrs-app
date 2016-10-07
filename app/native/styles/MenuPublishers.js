@@ -60,13 +60,27 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginRight: 16
+    width: 30,
+    height: 30,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#F1F1F1'
   },
 
   name: {
     fontSize: 18,
     fontWeight: '500',
     color: '#666666'
+  },
+
+  logoContainer: {
+    backgroundColor: 'white',
+    marginRight: 10,
+    borderRadius: 30,
+    width: 32,
+    height: 32,
+    borderWidth: 1,
+    borderColor: '#CCCCCC'
   },
 
   touch: {
