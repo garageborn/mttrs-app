@@ -83,7 +83,7 @@ class TimelineContainer extends Component {
   }
 
   renderStory(story) {
-    return <StoryContainer story={story} />
+    return <StoryContainer story={story} section={this.props.params.section} />
   }
 
   renderStoryLinks() {

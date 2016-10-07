@@ -14,11 +14,12 @@ class StoryContainer extends Component {
   }
 
   render() {
-    const { story } = this.props
+    const { story, section } = this.props
 
     return (
       <Story
         story={story}
+        section={section}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks} />
