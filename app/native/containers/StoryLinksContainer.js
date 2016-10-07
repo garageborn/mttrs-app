@@ -57,7 +57,6 @@ class StoryLinksContainer extends Component {
                 link={this.mainLink}
                 openLink={this.openLink} />
             </View>
-            <Text style={styles.subHeaderText}>Also published in</Text>
             <ListView
               dataSource={this.dataSource()}
               renderRow={this.renderRow} />

@@ -19,7 +19,6 @@ class StoryLink extends Component {
 
   render() {
     const { link, rowID, openLink } = this.props
-    if (this.props.linkType === 'list' && this.props.rowID === '0') return <View />
     return (
       <View
         style={this.rowStyle}>
@@ -27,8 +26,8 @@ class StoryLink extends Component {
           <View style={styles.publisher}>
             <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
             <View style={styles.publisherInfo}>
-              <Text style={styles.title}>{link.publisher.name}</Text>
-              <Text style={styles.time}>{ParseDate(moment(link.created_at).unix())}</Text>
+              <Text style={styles.publisherName}>{link.publisher.name}</Text>
+              {/* <Text style={styles.time}>{ParseDate(moment(link.created_at).unix())}</Text> */}
             </View>
           </View>
           <View style={styles.story}>
