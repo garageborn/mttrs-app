@@ -5,6 +5,7 @@ import StoryLink from '../components/StoryLink'
 import CloseButton from '../components/CloseButton'
 import styles from '../styles/StoryLinks'
 import { NavigationActions } from '../actions/index'
+import LinearGradient from 'react-native-linear-gradient'
 
 class StoryLinksContainer extends Component {
   constructor(props) {
@@ -51,16 +52,20 @@ class StoryLinksContainer extends Component {
         onRequestClose={this.close}>
         <View style={styles.modal}>
           <View style={styles.container}>
-            <View style={styles.header} shadowOffset={{width: 0, height: 4}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.06}>
+            <View style={styles.header}>
               <StoryLink
                 linkType='header'
                 link={this.mainLink}
                 openLink={this.openLink} />
             </View>
-            <Text style={styles.subHeaderText}>Also published in</Text>
             <ListView
+              style={styles.linksList}
               dataSource={this.dataSource()}
               renderRow={this.renderRow} />
+            <LinearGradient
+              colors={['rgba(255,255,255,.2)', 'rgba(255,255,255,.6)', 'rgba(255,255,255,.8)']}
+              style={styles.gradient}
+            />
           </View>
           <CloseButton onPress={this.close} />
         </View>
