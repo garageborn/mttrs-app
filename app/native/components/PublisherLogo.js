@@ -6,7 +6,7 @@ class PublisherLogo extends Component {
   render() {
     return (
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={ {uri: this.props.source} } />
+        <Image style={styles.logo} source={{uri: this.props.source}} />
       </View>
     )
   }

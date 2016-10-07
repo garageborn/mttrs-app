@@ -10,7 +10,7 @@ class PublisherMenuItem extends Component {
     return (
       <TouchableHighlight style={styles.touch} onPress={e => onPress(publisher)}>
         <View style={styles.publisher}>
-          { this.renderIcon() }
+          {this.renderIcon()}
           <Text style={styles.name}>{publisher.name}</Text>
         </View>
       </TouchableHighlight>
