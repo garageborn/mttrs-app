@@ -83,6 +83,15 @@ const styles = StyleSheet.create({
     marginTop: 6,
     color: '#333333',
     fontWeight: 'bold'
+  },
+
+  linksList: {
+    marginBottom: -15
+  },
+
+  gradient: {
+    height: 15,
+    backgroundColor: 'transparent'
   }
 })
 
