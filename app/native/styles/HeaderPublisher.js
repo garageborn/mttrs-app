@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#F5F8FA'
+    backgroundColor: '#262C5B'
   },
 
   publisher: {
@@ -21,14 +21,16 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 17,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#373737'
+    color: '#FFF',
+    opacity: 0.8
   },
 
-  time: {
-    fontSize: 11,
-    color: '#A9AAAC'
+  storyTitle: {
+    fontSize: 14,
+    width: 150,
+    color: '#FFF'
   },
 
   actions: {

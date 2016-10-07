@@ -36,7 +36,7 @@ class LinkHeaderContainer extends Component {
           <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
           <View style={styles.publisherInfo}>
             <Text style={styles.title}>{link.publisher.name}</Text>
-            <Text style={styles.time}>Ontem às 7:01</Text>
+            <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
           </View>
         </View>
         <View style={styles.actions}>
