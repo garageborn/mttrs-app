@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { PublishersActions, NavigationActions } from '../actions/index'
+import { PublishersActions, NavigationActions, MenuActions } from '../actions/index'
 
 class PublisherMenuContainer extends Component {
   constructor() {
@@ -105,6 +105,7 @@ class PublisherMenuContainer extends Component {
 
   openPublisher(publisher) {
     this.props.dispatch(NavigationActions.publisher(publisher))
+    this.props.dispatch(MenuActions.toggleMenu())
   }
 }
 
