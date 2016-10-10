@@ -7,6 +7,7 @@ import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
 import { MenuActions } from '../actions/index'
 import { createAnimatableComponent } from 'react-native-animatable'
+import _find from 'lodash/find'
 
 const AnimateView = createAnimatableComponent(View)
 
