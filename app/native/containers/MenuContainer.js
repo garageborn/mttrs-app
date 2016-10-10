@@ -7,6 +7,7 @@ import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
 import { NavigationActions } from '../actions/index'
 import { createAnimatableComponent } from 'react-native-animatable'
+import _find from 'lodash/find'
 
 const AnimateView = createAnimatableComponent(View)
 
@@ -51,13 +52,12 @@ class MenuContainer extends Component {
   }
 
   get currentTab() {
-    const { tab } = this.props.params.menu
-    return this.state.tabs.find(t => t.id === tab) || this.state.tabs[0]
-  }
-
-  get currentTabIndex() {
-    return this.state.tabs.indexOf(this.currentTab)
+    return _find(this.state.tabs, (tab) => tab.id === this.props.uiReducer.menu.currentTab)
   }
 }
 
-export default connect()(MenuContainer)
+function mapStateToProps(state) {
+  return { uiReducer: state.uiReducer }
+}
+
+export default connect(mapStateToProps)(MenuContainer)

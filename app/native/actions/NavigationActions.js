@@ -66,18 +66,6 @@ export function menu(menuParams) {
   }
 }
 
-export function toggleMenu(menuParams) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let isMenuOpened = params.menu && params.menu.open
-    let menuParams = Object.assign({}, params.menu, { open: !isMenuOpened })
-
-    return dispatch(menu(menuParams))
-  }
-}
-
 export function changeMenuTab(tab) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
