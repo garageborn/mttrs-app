@@ -56,26 +56,6 @@ export function storyLinks(storyLinksParams) {
   }
 }
 
-export function menu(menuParams) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let newParams = Object.assign({}, params, { menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
-  }
-}
-
-export function changeMenuTab(tab) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let menuParams = Object.assign({}, params.menu, { tab: tab })
-    return dispatch(menu(menuParams))
-  }
-}
-
 export function back() {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)

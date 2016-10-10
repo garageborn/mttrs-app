@@ -5,7 +5,7 @@ import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
-import { NavigationActions } from '../actions/index'
+import { MenuActions } from '../actions/index'
 import { createAnimatableComponent } from 'react-native-animatable'
 import _find from 'lodash/find'
 
@@ -25,7 +25,7 @@ class MenuContainer extends Component {
 
   changeCurrentTab(selectedIndex) {
     const selectedTab = this.state.tabs[selectedIndex]
-    this.props.dispatch(NavigationActions.changeMenuTab(selectedTab.id))
+    this.props.dispatch(MenuActions.changeMenuTab(selectedTab.id))
   }
 
   render() {
