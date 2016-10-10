@@ -51,6 +51,10 @@ class MenuContainer extends Component {
     return this.state.tabs.map(tab => tab.label)
   }
 
+  get currentTabIndex() {
+    return this.state.tabs.indexOf(this.currentTab)
+  }
+
   get currentTab() {
     return _find(this.state.tabs, (tab) => tab.id === this.props.uiReducer.menu.currentTab)
   }
