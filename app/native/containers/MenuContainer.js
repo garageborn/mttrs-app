@@ -5,7 +5,7 @@ import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
-import { NavigationActions } from '../actions/index'
+import { MenuActions } from '../actions/index'
 import { createAnimatableComponent } from 'react-native-animatable'
 
 const AnimateView = createAnimatableComponent(View)
@@ -24,7 +24,7 @@ class MenuContainer extends Component {
 
   changeCurrentTab(selectedIndex) {
     const selectedTab = this.state.tabs[selectedIndex]
-    this.props.dispatch(NavigationActions.changeMenuTab(selectedTab.id))
+    this.props.dispatch(MenuActions.changeMenuTab(selectedTab.id))
   }
 
   render() {
@@ -50,14 +50,17 @@ class MenuContainer extends Component {
     return this.state.tabs.map(tab => tab.label)
   }
 
-  get currentTab() {
-    const { tab } = this.props.params.menu
-    return this.state.tabs.find(t => t.id === tab) || this.state.tabs[0]
-  }
-
   get currentTabIndex() {
     return this.state.tabs.indexOf(this.currentTab)
   }
+
+  get currentTab() {
+    return this.state.tabs.find((tab) => tab.id === this.props.uiReducer.menu.currentTab)
+  }
 }
 
-export default connect()(MenuContainer)
+function mapStateToProps(state) {
+  return { uiReducer: state.uiReducer }
+}
+
+export default connect(mapStateToProps)(MenuContainer)

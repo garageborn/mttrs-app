@@ -21,14 +21,13 @@ export function link(link) {
   }
 }
 
-export function category(category) {
+export function selectCategory(category) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
 
-    let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
+    let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
@@ -53,38 +52,6 @@ export function storyLinks(storyLinksParams) {
     let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })
     let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
-  }
-}
-
-export function menu(menuParams) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let newParams = Object.assign({}, params, { menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
-  }
-}
-
-export function toggleMenu(menuParams) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let isMenuOpened = params.menu && params.menu.open
-    let menuParams = Object.assign({}, params.menu, { open: !isMenuOpened })
-
-    return dispatch(menu(menuParams))
-  }
-}
-
-export function changeMenuTab(tab) {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
-
-    let menuParams = Object.assign({}, params.menu, { tab: tab })
-    return dispatch(menu(menuParams))
   }
 }
 

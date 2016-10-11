@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import { CategoryActions, NavigationActions } from '../actions/index'
+import { CategoryActions, NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {
@@ -58,7 +58,8 @@ class CategoryMenuContainer extends Component {
   }
 
   openCategory(category) {
-    this.props.dispatch(NavigationActions.category(category))
+    this.props.dispatch(NavigationActions.selectCategory(category))
+    this.props.dispatch(MenuActions.toggleMenu())
   }
 }
 
