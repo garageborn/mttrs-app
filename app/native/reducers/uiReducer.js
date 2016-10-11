@@ -1,21 +1,29 @@
 
-import { TOGGLE_MENU, CHANGE_MENU_TAB } from '../../constants/ActionTypes'
+import { OPEN_MENU, CLOSE_MENU, CHANGE_MENU_TAB } from '../../constants/ActionTypes'
 
 let defaultState = {
   menu: {
-    isOpened: false,
+    isOpen: false,
     currentTab: 'categories'
   }
 }
 
 export default function(state = defaultState, action) {
   switch (action.type) {
-    case TOGGLE_MENU:
+    case OPEN_MENU:
       return {
         ...state,
         menu: {
           ...state.menu,
-          isOpened: !state.menu.isOpened
+          isOpen: true
+        }
+      }
+    case CLOSE_MENU:
+      return {
+        ...state,
+        menu: {
+          ...state.menu,
+          isOpen: false
         }
       }
     case CHANGE_MENU_TAB:

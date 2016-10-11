@@ -1,7 +1,11 @@
-import { TOGGLE_MENU, CHANGE_MENU_TAB } from '../../constants/ActionTypes'
+import { OPEN_MENU, CLOSE_MENU, CHANGE_MENU_TAB } from '../../constants/ActionTypes'
 
-export const toggleMenu = () => ({
-  type: TOGGLE_MENU
+export const openMenu = () => ({
+  type: OPEN_MENU
+})
+
+export const closeMenu = () => ({
+  type: CLOSE_MENU
 })
 
 export const changeMenuTab = (tabId) => ({
