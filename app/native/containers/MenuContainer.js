@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Animated, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import styles from '../styles/Menu'
 import { MenuActions } from '../actions/index'
-import { createAnimatableComponent } from 'react-native-animatable'
 
-const AnimateView = createAnimatableComponent(View)
+const { height } = Dimensions.get('window')
 
 class MenuContainer extends Component {
   constructor(props) {
@@ -18,8 +17,30 @@ class MenuContainer extends Component {
       tabs: [
         { id: 'categories', label: 'Categories', component: <CategoryMenuContainer params={ this.props.params }/> },
         { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
-      ]
+      ],
+      menuPositionY: new Animated.Value(-height),
     }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.uiReducer.menu.isOpened) {
+      this.animate('in')
+    } else {
+      this.animate('out')
+    }
+  }
+
+  animate(type) {
+    const value = type === 'in' ? 0 : -height;
+    return (
+      Animated.timing(
+        this.state.menuPositionY,
+        {
+          toValue: value,
+          duration: 330
+        }
+      ).start()
+    )
   }
 
   changeCurrentTab(selectedIndex) {
@@ -29,7 +50,7 @@ class MenuContainer extends Component {
 
   render() {
     return (
-      <AnimateView animation='bounceInDown' style={styles.menu}>
+      <Animated.View style={[styles.menu, {transform: [{translateY: this.state.menuPositionY}]}]}>
         <View style={styles.selector}>
           <ButtonGroup
             underlayColor={'rgba(255,255,255,.1)'}
@@ -42,7 +63,7 @@ class MenuContainer extends Component {
         <View style={styles.menuContainer}>
           { this.currentTab.component }
         </View>
-      </AnimateView>
+      </Animated.View>
     )
   }
 

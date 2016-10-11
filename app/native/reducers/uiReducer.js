@@ -1,3 +1,4 @@
+
 import { TOGGLE_MENU, CHANGE_MENU_TAB } from '../../constants/ActionTypes'
 
 let defaultState = {
@@ -18,13 +19,13 @@ export default function(state = defaultState, action) {
         }
       }
     case CHANGE_MENU_TAB:
-    return {
-      ...state,
-      menu: {
-        ...state.menu,
-        currentTab: action.payload
+      return {
+        ...state,
+        menu: {
+          ...state.menu,
+          currentTab: action.payload
+        }
       }
-    }
     default:
       return state
   }
