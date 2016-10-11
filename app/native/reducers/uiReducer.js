@@ -18,16 +18,14 @@ export default function(state = defaultState, action) {
           isOpened: !state.menu.isOpened
         }
       }
-
     case CHANGE_MENU_TAB:
-    return {
-      ...state,
-      menu: {
-        ...state.menu,
-        currentTab: action.payload
+      return {
+        ...state,
+        menu: {
+          ...state.menu,
+          currentTab: action.payload
+        }
       }
-    }
-
     default:
       return state
   }
