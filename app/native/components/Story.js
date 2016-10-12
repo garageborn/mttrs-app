@@ -11,23 +11,25 @@ class Story extends Component {
     const { story, openLink, openStoryLinks } = this.props
 
     return (
-      <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
-        {this.renderCategoryLabel()}
-        <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
-          <View style={styles.content}>
-            <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
-            <View style={styles.storyTitle}>
-              <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
+      <View>
+        <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1}>
+          <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
+            <View style={styles.content}>
+              <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
+              <View style={styles.storyTitle}>
+                <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
+              </View>
+            </View>
+          </TouchableHighlight>
+          <View style={styles.footer}>
+            <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
+            <View style={styles.shares}>
+              <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
+              <Text style={styles.shareCount}>{KFormat(story.total_social)}+</Text>
             </View>
           </View>
-        </TouchableHighlight>
-        <View style={styles.footer}>
-          <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
-          <View style={styles.shares}>
-            <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
-            <Text style={styles.shareCount}>{KFormat(story.total_social)}+</Text>
-          </View>
         </View>
+        {this.renderCategoryLabel()}
       </View>
     )
   }

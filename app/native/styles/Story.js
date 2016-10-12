@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
   card: {
     position: 'relative',
     flex: 1,
+    zIndex: 2,
     marginTop: 16,
     marginBottom: 16,
     padding: 12,
@@ -15,9 +16,9 @@ const styles = StyleSheet.create({
 
   category: {
     position: 'absolute',
-    top: -15,
+    top: 0,
     right: 10,
-    zIndex: 2,
+    zIndex: 3,
     width: 130,
     height: 30,
     alignItems: 'center',
