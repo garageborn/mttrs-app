@@ -90,20 +90,20 @@ class TimelineContainer extends Component {
   render() {
     const { items, isFetching, isFetchingTop } = this.props
     return (
-      <View style={styles.container}>
-        {this.renderStoryLinks()}
-        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-          { this.renderMenu() }
-        </Animated.View>
-        <Timeline
-          items={items}
-          isFetching={isFetching}
-          isFetchingTop={isFetchingTop}
-          onEndReached={this.onEndReached}
-          onRefresh={this.onPullToRefresh}
-          storyRenderer={this.renderStory}
-          />
-      </View>
+        <View style={styles.container}>
+          {this.renderStoryLinks()}
+          <Timeline
+            items={items}
+            isFetching={isFetching}
+            isFetchingTop={isFetchingTop}
+            onEndReached={this.onEndReached}
+            onRefresh={this.onPullToRefresh}
+            storyRenderer={this.renderStory}
+            />
+          <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+            { this.renderMenu() }
+          </Animated.View>
+        </View>
     )
   }
 

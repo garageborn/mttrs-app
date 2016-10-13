@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { ListView, View, Text, RefreshControl } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
@@ -69,7 +70,7 @@ class Timeline extends Component {
 
     return (
       <ListView
-        style={styles.listView}
+        style={[styles.listView, this.listViewStyle]}
         dataSource={this.dataSource()}
         renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
@@ -77,6 +78,10 @@ class Timeline extends Component {
         onEndReached={onEndReached}
         />
     )
+  }
+
+  get listViewStyle() {
+    return this.props.uiReducer.menu.isOpen ? { position: 'absolute' } : null
   }
 }
 
@@ -89,4 +94,10 @@ Timeline.propTypes = {
   storyRenderer: PropTypes.func.isRequired
 }
 
-export default Timeline
+let mapStateToProps = (state) => {
+  return {
+    uiReducer: state.uiReducer
+  }
+}
+
+export default connect(mapStateToProps)(Timeline)
