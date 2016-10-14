@@ -7,6 +7,8 @@ class TimelineSceneContainer extends Component {
   static route = {
     navigationBar: {
       renderTitle: (route) => <TimelineHeaderContainer params={route.params}/>,
+      renderLeft: () => <View />,
+      renderRight: () => <View />,
       backgroundColor: '#262C5B'
     }
   }
