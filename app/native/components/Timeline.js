@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { ListView, View, Text, RefreshControl } from 'react-native'
+import { Platform, ListView, View, Text, RefreshControl } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -81,7 +81,7 @@ class Timeline extends Component {
   }
 
   get listViewStyle() {
-    return this.props.uiReducer.menu.isOpen ? { position: 'absolute' } : null
+    if (this.props.uiReducer.menu.isOpen && Platform.OS === 'ios') return { position: 'absolute' }
   }
 }
 
@@ -95,9 +95,8 @@ Timeline.propTypes = {
 }
 
 let mapStateToProps = (state) => {
-  return {
-    uiReducer: state.uiReducer
-  }
+  const { uiReducer } = state
+  return { uiReducer }
 }
 
 export default connect(mapStateToProps)(Timeline)
