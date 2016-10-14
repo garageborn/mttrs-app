@@ -37,7 +37,7 @@ class Story extends Component {
   renderCategoryLabel() {
     const { section, openCategory } = this.props
 
-    if (typeof section === 'undefined') {
+    if (typeof section === 'undefined' || section === null) {
       return (
         <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
           <TouchableHighlight onPress={openCategory}>
