@@ -55,11 +55,13 @@ class CategoryMenuContainer extends Component {
 
   openHome() {
     this.props.dispatch(NavigationActions.home())
+    this.props.dispatch(MenuActions.closeMenu())
+    
   }
 
   openCategory(category) {
     this.props.dispatch(NavigationActions.selectCategory(category))
-    this.props.dispatch(MenuActions.toggleMenu())
+    this.props.dispatch(MenuActions.closeMenu())
   }
 }
 
