@@ -32,7 +32,7 @@ export function selectCategory(category) {
   }
 }
 
-export function publisher(publisher) {
+export function selectPublisher(publisher) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)

@@ -18,17 +18,19 @@ class StoryLink extends Component {
   }
 
   render() {
-    const { link, rowID, openLink } = this.props
+    const { link, rowID, openLink, openPublisher } = this.props
     return (
       <View
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
-          <View style={styles.publisher}>
-            <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
-            <View style={styles.publisherInfo}>
-              <Text style={styles.publisherName}>{link.publisher.name}</Text>
+          <TouchableHighlight style={styles.rowTouch} onPress={e => openPublisher(link.publisher)}>
+            <View style={styles.publisher}>
+              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+              <View style={styles.publisherInfo}>
+                <Text style={styles.publisherName}>{link.publisher.name}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableHighlight>
           <View style={styles.story}>
             <TouchableHighlight style={styles.rowTouch} onPress={e => openLink(link)}>
               <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>
@@ -45,7 +47,8 @@ StoryLink.propTypes = {
     url: PropTypes.string.isRequired
   }).isRequired,
   rowID: PropTypes.string,
-  openLink: PropTypes.func.isRequired
+  openLink: PropTypes.func.isRequired,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default StoryLink
