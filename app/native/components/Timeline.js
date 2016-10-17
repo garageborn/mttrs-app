@@ -48,9 +48,9 @@ class Timeline extends Component {
         style={styles.hideRefreshControl}
         refreshing={isFetchingTop}
         onRefresh={onRefresh}
-        tintColor='#ddd'
+        tintColor='#DDD'
         title='Refreshing...'
-        titleColor='#aaa'
+        titleColor='#AAA'
         progressBackgroundColor='#FFF'
        />
     )
@@ -64,7 +64,7 @@ class Timeline extends Component {
         <View style={styles.loading}>
           <ActivityIndicator
             size="large"
-            color="#aaa"
+            color="#AAA"
           />
         </View>
       )

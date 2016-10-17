@@ -67,7 +67,7 @@ class PublisherMenuContainer extends Component {
         <View style={styles.container}>
           <ActivityIndicator
             size="large"
-            color="#aaa"
+            color="#AAA"
           />
         </View>
       )
