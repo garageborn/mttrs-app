@@ -12,6 +12,7 @@ class StoryLinksContainer extends Component {
     super(props)
 
     this.openLink = this.openLink.bind(this)
+    this.openPublisher = this.openPublisher.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
     this.close = this.close.bind(this)
@@ -30,7 +31,9 @@ class StoryLinksContainer extends Component {
         linkType='list'
         rowID={rowID}
         link={rowData}
-        openLink={this.openLink} />
+        openLink={this.openLink}
+        openPublisher={this.openPublisher}
+      />
     )
   }
 
@@ -41,6 +44,11 @@ class StoryLinksContainer extends Component {
   openLink(link) {
     this.close()
     this.props.dispatch(NavigationActions.link(link))
+  }
+
+  openPublisher(publisher) {
+    this.close()
+    this.props.dispatch(NavigationActions.selectPublisher(publisher))
   }
 
   render() {
@@ -56,12 +64,15 @@ class StoryLinksContainer extends Component {
               <StoryLink
                 linkType='header'
                 link={this.mainLink}
-                openLink={this.openLink} />
+                openLink={this.openLink}
+                openPublisher={this.openPublisher}
+              />
             </View>
             <ListView
               style={styles.linksList}
               dataSource={this.dataSource()}
-              renderRow={this.renderRow} />
+              renderRow={this.renderRow}
+            />
             <LinearGradient
               colors={['rgba(255,255,255,.2)', 'rgba(255,255,255,.6)', 'rgba(255,255,255,.8)']}
               style={styles.gradient}
