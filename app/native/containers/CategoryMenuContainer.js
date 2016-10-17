@@ -6,18 +6,10 @@ import styles from '../styles/Menu'
 import { CategoryActions, NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
-  static fetchData({ dispatch }) {
-    return dispatch(CategoryActions.getCategories())
-  }
-
   constructor(props) {
     super(props)
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
-  }
-
-  componentDidMount() {
-    this.constructor.fetchData(this.props)
   }
 
   render() {
@@ -56,7 +48,7 @@ class CategoryMenuContainer extends Component {
   openHome() {
     this.props.dispatch(NavigationActions.home())
     this.props.dispatch(MenuActions.closeMenu())
-    
+
   }
 
   openCategory(category) {
