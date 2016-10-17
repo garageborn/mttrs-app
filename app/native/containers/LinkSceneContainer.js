@@ -29,7 +29,7 @@ class LinkSceneContainer extends Component {
         {Platform.OS === 'android' &&
           <LinkHeaderContainer link={this.props.route.params.link} />
         }
-        <WebView source={{uri: url}} contentInset={{top: 12}}/>
+        <WebView source={{uri: url}} contentInset={{top: 11}}/>
       </View>
     )
   }
