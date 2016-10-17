@@ -12,7 +12,7 @@ class Story extends Component {
 
     return (
       <View>
-        <View style={styles.card} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1}>
+        <View style={[styles.card, this.storySpacing()]} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1}>
           <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
             <View style={styles.content}>
               <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
@@ -32,6 +32,17 @@ class Story extends Component {
         {this.renderCategoryLabel()}
       </View>
     )
+  }
+
+  storySpacing() {
+    const { section } = this.props
+
+    if (typeof section === 'undefined' || section === null) {
+      return {
+        marginTop: 16,
+        marginBottom: 16
+      }
+    }
   }
 
   renderCategoryLabel() {

@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
     zIndex: 2,
-    marginTop: 16,
-    marginBottom: 16,
+    marginTop: 8,
+    marginBottom: 8,
     padding: 12,
     height: 150,
     backgroundColor: '#FFF'
