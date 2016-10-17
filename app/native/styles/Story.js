@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
 
   shareIcon: {
     width: 8,
-    height: 16,
-    marginRight: 5
+    height: 13,
+    marginRight: 5,
+    marginTop: -1
   },
 
   shareCount: {
