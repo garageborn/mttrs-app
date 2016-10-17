@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TextInput, ListView } from 'react-native'
+import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
@@ -65,7 +65,10 @@ class PublisherMenuContainer extends Component {
     if (!this.props.publishers.length) {
       return (
         <View style={styles.container}>
-          <Text>Hang on...</Text>
+          <ActivityIndicator
+            size="large"
+            color="#aaa"
+          />
         </View>
       )
     }

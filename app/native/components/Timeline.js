@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Platform, ListView, View, Text, RefreshControl } from 'react-native'
+import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -63,7 +63,10 @@ class Timeline extends Component {
     if (isFetching) {
       return (
         <View style={styles.loading}>
-          <Text style={styles.loadingText}>Hang on...</Text>
+          <ActivityIndicator
+            size="large"
+            color="#aaa"
+          />
         </View>
       )
     }
