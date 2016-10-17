@@ -48,10 +48,9 @@ class Timeline extends Component {
         style={styles.hideRefreshControl}
         refreshing={isFetchingTop}
         onRefresh={onRefresh}
-        tintColor='#FFF'
+        tintColor='#ddd'
         title='Refreshing...'
-        titleColor='#FFF'
-        colors={['#FFF']}
+        titleColor='#aaa'
         progressBackgroundColor='#FFF'
        />
     )
