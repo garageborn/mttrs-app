@@ -16,15 +16,16 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: 17,
+    fontSize: 16,
     marginLeft: 10,
     marginRight: 10,
     color: '#FFF'
   },
 
   icon: {
-    width: 23,
-    height: 23
+    marginTop: 3,
+    width: 19,
+    height: 20
   }
 })
 
