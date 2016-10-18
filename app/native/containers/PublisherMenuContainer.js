@@ -14,7 +14,7 @@ class PublisherMenuContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(PublishersActions.getPublishers())
+    this.props.dispatch(PublishersActions.getPublishers({order_by_name: true}))
   }
 
   dataSource() {
