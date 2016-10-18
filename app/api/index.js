@@ -9,7 +9,7 @@ export function getCategory(id) {
   return request('GET', ENDPOINTS.CATEGORY(id))
 }
 
-export function getPublishers(query={}) {
+export function getPublishers(query) {
   return request('GET', ENDPOINTS.PUBLISHERS).query(query)
 }
 
