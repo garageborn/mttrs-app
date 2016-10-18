@@ -1,0 +1,8 @@
+# iOS
+app_identifier "com.garageborn.mttrs" # The bundle identifier of your app
+apple_id "apps@garageborn.com" # Your Apple email address
+team_id "Z3VCDU6D6T"  # Developer Portal Team ID
+
+# Android
+json_key_file "./google-play-api-secret.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
+package_name "com.garageborn.mttrs" # Your Android app package
