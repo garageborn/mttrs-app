@@ -5,6 +5,7 @@ import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { PublishersActions, NavigationActions, MenuActions } from '../actions/index'
 import _debounce from 'lodash/debounce'
+import _isNil from 'lodash/isNil'
 
 class PublisherMenuContainer extends Component {
   constructor() {
@@ -41,7 +42,9 @@ class PublisherMenuContainer extends Component {
     let { publishers } = this.props
     let rows = {}
     let sections = []
-    Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
+
+    if (!_isNil(publishers))
+      Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
 
     const queryMatcher = new RegExp(query, 'i')
     const filteredPublishers = publishers.filter(publisher => publisher.name.match(queryMatcher))
