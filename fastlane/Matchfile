@@ -1,9 +1,9 @@
 git_url "git@github.com:garageborn/mttrs-certs.git"
 
 type "development" # The default type, can be: appstore, adhoc or development
-shallow_close "false"
+shallow_clone "false"
 
-app_identifier "com.garageborn.mttrs"
+app_identifier "garageborn.mttrs"
 username "apps@garageborn.com" # Your Apple Developer Portal username
 
 # For all available options run `match --help`

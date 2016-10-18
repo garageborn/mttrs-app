@@ -730,7 +730,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.garageborn.mttrs;
+				PRODUCT_BUNDLE_IDENTIFIER = garageborn.mttrs;
 				PRODUCT_NAME = mttrs;
 			};
 			name = Debug;
@@ -756,7 +756,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.garageborn.mttrs;
+				PRODUCT_BUNDLE_IDENTIFIER = garageborn.mttrs;
 				PRODUCT_NAME = mttrs;
 			};
 			name = Release;
