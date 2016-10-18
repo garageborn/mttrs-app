@@ -41,11 +41,10 @@ class PublisherMenuContainer extends Component {
     let { publishers } = this.props
     let rows = {}
     let sections = []
-    if ((typeof publishers !== undefined || publishers !== null) && publishers.length > 0) {
-      Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
-    }
+    Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
 
-    const filteredPublishers = publishers.filter(publisher => publisher.name.indexOf(query) !== -1)
+    const queryMatcher = new RegExp(query, 'i')
+    const filteredPublishers = publishers.filter(publisher => publisher.name.match(queryMatcher))
 
     filteredPublishers.forEach(publisher => {
       let section = publisher.starred ? 'starred' : publisher.name.substring(0, 1).toUpperCase()
