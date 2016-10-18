@@ -6,10 +6,11 @@ export const receivePublishers = (publishers) => ({
   publishers
 })
 
-export function getPublishers() {
+export function getPublishers(query) {
   return (dispatch, getState) => {
+    if (query === null) query = {}
 
-    return API.getPublishers()
+    return API.getPublishers(query)
       .then((response) => {
         if (!response.ok) return
         dispatch(receivePublishers(response.body))
