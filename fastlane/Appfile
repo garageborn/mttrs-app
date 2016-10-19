@@ -9,5 +9,5 @@ team_id "Z3VCDU6D6T"  # Developer Portal Team ID
 # More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
 
 # Android
-json_key_file "android/app/mttrs-release-key.json"
+json_key_file "android/app/google-play-api-secret.json"
 package_name "garageborn.mttrs"
