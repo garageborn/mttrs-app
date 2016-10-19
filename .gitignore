@@ -45,3 +45,4 @@ android/app/libs
 android/keystores/debug.keystore
 
 mttrs.app.dSYM.zip
+android/app/mttrs-release-key.keystore

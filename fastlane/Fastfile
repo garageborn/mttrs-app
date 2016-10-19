@@ -78,7 +78,22 @@ platform :ios do
   end
 end
 
+platform :android do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+  end
 
+  desc "Submit a new Alpha Build to Play Store"
+  lane :alpha do
+    gradle(task: 'clean', project_dir: "android/") # Clean the Gradle project
+    gradle(task: "assemble", build_type: "Release", project_dir: "android/") # Build the Release APK
+    supply(track: "alpha", apk: "android/app/build/outputs/apk/app-release.apk") # Upload the APK to the Play Store (alpha)
+  end
+
+  after_all do |lane|
+    slack(channel: "deploys", message: "Successfully deployed new mttrs alpha update to the Play Store.")
+  end
+end
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
 # All available actions: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Actions.md
 
