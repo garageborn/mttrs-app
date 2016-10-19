@@ -28,10 +28,15 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
-    # match(type: "appstore") # more information: https://codesigning.guide
+    match(type: "appstore") # more information: https://codesigning.guide
+
+    increment_build_number(
+      xcodeproj: "./ios/mttrs.xcodeproj"
+    )
+
     gym(
       scheme: "mttrs",
-      use_legacy_build_api: true
+      project: "./ios/mttrs.xcodeproj"
     ) # Build your app - more options available
     pilot
 
