@@ -28,6 +28,13 @@ platform :ios do
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
+    # UI.important "Important Message"
+    # UI.error "O NO!"
+    # UI.message "Basic blah"
+    answer = UI.select("Would you like to add a Changelog?", ["Yes", "No"])
+    changelog = ask('Type Changelog message:') if answer == "Yes"
+
+    # always get latest certificates/provisioning profiles
     match(type: "appstore") # more information: https://codesigning.guide
 
     increment_build_number(
