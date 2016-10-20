@@ -76,11 +76,19 @@ const styles = StyleSheet.create({
     color: '#A9AAAC'
   },
 
+  story: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 6
+  },
+
   storyTitle: {
     fontSize: 16,
+    width: width - 110,
+    paddingRight: 40,
     letterSpacing: -.73,
     lineHeight: 22,
-    marginTop: 6,
     color: '#333333',
     fontWeight: 'bold'
   },
@@ -92,6 +100,23 @@ const styles = StyleSheet.create({
   gradient: {
     height: 15,
     backgroundColor: 'transparent'
+  },
+
+  shares: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  shareIcon: {
+    width: 8,
+    height: 16,
+    marginRight: 5
+  },
+
+  shareCount: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#999'
   }
 })
 
