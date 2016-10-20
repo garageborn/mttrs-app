@@ -1,0 +1,13 @@
+# iOS
+
+app_identifier "garageborn.mttrs" # The bundle identifier of your app
+apple_id "apps@garageborn.com" # Your Apple email address
+
+team_id "Z3VCDU6D6T"  # Developer Portal Team ID
+
+# you can even provide different app identifiers, Apple IDs and team names per lane:
+# More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md
+
+# Android
+json_key_file "android/app/google-play-api-secret.json"
+package_name "garageborn.mttrs"
