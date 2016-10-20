@@ -45,6 +45,11 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
 
+  topStoriesIcon: {
+    width: 19,
+    height: 20
+  },
+
   categories: {
     flex: 1,
     flexDirection: 'row',
