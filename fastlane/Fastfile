@@ -91,7 +91,7 @@ platform :android do
   end
 
   after_all do |lane|
-    slack(channel: "deploys", message: "Successfully deployed new mttrs alpha update to the Play Store.")
+    # slack(channel: "deploys", message: "Successfully deployed new mttrs alpha update to the Play Store.")
   end
 end
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
