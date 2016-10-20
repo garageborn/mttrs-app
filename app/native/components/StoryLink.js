@@ -3,6 +3,7 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
 import moment from '../../common/utils/Moment'
 import ParseDate from '../../common/utils/ParseDate'
+import KFormat from '../../common/utils/KFormat'
 
 class StoryLink extends Component {
   isHeader(linkType) {
@@ -33,8 +34,12 @@ class StoryLink extends Component {
           </TouchableHighlight>
           <View style={styles.story}>
             <TouchableHighlight style={styles.rowTouch} onPress={e => openLink(link)}>
-              <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>
+              <Text numberOfLines={1} style={styles.storyTitle}>{link.title}</Text>
             </TouchableHighlight>
+            <View style={styles.shares}>
+              <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
+              <Text style={styles.shareCount}>{KFormat(link.total_social)}+</Text>
+            </View>
           </View>
         </View>
       </View>
