@@ -37,7 +37,10 @@ class StoryLink extends Component {
             </View>
           </TouchableHighlight>
           <View style={styles.story}>
-            <TouchableHighlight style={styles.rowTouch} onPress={e => openLink(link)}>
+            <TouchableHighlight
+              style={styles.rowTouch}
+              onPress={e => openLink(link)}
+              underlayColor={WHITE_TRANSPARENT_COLOR}>
               <Text numberOfLines={1} style={styles.storyTitle}>{link.title}</Text>
             </TouchableHighlight>
             <View style={styles.shares}>
