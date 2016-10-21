@@ -4,6 +4,7 @@ import styles from '../styles/StoryLinks'
 import moment from '../../common/utils/Moment'
 import ParseDate from '../../common/utils/ParseDate'
 import KFormat from '../../common/utils/KFormat'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryLink extends Component {
   isHeader(linkType) {
@@ -24,7 +25,10 @@ class StoryLink extends Component {
       <View
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
-          <TouchableHighlight style={styles.rowTouch} onPress={e => openPublisher(link.publisher)}>
+          <TouchableHighlight
+            style={styles.rowTouch}
+            onPress={e => openPublisher(link.publisher)}
+            underlayColor={WHITE_TRANSPARENT_COLOR}>
             <View style={styles.publisher}>
               <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
               <View style={styles.publisherInfo}>

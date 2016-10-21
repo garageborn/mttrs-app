@@ -5,6 +5,7 @@ import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import KFormat from '../../common/utils/KFormat'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
   render() {
@@ -12,8 +13,12 @@ class Story extends Component {
 
     return (
       <View>
-        <View style={[styles.card, this.storySpacing()]} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1}>
-          <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor='white'>
+        <View
+          shadowOpacity={.1}
+          shadowColor={'rgba(0, 0, 0, .6)'}
+          shadowOffset={{width: 0, height: 2}}
+          style={[styles.card, this.storySpacing()]}>
+          <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor={WHITE_COLOR}>
             <View style={styles.content}>
               <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
               <View style={styles.storyTitle}>

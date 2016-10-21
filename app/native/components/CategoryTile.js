@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import styles from '../styles/Menu'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class CategoryTile extends Component {
   render() {
@@ -10,7 +11,7 @@ class CategoryTile extends Component {
 
     return (
       <View style={styles.categoryContainer}>
-        <TouchableHighlight underlayColor={'rgba(255,255,255,.1)'} onPress={e => onPress(category)}>
+        <TouchableHighlight underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress(category)}>
           <View style={this.categoryStyle} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
             {this.renderIcon()}
             <Text style={this.categoryNameStyle}>{name}</Text>

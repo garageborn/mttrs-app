@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
 import { CategoryActions, NavigationActions, MenuActions } from '../actions/index'
+import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class CategoryMenuContainer extends Component {
   static fetchData({ dispatch }) {
@@ -24,7 +25,7 @@ class CategoryMenuContainer extends Component {
     return (
       <View>
         <View style={styles.topStoriesContainer}>
-          <TouchableHighlight underlayColor={'rgba(0,0,0,.1)'} onPress={this.openHome}>
+          <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
             <View style={styles.topStories} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
               <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
               <Text style={styles.topStoriesTitle}>Top Stories</Text>

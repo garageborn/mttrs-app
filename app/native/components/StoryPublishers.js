@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
 import styles from '../styles/Story'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryPublishers extends Component {
   render() {
     const { openStoryLinks } = this.props
 
     return (
-      <TouchableHighlight onPress={openStoryLinks}>
+      <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
           <Text style={styles.lightText}>From </Text>
           <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
