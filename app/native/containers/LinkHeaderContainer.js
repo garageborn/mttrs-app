@@ -5,6 +5,7 @@ import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
 import { NavigationActions } from '../actions/index'
 import Share from 'react-native-share'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
@@ -38,10 +39,10 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={TRANSPARENT} onPress={this.share}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={TRANSPARENT} onPress={this.close}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>

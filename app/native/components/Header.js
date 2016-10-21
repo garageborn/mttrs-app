@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import styles from '../styles/Header'
-import { TRANSPARENT } from '../../constants/TouchUnderlayColors'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Header extends Component {
   render() {
@@ -9,7 +9,7 @@ class Header extends Component {
 
     return (
       <View style={styles.header}>
-        <TouchableHighlight onPress={toggleMenu} underlayColor={TRANSPARENT}>
+        <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
           <View style={styles.headerContainer}>
             <Image style={styles.icon} source={icon} />
             <Text style={styles.headerTitle}>{title}</Text>
