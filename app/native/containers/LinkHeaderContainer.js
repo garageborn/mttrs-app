@@ -38,10 +38,10 @@ class LinkHeaderContainer extends Component {
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={'transparent'} onPress={this.share}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={TRANSPARENT} onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={'transparent'} onPress={this.close}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={TRANSPARENT} onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>
