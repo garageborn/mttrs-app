@@ -8,7 +8,7 @@ class Header extends Component {
 
     return (
       <View style={styles.header}>
-        <TouchableHighlight onPress={toggleMenu}>
+        <TouchableHighlight onPress={toggleMenu} underlayColor={'transparent'}>
           <View style={styles.headerContainer}>
             <Image style={styles.icon} source={icon} />
             <Text style={styles.headerTitle}>{title}</Text>
