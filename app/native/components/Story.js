@@ -5,7 +5,7 @@ import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import KFormat from '../../common/utils/KFormat'
-import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
+import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
   render() {
@@ -56,7 +56,7 @@ class Story extends Component {
     if (typeof section === 'undefined' || section === null) {
       return (
         <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
-          <TouchableHighlight onPress={openCategory}>
+          <TouchableHighlight onPress={openCategory} underlayColor={COLORLESS}>
             <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
           </TouchableHighlight>
         </View>
