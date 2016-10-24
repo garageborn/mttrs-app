@@ -1,4 +1,4 @@
-package com.mttrs;
+package garageborn.mttrs;
 
 import com.facebook.react.ReactActivity;
 import com.BV.LinearGradient.LinearGradientPackage;
