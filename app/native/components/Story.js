@@ -55,11 +55,12 @@ class Story extends Component {
 
     if (typeof section === 'undefined' || section === null) {
       return (
-        <View style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
-          <TouchableHighlight onPress={openCategory} underlayColor={COLORLESS}>
-            <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
-          </TouchableHighlight>
-        </View>
+        <TouchableHighlight
+          onPress={openCategory}
+          underlayColor={COLORLESS}
+          style={[styles.category, {backgroundColor: this.mainCategory.color}]}>
+          <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
+        </TouchableHighlight>
       )
     }
   }
