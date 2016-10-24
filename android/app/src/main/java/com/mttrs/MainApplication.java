@@ -1,4 +1,4 @@
-package com.mttrs;
+package garageborn.mttrs;
 
 import android.app.Application;
 import android.util.Log;
