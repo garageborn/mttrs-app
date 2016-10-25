@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { Image, TouchableHighlight, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import Text from './MttrsText'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
 import * as cloudinary from '../../common/utils/Cloudinary'
