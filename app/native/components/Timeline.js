@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
-import { TimelineActions } from '../actions/index'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -11,39 +10,6 @@ class Timeline extends Component {
   constructor(props) {
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.activeIndex !== nextProps.activeIndex
-      && this.props.activeIndex + 2 == this.props.routeKey) {
-      this.fetchData(nextProps)
-    }
-  }
-
-  componentDidMount() {
-    console.log('mount')
-    if (this.props.type === 'timeline') {
-      this.fetchData(this.props)
-    }
-  }
-
-  fetchData(props) {
-    // let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    return props.dispatch(action)
-  }
-
-  fetchQuery(props) {
-    return {}
-    // if (!section) return {}
-    // switch(section.name) {
-    //   case 'category':
-    //     return { category_slug: section.model.slug }
-    //   case 'publisher':
-    //     return { publisher_slug: section.model.slug }
-    //   default:
-    //     return null
-    // }
   }
 
   renderSectionHeader(sectionData, date) {

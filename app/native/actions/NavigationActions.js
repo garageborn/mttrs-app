@@ -25,7 +25,6 @@ export function selectCategory(category) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
-
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))

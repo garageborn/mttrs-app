@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Animated, Dimensions, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view';
-import { NavigationActions } from '@exponent/ex-navigation'
-import { MenuActions, CategoryActions } from '../actions/index'
+import { MenuActions, CategoryActions, NavigationActions, TimelineActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -13,22 +12,7 @@ import MenuContainer from './MenuContainer'
 
 const { height } = Dimensions.get('window')
 
-const tabViewStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  page: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
 class TimelineContainer extends Component {
-  static fetchData({ dispatch }) {
-    return dispatch(CategoryActions.getCategories())
-  }
-
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -40,13 +24,13 @@ class TimelineContainer extends Component {
       navigationState: {
         index: 0,
         routes: [
-         { key: '1', title: 'Timeline', type: 'timeline' }
+         { key: '0', title: 'Top Stories' }
         ],
       }
     }
   }
 
-  _handleChangeTab = (index) => {
+  handleChangeTab = (index) => {
     this.setState({
       navigationState: {
         index,
@@ -55,75 +39,96 @@ class TimelineContainer extends Component {
     });
   };
 
-  _renderScene = ({ route }) => {
+  renderScene = () => {
     const { items, isFetching, isFetchingTop } = this.props
-    switch (route.type) {
-    case 'timeline':
-      return <Timeline
-              type='timeline'
-              items={items}
-              routeKey={route.key}
-              activeIndex={this.state.navigationState.index}
-              isFetching={isFetching}
-              isFetchingTop={isFetchingTop}
-              onEndReached={this.onEndReached}
-              onRefresh={this.onPullToRefresh}
-              storyRenderer={this.renderStory}
-            />
-    case 'category':
-      return <Timeline
-              type='category'
-              typeSectionId={this.state.navigationState.routes[1]}
-              routeKey={route.key}
-              activeIndex={this.state.navigationState.index}
-              items={items}
-              isFetching={isFetching}
-              isFetchingTop={isFetchingTop}
-              onEndReached={this.onEndReached}
-              onRefresh={this.onPullToRefresh}
-              storyRenderer={this.renderStory}
-            />
-    // return ()
-    default:
-      return null;
-    }
+    return (
+      <Timeline
+        items={items}
+        isFetching={isFetching}
+        isFetchingTop={isFetchingTop}
+        onEndReached={this.onEndReached}
+        onRefresh={this.onPullToRefresh}
+        storyRenderer={this.renderStory}
+      />
+    )
   };
 
   componentDidMount() {
-    this.constructor.fetchData(this.props)
+    this.fetchCategories(this.props)
+    this.fetchData(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
     const { categories } = this.props;
-    // let nextSection = nextProps.params.section || {}
-    // let currentSection = this.props.params.section || {}
-    //
-    // let sectionNameChanged = nextSection.name !== currentSection.name
-    // let sectionModelChanged = nextSection.model !== currentSection.model
-    // if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+    let nextSection = nextProps.params.section || {}
+    let currentSection = this.props.params.section || {}
+
+    let sectionNameChanged = nextSection.name !== currentSection.name
+    let sectionModelChanged = nextSection.model !== currentSection.model
+    if (sectionNameChanged || sectionModelChanged) {
+      this.fetchData(nextProps)
+    }
     if (categories.length < nextProps.categories.length) {
-      let newRoutes = nextProps.categories.map((item, idx) => {
-        return { key: `${idx+2}`, title: item.name, type: 'category' }
-      })
-      this.setState({
-        navigationState: {
-          ...this.state.navigationState,
-          routes: [...this.state.navigationState.routes, ...newRoutes ]
-        }
-      })
+      this.addSwipeRoutes(nextProps)
     }
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
     if (nextProps.uiReducer.menu.retract) this.animate('out')
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    const topStories = nextState.navigationState.index === 0
+    const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
+    const { dispatch } = this.props
+    if (newIndex && !topStories) {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.category))
+    }
+
+    if (newIndex && topStories) dispatch(NavigationActions.home())
+  }
+
+  fetchCategories(props) {
+    return props.dispatch(CategoryActions.getCategories())
+  }
+
+  addSwipeRoutes(nextProps) {
+    let newRoutes = nextProps.categories.map((item, idx) => {
+      return { key: `${idx+1}`, title: item.name, type: 'category', category: item }
+    })
+    this.setState({
+      navigationState: {
+        ...this.state.navigationState,
+        routes: [...this.state.navigationState.routes, ...newRoutes ]
+      }
+    })
+  }
+
+  fetchData(props) {
+    let action = TimelineActions.getTimeline(this.fetchQuery(props))
+    props.dispatch(action)
+  }
+
+  fetchQuery(props) {
+    const { section } = props.params
+    if (!section) return {}
+    switch(section.name) {
+      case 'category':
+        return { category_slug: section.model.slug }
+      case 'publisher':
+        return { publisher_slug: section.model.slug }
+      default:
+        return null
+    }
+  }
+
   pullFetchData(props) {
-    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
+    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
   }
 
   infiniteFetchData(props) {
-    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
+    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    return props.dispatch(action)
   }
 
   onPullToRefresh() {
@@ -149,15 +154,14 @@ class TimelineContainer extends Component {
   }
 
   render() {
-    console.log(this.state.navigationState)
     return (
       <View style={styles.container}>
         {this.renderStoryLinks()}
         <TabViewAnimated
-         style={tabViewStyles.container}
-         navigationState={this.state.navigationState}
-         renderScene={this._renderScene}
-         onRequestChangeTab={this._handleChangeTab}
+          style={styles.container}
+          navigationState={this.state.navigationState}
+          renderScene={this.renderScene}
+          onRequestChangeTab={this.handleChangeTab}
         />
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           { this.renderMenu() }
