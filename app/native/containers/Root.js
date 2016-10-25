@@ -7,7 +7,7 @@ import apolloClient from '../config/apolloClient'
 
 class Root extends Component {
   render() {
-    if (Platform.OS === 'ios') StatusBar.setBarStyle('default')
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
 
     const { store } = this.props
     const navigationContext = new NavigationContext({ router: Router, store: store })

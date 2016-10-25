@@ -1,34 +1,45 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
 import styles from '../styles/Story'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryPublishers extends Component {
   render() {
-    const { story, openStoryLinks } = this.props
-    if (!story.links) return
+    const { openStoryLinks } = this.props
 
     return (
-      <TouchableHighlight onPress={openStoryLinks}>
+      <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
-          <Image style={styles.publisherLogo} source={require('../assets/nyt.png')} />
-          { this.renderCounter() }
+          <Text style={styles.lightText}>From </Text>
+          <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
+          {this.getMainPublisher()}
+          {this.getCounter()}
         </View>
       </TouchableHighlight>
     )
   }
 
-  renderCounter() {
+  getMainPublisher() {
+    const { main_link } = this.props.story
+    return <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+  }
+
+  getCounter() {
     const { other_links } = this.props.story
-    if (other_links.length <= 1) return
-    return <Text style={styles.publisherTitle}>+{other_links.length - 1}</Text>
+    let linksLength = other_links.length
+
+    if (!linksLength) return
+
+    return (
+      <Text style={styles.lightText}> and
+        <Text style={styles.darkText}> {linksLength} {linksLength === 1 ? 'other' : 'others'}</Text>
+      </Text>
+    )
   }
 }
 
 StoryPublishers.propTypes = {
-  story: PropTypes.shape({
-    main_link: PropTypes.object.isRequired,
-    other_links: PropTypes.array.isRequired,
-  }).isRequired,
+  story: PropTypes.object.isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 

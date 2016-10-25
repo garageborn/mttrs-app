@@ -43,3 +43,20 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
+
+mttrs.app.dSYM.zip
+android/app/mttrs-release-key.keystore
+
+# Fastlane temporary profiling data
+/fastlane/report.xml
+# Deliver temporary error output
+/fastlane/Error*.png
+# Deliver temporary preview output
+/fastlane/Preview.html
+# Snapshot generated screenshots
+/fastlane/screenshots/*/*-portrait.png
+/fastlane/screenshots/*/*-landscape.png
+/fastlane/screenshots/screenshots.html
+# Frameit generated screenshots
+/fastlane/screenshots/*/*-portrait_framed.png
+/fastlane/screenshots/*/*-landscape_framed.png

@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#1B2A45',
+    backgroundColor: '#F1F1F1',
     height: 40,
-    paddingTop: 5,
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#FFF'
+    color: '#999999'
   }
 
 })

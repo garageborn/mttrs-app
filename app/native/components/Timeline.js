@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, View, Text, RefreshControl } from 'react-native'
+import { connect } from 'react-redux'
+import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -47,10 +48,9 @@ class Timeline extends Component {
         style={styles.hideRefreshControl}
         refreshing={isFetchingTop}
         onRefresh={onRefresh}
-        tintColor='#FFF'
+        tintColor='#DDD'
         title='Refreshing...'
-        titleColor='#FFF'
-        colors={['#FFF']}
+        titleColor='#AAA'
         progressBackgroundColor='#FFF'
        />
     )
@@ -62,14 +62,17 @@ class Timeline extends Component {
     if (isFetching) {
       return (
         <View style={styles.loading}>
-          <Text style={styles.loadingText}>Hang on...</Text>
+          <ActivityIndicator
+            size="large"
+            color="#AAA"
+          />
         </View>
       )
     }
 
     return (
       <ListView
-        style={styles.listView}
+        style={[styles.listView, this.listViewStyle]}
         dataSource={this.dataSource()}
         renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
@@ -77,6 +80,10 @@ class Timeline extends Component {
         onEndReached={onEndReached}
         />
     )
+  }
+
+  get listViewStyle() {
+    if (this.props.uiReducer.menu.isOpen && Platform.OS === 'ios') return { position: 'absolute' }
   }
 }
 
@@ -89,4 +96,9 @@ Timeline.propTypes = {
   storyRenderer: PropTypes.func.isRequired
 }
 
-export default Timeline
+let mapStateToProps = (state) => {
+  const { uiReducer } = state
+  return { uiReducer }
+}
+
+export default connect(mapStateToProps)(Timeline)

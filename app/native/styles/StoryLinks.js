@@ -5,13 +5,13 @@ let { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
-    backgroundColor: '#1B2A45'
+    backgroundColor: '#262C5B'
   },
 
   container: {
     width: width - 16,
-    height: height - 120,
-    paddingBottom: 20,
+    height: height - 90,
+    paddingBottom: 2,
     marginTop: 20,
     marginLeft: 8,
     borderRadius: 4,
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   header: {
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
-    paddingTop: 2,
-    backgroundColor: '#F5F8FA',
+    paddingTop: 1,
+    backgroundColor: 'rgba(38,44,91,.1)',
   },
 
   subHeaderText: {
@@ -42,16 +42,16 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     paddingTop: 16,
-    paddingBottom: 16,
+    paddingBottom: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ECECEC'
+    borderBottomColor: '#DDDDDD'
   },
 
   headerContainer: {
     paddingLeft: 20,
     paddingRight: 20,
-    paddingTop: 16,
-    paddingBottom: 16
+    paddingTop: 15,
+    paddingBottom: 15
   },
 
   publisher: {
@@ -60,13 +60,15 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    marginRight: 12
+    marginRight: 5,
+    height: 30,
+    width: 30
   },
 
-  title: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: '#373737'
+  publisherName: {
+    fontSize: 20,
+    color: '#666666',
+    fontWeight: 'bold'
   },
 
   time: {
@@ -74,10 +76,47 @@ const styles = StyleSheet.create({
     color: '#A9AAAC'
   },
 
+  story: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 6
+  },
+
   storyTitle: {
     fontSize: 16,
-    marginTop: 6,
-    color: '#373737'
+    width: width - 110,
+    paddingRight: 40,
+    letterSpacing: -.73,
+    lineHeight: 22,
+    color: '#333333',
+    fontWeight: 'bold'
+  },
+
+  linksList: {
+    marginBottom: -15
+  },
+
+  gradient: {
+    height: 15,
+    backgroundColor: 'transparent'
+  },
+
+  shares: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  shareIcon: {
+    width: 8,
+    height: 16,
+    marginRight: 5
+  },
+
+  shareCount: {
+    fontSize: 13,
+    fontWeight: '500',
+    color: '#999'
   }
 })
 

@@ -8,9 +8,9 @@ class ListViewHeader extends Component {
 
     return (
       <View style={[styles.header, {
-        marginTop: date === 'Today' ? 10 : null
+        marginTop: date === 'Today' ? 20 : null
       }]}>
-        <Text style={styles.title}>{date}</Text>
+        <Text style={styles.title}>{date.toUpperCase()}</Text>
       </View>
     )
   }

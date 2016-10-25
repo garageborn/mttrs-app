@@ -3,6 +3,8 @@ import { View, Image, TouchableHighlight, Text } from 'react-native'
 import styles from '../styles/StoryLinks'
 import moment from '../../common/utils/Moment'
 import ParseDate from '../../common/utils/ParseDate'
+import KFormat from '../../common/utils/KFormat'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryLink extends Component {
   isHeader(linkType) {
@@ -18,23 +20,33 @@ class StoryLink extends Component {
   }
 
   render() {
-    const { link, rowID, openLink } = this.props
-    if (this.props.linkType === 'list' && this.props.rowID === '0') return <View />
+    const { link, rowID, openLink, openPublisher } = this.props
     return (
       <View
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
-          <View style={styles.publisher}>
-            <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
-            <View style={styles.publisherInfo}>
-              <Text style={styles.title}>{link.publisher.name}</Text>
-              <Text style={styles.time}>{ParseDate(moment(link.created_at).unix())}</Text>
+          <TouchableHighlight
+            style={styles.rowTouch}
+            onPress={e => openPublisher(link.publisher)}
+            underlayColor={WHITE_TRANSPARENT_COLOR}>
+            <View style={styles.publisher}>
+              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+              <View style={styles.publisherInfo}>
+                <Text style={styles.publisherName}>{link.publisher.name}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableHighlight>
           <View style={styles.story}>
-            <TouchableHighlight style={styles.rowTouch} onPress={e => openLink(link)}>
-              <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>
+            <TouchableHighlight
+              style={styles.rowTouch}
+              onPress={e => openLink(link)}
+              underlayColor={WHITE_TRANSPARENT_COLOR}>
+              <Text numberOfLines={1} style={styles.storyTitle}>{link.title}</Text>
             </TouchableHighlight>
+            <View style={styles.shares}>
+              <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
+              <Text style={styles.shareCount}>{KFormat(link.total_social)}+</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -47,7 +59,8 @@ StoryLink.propTypes = {
     url: PropTypes.string.isRequired
   }).isRequired,
   rowID: PropTypes.string,
-  openLink: PropTypes.func.isRequired
+  openLink: PropTypes.func.isRequired,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default StoryLink

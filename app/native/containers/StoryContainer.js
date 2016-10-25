@@ -14,11 +14,12 @@ class StoryContainer extends Component {
   }
 
   render() {
-    const { story } = this.props
+    const { story, section } = this.props
 
     return (
       <Story
         story={story}
+        section={section}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks} />
@@ -34,12 +35,12 @@ class StoryContainer extends Component {
   }
 
   openPublisher() {
-    this.props.dispatch(NavigationActions.publisher(this.mainLink.publisher))
+    this.props.dispatch(NavigationActions.selectPublisher(this.mainLink.publisher))
   }
 
   openStoryLinks() {
+    if (this.otherLinks.length === 0) return this.openPublisher()
     const { dispatch, story } = this.props
-    if (story.links.length <= 1) return this.openPublisher()
     dispatch(NavigationActions.storyLinks({ story: story, open: true }))
   }
 
@@ -48,7 +49,11 @@ class StoryContainer extends Component {
   }
 
   get mainLink() {
-    return this.props.story.links[0]
+    return this.props.story.main_link
+  }
+
+  get otherLinks() {
+    return this.props.story.other_links
   }
 
   get mainCategory() {
@@ -57,11 +62,7 @@ class StoryContainer extends Component {
 }
 
 StoryContainer.propTypes = {
-  story: PropTypes.shape({
-    main_link: PropTypes.object.isRequired,
-    other_links: PropTypes.array.isRequired,
-  }).isRequired,
-  params: PropTypes.object.isRequired
+  story: PropTypes.object.isRequired
 }
 
 export default connect()(StoryContainer)

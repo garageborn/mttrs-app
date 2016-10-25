@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from '../actions/index'
+import { MenuActions } from '../actions/index'
 import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
@@ -17,7 +17,6 @@ class TimelineHeaderContainer extends Component {
     return (
       <View>
         { this.renderHeader() }
-        { this.renderMenu() }
       </View>
     )
   }
@@ -36,23 +35,19 @@ class TimelineHeaderContainer extends Component {
     }
   }
 
-  renderMenu() {
-    const { params } = this.props
-    if (this.isMenuOpened) return <MenuContainer params={params}/>
-  }
-
   toggleMenu() {
-    this.props.dispatch(NavigationActions.toggleMenu())
-  }
-
-  get isMenuOpened() {
-    const { params } = this.props
-    return params.menu && params.menu.open
+    const { menu } = this.props.uiReducer
+    return menu.isOpen ? this.props.dispatch(MenuActions.retractMenu()) : this.props.dispatch(MenuActions.openMenu())
   }
 }
 
 TimelineHeaderContainer.propTypes = {
-  params: PropTypes.object.isRequired
+  params: PropTypes.object.isRequired,
+  uiReducer: PropTypes.object.isRequired
 }
 
-export default connect()(TimelineHeaderContainer)
+function mapStateToProps(state) {
+  return { uiReducer: state.uiReducer }
+}
+
+export default connect(mapStateToProps)(TimelineHeaderContainer)

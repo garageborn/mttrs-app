@@ -9,3 +9,4 @@ export {default as CurrentPublisherReducer} from '../../reducers/CurrentPublishe
 export {default as FilterReducers} from '../../reducers/FilterReducers'
 export {default as PublishersReducers} from '../../reducers/PublishersReducers'
 export {default as TimelineReducers} from '../../reducers/TimelineReducers'
+export {default as uiReducer} from './uiReducer'

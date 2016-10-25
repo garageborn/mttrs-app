@@ -5,7 +5,7 @@ import styles from '../styles/Buttons'
 const CloseButton = ({onPress}) => {
   return (
     <View style={styles.closeButton}>
-      <TouchableHighlight onPress={onPress}>
+      <TouchableHighlight onPress={onPress} underlayColor={'transparent'}>
         <Image style={styles.closeButtonIcon} source={require('../assets/icons/icon-close-modal@3x.png')} />
       </TouchableHighlight>
     </View>

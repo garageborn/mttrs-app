@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import styles from '../styles/Header'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Header extends Component {
   render() {
     const { title, icon, toggleMenu } = this.props
+
     return (
       <View style={styles.header}>
-        <TouchableHighlight onPress={toggleMenu}>
+        <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
           <View style={styles.headerContainer}>
-            <Image source={icon} />
+            <Image style={styles.icon} source={icon} />
             <Text style={styles.headerTitle}>{title}</Text>
             <Image source={require('../assets/arrow.png')} />
           </View>
@@ -21,7 +23,7 @@ class Header extends Component {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.number.isRequired,
+  icon: PropTypes.any.isRequired,
   toggleMenu: PropTypes.func.isRequired
 }
 

@@ -1,37 +1,31 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import CategoryTile from '../components/CategoryTile'
-import styles from '../styles/Menu'
-import { CategoryActions, NavigationActions } from '../actions/index'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import CategoryTile from '../components/CategoryTile'
+import styles from '../styles/Menu'
+import { NavigationActions, MenuActions } from '../actions/index'
+import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class CategoryMenuContainer extends Component {
-  // static fetchData({ dispatch }) {
-  //   return dispatch(CategoryActions.getCategories())
-  // }
-
   constructor(props) {
     super(props)
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
   }
 
-  // componentDidMount() {
-  //   this.constructor.fetchData(this.props)
-  // }
-
   render() {
     return (
       <View>
-        <TouchableHighlight onPress={this.openHome}>
-          <View style={styles.topStories} shadowOffset={{width: 1, height: 1}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={5}>
-            <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
-            <Text style={styles.topStoriesTitle}>Top Stories</Text>
-            <Image style={styles.selectedMarker} source={require('../assets/icons/icon-selected.png')} />
-          </View>
-        </TouchableHighlight>
+        <View style={styles.topStoriesContainer}>
+          <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
+            <View style={styles.topStories} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
+              <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
+              <Text style={styles.topStoriesTitle}>Top Stories</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
 
         <View style={styles.categories}>
           { this.renderCategories() }
@@ -44,12 +38,9 @@ class CategoryMenuContainer extends Component {
     const { params } = this.props
     const { categories, loading } = this.props.data
 
-    console.log('--------', this.props.data)
-    console.log(categories)
-
     if (loading) return
     return categories.map((category) => {
-      let isActive = false;
+      let isActive = false
       if (params.section != null && typeof params.section.model !== 'undefined')
         isActive = category.slug === params.section.model.slug
 
@@ -61,19 +52,15 @@ class CategoryMenuContainer extends Component {
 
   openHome() {
     this.props.dispatch(NavigationActions.home())
+    this.props.dispatch(MenuActions.closeMenu())
   }
 
   openCategory(category) {
-    this.props.dispatch(NavigationActions.category(category))
+    this.props.dispatch(NavigationActions.selectCategory(category))
+    this.props.dispatch(MenuActions.closeMenu())
   }
 }
 
-// let mapStateToProps = (state) => {
-//   return {
-//     categories: state.CategoriesReducers.categories
-//   }
-// }
-// export default connect(mapStateToProps)(CategoryMenuContainer)
-
-const Query = gql`query { categories { id name slug } }`
-export default graphql(Query)(CategoryMenuContainer)
+const Query = gql`query { categories { id name slug color icon_id } }`
+const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
+export default connect()(CategoryMenuContainerWithData)

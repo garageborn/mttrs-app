@@ -5,8 +5,7 @@ import styles from '../styles/HeaderPublisher'
 import Router from '../config/Router'
 import { NavigationActions } from '../actions/index'
 import Share from 'react-native-share'
-
-const underlayColor = 'rgba(255, 255, 255, .5)'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class LinkHeaderContainer extends Component {
   constructor(props) {
@@ -36,14 +35,14 @@ class LinkHeaderContainer extends Component {
           <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
           <View style={styles.publisherInfo}>
             <Text style={styles.title}>{link.publisher.name}</Text>
-            <Text style={styles.time}>Ontem às 7:01</Text>
+            <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={underlayColor} onPress={this.share}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={underlayColor} onPress={this.close}>
+          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>

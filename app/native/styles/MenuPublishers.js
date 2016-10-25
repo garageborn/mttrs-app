@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center'
   },
 
   search: {
@@ -36,37 +37,59 @@ const styles = StyleSheet.create({
   },
 
   listHeader: {
-    color: '#3E749B',
-    fontWeight: 'bold',
-    fontSize: 23,
     paddingLeft: 15,
     marginTop: 8,
     paddingTop: 8,
-    marginBottom: 8,
-    paddingBottom: 8
+    marginBottom: 3,
+    paddingBottom: 3,
+  },
+
+  listHeaderText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 20
   },
 
   publisher: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#F1F1F1',
     flexDirection: 'row',
     alignItems: 'center',
-    height: 80,
-    marginLeft: 15,
+    height: 60,
+    marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#ECECEC'
+    borderBottomColor: '#DDDDDD'
   },
 
   logo: {
-    marginRight: 16
+    width: 30,
+    height: 30,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#F1F1F1'
   },
 
   name: {
-    fontSize: 14,
-    fontWeight: '500'
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#666666'
+  },
+
+  logoContainer: {
+    backgroundColor: 'white',
+    marginRight: 10,
+    borderRadius: 30,
+    width: 32,
+    height: 32,
+    borderWidth: 1,
+    borderColor: '#CCCCCC'
   },
 
   touch: {
-    backgroundColor: '#FFF'
+    backgroundColor: '#F1F1F1',
+  },
+
+  listHeaderImage: {
+
   }
 })
 
