@@ -73,10 +73,11 @@ export function getTimeline(options) {
   }
 }
 
-const receiveDateStories = (date, stories) => ({
+const receiveDateStories = (date, stories, options) => ({
   type: TIMELINE_DATE_RECEIVED,
   date,
-  stories
+  stories,
+  options
 })
 
 function getFilterStories(options) {
@@ -116,7 +117,7 @@ function getDateStories(date, options) {
     return API.getStories(query)
       .then((response) => {
         if (!response.ok) return
-        dispatch(receiveDateStories(date, response.body))
+        dispatch(receiveDateStories(date, response.body, options))
       })
   }
 }
