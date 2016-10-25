@@ -127,7 +127,7 @@ class PublisherMenuContainer extends Component {
 
   openPublisher(publisher) {
     this.props.dispatch(NavigationActions.selectPublisher(publisher))
-    this.props.dispatch(MenuActions.toggleMenu())
+    this.props.dispatch(MenuActions.closeMenu())
   }
 }
 
