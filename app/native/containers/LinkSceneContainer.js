@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, WebView, Platform } from 'react-native'
+import { View, WebView, Platform, ProgressViewIOS, ProgressBarAndroid } from 'react-native'
+import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import styles from '../styles/App'
-import { connect } from 'react-redux'
 
 class LinkSceneContainer extends Component {
   static route = {
@@ -20,6 +20,14 @@ class LinkSceneContainer extends Component {
     }
   }
 
+  renderProgressBar() {
+    if (Platform.OS === 'ios') {
+      return <ProgressViewIOS style={{marginTop: 11}} progress={0.5} progressTintColor={'#08C'} />
+    } else {
+      return <ProgressBarAndroid progress={0.5} indeterminate={false} styleAttr='Horizontal' color='#08C' />
+    }
+  }
+
   render() {
     const { url } = this.props.route.params.link
 
@@ -29,7 +37,13 @@ class LinkSceneContainer extends Component {
         {Platform.OS === 'android' &&
           <LinkHeaderContainer link={this.props.route.params.link} />
         }
-        <WebView source={{uri: url}} contentInset={{top: 11}}/>
+        <WebView
+          source={{uri: url}}
+          contentInset={{top: 11}}
+          onLoadStart={() => console.log('Loading...')}
+          onLoad={() => console.log('Done.')}
+          startInLoadingState={true}
+          renderLoading={this.renderProgressBar.bind(this)} />
       </View>
     )
   }
