@@ -59,7 +59,7 @@ class Timeline extends Component {
   render() {
     const { isFetching, onEndReached } = this.props
 
-    if (isFetching) {
+    if (!isFetching) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator
@@ -89,7 +89,6 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
@@ -98,9 +97,6 @@ Timeline.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    items: state.TimelineReducers.items,
-    isFetching: state.TimelineReducers.isFetching,
-    isFetchingTop: state.TimelineReducers.isFetchingTop,
     uiReducer: state.uiReducer
   }
 }

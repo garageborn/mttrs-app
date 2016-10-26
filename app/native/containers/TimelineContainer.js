@@ -9,6 +9,7 @@ import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
 import MenuContainer from './MenuContainer'
+import _isNil from 'lodash/isNil'
 
 const { height } = Dimensions.get('window')
 
@@ -19,6 +20,7 @@ class TimelineContainer extends Component {
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
+    this.renderScene = this.renderScene.bind(this)
     this.state = {
       menuPositionY: new Animated.Value(-height),
       navigationState: {
@@ -26,6 +28,7 @@ class TimelineContainer extends Component {
         routes: [
          { key: '0', title: 'Top Stories' }
         ],
+        loaded: false
       }
     }
   }
@@ -39,16 +42,18 @@ class TimelineContainer extends Component {
     })
   }
 
-  renderScene = () => {
+  renderScene() {
     const { items, isFetching, isFetchingTop } = this.props
+
     return (
       <Timeline
         items={items}
-        isFetching={isFetching}
+        isFetching={!this.state.loaded}
         isFetchingTop={isFetchingTop}
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
         storyRenderer={this.renderStory}
+        navigationState={this.state.navigationState}
       />
     )
   }
@@ -65,6 +70,9 @@ class TimelineContainer extends Component {
 
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
+
+    if (!nextProps.isFetching) this.setState({navigationState: { ...this.state.navigationState, loaded: true}})
+
     if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
     if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
@@ -72,7 +80,7 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const topStories = nextState.navigationState.index === 0
+    const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
     const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
     const { dispatch } = this.props
     if (!newIndex) return
@@ -157,6 +165,7 @@ class TimelineContainer extends Component {
           navigationState={this.state.navigationState}
           renderScene={this.renderScene}
           onRequestChangeTab={this.handleChangeTab}
+          lazy={true}
         />
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           { this.renderMenu() }
