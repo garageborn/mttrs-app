@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Animated, Dimensions, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { TabViewAnimated } from 'react-native-tab-view';
+import { TabViewAnimated } from 'react-native-tab-view'
 import { MenuActions, CategoryActions, NavigationActions, TimelineActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
@@ -36,8 +36,8 @@ class TimelineContainer extends Component {
         index,
         routes: this.state.navigationState.routes
       }
-    });
-  };
+    })
+  }
 
   renderScene = () => {
     const { items, isFetching, isFetchingTop } = this.props
@@ -51,7 +51,7 @@ class TimelineContainer extends Component {
         storyRenderer={this.renderStory}
       />
     )
-  };
+  }
 
   componentDidMount() {
     this.fetchCategories(this.props)
@@ -59,7 +59,7 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { categories } = this.props;
+    const { categories } = this.props
     let nextSection = nextProps.params.section || {}
     let currentSection = this.props.params.section || {}
 
@@ -140,7 +140,7 @@ class TimelineContainer extends Component {
   }
 
   animate(type) {
-    const value = type === 'in' ? 0 : -height;
+    const value = type === 'in' ? 0 : -height
     const callback = type === 'out' ? this.closeMenu : null
     return (
       Animated.timing(
