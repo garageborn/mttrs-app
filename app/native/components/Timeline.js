@@ -57,9 +57,9 @@ class Timeline extends Component {
   }
 
   render() {
-    const { isFetching, onEndReached } = this.props
+    const { onEndReached } = this.props
 
-    if (!isFetching) {
+    if (!this.props.navigationState.loaded) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator

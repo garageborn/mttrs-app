@@ -70,9 +70,9 @@ class TimelineContainer extends Component {
 
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
+    const fetchingChanged = nextProps.isFetching !== this.props.isFetching
 
-    if (!nextProps.isFetching) this.setState({navigationState: { ...this.state.navigationState, loaded: true}})
-
+    if (fetchingChanged) this.toggleLoading(nextProps)
     if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
     if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
@@ -122,6 +122,17 @@ class TimelineContainer extends Component {
       case 'publisher':
         return { publisher_slug: section.model.slug }
     }
+  }
+
+  toggleLoading(nextProps) {
+    this.setState(
+      {
+        navigationState: {
+          ...this.state.navigationState,
+          loaded: !nextProps.isFetching
+        }
+      }
+    )
   }
 
   pullFetchData(props) {
