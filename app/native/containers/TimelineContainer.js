@@ -3,7 +3,6 @@ import { View, Animated, Dimensions, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { MenuActions, CategoryActions, NavigationActions, TimelineActions } from '../actions/index'
-import { TabViewAnimated } from 'react-native-tab-view';
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -14,17 +13,6 @@ import _isNil from 'lodash/isNil'
 import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
-
-const tabViewStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  page: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 class TimelineContainer extends Component {
   static fetchData({ dispatch }) {
