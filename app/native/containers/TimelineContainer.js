@@ -152,13 +152,13 @@ class TimelineContainer extends Component {
   }
 
   pullFetchData(props) {
-    let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
+    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
   }
 
   infiniteFetchData(props) {
-    let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    return props.dispatch(action)
+    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
+    // return props.dispatch(action)
   }
 
   onPullToRefresh() {
