@@ -65,12 +65,8 @@ class TimelineContainer extends Component {
 
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
-    if (sectionNameChanged || sectionModelChanged) {
-      this.fetchData(nextProps)
-    }
-    if (categories.length < nextProps.categories.length) {
-      this.addSwipeRoutes(nextProps)
-    }
+    if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+    if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
     if (nextProps.uiReducer.menu.retract) this.animate('out')
   }
@@ -79,12 +75,13 @@ class TimelineContainer extends Component {
     const topStories = nextState.navigationState.index === 0
     const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
     const { dispatch } = this.props
-    if (newIndex && !topStories) {
+    if (!newIndex) return
+    if (!topStories) {
       const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
       dispatch(NavigationActions.selectCategory(currentRoute.category))
+    } else {
+      dispatch(NavigationActions.home())
     }
-
-    if (newIndex && topStories) dispatch(NavigationActions.home())
   }
 
   fetchCategories(props) {
@@ -116,8 +113,6 @@ class TimelineContainer extends Component {
         return { category_slug: section.model.slug }
       case 'publisher':
         return { publisher_slug: section.model.slug }
-      default:
-        return null
     }
   }
 
@@ -194,6 +189,9 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
+    items: state.TimelineReducers.items,
+    isFetching: state.TimelineReducers.isFetching,
+    isFetchingTop: state.TimelineReducers.isFetchingTop,
     categories: state.CategoriesReducers.categories,
     uiReducer: state.uiReducer
   }
