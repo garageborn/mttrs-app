@@ -20,11 +20,35 @@ class LinkSceneContainer extends Component {
     }
   }
 
+  constructor() {
+    super()
+    this.state = {
+      progress: 0
+    }
+
+    this.updateProgress = this.updateProgress.bind(this)
+    this.getProgress = this.getProgress.bind(this)
+  }
+
+  componentDidMount() {
+    this.updateProgress()
+  }
+
+  updateProgress() {
+    let progress = this.state.progress + 0.01;
+    this.setState({ progress })
+  }
+
+  getProgress(offset) {
+    let progress = this.state.progress + offset
+    return Math.sin(progress % Math.PI) % 1
+  }
+
   renderProgressBar() {
     if (Platform.OS === 'ios') {
-      return <ProgressViewIOS style={{marginTop: 11}} progress={0.5} progressTintColor={'#08C'} />
+      return <ProgressViewIOS style={{marginTop: 11}} progress={this.getProgress(0)} progressTintColor={'#08C'} />
     } else {
-      return <ProgressBarAndroid progress={0.5} indeterminate={false} styleAttr='Horizontal' color='#08C' />
+      return <ProgressBarAndroid progress={this.state.progress} indeterminate={false} styleAttr='Horizontal' color='#08C' />
     }
   }
 
