@@ -11,6 +11,7 @@ import Router from '../config/Router'
 import styles from '../styles/App'
 import MenuContainer from './MenuContainer'
 import _isNil from 'lodash/isNil'
+import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
 
@@ -187,6 +188,20 @@ class TimelineContainer extends Component {
     return (
       <View style={styles.container}>
         {this.renderStoryLinks()}
+        {this.renderTimeline()}
+        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+          {this.renderMenu()}
+        </Animated.View>
+      </View>
+    )
+  }
+
+  renderTimeline() {
+    const publisherTimeline = !_isNil(this.props.params.section) && this.props.params.section.name === 'publisher'
+    if (publisherTimeline) {
+      return this.renderScene()
+    } else {
+      return (
         <TabViewAnimated
           style={styles.container}
           navigationState={this.state.navigationState}
@@ -194,11 +209,8 @@ class TimelineContainer extends Component {
           onRequestChangeTab={this.handleChangeTab}
           lazy={true}
         />
-        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-          { this.renderMenu() }
-        </Animated.View>
-      </View>
-    )
+      )
+    }
   }
 
   renderMenu() {
