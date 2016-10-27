@@ -62,25 +62,34 @@ class StoryContainer extends Component {
   }
 
   async addLinkToLocalStorage(story) {
-    let visitedLinks = await AsyncStorage.getItem('visitedLinks')
+    let visitedStories = await AsyncStorage.getItem('visitedStories')
 
-    if (_isNil(visitedLinks)) {
-      visitedLinks = []
+    if (_isNil(visitedStories)) {
+      visitedStories = []
     } else {
-      visitedLinks = [
-        ...JSON.parse(visitedLinks),
-        story.id
-      ]
+      this.addStoryToStorage(JSON.parse(visitedStories), story)
     }
 
-    AsyncStorage.setItem('visitedLinks', JSON.stringify(visitedLinks))
+    AsyncStorage.setItem('visitedStories', JSON.stringify(visitedStories))
   }
 
   async checkVisited() {
-    const visitedStories = await AsyncStorage.getItem('visitedLinks')
-    this.setState({
-      visited: visitedStories.indexOf(this.props.story.id) !== -1
-    })
+    const visitedStories = await AsyncStorage.getItem('visitedStories')
+    if (!_isNil(visitedStories))
+      this.setState({
+        visited: visitedStories.indexOf(this.props.story.id) !== -1
+      })
+  }
+
+  addStoryToStorage(visitedStories, story) {
+    const isVisited = visitedStories.indexOf(story.id) !== -1
+
+    if (isVisited) return
+
+    visitedStories = [
+      ...visitedStories,
+      story.id
+    ]
   }
 
   get mainLink() {
