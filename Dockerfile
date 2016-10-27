@@ -19,5 +19,4 @@ RUN mkdir $MTTRS_FRONTEND
 COPY . $MTTRS_FRONTEND
 WORKDIR $MTTRS_FRONTEND
 
-RUN npm install -g yarn
-RUN npm install --production
+RUN yarn install --production
