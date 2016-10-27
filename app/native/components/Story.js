@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { Image, Text, TouchableHighlight, View, AsyncStorage } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
@@ -10,9 +10,8 @@ import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 class Story extends Component {
   render() {
     const { story, openLink, openStoryLinks } = this.props
-
     return (
-      <View>
+      <View style={{ opacity: this.props.visited ? 0.4 : 1 }}>
         <View
           shadowOpacity={.1}
           shadowColor={'rgba(0, 0, 0, .6)'}
@@ -84,7 +83,8 @@ Story.propTypes = {
   story: PropTypes.object.isRequired,
   openLink: PropTypes.func.isRequired,
   openCategory: PropTypes.func.isRequired,
-  openStoryLinks: PropTypes.func.isRequired
+  openStoryLinks: PropTypes.func.isRequired,
+  visited: PropTypes.bool.isRequired
 }
 
 export default Story
