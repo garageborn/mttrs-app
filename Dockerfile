@@ -1,4 +1,4 @@
-FROM node:6.3.1-slim
+FROM node:6.9.1-slim
 
 # install dependencies
 RUN apt-get update -qq && apt-get install --fix-missing -y \
