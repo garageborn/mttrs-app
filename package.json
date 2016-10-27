@@ -35,7 +35,6 @@
     "moment": "^2.15.2",
     "moment-timezone": "^0.5.7",
     "node-sass": "^3.10.1",
-    "path": "^0.12.7",
     "postcss-cssnext": "^2.8.0",
     "postcss-loader": "^0.13.0",
     "pug": "^2.0.0-beta6",
