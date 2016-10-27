@@ -1,4 +1,4 @@
-FROM node:6.9.1-slim
+FROM node:6.3.1-slim
 
 # install dependencies
 RUN apt-get update -qq && apt-get install --fix-missing -y \
@@ -19,5 +19,4 @@ RUN mkdir $MTTRS_FRONTEND
 COPY . $MTTRS_FRONTEND
 WORKDIR $MTTRS_FRONTEND
 
-RUN npm install -g yarn
-RUN yarn install --production
+RUN npm install --production --silent --no-progress
