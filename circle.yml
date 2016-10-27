@@ -14,6 +14,7 @@ dependencies:
     - ~/.yarn-cache
   override:
     - yarn install
+    - bundle install
 
 deployment:
   production:
