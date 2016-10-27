@@ -67,7 +67,7 @@ class StoryContainer extends Component {
     if (_isNil(visitedStories)) {
       visitedStories = []
     } else {
-      this.addStoryToStorage(visitedStories, story)
+      this.addStoryToStorage(JSON.parse(visitedStories), story)
     }
 
     AsyncStorage.setItem('visitedStories', JSON.stringify(visitedStories))
@@ -82,13 +82,14 @@ class StoryContainer extends Component {
   }
 
   addStoryToStorage(visitedStories, story) {
-    const currentVisitedStories = JSON.parse(visitedStories)
-    const firstVisitStory = currentVisitedStories.indexOf(story.id) === -1
-    if (firstVisitStory)
-      visitedStories = [
-        ...currentVisitedStories,
-        story.id
-      ]
+    const isVisited = visitedStories.indexOf(story.id) !== -1
+
+    if (isVisited) return
+
+    visitedStories = [
+      ...visitedStories,
+      story.id
+    ]
   }
 
   get mainLink() {
