@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, WebView, Platform, ProgressViewIOS, ProgressBarAndroid } from 'react-native'
-import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import styles from '../styles/App'
 
