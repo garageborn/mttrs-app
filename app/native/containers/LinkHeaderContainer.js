@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
-import styles from '../styles/HeaderPublisher'
+import { connect } from 'react-redux'
+import Share from 'react-native-share'
+import styles from '../styles/HeaderWebview'
 import Router from '../config/Router'
 import { NavigationActions } from '../actions/index'
-import Share from 'react-native-share'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class LinkHeaderContainer extends Component {

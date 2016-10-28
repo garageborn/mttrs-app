@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
 import styles from '../styles/Story'
+import PublisherLogo from './PublisherLogo'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryPublishers extends Component {
@@ -11,7 +12,7 @@ class StoryPublishers extends Component {
       <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
           <Text style={styles.lightText}>From </Text>
-          <Image style={styles.publisherLogo} source={require('../assets/icons/icon-publisher-mock.png')} />
+          <PublisherLogo source={require('../assets/icons/icon-publisher-mock.png')} />
           {this.getMainPublisher()}
           {this.getCounter()}
         </View>

@@ -11,7 +11,8 @@ class Header extends Component {
       <View style={styles.header}>
         <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
           <View style={styles.headerContainer}>
-            <Image style={styles.icon} source={icon} />
+            {icon}
+            {/* <Image style={styles.icon} source={icon} /> */}
             <Text style={styles.headerTitle}>{title}</Text>
             <Image source={require('../assets/arrow.png')} />
           </View>

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
+import PublisherLogo from './PublisherLogo'
 import styles from '../styles/StoryLinks'
 import moment from '../../common/utils/Moment'
 import ParseDate from '../../common/utils/ParseDate'
@@ -30,7 +31,7 @@ class StoryLink extends Component {
             onPress={e => openPublisher(link.publisher)}
             underlayColor={WHITE_TRANSPARENT_COLOR}>
             <View style={styles.publisher}>
-              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+              <PublisherLogo source={require('../assets/publisher-placeholder.png')} />
               <View style={styles.publisherInfo}>
                 <Text style={styles.publisherName}>{link.publisher.name}</Text>
               </View>
