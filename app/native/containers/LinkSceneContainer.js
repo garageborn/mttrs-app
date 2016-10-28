@@ -51,7 +51,7 @@ class LinkSceneContainer extends Component {
 
   render() {
     const { url } = this.props.route.params.link
-    console.log(this.state.progress)
+
     return (
       <View style={styles.container}>
         {/* Waiting for the new ex-navigation release which will fix this */}
