@@ -5,6 +5,8 @@ import LinkHeaderContainer from './LinkHeaderContainer'
 import styles from '../styles/App'
 
 class LinkSceneContainer extends Component {
+  static progress
+
   static route = {
     navigationBar: {
       ...Platform.select({
@@ -25,30 +27,29 @@ class LinkSceneContainer extends Component {
     this.state = {
       progress: 0
     }
-
-    this.updateProgress = this.updateProgress.bind(this)
-    this.getProgress = this.getProgress.bind(this)
   }
 
   componentDidMount() {
-    this.updateProgress()
+    this.progressLoading()
   }
 
-  updateProgress() {
-    let progress = this.state.progress + 0.01;
-    this.setState({ progress })
+  componentWillUnmount() {
+    clearInterval(this.constructor.progress)
   }
 
-  getProgress(offset) {
-    let progress = this.state.progress + offset
-    return Math.sin(progress % Math.PI) % 1
+  progressLoading() {
+    this.constructor.progress = setInterval(() => {
+      this.setState({
+        progress: this.state.progress === 1 ? 1 : Math.min(1, this.state.progress + 0.01)
+      })
+    }, 17 * 2)
   }
 
-  renderProgressBar() {
+  renderProgressBar = () => {
     if (Platform.OS === 'ios') {
-      return <ProgressViewIOS style={{marginTop: 11}} progress={this.getProgress(0)} progressTintColor={'#08C'} />
+      return <ProgressViewIOS style={{marginTop: 11}} progress={this.state.progress} progressTintColor={'#2672D7'} />
     } else {
-      return <ProgressBarAndroid progress={this.state.progress} indeterminate={false} styleAttr='Horizontal' color='#08C' />
+      return <ProgressBarAndroid style={{marginTop: -6}} progress={this.state.progress} indeterminate={false} styleAttr='Horizontal' color='#2672D7' />
     }
   }
 
@@ -64,10 +65,9 @@ class LinkSceneContainer extends Component {
         <WebView
           source={{uri: url}}
           contentInset={{top: 11}}
-          onLoadStart={() => console.log('Loading...')}
-          onLoad={() => console.log('Done.')}
           startInLoadingState={true}
-          renderLoading={this.renderProgressBar.bind(this)} />
+          renderLoading={this.renderProgressBar}
+          />
       </View>
     )
   }
