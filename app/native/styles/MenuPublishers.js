@@ -57,21 +57,18 @@ const styles = StyleSheet.create({
     height: 60,
     marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#DDDDDD'
+    borderBottomColor: '#DDD'
   },
 
   name: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#666666'
+    color: '#666',
+    marginLeft: 10
   },
 
   touch: {
     backgroundColor: '#F1F1F1',
-  },
-
-  listHeaderImage: {
-
   }
 })
 

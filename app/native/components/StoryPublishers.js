@@ -12,7 +12,7 @@ class StoryPublishers extends Component {
       <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
           <Text style={styles.lightText}>From </Text>
-          <PublisherLogo source={require('../assets/icons/icon-publisher-mock.png')} />
+          <PublisherLogo skin='light' source={require('../assets/icons/icon-publisher-mock.png')} />
           {this.getMainPublisher()}
           {this.getCounter()}
         </View>

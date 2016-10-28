@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { Image } from 'react-native'
 import Header from '../components/Header'
+import styles from '../styles/Header'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 class HomeHeaderContainer extends Component {
   get icon() {
-    return <Image source={require('../assets/icons/icon-top-stories.png')} />
+    return <Image style={styles.icon} source={require('../assets/icons/icon-top-stories.png')} />
   }
 
   render() {
