@@ -40,9 +40,9 @@ class LinkSceneContainer extends Component {
   progressLoading() {
     this.constructor.progress = setInterval(() => {
       this.setState({
-        progress: this.state.progress === 1 ? 1 : Math.min(1, this.state.progress + 0.01)
+        progress: this.state.progress === 1 ? 1 : Math.min(0.95, this.state.progress + 0.01)
       })
-    }, 20 * 2)
+    }, 50)
   }
 
   renderProgressBar = () => {
