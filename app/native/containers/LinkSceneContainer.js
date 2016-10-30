@@ -7,21 +7,6 @@ import styles from '../styles/App'
 class LinkSceneContainer extends Component {
   static progress
 
-  static route = {
-    navigationBar: {
-      ...Platform.select({
-        ios: {
-          renderLeft: () => <View />,
-          renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
-          backgroundColor: '#262C5B'
-        },
-        android: {
-          visible: false
-        }
-      })
-    }
-  }
-
   constructor() {
     super()
     this.state = {
@@ -49,18 +34,19 @@ class LinkSceneContainer extends Component {
     return <ProgressBar progress={this.state.progress} color='#2672D7' />
   }
 
+  get contentInset() {
+    return Platform.OS === 'ios' ? 0 : 11
+  }
+
   render() {
     const { url } = this.props.route.params.link
 
     return (
       <View style={styles.container}>
-        {/* Waiting for the new ex-navigation release which will fix this */}
-        {Platform.OS === 'android' &&
-          <LinkHeaderContainer link={this.props.route.params.link} />
-        }
+        <LinkHeaderContainer link={this.props.route.params.link} />
         <WebView
           source={{uri: url}}
-          contentInset={{top: 11}}
+          contentInset={{top: this.contentInset}}
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
           />
