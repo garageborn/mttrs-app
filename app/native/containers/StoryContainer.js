@@ -44,7 +44,7 @@ class StoryContainer extends Component {
   }
 
   openCategory() {
-    this.props.dispatch(NavigationActions.category(this.mainCategory))
+    this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
   }
 
   openPublisher() {
