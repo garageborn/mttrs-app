@@ -57,39 +57,18 @@ const styles = StyleSheet.create({
     height: 60,
     marginHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#DDDDDD'
-  },
-
-  logo: {
-    width: 30,
-    height: 30,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: '#F1F1F1'
+    borderBottomColor: '#DDD'
   },
 
   name: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#666666'
-  },
-
-  logoContainer: {
-    backgroundColor: 'white',
-    marginRight: 10,
-    borderRadius: 30,
-    width: 32,
-    height: 32,
-    borderWidth: 1,
-    borderColor: '#CCCCCC'
+    color: '#666',
+    marginLeft: 10
   },
 
   touch: {
     backgroundColor: '#F1F1F1',
-  },
-
-  listHeaderImage: {
-
   }
 })
 

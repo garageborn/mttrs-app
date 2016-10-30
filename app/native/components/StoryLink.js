@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
+import PublisherLogo from './PublisherLogo'
 import styles from '../styles/StoryLinks'
 import moment from '../../common/utils/Moment'
 import ParseDate from '../../common/utils/ParseDate'
 import KFormat from '../../common/utils/KFormat'
+import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryLink extends Component {
@@ -19,6 +21,13 @@ class StoryLink extends Component {
     return this.isHeader(this.props.linkType) ? styles.headerContainer : styles.rowContainer
   }
 
+  get publisherLogo() {
+    const { publisher } = this.props.link
+    if (!publisher.icon_id) return <View />
+    const uri = cloudinary.id(publisher.icon_id, { secure: true })
+    return { uri }
+  }
+
   render() {
     const { link, rowID, openLink, openPublisher } = this.props
     return (
@@ -30,7 +39,7 @@ class StoryLink extends Component {
             onPress={e => openPublisher(link.publisher)}
             underlayColor={WHITE_TRANSPARENT_COLOR}>
             <View style={styles.publisher}>
-              <Image style={styles.logo} source={require('../assets/publisher-placeholder.png')} />
+              <PublisherLogo size={30} source={this.publisherLogo} />
               <View style={styles.publisherInfo}>
                 <Text style={styles.publisherName}>{link.publisher.name}</Text>
               </View>
