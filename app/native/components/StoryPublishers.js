@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
-import styles from '../styles/Story'
 import PublisherLogo from './PublisherLogo'
+import styles from '../styles/Story'
+import publisherLogoStyles from '../styles/PublisherLogo'
+import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryPublishers extends Component {
@@ -12,7 +14,7 @@ class StoryPublishers extends Component {
       <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
           <Text style={styles.lightText}>From </Text>
-          <PublisherLogo source={require('../assets/icons/icon-publisher-mock.png')} />
+          <PublisherLogo source={this.publisherLogo} />
           {this.getMainPublisher()}
           {this.getCounter()}
         </View>
@@ -23,6 +25,13 @@ class StoryPublishers extends Component {
   getMainPublisher() {
     const { main_link } = this.props.story
     return <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+  }
+
+  get publisherLogo() {
+    const { main_link } = this.props.story
+    if (!main_link.publisher.icon_id) return <View style={publisherLogoStyles.logoContainer} />
+    const uri = cloudinary.id(main_link.publisher.icon_id, { secure: true })
+    return { uri }
   }
 
   getCounter() {

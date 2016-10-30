@@ -26,7 +26,7 @@ class PublisherMenuItem extends Component {
     const { publisher } = this.props
     if (!publisher.icon_id) return <View style={publisherLogoStyles.logoContainer} />
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
-    return <PublisherLogo source={{ uri }} />
+    return <PublisherLogo size={30} source={{ uri }} />
   }
 }
 

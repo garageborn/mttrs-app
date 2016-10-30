@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import { connect } from 'react-redux'
 import Share from 'react-native-share'
-import _isNil from 'lodash/isNil'
 import styles from '../styles/HeaderWebview'
 import Router from '../config/Router'
 import PublisherLogo from '../components/PublisherLogo'
@@ -29,13 +28,20 @@ class LinkHeaderContainer extends Component {
     return Share.open(shareOptions)
   }
 
+  get publisherLogo() {
+    const { publisher } = this.props.link
+    if (!publisher.icon_id) return <View />
+    const uri = cloudinary.id(publisher.icon_id, { secure: true })
+    return { uri }
+  }
+
   render() {
     const { link } = this.props
 
     return (
       <View style={styles.header} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={.1} elevation={1}>
         <View style={styles.publisher}>
-          <PublisherLogo size={25} skin='dark' source={require('../assets/publisher-placeholder.png')} />
+          <PublisherLogo size={25} skin='dark' source={this.publisherLogo} />
           <View style={styles.publisherInfo}>
             <Text style={styles.title}>{link.publisher.name}</Text>
             <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
