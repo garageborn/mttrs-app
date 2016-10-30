@@ -60,3 +60,6 @@ android/app/mttrs-release-key.keystore
 # Frameit generated screenshots
 /fastlane/screenshots/*/*-portrait_framed.png
 /fastlane/screenshots/*/*-landscape_framed.png
+
+.vscode
+tsconfig.json
