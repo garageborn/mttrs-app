@@ -5,7 +5,7 @@ import { NavigationActions } from '@exponent/ex-navigation'
 
 class PublisherHeaderContainer extends Component {
   get icon() {
-    return <PublisherLogo source={require('../assets/icons/icon-publisher-mock.png')} />
+    return <PublisherLogo skin='dark' source={require('../assets/icons/icon-publisher-mock.png')} />
   }
 
   render() {

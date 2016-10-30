@@ -6,21 +6,15 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    borderWidth: 1
+    borderWidth: 1,
+    borderColor: '#CCC'
   },
 
   logo: {
     width: 22,
     height: 22,
     borderRadius: 11,
-    borderWidth: 1
-  },
-
-  lightLogoContainerSkin: {
-    borderColor: '#CCC'
-  },
-
-  lightLogoSkin: {
+    borderWidth: 1,
     borderColor: '#F1F1F1'
   },
 

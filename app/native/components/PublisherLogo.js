@@ -5,20 +5,25 @@ import styles from '../styles/PublisherLogo'
 class PublisherLogo extends Component {
   get logoContainerStyles() {
     const { skin, size } = this.props
+    let offset = 2
+    let styleArr = [styles.logoContainer, this.publisherLogoSize(size + offset)]
 
-    if (skin === 'light') {
-      return styles.lightLogoContainerSkin
-    } else {
-      return styles.darkLogoContainerSkin
+    if (skin === 'dark') {
+      styleArr.push(styles.darkLogoContainerSkin)
     }
+
+    return styleArr
   }
 
   get logoStyles() {
     const { skin, size } = this.props
+    let styleArr = [styles.logo, this.publisherLogoSize(size)]
 
-    if (skin === 'light') {
-      return styles.lightLogoSkin
+    if (skin === 'dark') {
+      styleArr.push(styles.darkLogoSkin)
     }
+
+    return styleArr
   }
 
   publisherLogoSize(size) {
@@ -33,8 +38,8 @@ class PublisherLogo extends Component {
     const { source } = this.props
 
     return (
-      <View style={[styles.logoContainer, this.logoContainerStyles]}>
-        <Image style={[styles.logo, this.logoStyles]} source={source} />
+      <View style={this.logoContainerStyles}>
+        <Image style={this.logoStyles} source={source} />
       </View>
     )
   }
@@ -42,8 +47,12 @@ class PublisherLogo extends Component {
 
 PublisherLogo.propTypes = {
   source: PropTypes.any.isRequired,
-  skin: PropTypes.string.isRequired,
+  skin: PropTypes.string,
   size: PropTypes.number
+}
+
+PublisherLogo.defaultProps = {
+  size: 22
 }
 
 export default PublisherLogo

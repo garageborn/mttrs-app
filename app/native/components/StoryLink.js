@@ -31,7 +31,7 @@ class StoryLink extends Component {
             onPress={e => openPublisher(link.publisher)}
             underlayColor={WHITE_TRANSPARENT_COLOR}>
             <View style={styles.publisher}>
-              <PublisherLogo skin='light' source={require('../assets/publisher-placeholder.png')} />
+              <PublisherLogo size={30} source={require('../assets/publisher-placeholder.png')} />
               <View style={styles.publisherInfo}>
                 <Text style={styles.publisherName}>{link.publisher.name}</Text>
               </View>
