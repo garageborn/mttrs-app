@@ -11,13 +11,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#262C5B'
   },
 
+  publisherInfo: {
+    marginLeft: 12
+  },
+
   publisher: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-
-  logo: {
-    marginRight: 12
   },
 
   title: {
