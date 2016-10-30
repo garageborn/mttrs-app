@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
 import PublisherLogo from './PublisherLogo'
 import styles from '../styles/Story'
-import publisherLogoStyles from '../styles/PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
@@ -29,7 +28,7 @@ class StoryPublishers extends Component {
 
   get publisherLogo() {
     const { main_link } = this.props.story
-    if (!main_link.publisher.icon_id) return <View style={publisherLogoStyles.logoContainer} />
+    if (!main_link.publisher.icon_id) return <View />
     const uri = cloudinary.id(main_link.publisher.icon_id, { secure: true })
     return { uri }
   }

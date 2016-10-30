@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, TouchableHighlight, Image } from 'react-native'
 import PublisherLogo from './PublisherLogo'
 import styles from '../styles/MenuPublishers'
-import publisherLogoStyles from '../styles/PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
@@ -24,7 +23,7 @@ class PublisherMenuItem extends Component {
 
   renderIcon() {
     const { publisher } = this.props
-    if (!publisher.icon_id) return <View style={publisherLogoStyles.logoContainer} />
+    if (!publisher.icon_id) return <View />
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return <PublisherLogo size={30} source={{ uri }} />
   }

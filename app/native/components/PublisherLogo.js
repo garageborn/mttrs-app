@@ -6,7 +6,7 @@ class PublisherLogo extends Component {
   get logoContainerStyles() {
     const { skin, size } = this.props
     let offset = 2
-    let styleArr = [styles.logoContainer, this.publisherLogoSize(size + offset)]
+    let styleArr = [styles.logoContainer, this.getSize(size + offset)]
 
     if (skin === 'dark') {
       styleArr.push(styles.darkLogoContainerSkin)
@@ -17,7 +17,7 @@ class PublisherLogo extends Component {
 
   get logoStyles() {
     const { skin, size } = this.props
-    let styleArr = [styles.logo, this.publisherLogoSize(size)]
+    let styleArr = [styles.logo, this.getSize(size)]
 
     if (skin === 'dark') {
       styleArr.push(styles.darkLogoSkin)
@@ -26,7 +26,7 @@ class PublisherLogo extends Component {
     return styleArr
   }
 
-  publisherLogoSize(size) {
+  getSize(size) {
     return {
       width: size,
       height: size,
