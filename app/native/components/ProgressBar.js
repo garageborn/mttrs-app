@@ -16,7 +16,7 @@ const ProgressBar = ({ progress, color }) => {
 
 const styles = StyleSheet.create({
   progressBar: {
-    marginTop: Platform.OS === 'ios' ? 11 : -6
+    marginTop: Platform.OS === 'ios' ? 0 : -6
   }
 })
 
