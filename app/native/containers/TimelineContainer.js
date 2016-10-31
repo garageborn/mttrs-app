@@ -97,7 +97,6 @@ class TimelineContainer extends Component {
   }
 
   render() {
-    console.log('render TimelineContainer')
     const { items, isFetching, isFetchingTop } = this.props
     return (
         <View style={styles.container}>

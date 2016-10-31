@@ -16,7 +16,6 @@ class CategoryMenuContainer extends Component {
   }
 
   render() {
-    console.log('render CategoryMenuContainer')
     return (
       <View>
         <View style={styles.topStoriesContainer}>
@@ -29,18 +28,10 @@ class CategoryMenuContainer extends Component {
         </View>
 
         <View style={styles.categories}>
-          { this.renderCategories() }
+          { /*this.renderCategories()*/ }
         </View>
       </View>
     )
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.info('shouldComponentUpdate')
-    console.log(this.props.data.categories)
-    console.log(nextProps.data.categories)
-    console.log(this.props.data.categories != nextProps.data.categories)
-    return this.props.data.categories !== nextProps.data.categories
   }
 
   renderCategories() {
