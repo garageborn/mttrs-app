@@ -2,7 +2,6 @@ import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
 
 export function home() {
-  console.log('home')
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)

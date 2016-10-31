@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import { CategoryActions, NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions } from '../actions/index'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class CategoryMenuContainer extends Component {
-  static fetchData({ dispatch }) {
-    return dispatch(CategoryActions.getCategories())
-  }
-
   constructor(props) {
     super(props)
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
-  }
-
-  componentDidMount() {
-    this.constructor.fetchData(this.props)
   }
 
   render() {
@@ -41,8 +35,10 @@ class CategoryMenuContainer extends Component {
   }
 
   renderCategories() {
-    const { categories, params } = this.props
-    if (!categories.length) return
+    const { params } = this.props
+    const { categories, loading } = this.props.data
+
+    if (loading) return
     return categories.map((category) => {
       let isActive = false
       if (params.section != null && typeof params.section.model !== 'undefined')
@@ -65,9 +61,6 @@ class CategoryMenuContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    categories: state.CategoriesReducers.categories
-  }
-}
-export default connect(mapStateToProps)(CategoryMenuContainer)
+const Query = gql`query { categories { id name slug color icon_id } }`
+const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
+export default connect()(CategoryMenuContainerWithData)
