@@ -16,6 +16,7 @@ class CategoryMenuContainer extends Component {
   }
 
   render() {
+    console.log('render CategoryMenuContainer')
     return (
       <View>
         <View style={styles.topStoriesContainer}>
@@ -34,20 +35,28 @@ class CategoryMenuContainer extends Component {
     )
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.info('shouldComponentUpdate')
+    console.log(this.props.data.categories)
+    console.log(nextProps.data.categories)
+    console.log(this.props.data.categories != nextProps.data.categories)
+    return this.props.data.categories !== nextProps.data.categories
+  }
+
   renderCategories() {
-    const { params } = this.props
     const { categories, loading } = this.props.data
 
     if (loading) return
     return categories.map((category) => {
-      let isActive = false
-      if (params.section != null && typeof params.section.model !== 'undefined')
-        isActive = category.slug === params.section.model.slug
-
       return (
-        <CategoryTile key={category.id} category={category} onPress={this.openCategory} isActive={isActive}/>
+        <CategoryTile
+          key={category.id}
+          category={category}
+          onPress={this.openCategory}
+          isActive={this.isActive(category)}
+          />
       )
-    }, this)
+    })
   }
 
   openHome() {
@@ -58,6 +67,12 @@ class CategoryMenuContainer extends Component {
   openCategory(category) {
     this.props.dispatch(NavigationActions.selectCategory(category))
     this.props.dispatch(MenuActions.closeMenu())
+  }
+
+  isActive(category) {
+    const { params } = this.props
+    if (params.section == null || typeof params.section.model === 'undefined') return false
+    return category.slug === params.section.model.slug
   }
 }
 

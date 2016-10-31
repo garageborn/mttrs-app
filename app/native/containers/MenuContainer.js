@@ -27,6 +27,7 @@ class MenuContainer extends Component {
   }
 
   render() {
+    console.log('render MenuContainer')
     return (
       <View style={styles.menu}>
         <View style={styles.selector}>

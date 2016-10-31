@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions } from 'react-native'
+import { View, Animated, Dimensions, Easing } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from '@exponent/ex-navigation'
 import { TimelineActions, MenuActions } from '../actions/index'
@@ -74,20 +74,30 @@ class TimelineContainer extends Component {
   }
 
   animate(type) {
-    const value = type === 'in' ? 0 : -height;
-    const callback = type === 'out' ? this.closeMenu : null
+    let value, callback, easing = null
+    if (type === 'in') {
+      value = 0
+      easing = Easing.out(Easing.quad)
+    } else {
+      value = -height
+      callback = this.closeMenu
+      easing = Easing.in(Easing.quad)
+    }
+
     return (
       Animated.timing(
         this.state.menuPositionY,
         {
           toValue: value,
-          duration: 330
+          duration: 330,
+          easing: easing
         }
       ).start(callback)
     )
   }
 
   render() {
+    console.log('render TimelineContainer')
     const { items, isFetching, isFetchingTop } = this.props
     return (
         <View style={styles.container}>
