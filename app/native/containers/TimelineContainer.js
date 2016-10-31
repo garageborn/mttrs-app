@@ -2,8 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { View, Animated, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from '@exponent/ex-navigation'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { TimelineActions, MenuActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
@@ -11,7 +9,6 @@ import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
 import MenuContainer from './MenuContainer'
-import moment from '../../common/utils/Moment'
 
 const { height } = Dimensions.get('window')
 
@@ -27,6 +24,10 @@ class TimelineContainer extends Component {
     }
   }
 
+  componentDidMount() {
+    this.fetchData(this.props)
+  }
+
   componentWillReceiveProps(nextProps) {
     let nextSection = nextProps.params.section || {}
     let currentSection = this.props.params.section || {}
@@ -39,8 +40,8 @@ class TimelineContainer extends Component {
   }
 
   fetchData(props) {
-    // let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    // return props.dispatch(action)
+    let action = TimelineActions.getTimeline(this.fetchQuery(props))
+    return props.dispatch(action)
   }
 
   pullFetchData(props) {
@@ -88,18 +89,17 @@ class TimelineContainer extends Component {
 
   render() {
     const { items, isFetching, isFetchingTop } = this.props
-    console.info('render', this.props.data)
     return (
         <View style={styles.container}>
           {this.renderStoryLinks()}
-{/*          <Timeline
+          <Timeline
             items={items}
             isFetching={isFetching}
             isFetchingTop={isFetchingTop}
             onEndReached={this.onEndReached}
             onRefresh={this.onPullToRefresh}
             storyRenderer={this.renderStory}
-            />*/}
+            />
           <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
             { this.renderMenu() }
           </Animated.View>
@@ -131,57 +131,11 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    // items: state.TimelineReducers.items,
-    // isFetching: state.TimelineReducers.isFetching,
-    // isFetchingTop: state.TimelineReducers.isFetchingTop,
+    items: state.TimelineReducers.items,
+    isFetching: state.TimelineReducers.isFetching,
+    isFetchingTop: state.TimelineReducers.isFetchingTop,
     uiReducer: state.uiReducer
   }
 }
 
-// export default connect(mapStateToProps)(TimelineContainer)
-
-const Query = gql`
-  query Stories($limit: Int){
-    stories(limit: $limit) {
-      total_social
-      main_link {
-        title
-        publisher { name }
-        categories { name }
-      }
-      other_links {
-        publisher { name }
-      }
-    }
-  }
-`
-const TimelineContainerWithData = graphql(Query, {
-  options(props) {
-    console.log('options', props)
-    return {
-      variables: {
-        limit: 10,
-        published_at: moment().startOf('day').unix()
-      }
-    }
-  },
-  // props({ data: { loading, fetchMore } }) {
-  props({ data: { loading, stories, fetchMore } }) {
-    console.log('stories', stories)
-    return {
-      data: {
-        loading,
-        stories,
-        loadMoreEntries() {
-          return fetchMore({
-            variables: {},
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              console.log('update query')
-            }
-          })
-        }
-      }
-    }
-  }
-})(TimelineContainer)
-export default connect(mapStateToProps)(TimelineContainerWithData)
+export default connect(mapStateToProps)(TimelineContainer)
