@@ -1,8 +1,16 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    height: 55,
+    ...Platform.select({
+      ios: {
+        height: 75,
+        paddingTop: 20
+      },
+      android: {
+        height: 55
+      }
+    }),
     paddingLeft: 30,
     paddingRight: 10,
     flexDirection: 'row',
@@ -11,13 +19,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#262C5B'
   },
 
+  publisherInfo: {
+    marginLeft: 12
+  },
+
   publisher: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-
-  logo: {
-    marginRight: 12
   },
 
   title: {

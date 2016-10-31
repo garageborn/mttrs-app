@@ -1,3 +1,5 @@
+import _isNil from 'lodash/isNil'
+
 import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
@@ -27,6 +29,24 @@ const sortDate = items => {
   return items.sort((a, b) => b.date - a.date)
 }
 
+const publisherItems = (items, action) => {
+  items.map((itemsArray) => {
+    itemsArray.stories.map((story) => {
+      if (story.main_link.publisher.slug !== action.options.publisher_slug) {
+        const publisherLink = story.other_links.find((link) =>
+          link.publisher.slug === action.options.publisher_slug)
+        story.other_links = [
+          story.main_link,
+          ...story.other_links.slice(0, story.other_links.indexOf(publisherLink)),
+          ...story.other_links.slice(story.other_links.indexOf(publisherLink) + 1)
+        ]
+        story.main_link = publisherLink
+      }
+    })
+  })
+  return items
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case TIMELINE_DATE_REQUEST:
@@ -39,7 +59,10 @@ export default function(state = defaultState, action) {
       let items = [...state.items]
       let dateItem = items.find(item => item.date === action.date)
       Object.assign(dateItem, { stories: action.stories, isFetching: false })
-      return { ...state, items: items }
+      if (!_isNil(action.options.publisher_slug)) {
+        items = publisherItems(items, action)
+      }
+      return { ...state, items }
     case TIMELINE_RECEIVED:
       return { ...state, isFetching: false }
     case TIMELINE_PULL_TO_REFRESH:

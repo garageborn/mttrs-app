@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import { AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
 import { NavigationActions } from '../actions/index'
+import _isNil from 'lodash/isNil'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -11,6 +13,14 @@ class StoryContainer extends Component {
     this.openMainLink = this.openMainLink.bind(this)
     this.openCategory = this.openCategory.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
+
+    this.state = {
+      visited: false
+    }
+  }
+
+  componentWillMount() {
+    this.checkVisited()
   }
 
   render() {
@@ -22,16 +32,19 @@ class StoryContainer extends Component {
         section={section}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
-        openStoryLinks={this.openStoryLinks} />
+        openStoryLinks={this.openStoryLinks}
+        visited={this.state.visited} />
     )
   }
 
   openLink(link) {
     this.props.dispatch(NavigationActions.link(link))
+    this.addLinkToLocalStorage(this.props.story)
+    this.setState({visited: true})
   }
 
   openCategory() {
-    this.props.dispatch(NavigationActions.category(this.mainCategory))
+    this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
   }
 
   openPublisher() {
@@ -46,6 +59,37 @@ class StoryContainer extends Component {
 
   openMainLink() {
     this.openLink(this.mainLink)
+  }
+
+  async addLinkToLocalStorage(story) {
+    let visitedStories = await AsyncStorage.getItem('visitedStories')
+
+    if (_isNil(visitedStories)) {
+      visitedStories = []
+    } else {
+      this.addStoryToStorage(JSON.parse(visitedStories), story)
+    }
+
+    AsyncStorage.setItem('visitedStories', JSON.stringify(visitedStories))
+  }
+
+  async checkVisited() {
+    const visitedStories = await AsyncStorage.getItem('visitedStories')
+    if (!_isNil(visitedStories))
+      this.setState({
+        visited: visitedStories.indexOf(this.props.story.id) !== -1
+      })
+  }
+
+  addStoryToStorage(visitedStories, story) {
+    const isVisited = visitedStories.indexOf(story.id) !== -1
+
+    if (isVisited) return
+
+    visitedStories = [
+      ...visitedStories,
+      story.id
+    ]
   }
 
   get mainLink() {

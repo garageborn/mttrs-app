@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    fontWeight: '500'
+    fontWeight: '400',
+    fontFamily: 'Open Sans'
   },
 
   footer: {

@@ -2,9 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { Image } from 'react-native'
 import { NavigationActions } from '@exponent/ex-navigation'
 import Header from '../components/Header'
+import styles from '../styles/Header'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 class CategoryHeaderContainer extends Component {
+  get icon() {
+    return <Image style={styles.icon} source={{uri: this.getCategoryIcon()}} />
+  }
+
   getCategoryIcon() {
     const { icon_id } = this.props.category
     if (!icon_id) return
@@ -16,8 +21,7 @@ class CategoryHeaderContainer extends Component {
       height: 40,
       crop: 'crop'
     }
-    const uri = cloudinary.id(icon_id, options)
-    return { uri }
+    return cloudinary.id(icon_id, options)
   }
 
   render() {
@@ -26,7 +30,7 @@ class CategoryHeaderContainer extends Component {
       <Header
         title={category.name}
         toggleMenu={toggleMenu}
-        icon={this.getCategoryIcon()}
+        icon={this.icon}
         />
     )
   }
