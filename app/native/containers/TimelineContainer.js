@@ -101,14 +101,18 @@ class TimelineContainer extends Component {
     return (
         <View style={styles.container}>
           {this.renderStoryLinks()}
-          <Timeline
-            items={items}
-            isFetching={isFetching}
-            isFetchingTop={isFetchingTop}
-            onEndReached={this.onEndReached}
-            onRefresh={this.onPullToRefresh}
-            storyRenderer={this.renderStory}
-            />
+
+          <View style={styles.listViewContainer}>
+            <Timeline
+              items={items}
+              isFetching={isFetching}
+              isFetchingTop={isFetchingTop}
+              onEndReached={this.onEndReached}
+              onRefresh={this.onPullToRefresh}
+              storyRenderer={this.renderStory}
+              />
+          </View>
+
           <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
             { this.renderMenu() }
           </Animated.View>
