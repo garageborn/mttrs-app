@@ -1,37 +1,46 @@
 import React, { Component } from 'react'
-import { View, WebView, Platform, Animated } from 'react-native'
+import { View, WebView, Platform, Animated, Easing } from 'react-native'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import styles from '../styles/App'
 
 class LinkSceneContainer extends Component {
-  static progress
-
   constructor() {
     super()
-    this.state = {
-      progress: 0
-    }
+    this.progress = new Animated.Value(0)
   }
 
   componentDidMount() {
-    this.progressLoading()
+    this.animate()
   }
 
-  componentWillUnmount() {
-    clearInterval(this.constructor.progress)
-  }
-
-  progressLoading() {
-    this.constructor.progress = setInterval(() => {
-      this.setState({
-        progress: this.state.progress === 1 ? 1 : Math.min(0.95, this.state.progress + 0.01)
-      })
-    }, 50)
+  animate() {
+    this.progress.setValue(0)
+    Animated.timing(
+      this.progress,
+      {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear
+      }
+    ).start(() => this.animate())
   }
 
   renderProgressBar = () => {
-    return <ProgressBar progress={this.state.progress} color='#2672D7' />
+    const width = this.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 400]
+    })
+
+    return (
+      <Animated.View
+        style={{
+          height: 3,
+          width,
+          backgroundColor: '#08C'
+        }}
+      />
+    )
   }
 
   get contentInset() {
@@ -44,6 +53,7 @@ class LinkSceneContainer extends Component {
     return (
       <View style={styles.container}>
         <LinkHeaderContainer link={this.props.route.params.link} />
+
         <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
