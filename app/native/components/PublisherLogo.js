@@ -46,7 +46,7 @@ class PublisherLogo extends Component {
 }
 
 PublisherLogo.propTypes = {
-  source: PropTypes.any.isRequired,
+  source: PropTypes.any,
   skin: PropTypes.string,
   size: PropTypes.number
 }
