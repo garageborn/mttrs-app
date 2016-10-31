@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
-const { width } = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +16,11 @@ const styles = StyleSheet.create({
 
   loadingText: {
     color: '#999999'
+  },
+
+  listViewContainer: {
+    height: height,
+    position: 'absolute'
   },
 
   listView: {

@@ -72,7 +72,7 @@ class Timeline extends Component {
 
     return (
       <ListView
-        style={[styles.listView, this.listViewStyle]}
+        style={styles.listView}
         dataSource={this.dataSource()}
         renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
@@ -80,10 +80,6 @@ class Timeline extends Component {
         onEndReached={onEndReached}
         />
     )
-  }
-
-  get listViewStyle() {
-    if (this.props.uiReducer.menu.isOpen && Platform.OS === 'ios') return { position: 'absolute' }
   }
 }
 
