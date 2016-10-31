@@ -2,7 +2,9 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
+  REQUEST_NEXT_TIMELINE, NEXT_TIMELINE_RECEIVED, NEXT_TIMELINE_DATE_RECEIVED,
+  NEXT_TIMELINE_DATE_REQUEST, PAGINATE
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
@@ -14,8 +16,16 @@ export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
 
+export const requestNextTimeline = () => ({
+  type: REQUEST_NEXT_TIMELINE
+})
+
 export const requestDate = (date) => ({
   type: TIMELINE_DATE_REQUEST,
+  date
+})
+export const nextRequestDate = (date) => ({
+  type: NEXT_TIMELINE_DATE_REQUEST,
   date
 })
 
@@ -37,6 +47,10 @@ export const pullToInfiniteTimelineCompleted = () => ({
 
 export const timelineReceived = () => ({
   type: TIMELINE_RECEIVED
+})
+
+export const nextTimelineReceived = () => ({
+  type: NEXT_TIMELINE_RECEIVED
 })
 
 export const pullToRefresh = (options) => {
@@ -61,8 +75,8 @@ export const infiniteToRefresh = (options) => {
 
 export function getTimeline(options) {
   return dispatch => {
+    console.log(options)
     dispatch(requestTimeline())
-
     let promise = null
 
     options.filter
@@ -73,8 +87,17 @@ export function getTimeline(options) {
   }
 }
 
+export function getNextTimeline(options) {
+  return dispatch => {
+    dispatch(requestNextTimeline())
+    let promise = dispatch(getDatesStories(options))
+
+    return promise.then(() => dispatch(nextTimelineReceived()))
+  }
+}
+
 const receiveDateStories = (date, stories, options) => ({
-  type: TIMELINE_DATE_RECEIVED,
+  type: options.next ? NEXT_TIMELINE_DATE_RECEIVED : TIMELINE_DATE_RECEIVED,
   date,
   stories,
   options
@@ -111,7 +134,7 @@ function getDatesStories(options) {
 
 function getDateStories(date, options) {
   return dispatch => {
-    dispatch(requestDate(date))
+    dispatch(options.next ? nextRequestDate(date) : requestDate(date))
     let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
 
     return API.getStories(query)
@@ -121,3 +144,8 @@ function getDateStories(date, options) {
       })
   }
 }
+
+export const paginate = (options) => ({
+  type: PAGINATE,
+  options
+})

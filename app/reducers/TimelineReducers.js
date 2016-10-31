@@ -4,13 +4,17 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
+  REQUEST_NEXT_TIMELINE, NEXT_TIMELINE_RECEIVED, NEXT_TIMELINE_DATE_RECEIVED,
+  NEXT_TIMELINE_DATE_REQUEST, PAGINATE
 } from '../constants/ActionTypes'
 
 let defaultState = {
   items: [],
   isFetching: false,
-  isFetchingTop: false
+  isFetchingTop: false,
+  nextItems: [],
+  isFetchingNext: false
 }
 
 const replaceItem = (source, index, item) => {
@@ -63,6 +67,17 @@ export default function(state = defaultState, action) {
         items = publisherItems(items, action)
       }
       return { ...state, items }
+    case NEXT_TIMELINE_DATE_REQUEST:
+      let nextTimelineDateItem = state.nextItems.find(item => item.date === action.date)
+      let nextIndex = state.nextItems.indexOf(nextTimelineDateItem)
+      let nextNewTimelineDateItem = Object.assign({ stories: [] }, nextTimelineDateItem, { date: action.date, isNextFetching: true })
+      let nextTimelineDateItems = replaceItem(state.nextItems, nextIndex, nextNewTimelineDateItem)
+      return { ...state, nextItems: sortDate(nextTimelineDateItems) }
+    case NEXT_TIMELINE_DATE_RECEIVED:
+      let nextItems = [...state.nextItems]
+      let nextDateItem = nextItems.find(item => item.date === action.date)
+      Object.assign(nextDateItem, { stories: action.stories, isFetchingNext: false })
+      return { ...state, nextItems }
     case TIMELINE_RECEIVED:
       return { ...state, isFetching: false }
     case TIMELINE_PULL_TO_REFRESH:
@@ -75,6 +90,15 @@ export default function(state = defaultState, action) {
       return { ...state, isFetchingBottom: false }
     case REQUEST_TIMELINE:
       return { ...state, items: [], isFetching: true }
+    case REQUEST_NEXT_TIMELINE:
+      return { ...state, nextItems: [], isFetchingNext: true }
+    case PAGINATE:
+      let pagination
+      if (action.options === 'next') {
+        pagination = { ...state, items: state.nextItems, nextItems: [] }
+      }
+
+      return pagination
     default:
       return state
   }

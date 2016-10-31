@@ -1,5 +1,6 @@
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
+import _isNil from 'lodash/isNil'
 
 export function home() {
   console.log('home')
@@ -21,12 +22,17 @@ export function link(link) {
   }
 }
 
-export function selectCategory(category) {
+export function selectCategory(category, source) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
+
+    if (!_isNil(source)) {
+      newParams = Object.assign({}, newParams, { source } )
+    }
+
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
