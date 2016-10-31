@@ -23,7 +23,7 @@ class StoryLink extends Component {
 
   get publisherLogo() {
     const { publisher } = this.props.link
-    if (!publisher.icon_id) return <View />
+    if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return { uri }
   }

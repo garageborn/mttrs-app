@@ -28,7 +28,7 @@ class StoryPublishers extends Component {
 
   get publisherLogo() {
     const { main_link } = this.props.story
-    if (!main_link.publisher.icon_id) return <View />
+    if (!main_link.publisher.icon_id) return
     const uri = cloudinary.id(main_link.publisher.icon_id, { secure: true })
     return { uri }
   }
