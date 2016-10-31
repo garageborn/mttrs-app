@@ -15,7 +15,7 @@ class LinkSceneContainer extends Component {
   }
 
   componentDidMount() {
-    this.progressLoading()
+    // this.progressLoading()
   }
 
   componentWillUnmount() {
@@ -48,7 +48,7 @@ class LinkSceneContainer extends Component {
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
           startInLoadingState={true}
-          renderLoading={this.renderProgressBar}
+          // renderLoading={this.renderProgressBar}
           />
       </View>
     )

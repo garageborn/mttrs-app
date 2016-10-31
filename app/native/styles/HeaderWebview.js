@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
         height: 55
       }
     }),
-    paddingLeft: 30,
-    paddingRight: 10,
+    paddingLeft: 28,
+    paddingRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 
   iconHighlight: {
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     padding: 5
   },
 
