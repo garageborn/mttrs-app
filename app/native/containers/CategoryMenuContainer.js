@@ -28,7 +28,7 @@ class CategoryMenuContainer extends Component {
         </View>
 
         <View style={styles.categories}>
-          { /*this.renderCategories()*/ }
+          { this.renderCategories() }
         </View>
       </View>
     )
