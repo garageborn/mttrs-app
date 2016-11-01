@@ -14,6 +14,7 @@ let defaultState = {
   isFetching: false,
   isFetchingTop: false,
   nextItems: [],
+  previousItems: [],
   isFetchingNext: false
 }
 
@@ -95,7 +96,7 @@ export default function(state = defaultState, action) {
     case PAGINATE:
       let pagination
       if (action.options === 'next') {
-        pagination = { ...state, items: state.nextItems, nextItems: [] }
+        pagination = { ...state, items: state.nextItems, previousItems: action.items, nextItems: [] }
       }
 
       return pagination

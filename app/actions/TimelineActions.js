@@ -145,7 +145,8 @@ function getDateStories(date, options) {
   }
 }
 
-export const paginate = (options) => ({
+export const paginate = (options, props) => ({
   type: PAGINATE,
-  options
+  options,
+  items: props.items
 })

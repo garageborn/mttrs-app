@@ -49,11 +49,19 @@ class TimelineContainer extends Component {
   }
 
   renderScene({ route }) {
-    const { items, nextItems, isFetching, isFetchingTop } = this.props
+    const { items, nextItems, previousItems, isFetching, isFetchingTop } = this.props
+
+    let timelineItems = []
+    let { index } = this.state.navigationState
+    let routeNumber = JSON.parse(route.key)
+
+    if (routeNumber === index) timelineItems = items
+    if (routeNumber === index + 1) timelineItems = nextItems
+    if (routeNumber === index - 1) timelineItems = previousItems
 
     return (
       <Timeline
-        items={route.key == this.state.navigationState.index ? items : nextItems}
+        items={timelineItems}
         isFetchingTop={isFetchingTop}
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
@@ -84,7 +92,7 @@ class TimelineContainer extends Component {
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
     if (nextProps.uiReducer.menu.retract) this.animate('out')
     if ((sectionNameChanged || sectionModelChanged) && nextProps.params.source === 'slider') {
-      this.cloneProps(nextProps)
+      this.cloneProps(this.props)
     }
   }
 
@@ -101,8 +109,8 @@ class TimelineContainer extends Component {
     }
   }
 
-  cloneProps(nextProps) {
-    return this.props.dispatch(TimelineActions.paginate('next'))
+  cloneProps(props) {
+    return props.dispatch(TimelineActions.paginate('next', props))
   }
 
   fetchCategories(props) {
@@ -239,6 +247,7 @@ class TimelineContainer extends Component {
 let mapStateToProps = (state) => {
   return {
     items: state.TimelineReducers.items,
+    previousItems: state.TimelineReducers.previousItems,
     nextItems: state.TimelineReducers.nextItems,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
