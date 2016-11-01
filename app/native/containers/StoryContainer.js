@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
-import { NavigationActions } from '../actions/index'
-import _isNil from 'lodash/isNil'
+import { NavigationActions, StorageActions } from '../actions/index'
+import _ from 'lodash'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -13,18 +12,14 @@ class StoryContainer extends Component {
     this.openMainLink = this.openMainLink.bind(this)
     this.openCategory = this.openCategory.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
-
-    this.state = {
-      visited: false
-    }
   }
 
   componentWillMount() {
-    this.checkVisited()
+    this.props.dispatch(StorageActions.getVisitedStories())
   }
 
   render() {
-    const { story, section } = this.props
+    const { story, section, visited } = this.props
 
     return (
       <Story
@@ -33,14 +28,13 @@ class StoryContainer extends Component {
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
-        visited={this.state.visited} />
+        visited={visited} />
     )
   }
 
   openLink(link) {
     this.props.dispatch(NavigationActions.link(link))
-    this.addLinkToLocalStorage(this.props.story)
-    this.setState({visited: true})
+    this.addStoryToLocalStorage()
   }
 
   openCategory() {
@@ -61,35 +55,14 @@ class StoryContainer extends Component {
     this.openLink(this.mainLink)
   }
 
-  async addLinkToLocalStorage(story) {
-    let visitedStories = await AsyncStorage.getItem('visitedStories')
-
-    if (_isNil(visitedStories)) {
-      visitedStories = []
-    } else {
-      this.addStoryToStorage(JSON.parse(visitedStories), story)
-    }
-
-    AsyncStorage.setItem('visitedStories', JSON.stringify(visitedStories))
-  }
-
-  async checkVisited() {
-    const visitedStories = await AsyncStorage.getItem('visitedStories')
-    if (!_isNil(visitedStories))
-      this.setState({
-        visited: visitedStories.indexOf(this.props.story.id) !== -1
-      })
+  addStoryToLocalStorage() {
+    this.props.dispatch(StorageActions.addVisitedStory(this.props.story))
   }
 
   addStoryToStorage(visitedStories, story) {
     const isVisited = visitedStories.indexOf(story.id) !== -1
-
     if (isVisited) return
-
-    visitedStories = [
-      ...visitedStories,
-      story.id
-    ]
+    return
   }
 
   get mainLink() {
@@ -109,4 +82,12 @@ StoryContainer.propTypes = {
   story: PropTypes.object.isRequired
 }
 
-export default connect()(StoryContainer)
+let mapStateToProps = (state, ownProps) => {
+  let isVisited = state.StorageReducer.visitedStories.items.indexOf(ownProps.story.id) !== -1
+
+  return {
+    visited: isVisited
+  }
+}
+
+export default connect(mapStateToProps)(StoryContainer)

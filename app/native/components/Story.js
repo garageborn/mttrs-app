@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Text, TouchableHighlight, View, AsyncStorage } from 'react-native'
+import { Image, Text, TouchableHighlight, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
