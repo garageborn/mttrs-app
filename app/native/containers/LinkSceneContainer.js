@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, WebView, Platform, Animated, Easing } from 'react-native'
+import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import styles from '../styles/App'
@@ -19,28 +19,23 @@ class LinkSceneContainer extends Component {
     Animated.timing(
       this.progress,
       {
-        toValue: 1,
-        duration: 2000,
+        toValue: 2,
+        duration: 15000,
         easing: Easing.linear
       }
     ).start(() => this.animate())
   }
 
-  renderProgressBar = () => {
-    const width = this.progress.interpolate({
+  getProgress() {
+    const { width } = Dimensions.get('window')
+    return this.progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, 400]
+      outputRange: [0, width]
     })
+  }
 
-    return (
-      <Animated.View
-        style={{
-          height: 3,
-          width,
-          backgroundColor: '#08C'
-        }}
-      />
-    )
+  renderProgressBar = () => {
+    return <ProgressBar progress={this.getProgress()} color='#08C' />
   }
 
   get contentInset() {
@@ -53,7 +48,6 @@ class LinkSceneContainer extends Component {
     return (
       <View style={styles.container}>
         <LinkHeaderContainer link={this.props.route.params.link} />
-
         <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
