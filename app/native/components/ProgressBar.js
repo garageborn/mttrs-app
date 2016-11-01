@@ -1,23 +1,22 @@
-import React from 'react'
-import {
-  StyleSheet,
-  ProgressViewIOS,
-  ProgressBarAndroid,
-  Platform
-} from 'react-native'
+import React, { PropTypes } from 'react'
+import { View, Animated } from 'react-native'
 
-const ProgressBar = ({ progress, color }) => {
-  if (Platform.OS === 'ios') {
-    return <ProgressViewIOS style={styles.progressBar} progress={progress} progressTintColor={color} />
-  } else {
-    return <ProgressBarAndroid style={styles.progressBar} progress={progress} indeterminate={false} styleAttr='Horizontal' color={color} />
-  }
+const ProgressBar = ({ progress, height, color }) => {
+  return <Animated.View style={{width: progress, height, backgroundColor: color}} />
 }
 
-const styles = StyleSheet.create({
-  progressBar: {
-    marginTop: Platform.OS === 'ios' ? 0 : -6
-  }
-})
+ProgressBar.propTypes = {
+  progress: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number
+  ]).isRequired,
+  height: PropTypes.number,
+  color: PropTypes.string
+}
+
+ProgressBar.defaultProps = {
+  height: 3,
+  color: '#08C'
+}
 
 export default ProgressBar

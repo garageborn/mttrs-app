@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
 
   loading: {
     flex: 1,
+    width,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -19,13 +20,13 @@ const styles = StyleSheet.create({
   },
 
   listViewContainer: {
-    height: height,
-    position: 'absolute'
+    position: 'absolute',
+    height
   },
 
   listView: {
     backgroundColor: '#F1F1F1',
-    width: width
+    width
   },
 
   hideRefreshControl: {

@@ -1,37 +1,41 @@
 import React, { Component } from 'react'
-import { View, WebView, Platform, Animated } from 'react-native'
+import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import styles from '../styles/App'
 
 class LinkSceneContainer extends Component {
-  static progress
-
   constructor() {
     super()
-    this.state = {
-      progress: 0
-    }
+    this.progress = new Animated.Value(0)
   }
 
   componentDidMount() {
-    this.progressLoading()
+    this.progressTransition()
   }
 
-  componentWillUnmount() {
-    clearInterval(this.constructor.progress)
+  progressTransition() {
+    this.progress.setValue(0)
+    Animated.timing(
+      this.progress,
+      {
+        toValue: 2,
+        duration: 15000,
+        easing: Easing.linear
+      }
+    ).start(() => this.progressTransition())
   }
 
-  progressLoading() {
-    this.constructor.progress = setInterval(() => {
-      this.setState({
-        progress: this.state.progress === 1 ? 1 : Math.min(0.95, this.state.progress + 0.01)
-      })
-    }, 50)
+  getProgress() {
+    const { width } = Dimensions.get('window')
+    return this.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, width]
+    })
   }
 
   renderProgressBar = () => {
-    return <ProgressBar progress={this.state.progress} color='#2672D7' />
+    return <ProgressBar progress={this.getProgress()} />
   }
 
   get contentInset() {
