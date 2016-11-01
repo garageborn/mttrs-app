@@ -35,7 +35,7 @@ class LinkSceneContainer extends Component {
   }
 
   renderProgressBar = () => {
-    return <ProgressBar progress={this.getProgress()} color='#08C' />
+    return <ProgressBar progress={this.getProgress()} />
   }
 
   get contentInset() {
