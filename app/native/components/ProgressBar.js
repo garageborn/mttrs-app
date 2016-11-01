@@ -1,8 +1,7 @@
 import React from 'react'
 import {
   View,
-  Animated,
-  StyleSheet
+  Animated
 } from 'react-native'
 
 const ProgressBar = ({ progress, color }) => {
