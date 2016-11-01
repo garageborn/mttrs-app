@@ -11,10 +11,10 @@ class LinkSceneContainer extends Component {
   }
 
   componentDidMount() {
-    this.animate()
+    this.progressTransition()
   }
 
-  animate() {
+  progressTransition() {
     this.progress.setValue(0)
     Animated.timing(
       this.progress,
@@ -23,7 +23,7 @@ class LinkSceneContainer extends Component {
         duration: 15000,
         easing: Easing.linear
       }
-    ).start(() => this.animate())
+    ).start(() => this.progressTransition())
   }
 
   getProgress() {
