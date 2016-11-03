@@ -18,7 +18,7 @@ export function getVisitedStories() {
 
     dispatch(requestVisitedStories())
     return AsyncStorage.getItem('visitedStories', (error, stories) => {
-      return dispatch(receiveVisitedStories(JSON.parse(stories)))
+      return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
     })
   }
 }

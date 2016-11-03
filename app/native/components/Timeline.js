@@ -31,7 +31,7 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-    console.log('------', this.props)
+
     items.forEach(item => {
       if (item.stories.length) {
         let section = item.date

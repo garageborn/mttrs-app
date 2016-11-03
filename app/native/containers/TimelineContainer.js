@@ -53,16 +53,10 @@ class TimelineContainer extends Component {
 
     let { index } = this.state.navigationState
     let routeNumber = JSON.parse(route.key)
-    let key = route.category ? route.category.slug : 'home'
-    // console.log('key', key)
-    // console.log('items', items)
+    let key = route.categry ? route.category.slug : 'home'
     let timelineItems = items[key]
-    // console.log('timelineItems', timelineItems)
 
-    // if (routeNumber === index) timelineItems = items
-    // if (routeNumber === index + 1) timelineItems = nextItems
-    // if (routeNumber === index - 1) timelineItems = previousItems
-    // console.log(timelineItems)
+    console.log('-----------', timelineItems)
 
     return (
       <Timeline
@@ -140,14 +134,8 @@ class TimelineContainer extends Component {
     if (!nextProps.categories.length) return
     nextProps.categories.forEach((category) => {
       let args = { category_slug: category.slug }
-      console.log('fetchNextCategoryData', args)
       nextProps.dispatch(TimelineActions.getTimeline(args))
     })
-    // let category = nextProps.categories[this.state.navigationState.index]
-    // if (!category) return
-    // let args = { category_slug: nextProps.categories[this.state.navigationState.index].slug }
-    // console.log('fetchNextCategoryData', args)
-    // nextProps.dispatch(TimelineActions.getTimeline(args))
   }
 
   fetchData(props) {
@@ -261,11 +249,8 @@ class TimelineContainer extends Component {
 }
 
 let mapStateToProps = (state) => {
-  console.log
   return {
     items: state.TimelineReducers.items,
-    // previousItems: state.TimelineReducers.previousItems,
-    // nextItems: state.TimelineReducers.nextItems,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
     categories: state.CategoriesReducers.categories,
