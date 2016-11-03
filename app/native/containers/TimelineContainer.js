@@ -32,8 +32,7 @@ class TimelineContainer extends Component {
         index: 0,
         routes: [
          { key: '0', title: 'Top Stories' }
-        ],
-        loaded: false
+        ]
       }
     }
   }
@@ -42,21 +41,12 @@ class TimelineContainer extends Component {
     this.setState({
       navigationState: {
         index,
-        routes: this.state.navigationState.routes,
-        loaded: true
+        routes: this.state.navigationState.routes
       }
     })
   }
 
   renderScene({ route }) {
-    // const { items, nextItems, previousItems, isFetching, isFetchingTop } = this.props
-
-    // let { index } = this.state.navigationState
-    // let routeNumber = JSON.parse(route.key)
-    // let key = route.category ? route.category.slug : 'home'
-    // let timelineItems = items[key]
-    let timelineItems = []
-
     return (
       <Timeline
         onEndReached={this.onEndReached}
@@ -89,9 +79,6 @@ class TimelineContainer extends Component {
     if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
     // if (nextProps.uiReducer.menu.isOpen) this.animate('in')
     // if (nextProps.uiReducer.menu.retract) this.animate('out')
-    // if ((sectionNameChanged || sectionModelChanged) && nextProps.params.source === 'slider') {
-    //   this.cloneProps(this.props)
-    // }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -105,10 +92,6 @@ class TimelineContainer extends Component {
     } else {
       dispatch(NavigationActions.home())
     }
-  }
-
-  cloneProps(props) {
-    // return props.dispatch(TimelineActions.paginate('next', props))
   }
 
   fetchCategories(props) {
@@ -154,10 +137,7 @@ class TimelineContainer extends Component {
   toggleLoading(nextProps) {
     this.setState(
       {
-        navigationState: {
-          ...this.state.navigationState,
-          loaded: true
-        }
+        navigationState: { ...this.state.navigationState }
       }
     )
   }

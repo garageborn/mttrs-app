@@ -3,21 +3,15 @@ import { connect } from 'react-redux'
 import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { TimelineActions } from '../actions/index'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
 
-
 class Timeline extends Component {
   constructor(props) {
     super(props)
-    console.warn('Timeline.constructor')
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log('componentWillReceiveProps', nextProps)
   }
 
   renderSectionHeader(sectionData, date) {
@@ -37,6 +31,7 @@ class Timeline extends Component {
   rowsAndSections() {
     let rows = {}
     let sections = []
+    console.log('rowsAndSections', this.props.data)
     const { timeline } = this.props.data
 
     timeline.forEach(item => {
@@ -65,9 +60,9 @@ class Timeline extends Component {
   }
 
   render() {
-    console.log('render', this.props.data)
     const { onEndReached } = this.props
 
+    console.log('render', this.props.data)
     if (this.props.data.loading) {
       return (
         <View style={styles.loading}>
@@ -80,14 +75,15 @@ class Timeline extends Component {
     }
 
     return (
-      <ListView
-        style={styles.listView}
-        dataSource={this.dataSource()}
-        renderRow={this.props.storyRenderer}
-        renderSectionHeader={this.renderSectionHeader}
-        refreshControl={this.refreshControl()}
-        onEndReached={onEndReached}
-      />
+      <View>
+        <Text style={{fontSize: 36}}>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Text>
+        <ListView
+          style={styles.listView}
+          dataSource={this.dataSource()}
+          renderRow={this.props.storyRenderer}
+
+        />
+      </View>
     )
   }
 }
@@ -99,14 +95,13 @@ Timeline.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
-  console.log('===============state', state)
   return {
     uiReducer: state.uiReducer
   }
 }
 
 const Query = gql`
-  query($categorySlug: String) {
+  query Batata($categorySlug: String) {
     timeline(days: 5, offset: 25) {
       date
       stories(limit: 1, popular: true, category_slug: $categorySlug) {
@@ -130,9 +125,19 @@ const TimelineWithData = graphql(Query, {
   options(props) {
     let { index } = props.navigationState
     let route = props.navigationState.routes[index]
-    console.info('TimelineWithData request', props, route)
     if (!route.category) return {}
-    return { variables: { categorySlug: route.category.slug } }
-  }
+    return {
+      variables: { categorySlug: route.category.slug }
+    }
+  },
+  // props({ data: { loading, timeline } }) {
+  //   console.log('props', timeline)
+  //   return {
+  //     data: {
+  //       loading,
+  //       timeline
+  //     }
+  //   }
+  // }
 })(Timeline)
 export default connect(mapStateToProps)(TimelineWithData)
