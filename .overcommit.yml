@@ -14,15 +14,3 @@ PreCommit:
 
   TrailingWhitespace:
     enabled: true
-
-PostCheckout:
-  NpmInstall:
-    enabled: true
-
-PostMerge:
-  NpmInstall:
-    enabled: true
-
-PostRewrite:
-  NpmInstall:
-    enabled: true

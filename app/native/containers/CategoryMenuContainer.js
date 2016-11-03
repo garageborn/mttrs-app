@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
-import { CategoryActions, NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions } from '../actions/index'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class CategoryMenuContainer extends Component {
@@ -33,33 +35,38 @@ class CategoryMenuContainer extends Component {
   }
 
   renderCategories() {
-    const { categories, params } = this.props
-    if (!categories.length) return
-    return categories.map((category) => {
-      let isActive = false
-      if (params.section != null && typeof params.section.model !== 'undefined')
-        isActive = category.slug === params.section.model.slug
+    const { categories, loading } = this.props.data
 
+    if (loading) return
+    return categories.map((category) => {
       return (
-        <CategoryTile key={category.id} category={category} onPress={this.openCategory} isActive={isActive}/>
+        <CategoryTile
+          key={category.id}
+          category={category}
+          onPress={this.openCategory}
+          isActive={this.isActive(category)}
+          />
       )
-    }, this)
+    })
   }
 
   openHome() {
+    this.props.dispatch(MenuActions.retractMenu())
     this.props.dispatch(NavigationActions.home())
-    this.props.dispatch(MenuActions.closeMenu())
   }
 
   openCategory(category) {
+    this.props.dispatch(MenuActions.retractMenu())
     this.props.dispatch(NavigationActions.selectCategory(category))
-    this.props.dispatch(MenuActions.closeMenu())
+  }
+
+  isActive(category) {
+    const { params } = this.props
+    if (params.section == null || typeof params.section.model === 'undefined') return false
+    return category.slug === params.section.model.slug
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    categories: state.CategoriesReducers.categories
-  }
-}
-export default connect(mapStateToProps)(CategoryMenuContainer)
+const Query = gql`query { categories { id name slug color icon_id } }`
+const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
+export default connect()(CategoryMenuContainerWithData)

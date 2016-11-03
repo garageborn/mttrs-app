@@ -49,7 +49,6 @@ class TimelineContainer extends Component {
   }
 
   renderScene({ route }) {
-    console.log('renderScene', route)
     // const { items, nextItems, previousItems, isFetching, isFetchingTop } = this.props
 
     // let { index } = this.state.navigationState
@@ -247,7 +246,6 @@ class TimelineContainer extends Component {
 }
 
 let mapStateToProps = (state) => {
-  console.log
   return {
     // items: state.TimelineReducers.items,
     // previousItems: state.TimelineReducers.previousItems,

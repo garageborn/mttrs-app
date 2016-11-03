@@ -16,7 +16,7 @@ class TimelineHeaderContainer extends Component {
   render() {
     return (
       <View>
-        { this.renderHeader() }
+        {this.renderHeader()}
       </View>
     )
   }
@@ -37,7 +37,11 @@ class TimelineHeaderContainer extends Component {
 
   toggleMenu() {
     const { menu } = this.props.uiReducer
-    return menu.isOpen ? this.props.dispatch(MenuActions.retractMenu()) : this.props.dispatch(MenuActions.openMenu())
+    if (menu.isOpen) {
+      return this.props.dispatch(MenuActions.retractMenu())
+    } else {
+      return this.props.dispatch(MenuActions.openMenu())
+    }
   }
 }
 

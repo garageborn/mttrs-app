@@ -10,9 +10,8 @@ import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 class Story extends Component {
   render() {
     const { story, openLink, openStoryLinks } = this.props
-
     return (
-      <View>
+      <View style={{ opacity: this.props.visited ? 0.4 : 1 }}>
         <View
           shadowOpacity={.1}
           shadowColor={'rgba(0, 0, 0, .6)'}
@@ -76,15 +75,29 @@ class Story extends Component {
   }
 
   get mainCategory() {
-    return this.mainLink.categories[0]
+    return this.props.story.main_category
   }
 }
 
 Story.propTypes = {
-  story: PropTypes.object.isRequired,
+  story: PropTypes.shape({
+    main_link: PropTypes.shape({
+      image_source_url: PropTypes.string.isRequired,
+      publisher: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        icon_id: PropTypes.string
+      }).isRequired,
+    }).isRequired,
+    other_links: PropTypes.array.isRequired,
+    main_category: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      color: PropTypes.string
+    }).isRequired,
+  }).isRequired,
   openLink: PropTypes.func.isRequired,
   openCategory: PropTypes.func.isRequired,
-  openStoryLinks: PropTypes.func.isRequired
+  openStoryLinks: PropTypes.func.isRequired,
+  visited: PropTypes.bool.isRequired
 }
 
 export default Story

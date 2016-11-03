@@ -5,8 +5,16 @@ machine:
     - docker
 
 dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - gem install bundler
+
   cache_directories:
     - ~/docker
+    - ~/.yarn-cache
+  override:
+    - yarn install
+    - bundle install
 
 deployment:
   production:

@@ -1,23 +1,31 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    height: 55,
-    paddingLeft: 30,
-    paddingRight: 10,
+    ...Platform.select({
+      ios: {
+        height: 75,
+        paddingTop: 20
+      },
+      android: {
+        height: 55
+      }
+    }),
+    paddingLeft: 28,
+    paddingRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#262C5B'
   },
 
+  publisherInfo: {
+    marginLeft: 12
+  },
+
   publisher: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-
-  logo: {
-    marginRight: 12
   },
 
   title: {
@@ -39,7 +47,7 @@ const styles = StyleSheet.create({
   },
 
   iconHighlight: {
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     padding: 5
   },
 
