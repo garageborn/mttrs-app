@@ -76,7 +76,7 @@ class Timeline extends Component {
     return (
       <ListView
         removeClippedSubviews={false}
-        initialListSize={10}
+        initialListSize={100}
         style={styles.listView}
         dataSource={this.dataSource()}
         renderRow={this.props.storyRenderer}
@@ -105,7 +105,7 @@ const Query = gql`
   query Batata($categorySlug: String) {
     timeline(days: 5, offset: 25) {
       date
-      stories(limit: 1, popular: true, category_slug: $categorySlug) {
+      stories(limit: 10, popular: true, category_slug: $categorySlug) {
         id
         total_social
         main_category { name color }
