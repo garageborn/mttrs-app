@@ -51,13 +51,17 @@ class TimelineContainer extends Component {
   renderScene({ route }) {
     const { items, nextItems, previousItems, isFetching, isFetchingTop } = this.props
 
-    let timelineItems = []
     let { index } = this.state.navigationState
     let routeNumber = JSON.parse(route.key)
+    let key = route.category ? route.category.slug : 'home'
+    // console.log('key', key)
+    // console.log('items', items)
+    let timelineItems = items[key]
+    // console.log('timelineItems', timelineItems)
 
-    if (routeNumber === index) timelineItems = items
-    if (routeNumber === index + 1) timelineItems = nextItems
-    if (routeNumber === index - 1) timelineItems = previousItems
+    // if (routeNumber === index) timelineItems = items
+    // if (routeNumber === index + 1) timelineItems = nextItems
+    // if (routeNumber === index - 1) timelineItems = previousItems
 
     return (
       <Timeline
@@ -86,7 +90,9 @@ class TimelineContainer extends Component {
     const fetchingChanged = nextProps.isFetching !== this.props.isFetching
 
     if (fetchingChanged) this.toggleLoading(nextProps)
-    if (fetchingChanged && !nextProps.isFetching) this.fetchNextCategoryData(nextProps)
+    // if (fetchingChanged && !nextProps.isFetching) this.fetchNextCategoryData(nextProps)
+    if (categories.length < nextProps.categories.length) this.fetchNextCategoryData(nextProps)
+
     if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
     if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
     if (nextProps.uiReducer.menu.isOpen) this.animate('in')
@@ -129,9 +135,11 @@ class TimelineContainer extends Component {
     })
   }
 
-  fetchNextCategoryData(props) {
-    let args = { next: true, category_slug: props.categories[this.state.navigationState.index].slug }
-    props.dispatch(TimelineActions.getNextTimeline(args))
+  fetchNextCategoryData(nextProps) {
+    let category = nextProps.categories[this.state.navigationState.index]
+    if (!category) return
+    let args = { category_slug: nextProps.categories[this.state.navigationState.index].slug }
+    nextProps.dispatch(TimelineActions.getTimeline(args))
   }
 
   fetchData(props) {
@@ -245,10 +253,11 @@ class TimelineContainer extends Component {
 }
 
 let mapStateToProps = (state) => {
+  console.log
   return {
     items: state.TimelineReducers.items,
-    previousItems: state.TimelineReducers.previousItems,
-    nextItems: state.TimelineReducers.nextItems,
+    // previousItems: state.TimelineReducers.previousItems,
+    // nextItems: state.TimelineReducers.nextItems,
     isFetching: state.TimelineReducers.isFetching,
     isFetchingTop: state.TimelineReducers.isFetchingTop,
     categories: state.CategoriesReducers.categories,

@@ -4,18 +4,12 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
-  REQUEST_NEXT_TIMELINE, NEXT_TIMELINE_RECEIVED, NEXT_TIMELINE_DATE_RECEIVED,
-  NEXT_TIMELINE_DATE_REQUEST, PAGINATE
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 
 let defaultState = {
-  items: [],
-  isFetching: false,
-  isFetchingTop: false,
-  nextItems: [],
-  previousItems: [],
-  isFetchingNext: false
+  items: {},
+  isFetchingTop: false
 }
 
 const replaceItem = (source, index, item) => {
@@ -53,53 +47,44 @@ const publisherItems = (items, action) => {
 }
 
 export default function(state = defaultState, action) {
+  // console.info('--------', action.type, state.items)
   switch (action.type) {
     case TIMELINE_DATE_REQUEST:
-      let timelineDateItem = state.items.find(item => item.date === action.date)
-      let index = state.items.indexOf(timelineDateItem)
+      let key = action.options.category_slug || 'home'
+      let items = Object.assign({}, state.items)
+      if (!items[key]) items[key] = []
+
+      let timelineDateItem = items[key].find(item => item.date === action.date)
+      let index = items[key].indexOf(timelineDateItem)
       let newTimelineDateItem = Object.assign({ stories: [] }, timelineDateItem, { date: action.date, isFetching: true })
-      let timelineDateItems = replaceItem(state.items, index, newTimelineDateItem)
-      return { ...state, items: sortDate(timelineDateItems) }
+      let timelineDateItems = replaceItem(items[key], index, newTimelineDateItem)
+
+      items[key] = sortDate(timelineDateItems)
+      return { ...state, items: items }
+
     case TIMELINE_DATE_RECEIVED:
-      let items = [...state.items]
-      let dateItem = items.find(item => item.date === action.date)
+      let key2 = action.options.category_slug || 'home'
+      let items2 = Object.assign({}, state.items)
+      let dateItem = items2[key2].find(item => item.date === action.date)
       Object.assign(dateItem, { stories: action.stories, isFetching: false })
-      if (!_isNil(action.options.publisher_slug)) {
-        items = publisherItems(items, action)
-      }
-      return { ...state, items }
-    case NEXT_TIMELINE_DATE_REQUEST:
-      let nextTimelineDateItem = state.nextItems.find(item => item.date === action.date)
-      let nextIndex = state.nextItems.indexOf(nextTimelineDateItem)
-      let nextNewTimelineDateItem = Object.assign({ stories: [] }, nextTimelineDateItem, { date: action.date, isNextFetching: true })
-      let nextTimelineDateItems = replaceItem(state.nextItems, nextIndex, nextNewTimelineDateItem)
-      return { ...state, nextItems: sortDate(nextTimelineDateItems) }
-    case NEXT_TIMELINE_DATE_RECEIVED:
-      let nextItems = [...state.nextItems]
-      let nextDateItem = nextItems.find(item => item.date === action.date)
-      Object.assign(nextDateItem, { stories: action.stories, isFetchingNext: false })
-      return { ...state, nextItems }
+      // if (!_isNil(action.options.publisher_slug)) {
+      //   items = publisherItems(items, action)
+      // }
+      return { ...state, items: items2 }
+
     case TIMELINE_RECEIVED:
       return { ...state, isFetching: false }
-    case TIMELINE_PULL_TO_REFRESH:
-      return { ...state, isFetchingTop: true }
-    case TIMELINE_PULL_TO_REFRESH_COMPLETED:
-      return { ...state, isFetchingTop: false }
-    case TIMELINE_PULL_TO_INFINITE:
-      return { ...state, isFetchingBottom: true }
-    case TIMELINE_PULL_TO_INFINITE_COMPLETED:
-      return { ...state, isFetchingBottom: false }
-    case REQUEST_TIMELINE:
-      return { ...state, items: [], isFetching: true }
-    case REQUEST_NEXT_TIMELINE:
-      return { ...state, nextItems: [], isFetchingNext: true }
-    case PAGINATE:
-      let pagination
-      if (action.options === 'next') {
-        pagination = { ...state, items: state.nextItems, previousItems: action.items, nextItems: [] }
-      }
+    // case TIMELINE_PULL_TO_REFRESH:
+    //   return { ...state, isFetchingTop: true }
+    // case TIMELINE_PULL_TO_REFRESH_COMPLETED:
+    //   return { ...state, isFetchingTop: false }
+    // case TIMELINE_PULL_TO_INFINITE:
+    //   return { ...state, isFetchingBottom: true }
+    // case TIMELINE_PULL_TO_INFINITE_COMPLETED:
+    //   return { ...state, isFetchingBottom: false }
+    // case REQUEST_TIMELINE:
+    //   return { ...state, items: {}, isFetching: true }
 
-      return pagination
     default:
       return state
   }

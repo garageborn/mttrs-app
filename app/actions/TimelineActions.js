@@ -2,31 +2,23 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
-  REQUEST_NEXT_TIMELINE, NEXT_TIMELINE_RECEIVED, NEXT_TIMELINE_DATE_RECEIVED,
-  NEXT_TIMELINE_DATE_REQUEST, PAGINATE
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 import _last from 'lodash/last'
 
-const startDays = 3
+const startDays = 1
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
 
-export const requestNextTimeline = () => ({
-  type: REQUEST_NEXT_TIMELINE
-})
 
-export const requestDate = (date) => ({
+export const requestDate = (date, options) => ({
   type: TIMELINE_DATE_REQUEST,
-  date
-})
-export const nextRequestDate = (date) => ({
-  type: NEXT_TIMELINE_DATE_REQUEST,
-  date
+  date,
+  options
 })
 
 export const pullToRefreshTimeline = () => ({
@@ -47,10 +39,6 @@ export const pullToInfiniteTimelineCompleted = () => ({
 
 export const timelineReceived = () => ({
   type: TIMELINE_RECEIVED
-})
-
-export const nextTimelineReceived = () => ({
-  type: NEXT_TIMELINE_RECEIVED
 })
 
 export const pullToRefresh = (options) => {
@@ -75,7 +63,6 @@ export const infiniteToRefresh = (options) => {
 
 export function getTimeline(options) {
   return dispatch => {
-    console.log(options)
     dispatch(requestTimeline())
     let promise = null
 
@@ -87,17 +74,8 @@ export function getTimeline(options) {
   }
 }
 
-export function getNextTimeline(options) {
-  return dispatch => {
-    dispatch(requestNextTimeline())
-    let promise = dispatch(getDatesStories(options))
-
-    return promise.then(() => dispatch(nextTimelineReceived()))
-  }
-}
-
 const receiveDateStories = (date, stories, options) => ({
-  type: options.next ? NEXT_TIMELINE_DATE_RECEIVED : TIMELINE_DATE_RECEIVED,
+  type: TIMELINE_DATE_RECEIVED,
   date,
   stories,
   options
@@ -134,7 +112,7 @@ function getDatesStories(options) {
 
 function getDateStories(date, options) {
   return dispatch => {
-    dispatch(options.next ? nextRequestDate(date) : requestDate(date))
+    dispatch(requestDate(date, options))
     let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
 
     return API.getStories(query)

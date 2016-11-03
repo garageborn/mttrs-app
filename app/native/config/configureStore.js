@@ -13,7 +13,7 @@ const createStoreWithNavigation = createNavigationEnabledStore({
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
-  applyMiddleware(loggerMiddleware)
+  // applyMiddleware(loggerMiddleware)
 )(createStoreWithNavigation)
 
 const rootReducer = combineReducers(reducers)

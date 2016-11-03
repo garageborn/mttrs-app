@@ -31,13 +31,14 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-    items.forEach(item => {
-      if (item.stories.length) {
-        let section = item.date
-        sections.push(section)
-        rows[section] = item.stories
-      }
-    })
+    // console.log(this.props)
+    // items.forEach(item => {
+    //   if (item.stories.length) {
+    //     let section = item.date
+    //     sections.push(section)
+    //     rows[section] = item.stories
+    //   }
+    // })
 
     return {rows, sections}
   }
@@ -89,14 +90,15 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  items: PropTypes.array.isRequired,
+  // items: PropTypes.array.isRequired,
   isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
   storyRenderer: PropTypes.func.isRequired
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state, ownProps) => {
+  // console.log('ownProps', ownProps)
   return {
     uiReducer: state.uiReducer
   }
