@@ -16,7 +16,7 @@ class TimelineHeaderContainer extends Component {
   render() {
     return (
       <View>
-        { this.renderHeader() }
+        {this.renderHeader()}
       </View>
     )
   }

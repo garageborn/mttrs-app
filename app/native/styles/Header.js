@@ -2,8 +2,16 @@ import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
-    height: 55,
-    paddingTop: Platform.OS === 'ios' ? 15 : 18,
+    ...Platform.select({
+      ios: {
+        height: 75,
+        paddingTop: 35
+      },
+      android: {
+        height: 55,
+        paddingTop: 18
+      }
+    }),
     backgroundColor: '#262C5B',
     zIndex: 2
   },
