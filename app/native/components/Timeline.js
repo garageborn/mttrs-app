@@ -10,6 +10,7 @@ import ParseDate from '../../common/utils/ParseDate'
 
 class Timeline extends Component {
   constructor(props) {
+    console.info('Timeline constructor', props)
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
@@ -31,7 +32,6 @@ class Timeline extends Component {
   rowsAndSections() {
     let rows = {}
     let sections = []
-    console.log('rowsAndSections', this.props.data)
     const { timeline } = this.props.data
 
     timeline.forEach(item => {
@@ -62,7 +62,6 @@ class Timeline extends Component {
   render() {
     const { onEndReached } = this.props
 
-    console.log('render', this.props.data)
     if (this.props.data.loading) {
       return (
         <View style={styles.loading}>
@@ -75,20 +74,22 @@ class Timeline extends Component {
     }
 
     return (
-      <View>
-        <Text style={{fontSize: 36}}>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Text>
-        <ListView
-          style={styles.listView}
-          dataSource={this.dataSource()}
-          renderRow={this.props.storyRenderer}
-
-        />
-      </View>
+      <ListView
+        removeClippedSubviews={false}
+        initialListSize={10}
+        style={styles.listView}
+        dataSource={this.dataSource()}
+        renderRow={this.props.storyRenderer}
+        renderSectionHeader={this.renderSectionHeader}
+        refreshControl={this.refreshControl()}
+        onEndReached={onEndReached}
+      />
     )
   }
 }
 
 Timeline.propTypes = {
+  category: PropTypes.object,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
   storyRenderer: PropTypes.func.isRequired
@@ -123,21 +124,10 @@ const Query = gql`
 `
 const TimelineWithData = graphql(Query, {
   options(props) {
-    let { index } = props.navigationState
-    let route = props.navigationState.routes[index]
-    if (!route.category) return {}
+    if (!props.category) return {}
     return {
-      variables: { categorySlug: route.category.slug }
+      variables: { categorySlug: props.category.slug },
     }
-  },
-  // props({ data: { loading, timeline } }) {
-  //   console.log('props', timeline)
-  //   return {
-  //     data: {
-  //       loading,
-  //       timeline
-  //     }
-  //   }
-  // }
+  }
 })(Timeline)
 export default connect(mapStateToProps)(TimelineWithData)

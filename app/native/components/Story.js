@@ -82,7 +82,7 @@ class Story extends Component {
 Story.propTypes = {
   story: PropTypes.shape({
     main_link: PropTypes.shape({
-      image_source_url: PropTypes.string.isRequired,
+      image_source_url: PropTypes.string,
       publisher: PropTypes.shape({
         name: PropTypes.string.isRequired,
         icon_id: PropTypes.string

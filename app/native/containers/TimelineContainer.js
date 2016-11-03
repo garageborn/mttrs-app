@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, StyleSheet, Text } from 'react-native'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { MenuActions, CategoryActions, NavigationActions, TimelineActions } from '../actions/index'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import { MenuActions, NavigationActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -15,10 +17,6 @@ import _isEmpty from 'lodash/isEmpty'
 const { height } = Dimensions.get('window')
 
 class TimelineContainer extends Component {
-  static fetchData({ dispatch }) {
-    return dispatch(CategoryActions.getCategories())
-  }
-
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -52,18 +50,13 @@ class TimelineContainer extends Component {
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
         storyRenderer={this.renderStory}
-        navigationState={this.state.navigationState}
+        category={route.category}
       />
     )
   }
 
-  componentDidMount() {
-    this.fetchCategories(this.props)
-    this.fetchData(this.props)
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { categories } = this.props
+    this.addSwipeRoutes(nextProps)
     // let nextSection = nextProps.params.section || {}
     // let currentSection = this.props.params.section || {}
 
@@ -72,11 +65,8 @@ class TimelineContainer extends Component {
     // const fetchingChanged = nextProps.isFetching !== this.props.isFetching
 
     // if (fetchingChanged) this.toggleLoading(nextProps)
-    // if (fetchingChanged && !nextProps.isFetching) this.fetchNextCategoryData(nextProps)
-    // // if (categories.length < nextProps.categories.length) this.fetchNextCategoryData(nextProps)
-
     // if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
-    if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
+
     // if (nextProps.uiReducer.menu.isOpen) this.animate('in')
     // if (nextProps.uiReducer.menu.retract) this.animate('out')
   }
@@ -94,12 +84,9 @@ class TimelineContainer extends Component {
     }
   }
 
-  fetchCategories(props) {
-    return props.dispatch(CategoryActions.getCategories())
-  }
-
   addSwipeRoutes(nextProps) {
-    let newRoutes = nextProps.categories.map((item, idx) => {
+    if (nextProps.data.loading || this.state.navigationState.routes.length > 1) return
+    let newRoutes = nextProps.data.categories.map((item, idx) => {
       return { key: `${idx+1}`, title: item.name, type: 'category', category: item }
     })
     this.setState({
@@ -108,19 +95,6 @@ class TimelineContainer extends Component {
         routes: [...this.state.navigationState.routes, ...newRoutes ]
       }
     })
-  }
-
-  fetchNextCategoryData(nextProps) {
-    // if (!nextProps.categories.length) return
-    // nextProps.categories.forEach((category) => {
-    //   let args = { category_slug: category.slug }
-    //   nextProps.dispatch(TimelineActions.getTimeline(args))
-    // })
-  }
-
-  fetchData(props) {
-    // let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    // props.dispatch(action)
   }
 
   fetchQuery(props) {
@@ -161,14 +135,23 @@ class TimelineContainer extends Component {
   }
 
   animate(type) {
-    const value = type === 'in' ? 0 : -height
-    const callback = type === 'out' ? this.closeMenu : null
+    let value, callback, easing = null
+    if (type === 'in') {
+      value = 0
+      easing = Easing.out(Easing.quad)
+    } else {
+      value = -height
+      callback = this.closeMenu
+      easing = Easing.in(Easing.quad)
+    }
+
     return (
       Animated.timing(
         this.state.menuPositionY,
         {
           toValue: value,
-          duration: 330
+          duration: 330,
+          easing: easing
         }
       ).start(callback)
     )
@@ -179,6 +162,7 @@ class TimelineContainer extends Component {
       <View style={styles.container}>
         {this.renderStoryLinks()}
         {this.renderTimeline()}
+
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           {this.renderMenu()}
         </Animated.View>
@@ -193,7 +177,7 @@ class TimelineContainer extends Component {
     } else {
       return (
         <TabViewAnimated
-          style={styles.container}
+          style={styles.listViewContainer}
           navigationState={this.state.navigationState}
           renderScene={this.renderScene}
           onRequestChangeTab={this.handleChangeTab}
@@ -227,14 +211,10 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    // items: state.TimelineReducers.items,
-    // previousItems: state.TimelineReducers.previousItems,
-    // nextItems: state.TimelineReducers.nextItems,
-    // isFetching: state.TimelineReducers.isFetching,
-    // isFetchingTop: state.TimelineReducers.isFetchingTop,
-    categories: state.CategoriesReducers.categories,
     uiReducer: state.uiReducer
   }
 }
 
-export default connect(mapStateToProps)(TimelineContainer)
+const Query = gql`query { categories(ordered: true) { id name slug } }`
+const TimelineContainerWithData = graphql(Query)(TimelineContainer)
+export default connect(mapStateToProps)(TimelineContainerWithData)
