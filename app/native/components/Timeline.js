@@ -31,7 +31,6 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-    console.log('------', this.props)
     items.forEach(item => {
       if (item.stories.length) {
         let section = item.date
@@ -91,14 +90,17 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   // items: PropTypes.array.isRequired,
-  isFetchingTop: PropTypes.bool.isRequired,
+  // isFetchingTop: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
   storyRenderer: PropTypes.func.isRequired
 }
 
 let mapStateToProps = (state, ownProps) => {
-  // console.log('ownProps', ownProps)
+  let { index } = ownProps.navigationState
+  let route = ownProps.navigationState.routes[index]
+  console.log(route)
+
   return {
     uiReducer: state.uiReducer
   }

@@ -3,7 +3,6 @@ import { NavigationActions } from '@exponent/ex-navigation'
 import _isNil from 'lodash/isNil'
 
 export function home() {
-  console.log('home')
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
