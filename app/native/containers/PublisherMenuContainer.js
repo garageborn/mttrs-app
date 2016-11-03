@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { PublishersActions, NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions } from '../actions/index'
 import _debounce from 'lodash/debounce'
 import _isNil from 'lodash/isNil'
 
@@ -16,10 +18,6 @@ class PublisherMenuContainer extends Component {
     this.state = {
       query: ''
     }
-  }
-
-  componentDidMount() {
-    this.props.dispatch(PublishersActions.getPublishers({order_by_name: true}))
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -39,7 +37,7 @@ class PublisherMenuContainer extends Component {
   }
 
   rowsAndSections(query) {
-    let { publishers } = this.props
+    const { publishers, loading } = this.props.data
     let rows = {}
     let sections = []
 
@@ -78,7 +76,8 @@ class PublisherMenuContainer extends Component {
   }
 
   render() {
-    if (!this.props.publishers.length) {
+    const { loading } = this.props.data
+    if (loading) {
       return (
         <View style={styles.container}>
           <ActivityIndicator
@@ -131,9 +130,6 @@ class PublisherMenuContainer extends Component {
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-    publishers: state.PublishersReducers.publishers
-  }
-}
-export default connect(mapStateToProps)(PublisherMenuContainer)
+const Query = gql`query { publishers(order_by_name: true) { id name } }`
+const PublisherMenuContainerWithData = graphql(Query)(PublisherMenuContainer)
+export default connect()(PublisherMenuContainerWithData)

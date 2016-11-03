@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
-import { NavigationActions } from '../actions/index'
+import { NavigationActions, StorageActions } from '../actions/index'
+import _ from 'lodash'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -13,8 +14,12 @@ class StoryContainer extends Component {
     this.openPublisher = this.openPublisher.bind(this)
   }
 
+  componentWillMount() {
+    this.props.dispatch(StorageActions.getVisitedStories())
+  }
+
   render() {
-    const { story, section } = this.props
+    const { story, section, visited } = this.props
 
     return (
       <Story
@@ -22,16 +27,18 @@ class StoryContainer extends Component {
         section={section}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
-        openStoryLinks={this.openStoryLinks} />
+        openStoryLinks={this.openStoryLinks}
+        visited={visited} />
     )
   }
 
   openLink(link) {
     this.props.dispatch(NavigationActions.link(link))
+    this.addStoryToLocalStorage()
   }
 
   openCategory() {
-    this.props.dispatch(NavigationActions.category(this.mainCategory))
+    this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
   }
 
   openPublisher() {
@@ -46,6 +53,16 @@ class StoryContainer extends Component {
 
   openMainLink() {
     this.openLink(this.mainLink)
+  }
+
+  addStoryToLocalStorage() {
+    this.props.dispatch(StorageActions.addVisitedStory(this.props.story))
+  }
+
+  addStoryToStorage(visitedStories, story) {
+    const isVisited = visitedStories.indexOf(story.id) !== -1
+    if (isVisited) return
+    return
   }
 
   get mainLink() {
@@ -65,4 +82,12 @@ StoryContainer.propTypes = {
   story: PropTypes.object.isRequired
 }
 
-export default connect()(StoryContainer)
+let mapStateToProps = (state, ownProps) => {
+  let isVisited = state.StorageReducer.visitedStories.items.indexOf(ownProps.story.id) !== -1
+
+  return {
+    visited: isVisited
+  }
+}
+
+export default connect(mapStateToProps)(StoryContainer)

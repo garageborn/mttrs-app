@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Provider, connect } from 'react-redux'
+import { ApolloProvider } from 'react-apollo'
 import { StatusBar, Platform } from 'react-native'
 import { NavigationContext, NavigationProvider, StackNavigation, } from '@exponent/ex-navigation'
 import Router from '../config/Router'
+import apolloClient from '../config/apolloClient'
 
 class Root extends Component {
   render() {
@@ -12,11 +13,11 @@ class Root extends Component {
     const navigationContext = new NavigationContext({ router: Router, store: store })
 
     return (
-      <Provider store={store}>
+      <ApolloProvider store={store} client={apolloClient}>
         <NavigationProvider context={navigationContext}>
           <StackNavigation initialRoute={Router.getRoute('timeline')} />
         </NavigationProvider>
-      </Provider>
+      </ApolloProvider>
     )
   }
 }

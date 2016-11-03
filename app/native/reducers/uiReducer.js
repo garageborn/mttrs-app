@@ -4,7 +4,7 @@ import { OPEN_MENU, CLOSE_MENU, RETRACT_MENU, CHANGE_MENU_TAB } from '../../cons
 let defaultState = {
   menu: {
     isOpen: false,
-    retractMenu: false,
+    retract: false,
     currentTab: 'categories'
   }
 }

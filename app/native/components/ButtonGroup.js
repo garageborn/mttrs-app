@@ -77,6 +77,7 @@ styles = StyleSheet.create({
     flexDirection: 'row',
     borderRadius: 5,
     overflow: 'hidden',
+    height: 30,
     backgroundColor: 'transparent'
   },
   buttonText: {

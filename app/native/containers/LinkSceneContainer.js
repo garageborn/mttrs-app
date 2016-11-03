@@ -1,23 +1,45 @@
 import React, { Component } from 'react'
-import { View, WebView, Platform } from 'react-native'
+import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
 import LinkHeaderContainer from './LinkHeaderContainer'
+import ProgressBar from '../components/ProgressBar'
 import styles from '../styles/App'
-import { connect } from 'react-redux'
 
 class LinkSceneContainer extends Component {
-  static route = {
-    navigationBar: {
-      ...Platform.select({
-        ios: {
-          renderLeft: () => <View />,
-          renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
-          backgroundColor: '#262C5B'
-        },
-        android: {
-          visible: false
-        }
-      })
-    }
+  constructor() {
+    super()
+    this.progress = new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    this.progressTransition()
+  }
+
+  progressTransition() {
+    this.progress.setValue(0)
+    Animated.timing(
+      this.progress,
+      {
+        toValue: 2,
+        duration: 15000,
+        easing: Easing.linear
+      }
+    ).start(() => this.progressTransition())
+  }
+
+  getProgress() {
+    const { width } = Dimensions.get('window')
+    return this.progress.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, width]
+    })
+  }
+
+  renderProgressBar = () => {
+    return <ProgressBar progress={this.getProgress()} />
+  }
+
+  get contentInset() {
+    return Platform.OS === 'ios' ? 0 : 11
   }
 
   render() {
@@ -25,11 +47,13 @@ class LinkSceneContainer extends Component {
 
     return (
       <View style={styles.container}>
-        {/* Waiting for the new ex-navigation release which will fix this */}
-        {Platform.OS === 'android' &&
-          <LinkHeaderContainer link={this.props.route.params.link} />
-        }
-        <WebView source={{uri: url}} contentInset={{top: 11}}/>
+        <LinkHeaderContainer link={this.props.route.params.link} />
+        <WebView
+          source={{uri: url}}
+          contentInset={{top: this.contentInset}}
+          startInLoadingState={true}
+          renderLoading={this.renderProgressBar}
+          />
       </View>
     )
   }
