@@ -31,14 +31,14 @@ class Timeline extends Component {
     let rows = {}
     let sections = []
     const { items } = this.props
-    // console.log(this.props)
-    // items.forEach(item => {
-    //   if (item.stories.length) {
-    //     let section = item.date
-    //     sections.push(section)
-    //     rows[section] = item.stories
-    //   }
-    // })
+    console.log('------', this.props)
+    items.forEach(item => {
+      if (item.stories.length) {
+        let section = item.date
+        sections.push(section)
+        rows[section] = item.stories
+      }
+    })
 
     return {rows, sections}
   }
@@ -85,7 +85,7 @@ class Timeline extends Component {
   }
 
   get listViewStyle() {
-    if (this.props.uiReducer.menu.isOpen && Platform.OS === 'ios') return { position: 'absolute' }
+    // if (this.props.uiReducer.menu.isOpen && Platform.OS === 'ios') return { position: 'absolute' }
   }
 }
 

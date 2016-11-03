@@ -62,6 +62,7 @@ class TimelineContainer extends Component {
     // if (routeNumber === index) timelineItems = items
     // if (routeNumber === index + 1) timelineItems = nextItems
     // if (routeNumber === index - 1) timelineItems = previousItems
+    // console.log(timelineItems)
 
     return (
       <Timeline
@@ -90,8 +91,8 @@ class TimelineContainer extends Component {
     const fetchingChanged = nextProps.isFetching !== this.props.isFetching
 
     if (fetchingChanged) this.toggleLoading(nextProps)
-    // if (fetchingChanged && !nextProps.isFetching) this.fetchNextCategoryData(nextProps)
-    if (categories.length < nextProps.categories.length) this.fetchNextCategoryData(nextProps)
+    if (fetchingChanged && !nextProps.isFetching) this.fetchNextCategoryData(nextProps)
+    // if (categories.length < nextProps.categories.length) this.fetchNextCategoryData(nextProps)
 
     if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
     if (categories.length < nextProps.categories.length) this.addSwipeRoutes(nextProps)
@@ -116,7 +117,7 @@ class TimelineContainer extends Component {
   }
 
   cloneProps(props) {
-    return props.dispatch(TimelineActions.paginate('next', props))
+    // return props.dispatch(TimelineActions.paginate('next', props))
   }
 
   fetchCategories(props) {
@@ -136,10 +137,17 @@ class TimelineContainer extends Component {
   }
 
   fetchNextCategoryData(nextProps) {
-    let category = nextProps.categories[this.state.navigationState.index]
-    if (!category) return
-    let args = { category_slug: nextProps.categories[this.state.navigationState.index].slug }
-    nextProps.dispatch(TimelineActions.getTimeline(args))
+    if (!nextProps.categories.length) return
+    nextProps.categories.forEach((category) => {
+      let args = { category_slug: category.slug }
+      console.log('fetchNextCategoryData', args)
+      nextProps.dispatch(TimelineActions.getTimeline(args))
+    })
+    // let category = nextProps.categories[this.state.navigationState.index]
+    // if (!category) return
+    // let args = { category_slug: nextProps.categories[this.state.navigationState.index].slug }
+    // console.log('fetchNextCategoryData', args)
+    // nextProps.dispatch(TimelineActions.getTimeline(args))
   }
 
   fetchData(props) {
