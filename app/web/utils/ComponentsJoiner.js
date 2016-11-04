@@ -1,24 +1,24 @@
 import React from 'react'
-import _ from 'lodash'
+import _uniqueIdfrom 'lodash/uniqueId'
 
 const ComponentsJoiner = (componentArr) => {
   return componentArr.map((component, index) => {
     if (index < componentArr.length - 2) {
       return (
-        <div key={_.uniqueId('c_')}>
+        <div key={_uniqueId('c_')}>
           {component},&nbsp;
         </div>
       )
     }
     if (index === componentArr.length - 2) {
       return (
-        <div key={_.uniqueId('c_')}>
+        <div key={_uniqueId('c_')}>
           {component}&nbsp;and&nbsp;
         </div>
       )
     }
     return (
-      <div key={_.uniqueId('c_')}>
+      <div key={_uniqueId('c_')}>
         {component}
       </div>
     )

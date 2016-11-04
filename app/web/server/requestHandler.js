@@ -3,7 +3,7 @@ import {match} from 'react-router'
 import configureStore from '../config/configureStore.production'
 import Routes from '../config/Routes'
 import renderEngine from './renderEngine'
-import _ from 'lodash'
+import _flattenDeep from 'lodash/flattenDeep'
 import Setup from '../config/Setup'
 import sentry from './sentry'
 const store = configureStore()
@@ -41,7 +41,7 @@ let handleRequest = (request, response) => {
 
 let requestHandler = (request, response) => {
   Setup.fromRequest(request)
-  let promises = _.flattenDeep(Routes.fetchData(store))
+  let promises = _flattenDeep(Routes.fetchData(store))
   Promise.all(promises).then(() => {
     return handleRequest(request, response)
   })

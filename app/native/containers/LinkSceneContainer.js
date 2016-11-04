@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
+import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import styles from '../styles/App'
+import { StorageActions } from '../actions/index'
 
 class LinkSceneContainer extends Component {
   constructor() {
     super()
+    this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
     this.progress = new Animated.Value(0)
   }
 
   componentDidMount() {
     this.progressTransition()
+  }
+
+  addStoryToLocalStorage() {
+    const { dispatch, story } = this.props
+    dispatch(StorageActions.addVisitedStory(story))
   }
 
   progressTransition() {
@@ -53,10 +61,20 @@ class LinkSceneContainer extends Component {
           contentInset={{top: this.contentInset}}
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
+          onLoadEnd={this.addStoryToLocalStorage}
           />
       </View>
     )
   }
 }
 
-export default LinkSceneContainer
+LinkSceneContainer.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      story: PropTypes.object.isRequired,
+      link: PropTypes.object.isRequired
+    }).isRequired,
+  }).isRequired
+}
+
+export default connect()(LinkSceneContainer)
