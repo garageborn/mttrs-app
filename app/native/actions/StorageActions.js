@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native'
-import { _uniq, _flatten } from 'lodash'
+import _uniq from 'lodash/uniq'
+import _flatten from 'lodash/flatten'
+
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED } from '../../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -18,7 +20,7 @@ export function getVisitedStories() {
 
     dispatch(requestVisitedStories())
     return AsyncStorage.getItem('visitedStories', (error, stories) => {
-      return dispatch(receiveVisitedStories(JSON.parse(stories)))
+      return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
     })
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-import _ from 'lodash'
+import _flattenDeep from 'lodash/flattenDeep'
 import {renderToString} from 'react-dom/server'
 import {Router, RouterContext} from 'react-router'
 import path from 'path'
@@ -25,7 +25,7 @@ let mapPromises = (store, renderProps) => {
       let options = { dispatch: store.dispatch, params: params, route: routes[0] }
       return component.fetchData(options)
     })
-  return _.flattenDeep(promises)
+  return _flattenDeep(promises)
 }
 
 let render = (store, renderProps) => {

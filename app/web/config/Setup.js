@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Tenant from '../../common/utils/Tenant'
 
 export default class Setup {
