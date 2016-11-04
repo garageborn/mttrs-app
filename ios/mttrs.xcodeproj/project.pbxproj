@@ -129,8 +129,6 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RNShare;
 		};
-<<<<<<< HEAD
-=======
 		AA4328641DC8E21F00CD42D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
@@ -180,7 +178,6 @@
 			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
 			remoteInfo = "React-tvOS";
 		};
->>>>>>> master
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -476,11 +473,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-<<<<<<< HEAD
-				LastUpgradeCheck = 610;
-=======
 				LastUpgradeCheck = 0810;
->>>>>>> master
 				ORGANIZATIONNAME = "Garage Born";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -660,8 +653,6 @@
 			remoteRef = A0B826881DB547B3009A234B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-<<<<<<< HEAD
-=======
 		AA4328651DC8E21F00CD42D2 /* libRCTImage-tvOS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -711,7 +702,6 @@
 			remoteRef = AA43287D1DC8E21F00CD42D2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
->>>>>>> master
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -800,11 +790,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 11;
-=======
 				CURRENT_PROJECT_VERSION = 18;
->>>>>>> master
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -833,11 +819,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 11;
-=======
 				CURRENT_PROJECT_VERSION = 18;
->>>>>>> master
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
