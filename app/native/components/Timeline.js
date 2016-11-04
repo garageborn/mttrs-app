@@ -103,7 +103,7 @@ let mapStateToProps = (state, ownProps) => {
 
 const Query = gql`
   query Batata($categorySlug: String) {
-    timeline(days: 5, offset: 25) {
+    timeline(days: 7, offset: 0) {
       date
       stories(limit: 10, popular: true, category_slug: $categorySlug) {
         id
