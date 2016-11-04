@@ -8,7 +8,7 @@ import { NavigationActions } from '@exponent/ex-navigation'
 class PublisherHeaderContainer extends Component {
   getPublisherLogo() {
     const { publisher } = this.props
-    if (!publisher.icon_id) return <View />
+    if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return { uri }
   }
