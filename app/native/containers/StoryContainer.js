@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
 import { NavigationActions, StorageActions } from '../actions/index'
-import _ from 'lodash'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -33,8 +32,7 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    this.props.dispatch(NavigationActions.link(link))
-    this.addStoryToLocalStorage()
+    this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 
   openCategory() {
@@ -53,16 +51,6 @@ class StoryContainer extends Component {
 
   openMainLink() {
     this.openLink(this.mainLink)
-  }
-
-  addStoryToLocalStorage() {
-    this.props.dispatch(StorageActions.addVisitedStory(this.props.story))
-  }
-
-  addStoryToStorage(visitedStories, story) {
-    const isVisited = visitedStories.indexOf(story.id) !== -1
-    if (isVisited) return
-    return
   }
 
   get mainLink() {
