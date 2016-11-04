@@ -11,6 +11,7 @@ import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
 import MenuContainer from './MenuContainer'
+
 import _isNil from 'lodash/isNil'
 import _isEmpty from 'lodash/isEmpty'
 
@@ -29,7 +30,7 @@ class TimelineContainer extends Component {
       navigationState: {
         index: 0,
         routes: [
-         { key: '0', title: 'Top Stories' }
+         { key: '0', title: 'Top Stories', type: 'home' }
         ]
       }
     }
@@ -59,6 +60,9 @@ class TimelineContainer extends Component {
     this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
     this.menuWillChange(nextProps)
+
+    console.log(this.props)
+    console.log(nextProps)
   }
 
   sectionWillChange(nextProps) {
@@ -67,7 +71,9 @@ class TimelineContainer extends Component {
 
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
-    // if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+    if (sectionNameChanged || sectionModelChanged) {
+      this.changeSection(nextProps)
+    }
   }
 
   menuWillChange(nextProps) {
@@ -82,6 +88,26 @@ class TimelineContainer extends Component {
     } else if(retractChanged && nextMenu.retract) {
       this.animate('out')
     }
+  }
+
+  changeSection(nextProps) {
+    let { routes } = this.state.navigationState
+    let nextIndex
+
+    routes.find((route) => {
+      if (route.type === 'home') return
+      if (route.category.slug === nextProps.params.section.model.slug) {
+         nextIndex = JSON.parse(route.key)
+      }
+    })
+
+    this.setState({
+      ...this.state,
+      navigationState: {
+        ...this.state.navigationState,
+        index: nextIndex
+      }
+    })
   }
 
   componentWillUpdate(nextProps, nextState) {
