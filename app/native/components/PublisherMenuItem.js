@@ -11,7 +11,7 @@ class PublisherMenuItem extends Component {
     return (
       <TouchableHighlight
         style={styles.touch}
-        onPress={e => onPress(publisher)}
+        onPress={(e) => onPress(publisher)}
         underlayColor={WHITE_TRANSPARENT_COLOR}>
         <View style={styles.publisher}>
           {this.renderIcon()}
@@ -23,7 +23,7 @@ class PublisherMenuItem extends Component {
 
   renderIcon() {
     const { publisher } = this.props
-    if (!publisher.icon_id) return <View />
+    if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return <PublisherLogo size={30} source={{ uri }} />
   }
