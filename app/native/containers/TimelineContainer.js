@@ -57,18 +57,31 @@ class TimelineContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.addSwipeRoutes(nextProps)
-    // let nextSection = nextProps.params.section || {}
-    // let currentSection = this.props.params.section || {}
+    this.sectionWillChange(nextProps)
+    this.menuWillChange(nextProps)
+  }
 
-    // let sectionNameChanged = nextSection.name !== currentSection.name
-    // let sectionModelChanged = nextSection.model !== currentSection.model
-    // const fetchingChanged = nextProps.isFetching !== this.props.isFetching
+  sectionWillChange(nextProps) {
+    let nextSection = nextProps.params.section || {}
+    let currentSection = this.props.params.section || {}
 
-    // if (fetchingChanged) this.toggleLoading(nextProps)
+    let sectionNameChanged = nextSection.name !== currentSection.name
+    let sectionModelChanged = nextSection.model !== currentSection.model
     // if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+  }
 
-    // if (nextProps.uiReducer.menu.isOpen) this.animate('in')
-    // if (nextProps.uiReducer.menu.retract) this.animate('out')
+  menuWillChange(nextProps) {
+    let currentMenu = this.props.uiReducer.menu || {}
+    let nextMenu = nextProps.uiReducer.menu || {}
+
+    let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
+    let retractChanged = currentMenu.retract !== nextMenu.retract
+
+    if (isOpenChanged && nextMenu.isOpen) {
+      this.animate('in')
+    } else if(retractChanged && nextMenu.retract) {
+      this.animate('out')
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
