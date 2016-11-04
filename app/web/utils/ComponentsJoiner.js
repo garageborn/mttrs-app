@@ -1,5 +1,5 @@
 import React from 'react'
-import _uniqueIdfrom 'lodash/uniqueId'
+import _uniqueId from 'lodash/uniqueId'
 
 const ComponentsJoiner = (componentArr) => {
   return componentArr.map((component, index) => {
