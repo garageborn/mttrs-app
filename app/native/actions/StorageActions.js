@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { _unique, _flatten } from 'lodash'
+import { _uniq, _flatten } from 'lodash'
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED } from '../../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
