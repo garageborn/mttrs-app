@@ -12,10 +12,10 @@ export function home() {
   }
 }
 
-export function link(link) {
+export function link(story, link) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
-    const route = Router.getRoute('link', { link: link })
+    const route = Router.getRoute('link', { story: story, link: link })
     dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
   }
 }
