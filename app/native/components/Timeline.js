@@ -123,6 +123,15 @@ const Query = gql`
     }
   }
 `
+
+const defaultVariables = {
+  categorySlug: '',
+  days: 7,
+  offset: 0,
+  perDay: 1,
+  publisherSlug: ''
+}
+
 const pullToRefresh = function({ fetchMore, variables }) {
   return fetchMore({
     variables: { ...variables, days: 1, offset: 0 },
@@ -136,22 +145,14 @@ const pullToRefresh = function({ fetchMore, variables }) {
   })
 }
 
-const defaultVariables = {
-  categorySlug: '',
-  days: 7,
-  offset: 0,
-  perDay: 1,
-  publisherSlug: ''
-}
-
 const TimelineWithData = graphql(Query, {
   options(props) {
     if (props.type === 'home') return { variables: defaultVariables }
     return {
       variables: {
         ...defaultVariables,
-        publisherSlug: props.type === 'publisher' ? props.filter : "",
-        categorySlug: props.type === 'category' ? props.filter.slug : ""
+        publisherSlug: props.type === 'publisher' ? props.filter : '',
+        categorySlug: props.type === 'category' ? props.filter.slug : ''
       }
     }
   },
