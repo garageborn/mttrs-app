@@ -56,8 +56,6 @@ class TimelineContainer extends Component {
       filter = route.filter
     }
 
-    console.log(filter)
-
     return (
       <Timeline
         onEndReached={this.onEndReached}
@@ -122,16 +120,16 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    // const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    // const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
-    // const { dispatch } = this.props
-    // if (!newIndex) return
-    // if (!topStories) {
-    //   const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-    //   dispatch(NavigationActions.selectCategory(currentRoute.category, 'slider'))
-    // } else {
-    //   dispatch(NavigationActions.home())
-    // }
+    const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
+    const { dispatch } = this.props
+    if (!newIndex) return
+    if (!topStories) {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.filter))
+    } else {
+      dispatch(NavigationActions.home())
+    }
   }
 
   addSwipeRoutes(nextProps) {
