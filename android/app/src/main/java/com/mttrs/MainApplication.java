@@ -11,11 +11,19 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+import com.smixx.fabric.FabricPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Fabric.with(this, new Crashlytics());
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -29,6 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNSharePackage(),
           new LinearGradientPackage(),
+          new FabricPackage(),
           new ReactNativeConfigPackage()
       );
     }

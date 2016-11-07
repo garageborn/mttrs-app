@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -31,7 +30,7 @@
 		A09BA2A91DBF741000104DE1 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */; };
 		A09BA2AA1DBF741000104DE1 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */; };
 		ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */; };
-		F0E5D97CB89F4B8B9E2F1806 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF758BB652304809B713507C /* libSMXCrashlytics.a */; };
+		B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,13 +132,6 @@
 			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
 			remoteInfo = ReactNativeConfig;
 		};
-		A061B6DF1DD0B2D0000F7869 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DA087D03307F4534B435404C /* SMXCrashlytics.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D8D9DB831C6D03DB009FBC0E;
-			remoteInfo = SMXCrashlytics;
-		};
 		A0B826881DB547B3009A234B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */;
@@ -231,9 +223,9 @@
 		A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
-		DA087D03307F4534B435404C /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
-		DF758BB652304809B713507C /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; name = "SMXCrashlytics.xcodeproj"; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */ = {isa = PBXFileReference; name = "libSMXCrashlytics.a"; path = "libSMXCrashlytics.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +256,7 @@
 				ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */,
 				39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */,
 				49B7BB9B69C74B3D93EC3491 /* libReactNativeConfig.a in Frameworks */,
-				F0E5D97CB89F4B8B9E2F1806 /* libSMXCrashlytics.a in Frameworks */,
+				B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +396,7 @@
 				75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */,
 				CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */,
 				1AD0DA9E0CB347F08DCDB8BF /* ReactNativeConfig.xcodeproj */,
-				DA087D03307F4534B435404C /* SMXCrashlytics.xcodeproj */,
+				F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -456,14 +448,6 @@
 			isa = PBXGroup;
 			children = (
 				A061B68E1DD0AD20000F7869 /* libReactNativeConfig.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		A061B6C81DD0B2D0000F7869 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A061B6E01DD0B2D0000F7869 /* libSMXCrashlytics.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -605,10 +589,6 @@
 					ProductGroup = A06061811D918E4D00CB40C8 /* Products */;
 					ProjectRef = 731548E4C3144FB79E7B325D /* SafariViewManager.xcodeproj */;
 				},
-				{
-					ProductGroup = A061B6C81DD0B2D0000F7869 /* Products */;
-					ProjectRef = DA087D03307F4534B435404C /* SMXCrashlytics.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -708,13 +688,6 @@
 			fileType = archive.ar;
 			path = libReactNativeConfig.a;
 			remoteRef = A061B68D1DD0AD20000F7869 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A061B6E01DD0B2D0000F7869 /* libSMXCrashlytics.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSMXCrashlytics.a;
-			remoteRef = A061B6DF1DD0B2D0000F7869 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A0B826891DB547B3009A234B /* libRNShare.a */ = {
