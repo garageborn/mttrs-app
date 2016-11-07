@@ -21,7 +21,6 @@ class TimelineContainer extends Component {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
-    this.onPullToRefresh = this.onPullToRefresh.bind(this)
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
@@ -59,7 +58,6 @@ class TimelineContainer extends Component {
     return (
       <Timeline
         onEndReached={this.onEndReached}
-        onRefresh={this.onPullToRefresh}
         storyRenderer={this.renderStory}
         type={routeType}
         filter={filter}
@@ -69,7 +67,7 @@ class TimelineContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.menuWillChange(nextProps)
-    if (!_isNil(nextProps.params.section) && nextProps.params.section.name === 'publisher') return 
+    if (!_isNil(nextProps.params.section) && nextProps.params.section.name === 'publisher') return
     this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
   }
@@ -164,18 +162,9 @@ class TimelineContainer extends Component {
     )
   }
 
-  pullFetchData(props) {
-    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
-  }
-
   infiniteFetchData(props) {
     // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
     // return props.dispatch(action)
-  }
-
-  onPullToRefresh() {
-    this.pullFetchData(this.props)
   }
 
   onEndReached() {
@@ -263,6 +252,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-const Query = gql`query { categories(ordered: true) { id name slug } }`
+const Query = gql`query { categories(ordered: true) { id name slug icon_id } }`
 const TimelineContainerWithData = graphql(Query)(TimelineContainer)
 export default connect(mapStateToProps)(TimelineContainerWithData)

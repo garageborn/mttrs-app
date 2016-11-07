@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import _sortBy from 'lodash/sortBy'
+import _uniqBy from 'lodash/uniqBy'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -10,7 +12,6 @@ import ParseDate from '../../common/utils/ParseDate'
 
 class Timeline extends Component {
   constructor(props) {
-    console.info('Timeline constructor', props)
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
@@ -46,11 +47,12 @@ class Timeline extends Component {
   }
 
   refreshControl() {
+    const { loading, pullToRefresh } = this.props.data
     return (
       <RefreshControl
         style={styles.hideRefreshControl}
-        refreshing={this.props.data.loading}
-        onRefresh={this.props.onRefresh}
+        refreshing={loading}
+        onRefresh={pullToRefresh}
         tintColor='#DDD'
         title='Refreshing...'
         titleColor='#AAA'
@@ -66,8 +68,8 @@ class Timeline extends Component {
       return (
         <View style={styles.loading}>
           <ActivityIndicator
-            size="large"
-            color="#AAA"
+            size='large'
+            color='#AAA'
           />
         </View>
       )
@@ -90,7 +92,6 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   category: PropTypes.object,
-  onRefresh: PropTypes.func.isRequired,
   onEndReached: PropTypes.func.isRequired,
   storyRenderer: PropTypes.func.isRequired
 }
@@ -102,10 +103,10 @@ let mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`
-  query($publisherSlug: String, $categorySlug: String) {
-    timeline(days: 7, offset: 0) {
+  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(days: $days, offset: $offset) {
       date
-      stories(limit: 10, popular: true, publisher_slug: $publisherSlug, category_slug: $categorySlug) {
+      stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
         total_social
         main_category { name slug color }
@@ -122,13 +123,46 @@ const Query = gql`
     }
   }
 `
+
+const defaultVariables = {
+  categorySlug: '',
+  days: 7,
+  offset: 0,
+  perDay: 1,
+  publisherSlug: ''
+}
+
+const pullToRefresh = function({ fetchMore, variables }) {
+  return fetchMore({
+    variables: { ...variables, days: 1, offset: 0 },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      if (!fetchMoreResult.data) { return previousResult }
+      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      timeline = _uniqBy(timeline, item => item.date)
+      timeline = _sortBy(timeline, item => -item.date)
+      return Object.assign({}, previousResult, { timeline: [...timeline] })
+    },
+  })
+}
+
 const TimelineWithData = graphql(Query, {
   options(props) {
-    if (props.type === 'home') return {}
+    if (props.type === 'home') return { variables: defaultVariables }
     return {
       variables: {
-        publisherSlug: props.type === 'publisher' ? props.filter : "",
-        categorySlug: props.type === 'category' ? props.filter.slug : ""
+        ...defaultVariables,
+        publisherSlug: props.type === 'publisher' ? props.filter : '',
+        categorySlug: props.type === 'category' ? props.filter.slug : ''
+      }
+    }
+  },
+  props({ data: { loading, timeline, variables, fetchMore } }) {
+    return {
+      data: {
+        loading,
+        timeline,
+        fetchMore,
+        pullToRefresh: pullToRefresh.bind(this, { fetchMore, variables })
       }
     }
   }
