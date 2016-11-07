@@ -8,7 +8,8 @@ import {
 } from '../constants/ActionTypes'
 
 let defaultState = {
-  items: {},
+  items: [],
+  isFetching: false,
   isFetchingTop: false
 }
 
@@ -47,44 +48,33 @@ const publisherItems = (items, action) => {
 }
 
 export default function(state = defaultState, action) {
-  // console.info('--------', action.type, state.items)
   switch (action.type) {
     case TIMELINE_DATE_REQUEST:
-      let key = action.options.category_slug || 'home'
-      let items = Object.assign({}, state.items)
-      if (!items[key]) items[key] = []
-
-      let timelineDateItem = items[key].find(item => item.date === action.date)
-      let index = items[key].indexOf(timelineDateItem)
+      let timelineDateItem = state.items.find(item => item.date === action.date)
+      let index = state.items.indexOf(timelineDateItem)
       let newTimelineDateItem = Object.assign({ stories: [] }, timelineDateItem, { date: action.date, isFetching: true })
-      let timelineDateItems = replaceItem(items[key], index, newTimelineDateItem)
-
-      items[key] = sortDate(timelineDateItems)
-      return { ...state, items: items }
-
+      let timelineDateItems = replaceItem(state.items, index, newTimelineDateItem)
+      return { ...state, items: sortDate(timelineDateItems) }
     case TIMELINE_DATE_RECEIVED:
-      let key2 = action.options.category_slug || 'home'
-      let items2 = Object.assign({}, state.items)
-      let dateItem = items2[key2].find(item => item.date === action.date)
+      let items = [...state.items]
+      let dateItem = items.find(item => item.date === action.date)
       Object.assign(dateItem, { stories: action.stories, isFetching: false })
-      // if (!_isNil(action.options.publisher_slug)) {
-      //   items = publisherItems(items, action)
-      // }
-      return { ...state, items: items2 }
-
+      if (!_isNil(action.options.publisher_slug)) {
+        items = publisherItems(items, action)
+      }
+      return { ...state, items }
     case TIMELINE_RECEIVED:
       return { ...state, isFetching: false }
-    // case TIMELINE_PULL_TO_REFRESH:
-    //   return { ...state, isFetchingTop: true }
-    // case TIMELINE_PULL_TO_REFRESH_COMPLETED:
-    //   return { ...state, isFetchingTop: false }
-    // case TIMELINE_PULL_TO_INFINITE:
-    //   return { ...state, isFetchingBottom: true }
-    // case TIMELINE_PULL_TO_INFINITE_COMPLETED:
-    //   return { ...state, isFetchingBottom: false }
-    // case REQUEST_TIMELINE:
-    //   return { ...state, items: {}, isFetching: true }
-
+    case TIMELINE_PULL_TO_REFRESH:
+      return { ...state, isFetchingTop: true }
+    case TIMELINE_PULL_TO_REFRESH_COMPLETED:
+      return { ...state, isFetchingTop: false }
+    case TIMELINE_PULL_TO_INFINITE:
+      return { ...state, isFetchingBottom: true }
+    case TIMELINE_PULL_TO_INFINITE_COMPLETED:
+      return { ...state, isFetchingBottom: false }
+    case REQUEST_TIMELINE:
+      return { ...state, items: [], isFetching: true }
     default:
       return state
   }

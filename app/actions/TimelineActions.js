@@ -8,17 +8,15 @@ import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 import _last from 'lodash/last'
 
-const startDays = 1
+const startDays = 3
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
 })
 
-
-export const requestDate = (date, options) => ({
+export const requestDate = (date) => ({
   type: TIMELINE_DATE_REQUEST,
-  date,
-  options
+  date
 })
 
 export const pullToRefreshTimeline = () => ({
@@ -64,6 +62,7 @@ export const infiniteToRefresh = (options) => {
 export function getTimeline(options) {
   return dispatch => {
     dispatch(requestTimeline())
+
     let promise = null
 
     options.filter
@@ -112,7 +111,7 @@ function getDatesStories(options) {
 
 function getDateStories(date, options) {
   return dispatch => {
-    dispatch(requestDate(date, options))
+    dispatch(requestDate(date))
     let query = Object.assign({ published_at: date, popular: true, limit: 10 }, options)
 
     return API.getStories(query)
@@ -122,9 +121,3 @@ function getDateStories(date, options) {
       })
   }
 }
-
-export const paginate = (options, props) => ({
-  type: PAGINATE,
-  options,
-  items: props.items
-})
