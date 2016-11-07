@@ -56,6 +56,8 @@ class TimelineContainer extends Component {
       filter = route.filter
     }
 
+    console.log(filter)
+
     return (
       <Timeline
         onEndReached={this.onEndReached}
@@ -72,8 +74,6 @@ class TimelineContainer extends Component {
     this.sectionWillChange(nextProps)
     this.menuWillChange(nextProps)
 
-    console.log(this.props)
-    console.log(nextProps)
   }
 
   sectionWillChange(nextProps) {

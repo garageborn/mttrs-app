@@ -102,10 +102,10 @@ let mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`
-  query Batata($categorySlug: String) {
+  query($publisherSlug: String, $categorySlug: String) {
     timeline(days: 7, offset: 0) {
       date
-      stories(limit: 10, popular: true, category_slug: $categorySlug, ) {
+      stories(limit: 10, popular: true, publisher_slug: $publisherSlug, category_slug: $categorySlug) {
         id
         total_social
         main_category { name color }
@@ -124,14 +124,11 @@ const Query = gql`
 `
 const TimelineWithData = graphql(Query, {
   options(props) {
-    if (props.type === 'home') {
-      return {}
-    } else {
-      return {
-        variables: {
-          categorySlug: props.filter.slug,
-          publisherSlug: props.filter.slug
-        },
+    if (props.type === 'home') return {}
+    return {
+      variables: {
+        publisherSlug: props.type === 'publisher' ? props.filter : "",
+        categorySlug: props.type === 'category' ? props.filter.slug : ""
       }
     }
   }
