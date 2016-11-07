@@ -115,6 +115,7 @@ const Query = gql`
         }
         other_links {
           title
+          url
           publisher { name icon_id }
         }
       }
