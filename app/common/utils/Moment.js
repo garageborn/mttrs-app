@@ -1,4 +1,4 @@
 import moment from 'moment-timezone'
-moment.tz.setDefault('America/Los_Angeles')
+moment.tz.setDefault('UTC')
 
 export default moment
