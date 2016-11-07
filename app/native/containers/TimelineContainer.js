@@ -30,7 +30,7 @@ class TimelineContainer extends Component {
       navigationState: {
         index: 0,
         routes: [
-         { key: '0', title: 'Top Stories', type: 'home' }
+         { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
         ]
       }
     }
@@ -45,13 +45,24 @@ class TimelineContainer extends Component {
     })
   }
 
-  renderScene({ route }) {
+  renderScene(props) {
+    let { route } = props
+    let routeType = !_isNil(route) ? route.type : 'publisher'
+    let filter
+
+    if (routeType === 'publisher') {
+      filter = props.params.section.model.slug
+    } else {
+      filter = route.filter
+    }
+
     return (
       <Timeline
         onEndReached={this.onEndReached}
         onRefresh={this.onPullToRefresh}
         storyRenderer={this.renderStory}
-        category={route.category}
+        type={routeType}
+        filter={filter}
       />
     )
   }
@@ -96,7 +107,7 @@ class TimelineContainer extends Component {
 
     routes.find((route) => {
       if (route.type === 'home') return
-      if (route.category.slug === nextProps.params.section.model.slug) {
+      if (route.filter.slug === nextProps.params.section.model.slug) {
          nextIndex = JSON.parse(route.key)
       }
     })
@@ -111,22 +122,22 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
-    const { dispatch } = this.props
-    if (!newIndex) return
-    if (!topStories) {
-      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-      dispatch(NavigationActions.selectCategory(currentRoute.category, 'slider'))
-    } else {
-      dispatch(NavigationActions.home())
-    }
+    // const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    // const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
+    // const { dispatch } = this.props
+    // if (!newIndex) return
+    // if (!topStories) {
+    //   const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+    //   dispatch(NavigationActions.selectCategory(currentRoute.category, 'slider'))
+    // } else {
+    //   dispatch(NavigationActions.home())
+    // }
   }
 
   addSwipeRoutes(nextProps) {
     if (nextProps.data.loading || this.state.navigationState.routes.length > 1) return
     let newRoutes = nextProps.data.categories.map((item, idx) => {
-      return { key: `${idx+1}`, title: item.name, type: 'category', category: item }
+      return { key: `${idx+1}`, title: item.name, type: 'category', filter: item }
     })
     this.setState({
       navigationState: {
@@ -212,7 +223,7 @@ class TimelineContainer extends Component {
   renderTimeline() {
     const publisherTimeline = !_isNil(this.props.params.section) && this.props.params.section.name === 'publisher'
     if (publisherTimeline) {
-      return this.renderScene()
+      return this.renderScene(this.props)
     } else {
       return (
         <TabViewAnimated

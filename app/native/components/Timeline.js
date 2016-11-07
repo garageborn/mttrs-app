@@ -105,7 +105,7 @@ const Query = gql`
   query Batata($categorySlug: String) {
     timeline(days: 7, offset: 0) {
       date
-      stories(limit: 10, popular: true, category_slug: $categorySlug) {
+      stories(limit: 10, popular: true, category_slug: $categorySlug, ) {
         id
         total_social
         main_category { name color }
@@ -124,9 +124,15 @@ const Query = gql`
 `
 const TimelineWithData = graphql(Query, {
   options(props) {
-    if (!props.category) return {}
-    return {
-      variables: { categorySlug: props.category.slug },
+    if (props.type === 'home') {
+      return {}
+    } else {
+      return {
+        variables: {
+          categorySlug: props.filter.slug,
+          publisherSlug: props.filter.slug
+        },
+      }
     }
   }
 })(Timeline)
