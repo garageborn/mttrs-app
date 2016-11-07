@@ -125,7 +125,7 @@ const Query = gql`
 
 const defaultVariables = {
   categorySlug: '',
-  days: 3,
+  days: 7,
   offset: 0,
   perDay: 10,
   publisherSlug: ''
