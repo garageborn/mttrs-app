@@ -96,7 +96,7 @@ class TimelineContainer extends Component {
     let { routes } = this.state.navigationState
     let nextIndex = 0
 
-    if (sectionType(nextProps) !== 'home') {
+    if (this.sectionType(nextProps) !== 'home') {
       let route = routes.find(route => route.filter.slug === nextProps.params.section.model.slug)
       nextIndex = parseInt(route.key)
     }

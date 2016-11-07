@@ -171,9 +171,7 @@ const TimelineWithData = graphql(Query, {
   props({ data }) {
     return {
       data: {
-        loading: data.loading,
-        timeline: data.timeline,
-        fetchMore: data.fetchMore,
+        ...data,
         pullToRefresh: pullToRefresh.bind(this, data),
         infiniteScroll: infiniteScroll.bind(this, data),
       }

@@ -9,7 +9,7 @@
     "start-native": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "@exponent/ex-navigation": "^1.8.1",
+    "@exponent/ex-navigation": "^2.0.0",
     "apollo-client": "^0.5.0",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
@@ -50,7 +50,7 @@
     "react-native-fabric": "^0.3.1",
     "react-native-linear-gradient": "^1.5.14",
     "react-native-share": "^1.0.17",
-    "react-native-tab-view": "0.0.37",
+    "react-native-tab-view": "0.0.38",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.7",
