@@ -113,6 +113,7 @@ const Query = gql`
         main_link {
           title
           image_source_url
+          url
           publisher { name icon_id }
         }
         other_links {
