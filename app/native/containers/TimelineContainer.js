@@ -21,7 +21,6 @@ class TimelineContainer extends Component {
   constructor(props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
-    this.onPullToRefresh = this.onPullToRefresh.bind(this)
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
@@ -59,7 +58,6 @@ class TimelineContainer extends Component {
     return (
       <Timeline
         onEndReached={this.onEndReached}
-        onRefresh={this.onPullToRefresh}
         storyRenderer={this.renderStory}
         type={routeType}
         filter={filter}
@@ -71,9 +69,6 @@ class TimelineContainer extends Component {
     this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
     this.menuWillChange(nextProps)
-
-    console.log(this.props)
-    console.log(nextProps)
   }
 
   sectionWillChange(nextProps) {
@@ -166,18 +161,9 @@ class TimelineContainer extends Component {
     )
   }
 
-  pullFetchData(props) {
-    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
-  }
-
   infiniteFetchData(props) {
     // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
     // return props.dispatch(action)
-  }
-
-  onPullToRefresh() {
-    this.pullFetchData(this.props)
   }
 
   onEndReached() {
