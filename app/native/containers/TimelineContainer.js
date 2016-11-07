@@ -44,20 +44,18 @@ class TimelineContainer extends Component {
   }
 
   renderScene(props) {
-    let { route } = props
-    let routeType = !_isNil(route) ? route.type : 'publisher'
     let filter
 
-    if (routeType === 'publisher') {
-      filter = props.params.section.model.slug
+    if (this.sceneType(props) === 'publisher') {
+      filter = props.params.section.model
     } else {
-      filter = route.filter
+      filter = props.route.filter
     }
 
     return (
       <Timeline
         storyRenderer={this.renderStory}
-        type={routeType}
+        type={props.route.type}
         filter={filter}
       />
     )
@@ -98,13 +96,9 @@ class TimelineContainer extends Component {
     let { routes } = this.state.navigationState
     let nextIndex = 0
 
-
-    if (!_isNil(nextProps.params.section)) {
-      routes.find((route) => {
-        if (route.filter.slug === nextProps.params.section.model.slug) {
-           nextIndex = parseInt(route.key)
-        }
-      })
+    if (sectionType(nextProps) !== 'home') {
+      let route = routes.find(route => route.filter.slug === nextProps.params.section.model.slug)
+      nextIndex = parseInt(route.key)
     }
 
     this.setState({
@@ -179,8 +173,7 @@ class TimelineContainer extends Component {
   }
 
   renderTimeline() {
-    const publisherTimeline = !_isNil(this.props.params.section) && this.props.params.section.name === 'publisher'
-    if (publisherTimeline) {
+    if (this.sectionType(this.props) === 'publisher') {
       return this.renderScene(this.props)
     } else {
       return (
@@ -193,6 +186,16 @@ class TimelineContainer extends Component {
         />
       )
     }
+  }
+
+  sectionType(props) {
+    if (_isNil(props.params.section)) return 'home'
+    return props.params.section.name
+  }
+
+  sceneType(props) {
+    if (_isNil(props.route)) return 'publisher'
+    return props.route.type
   }
 
   renderMenu() {

@@ -163,7 +163,7 @@ const TimelineWithData = graphql(Query, {
     return {
       variables: {
         ...defaultVariables,
-        publisherSlug: props.type === 'publisher' ? props.filter : '',
+        publisherSlug: props.type === 'publisher' ? props.filter.slug : '',
         categorySlug: props.type === 'category' ? props.filter.slug : ''
       }
     }
