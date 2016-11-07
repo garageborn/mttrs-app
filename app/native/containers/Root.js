@@ -12,7 +12,7 @@ if (!__DEV__) {
   const DSN_KEY = 'https://5cdede7e751f4807b1113013db2d917b@sentry.io/87957'
 
   Raven
-    .config(Config.DSN_KEY, { release: '1.0' })
+    .config(DSN_KEY, { release: '1.0' })
     .install()
 }
 
