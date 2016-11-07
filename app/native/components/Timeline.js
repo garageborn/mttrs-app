@@ -34,7 +34,7 @@ class Timeline extends Component {
     let sections = []
     const { timeline } = this.props.data
 
-    timeline.forEach(item => {
+    timeline.forEach((item) => {
       if (item.stories.length) {
         let section = item.date
         sections.push(section)
@@ -102,7 +102,7 @@ let mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`
-  query Batata($categorySlug: String) {
+  query Timeline($categorySlug: String) {
     timeline(days: 7, offset: 0) {
       date
       stories(limit: 10, popular: true, category_slug: $categorySlug, ) {
