@@ -63,3 +63,5 @@ android/app/mttrs-release-key.keystore
 
 .vscode
 tsconfig.json
+
+.env
