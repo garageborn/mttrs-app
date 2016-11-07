@@ -100,9 +100,8 @@ class TimelineContainer extends Component {
 
     routes.find((route) => {
       if (route.type === 'home') return
-      console.log(nextProps.params.section.model.slug)
       if (route.filter.slug === nextProps.params.section.model.slug) {
-         nextIndex = JSON.parse(route.key)
+         nextIndex = parseInt(route.key)
       }
     })
 
@@ -116,15 +115,15 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
+    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
     const { dispatch } = this.props
     if (!newIndex) return
-    if (!topStories) {
+    if (home) {
+      dispatch(NavigationActions.home())
+    } else {
       const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
       dispatch(NavigationActions.selectCategory(currentRoute.filter))
-    } else {
-      dispatch(NavigationActions.home())
     }
   }
 
