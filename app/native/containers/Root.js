@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { StatusBar, Platform } from 'react-native'
+import Raven from 'raven-js'
 import { NavigationContext, NavigationProvider, StackNavigation, } from '@exponent/ex-navigation'
 import Router from '../config/Router'
 import apolloClient from '../config/apolloClient'
+
+require('raven-js/plugins/react-native')(Raven)
+
+Raven
+  .config('key', { release: RELEASE_ID })
+  .install()
 
 class Root extends Component {
   render() {
