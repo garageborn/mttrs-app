@@ -62,8 +62,6 @@ class Timeline extends Component {
   }
 
   render() {
-    const { onEndReached } = this.props
-
     if (this.props.data.loading) {
       return (
         <View style={styles.loading}>
@@ -84,7 +82,7 @@ class Timeline extends Component {
         renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
-        onEndReached={onEndReached}
+        onEndReached={this.props.data.infiniteScroll}
       />
     )
   }
@@ -92,7 +90,6 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   category: PropTypes.object,
-  onEndReached: PropTypes.func.isRequired,
   storyRenderer: PropTypes.func.isRequired
 }
 
@@ -132,7 +129,7 @@ const defaultVariables = {
   publisherSlug: ''
 }
 
-const pullToRefresh = function({ fetchMore, variables }) {
+const pullToRefresh = ({ fetchMore, variables, loading }) => {
   return fetchMore({
     variables: { ...variables, days: 1, offset: 0 },
     updateQuery: (previousResult, { fetchMoreResult }) => {
@@ -141,6 +138,19 @@ const pullToRefresh = function({ fetchMore, variables }) {
       timeline = _uniqBy(timeline, item => item.date)
       timeline = _sortBy(timeline, item => -item.date)
       return Object.assign({}, previousResult, { timeline: [...timeline] })
+    },
+  })
+}
+
+const infiniteScroll = ({ loading, fetchMore, variables, timeline }) => {
+  return fetchMore({
+    variables: { ...variables, days: 1, offset: timeline.length },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      if (!fetchMoreResult.data) { return previousResult }
+      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      return Object.assign({}, previousResult, {
+        timeline: [...previousResult.timeline, ...fetchMoreResult.data.timeline]
+      });
     },
   })
 }
@@ -156,13 +166,14 @@ const TimelineWithData = graphql(Query, {
       }
     }
   },
-  props({ data: { loading, timeline, variables, fetchMore } }) {
+  props({ data }) {
     return {
       data: {
-        loading,
-        timeline,
-        fetchMore,
-        pullToRefresh: pullToRefresh.bind(this, { fetchMore, variables })
+        loading: data.loading,
+        timeline: data.timeline,
+        fetchMore: data.fetchMore,
+        pullToRefresh: pullToRefresh.bind(this, data),
+        infiniteScroll: infiniteScroll.bind(this, data),
       }
     }
   }
