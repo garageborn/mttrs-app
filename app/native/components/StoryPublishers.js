@@ -48,7 +48,15 @@ class StoryPublishers extends Component {
 }
 
 StoryPublishers.propTypes = {
-  story: PropTypes.object.isRequired,
+  story: PropTypes.shape({
+    main_link: PropTypes.shape({
+      publisher: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        icon_id: PropTypes.string
+      }).isRequired,
+    }).isRequired,
+    other_links: PropTypes.array.isRequired,
+  }).isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }
 

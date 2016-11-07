@@ -67,6 +67,6 @@ class CategoryMenuContainer extends Component {
   }
 }
 
-const Query = gql`query { categories { id name slug color icon_id } }`
+const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
 const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
 export default connect()(CategoryMenuContainerWithData)

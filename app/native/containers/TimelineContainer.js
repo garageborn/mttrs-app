@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing } from 'react-native'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from '@exponent/ex-navigation'
-import { TimelineActions, MenuActions } from '../actions/index'
+import { TabViewAnimated } from 'react-native-tab-view'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import { MenuActions, NavigationActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -10,36 +12,70 @@ import Router from '../config/Router'
 import styles from '../styles/App'
 import MenuContainer from './MenuContainer'
 
+import _isNil from 'lodash/isNil'
+import _isEmpty from 'lodash/isEmpty'
+
 const { height } = Dimensions.get('window')
 
 class TimelineContainer extends Component {
   constructor(props) {
     super(props)
-    this.onEndReached = this.onEndReached.bind(this)
-    this.onPullToRefresh = this.onPullToRefresh.bind(this)
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
+    this.renderScene = this.renderScene.bind(this)
     this.state = {
-      menuPositionY: new Animated.Value(-height)
+      menuPositionY: new Animated.Value(-height),
+      navigationState: {
+        index: 0,
+        routes: [
+         { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
+        ]
+      }
     }
   }
 
-  componentDidMount() {
-    this.fetchData(this.props)
+  handleChangeTab = (index) => {
+    this.setState({
+      navigationState: {
+        index,
+        routes: this.state.navigationState.routes
+      }
+    })
+  }
+
+  renderScene(props) {
+    let filter
+
+    if (this.sceneType(props) === 'publisher') {
+      filter = props.params.section.model
+    } else {
+      filter = props.route.filter
+    }
+
+    return (
+      <Timeline
+        storyRenderer={this.renderStory}
+        type={props.route.type}
+        filter={filter}
+      />
+    )
   }
 
   componentWillReceiveProps(nextProps) {
-    this.sectionWillChange(nextProps)
     this.menuWillChange(nextProps)
+    if (!_isNil(nextProps.params.section) && nextProps.params.section.name === 'publisher') return
+    this.addSwipeRoutes(nextProps)
+    this.sectionWillChange(nextProps)
   }
 
   sectionWillChange(nextProps) {
     let nextSection = nextProps.params.section || {}
     let currentSection = this.props.params.section || {}
-
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
-    if (sectionNameChanged || sectionModelChanged) this.fetchData(nextProps)
+    if (sectionNameChanged || sectionModelChanged) {
+      this.changeSection(nextProps)
+    }
   }
 
   menuWillChange(nextProps) {
@@ -56,38 +92,48 @@ class TimelineContainer extends Component {
     }
   }
 
-  fetchData(props) {
-    let action = TimelineActions.getTimeline(this.fetchQuery(props))
-    return props.dispatch(action)
+  changeSection(nextProps) {
+    let { routes } = this.state.navigationState
+    let nextIndex = 0
+
+    if (sectionType(nextProps) !== 'home') {
+      let route = routes.find(route => route.filter.slug === nextProps.params.section.model.slug)
+      nextIndex = parseInt(route.key)
+    }
+
+    this.setState({
+      ...this.state,
+      navigationState: {
+        ...this.state.navigationState,
+        index: nextIndex
+      }
+    })
   }
 
-  pullFetchData(props) {
-    // let action = TimelineActions.pullToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
-  }
-
-  infiniteFetchData(props) {
-    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
-  }
-
-  fetchQuery(props) {
-    const { section } = props.params
-    if (!section) return {}
-    switch(section.name) {
-      case 'category':
-        return { category_slug: section.model.slug }
-      case 'publisher':
-        return { publisher_slug: section.model.slug }
+  componentWillUpdate(nextProps, nextState) {
+    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
+    const { dispatch } = this.props
+    if (!newIndex) return
+    if (home) {
+      dispatch(NavigationActions.home())
+    } else {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.filter))
     }
   }
 
-  onPullToRefresh() {
-    this.pullFetchData(this.props)
-  }
-
-  onEndReached() {
-    this.infiniteFetchData(this.props)
+  addSwipeRoutes(nextProps) {
+    if (nextProps.data.loading || this.state.navigationState.routes.length > 1) return
+    let newRoutes = nextProps.data.categories.map((item, idx) => {
+      return { key: `${idx+1}`, title: item.name, type: 'category', filter: item }
+    })
+    this.setState({
+      navigationState: {
+        ...this.state.navigationState,
+        routes: [...this.state.navigationState.routes, ...newRoutes ]
+      }
+    })
   }
 
   animate(type) {
@@ -114,27 +160,42 @@ class TimelineContainer extends Component {
   }
 
   render() {
-    const { items, isFetching, isFetchingTop } = this.props
     return (
-        <View style={styles.container}>
-          {this.renderStoryLinks()}
+      <View style={styles.container}>
+        {this.renderStoryLinks()}
+        {this.renderTimeline()}
 
-          <View style={styles.listViewContainer}>
-            <Timeline
-              items={items}
-              isFetching={isFetching}
-              isFetchingTop={isFetchingTop}
-              onEndReached={this.onEndReached}
-              onRefresh={this.onPullToRefresh}
-              storyRenderer={this.renderStory}
-              />
-          </View>
-
-          <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-            { this.renderMenu() }
-          </Animated.View>
-        </View>
+        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+          {this.renderMenu()}
+        </Animated.View>
+      </View>
     )
+  }
+
+  renderTimeline() {
+    if (this.sectionType(this.props) === 'publisher') {
+      return this.renderScene(this.props)
+    } else {
+      return (
+        <TabViewAnimated
+          style={styles.listViewContainer}
+          navigationState={this.state.navigationState}
+          renderScene={this.renderScene}
+          onRequestChangeTab={this.handleChangeTab}
+          lazy={true}
+        />
+      )
+    }
+  }
+
+  sectionType(props) {
+    if (_isNil(props.params.section)) return 'home'
+    return props.params.section.name
+  }
+
+  sceneType(props) {
+    if (_isNil(props.route)) return 'publisher'
+    return props.route.type
   }
 
   renderMenu() {
@@ -161,11 +222,10 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    items: state.TimelineReducers.items,
-    isFetching: state.TimelineReducers.isFetching,
-    isFetchingTop: state.TimelineReducers.isFetchingTop,
     uiReducer: state.uiReducer
   }
 }
 
-export default connect(mapStateToProps)(TimelineContainer)
+const Query = gql`query { categories(ordered: true) { id name slug icon_id } }`
+const TimelineContainerWithData = graphql(Query)(TimelineContainer)
+export default connect(mapStateToProps)(TimelineContainerWithData)

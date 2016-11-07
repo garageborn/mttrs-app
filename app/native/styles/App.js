@@ -5,7 +5,9 @@ const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F1F1F1'
+    backgroundColor: '#F1F1F1',
+    height,
+    width
   },
 
   loading: {
@@ -20,12 +22,15 @@ const styles = StyleSheet.create({
   },
 
   listViewContainer: {
+    flex: 1,
     position: 'absolute',
-    height
+    height,
+    width
   },
 
   listView: {
-    backgroundColor: '#F1F1F1',
+    flex: 1,
+    height,
     width
   },
 

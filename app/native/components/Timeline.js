@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Platform, ListView, View, Text, RefreshControl, ActivityIndicator } from 'react-native'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import _sortBy from 'lodash/sortBy'
+import _uniqBy from 'lodash/uniqBy'
 import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
@@ -29,8 +33,9 @@ class Timeline extends Component {
   rowsAndSections() {
     let rows = {}
     let sections = []
-    const { items } = this.props
-    items.forEach(item => {
+    const { timeline } = this.props.data
+
+    timeline.forEach(item => {
       if (item.stories.length) {
         let section = item.date
         sections.push(section)
@@ -42,12 +47,12 @@ class Timeline extends Component {
   }
 
   refreshControl() {
-    const { isFetchingTop, onRefresh } = this.props
+    const { loading, pullToRefresh } = this.props.data
     return (
       <RefreshControl
         style={styles.hideRefreshControl}
-        refreshing={isFetchingTop}
-        onRefresh={onRefresh}
+        refreshing={loading}
+        onRefresh={pullToRefresh}
         tintColor='#DDD'
         title='Refreshing...'
         titleColor='#AAA'
@@ -57,14 +62,12 @@ class Timeline extends Component {
   }
 
   render() {
-    const { isFetching, onEndReached } = this.props
-
-    if (isFetching) {
+    if (this.props.data.loading) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator
-            size="large"
-            color="#AAA"
+            size='large'
+            color='#AAA'
           />
         </View>
       )
@@ -72,29 +75,109 @@ class Timeline extends Component {
 
     return (
       <ListView
+        removeClippedSubviews={false}
+        initialListSize={100}
         style={styles.listView}
         dataSource={this.dataSource()}
         renderRow={this.props.storyRenderer}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
-        onEndReached={onEndReached}
-        />
+        onEndReached={this.props.data.infiniteScroll}
+      />
     )
   }
 }
 
 Timeline.propTypes = {
-  items: PropTypes.array.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  isFetchingTop: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired,
-  onEndReached: PropTypes.func.isRequired,
+  category: PropTypes.object,
   storyRenderer: PropTypes.func.isRequired
 }
 
-let mapStateToProps = (state) => {
-  const { uiReducer } = state
-  return { uiReducer }
+let mapStateToProps = (state, ownProps) => {
+  return {
+    uiReducer: state.uiReducer
+  }
 }
 
-export default connect(mapStateToProps)(Timeline)
+const Query = gql`
+  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(days: $days, offset: $offset) {
+      date
+      stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
+        id
+        total_social
+        main_category { name slug color }
+        main_link {
+          title
+          image_source_url
+          url
+          publisher { name icon_id }
+        }
+        other_links {
+          title
+          url
+          publisher { name icon_id }
+        }
+      }
+    }
+  }
+`
+
+const defaultVariables = {
+  categorySlug: '',
+  days: 3,
+  offset: 0,
+  perDay: 10,
+  publisherSlug: ''
+}
+
+const pullToRefresh = ({ fetchMore, variables }) => {
+  return fetchMore({
+    variables: { ...variables, days: 1, offset: 0 },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      if (!fetchMoreResult.data) { return previousResult }
+      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      timeline = _uniqBy(timeline, item => item.date)
+      timeline = _sortBy(timeline, item => -item.date)
+      return Object.assign({}, previousResult, { timeline: [...timeline] })
+    },
+  })
+}
+
+const infiniteScroll = ({ fetchMore, variables, timeline }) => {
+  return fetchMore({
+    variables: { ...variables, days: 1, offset: timeline.length },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      if (!fetchMoreResult.data) { return previousResult }
+      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      return Object.assign({}, previousResult, {
+        timeline: [...previousResult.timeline, ...fetchMoreResult.data.timeline]
+      })
+    }
+  })
+}
+
+const TimelineWithData = graphql(Query, {
+  options(props) {
+    if (props.type === 'home') return { variables: defaultVariables }
+    return {
+      variables: {
+        ...defaultVariables,
+        publisherSlug: props.type === 'publisher' ? props.filter.slug : '',
+        categorySlug: props.type === 'category' ? props.filter.slug : ''
+      }
+    }
+  },
+  props({ data }) {
+    return {
+      data: {
+        loading: data.loading,
+        timeline: data.timeline,
+        fetchMore: data.fetchMore,
+        pullToRefresh: pullToRefresh.bind(this, data),
+        infiniteScroll: infiniteScroll.bind(this, data),
+      }
+    }
+  }
+})(Timeline)
+export default connect(mapStateToProps)(TimelineWithData)

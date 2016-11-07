@@ -1,5 +1,6 @@
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
+import _isNil from 'lodash/isNil'
 
 export function home() {
   return (dispatch, getState) => {
@@ -24,7 +25,6 @@ export function selectCategory(category) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
-
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
