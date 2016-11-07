@@ -20,7 +20,6 @@ const { height } = Dimensions.get('window')
 class TimelineContainer extends Component {
   constructor(props) {
     super(props)
-    this.onEndReached = this.onEndReached.bind(this)
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
@@ -57,7 +56,6 @@ class TimelineContainer extends Component {
 
     return (
       <Timeline
-        onEndReached={this.onEndReached}
         storyRenderer={this.renderStory}
         type={routeType}
         filter={filter}
@@ -141,34 +139,6 @@ class TimelineContainer extends Component {
         routes: [...this.state.navigationState.routes, ...newRoutes ]
       }
     })
-  }
-
-  fetchQuery(props) {
-    // const { section } = props.params
-    // if (!section) return {}
-    // switch(section.name) {
-    //   case 'category':
-    //     return { category_slug: section.model.slug }
-    //   case 'publisher':
-    //     return { publisher_slug: section.model.slug }
-    // }
-  }
-
-  toggleLoading(nextProps) {
-    this.setState(
-      {
-        navigationState: { ...this.state.navigationState }
-      }
-    )
-  }
-
-  infiniteFetchData(props) {
-    // let action = TimelineActions.infiniteToRefresh(this.fetchQuery(props))
-    // return props.dispatch(action)
-  }
-
-  onEndReached() {
-    this.infiniteFetchData(this.props)
   }
 
   animate(type) {
