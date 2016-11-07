@@ -62,7 +62,7 @@ class StoryContainer extends Component {
   }
 
   get mainCategory() {
-    return this.mainLink.categories[0]
+    return this.props.story.main_category
   }
 }
 

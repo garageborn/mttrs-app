@@ -9,7 +9,6 @@ import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
-const startDays = 7
 
 class Timeline extends Component {
   constructor(props) {
@@ -104,13 +103,13 @@ let mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`
-  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String) {
+  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
     timeline(days: $days, offset: $offset) {
       date
-      stories(limit: $perDay, popular: true, category_slug: $categorySlug) {
+      stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
         total_social
-        main_category { name color }
+        main_category { name slug color }
         main_link {
           title
           image_source_url
@@ -137,18 +136,22 @@ const pullToRefresh = function({ fetchMore, variables }) {
   })
 }
 
+const defaultVariables = {
+  categorySlug: '',
+  days: 7,
+  offset: 0,
+  perDay: 1,
+  publisherSlug: ''
+}
+
 const TimelineWithData = graphql(Query, {
   options(props) {
-    let defaultVariables = { days: startDays, perDay: 1, offset: 0, categorySlug: '' }
-    if (props.type === 'home') {
-      return { variables: defaultVariables }
-    } else {
-      return {
-        variables: {
-          ...defaultVariables,
-          categorySlug: props.filter.slug,
-          publisherSlug: props.filter.slug
-        },
+    if (props.type === 'home') return { variables: defaultVariables }
+    return {
+      variables: {
+        ...defaultVariables,
+        publisherSlug: props.type === 'publisher' ? props.filter : "",
+        categorySlug: props.type === 'category' ? props.filter.slug : ""
       }
     }
   },

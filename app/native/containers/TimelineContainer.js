@@ -66,15 +66,15 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.menuWillChange(nextProps)
+    if (!_isNil(nextProps.params.section) && nextProps.params.section.name === 'publisher') return
     this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
-    this.menuWillChange(nextProps)
   }
 
   sectionWillChange(nextProps) {
     let nextSection = nextProps.params.section || {}
     let currentSection = this.props.params.section || {}
-
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
     if (sectionNameChanged || sectionModelChanged) {
@@ -102,6 +102,7 @@ class TimelineContainer extends Component {
 
     routes.find((route) => {
       if (route.type === 'home') return
+      console.log(nextProps.params.section.model.slug)
       if (route.filter.slug === nextProps.params.section.model.slug) {
          nextIndex = JSON.parse(route.key)
       }
@@ -117,16 +118,16 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    // const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    // const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
-    // const { dispatch } = this.props
-    // if (!newIndex) return
-    // if (!topStories) {
-    //   const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-    //   dispatch(NavigationActions.selectCategory(currentRoute.category, 'slider'))
-    // } else {
-    //   dispatch(NavigationActions.home())
-    // }
+    const topStories = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = (nextState.navigationState.index !== this.state.navigationState.index)
+    const { dispatch } = this.props
+    if (!newIndex) return
+    if (!topStories) {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.filter))
+    } else {
+      dispatch(NavigationActions.home())
+    }
   }
 
   addSwipeRoutes(nextProps) {
