@@ -150,8 +150,8 @@ const infiniteScroll = ({ fetchMore, variables, timeline }) => {
       let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
       return Object.assign({}, previousResult, {
         timeline: [...previousResult.timeline, ...fetchMoreResult.data.timeline]
-      });
-    },
+      })
+    }
   })
 }
 
