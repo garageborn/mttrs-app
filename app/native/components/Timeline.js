@@ -129,7 +129,7 @@ const defaultVariables = {
   publisherSlug: ''
 }
 
-const pullToRefresh = ({ fetchMore, variables, loading }) => {
+const pullToRefresh = ({ fetchMore, variables }) => {
   return fetchMore({
     variables: { ...variables, days: 1, offset: 0 },
     updateQuery: (previousResult, { fetchMoreResult }) => {
@@ -142,7 +142,7 @@ const pullToRefresh = ({ fetchMore, variables, loading }) => {
   })
 }
 
-const infiniteScroll = ({ loading, fetchMore, variables, timeline }) => {
+const infiniteScroll = ({ fetchMore, variables, timeline }) => {
   return fetchMore({
     variables: { ...variables, days: 1, offset: timeline.length },
     updateQuery: (previousResult, { fetchMoreResult }) => {
