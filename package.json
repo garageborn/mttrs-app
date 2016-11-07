@@ -47,6 +47,7 @@
     "react-dom": "~15.3.2",
     "react-native": "^0.36.1",
     "react-native-config": "^0.1.1",
+    "react-native-fabric": "^0.3.1",
     "react-native-linear-gradient": "^1.5.14",
     "react-native-share": "^1.0.16",
     "react-redux": "^4.4.5",
