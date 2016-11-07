@@ -62,6 +62,7 @@ class LinkSceneContainer extends Component {
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
           onLoadEnd={this.addStoryToLocalStorage}
+          mediaPlaybackRequiresUserAction={true}
           />
       </View>
     )
