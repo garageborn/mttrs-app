@@ -130,6 +130,6 @@ class PublisherMenuContainer extends Component {
   }
 }
 
-const Query = gql`query { publishers(order_by_name: true) { id name slug } }`
+const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
 const PublisherMenuContainerWithData = graphql(Query)(PublisherMenuContainer)
 export default connect()(PublisherMenuContainerWithData)
