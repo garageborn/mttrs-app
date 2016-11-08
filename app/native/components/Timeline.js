@@ -111,12 +111,12 @@ const Query = gql`
           title
           image_source_url
           url
-          publisher { name icon_id }
+          publisher { name slug icon_id }
         }
         other_links {
           title
           url
-          publisher { name icon_id }
+          publisher { name slug icon_id }
         }
       }
     }
