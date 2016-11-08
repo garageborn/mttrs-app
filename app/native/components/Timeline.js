@@ -111,11 +111,13 @@ const Query = gql`
           title
           image_source_url
           url
+          total_social
           publisher { name slug icon_id }
         }
         other_links(publisher_slug: $publisherSlug, popular: true) {
           title
           url
+          total_social
           publisher { name slug icon_id }
         }
       }
