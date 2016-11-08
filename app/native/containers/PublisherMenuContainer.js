@@ -45,9 +45,9 @@ class PublisherMenuContainer extends Component {
       Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
 
     const queryMatcher = new RegExp(query, 'i')
-    const filteredPublishers = publishers.filter(publisher => publisher.name.match(queryMatcher))
+    const filteredPublishers = publishers.filter((publisher) => publisher.name.match(queryMatcher))
 
-    filteredPublishers.forEach(publisher => {
+    filteredPublishers.forEach((publisher) => {
       let section = publisher.starred ? 'starred' : publisher.name.substring(0, 1).toUpperCase()
       if (publisher.starred || sections.indexOf(section) === -1) {
         sections.push(section)
@@ -130,6 +130,6 @@ class PublisherMenuContainer extends Component {
   }
 }
 
-const Query = gql`query { publishers(order_by_name: true) { id name slug } }`
+const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
 const PublisherMenuContainerWithData = graphql(Query)(PublisherMenuContainer)
 export default connect()(PublisherMenuContainerWithData)
