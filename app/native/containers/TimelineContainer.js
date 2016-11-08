@@ -62,9 +62,8 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     this.menuWillChange(nextProps)
-    if (!_isNil(nextProps.params.section) && nextProps.params.section.name === 'publisher') return
-    this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
   }
 

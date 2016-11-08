@@ -107,13 +107,13 @@ const Query = gql`
         id
         total_social
         main_category { name slug color }
-        main_link {
+        main_link(publisher_slug: $publisherSlug) {
           title
           image_source_url
           url
           publisher { name slug icon_id }
         }
-        other_links {
+        other_links(publisher_slug: $publisherSlug, popular: true) {
           title
           url
           publisher { name slug icon_id }
