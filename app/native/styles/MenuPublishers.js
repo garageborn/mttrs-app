@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -33,7 +35,8 @@ const styles = StyleSheet.create({
   },
 
   listContainer: {
-    flex: 1
+    flex: 1,
+    marginBottom: 10
   },
 
   listHeader: {

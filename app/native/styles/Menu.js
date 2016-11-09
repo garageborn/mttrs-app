@@ -1,21 +1,26 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
+import { headerHeight } from './Header'
+const { width, height } = Dimensions.get('window')
 
-let { width, height } = Dimensions.get('window')
+const topStoriesHeight = 100
+const selectorHeight = 60
+const menuHeader = headerHeight + topStoriesHeight + selectorHeight
+const categoriesContainerHeight = height - menuHeader
 
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
     backgroundColor: '#262C5B',
     zIndex: 1,
-    padding: 10,
-    marginTop: -12,
-    height
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: height - headerHeight
   },
 
   selector: {
     paddingLeft: 60,
     paddingRight: 60,
-    height: height * .1,
+    height: 60,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -54,7 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 5
+    marginBottom: 10,
+    height: categoriesContainerHeight
   },
 
   category: {

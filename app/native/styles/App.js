@@ -1,19 +1,21 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-
+import { headerHeight } from './Header'
 const { width, height } = Dimensions.get('window')
-const headerHeight = Platform.OS === 'ios' ? 75 : 55
+
+const containerStyles = {
+  flex: 1,
+  height: height - headerHeight,
+  width
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...containerStyles,
     backgroundColor: '#F1F1F1',
-    height,
-    width
   },
 
   loading: {
-    flex: 1,
-    width,
+    ...containerStyles,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -25,14 +27,11 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
-    height: height - headerHeight,
     width
   },
 
   listView: {
-    flex: 1,
-    height,
-    width
+    ...containerStyles
   },
 
   hideRefreshControl: {

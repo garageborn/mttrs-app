@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableHighlight } from 'react-native'
+import { View, ScrollView, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -27,9 +27,9 @@ class CategoryMenuContainer extends Component {
           </TouchableHighlight>
         </View>
 
-        <View style={styles.categories}>
-          { this.renderCategories() }
-        </View>
+        <ScrollView contentContainerStyle={styles.categories}>
+          {this.renderCategories()}
+        </ScrollView>
       </View>
     )
   }
