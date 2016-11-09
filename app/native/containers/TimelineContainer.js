@@ -142,7 +142,7 @@ class TimelineContainer extends Component {
       value = 0
       easing = Easing.out(Easing.quad)
     } else {
-      let headerHeight = (Platform.OS === 'ios') ? headerHeightIOS : headerHeightAndroid
+      const headerHeight = Platform.OS === 'ios' ? headerHeightIOS : headerHeightAndroid
       value = -height - headerHeight
       callback = this.closeMenu
       easing = Easing.in(Easing.quad)
@@ -154,7 +154,7 @@ class TimelineContainer extends Component {
         {
           toValue: value,
           duration: 330,
-          easing: easing
+          easing
         }
       ).start(callback)
     )
