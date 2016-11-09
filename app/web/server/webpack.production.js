@@ -59,7 +59,9 @@ module.exports = {
     },
     extensions: ['', '.js', '.json']
   },
-
+  node: {
+    fs: 'empty'
+  },
   postcss: function (webpack) {
     return [
       cssnext({ browsers: ['last 2 versions'] })

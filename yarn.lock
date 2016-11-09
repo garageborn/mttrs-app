@@ -161,10 +161,9 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
 
 apollo-client@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-0.5.0.tgz#b9ec43a8e621461ff24c9fddba21446d8e1d5aa3"
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-0.5.1.tgz#d22e6da2886e12dc3f9d76a517c171a9a4ee930a"
   dependencies:
-    es6-promise "^4.0.3"
     graphql-anywhere "^0.2.4"
     graphql-tag "^0.1.13"
     lodash.assign "^4.0.8"
@@ -2540,7 +2539,7 @@ es6-promise@^3.0.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
-es6-promise@^4.0.3, es6-promise@^4.0.5:
+es6-promise@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-4.0.5.tgz#7882f30adde5b240ccfa7f7d78c548330951ae42"
 
@@ -5546,8 +5545,8 @@ postcss-nesting@^2.0.5:
     postcss "^5.0.19"
 
 postcss-normalize-charset@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/postcss-normalize-charset/-/postcss-normalize-charset-1.1.0.tgz#2fbd30e12248c442981d31ea2484d46fd0628970"
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/postcss-normalize-charset/-/postcss-normalize-charset-1.1.1.tgz#ef9ee71212d7fe759c78ed162f61ed62b5cb93f1"
   dependencies:
     postcss "^5.0.5"
 
@@ -5991,8 +5990,8 @@ react-mixin@^3.0.5:
     smart-mixin "^2.0.0"
 
 react-native-config@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.1.1.tgz#01d644bc0d88c88f0322953b70b15b118bd67fc9"
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.1.2.tgz#cf6e3e312845f411fe9ef42f3ea283c576078681"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
@@ -6010,8 +6009,8 @@ react-native-fabric@^0.3.1:
   resolved "https://registry.yarnpkg.com/react-native-fabric/-/react-native-fabric-0.3.1.tgz#2c516f3a5ff52d771d2da26937b2438f116ede86"
 
 react-native-linear-gradient@^1.5.14:
-  version "1.5.14"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-1.5.14.tgz#497fe90ad23f4a0820811f002a2fc984d8f42a07"
+  version "1.5.15"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-1.5.15.tgz#4413111934dc1d8f5e0572ca96e60b1a2cf41f4d"
 
 react-native-share@^1.0.17:
   version "1.0.17"
@@ -6271,8 +6270,8 @@ rechoir@^0.6.2:
     resolve "^1.1.6"
 
 redbox-react@^1.2.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/redbox-react/-/redbox-react-1.3.2.tgz#bc12ca4f88705d29aaace7a12183d3ec14dd33f1"
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/redbox-react/-/redbox-react-1.3.3.tgz#63ec9c2cb9c620c46e2b9f8543b4898f1b787e41"
   dependencies:
     error-stack-parser "^1.3.6"
     object-assign "^4.0.1"
@@ -7557,8 +7556,8 @@ webpack-dev-middleware@^1.8.4:
     range-parser "^1.0.3"
 
 webpack-hot-middleware@^2.13.0:
-  version "2.13.1"
-  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.13.1.tgz#104350e044be58ba3b7ef1c39513d69562841975"
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.13.2.tgz#6500b15e6d4f1a9590f8df708183f4d2ac2c3e9e"
   dependencies:
     ansi-html "0.0.6"
     html-entities "^1.2.0"

@@ -11,16 +11,10 @@ const store = configureStore()
 let render = (renderProps, response) => {
   try {
     renderEngine(renderProps, store)
-      .then((html) => {
-        response.status(200).send(html)
-      })
-      .catch(exception => {
-        sentry.captureException(exception)
-        response.status(500).send(exception.message)
-      })
-  } catch(exception) {
-    sentry.captureException(exception)
-    response.status(500).send(exception.message)
+      .then((html) => { response.status(200).send(html) })
+      .catch(error => { raise(response, error) })
+  } catch(error) {
+    raise(response, error)
   }
 }
 
@@ -28,7 +22,7 @@ let handleRequest = (request, response) => {
   let routes = Routes.all(store)
   match({ routes: routes, location: request.url }, (error, redirectLocation, renderProps) => {
     if (error) {
-      response.status(500).send(error.message)
+      raise(response, error)
     } else if (redirectLocation) {
       response.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
@@ -45,6 +39,13 @@ let requestHandler = (request, response) => {
   Promise.all(promises).then(() => {
     return handleRequest(request, response)
   })
+}
+
+let raise = (response, error) => {
+  sentry.captureException(error)
+  let message = [error.message].concat(error.stack).join("\n\n")
+  response.setHeader('content-type', 'text/plain')
+  response.status(500).send(message)
 }
 
 export default requestHandler
