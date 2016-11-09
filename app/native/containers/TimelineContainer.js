@@ -16,6 +16,7 @@ import _isNil from 'lodash/isNil'
 import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
+const headerHeight = 75
 
 class TimelineContainer extends Component {
   constructor(props) {
@@ -141,7 +142,7 @@ class TimelineContainer extends Component {
       value = 0
       easing = Easing.out(Easing.quad)
     } else {
-      value = -height
+      value = -height - headerHeight
       callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
