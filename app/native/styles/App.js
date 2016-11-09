@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F1F1F1',
-    height,
+    height: height - headerHeight,
     width
   },
 
@@ -25,13 +25,12 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
-    height: height - headerHeight,
     width
   },
 
   listView: {
     flex: 1,
-    height,
+    height: height - headerHeight,
     width
   },
 
