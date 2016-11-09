@@ -1,6 +1,7 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
+const headerHeight = Platform.OS === 'ios' ? 75 : 55
 
 const styles = StyleSheet.create({
   container: {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
-    height,
+    height: height - headerHeight,
     width
   },
 
