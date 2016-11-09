@@ -102,7 +102,9 @@ class PublisherMenuContainer extends Component {
         <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
         <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
           <Image style={styles.searchIcon} source={require('../assets/icons/icon-search.png')} />
-          <TextInput style={styles.searchInput}
+          <TextInput
+            style={styles.searchInput}
+            underlineColorAndroid={'transparent'}
             placeholder='Search for publishers'
             onChangeText={_debounce((query) => this.setState({query}), 300)}
           />
