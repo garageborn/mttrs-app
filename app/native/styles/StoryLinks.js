@@ -1,6 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native'
-
-let { width, height } = Dimensions.get('window')
+import { StyleSheet, Dimensions, Platform } from 'react-native'
+const { width, height } = Dimensions.get('window')
+const heightOffset = (Platform.OS === 'ios') ? 90 : 110
 
 const styles = StyleSheet.create({
   modal: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
   container: {
     width: width - 16,
-    height: height - 90,
+    height: height - heightOffset,
     paddingBottom: 2,
     marginTop: 20,
     marginLeft: 8,
