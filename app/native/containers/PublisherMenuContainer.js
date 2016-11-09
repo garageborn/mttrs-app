@@ -119,7 +119,7 @@ class PublisherMenuContainer extends Component {
           dataSource={this.dataSource()}
           renderRow={this.renderRow}
           renderSectionHeader={this.renderSeparator}
-          />
+        />
       </View>
     )
   }

@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
-const headerHeight = Platform.OS === 'ios' ? 75 : 55
+const headerHeight = (Platform.OS === 'ios') ? 75 : 55
 
 const styles = StyleSheet.create({
   container: {
