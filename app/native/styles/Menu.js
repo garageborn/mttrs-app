@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width, height } = Dimensions.get('window')
 const headerHeight = Platform.OS === 'ios' ? 63 : 43
+const categoriesContainerHeight = 400
 
 const styles = StyleSheet.create({
   menu: {
@@ -9,9 +10,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     padding: 10,
     marginTop: -12,
-    height: height - headerHeight,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'red'
+    height: height - headerHeight
   },
 
   selector: {
@@ -56,7 +55,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 5
+    marginBottom: 10,
+    height: categoriesContainerHeight
   },
 
   category: {
