@@ -1631,12 +1631,11 @@ clone@^1.0.0, clone@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
 
-cloudinary@^1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/cloudinary/-/cloudinary-1.4.4.tgz#48de40983fe88c1ca0f9f215fb6bf14cf0fc234d"
+cloudinary-core@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.1.6.tgz#c7127f19adb0814711844f89d84c274010bb8d59"
   dependencies:
-    lodash "3.10.x"
-    q "1.4.x"
+    lodash ">=3.0"
 
 co@^4.6.0:
   version "4.6.0"
@@ -4421,11 +4420,11 @@ lodash.words@^3.0.0:
   dependencies:
     lodash._root "^3.0.0"
 
-lodash@^3.1.0, lodash@^3.10.1, lodash@^3.2.0, lodash@^3.3.1, lodash@^3.5.0, lodash@^3.6.0, lodash@3.10.x:
+lodash@^3.1.0, lodash@^3.10.1, lodash@^3.2.0, lodash@^3.3.1, lodash@^3.5.0, lodash@^3.6.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@~4.16.4:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.16.6, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@>=3.0, lodash@~4.16.4:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.6.tgz#d22c9ac660288f3843e16ba7d2b5d06cca27d777"
 
@@ -5846,7 +5845,7 @@ pure-color@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pure-color/-/pure-color-1.2.0.tgz#702d2f2819dd545b1fde5116fca5f0c2dad2d18d"
 
-q@^1.1.2, q@1.4.x:
+q@^1.1.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
 
