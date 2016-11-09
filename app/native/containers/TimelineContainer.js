@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing, StyleSheet, Text } from 'react-native'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
@@ -10,6 +10,7 @@ import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
+import { headerHeight } from '../styles/Header'
 import MenuContainer from './MenuContainer'
 
 import _isNil from 'lodash/isNil'
@@ -141,7 +142,7 @@ class TimelineContainer extends Component {
       value = 0
       easing = Easing.out(Easing.quad)
     } else {
-      value = -height
+      value = -height - headerHeight
       callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
@@ -152,7 +153,7 @@ class TimelineContainer extends Component {
         {
           toValue: value,
           duration: 330,
-          easing: easing
+          easing
         }
       ).start(callback)
     )
