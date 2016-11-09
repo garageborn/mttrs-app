@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width, height } = Dimensions.get('window')
-const heightOffset = (Platform.OS === 'ios') ? 90 : 110
+const heightOffset = Platform.OS === 'ios' ? 90 : 110
 
 const styles = StyleSheet.create({
   modal: {
