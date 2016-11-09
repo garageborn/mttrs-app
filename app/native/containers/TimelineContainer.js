@@ -10,7 +10,7 @@ import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
-import { headerHeightIOS, headerHeightAndroid } from '../styles/Header'
+import { headerHeight } from '../styles/Header'
 import MenuContainer from './MenuContainer'
 
 import _isNil from 'lodash/isNil'
@@ -142,7 +142,6 @@ class TimelineContainer extends Component {
       value = 0
       easing = Easing.out(Easing.quad)
     } else {
-      const headerHeight = Platform.OS === 'ios' ? headerHeightIOS : headerHeightAndroid
       value = -height - headerHeight
       callback = this.closeMenu
       easing = Easing.in(Easing.quad)
