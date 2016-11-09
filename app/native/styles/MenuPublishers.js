@@ -5,9 +5,7 @@ const { height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    borderColor: 'red',
-    borderWidth: 1
+    justifyContent: 'center'
   },
 
   search: {
