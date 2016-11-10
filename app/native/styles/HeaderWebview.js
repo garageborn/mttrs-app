@@ -4,11 +4,11 @@ const styles = StyleSheet.create({
   header: {
     ...Platform.select({
       ios: {
-        height: 75,
-        paddingTop: 20
+        // height: 75,
+        // paddingTop: 20
       },
       android: {
-        height: 55
+        // height: 55
       }
     }),
     paddingLeft: 28,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#262C5B'
+    // backgroundColor: '#262C5B'
   },
 
   publisherInfo: {

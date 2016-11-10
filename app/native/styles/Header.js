@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
     height: headerHeight,
     ...Platform.select({
       ios: {
-        paddingTop: 35
+        // paddingTop: 35
       },
       android: {
-        paddingTop: 18
+        // paddingTop: 18
       }
     }),
-    backgroundColor: '#262C5B',
+    // backgroundColor: '#262C5B',
     zIndex: 2
   },
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
+import { View, WebView, Platform, Animated, Easing, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
@@ -7,8 +7,20 @@ import styles from '../styles/App'
 import { StorageActions } from '../actions/index'
 
 class LinkSceneContainer extends Component {
+  static route = {
+    navigationBar: {
+      renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
+      renderLeft: () => <View />,
+      renderRight: () => <View />,
+      backgroundColor: '#262C5B'
+    }
+  }
+
   constructor() {
     super()
+
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
+
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
     this.progress = new Animated.Value(0)
   }
@@ -55,15 +67,15 @@ class LinkSceneContainer extends Component {
 
     return (
       <View style={styles.container}>
-        <LinkHeaderContainer link={this.props.route.params.link} />
-        <WebView
+        {/*<LinkHeaderContainer link={this.props.route.params.link} />*/}
+{/*        <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
           onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction={true}
-          />
+          />*/}
       </View>
     )
   }
