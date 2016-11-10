@@ -1,11 +1,20 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Header'
+import { iPhone5S } from '../../constants/DeviceDimensions'
 const { width, height } = Dimensions.get('window')
 
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
+
+const iOSCategoryVerticalMargin = width => {
+  if (width === iPhone5S.width) {
+    return 0
+  }
+
+  return 2.5
+}
 
 const styles = StyleSheet.create({
   menu: {
@@ -74,7 +83,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     height: height / 6.5,
     marginHorizontal: 7.5,
-    marginVertical: Platform.OS === 'ios' ? 2.5 : 0
+    marginVertical: Platform.OS === 'ios' ? iOSCategoryVerticalMargin(width) : 0
   },
 
   categoryIcon: {
