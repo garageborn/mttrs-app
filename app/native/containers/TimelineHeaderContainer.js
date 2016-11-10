@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { MenuActions } from '../actions/index'
 import HomeHeaderContainer from './HomeHeaderContainer'
@@ -15,7 +15,7 @@ class TimelineHeaderContainer extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles}>
         {this.renderHeader()}
       </View>
     )
@@ -53,5 +53,9 @@ TimelineHeaderContainer.propTypes = {
 function mapStateToProps(state) {
   return { uiReducer: state.uiReducer }
 }
+
+const styles = StyleSheet.create({
+  zIndex: 1
+})
 
 export default connect(mapStateToProps)(TimelineHeaderContainer)
