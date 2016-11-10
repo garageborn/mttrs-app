@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 const { height } = Dimensions.get('window')
 
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 2,
+    marginBottom: Platform.OS === 'ios' ? 2 : 15,
     borderRadius: 5
   },
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
   listContainer: {
     flex: 1,
-    marginBottom: 10
+    marginBottom: Platform.OS === 'ios' ? 10 : 40
   },
 
   listHeader: {

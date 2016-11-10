@@ -106,8 +106,7 @@ class PublisherMenuContainer extends Component {
             style={styles.searchInput}
             underlineColorAndroid={'transparent'}
             placeholder='Search for publishers'
-            onChangeText={_debounce((query) => this.setState({query}), 300)}
-          />
+            onChangeText={_debounce((query) => this.setState({query}), 300)} />
         </View>
       </View>
     )
