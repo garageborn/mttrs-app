@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 60,
-    marginHorizontal: 20,
+    paddingHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#DDD'
   },
