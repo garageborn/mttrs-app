@@ -54,7 +54,7 @@ class StoryLink extends Component {
             </TouchableHighlight>
             <View style={styles.shares}>
               <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
-              <Text style={styles.shareCount}>{SocialCount(link.total_social)}+</Text>
+              <Text style={styles.shareCount}>{SocialCount(link.total_social)}</Text>
             </View>
           </View>
         </View>
