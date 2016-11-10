@@ -2,10 +2,16 @@ import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Header'
 const { width, height } = Dimensions.get('window')
 
+const iphoneWidthSmall = 320
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
+
+const categoryVerticalMargin = Platform.select({
+  ios: width === iphoneWidthSmall ? 0 : 2.5,
+  android: 0
+})
 
 const styles = StyleSheet.create({
   menu: {
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     height: height / 6.5,
     marginHorizontal: 7.5,
-    marginVertical: Platform.OS === 'ios' ? 2.5 : 0
+    marginVertical: categoryVerticalMargin
   },
 
   categoryIcon: {

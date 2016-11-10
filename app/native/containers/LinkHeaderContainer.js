@@ -51,7 +51,7 @@ class LinkHeaderContainer extends Component {
           <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.share}>
             <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
           </TouchableHighlight>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.close}>
+          <TouchableHighlight style={[styles.iconHighlight, styles.iconCloseHighlight]} underlayColor={COLORLESS} onPress={this.close}>
             <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
           </TouchableHighlight>
         </View>
