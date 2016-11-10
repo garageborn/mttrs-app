@@ -3,6 +3,7 @@ import { Image } from 'react-native'
 import Header from '../components/Header'
 import styles from '../styles/Header'
 import { NavigationActions } from '@exponent/ex-navigation'
+import _isNil from 'lodash/isNil'
 
 class HomeHeaderContainer extends Component {
   get icon() {
@@ -10,11 +11,15 @@ class HomeHeaderContainer extends Component {
   }
 
   render() {
-    const { toggleMenu } = this.props
+    const { toggleMenu, category } = this.props
+    let title = 'Top Stories'
+
+    if (category) { title = category.name }
+
     return (
       <Header
         toggleMenu={toggleMenu}
-        title='Top Stories'
+        title={title}
         icon={this.icon}
         />
     )

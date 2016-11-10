@@ -6,6 +6,7 @@ import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
 import MenuContainer from './MenuContainer'
+import _isNil from 'lodash/isNil'
 
 class TimelineHeaderContainer extends Component {
   constructor(props) {
@@ -25,14 +26,17 @@ class TimelineHeaderContainer extends Component {
     const { section } = this.props.params
 
     if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
-    switch(section.name) {
-      case 'category':
-        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
-      case 'publisher':
-        return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
-      default:
-        return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
-    }
+
+    return <HomeHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
+
+    // switch(section.name) {
+    //   // case 'category':
+    //   //   return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
+    //   // case 'publisher':
+    //   //   return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
+    //   default:
+    //     return
+    // }
   }
 
   toggleMenu() {
