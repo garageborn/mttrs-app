@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
 
   iconClose: {
     marginBottom: 1
+  },
+
+  iconCloseHighlight: {
+    paddingHorizontal: 10
   }
 })
 
