@@ -6,7 +6,7 @@ import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
 import MenuContainer from './MenuContainer'
-import _isNil from 'lodash/isNil'
+import styles from '../styles/TimelineHeaderContainer'
 
 class TimelineHeaderContainer extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class TimelineHeaderContainer extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         {this.renderHeader()}
       </View>
     )
