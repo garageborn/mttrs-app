@@ -3,17 +3,25 @@ import { View, WebView, Platform, Animated, Easing, Dimensions, StatusBar } from
 import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
-import styles from '../styles/App'
 import { StorageActions } from '../actions/index'
+import { headerHeight } from '../styles/Header'
 
 class LinkSceneContainer extends Component {
-  static route = {
-    navigationBar: {
-      renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
-      renderLeft: () => <View />,
-      renderRight: () => <View />,
-      backgroundColor: '#262C5B'
+  static route = Platform.OS === 'ios'
+  ? {
+      navigationBar: {
+        renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
+        renderLeft: () =>  <View />,
+        renderRight: () =>  <View />,
+        backgroundColor: '#262C5B',
+        height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
+      }
     }
+  : null
+
+  renderNavbar(props) {
+    if (Platform.OS === 'ios') return
+    return <LinkHeaderContainer link={props.route.params.link} />
   }
 
   constructor() {
@@ -66,16 +74,16 @@ class LinkSceneContainer extends Component {
     const { url } = this.props.route.params.link
 
     return (
-      <View style={styles.container}>
-        {/*<LinkHeaderContainer link={this.props.route.params.link} />*/}
-{/*        <WebView
+      <View>
+        {this.renderNavbar(this.props)}
+        <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
           onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction={true}
-          />*/}
+        />
       </View>
     )
   }
