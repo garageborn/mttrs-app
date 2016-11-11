@@ -6,6 +6,7 @@ import ProgressBar from '../components/ProgressBar'
 import { StorageActions } from '../actions/index'
 import { headerHeight } from '../styles/Header'
 import styles from '../styles/App'
+import { DARK_COLOR } from '../../constants/Colors'
 
 class LinkSceneContainer extends Component {
   static route = Platform.OS === 'ios'
@@ -14,7 +15,7 @@ class LinkSceneContainer extends Component {
         renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
         renderLeft: () =>  <View />,
         renderRight: () =>  <View />,
-        backgroundColor: '#262C5B',
+        backgroundColor: DARK_COLOR,
         height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
       }
     }

@@ -4,6 +4,7 @@ import TimelineHeaderContainer from './TimelineHeaderContainer'
 import TimelineContainer from './TimelineContainer'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Header'
+import { DARK_COLOR } from '../../constants/Colors'
 
 class TimelineSceneContainer extends Component {
   static route = {
@@ -11,7 +12,7 @@ class TimelineSceneContainer extends Component {
       renderTitle: (route) => <TimelineHeaderContainer params={route.params}/>,
       renderLeft: () => <View />,
       renderRight: () => <View />,
-      backgroundColor: '#262C5B',
+      backgroundColor: DARK_COLOR,
       height: headerHeight
    }
   }
