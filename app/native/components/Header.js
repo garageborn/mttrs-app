@@ -6,7 +6,6 @@ import { COLORLESS } from '../../constants/TouchUnderlayColors'
 class Header extends Component {
   render() {
     const { title, icon, toggleMenu } = this.props
-    console.log(title)
     return (
       <View style={styles.header}>
         <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
