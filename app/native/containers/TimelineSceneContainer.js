@@ -20,13 +20,6 @@ class TimelineSceneContainer extends Component {
   render() {
     const { route } = this.props
     return <TimelineContainer params={route.params} />
-
-    return (
-      <View style={styles.container}>
-        {/*<TimelineHeaderContainer params={route.params} />*/}
-        <TimelineContainer params={route.params} />
-      </View>
-    )
   }
 }
 
