@@ -5,6 +5,7 @@ import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import { StorageActions } from '../actions/index'
 import { headerHeight } from '../styles/Header'
+import styles from '../styles/App'
 
 class LinkSceneContainer extends Component {
   static route = Platform.OS === 'ios'
@@ -74,7 +75,7 @@ class LinkSceneContainer extends Component {
     const { url } = this.props.route.params.link
 
     return (
-      <View>
+      <View style={styles.container}>
         {this.renderNavbar(this.props)}
         <WebView
           source={{uri: url}}
