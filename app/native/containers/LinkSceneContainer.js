@@ -9,17 +9,18 @@ import styles from '../styles/App'
 import { DARK_COLOR } from '../../constants/Colors'
 
 class LinkSceneContainer extends Component {
-  static route = Platform.OS === 'ios'
-  ? {
-      navigationBar: {
-        renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
-        renderLeft: () =>  <View />,
-        renderRight: () =>  <View />,
-        backgroundColor: DARK_COLOR,
-        height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
-      }
-    }
-  : null
+  static route = Platform.select({
+    ios: {
+        navigationBar: {
+          renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
+          renderLeft: () =>  <View />,
+          renderRight: () =>  <View />,
+          backgroundColor: DARK_COLOR,
+          height: headerHeight // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
+        }
+      },
+    android: null
+  })
 
   renderNavbar(props) {
     if (Platform.OS === 'ios') return

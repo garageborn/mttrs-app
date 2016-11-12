@@ -3,7 +3,6 @@ import { headerHeight } from './Header'
 const { width, height } = Dimensions.get('window')
 import { DARK_COLOR } from '../../constants/Colors'
 
-
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
