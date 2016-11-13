@@ -49,6 +49,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  topStoriesInactive: {
+    backgroundColor: '#666'
+  },
+
   topStoriesTitle: {
     marginLeft: 12,
     marginTop: -4,

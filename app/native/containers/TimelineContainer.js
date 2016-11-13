@@ -110,6 +110,12 @@ class TimelineContainer extends Component {
     })
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props
+
+    dispatch(NavigationActions.home())
+  }
+
   componentWillUpdate(nextProps, nextState) {
     const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
     const newIndex = nextState.navigationState.index !== this.state.navigationState.index
@@ -208,7 +214,7 @@ class TimelineContainer extends Component {
   }
 
   renderStory(story) {
-    return <StoryContainer story={story} section={this.props.params.section} />
+    return <StoryContainer story={story} isHome={this.state.navigationState.index === 0} />
   }
 
   renderStoryLinks() {

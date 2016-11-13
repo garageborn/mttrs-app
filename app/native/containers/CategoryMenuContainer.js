@@ -20,7 +20,7 @@ class CategoryMenuContainer extends Component {
       <View>
         <View style={styles.topStoriesContainer}>
           <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
-            <View style={styles.topStories} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
+            <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
               <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
               <Text style={styles.topStoriesTitle}>Top Stories</Text>
             </View>
@@ -32,6 +32,14 @@ class CategoryMenuContainer extends Component {
         </ScrollView>
       </View>
     )
+  }
+
+  get topStoriesStyles() {
+    const { section } = this.props.params
+
+    if (section.name === 'home') return styles.topStories
+
+    return [styles.topStories, styles.topStoriesInactive]
   }
 
   renderCategories() {
