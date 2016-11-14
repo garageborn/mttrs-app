@@ -82,21 +82,16 @@ export function removeFavoritePublisher(publisher) {
     publishers = removePublisherFromFavorite(publishers, publisherIndex)
 
     AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
-
-    console.log('removeFavoritePublisher')
     return dispatch(receiveFavoritePublishers(publishers))
   }
 }
 
 export function addFavoritePublisher(publisher) {
   return (dispatch, getState) => {
-    if (isFavoritePublisher(getState, publisher)) {
-      console.log('golfo')
-    }
+    if (isFavoritePublisher(getState, publisher)) return
 
     let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
     AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
-    console.log('addFavoritePublisher')
     return dispatch(receiveFavoritePublishers(publishers))
   }
 }
