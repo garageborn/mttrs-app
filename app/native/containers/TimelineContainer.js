@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform } from 'react-native'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
@@ -21,6 +21,7 @@ const { height } = Dimensions.get('window')
 class TimelineContainer extends Component {
   constructor(props) {
     super(props)
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
