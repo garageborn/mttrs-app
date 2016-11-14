@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
 
   right: {
     marginRight: marginHorizonal,
-    marginTop: 20,
+    padding: 20,
     width
   },
 

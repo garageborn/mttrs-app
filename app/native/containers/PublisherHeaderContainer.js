@@ -7,6 +7,7 @@ import * as cloudinary from '../../common/utils/Cloudinary'
 import { NavigationActions } from '@exponent/ex-navigation'
 import { StorageActions } from '../actions/index'
 import styles from '../styles/PublisherHeader'
+import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 class PublisherHeaderContainer extends Component {
   getPublisherLogo() {
@@ -22,7 +23,6 @@ class PublisherHeaderContainer extends Component {
 
   render() {
     const { toggleMenu, publisher } = this.props
-    console.log(this.props.publisher)
     return (
       <View style={styles.container}>
         <View style={styles.left} />
@@ -31,7 +31,10 @@ class PublisherHeaderContainer extends Component {
           title={publisher.name}
           icon={this.icon}
         />
-      <TouchableHighlight style={styles.right} onPress={() => this.toggleFavoritePublisher(this.props.publisher)}>
+      <TouchableHighlight
+        underlayColor={DARK_TRANSPARENT_COLOR}
+        style={styles.right}
+        onPress={() => this.toggleFavoritePublisher(this.props.publisher)}>
           <Image source={this.favoritePublisherIcon}/>
         </TouchableHighlight>
       </View>
