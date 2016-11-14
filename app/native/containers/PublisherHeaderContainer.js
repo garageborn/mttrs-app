@@ -39,8 +39,8 @@ class PublisherHeaderContainer extends Component {
   }
 
   get favoritePublisherIcon() {
-    if (!this.props.isFavorite) {
-      return require('../assets/starInactive.png')
+    if (this.props.isFavorite) {
+      return require('../assets/starActive.png')
     }
 
     return require('../assets/starInactive.png')
@@ -48,7 +48,7 @@ class PublisherHeaderContainer extends Component {
 
   toggleFavoritePublisher() {
     if (this.props.isFavorite) {
-      this.removePublisherFromLocalStorage()
+      return this.removePublisherFromLocalStorage()
     }
 
     return this.addPublisherToLocalStorage()
@@ -61,6 +61,7 @@ class PublisherHeaderContainer extends Component {
 
   removePublisherFromLocalStorage() {
     const { dispatch, publisher } = this.props
+    dispatch(StorageActions.removeFavoritePublisher(publisher))
   }
 }
 

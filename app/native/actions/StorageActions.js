@@ -19,6 +19,8 @@ export function getVisitedStories() {
     if (isVisitedStoriesLoaded(getState)) return
     if (isVisitedStoriesFetching(getState)) return
 
+    AsyncStorage.removeItem('favoritePublishers')
+
     dispatch(requestVisitedStories())
     return AsyncStorage.getItem('visitedStories', (error, stories) => {
       return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
@@ -72,15 +74,38 @@ export function getFavoritePublishers() {
   }
 }
 
-export function addFavoritePublisher(publisher) {
+export function removeFavoritePublisher(publisher) {
   return (dispatch, getState) => {
-    if (isFavoritePublisher(getState, publisher)) return
-
-    let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
+    if (!isFavoritePublisher(getState, publisher)) return
+    let publishers = favoritePublishers(getState).items
+    const publisherIndex = publishers.indexOf(publisher.id)
+    publishers = removePublisherFromFavorite(publishers, publisherIndex)
 
     AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+
+    console.log('removeFavoritePublisher')
     return dispatch(receiveFavoritePublishers(publishers))
   }
+}
+
+export function addFavoritePublisher(publisher) {
+  return (dispatch, getState) => {
+    if (isFavoritePublisher(getState, publisher)) {
+      console.log('golfo')
+    }
+
+    let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+    console.log('addFavoritePublisher')
+    return dispatch(receiveFavoritePublishers(publishers))
+  }
+}
+
+function removePublisherFromFavorite(publishers, index) {
+  return [
+    ...publishers.slice(0, index),
+    ...publishers.slice(index+1)
+  ]
 }
 
 function isFavoritePublishersFetching(getState) {
