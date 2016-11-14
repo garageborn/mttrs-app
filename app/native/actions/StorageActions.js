@@ -19,8 +19,6 @@ export function getVisitedStories() {
     if (isVisitedStoriesLoaded(getState)) return
     if (isVisitedStoriesFetching(getState)) return
 
-    AsyncStorage.removeItem('favoritePublishers')
-
     dispatch(requestVisitedStories())
     return AsyncStorage.getItem('visitedStories', (error, stories) => {
       return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
