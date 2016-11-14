@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   logoContainer: {
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   },
 
   darkLogoSkin: {
-    borderColor: '#262C5B'
+    borderColor: DARK_COLOR
   }
 })
 

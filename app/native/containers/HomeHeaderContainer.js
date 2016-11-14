@@ -10,11 +10,15 @@ class HomeHeaderContainer extends Component {
   }
 
   render() {
-    const { toggleMenu } = this.props
+    const { toggleMenu, category } = this.props
+    let title = 'Top Stories'
+
+    if (category) { title = category.name }
+
     return (
       <Header
         toggleMenu={toggleMenu}
-        title='Top Stories'
+        title={title}
         icon={this.icon}
         />
     )

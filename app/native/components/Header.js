@@ -4,12 +4,8 @@ import styles from '../styles/Header'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Header extends Component {
-  componentWillReceiveProps(nextProps) {
-    // Hack to make android work
-  }
   render() {
     const { title, icon, toggleMenu } = this.props
-
     return (
       <View style={styles.header}>
         <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>

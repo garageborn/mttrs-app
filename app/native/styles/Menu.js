@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Header'
 const { width, height } = Dimensions.get('window')
+import { DARK_COLOR } from '../../constants/Colors'
 
 const iphoneWidthSmall = 320
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
@@ -16,7 +17,7 @@ const categoryVerticalMargin = Platform.select({
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
-    backgroundColor: '#262C5B',
+    backgroundColor: DARK_COLOR,
     zIndex: 1,
     paddingLeft: 10,
     paddingRight: 10,
