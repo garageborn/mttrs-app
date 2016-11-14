@@ -18,12 +18,12 @@ class StoryContainer extends Component {
   }
 
   render() {
-    const { story, isHome, visited } = this.props
+    const { story, isSceneHome, visited } = this.props
 
     return (
       <Story
         story={story}
-        isHome={isHome}
+        isSceneHome={isSceneHome}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}

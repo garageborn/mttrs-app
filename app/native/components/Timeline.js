@@ -14,6 +14,7 @@ class Timeline extends Component {
   constructor(props) {
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
+    this.renderRow = this.renderRow.bind(this)
   }
 
   renderSectionHeader(sectionData, date) {
@@ -79,12 +80,17 @@ class Timeline extends Component {
         initialListSize={100}
         style={styles.listView}
         dataSource={this.dataSource()}
-        renderRow={this.props.storyRenderer}
+        renderRow={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
         onEndReached={this.props.data.infiniteScroll}
       />
     )
+  }
+
+  renderRow(story) {
+    let isSceneHome = this.props.type === 'home'
+    return this.props.storyRenderer(story, isSceneHome)
   }
 }
 

@@ -213,8 +213,8 @@ class TimelineContainer extends Component {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
-  renderStory(story) {
-    return <StoryContainer story={story} isHome={this.state.navigationState.index === 0} />
+  renderStory(story, isSceneHome) {
+    return <StoryContainer story={story} isSceneHome={isSceneHome} />
   }
 
   renderStoryLinks() {

@@ -39,9 +39,9 @@ class Story extends Component {
   }
 
   storySpacing() {
-    const { isHome } = this.props
+    const { isSceneHome } = this.props
 
-    if (isHome) {
+    if (isSceneHome) {
       return {
         marginTop: 16,
         marginBottom: 16
@@ -50,9 +50,9 @@ class Story extends Component {
   }
 
   renderCategoryLabel() {
-    const { isHome, openCategory } = this.props
+    const { isSceneHome, openCategory } = this.props
 
-    if (isHome) {
+    if (isSceneHome) {
       return (
         <TouchableHighlight
           onPress={openCategory}
@@ -98,7 +98,7 @@ Story.propTypes = {
   openCategory: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
-  isHome: PropTypes.bool.isRequired
+  isSceneHome: PropTypes.bool.isRequired
 }
 
 export default Story
