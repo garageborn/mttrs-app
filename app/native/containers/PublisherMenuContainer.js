@@ -61,7 +61,7 @@ class PublisherMenuContainer extends Component {
 
   renderSeparator(sectionData, section) {
     let renderSection = section === 'starred'
-      ? <Image source={require('../assets/star.png')} style={styles.listHeaderImage}/>
+      ? <Image source={require('../assets/starActive.png')} style={styles.listHeaderImage}/>
       : <Text style={styles.listHeaderText}>{section}</Text>
 
     return (
