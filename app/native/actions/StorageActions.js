@@ -2,7 +2,8 @@ import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
 
-import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED } from '../../constants/ActionTypes'
+import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
+  REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED } from '../../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
   type: REQUEST_VISITED_STORIES
@@ -49,4 +50,37 @@ function isVisitedStoriesLoaded(getState) {
 
 function isVisitedStory(getState, story) {
   return visitedStories(getState).items.indexOf(story.id) !== -1
+}
+
+export const requestFavoritePublishers = () => ({
+  type: REQUEST_FAVORITE_PUBLISHERS
+})
+
+export const receiveFavoritePublishers = (favoritePublishers) => ({
+  type: FAVORITE_PUBLISHERS_RECEIVED,
+  favoritePublishers
+})
+
+export function getFavoritePublishers() {
+  return (dispatch, getState) => {
+    if (isFavoritePublishersLoaded(getState)) return
+    if (isFavoritePublishersFetching(getState)) return
+
+    dispatch(requestFavoritePublishers())
+    return AsyncStorage.getItem('favoritePublishers', (error, publishers) => {
+      return dispatch(receiveFavoritePublishers(JSON.parse(publishers) || []))
+    })
+  }
+}
+
+function isFavoritePublishersFetching(getState) {
+  return favoritePublishers(getState).isFetching
+}
+
+function isFavoritePublishersLoaded(getState) {
+  return favoritePublishers(getState).isLoaded
+}
+
+function favoritePublishers(getState) {
+  return getState().StorageReducer.favoritePublishers
 }

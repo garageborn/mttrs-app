@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions, StorageActions } from '../actions/index'
 import _debounce from 'lodash/debounce'
 import _isNil from 'lodash/isNil'
 
@@ -18,6 +18,10 @@ class PublisherMenuContainer extends Component {
     this.state = {
       query: ''
     }
+  }
+
+  componentWillMount() {
+    this.props.dispatch(StorageActions.getFavoritePublishers())
   }
 
   componentWillUpdate(nextProps, nextState) {
