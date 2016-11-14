@@ -16,7 +16,7 @@ class LinkSceneContainer extends Component {
           renderLeft: () =>  <View />,
           renderRight: () =>  <View />,
           backgroundColor: DARK_COLOR,
-          height: headerHeight // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
+          height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
         }
       },
     android: null
