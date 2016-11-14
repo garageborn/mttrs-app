@@ -36,7 +36,7 @@ export default function(state = defaultState, action) {
           isLoaded: false
         }
       }
-    case VISITED_STORIES_RECEIVED:
+    case FAVORITE_PUBLISHERS_RECEIVED:
       return {
         ...state,
         favoritePublishers: {

@@ -65,11 +65,21 @@ export function getFavoritePublishers() {
   return (dispatch, getState) => {
     if (isFavoritePublishersLoaded(getState)) return
     if (isFavoritePublishersFetching(getState)) return
-
     dispatch(requestFavoritePublishers())
     return AsyncStorage.getItem('favoritePublishers', (error, publishers) => {
       return dispatch(receiveFavoritePublishers(JSON.parse(publishers) || []))
     })
+  }
+}
+
+export function addFavoritePublisher(publisher) {
+  return (dispatch, getState) => {
+    if (isFavoritePublisher(getState, publisher)) return
+
+    let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
+
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+    return dispatch(receiveFavoritePublishers(publishers))
   }
 }
 
@@ -83,4 +93,8 @@ function isFavoritePublishersLoaded(getState) {
 
 function favoritePublishers(getState) {
   return getState().StorageReducer.favoritePublishers
+}
+
+function isFavoritePublisher(getState, publisher) {
+  return favoritePublishers(getState).items.indexOf(publisher.id) !== -1
 }
