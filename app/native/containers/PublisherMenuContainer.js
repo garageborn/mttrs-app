@@ -52,8 +52,20 @@ class PublisherMenuContainer extends Component {
       rows[section].push(publisher)
     })
 
+    const favoriteSectionIndex = sections.indexOf('isFavorite')
+
+    if (favoriteSectionIndex !== -1) {
+      sections = [
+        'isFavorite',
+        ...sections.slice(0, favoriteSectionIndex),
+        ...sections.slice(favoriteSectionIndex + 1)
+      ]
+      return {rows, sections}
+    }
+
     return {rows, sections}
   }
+
 
   renderSeparator(sectionData, section) {
     let renderSection = section === 'isFavorite'
