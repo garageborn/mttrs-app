@@ -8,6 +8,14 @@ import SocialCount from '../../common/utils/SocialCount'
 import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      imageLoading: false
+    }
+  }
+
   render() {
     const { story, openLink, openStoryLinks } = this.props
     return (
@@ -19,7 +27,7 @@ class Story extends Component {
           style={[styles.card, this.storySpacing()]}>
           <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor={WHITE_COLOR}>
             <View style={styles.content}>
-              <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
+              <Image style={styles.image} onLoadStart={() => this.setState({imageLoading: true})} resizeMode='cover' source={{uri: this.getImage()}} />
               <View style={styles.storyTitle}>
                 <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
               </View>
