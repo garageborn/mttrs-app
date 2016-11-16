@@ -1,8 +1,8 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Header'
-const { width, height } = Dimensions.get('window')
 import { DARK_COLOR } from '../../constants/Colors'
 
+const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60

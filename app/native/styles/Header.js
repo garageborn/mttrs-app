@@ -1,9 +1,6 @@
 import { StyleSheet, Platform } from 'react-native'
 
-export const headerHeight = Platform.select({
-  ios: 60,
-  android: 55
-})
+export const headerHeight = 55
 
 const styles = StyleSheet.create({
   header: {
