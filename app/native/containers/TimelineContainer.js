@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { MenuActions, NavigationActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -34,6 +34,10 @@ class TimelineContainer extends Component {
         ]
       }
     }
+  }
+
+  componentWillMount() {
+    this.props.dispatch(StorageActions.getFavoritePublishers())
   }
 
   handleChangeTab = (index) => {

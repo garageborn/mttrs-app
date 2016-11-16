@@ -40,28 +40,36 @@ class PublisherMenuContainer extends Component {
     const { publishers, loading } = this.props.data
     let rows = {}
     let sections = []
-
-    if (!_isNil(publishers))
-      Object.assign(publishers[0], { starred: true }) //Mock favorite publisher
-
     const queryMatcher = new RegExp(query, 'i')
     const filteredPublishers = publishers.filter(publisher => publisher.name.match(queryMatcher))
 
-    filteredPublishers.forEach(publisher => {
-      let section = publisher.starred ? 'starred' : publisher.name.substring(0, 1).toUpperCase()
-      if (publisher.starred || sections.indexOf(section) === -1) {
+    filteredPublishers.map(publisher => {
+      let section = this.props.StorageReducer.favoritePublishers.items.indexOf(publisher.id) !== -1 ? 'isFavorite' : publisher.name.substring(0, 1).toUpperCase()
+      if (sections.indexOf(section) === -1) {
         sections.push(section)
         rows[section] = []
       }
       rows[section].push(publisher)
     })
 
+    const favoriteSectionIndex = sections.indexOf('isFavorite')
+
+    if (favoriteSectionIndex !== -1) {
+      sections = [
+        'isFavorite',
+        ...sections.slice(0, favoriteSectionIndex),
+        ...sections.slice(favoriteSectionIndex + 1)
+      ]
+      return {rows, sections}
+    }
+
     return {rows, sections}
   }
 
+
   renderSeparator(sectionData, section) {
-    let renderSection = section === 'starred'
-      ? <Image source={require('../assets/star.png')} style={styles.listHeaderImage}/>
+    let renderSection = section === 'isFavorite'
+      ? <Image source={require('../assets/starActive.png')} style={styles.listHeaderImage}/>
       : <Text style={styles.listHeaderText}>{section}</Text>
 
     return (
@@ -72,7 +80,7 @@ class PublisherMenuContainer extends Component {
   }
 
   renderRow(publisher) {
-    return <PublisherMenuItem publisher={publisher} onPress={this.openPublisher} />
+    return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
   render() {
@@ -131,6 +139,13 @@ class PublisherMenuContainer extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+
+    StorageReducer: state.StorageReducer
+  }
+}
+
 const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
 const PublisherMenuContainerWithData = graphql(Query)(PublisherMenuContainer)
-export default connect()(PublisherMenuContainerWithData)
+export default connect(mapStateToProps)(PublisherMenuContainerWithData)
