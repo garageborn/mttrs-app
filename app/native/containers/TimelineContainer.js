@@ -219,7 +219,7 @@ class TimelineContainer extends Component {
   }
 
   renderStory(story, isSceneHome) {
-    return <StoryContainer story={story} isSceneHome={isSceneHome} />
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
   }
 
   renderStoryLinks() {

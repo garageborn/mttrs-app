@@ -15,6 +15,18 @@ class Timeline extends Component {
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.renderRow = this.renderRow.bind(this)
+    this.renderFooter = this.renderFooter.bind(this)
+    this.state = {
+      loadingMore: false
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.loadingMore && (this.props.data.timeline.length < nextProps.data.timeline.length)) {
+      this.setState({
+        loadingMore: false
+      })
+    }
   }
 
   renderSectionHeader(sectionData, date) {
@@ -64,14 +76,7 @@ class Timeline extends Component {
 
   render() {
     if (this.props.data.loading) {
-      return (
-        <View style={styles.loading}>
-          <ActivityIndicator
-            size='large'
-            color='#AAA'
-          />
-        </View>
-      )
+      return this.renderLoading()
     }
 
     return (
@@ -83,9 +88,35 @@ class Timeline extends Component {
         renderRow={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
-        onEndReached={this.props.data.infiniteScroll}
+        renderFooter={() => this.renderFooter()}
+        onEndReached={() => this.onEndReached()}
       />
     )
+  }
+
+  onEndReached() {
+    this.setState({
+      loadingMore: true
+    }, this.props.data.infiniteScroll)
+  }
+
+  renderFooter() {
+    return this.renderActivityIndicator()
+  }
+
+  renderLoading() {
+    return (
+      <View style={styles.loading}>
+        {this.renderActivityIndicator()}
+      </View>
+    )
+  }
+
+  renderActivityIndicator() {
+    return <ActivityIndicator
+      size='large'
+      color='#AAA'
+    />
   }
 
   renderRow(story) {
@@ -155,6 +186,7 @@ const pullToRefresh = ({ fetchMore, variables }) => {
 const infiniteScroll = ({ fetchMore, variables, timeline }) => {
   return fetchMore({
     variables: { ...variables, days: 1, offset: timeline.length },
+    loading: true,
     updateQuery: (previousResult, { fetchMoreResult }) => {
       if (!fetchMoreResult.data) { return previousResult }
       let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
