@@ -12,7 +12,7 @@ class Story extends Component {
     super(props)
 
     this.state = {
-      imageLoading: false
+      imageLoaded: false
     }
   }
 
@@ -27,7 +27,7 @@ class Story extends Component {
           style={[styles.card, this.storySpacing()]}>
           <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor={WHITE_COLOR}>
             <View style={styles.content}>
-              <Image style={styles.image} onLoadStart={() => this.setState({imageLoading: true})} resizeMode='cover' source={{uri: this.getImage()}} />
+              <Image style={styles.image} onLoad={() => this.handleImageLoad()} resizeMode='cover' source={this.getImage()} />
               <View style={styles.storyTitle}>
                 <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
               </View>
@@ -44,6 +44,10 @@ class Story extends Component {
         {this.renderCategoryLabel()}
       </View>
     )
+  }
+
+  handleImageLoad() {
+    this.setState({imageLoaded: true})
   }
 
   storySpacing() {
@@ -75,7 +79,11 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
-    return cloudinary.url(this.mainLink.image_source_url, options)
+    if (this.state.imageLoaded) {
+      return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
+    } else {
+      return require('../assets/mttrs-loading.gif')
+    }
   }
 
   get mainLink() {
