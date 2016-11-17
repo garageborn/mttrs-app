@@ -8,6 +8,14 @@ import SocialCount from '../../common/utils/SocialCount'
 import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      imageLoaded: false
+    }
+  }
+
   render() {
     const { story, openLink, openStoryLinks } = this.props
     return (
@@ -19,7 +27,7 @@ class Story extends Component {
           style={[styles.card, this.storySpacing()]}>
           <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor={WHITE_COLOR}>
             <View style={styles.content}>
-              <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
+              <Image style={styles.image} onLoad={() => this.handleImageLoad()} resizeMode='cover' source={this.getImage()} />
               <View style={styles.storyTitle}>
                 <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
               </View>
@@ -36,6 +44,10 @@ class Story extends Component {
         {this.renderCategoryLabel()}
       </View>
     )
+  }
+
+  handleImageLoad() {
+    this.setState({imageLoaded: true})
   }
 
   storySpacing() {
@@ -67,7 +79,11 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
-    return cloudinary.url(this.mainLink.image_source_url, options)
+    if (this.state.imageLoaded) {
+      return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
+    } else {
+      return require('../assets/mttrs-loading.gif')
+    }
   }
 
   get mainLink() {
