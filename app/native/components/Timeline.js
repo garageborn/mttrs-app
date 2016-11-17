@@ -21,14 +21,6 @@ class Timeline extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.loadingMore && (this.props.data.timeline.length < nextProps.data.timeline.length)) {
-      this.setState({
-        loadingMore: false
-      })
-    }
-  }
-
   renderSectionHeader(sectionData, date) {
     return <ListViewHeader date={ParseDate(date)} />
   }
@@ -95,13 +87,16 @@ class Timeline extends Component {
   }
 
   onEndReached() {
-    this.setState({
-      loadingMore: true
-    }, this.props.data.infiniteScroll)
+    //Reference: https://github.com/apollostack/react-apollo/issues/228
+    this.setState({ loadingMore: true })
+    this.props.data.infiniteScroll().then((data) => {
+      this.setState({ loadingMore: false })
+    })
   }
 
   renderFooter() {
-    return this.renderActivityIndicator()
+    if (this.state.loadingMore) return this.renderActivityIndicator()
+    return null
   }
 
   renderLoading() {
@@ -186,7 +181,6 @@ const pullToRefresh = ({ fetchMore, variables }) => {
 const infiniteScroll = ({ fetchMore, variables, timeline }) => {
   return fetchMore({
     variables: { ...variables, days: 1, offset: timeline.length },
-    loading: true,
     updateQuery: (previousResult, { fetchMoreResult }) => {
       if (!fetchMoreResult.data) { return previousResult }
       let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
