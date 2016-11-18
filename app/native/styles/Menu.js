@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: DARK_COLOR,
     zIndex: 1,
-    marginTop: 10,
+    marginTop: Platform.select({
+      ios: 10,
+      android: 0
+    }),
     paddingLeft: 10,
     paddingRight: 10,
     height: height - headerHeight

@@ -27,7 +27,10 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
-    marginTop: 15,
+    marginTop: Platform.select({
+      ios: 15,
+      android: 0
+    }),
     width
   },
 
@@ -39,10 +42,15 @@ const styles = StyleSheet.create({
     left: 20
   },
 
-  infiniteScrollLoadingContainer: {
-    padding: 10,
-    marginBottom: 20
-  }
+  infiniteScrollLoadingContainer: Platform.select({
+    ios: {
+      padding: 10,
+      marginBottom: 20
+    },
+    android: {
+      marginBottom: 30
+    }
+  })
 })
 
 export default styles
