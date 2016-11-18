@@ -9,6 +9,7 @@ import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
+import Analytics from '../config/Analytics'
 
 class Timeline extends Component {
   constructor(props) {
