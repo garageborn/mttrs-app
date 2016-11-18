@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: DARK_COLOR,
     zIndex: 1,
+    marginTop: 10,
     paddingLeft: 10,
     paddingRight: 10,
     height: height - headerHeight

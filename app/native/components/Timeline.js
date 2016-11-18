@@ -95,7 +95,9 @@ class Timeline extends Component {
   }
 
   renderFooter() {
-    if (this.state.loadingMore) return this.renderActivityIndicator()
+    if (this.state.loadingMore) {
+      return <View style={styles.infiniteScrollLoadingContainer}>{this.renderActivityIndicator()}</View>
+    }
     return null
   }
 

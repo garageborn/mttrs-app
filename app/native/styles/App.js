@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
+    marginTop: 15,
     width
   },
 
@@ -36,6 +37,11 @@ const styles = StyleSheet.create({
 
   hideRefreshControl: {
     left: 20
+  },
+
+  infiniteScrollLoadingContainer: {
+    padding: 10,
+    marginBottom: 20
   }
 })
 
