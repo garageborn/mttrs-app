@@ -15,6 +15,10 @@ class Timeline extends Component {
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.renderRow = this.renderRow.bind(this)
+    this.renderFooter = this.renderFooter.bind(this)
+    this.state = {
+      loadingMore: false
+    }
   }
 
   renderSectionHeader(sectionData, date) {
@@ -64,14 +68,7 @@ class Timeline extends Component {
 
   render() {
     if (this.props.data.loading) {
-      return (
-        <View style={styles.loading}>
-          <ActivityIndicator
-            size='large'
-            color='#AAA'
-          />
-        </View>
-      )
+      return this.renderLoading()
     }
 
     return (
@@ -83,9 +80,38 @@ class Timeline extends Component {
         renderRow={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
-        onEndReached={this.props.data.infiniteScroll}
+        renderFooter={() => this.renderFooter()}
+        onEndReached={() => this.onEndReached()}
       />
     )
+  }
+
+  onEndReached() {
+    //Reference: https://github.com/apollostack/react-apollo/issues/228
+    this.setState({ loadingMore: true })
+    this.props.data.infiniteScroll().then((data) => {
+      this.setState({ loadingMore: false })
+    })
+  }
+
+  renderFooter() {
+    if (this.state.loadingMore) return this.renderActivityIndicator()
+    return null
+  }
+
+  renderLoading() {
+    return (
+      <View style={styles.loading}>
+        {this.renderActivityIndicator()}
+      </View>
+    )
+  }
+
+  renderActivityIndicator() {
+    return <ActivityIndicator
+      size='large'
+      color='#AAA'
+    />
   }
 
   renderRow(story) {
