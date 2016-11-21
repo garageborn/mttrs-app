@@ -45,7 +45,7 @@
     "react": "~15.3.2",
     "react-apollo": "^0.5.16",
     "react-dom": "~15.3.2",
-    "react-native": "^0.36.1",
+    "react-native": "^0.37.0",
     "react-native-config": "^0.1.1",
     "react-native-fabric": "^0.3.1",
     "react-native-linear-gradient": "^1.5.14",
