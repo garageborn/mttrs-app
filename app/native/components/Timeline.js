@@ -36,7 +36,7 @@ class Timeline extends Component {
     analytics.track({
       anonymousId: '1', //TODO: Figure this out better!
       event: 'Visit Top Stories'
-    });
+    })
   }
 
   trackSection(type, filter) {
