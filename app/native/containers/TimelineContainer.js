@@ -173,12 +173,11 @@ class TimelineContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderStoryLinks()}
-        {this.renderTimeline()}
-
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           {this.renderMenu()}
         </Animated.View>
+        {this.renderStoryLinks()}
+        {this.renderTimeline()}
       </View>
     )
   }
