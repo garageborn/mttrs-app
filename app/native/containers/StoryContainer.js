@@ -41,7 +41,7 @@ class StoryContainer extends Component {
         title: this.props.story.main_link.title,
         link
       }
-    });
+    })
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 
