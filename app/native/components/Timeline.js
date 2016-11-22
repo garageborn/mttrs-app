@@ -9,6 +9,7 @@ import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
+import analytics from '../config/Analytics'
 
 class Timeline extends Component {
   constructor(props) {
@@ -19,6 +20,36 @@ class Timeline extends Component {
     this.state = {
       loadingMore: false
     }
+  }
+
+  componentWillMount() {
+    this.trackTopStories()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const renderCategory = nextProps.type === 'category'
+    const renderPublisher = nextProps.type === 'publisher'
+    if (renderCategory || renderPublisher) return this.trackSection(nextProps.type, nextProps.filter)
+  }
+
+  trackTopStories() {
+    analytics.track({
+      anonymousId: '1', //TODO: Figure this out better!
+      event: 'Visit Top Stories'
+    })
+  }
+
+  trackSection(type, filter) {
+    let event = type === 'publisher' ? 'Visit Publisher' : 'Visit Category'
+    analytics.track({
+      anonymousId: '1', //TODO: Figure this out better!
+      event,
+      properties: {
+        id: filter.id,
+        name: filter.name,
+        slug: filter.slug
+      }
+    })
   }
 
   renderSectionHeader(sectionData, date) {

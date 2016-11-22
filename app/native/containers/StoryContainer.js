@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
 import { NavigationActions, StorageActions } from '../actions/index'
+import analytics from '../config/Analytics'
 
 class StoryContainer extends Component {
   constructor(props) {
@@ -32,6 +33,15 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
+    analytics.track({
+      anonymousId: '1', //TODO: Figure this out better!
+      event: 'Open Link',
+      properties: {
+        id: this.props.story.id,
+        title: this.props.story.main_link.title,
+        link
+      }
+    })
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 
