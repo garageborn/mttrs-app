@@ -50,7 +50,12 @@ const styles = StyleSheet.create({
     android: {
       marginBottom: 30
     }
-  })
+  }),
+
+  menuContainerWrapper: {
+    height,
+    width
+  }
 })
 
 export default styles
