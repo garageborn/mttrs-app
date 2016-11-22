@@ -10,7 +10,6 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import com.smixx.fabric.FabricPackage;
@@ -37,8 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNSharePackage(),
           new LinearGradientPackage(),
-          new FabricPackage(),
-          new ReactNativeConfigPackage()
+          new FabricPackage()
       );
     }
   };
