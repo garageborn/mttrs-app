@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 
   menuContainer: {
-    flex: 1
+    flex: 1,
   },
 
   topStoriesContainer: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   categories: {
-    flex: 1,
+    width,
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: 10,

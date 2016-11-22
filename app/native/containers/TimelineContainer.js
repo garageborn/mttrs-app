@@ -210,7 +210,7 @@ class TimelineContainer extends Component {
 
   renderMenu() {
     const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <MenuContainer params={params}/>
+    if (uiReducer.menu.isOpen) return <View style={styles.menuContainerWrapper}><MenuContainer params={params}/></View>
   }
 
   closeMenu() {
