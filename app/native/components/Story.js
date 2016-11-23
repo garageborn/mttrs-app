@@ -3,6 +3,7 @@ import { Image, Text, TouchableHighlight, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
+import StorySummary from './StorySummary'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import SocialCount from '../../common/utils/SocialCount'
 import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
@@ -33,6 +34,7 @@ class Story extends Component {
               </View>
             </View>
           </TouchableHighlight>
+          <StorySummary />
           <View style={styles.footer}>
             <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
             <View style={styles.shares}>
