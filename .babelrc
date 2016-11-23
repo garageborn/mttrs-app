@@ -1,3 +1,8 @@
 {
-  "presets": ["react-native-stage-0/decorator-support"]
+  "presets": ["react-native-stage-0/decorator-support"],
+  "plugins": [
+    ["react-intl", {
+      "messageDir": "./app/common/i18n/"
+    }]
+  ]
 }

@@ -46,6 +46,7 @@
     "react": "~15.3.2",
     "react-apollo": "^0.5.16",
     "react-dom": "~15.3.2",
+    "react-intl": "^2.1.5",
     "react-native": "^0.37.0",
     "react-native-config": "^0.1.1",
     "react-native-fabric": "^0.3.1",
@@ -67,6 +68,7 @@
     "webpack-hot-middleware": "^2.13.0"
   },
   "devDependencies": {
+    "babel-plugin-react-intl": "^2.2.0",
     "nodemon": "1.11.0",
     "redux-devtools": "3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
