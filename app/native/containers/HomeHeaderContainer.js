@@ -1,8 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { Image } from 'react-native'
+import { injectIntl, defineMessages } from 'react-intl'
+import { NavigationActions } from '@exponent/ex-navigation'
 import Header from '../components/Header'
 import styles from '../styles/Header'
-import { NavigationActions } from '@exponent/ex-navigation'
+
+const messages = defineMessages({
+  headerTitle: {
+    id: 'header.title',
+    defaultMessage: 'Top Stories'
+  }
+})
 
 class HomeHeaderContainer extends Component {
   get icon() {
@@ -10,8 +18,9 @@ class HomeHeaderContainer extends Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl
     const { toggleMenu, category } = this.props
-    let title = 'Top Stories'
+    let title = formatMessage(messages.headerTitle)
 
     if (category) { title = category.name }
 
@@ -29,4 +38,4 @@ HomeHeaderContainer.propTypes = {
   toggleMenu: PropTypes.func.isRequired
 }
 
-export default HomeHeaderContainer
+export default injectIntl(HomeHeaderContainer)
