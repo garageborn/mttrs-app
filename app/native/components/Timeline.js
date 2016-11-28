@@ -160,7 +160,8 @@ Timeline.propTypes = {
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    TimelineReducers: state.TimelineReducers
   }
 }
 

@@ -2,13 +2,20 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
+  SWITCH_TENANT
 } from '../constants/ActionTypes'
 import * as API from '../api/index'
 import moment from '../common/utils/Moment'
 import _last from 'lodash/last'
 
 const startDays = 3
+
+
+export const switchTenant = (tenant) => ({
+  type: SWITCH_TENANT,
+  tenant
+})
 
 export const requestTimeline = () => ({
   type: REQUEST_TIMELINE
