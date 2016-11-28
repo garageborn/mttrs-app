@@ -1,5 +1,6 @@
 {
   "header.title": "Principais histórias",
   "header.categories": "Categorias",
-  "header.publishers": "Editores"
+  "header.publishers": "Editores",
+  "search.placeholder": "Busca de editores"
 }
