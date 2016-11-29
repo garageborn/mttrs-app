@@ -3,11 +3,19 @@ import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { injectIntl, defineMessages } from 'react-intl'
+import _debounce from 'lodash/debounce'
+import _isNil from 'lodash/isNil'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../actions/index'
-import _debounce from 'lodash/debounce'
-import _isNil from 'lodash/isNil'
+
+const messages = defineMessages({
+  searchPlaceholder: {
+    id: 'search.placeholder',
+    defaultMessage: 'Search for publishers'
+  }
+})
 
 class PublisherMenuContainer extends Component {
   constructor() {
@@ -105,6 +113,7 @@ class PublisherMenuContainer extends Component {
   }
 
   renderSearch() {
+    const { formatMessage } = this.props.intl
     return (
       <View>
         <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
@@ -113,7 +122,7 @@ class PublisherMenuContainer extends Component {
           <TextInput
             style={styles.searchInput}
             underlineColorAndroid={'transparent'}
-            placeholder='Search for publishers'
+            placeholder={formatMessage(messages.searchPlaceholder)}
             onChangeText={_debounce((query) => this.setState({query}), 300)} />
         </View>
       </View>
@@ -147,5 +156,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
-const PublisherMenuContainerWithData = graphql(Query)(PublisherMenuContainer)
+const intlPublisherMenuContainer = injectIntl(PublisherMenuContainer)
+const PublisherMenuContainerWithData = graphql(Query)(intlPublisherMenuContainer)
 export default connect(mapStateToProps)(PublisherMenuContainerWithData)

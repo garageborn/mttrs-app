@@ -1,3 +1,7 @@
 {
-  "header.title": "Top Stories"
+  "header.title": "Top Stories",
+  "header.topStories": "Top Stories",
+  "header.categories": "Categories",
+  "header.publishers": "Publishers",
+  "search.placeholder": "Search for publishers"
 }

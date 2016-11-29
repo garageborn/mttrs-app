@@ -1,3 +1,7 @@
 {
-  "header.title": "Principais histórias"
+  "header.title": "Principais histórias",
+  "header.topStories": "Principais histórias",
+  "header.categories": "Categorias",
+  "header.publishers": "Editores",
+  "search.placeholder": "Busca de editores"
 }
