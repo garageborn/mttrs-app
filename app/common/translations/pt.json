@@ -3,5 +3,9 @@
   "header.topStories": "Principais histórias",
   "header.categories": "Categorias",
   "header.publishers": "Editores",
-  "search.placeholder": "Busca de editores"
+  "search.placeholder": "Busca de editores",
+  "from": "Via",
+  "and": "e",
+  "other": "outro",
+  "others": "outros"
 }

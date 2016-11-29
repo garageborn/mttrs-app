@@ -3,5 +3,9 @@
   "header.topStories": "Top Stories",
   "header.categories": "Categories",
   "header.publishers": "Publishers",
-  "search.placeholder": "Search for publishers"
+  "search.placeholder": "Search for publishers",
+  "from": "From",
+  "and": "and",
+  "other": "other",
+  "others": "others"
 }
