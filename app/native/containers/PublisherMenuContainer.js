@@ -141,7 +141,6 @@ class PublisherMenuContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-
     StorageReducer: state.StorageReducer
   }
 }

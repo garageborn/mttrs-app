@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
@@ -38,6 +37,7 @@ class TimelineContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(StorageActions.getFavoritePublishers())
+    this.props.dispatch(StorageActions.getCurrentNamespace())
   }
 
   handleChangeTab = (index) => {
@@ -117,7 +117,6 @@ class TimelineContainer extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-
     dispatch(NavigationActions.home())
   }
 

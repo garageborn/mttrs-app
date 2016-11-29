@@ -4,9 +4,8 @@ import { connect } from 'react-redux'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
+import NamespaceMenuContainer from './NamespaceMenuContainer'
 import styles from '../styles/Menu'
-import { TimelineActions, NavigationActions, MenuActions } from '../actions/index'
-import Tenant from '../../common/utils/Tenant'
 
 const { height } = Dimensions.get('window')
 
@@ -14,11 +13,11 @@ class MenuContainer extends Component {
   constructor(props) {
     super(props)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
-    this.onPressSwitchTenant = this.onPressSwitchTenant.bind(this)
     this.state = {
       tabs: [
         { id: 'categories', label: 'Categories', component: <CategoryMenuContainer params={ this.props.params }/> },
-        { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
+        { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> },
+        { id: 'countries', label: 'Countries', component: <NamespaceMenuContainer /> }
       ]
     }
   }
@@ -31,10 +30,6 @@ class MenuContainer extends Component {
   render() {
     return (
       <View style={styles.menu}>
-        <Button
-          onPress={this.onPressSwitchTenant}
-          title="Switch Tenant"
-        />
         <View style={styles.selector}>
           <ButtonGroup
             underlayColor={'rgba(255,255,255,.1)'}
@@ -43,19 +38,11 @@ class MenuContainer extends Component {
             selectedIndex={this.currentTabIndex}
             buttons={this.labels} />
         </View>
-
         <View style={styles.menuContainer}>
-          { this.currentTab.component }
+          {this.currentTab.component}
         </View>
       </View>
     )
-  }
-
-  onPressSwitchTenant() {
-    Tenant.current = 'mttrs_br'
-    this.props.dispatch(TimelineActions.switchTenant(Tenant.current))
-    this.props.dispatch(NavigationActions.home())
-    this.props.dispatch(MenuActions.retractMenu())
   }
 
   get labels() {
