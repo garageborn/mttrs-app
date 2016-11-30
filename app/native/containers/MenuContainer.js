@@ -6,6 +6,7 @@ import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import NamespaceMenuContainer from './NamespaceMenuContainer'
+import { MenuActions } from '../actions/index'
 import styles from '../styles/Menu'
 
 const { height } = Dimensions.get('window')
