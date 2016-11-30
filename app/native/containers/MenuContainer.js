@@ -5,10 +5,9 @@ import { injectIntl, defineMessages } from 'react-intl'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
-import styles from '../styles/Menu'
+import NamespaceMenuContainer from './NamespaceMenuContainer'
 import { MenuActions } from '../actions/index'
-
-const { height } = Dimensions.get('window')
+import styles from '../styles/Menu'
 
 const messages = defineMessages({
   headerCategories: {
@@ -18,6 +17,10 @@ const messages = defineMessages({
   headerPublishers: {
     id: 'header.publishers',
     defaultMessage: 'Publishers'
+  },
+  headerCountries: {
+    id: 'header.countries',
+    defaultMessage: 'Countries'
   }
 })
 
@@ -25,11 +28,15 @@ class MenuContainer extends Component {
   constructor(props) {
     super(props)
     const { formatMessage } = this.props.intl
+    const categories = formatMessage(messages.headerCategories)
+    const publishers = formatMessage(messages.headerPublishers)
+    const countries = formatMessage(messages.headerCountries)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [
-        { id: 'categories', label: formatMessage(messages.headerCategories), component: <CategoryMenuContainer params={ this.props.params }/> },
-        { id: 'publishers', label: formatMessage(messages.headerPublishers), component: <PublisherMenuContainer /> }
+        { id: 'categories', label: categories, component: <CategoryMenuContainer params={ this.props.params }/> },
+        { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> },
+        { id: 'countries', label: countries, component: <NamespaceMenuContainer /> }
       ]
     }
   }
@@ -50,9 +57,8 @@ class MenuContainer extends Component {
             selectedIndex={this.currentTabIndex}
             buttons={this.labels} />
         </View>
-
         <View style={styles.menuContainer}>
-          { this.currentTab.component }
+          {this.currentTab.component}
         </View>
       </View>
     )

@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
   },
 
   selector: {
-    paddingLeft: 60,
-    paddingRight: 60,
+    paddingHorizontal: 45,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center'

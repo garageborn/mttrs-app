@@ -1,9 +1,12 @@
 import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
+import Tenant from '../../common/utils/Tenant'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
-  REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED } from '../../constants/ActionTypes'
+  REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
+  REQUEST_NAMESPACE, NAMESPACE_RECEIVED
+} from '../../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
   type: REQUEST_VISITED_STORIES
@@ -61,6 +64,19 @@ export const receiveFavoritePublishers = (favoritePublishers) => ({
   favoritePublishers
 })
 
+export const requestNamespace = () => ({
+  type: REQUEST_NAMESPACE
+})
+
+export const receiveNamespace = (namespace) => ({
+  type: NAMESPACE_RECEIVED,
+  namespace
+})
+
+function setTenant(namespace) {
+  Tenant.current = namespace
+}
+
 export function getFavoritePublishers() {
   return (dispatch, getState) => {
     if (isFavoritePublishersLoaded(getState)) return
@@ -91,6 +107,23 @@ export function addFavoritePublisher(publisher) {
     let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
     AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
     return dispatch(receiveFavoritePublishers(publishers))
+  }
+}
+
+export function setCurrentNamespace(namespace) {
+  return (dispatch) => {
+    setTenant(namespace)
+    AsyncStorage.setItem('namespace', namespace)
+    return dispatch(receiveNamespace(namespace))
+  }
+}
+
+export function getCurrentNamespace() {
+  return (dispatch) => {
+    dispatch(requestNamespace())
+    AsyncStorage.getItem('namespace', (error, namespace) => {
+      dispatch(this.setCurrentNamespace(namespace || "mttrs"))
+    })
   }
 }
 

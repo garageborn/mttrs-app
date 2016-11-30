@@ -118,6 +118,9 @@ class Timeline extends Component {
   }
 
   onEndReached() {
+    const storiesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const minStoriesInTheViewport = 3
+    if (storiesArray.length < minStoriesInTheViewport) return
     //Reference: https://github.com/apollostack/react-apollo/issues/228
     this.setState({ loadingMore: true })
     this.props.data.infiniteScroll().then((data) => {
@@ -160,7 +163,8 @@ Timeline.propTypes = {
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    TimelineReducers: state.TimelineReducers
   }
 }
 
