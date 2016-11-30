@@ -30,8 +30,8 @@ class CategoryMenuContainer extends Component {
         <View style={styles.topStoriesContainer}>
           <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
             <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
-              <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
-              <Text style={styles.topStoriesTitle}>{formatMessage(messages.topStories)}</Text>
+              <Image style={styles.topStoriesIcon} source={this.topStoriesIcon} />
+              <Text style={this.topStoriesTitleStyles}>{formatMessage(messages.topStories)}</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -44,11 +44,23 @@ class CategoryMenuContainer extends Component {
   }
 
   get topStoriesStyles() {
-    const { section } = this.props.params
+    const { name } = this.props.params.section
 
-    if (section.name === 'home') return styles.topStories
+    return name === 'home' ? styles.topStories : [styles.topStories, styles.topStoriesInactive]
+  }
 
-    return [styles.topStories, styles.topStoriesInactive]
+  get topStoriesTitleStyles() {
+    const { name } = this.props.params.section
+
+    return name === 'home' ? styles.topStoriesTitle : [styles.topStoriesTitle, styles.topStoriesTitleInactive]
+  }
+
+  get topStoriesIcon() {
+    const { name } = this.props.params.section
+
+    return name === 'home'
+      ? require('../assets/icons/icon-top-stories.png')
+      : require('../assets/icons/icon-top-stories-secondary.png')
   }
 
   renderCategories() {
