@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   topStoriesInactive: {
-    backgroundColor: '#666'
+    backgroundColor: '#FFF'
   },
 
   topStoriesTitle: {
@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
     marginTop: -4,
     color: 'white',
     fontSize: 18
+  },
+
+  topStoriesTitleInactive: {
+    color: '#2672D7'
   },
 
   topStoriesIcon: {
