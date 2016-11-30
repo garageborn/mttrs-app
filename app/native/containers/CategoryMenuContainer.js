@@ -3,10 +3,18 @@ import { View, ScrollView, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { injectIntl, defineMessages } from 'react-intl'
 import CategoryTile from '../components/CategoryTile'
 import styles from '../styles/Menu'
 import { NavigationActions, MenuActions } from '../actions/index'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+
+const messages = defineMessages({
+  topStories: {
+    id: 'header.topStories',
+    defaultMessage: 'Top Stories'
+  }
+})
 
 class CategoryMenuContainer extends Component {
   constructor(props) {
@@ -16,13 +24,14 @@ class CategoryMenuContainer extends Component {
   }
 
   render() {
+    const { formatMessage } = this.props.intl
     return (
       <View>
         <View style={styles.topStoriesContainer}>
           <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
             <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
               <Image style={styles.topStoriesIcon} source={require('../assets/icons/icon-top-stories.png')} />
-              <Text style={styles.topStoriesTitle}>Top Stories</Text>
+              <Text style={styles.topStoriesTitle}>{formatMessage(messages.topStories)}</Text>
             </View>
           </TouchableHighlight>
         </View>
@@ -76,5 +85,6 @@ class CategoryMenuContainer extends Component {
 }
 
 const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
-const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
+const intlCategoryMenuContainer = injectIntl(CategoryMenuContainer)
+const CategoryMenuContainerWithData = graphql(Query)(intlCategoryMenuContainer)
 export default connect()(CategoryMenuContainerWithData)

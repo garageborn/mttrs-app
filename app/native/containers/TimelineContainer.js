@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
