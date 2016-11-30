@@ -68,10 +68,46 @@ class TimelineContainer extends Component {
     )
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.home())
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
+    const { dispatch } = this.props
+    if (!newIndex) return
+    if (home) {
+      dispatch(NavigationActions.home())
+    } else {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.filter))
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    if (this.namespaceWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
+    if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
     this.menuWillChange(nextProps)
     this.sectionWillChange(nextProps)
+  }
+
+  namespaceWillChange(nextProps) {
+    const willNamespaceLoad = nextProps.StorageReducer.namespace.isLoaded
+    const willNamespaceChange = this.props.StorageReducer.namespace.name !== nextProps.StorageReducer.namespace.name
+    return willNamespaceLoad && willNamespaceChange
+  }
+
+  categoriesWillChange(nextProps) {
+    const hasCategories = !_isNil(this.props.data.categories)
+    if (hasCategories) {
+      const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
+      const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
+      const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
+      return categoriesChanged
+    }
   }
 
   sectionWillChange(nextProps) {
@@ -114,24 +150,6 @@ class TimelineContainer extends Component {
         index: nextIndex
       }
     })
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(NavigationActions.home())
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
-    const { dispatch } = this.props
-    if (!newIndex) return
-    if (home) {
-      dispatch(NavigationActions.home())
-    } else {
-      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-      dispatch(NavigationActions.selectCategory(currentRoute.filter))
-    }
   }
 
   addSwipeRoutes(nextProps) {
@@ -232,7 +250,8 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    StorageReducer: state.StorageReducer
   }
 }
 
