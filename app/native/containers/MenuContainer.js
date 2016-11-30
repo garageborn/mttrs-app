@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Animated, Dimensions } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
 import ButtonGroup from '../components/ButtonGroup'
