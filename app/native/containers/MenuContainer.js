@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Animated, Dimensions, Button } from 'react-native'
+import { View, Text, Image, Animated, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
 import ButtonGroup from '../components/ButtonGroup'
@@ -8,8 +8,6 @@ import PublisherMenuContainer from './PublisherMenuContainer'
 import NamespaceMenuContainer from './NamespaceMenuContainer'
 import { MenuActions } from '../actions/index'
 import styles from '../styles/Menu'
-
-const { height } = Dimensions.get('window')
 
 const messages = defineMessages({
   headerCategories: {

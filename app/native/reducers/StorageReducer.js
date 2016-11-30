@@ -5,7 +5,7 @@ import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
   favoritePublishers: { isFetching: false, isLoaded: false, items: [] },
-  namespace: { isFetching: false, isLoaded: false, name: ""}
+  namespace: { isFetching: false, isLoaded: false, name: ''}
 }
 
 export default function(state = defaultState, action) {

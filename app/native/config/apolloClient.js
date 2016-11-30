@@ -9,11 +9,11 @@ networkInterface.use([{
     if (!req.options.headers) {
       req.options.headers = {
         'X-Tenant': Tenant.current
-      };
+      }
     }
-    next();
+    next()
   }
-}]);
+}])
 
 export default new ApolloClient({
   networkInterface: networkInterface
