@@ -4,8 +4,7 @@ import {
   REQUEST_TIMELINE, TIMELINE_RECEIVED,
   TIMELINE_DATE_RECEIVED, TIMELINE_DATE_REQUEST,
   TIMELINE_PULL_TO_REFRESH, TIMELINE_PULL_TO_REFRESH_COMPLETED,
-  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED,
-  SWITCH_TENANT
+  TIMELINE_PULL_TO_INFINITE, TIMELINE_PULL_TO_INFINITE_COMPLETED
 } from '../constants/ActionTypes'
 
 let defaultState = {
@@ -77,8 +76,6 @@ export default function(state = defaultState, action) {
       return { ...state, isFetchingBottom: false }
     case REQUEST_TIMELINE:
       return { ...state, items: [], isFetching: true }
-    case SWITCH_TENANT:
-      return { ...state, tenant: action.tenant }
     default:
       return state
   }
