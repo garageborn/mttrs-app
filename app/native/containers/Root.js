@@ -3,13 +3,21 @@ import { StatusBar, Platform, NativeModules } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import { NavigationContext, NavigationProvider, StackNavigation, } from '@exponent/ex-navigation'
+import intl from 'intl'
 import localeData from 'react-intl/locale-data'
+import androidLocaleData from 'intl/locale-data/complete'
 import Raven from 'raven-js'
 import * as messages from '../../common/translations/i18n'
 import Router from '../config/Router'
 import apolloClient from '../config/apolloClient'
 require('raven-js/plugins/react-native')(Raven)
-addLocaleData([...localeData])
+
+Platform.select({
+  ios: addLocaleData([...localeData]),
+  android: addLocaleData([...androidLocaleData])
+})
+
+if (Platform.OS === 'android') global.Intl = intl
 
 const locale = new Intl.DateTimeFormat().resolvedOptions().locale
 let language = locale.substr(0, 2)
