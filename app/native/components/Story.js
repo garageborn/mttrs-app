@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { Image, Text, TouchableHighlight, View, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
@@ -79,6 +79,7 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
+    if (Platform.OS === 'android') return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
     if (this.state.imageLoaded) {
       return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
     } else {
