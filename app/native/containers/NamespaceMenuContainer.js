@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, Image, TextInput, ListView, TouchableHighlight } from 'react-native'
+import { View, Text, Image, TextInput, ListView, TouchableHighlight, Platform } from 'react-native'
 import { NavigationActions, MenuActions, StorageActions } from '../actions/index'
 import styles from '../styles/MenuNamespaces'
 import apolloClient from '../config/apolloClient'
@@ -17,10 +17,16 @@ class NamespaceMenuContainer extends Component {
     return (
       <View style={styles.container}>
         <TouchableHighlight style={[styles.button, this.styles('mttrs')]} onPress={() => this.onPressNamespaceButton('mttrs')}>
-          <Text style={styles.text}>🇺🇸</Text>
+          <Text style={styles.text}>{Platform.select({
+            ios: '🇺🇸',
+            android: 'USA'
+          })}</Text>
         </TouchableHighlight>
         <TouchableHighlight style={[styles.button, this.styles('mttrs_br')]} onPress={() => this.onPressNamespaceButton('mttrs_br')}>
-          <Text style={styles.text}>🇧🇷</Text>
+          <Text style={styles.text}>{Platform.select({
+            ios: '🇧🇷',
+            android: 'BRA'
+          })}</Text>
         </TouchableHighlight>
       </View>
     )

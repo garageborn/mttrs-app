@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
     opacity: .50
   },
   text: {
-    fontSize: 92
+    fontSize: Platform.select({
+      ios: 92,
+      android: 50
+    })
   },
   active: {
     opacity: 1
