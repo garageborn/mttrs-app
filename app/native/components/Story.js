@@ -79,11 +79,13 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
-    if (Platform.OS === 'android') return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
     if (this.state.imageLoaded) {
       return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
     } else {
-      return require('../assets/mttrs-loading.gif')
+      return Platform.select({
+        ios: require('../assets/mttrs-loading.gif'),
+        android: require('../assets/mttrs-loading.png')
+      })
     }
   }
 
