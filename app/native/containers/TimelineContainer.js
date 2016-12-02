@@ -169,11 +169,11 @@ class TimelineContainer extends Component {
     let value, callback, easing = null
     if (type === 'in') {
       value = 0
-      easing = Easing.out(Easing.quad)
+      easing = Easing.in(Easing.quad)
     } else {
       value = -height - headerHeight
       callback = this.closeMenu
-      easing = Easing.in(Easing.quad)
+      easing = Easing.out(Easing.quad)
     }
 
     return (
@@ -191,16 +191,17 @@ class TimelineContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.renderTimeline()}
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           {this.renderMenu()}
         </Animated.View>
         {this.renderStoryLinks()}
-        {this.renderTimeline()}
       </View>
     )
   }
 
   renderTimeline() {
+    if (this.props.uiReducer.menu.isOpen) return
     if (this.sectionType(this.props) === 'publisher') {
       return this.renderScene(this.props)
     } else {
