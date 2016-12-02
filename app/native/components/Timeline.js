@@ -26,6 +26,21 @@ class Timeline extends Component {
     this.trackTopStories()
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.storiesWillChange(nextProps)
+  }
+
+  storiesWillChange(nextProps) {
+    if (!this.props.data.timeline) return true
+    const thisStoriesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const nextStoriesArray = nextProps.data.timeline.filter((item) => item.stories.length)
+    if (thisStoriesArray.length !== nextStoriesArray.length) {
+      return true
+    }
+
+    return false
+  }
+
   componentWillReceiveProps(nextProps) {
     const renderCategory = nextProps.type === 'category'
     const renderPublisher = nextProps.type === 'publisher'
@@ -101,11 +116,10 @@ class Timeline extends Component {
     if (this.props.data.loading) {
       return this.renderLoading()
     }
-
     return (
       <ListView
         removeClippedSubviews={false}
-        initialListSize={100}
+        initialListSize={4}
         style={styles.listView}
         dataSource={this.dataSource()}
         renderRow={this.renderRow}
