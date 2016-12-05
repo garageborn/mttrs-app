@@ -84,7 +84,7 @@ class Story extends Component {
     } else {
       return Platform.select({
         ios: require('../assets/mttrs-loading.gif'),
-        android: require('../assets/mttrs-loading.png')
+        android: require('../assets/mttrs-loading-static.png')
       })
     }
   }
