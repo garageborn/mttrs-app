@@ -9,11 +9,62 @@ import styles from '../styles/App'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
+import analytics from '../config/Analytics'
 
 class Timeline extends Component {
   constructor(props) {
     super(props)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
+    this.renderRow = this.renderRow.bind(this)
+    this.renderFooter = this.renderFooter.bind(this)
+    this.state = {
+      loadingMore: false
+    }
+  }
+
+  componentWillMount() {
+    this.trackTopStories()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.storiesWillChange(nextProps)
+  }
+
+  storiesWillChange(nextProps) {
+    if (!this.props.data.timeline) return true
+    const thisStoriesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const nextStoriesArray = nextProps.data.timeline.filter((item) => item.stories.length)
+    if (thisStoriesArray.length !== nextStoriesArray.length) {
+      return true
+    }
+
+    return false
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const renderCategory = nextProps.type === 'category'
+    const renderPublisher = nextProps.type === 'publisher'
+    if (renderCategory || renderPublisher) return this.trackSection(nextProps.type, nextProps.filter)
+  }
+
+  trackTopStories() {
+    analytics.track({
+      anonymousId: '1', //TODO: Figure this out better!
+      event: 'Visit Top Stories'
+    })
+  }
+
+  trackSection(type, filter) {
+    let event = type === 'publisher' ? 'Visit Publisher' : 'Visit Category'
+    analytics.track({
+      anonymousId: '1', //TODO: Figure this out better!
+      event,
+      properties: {
+        id: filter.id,
+        name: filter.name,
+        slug: filter.slug
+      }
+    })
   }
 
   renderSectionHeader(sectionData, date) {
@@ -63,28 +114,59 @@ class Timeline extends Component {
 
   render() {
     if (this.props.data.loading) {
-      return (
-        <View style={styles.loading}>
-          <ActivityIndicator
-            size='large'
-            color='#AAA'
-          />
-        </View>
-      )
+      return this.renderLoading()
     }
-
     return (
       <ListView
         removeClippedSubviews={false}
-        initialListSize={100}
+        initialListSize={4}
         style={styles.listView}
         dataSource={this.dataSource()}
-        renderRow={this.props.storyRenderer}
+        renderRow={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
         refreshControl={this.refreshControl()}
-        onEndReached={this.props.data.infiniteScroll}
+        renderFooter={() => this.renderFooter()}
+        onEndReached={() => this.onEndReached()}
       />
     )
+  }
+
+  onEndReached() {
+    const storiesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const minStoriesInTheViewport = 3
+    if (storiesArray.length < minStoriesInTheViewport) return
+    //Reference: https://github.com/apollostack/react-apollo/issues/228
+    this.setState({ loadingMore: true })
+    this.props.data.infiniteScroll().then((data) => {
+      this.setState({ loadingMore: false })
+    })
+  }
+
+  renderFooter() {
+    if (this.state.loadingMore) {
+      return <View style={styles.infiniteScrollLoadingContainer}>{this.renderActivityIndicator()}</View>
+    }
+    return null
+  }
+
+  renderLoading() {
+    return (
+      <View style={styles.loading}>
+        {this.renderActivityIndicator()}
+      </View>
+    )
+  }
+
+  renderActivityIndicator() {
+    return <ActivityIndicator
+      size='large'
+      color='#AAA'
+    />
+  }
+
+  renderRow(story) {
+    let isSceneHome = this.props.type === 'home'
+    return this.props.storyRenderer(story, isSceneHome)
   }
 }
 
@@ -95,7 +177,8 @@ Timeline.propTypes = {
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    TimelineReducers: state.TimelineReducers
   }
 }
 
@@ -106,7 +189,7 @@ const Query = gql`
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
         total_social
-        main_category { name slug color }
+        main_category { id name slug color }
         main_link(publisher_slug: $publisherSlug) {
           title
           image_source_url

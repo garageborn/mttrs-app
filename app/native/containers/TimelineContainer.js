@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform } from 'react-native'
+import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { MenuActions, NavigationActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
 import StoryLinksContainer from './StoryLinksContainer'
@@ -21,6 +21,7 @@ const { height } = Dimensions.get('window')
 class TimelineContainer extends Component {
   constructor(props) {
     super(props)
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
     this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
@@ -33,6 +34,11 @@ class TimelineContainer extends Component {
         ]
       }
     }
+  }
+
+  componentWillMount() {
+    this.props.dispatch(StorageActions.getFavoritePublishers())
+    this.props.dispatch(StorageActions.getCurrentNamespace())
   }
 
   handleChangeTab = (index) => {
@@ -62,10 +68,46 @@ class TimelineContainer extends Component {
     )
   }
 
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.home())
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
+    const { dispatch } = this.props
+    if (!newIndex) return
+    if (home) {
+      dispatch(NavigationActions.home())
+    } else {
+      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+      dispatch(NavigationActions.selectCategory(currentRoute.filter))
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
+    if (this.namespaceWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
+    if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
     this.menuWillChange(nextProps)
     this.sectionWillChange(nextProps)
+  }
+
+  namespaceWillChange(nextProps) {
+    const willNamespaceLoad = nextProps.StorageReducer.namespace.isLoaded
+    const willNamespaceChange = this.props.StorageReducer.namespace.name !== nextProps.StorageReducer.namespace.name
+    return willNamespaceLoad && willNamespaceChange
+  }
+
+  categoriesWillChange(nextProps) {
+    const hasCategories = !_isNil(this.props.data.categories)
+    if (hasCategories) {
+      const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
+      const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
+      const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
+      return categoriesChanged
+    }
   }
 
   sectionWillChange(nextProps) {
@@ -110,19 +152,6 @@ class TimelineContainer extends Component {
     })
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
-    const newIndex = nextState.navigationState.index !== this.state.navigationState.index
-    const { dispatch } = this.props
-    if (!newIndex) return
-    if (home) {
-      dispatch(NavigationActions.home())
-    } else {
-      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-      dispatch(NavigationActions.selectCategory(currentRoute.filter))
-    }
-  }
-
   addSwipeRoutes(nextProps) {
     if (nextProps.data.loading || this.state.navigationState.routes.length > 1) return
     let newRoutes = nextProps.data.categories.map((item, idx) => {
@@ -140,11 +169,11 @@ class TimelineContainer extends Component {
     let value, callback, easing = null
     if (type === 'in') {
       value = 0
-      easing = Easing.out(Easing.quad)
+      easing = Easing.in(Easing.quad)
     } else {
       value = -height - headerHeight
       callback = this.closeMenu
-      easing = Easing.in(Easing.quad)
+      easing = Easing.out(Easing.quad)
     }
 
     return (
@@ -162,17 +191,17 @@ class TimelineContainer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {this.renderStoryLinks()}
         {this.renderTimeline()}
-
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           {this.renderMenu()}
         </Animated.View>
+        {this.renderStoryLinks()}
       </View>
     )
   }
 
   renderTimeline() {
+    if (this.props.uiReducer.menu.isOpen) return
     if (this.sectionType(this.props) === 'publisher') {
       return this.renderScene(this.props)
     } else {
@@ -200,15 +229,15 @@ class TimelineContainer extends Component {
 
   renderMenu() {
     const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <MenuContainer params={params}/>
+    if (uiReducer.menu.isOpen) return <View style={styles.menuContainerWrapper}><MenuContainer params={params}/></View>
   }
 
   closeMenu() {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
-  renderStory(story) {
-    return <StoryContainer story={story} section={this.props.params.section} />
+  renderStory(story, isSceneHome) {
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
   }
 
   renderStoryLinks() {
@@ -222,7 +251,8 @@ class TimelineContainer extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    StorageReducer: state.StorageReducer
   }
 }
 

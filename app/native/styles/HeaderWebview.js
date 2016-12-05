@@ -1,11 +1,12 @@
 import { StyleSheet, Platform } from 'react-native'
+import { headerHeight } from './Header.js'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   header: {
     ...Platform.select({
       ios: {
-        height: 75,
-        paddingTop: 20
+        paddingTop: 10
       },
       android: {
         height: 55
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#262C5B'
+    backgroundColor: DARK_COLOR
   },
 
   publisherInfo: {

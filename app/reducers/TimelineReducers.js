@@ -10,7 +10,8 @@ import {
 let defaultState = {
   items: [],
   isFetching: false,
-  isFetchingTop: false
+  isFetchingTop: false,
+  tenant: 'mttrs'
 }
 
 const replaceItem = (source, index, item) => {

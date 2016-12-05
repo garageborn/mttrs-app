@@ -8,7 +8,8 @@ export function home() {
     const params = getCurrentParams(getState)
 
     let menuParams = Object.assign({}, params.menu, { open: false })
-    let newParams = Object.assign({}, params, { section: null, menu: menuParams })
+    let sectionParams = Object.assign({}, params.section, { name: 'home', model: {} })
+    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }

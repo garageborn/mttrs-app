@@ -1,22 +1,42 @@
 import React, { Component } from 'react'
-import { View, Text, Image, Animated, Dimensions } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
+import { injectIntl, defineMessages } from 'react-intl'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
-import styles from '../styles/Menu'
+import NamespaceMenuContainer from './NamespaceMenuContainer'
 import { MenuActions } from '../actions/index'
+import styles from '../styles/Menu'
 
-const { height } = Dimensions.get('window')
+const messages = defineMessages({
+  headerCategories: {
+    id: 'header.categories',
+    defaultMessage: 'Categories'
+  },
+  headerPublishers: {
+    id: 'header.publishers',
+    defaultMessage: 'Publishers'
+  },
+  headerCountries: {
+    id: 'header.countries',
+    defaultMessage: 'Countries'
+  }
+})
 
 class MenuContainer extends Component {
   constructor(props) {
     super(props)
+    const { formatMessage } = this.props.intl
+    const categories = formatMessage(messages.headerCategories)
+    const publishers = formatMessage(messages.headerPublishers)
+    const countries = formatMessage(messages.headerCountries)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [
-        { id: 'categories', label: 'Categories', component: <CategoryMenuContainer params={ this.props.params }/> },
-        { id: 'publishers', label: 'Publishers', component: <PublisherMenuContainer /> }
+        { id: 'categories', label: categories, component: <CategoryMenuContainer params={ this.props.params }/> },
+        { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> },
+        { id: 'countries', label: countries, component: <NamespaceMenuContainer /> }
       ]
     }
   }
@@ -37,9 +57,8 @@ class MenuContainer extends Component {
             selectedIndex={this.currentTabIndex}
             buttons={this.labels} />
         </View>
-
         <View style={styles.menuContainer}>
-          { this.currentTab.component }
+          {this.currentTab.component}
         </View>
       </View>
     )
@@ -62,4 +81,5 @@ function mapStateToProps(state) {
   return { uiReducer: state.uiReducer }
 }
 
-export default connect(mapStateToProps)(MenuContainer)
+const intlMenuContainer = injectIntl(MenuContainer)
+export default connect(mapStateToProps)(intlMenuContainer)

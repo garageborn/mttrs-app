@@ -27,6 +27,10 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
+    marginTop: Platform.select({
+      ios: 15,
+      android: 0
+    }),
     width
   },
 
@@ -36,6 +40,21 @@ const styles = StyleSheet.create({
 
   hideRefreshControl: {
     left: 20
+  },
+
+  infiniteScrollLoadingContainer: Platform.select({
+    ios: {
+      padding: 10,
+      marginBottom: 20
+    },
+    android: {
+      marginBottom: 30
+    }
+  }),
+
+  menuContainerWrapper: {
+    height,
+    width
   }
 })
 

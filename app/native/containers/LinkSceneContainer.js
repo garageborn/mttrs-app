@@ -1,14 +1,37 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform, Animated, Easing, Dimensions } from 'react-native'
+import { View, WebView, Platform, Animated, Easing, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import LinkHeaderContainer from './LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
-import styles from '../styles/App'
 import { StorageActions } from '../actions/index'
+import { headerHeight } from '../styles/Header'
+import styles from '../styles/App'
+import { DARK_COLOR } from '../../constants/Colors'
 
 class LinkSceneContainer extends Component {
+  static route = Platform.select({
+    ios: {
+        navigationBar: {
+          renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
+          renderLeft: () =>  <View />,
+          renderRight: () =>  <View />,
+          backgroundColor: DARK_COLOR,
+          height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
+        }
+      },
+    android: null
+  })
+
+  renderNavbar(props) {
+    if (Platform.OS === 'ios') return
+    return <LinkHeaderContainer link={props.route.params.link} />
+  }
+
   constructor() {
     super()
+
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
+
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
     this.progress = new Animated.Value(0)
   }
@@ -55,7 +78,7 @@ class LinkSceneContainer extends Component {
 
     return (
       <View style={styles.container}>
-        <LinkHeaderContainer link={this.props.route.params.link} />
+        {this.renderNavbar(this.props)}
         <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
@@ -63,7 +86,7 @@ class LinkSceneContainer extends Component {
           renderLoading={this.renderProgressBar}
           onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction={true}
-          />
+        />
       </View>
     )
   }

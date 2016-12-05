@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { Image, Text, TouchableHighlight, View, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
@@ -8,6 +8,14 @@ import SocialCount from '../../common/utils/SocialCount'
 import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      imageLoaded: false
+    }
+  }
+
   render() {
     const { story, openLink, openStoryLinks } = this.props
     return (
@@ -19,7 +27,7 @@ class Story extends Component {
           style={[styles.card, this.storySpacing()]}>
           <TouchableHighlight onPress={openLink} activeOpacity={0.7} underlayColor={WHITE_COLOR}>
             <View style={styles.content}>
-              <Image style={styles.image} resizeMode='cover' source={{uri: this.getImage()}} />
+              <Image style={styles.image} onLoad={() => this.handleImageLoad()} resizeMode='cover' source={this.getImage()} />
               <View style={styles.storyTitle}>
                 <Text style={styles.title} numberOfLines={3}>{this.mainLink.title}</Text>
               </View>
@@ -38,10 +46,14 @@ class Story extends Component {
     )
   }
 
-  storySpacing() {
-    const { section } = this.props
+  handleImageLoad() {
+    this.setState({imageLoaded: true})
+  }
 
-    if (typeof section === 'undefined' || section === null) {
+  storySpacing() {
+    const { isSceneHome } = this.props
+
+    if (isSceneHome) {
       return {
         marginTop: 16,
         marginBottom: 16
@@ -50,9 +62,9 @@ class Story extends Component {
   }
 
   renderCategoryLabel() {
-    const { section, openCategory } = this.props
+    const { isSceneHome, openCategory } = this.props
 
-    if (typeof section === 'undefined' || section === null) {
+    if (isSceneHome) {
       return (
         <TouchableHighlight
           onPress={openCategory}
@@ -67,7 +79,14 @@ class Story extends Component {
   getImage() {
     if (!this.mainLink.image_source_url) return
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
-    return cloudinary.url(this.mainLink.image_source_url, options)
+    if (this.state.imageLoaded) {
+      return {uri: cloudinary.url(this.mainLink.image_source_url, options)}
+    } else {
+      return Platform.select({
+        ios: require('../assets/mttrs-loading.gif'),
+        android: require('../assets/mttrs-loading-static.png')
+      })
+    }
   }
 
   get mainLink() {
@@ -97,7 +116,8 @@ Story.propTypes = {
   openLink: PropTypes.func.isRequired,
   openCategory: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
-  visited: PropTypes.bool.isRequired
+  visited: PropTypes.bool.isRequired,
+  isSceneHome: PropTypes.bool.isRequired
 }
 
 export default Story

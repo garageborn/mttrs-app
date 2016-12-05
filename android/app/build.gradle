@@ -107,8 +107,8 @@ android {
     defaultConfig {
         applicationId "garageborn.mttrs"
         minSdkVersion 16
-        targetSdkVersion 22
-        versionCode 21
+        targetSdkVersion 23
+        versionCode 42
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -154,7 +154,6 @@ android {
 
 dependencies {
     compile project(':react-native-fabric')
-    compile project(':react-native-config')
     compile project(':react-native-share')
     compile project(':react-native-linear-gradient')
     compile fileTree(dir: "libs", include: ["*.jar"])

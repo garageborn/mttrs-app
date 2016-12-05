@@ -1,22 +1,11 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-export const headerHeight = Platform.select({
-  ios: 75,
-  android: 55
-})
+export const headerHeight = 55
 
 const styles = StyleSheet.create({
   header: {
     height: headerHeight,
-    ...Platform.select({
-      ios: {
-        paddingTop: 35
-      },
-      android: {
-        paddingTop: 18
-      }
-    }),
-    backgroundColor: '#262C5B',
+    paddingTop: 18,
     zIndex: 2
   },
 

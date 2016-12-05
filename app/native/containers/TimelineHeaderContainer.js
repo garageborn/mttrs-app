@@ -26,6 +26,7 @@ class TimelineHeaderContainer extends Component {
     const { section } = this.props.params
 
     if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+
     switch(section.name) {
       case 'category':
         return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />

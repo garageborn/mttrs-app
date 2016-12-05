@@ -1,7 +1,8 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Header'
-const { width, height } = Dimensions.get('window')
+import { DARK_COLOR } from '../../constants/Colors'
 
+const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60
@@ -16,23 +17,26 @@ const categoryVerticalMargin = Platform.select({
 const styles = StyleSheet.create({
   menu: {
     flex: 1,
-    backgroundColor: '#262C5B',
+    backgroundColor: DARK_COLOR,
     zIndex: 1,
+    marginTop: Platform.select({
+      ios: 10,
+      android: 0
+    }),
     paddingLeft: 10,
     paddingRight: 10,
     height: height - headerHeight
   },
 
   selector: {
-    paddingLeft: 60,
-    paddingRight: 60,
+    paddingHorizontal: 45,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center'
   },
 
   menuContainer: {
-    flex: 1
+    flex: 1,
   },
 
   topStoriesContainer: {
@@ -49,11 +53,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  topStoriesInactive: {
+    backgroundColor: '#FFF'
+  },
+
   topStoriesTitle: {
     marginLeft: 12,
     marginTop: -4,
     color: 'white',
     fontSize: 18
+  },
+
+  topStoriesTitleInactive: {
+    color: '#2672D7'
   },
 
   topStoriesIcon: {
@@ -62,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   categories: {
-    flex: 1,
+    width,
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginBottom: 10,
