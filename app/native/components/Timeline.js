@@ -11,6 +11,8 @@ import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
 import analytics from '../config/Analytics'
 
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 class Timeline extends Component {
   constructor(props) {
     super(props)
@@ -183,8 +185,8 @@ let mapStateToProps = (state, ownProps) => {
 }
 
 const Query = gql`
-  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
-    timeline(days: $days, offset: $offset) {
+  query($days: Int!, $offset: Int, $timezone: String, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(days: $days, offset: $offset, timezone: $timezone) {
       date
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
@@ -213,7 +215,8 @@ const defaultVariables = {
   days: 7,
   offset: 0,
   perDay: 10,
-  publisherSlug: ''
+  publisherSlug: '',
+  timezone
 }
 
 const pullToRefresh = ({ fetchMore, variables }) => {
