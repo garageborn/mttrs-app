@@ -16,7 +16,7 @@ const categoryVerticalMargin = Platform.select({
 
 const styles = StyleSheet.create({
   menu: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: DARK_COLOR,
     zIndex: 1,
     marginTop: Platform.select({
