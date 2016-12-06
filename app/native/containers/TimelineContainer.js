@@ -154,7 +154,7 @@ class TimelineContainer extends Component {
     })
   }
 
-  addSwipeRoutes(nextProps, from) {
+  addSwipeRoutes(nextProps) {
     const sameNavigationRoutes = nextProps.data.categories === this.props.data.categories
     const populatedRoutes = this.state.navigationState.routes.length > 1
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
