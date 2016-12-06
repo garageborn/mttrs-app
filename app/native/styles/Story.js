@@ -5,7 +5,6 @@ let { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   card: {
     position: 'relative',
-    flex: 1,
     zIndex: 2,
     marginTop: 8,
     marginBottom: 8,
@@ -32,7 +31,6 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 3

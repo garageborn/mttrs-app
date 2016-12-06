@@ -13,6 +13,7 @@ import com.BV.LinearGradient.LinearGradientPackage;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 import com.smixx.fabric.FabricPackage;
+import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,6 +23,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     Fabric.with(this, new Crashlytics());
+    SoLoader.init(this, /* native exopackage */ false);
   }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -43,6 +45,6 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public ReactNativeHost getReactNativeHost() {
-      return mReactNativeHost;
+    return mReactNativeHost;
   }
 }
