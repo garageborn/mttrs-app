@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import { View, Text, ListView, Modal } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, Text, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import StoryLink from '../components/StoryLink'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import StoryLinksComponent from '../components/StoryLinksComponent'
 import CloseButton from '../components/CloseButton'
-import styles from '../styles/StoryLinks'
 import { NavigationActions } from '../actions/index'
-import LinearGradient from 'react-native-linear-gradient'
+import styles from '../styles/StoryLinks'
 
 class StoryLinksContainer extends Component {
   constructor(props) {
@@ -13,28 +14,7 @@ class StoryLinksContainer extends Component {
 
     this.openLink = this.openLink.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
-    this.renderRow = this.renderRow.bind(this)
-    this.dataSource = this.dataSource.bind(this)
     this.close = this.close.bind(this)
-  }
-
-  dataSource() {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-    return ds.cloneWithRows(this.otherLinks)
-  }
-
-  renderRow(rowData, sectionID, rowID) {
-    return (
-      <StoryLink
-        linkType='list'
-        rowID={rowID}
-        link={rowData}
-        openLink={this.openLink}
-        openPublisher={this.openPublisher}
-      />
-    )
   }
 
   close() {
@@ -59,38 +39,67 @@ class StoryLinksContainer extends Component {
         visible={true}
         onRequestClose={this.close}>
         <View style={styles.modal}>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <StoryLink
-                linkType='header'
-                link={this.mainLink}
-                openLink={this.openLink}
-                openPublisher={this.openPublisher}
-              />
-            </View>
-            <ListView
-              style={styles.linksList}
-              dataSource={this.dataSource()}
-              renderRow={this.renderRow}
-            />
-            <LinearGradient
-              colors={['rgba(255,255,255,.2)', 'rgba(255,255,255,.6)', 'rgba(255,255,255,.8)']}
-              style={styles.gradient}
-            />
-          </View>
+          { this.renderStoryLinks() }
           <CloseButton onPress={this.close} />
         </View>
       </Modal>
     )
   }
 
-  get mainLink() {
-    return this.props.story.main_link
-  }
-
-  get otherLinks() {
-    return this.props.story.other_links
+  renderStoryLinks() {
+    if (this.props.data.loading) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator size='large' color='#FFF'/>
+        </View>
+      )
+    } else {
+      return (
+        <StoryLinksComponent
+          story={this.props.data.story}
+          openLink={this.openLink}
+          openPublisher={this.openPublisher}
+          />
+      )
+    }
   }
 }
 
-export default connect()(StoryLinksContainer)
+const Query = gql`
+  query($id: ID!, $publisherSlug: String) {
+    story(id: $id) {
+      main_link(publisher_slug: $publisherSlug) {
+        title
+        url
+        total_social
+        publisher { name slug icon_id }
+      }
+      other_links(publisher_slug: $publisherSlug, popular: true) {
+        title
+        url
+        total_social
+        publisher { name slug icon_id }
+      }
+    }
+  }
+`
+
+StoryLinksContainer.propTypes = {
+  story: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+  }).isRequired,
+  publisherSlug: PropTypes.string
+}
+
+const StoryLinksContainerWithData = graphql(Query, {
+  options(props) {
+    return {
+      variables: {
+        id: props.story.id,
+        publisherSlug: props.publisherSlug
+      }
+    }
+  }
+})(StoryLinksContainer)
+
+export default connect()(StoryLinksContainerWithData)

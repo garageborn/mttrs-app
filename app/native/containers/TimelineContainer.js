@@ -244,8 +244,16 @@ class TimelineContainer extends Component {
     const { params } = this.props
     let section = params.section || {}
     let storyLinks = section.storyLinks || {}
+    let publisherSlug = ''
     if (!storyLinks.open) return
-    return <StoryLinksContainer story={storyLinks.story}/>
+    if (this.sceneType(this.props) === 'publisher') {
+      publisherSlug = this.props.params.section.model.slug
+    }
+
+    return <StoryLinksContainer
+      story={storyLinks.story}
+      publisherSlug={publisherSlug}
+      />
   }
 }
 

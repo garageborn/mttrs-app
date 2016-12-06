@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     backgroundColor: DARK_COLOR
   },
 
+  loading: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: height - heightOffset
+  },
+
   container: {
     width: width - 16,
     height: height - heightOffset,
