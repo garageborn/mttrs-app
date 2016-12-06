@@ -18,6 +18,8 @@ import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
 
+const topStoriesRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
+
 class TimelineContainer extends Component {
   constructor(props) {
     super(props)
@@ -30,7 +32,7 @@ class TimelineContainer extends Component {
       navigationState: {
         index: 0,
         routes: [
-         { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
+         topStoriesRoute
         ]
       }
     }
@@ -153,14 +155,18 @@ class TimelineContainer extends Component {
   }
 
   addSwipeRoutes(nextProps) {
-    if (nextProps.data.loading || this.state.navigationState.routes.length > 1) return
-    let newRoutes = nextProps.data.categories.map((item, idx) => {
+    const sameNavigationRoutes = nextProps.data.categories === this.props.data.categories
+    const populatedRoutes = this.state.navigationState.routes.length > 1
+    const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
+    const isLoadingAndRoutesWillBeTheSame = nextProps.data.loading && sameNavigationRoutes
+    if (hasRoutesAndWillBeTheSame || isLoadingAndRoutesWillBeTheSame) return
+    const newRoutes = nextProps.data.categories.map((item, idx) => {
       return { key: `${idx+1}`, title: item.name, type: 'category', filter: item }
     })
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [...this.state.navigationState.routes, ...newRoutes ]
+        routes: [topStoriesRoute, ...newRoutes ]
       }
     })
   }
