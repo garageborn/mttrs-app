@@ -32,7 +32,7 @@ namespace :release do
     end
   end
 
-  task :android do
+  namespace :android do
     desc 'Release new Android version'
     task :run do
       # TODO
