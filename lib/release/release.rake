@@ -28,7 +28,7 @@ namespace :release do
         STDOUT.puts 'Enter MATCH_PASSWORD'
         match_password = STDIN.gets.strip
       end
-      system("MATCH_PASSWORD=\"#{ match_password }\" bundle exec fastlane ios beta")
+      system("MATCH_PASSWORD=#{ match_password } bundle exec fastlane ios beta")
     end
   end
 
