@@ -191,7 +191,7 @@ const Query = gql`
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
         total_social
-        main_category { name color }
+        main_category { name color slug }
         main_link(publisher_slug: $publisherSlug) {
           title
           image_source_url
