@@ -23,12 +23,15 @@ namespace :release do
   namespace :ios do
     desc 'Release new iOS version'
     task :run do
-      match_password = ENV['MATCH_PASSWORD']
-      if match_password.blank?
-        STDOUT.puts 'Enter MATCH_PASSWORD'
-        match_password = STDIN.gets.strip
-      end
-      system("MATCH_PASSWORD=#{ match_password } bundle exec fastlane ios beta")
+      p '-------------------'
+      p ENV['MATCH_PASSWORD']
+
+      # match_password = ENV['MATCH_PASSWORD']
+      # if match_password.blank?
+      #   STDOUT.puts 'Enter MATCH_PASSWORD'
+      #   match_password = STDIN.gets.strip
+      # end
+      system("bundle exec fastlane ios beta")
     end
   end
 
