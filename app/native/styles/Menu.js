@@ -78,10 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
 
-  categoriesSection: {
-    width: width - 20
-  },
-
   category: {
     backgroundColor: '#FFF',
     width: (width - 51) / 2,
