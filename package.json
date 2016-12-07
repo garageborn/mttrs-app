@@ -48,7 +48,7 @@
     "react-apollo": "^0.6.0",
     "react-dom": "~15.4.1",
     "react-intl": "^2.1.5",
-    "react-native": "0.40.0-rc.1",
+    "react-native": "0.39.0",
     "react-native-fabric": "^0.3.2",
     "react-native-linear-gradient": "^1.5.14",
     "react-native-share": "^1.0.17",
