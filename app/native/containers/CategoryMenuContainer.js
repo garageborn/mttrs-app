@@ -36,9 +36,11 @@ class CategoryMenuContainer extends Component {
           </TouchableHighlight>
         </View>
 
-        <ScrollView contentContainerStyle={styles.categories}>
-          {this.renderCategories()}
-        </ScrollView>
+        <View style={styles.categoriesSection}>
+          <ScrollView contentContainerStyle={styles.categories}>
+            {this.renderCategories()}
+          </ScrollView>
+        </View>
       </View>
     )
   }
