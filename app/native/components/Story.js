@@ -13,14 +13,16 @@ class Story extends Component {
     super(props)
 
     this.state = {
-      imageLoaded: false
+      imageLoaded: false,
+      py: 0,
+      isExpanded: false
     }
   }
 
   render() {
     const { story, openLink, openStoryLinks } = this.props
     return (
-      <View style={{ opacity: this.props.visited ? 0.4 : 1 }}>
+      <View ref={story.id} style={{ opacity: this.props.visited ? 0.4 : 1 }} onLayout={() => this.getViewPosition()} >
         <View
           shadowOpacity={.1}
           shadowColor={'rgba(0, 0, 0, .6)'}
@@ -48,9 +50,19 @@ class Story extends Component {
     )
   }
 
+  getViewPosition() {
+    this.refs[this.props.story.id].measure((ox, oy, width, height, px, py) => {
+      this.setState({ py })
+    })
+  }
+
   renderSummary(headline, summary) {
     if (!summary) return
-    return <StorySummary headline={headline} summary={summary}/>
+    return <StorySummary pressExpandButton={() => this.pressExpandButton()} headline={headline} summary={summary}/>
+  }
+
+  pressExpandButton() {
+    this.setState({isExpanded: !this.state.isExpanded})
   }
 
   handleImageLoad() {

@@ -7,9 +7,22 @@ const triangle = {
   borderStyle: 'solid',
   borderLeftWidth: 7,
   borderRightWidth: 7,
-  borderBottomWidth: 8,
   borderLeftColor: 'transparent',
   borderRightColor: 'transparent',
+}
+
+const trianglePointingUp = {
+  ...triangle,
+  borderBottomWidth: 8
+}
+
+const expandButtonTriangle = {
+  ...triangle,
+  borderLeftWidth: 5,
+  borderRightWidth: 5,
+  marginTop: 7,
+  marginRight: 3,
+  borderColor: 'black'
 }
 
 const styles = StyleSheet.create({
@@ -21,15 +34,16 @@ const styles = StyleSheet.create({
     zIndex: 2
   },
   outerTriangle: {
-    ...triangle,
+    ...trianglePointingUp,
     borderBottomColor: '#DDDDDD'
   },
   innerTriangle: {
-    ...triangle,
+    ...trianglePointingUp,
     marginTop: -6,
     borderBottomColor: '#F1F1F1'
   },
   box: {
+    position: 'relative',
     marginTop: -2,
     padding: 15,
     borderRadius: 5,
@@ -53,6 +67,36 @@ const styles = StyleSheet.create({
     color: '#666666',
     fontSize: 15,
     lineHeight: 23
+  },
+  showLessTriangle: {
+    ...expandButtonTriangle,
+    borderBottomWidth: 5,
+  },
+  showMoreTriangle: {
+    ...expandButtonTriangle,
+    borderTopWidth: 5,
+
+  },
+  buttonTextContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  expandButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F1F1F1'
+  },
+  expandButtonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    flexGrow: 1,
+  },
+  gradient: {
+    marginHorizontal: 1,
+    height: 80,
+    backgroundColor: 'transparent'
   }
 })
 

@@ -120,6 +120,7 @@ class Timeline extends Component {
     }
     return (
       <ListView
+        ref={"timeline"}
         removeClippedSubviews={false}
         initialListSize={4}
         style={styles.listView}
@@ -168,7 +169,7 @@ class Timeline extends Component {
 
   renderRow(story) {
     let isSceneHome = this.props.type === 'home'
-    return this.props.storyRenderer(story, isSceneHome)
+    return this.props.storyRenderer(story, isSceneHome, this.refs.timeline)
   }
 }
 
