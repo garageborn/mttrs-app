@@ -22,15 +22,14 @@ namespace :release do
   end
 
   task :all do
-    Rake::Task['release:ios:run'].execute
-    Rake::Task['release:android:run'].execute
+    # Rake::Task['release:ios'].execute
+    Rake::Task['release:android'].execute
   end
 
   desc 'Commit all changes'
   task :commit do
     message = "#{ ios_changes_message } #{ android_changes_message }".strip
-    p '--------message', message
-    # system "git commit -am '#{ message }'"
+    system "git commit -am '#{ message }'"
   end
 
   desc 'Release new iOS version'
