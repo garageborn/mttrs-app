@@ -32,8 +32,6 @@ project.xcworkspace
 .idea
 .gradle
 local.properties
-android/app/src/main/assets/crashlytics-build.properties
-android/app/src/main/res/values/com_crashlytics_export_strings.xml
 
 # node.js
 #
@@ -46,29 +44,29 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-# Env
 mttrs.app.dSYM.zip
 android/app/mttrs-release-key.keystore
+
+# Fastlane temporary profiling data
+/fastlane/report.xml
+# Deliver temporary error output
+/fastlane/Error*.png
+# Deliver temporary preview output
+/fastlane/Preview.html
+# Snapshot generated screenshots
+/fastlane/screenshots/*/*-portrait.png
+/fastlane/screenshots/*/*-landscape.png
+/fastlane/screenshots/screenshots.html
+# Frameit generated screenshots
+/fastlane/screenshots/*/*-portrait_framed.png
+/fastlane/screenshots/*/*-landscape_framed.png
+
 .vscode
 tsconfig.json
+
 .env
+
+android/app/src/main/assets/crashlytics-build.properties
+android/app/src/main/res/values/com_crashlytics_export_strings.xml
+=======
 *.keystore
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
-
-/fastlane/Error*.png
-/fastlane/Preview.html
-/fastlane/report.xml
-/fastlane/screenshots/*/*-landscape.png
-/fastlane/screenshots/*/*-landscape_framed.png
-/fastlane/screenshots/*/*-portrait.png
-/fastlane/screenshots/*/*-portrait_framed.png
-/fastlane/screenshots/screenshots.html
-fastlane/Preview.html
-fastlane/report.xml
-fastlane/screenshots
