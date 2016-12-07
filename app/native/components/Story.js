@@ -34,7 +34,7 @@ class Story extends Component {
               </View>
             </View>
           </TouchableHighlight>
-          <StorySummary />
+          {this.renderSummary(story.headline, story.summary)}
           <View style={styles.footer}>
             <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
             <View style={styles.shares}>
@@ -46,6 +46,11 @@ class Story extends Component {
         {this.renderCategoryLabel()}
       </View>
     )
+  }
+
+  renderSummary(headline, summary) {
+    if (!summary) return
+    return <StorySummary headline={headline} summary={summary}/>
   }
 
   handleImageLoad() {
