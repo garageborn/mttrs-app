@@ -34,13 +34,9 @@ class Timeline extends Component {
 
   storiesWillChange(nextProps) {
     if (!this.props.data.timeline) return true
-    const thisStoriesArray = this.props.data.timeline.filter((item) => item.stories.length)
-    const nextStoriesArray = nextProps.data.timeline.filter((item) => item.stories.length)
-    if (thisStoriesArray.length !== nextStoriesArray.length) {
-      return true
-    }
-
-    return false
+    const thisStoriesIds = this.props.data.timeline.map((item) => item.id)
+    const nextStoriesIds = nextProps.data.timeline.map((item) => item.id)
+    return thisStoriesIds !== nextStoriesIds
   }
 
   componentWillReceiveProps(nextProps) {
@@ -115,9 +111,8 @@ class Timeline extends Component {
   }
 
   render() {
-    if (this.props.data.loading) {
-      return this.renderLoading()
-    }
+    if (this.props.data.loading) return this.renderLoading()
+
     return (
       <ListView
         removeClippedSubviews={false}

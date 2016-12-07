@@ -7,7 +7,6 @@ import gql from 'graphql-tag'
 import { MenuActions, NavigationActions, StorageActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import StoryContainer from './StoryContainer'
-import StoryLinksContainer from './StoryLinksContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Header'
@@ -18,7 +17,7 @@ import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
 
-const topStoriesRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
+const homeRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
 
 class TimelineContainer extends Component {
   constructor(props) {
@@ -31,9 +30,7 @@ class TimelineContainer extends Component {
       menuPositionY: new Animated.Value(-height),
       navigationState: {
         index: 0,
-        routes: [
-         topStoriesRoute
-        ]
+        routes: [homeRoute]
       }
     }
   }
@@ -117,9 +114,7 @@ class TimelineContainer extends Component {
     let currentSection = this.props.params.section || {}
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
-    if (sectionNameChanged || sectionModelChanged) {
-      this.changeSection(nextProps)
-    }
+    if (sectionNameChanged || sectionModelChanged) this.changeSection(nextProps)
   }
 
   menuWillChange(nextProps) {
@@ -161,12 +156,12 @@ class TimelineContainer extends Component {
     const isLoadingAndRoutesWillBeTheSame = nextProps.data.loading && sameNavigationRoutes
     if (hasRoutesAndWillBeTheSame || isLoadingAndRoutesWillBeTheSame) return
     const newRoutes = nextProps.data.categories.map((item, idx) => {
-      return { key: `${idx+1}`, title: item.name, type: 'category', filter: item }
+      return { key: `${idx + 1}`, title: item.name, type: 'category', filter: item }
     })
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [topStoriesRoute, ...newRoutes ]
+        routes: [homeRoute, ...newRoutes ]
       }
     })
   }
@@ -201,13 +196,12 @@ class TimelineContainer extends Component {
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           {this.renderMenu()}
         </Animated.View>
-        {this.renderStoryLinks()}
+        {this.props.children}
       </View>
     )
   }
 
   renderTimeline() {
-    if (this.props.uiReducer.menu.isOpen) return
     if (this.sectionType(this.props) === 'publisher') {
       return this.renderScene(this.props)
     } else {
@@ -244,22 +238,6 @@ class TimelineContainer extends Component {
 
   renderStory(story, isSceneHome) {
     return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
-  }
-
-  renderStoryLinks() {
-    const { params } = this.props
-    let section = params.section || {}
-    let storyLinks = section.storyLinks || {}
-    let publisherSlug = ''
-    if (!storyLinks.open) return
-    if (this.sceneType(this.props) === 'publisher') {
-      publisherSlug = this.props.params.section.model.slug
-    }
-
-    return <StoryLinksContainer
-      story={storyLinks.story}
-      publisherSlug={publisherSlug}
-      />
   }
 }
 
