@@ -189,6 +189,7 @@ const Query = gql`
         main_category { name color slug }
         main_link(publisher_slug: $publisherSlug) {
           title
+          url
           image_source_url
           publisher { name icon_id }
         }
