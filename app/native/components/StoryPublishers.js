@@ -1,18 +1,43 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { injectIntl, defineMessages } from 'react-intl'
+import _capitalize from 'lodash/capitalize'
 import PublisherLogo from './PublisherLogo'
 import styles from '../styles/Story'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
+const messages = defineMessages({
+  storyFrom: {
+    id: 'from',
+    defaultMessage: 'From'
+  },
+
+  storyAnd: {
+    id: 'and',
+    defaultMessage: 'and'
+  },
+
+  storyOther: {
+    id: 'other',
+    defaultMessage: 'other'
+  },
+
+  storyOthers: {
+    id: 'others',
+    defaultMessage: 'others'
+  }
+})
+
 class StoryPublishers extends Component {
   render() {
     const { openStoryLinks } = this.props
+    const { formatMessage } = this.props.intl
 
     return (
       <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
-          <Text style={styles.lightText}>From </Text>
+          <Text style={styles.lightText}>{formatMessage(messages.storyFrom)} </Text>
           <PublisherLogo source={this.publisherLogo} />
           {this.getMainPublisher()}
           {this.getCounter()}
@@ -34,14 +59,18 @@ class StoryPublishers extends Component {
   }
 
   getCounter() {
+    const { formatMessage } = this.props.intl
     const { other_links } = this.props.story
+    const and = formatMessage(messages.storyAnd)
+    const other = formatMessage(messages.storyOther)
+    const others = formatMessage(messages.storyOthers)
     let linksLength = other_links.length
 
     if (!linksLength) return
 
     return (
-      <Text style={styles.lightText}> and
-        <Text style={styles.darkText}> {linksLength} {linksLength === 1 ? 'other' : 'others'}</Text>
+      <Text style={styles.lightText}> {and}
+        <Text style={styles.darkText}> {linksLength} {linksLength === 1 ? other : others}</Text>
       </Text>
     )
   }
@@ -60,4 +89,4 @@ StoryPublishers.propTypes = {
   openStoryLinks: PropTypes.func.isRequired
 }
 
-export default StoryPublishers
+export default injectIntl(StoryPublishers)

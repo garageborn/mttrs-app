@@ -16,7 +16,7 @@ const categoryVerticalMargin = Platform.select({
 
 const styles = StyleSheet.create({
   menu: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: DARK_COLOR,
     zIndex: 1,
     marginTop: Platform.select({
@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
   },
 
   selector: {
-    paddingLeft: 60,
-    paddingRight: 60,
+    paddingHorizontal: 45,
     height: 60,
     alignItems: 'center',
     justifyContent: 'center'
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   topStoriesInactive: {
-    backgroundColor: '#666'
+    backgroundColor: '#FFF'
   },
 
   topStoriesTitle: {
@@ -63,6 +62,10 @@ const styles = StyleSheet.create({
     marginTop: -4,
     color: 'white',
     fontSize: 18
+  },
+
+  topStoriesTitleInactive: {
+    color: '#2672D7'
   },
 
   topStoriesIcon: {

@@ -11,6 +11,8 @@ import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
 import analytics from '../config/Analytics'
 
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
 class Timeline extends Component {
   constructor(props) {
     super(props)
@@ -24,6 +26,21 @@ class Timeline extends Component {
 
   componentWillMount() {
     this.trackTopStories()
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.storiesWillChange(nextProps)
+  }
+
+  storiesWillChange(nextProps) {
+    if (!this.props.data.timeline) return true
+    const thisStoriesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const nextStoriesArray = nextProps.data.timeline.filter((item) => item.stories.length)
+    if (thisStoriesArray.length !== nextStoriesArray.length) {
+      return true
+    }
+
+    return false
   }
 
   componentWillReceiveProps(nextProps) {
@@ -101,11 +118,10 @@ class Timeline extends Component {
     if (this.props.data.loading) {
       return this.renderLoading()
     }
-
     return (
       <ListView
         removeClippedSubviews={false}
-        initialListSize={100}
+        initialListSize={4}
         style={styles.listView}
         dataSource={this.dataSource()}
         renderRow={this.renderRow}
@@ -118,6 +134,9 @@ class Timeline extends Component {
   }
 
   onEndReached() {
+    const storiesArray = this.props.data.timeline.filter((item) => item.stories.length)
+    const minStoriesInTheViewport = 3
+    if (storiesArray.length < minStoriesInTheViewport) return
     //Reference: https://github.com/apollostack/react-apollo/issues/228
     this.setState({ loadingMore: true })
     this.props.data.infiniteScroll().then((data) => {
@@ -160,13 +179,14 @@ Timeline.propTypes = {
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    TimelineReducers: state.TimelineReducers
   }
 }
 
 const Query = gql`
-  query($days: Int!, $offset: Int, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
-    timeline(days: $days, offset: $offset) {
+  query($days: Int!, $offset: Int, $timezone: String, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(days: $days, offset: $offset, timezone: $timezone) {
       date
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
@@ -195,7 +215,8 @@ const defaultVariables = {
   days: 7,
   offset: 0,
   perDay: 10,
-  publisherSlug: ''
+  publisherSlug: '',
+  timezone
 }
 
 const pullToRefresh = ({ fetchMore, variables }) => {
