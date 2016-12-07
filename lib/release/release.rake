@@ -24,6 +24,7 @@ namespace :release do
   task :all do
     Rake::Task['release:ios'].execute
     Rake::Task['release:android'].execute
+    Rake::Task['release:commit'].execute
   end
 
   desc 'Commit all changes'
