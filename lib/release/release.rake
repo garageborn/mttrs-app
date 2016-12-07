@@ -22,7 +22,7 @@ namespace :release do
   end
 
   task :all do
-    # Rake::Task['release:ios'].execute
+    Rake::Task['release:ios'].execute
     Rake::Task['release:android'].execute
   end
 
