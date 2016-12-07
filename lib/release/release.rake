@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'thread/pool'
 
 namespace :release do
   def ios_version
@@ -22,8 +23,11 @@ namespace :release do
   end
 
   task :all do
-    Rake::Task['release:ios'].execute
-    Rake::Task['release:android'].execute
+    Tread.pool(2).tap do |pool|
+      pool.process { Rake::Task['release:ios'].execute }
+      pool.process { Rake::Task['release:android'].execute }
+      pool.shutdown
+    end
     Rake::Task['release:commit'].execute
   end
 
