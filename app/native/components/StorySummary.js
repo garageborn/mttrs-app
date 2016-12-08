@@ -23,19 +23,24 @@ class StorySummary extends Component {
             <Text>👔</Text>
             <Text style={styles.headline}>{this.props.headline.toUpperCase()}</Text>
           </View>
-          <Text style={styles.summary}>{this.props.summary}</Text>
+          <Text style={this.summaryStyles()}>{this.props.summary}</Text>
           {this.renderFooter()}
         </View>
       </View>
     )
   }
 
+  summaryStyles() {
+    if (this.props.isExpanded) return [styles.summary, styles.summaryExpanded]
+    return styles.summary
+  }
+
   renderFooter() {
     if (this.props.summary.length < charsThreshold) return
     return (
       <View style={styles.footer}>
-          {this.renderLinearGradient()}
-          {this.renderButton()}
+        {this.renderLinearGradient()}
+        {this.renderButton()}
       </View>
     )
   }

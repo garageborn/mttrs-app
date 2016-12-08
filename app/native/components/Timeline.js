@@ -20,6 +20,7 @@ class Timeline extends Component {
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
+    this.scrollToY = this.scrollToY.bind(this)
     this.state = {
       loadingMore: false
     }
@@ -162,7 +163,7 @@ class Timeline extends Component {
 
   renderRow(story) {
     let isSceneHome = this.props.type === 'home'
-    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} scrollToY={(y) => this.scrollToY(y)}/>
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} scrollToY={this.scrollToY}/>
   }
 
   scrollToY(y) {

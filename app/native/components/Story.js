@@ -60,7 +60,7 @@ class Story extends Component {
 
   getViewPosition() {
     const storyTopHeight = 40
-    this.refs[this.props.story.id].measure((ox, oy, width, height, px, py) => {
+    this.refs[this.props.story.id].measure((ox, oy) => {
       this.setState({storyPosition: oy - storyTopHeight})
     })
   }

@@ -29,7 +29,7 @@ class StoryContainer extends Component {
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
         visited={visited}
-        scrollToY={(y) => scrollToY(y)}
+        scrollToY={scrollToY}
       />
     )
   }

@@ -68,6 +68,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 23
   },
+  summaryExpanded: {
+    padding: 15
+  },
   showLessTriangle: {
     ...expandButtonTriangle,
     borderBottomWidth: 5,
