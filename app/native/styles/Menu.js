@@ -23,8 +23,7 @@ const styles = StyleSheet.create({
       ios: 10,
       android: 0
     }),
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingHorizontal: 10,
     height: height - headerHeight
   },
 
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
     height: height / 7.5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
 
   topStoriesInactive: {
@@ -74,17 +73,16 @@ const styles = StyleSheet.create({
   },
 
   categories: {
-    width,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 10,
-    height: categoriesContainerHeight
+    marginBottom: 10
   },
 
   category: {
     backgroundColor: '#FFF',
     width: (width - 51) / 2,
     height: height / 7.5,
+    padding: 0,
     alignItems: 'center',
     justifyContent: 'center'
   },

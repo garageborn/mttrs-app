@@ -34,13 +34,9 @@ class Timeline extends Component {
 
   storiesWillChange(nextProps) {
     if (!this.props.data.timeline) return true
-    const thisStoriesArray = this.props.data.timeline.filter((item) => item.stories.length)
-    const nextStoriesArray = nextProps.data.timeline.filter((item) => item.stories.length)
-    if (thisStoriesArray.length !== nextStoriesArray.length) {
-      return true
-    }
-
-    return false
+    const thisStoriesIds = this.props.data.timeline.map((item) => item.id)
+    const nextStoriesIds = nextProps.data.timeline.map((item) => item.id)
+    return thisStoriesIds !== nextStoriesIds
   }
 
   componentWillReceiveProps(nextProps) {
@@ -115,12 +111,11 @@ class Timeline extends Component {
   }
 
   render() {
-    if (this.props.data.loading) {
-      return this.renderLoading()
-    }
+    if (this.props.data.loading) return this.renderLoading()
+
     return (
       <ListView
-        ref={"timeline"}
+        ref={'timeline'}
         removeClippedSubviews={false}
         initialListSize={4}
         style={styles.listView}
@@ -194,19 +189,15 @@ const Query = gql`
         total_social
         headline
         summary
-        main_category { id name slug color }
+        main_category { name color slug }
         main_link(publisher_slug: $publisherSlug) {
           title
+          url
           image_source_url
-          url
-          total_social
-          publisher { name slug icon_id }
+          publisher { name icon_id }
         }
-        other_links(publisher_slug: $publisherSlug, popular: true) {
-          title
-          url
-          total_social
-          publisher { name slug icon_id }
+        other_links(publisher_slug: $publisherSlug) {
+          id
         }
       }
     }
