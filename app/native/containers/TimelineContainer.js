@@ -6,7 +6,6 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { MenuActions, NavigationActions, StorageActions } from '../actions/index'
 import Timeline from '../components/Timeline'
-import StoryContainer from './StoryContainer'
 import Router from '../config/Router'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Header'
@@ -23,7 +22,6 @@ class TimelineContainer extends Component {
   constructor(props) {
     super(props)
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
-    this.renderStory = this.renderStory.bind(this)
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
     this.state = {
@@ -236,9 +234,6 @@ class TimelineContainer extends Component {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
-  renderStory(story, isSceneHome) {
-    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
-  }
 }
 
 let mapStateToProps = (state) => {

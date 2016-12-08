@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
 import styles from '../styles/App'
+import StoryContainer from '../containers/StoryContainer'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
@@ -164,7 +165,7 @@ class Timeline extends Component {
 
   renderRow(story) {
     let isSceneHome = this.props.type === 'home'
-    return this.props.storyRenderer(story, isSceneHome, this.refs.timeline)
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
   }
 }
 
