@@ -157,15 +157,16 @@ class Timeline extends Component {
   }
 
   renderActivityIndicator() {
-    return <ActivityIndicator
-      size='large'
-      color='#AAA'
-    />
+    return <ActivityIndicator size='large' color='#AAA'/>
   }
 
   renderRow(story) {
     let isSceneHome = this.props.type === 'home'
-    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} />
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} scrollToY={(y) => this.scrollToY(y)}/>
+  }
+
+  scrollToY(y) {
+    return this.refs.timeline.scrollTo({x: 0, y, animated: true})
   }
 }
 

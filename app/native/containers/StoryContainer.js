@@ -19,7 +19,7 @@ class StoryContainer extends Component {
   }
 
   render() {
-    const { story, isSceneHome, visited } = this.props
+    const { story, isSceneHome, visited, scrollToY } = this.props
 
     return (
       <Story
@@ -28,7 +28,9 @@ class StoryContainer extends Component {
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
-        visited={visited} />
+        visited={visited}
+        scrollToY={(y) => scrollToY(y)}
+      />
     )
   }
 

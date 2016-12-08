@@ -14,8 +14,16 @@ class Story extends Component {
 
     this.state = {
       imageLoaded: false,
-      py: 0,
-      isExpanded: false
+      storyPosition: 0,
+      isSummaryExpanded: false
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const summaryExpandedWillChange = nextState.isSummaryExpanded !== this.state.isSummaryExpanded
+    const nextSummaryNotExpanded = !nextState.isSummaryExpanded
+    if (summaryExpandedWillChange && nextSummaryNotExpanded) {
+      this.props.scrollToY(this.state.storyPosition)
     }
   }
 
@@ -51,18 +59,24 @@ class Story extends Component {
   }
 
   getViewPosition() {
+    const storyTopHeight = 40
     this.refs[this.props.story.id].measure((ox, oy, width, height, px, py) => {
-      this.setState({ py })
+      this.setState({storyPosition: oy - storyTopHeight})
     })
   }
 
   renderSummary(headline, summary) {
     if (!summary) return
-    return <StorySummary pressExpandButton={() => this.pressExpandButton()} headline={headline} summary={summary}/>
+    return <StorySummary
+      summary={summary}
+      headline={headline}
+      isExpanded={this.state.isSummaryExpanded}
+      pressExpandButton={() => this.pressExpandButton()}
+    />
   }
 
   pressExpandButton() {
-    this.setState({isExpanded: !this.state.isExpanded})
+    this.setState({isSummaryExpanded: !this.state.isSummaryExpanded})
   }
 
   handleImageLoad() {
