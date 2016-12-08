@@ -2,8 +2,9 @@ import React, { PropTypes, Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import styles from '../styles/StorySummary'
 import LinearGradient from 'react-native-linear-gradient'
+import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
-const charsThreshold = 140
+const charsThreshold = 200
 
 class StorySummary extends Component {
   constructor(props) {
@@ -23,22 +24,26 @@ class StorySummary extends Component {
             <Text style={styles.headline}>{this.props.headline.toUpperCase()}</Text>
           </View>
           <Text style={styles.summary}>{this.props.summary}</Text>
-          {this.renderExpandButtonContainer()}
+          {this.renderFooter()}
         </View>
       </View>
     )
   }
 
-  renderExpandButtonContainer() {
+  renderFooter() {
     if (this.props.summary.length < charsThreshold) return
     return (
-      <View style={styles.expandButtonContainer}>
-        <LinearGradient
-          colors={['rgba(241,241,241,.2)', 'rgba(241,241,241,1)']}
-          style={styles.gradient} />
+      <View style={styles.footer}>
+          {this.renderLinearGradient()}
           {this.renderButton()}
       </View>
     )
+  }
+
+  renderLinearGradient() {
+    if (this.props.isExpanded) return
+
+    return <LinearGradient colors={['rgba(241,241,241,.2)', 'rgba(241,241,241,1)']} style={styles.gradient} />
   }
 
   renderButton() {
@@ -59,9 +64,11 @@ class StorySummary extends Component {
     }
 
     return (
-      <TouchableHighlight style={styles.expandButton} onPress={() => this.props.pressExpandButton()}>
-        {buttonText}
-      </TouchableHighlight>
+      <View style={styles.expandButtonContainer}>
+        <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} style={styles.expandButton} onPress={() => this.props.pressExpandButton()}>
+          {buttonText}
+        </TouchableHighlight>
+      </View>
     )
   }
 

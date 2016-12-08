@@ -87,11 +87,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1F1F1'
   },
   expandButtonContainer: {
+    backgroundColor: '#F1F1F1'
+  },
+  footer: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    flexGrow: 1,
+    flexGrow: 1
   },
   gradient: {
     marginHorizontal: 1,
