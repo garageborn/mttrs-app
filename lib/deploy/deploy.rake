@@ -1,52 +1,50 @@
-require 'httparty'
+require 'active_support/all'
 
 namespace :deploy do
-  desc 'Load aws login'
-  task :setup do
-    system "eval `aws ecr get-login`"
+  def ios_version
+    versions = `git diff | grep CURRENT_PROJECT_VERSION`.chomp.scan(/\d+/).uniq.map(&:to_i)
+    { last_version: versions.min, current_version: versions.max }
   end
 
-  desc 'Build docker image'
-  task :build do
-    branch = ENV['branch'] || ENV['CIRCLE_BRANCH'] || `git rev-parse --abbrev-ref HEAD`.chomp
-    repo = `git config --get remote.origin.url`.chomp
-
-    system <<-CMD
-      mkdir -p ~/docker/repo
-      if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
-      git clone -b #{ branch } #{ repo } ~/docker/repo
-      docker build --tag mttrs-frontend ~/docker/repo
-      docker save mttrs-frontend > ~/docker/image.tar
-    CMD
+  def android_version
+    versions = `git diff | grep versionCode`.chomp.scan(/\d+/).uniq.map(&:to_i)
+    { last_version: versions.min, current_version: versions.max }
   end
 
-  desc 'Push docker image to amazon'
-  task :push do
-    system <<-CMD
-      docker tag mttrs-frontend:latest 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
-      docker push 845270614438.dkr.ecr.us-east-1.amazonaws.com/mttrs-frontend:latest
-    CMD
+  def ios_changes_message
+    return if ios_version[:current_version].blank?
+    "iOS version #{ ios_version[:last_version] } => #{ ios_version[:current_version] }"
   end
 
-  desc 'Publish application'
-  task :publish do
-    circle_url = 'https://circleci.com/api/v1.1/project/github/' \
-             'garageborn/server/tree/master' \
-             '?circle-token=66745267a877024ad3be6dd5a321b3af459873f8'
-    HTTParty.post(circle_url)
+  def android_changes_message
+    return if android_version[:current_version].blank?
+    "android version #{ android_version[:last_version] } => #{ android_version[:current_version] }"
   end
 
-  task :run do
-    Rake::Task['deploy:setup'].invoke
-    Rake::Task['deploy:build'].invoke
-    Rake::Task['deploy:push'].invoke
-    Rake::Task['deploy:publish'].invoke
+  task :all do
+    Rake::Task['deploy:ios'].execute
+    Rake::Task['deploy:android'].execute
+    Rake::Task['deploy:commit'].execute
+  end
+
+  desc 'Commit all changes'
+  task :commit do
+    message = "#{ ios_changes_message } #{ android_changes_message }".strip
+    system "git commit -am '#{ message }'"
+  end
+
+  desc 'Release new iOS version'
+  task :ios do
+    match_password = ENV['MATCH_PASSWORD']
+    if match_password.blank?
+      STDOUT.puts 'Enter MATCH_PASSWORD'
+      match_password = STDIN.gets.strip
+    end
+    system("MATCH_PASSWORD=\"#{ match_password }\" bundle exec fastlane ios beta")
+  end
+
+  desc 'Release new Android version'
+  task :android do
+    system('bundle exec fastlane android alpha')
   end
 end
-
-desc 'Deploy'
-task :deploy do
-  Rake::Task['deploy:run'].invoke
-end
-
-Dir.glob('lib/deploy/tasks/*.rake').each { |r| load r }
