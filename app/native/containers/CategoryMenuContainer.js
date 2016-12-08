@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, Image, TouchableHighlight } from 'react-native'
+import { View, ScrollView, Text, Image, TouchableHighlight, Modal } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { injectIntl, defineMessages } from 'react-intl'
 import CategoryTile from '../components/CategoryTile'
+import SettingsModal from '../components/SettingsModal'
 import styles from '../styles/Menu'
 import { NavigationActions, MenuActions } from '../actions/index'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
@@ -24,6 +25,11 @@ const messages = defineMessages({
 class CategoryMenuContainer extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      modalVisible: false
+    }
+
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
   }
@@ -49,13 +55,18 @@ class CategoryMenuContainer extends Component {
 
         <View style={styles.settings}>
           <Text style={styles.namespaceTitle}>English - USA/UK</Text>
-          <TouchableHighlight style={styles.settingsTouch}>
+          <TouchableHighlight onPress={() => this.setState({modalVisible: true})} style={styles.settingsTouch}>
             <View style={styles.settingTouchContainer}>
               <Image source={require('../assets/icons/icon-settings.png')} />
               <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
             </View>
           </TouchableHighlight>
         </View>
+
+        <SettingsModal
+          visible={this.state.modalVisible}
+          close={() => this.setState({modalVisible: false})}
+        />
       </View>
     )
   }
