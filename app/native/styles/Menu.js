@@ -10,9 +10,15 @@ const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
 
 const categoryVerticalMargin = Platform.select({
-  ios: width === iphoneWidthSmall ? 0 : 2.5,
+  ios: width === iphoneWidthSmall ? 0 : 8.5,
   android: 0
 })
+
+const centerXY = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center'
+}
 
 const styles = StyleSheet.create({
   menu: {
@@ -39,14 +45,14 @@ const styles = StyleSheet.create({
   },
 
   topStoriesContainer: {
-    marginHorizontal: (width * .02),
-    marginBottom: height * .02
+    marginHorizontal: width * .02,
+    marginBottom: 5
   },
 
   topStories: {
     backgroundColor: '#2672D7',
     width: width - 35,
-    height: height / 7.5,
+    height: height / 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
@@ -88,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   categoryContainer: {
-    height: height / 6.5,
+    height: height / 8,
     marginHorizontal: 7.5,
     marginVertical: categoryVerticalMargin
   },
@@ -105,6 +111,28 @@ const styles = StyleSheet.create({
 
   isActive: {
     borderWidth: 3
+  },
+
+  namespaceTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FFF',
+    opacity: .5
+  },
+
+  settings: {
+    ...centerXY
+  },
+
+  settingTouchContainer: {
+    ...centerXY,
+    marginHorizontal: 15
+  },
+
+  settingsTitle: {
+    fontSize: 14,
+    color: '#FFF',
+    marginLeft: 5
   }
 })
 

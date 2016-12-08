@@ -13,6 +13,11 @@ const messages = defineMessages({
   topStories: {
     id: 'header.topStories',
     defaultMessage: 'Top Stories'
+  },
+
+  settings: {
+    id: 'menu.settings',
+    defaultMessage: 'Settings'
   }
 })
 
@@ -40,6 +45,16 @@ class CategoryMenuContainer extends Component {
           <ScrollView contentContainerStyle={styles.categories}>
             {this.renderCategories()}
           </ScrollView>
+        </View>
+
+        <View style={styles.settings}>
+          <Text style={styles.namespaceTitle}>English - USA/UK</Text>
+          <TouchableHighlight style={styles.settingsTouch}>
+            <View style={styles.settingTouchContainer}>
+              <Image source={require('../assets/icons/icon-settings.png')} />
+              <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
+            </View>
+          </TouchableHighlight>
         </View>
       </View>
     )

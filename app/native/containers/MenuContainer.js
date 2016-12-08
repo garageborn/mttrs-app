@@ -36,7 +36,7 @@ class MenuContainer extends Component {
       tabs: [
         { id: 'categories', label: categories, component: <CategoryMenuContainer params={ this.props.params }/> },
         { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> },
-        { id: 'countries', label: countries, component: <NamespaceMenuContainer /> }
+        // { id: 'countries', label: countries, component: <NamespaceMenuContainer /> }
       ]
     }
   }
