@@ -3,6 +3,7 @@ import { Image, Text, TouchableHighlight, View, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import styles from '../styles/Story'
 import StoryPublishers from './StoryPublishers'
+import StorySummary from './StorySummary'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import SocialCount from '../../common/utils/SocialCount'
 import { WHITE_COLOR, COLORLESS } from '../../constants/TouchUnderlayColors'
@@ -12,14 +13,24 @@ class Story extends Component {
     super(props)
 
     this.state = {
-      imageLoaded: false
+      imageLoaded: false,
+      storyPosition: 0,
+      isSummaryExpanded: false
+    }
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    const summaryExpandedWillChange = nextState.isSummaryExpanded !== this.state.isSummaryExpanded
+    const nextSummaryNotExpanded = !nextState.isSummaryExpanded
+    if (summaryExpandedWillChange && nextSummaryNotExpanded) {
+      this.props.scrollToY(this.state.storyPosition)
     }
   }
 
   render() {
     const { story, openLink, openStoryLinks } = this.props
     return (
-      <View style={{ opacity: this.props.visited ? 0.4 : 1 }}>
+      <View ref={story.id} style={{ opacity: this.props.visited ? 0.4 : 1 }} onLayout={() => this.getViewPosition()} >
         <View
           shadowOpacity={.1}
           shadowColor={'rgba(0, 0, 0, .6)'}
@@ -33,6 +44,7 @@ class Story extends Component {
               </View>
             </View>
           </TouchableHighlight>
+          {this.renderSummary(story.headline, story.summary)}
           <View style={styles.footer}>
             <StoryPublishers story={story} openStoryLinks={openStoryLinks}/>
             <View style={styles.shares}>
@@ -44,6 +56,27 @@ class Story extends Component {
         {this.renderCategoryLabel()}
       </View>
     )
+  }
+
+  getViewPosition() {
+    const storyTopHeight = 40
+    this.refs[this.props.story.id].measure((ox, oy) => {
+      this.setState({storyPosition: oy - storyTopHeight})
+    })
+  }
+
+  renderSummary(headline, summary) {
+    if (!summary) return
+    return <StorySummary
+      summary={summary}
+      headline={headline}
+      isExpanded={this.state.isSummaryExpanded}
+      pressExpandButton={() => this.pressExpandButton()}
+    />
+  }
+
+  pressExpandButton() {
+    this.setState({isSummaryExpanded: !this.state.isSummaryExpanded})
   }
 
   handleImageLoad() {

@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
 import styles from '../styles/App'
+import StoryContainer from '../containers/StoryContainer'
 import Story from './Story'
 import ListViewHeader from './ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
@@ -19,6 +20,7 @@ class Timeline extends Component {
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
+    this.scrollToY = this.scrollToY.bind(this)
     this.state = {
       loadingMore: false
     }
@@ -115,6 +117,7 @@ class Timeline extends Component {
 
     return (
       <ListView
+        ref={'timeline'}
         removeClippedSubviews={false}
         initialListSize={4}
         style={styles.listView}
@@ -155,15 +158,16 @@ class Timeline extends Component {
   }
 
   renderActivityIndicator() {
-    return <ActivityIndicator
-      size='large'
-      color='#AAA'
-    />
+    return <ActivityIndicator size='large' color='#AAA'/>
   }
 
   renderRow(story) {
     let isSceneHome = this.props.type === 'home'
-    return this.props.storyRenderer(story, isSceneHome)
+    return <StoryContainer key={story.id} story={story} isSceneHome={isSceneHome} scrollToY={this.scrollToY}/>
+  }
+
+  scrollToY(y) {
+    return this.refs.timeline.scrollTo({x: 0, y, animated: true})
   }
 }
 
@@ -186,6 +190,8 @@ const Query = gql`
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
         total_social
+        headline
+        summary
         main_category { name color slug }
         main_link(publisher_slug: $publisherSlug) {
           title
