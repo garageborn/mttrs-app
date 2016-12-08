@@ -37,9 +37,7 @@ class StoryContainer extends Component {
       anonymousId: '1', //TODO: Figure this out better!
       event: 'Open Link',
       properties: {
-        id: this.props.story.id,
-        title: this.props.story.main_link.title,
-        link
+        name: this.props.story.main_link.title
       }
     })
     this.props.dispatch(NavigationActions.link(this.props.story, link))

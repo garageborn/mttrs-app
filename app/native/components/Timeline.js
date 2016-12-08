@@ -25,7 +25,7 @@ class Timeline extends Component {
   }
 
   componentWillMount() {
-    this.trackTopStories()
+    this.trackHome()
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -45,22 +45,19 @@ class Timeline extends Component {
     if (renderCategory || renderPublisher) return this.trackSection(nextProps.type, nextProps.filter)
   }
 
-  trackTopStories() {
-    analytics.track({
+  trackHome() {
+    analytics.page({
       anonymousId: '1', //TODO: Figure this out better!
-      event: 'Visit Top Stories'
+      name: 'home'
     })
   }
 
   trackSection(type, filter) {
-    let event = type === 'publisher' ? 'Visit Publisher' : 'Visit Category'
-    analytics.track({
+    analytics.page({
       anonymousId: '1', //TODO: Figure this out better!
-      event,
+      name: type,
       properties: {
-        id: filter.id,
-        name: filter.name,
-        slug: filter.slug
+        title: filter.name
       }
     })
   }
