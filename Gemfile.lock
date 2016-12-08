@@ -119,8 +119,6 @@ GEM
     highline (1.7.8)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    httparty (0.14.0)
-      multi_xml (>= 0.5.2)
     httpclient (2.8.2.4)
     hurley (0.2)
     i18n (0.7.0)
@@ -254,7 +252,6 @@ PLATFORMS
 DEPENDENCIES
   fastlane (= 1.111.0)
   gym (= 1.12.1)
-  httparty (= 0.14.0)
   match (= 0.11.1)
   overcommit (= 0.37.0)
   pilot (= 1.12.1)

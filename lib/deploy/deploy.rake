@@ -21,6 +21,7 @@ namespace :deploy do
     "android version #{ android_version[:last_version] } => #{ android_version[:current_version] }"
   end
 
+  desc 'Release iOS and Android'
   task :all do
     Rake::Task['deploy:ios'].execute
     Rake::Task['deploy:android'].execute
