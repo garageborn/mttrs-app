@@ -5,13 +5,13 @@ import { DARK_COLOR } from '../constants/Colors'
 const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
-const selectorHeight = 60
+const selectorHeight = width === iphoneWidthSmall ? 50 : 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
 const settingsSectionTopOffset = Platform.OS === 'ios' ? 5 : 0
 
 const categoryVerticalMargin = Platform.select({
-  ios: width === iphoneWidthSmall ? 5 : 8.5,
+  ios: width === iphoneWidthSmall ? 6 : 8.5,
   android: 4
 })
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
   selector: {
     paddingHorizontal: 45,
-    height: 60,
+    height: selectorHeight,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 10
+    marginBottom: width === iphoneWidthSmall ? 8 : 10
   },
 
   category: {
