@@ -4,11 +4,15 @@ import { DARK_COLOR } from '../constants/Colors'
 
 const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320
+const iphoneWidthLarge = 414
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = width === iphoneWidthSmall ? 50 : 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
-const settingsSectionTopOffset = Platform.OS === 'ios' ? 5 : 0
+const settingsSectionTopOffset = Platform.select({
+  ios: width === iphoneWidthLarge ? 20 : 5,
+  android: 0
+})
 
 const categoryVerticalMargin = Platform.select({
   ios: width === iphoneWidthSmall ? 6 : 8.5,
