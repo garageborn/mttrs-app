@@ -55,7 +55,7 @@ class CategoryMenuContainer extends Component {
         </View>
 
         <View style={styles.settings}>
-          <Text style={styles.namespaceTitle}>English - USA/UK</Text>
+          <Text style={styles.namespaceTitle}>{this.getTenantName(this.props.StorageReducer.tenant.name)}</Text>
           <TouchableHighlight onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
             <View style={styles.settingTouchContainer}>
               <Image source={require('../assets/icons/icon-settings.png')} />
@@ -127,9 +127,24 @@ class CategoryMenuContainer extends Component {
     if (params.section == null || typeof params.section.model === 'undefined') return false
     return category.slug === params.section.model.slug
   }
+
+  getTenantName(tenant) {
+    const tenants = {
+      mttrs_us: 'English - USA/UK',
+      mttrs_br: 'Português - Brasil'
+    }
+
+    return tenants[tenant]
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    StorageReducer: state.StorageReducer
+  }
 }
 
 const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
 const intlCategoryMenuContainer = injectIntl(CategoryMenuContainer)
 const CategoryMenuContainerWithData = graphql(Query)(intlCategoryMenuContainer)
-export default connect()(CategoryMenuContainerWithData)
+export default connect(mapStateToProps)(CategoryMenuContainerWithData)
