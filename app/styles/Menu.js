@@ -8,10 +8,11 @@ const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
+const settingsSectionTopOffset = Platform.OS === 'ios' ? 5 : 0
 
 const categoryVerticalMargin = Platform.select({
   ios: width === iphoneWidthSmall ? 0 : 8.5,
-  android: 0
+  android: 4
 })
 
 const centerXY = {
@@ -121,7 +122,8 @@ const styles = StyleSheet.create({
   },
 
   settings: {
-    ...centerXY
+    ...centerXY,
+    marginTop: settingsSectionTopOffset
   },
 
   settingTouchContainer: {
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
   settingsTitle: {
     fontSize: 14,
     color: '#FFF',
-    marginLeft: 5
+    marginHorizontal: 5
   }
 })
 

@@ -21,19 +21,19 @@ const styles = StyleSheet.create({
     width: width - widthOffeset,
     height: height - heightOffset,
     marginHorizontal: widthOffeset / 2,
-    marginTop: 20,
-    padding: 20,
+    marginTop: 20
   },
 
   modalHeader: {
-    ...centerXY
+    ...centerXY,
+    marginVertical: 15
   },
 
   modalTitle: {
     fontSize: 14,
     fontWeight: '600',
     color: '#FFF',
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 
   modalFooter: {
@@ -45,6 +45,34 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#FFF',
     marginHorizontal: 10
+  },
+
+  options: {
+    flex: 1
+  },
+
+  optionsSubTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FFF',
+    marginHorizontal: 20,
+    marginVertical: 10
+  },
+
+  optionItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#FFF',
+    padding: 20,
+    borderBottomColor: '#666',
+    borderBottomWidth: StyleSheet.hairlineWidth
+  },
+
+  optionTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#333'
   }
 })
 

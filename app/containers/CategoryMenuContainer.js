@@ -32,6 +32,8 @@ class CategoryMenuContainer extends Component {
 
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
+    this.openSettingsModal = this.openSettingsModal.bind(this)
+    this.closeSettingsModal = this.closeSettingsModal.bind(this)
   }
 
   render() {
@@ -55,7 +57,7 @@ class CategoryMenuContainer extends Component {
 
         <View style={styles.settings}>
           <Text style={styles.namespaceTitle}>English - USA/UK</Text>
-          <TouchableHighlight onPress={() => this.setState({modalVisible: true})} style={styles.settingsTouch}>
+          <TouchableHighlight onPress={this.openSettingsModal} style={styles.settingsTouch}>
             <View style={styles.settingTouchContainer}>
               <Image source={require('../assets/icons/icon-settings.png')} />
               <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
@@ -65,7 +67,7 @@ class CategoryMenuContainer extends Component {
 
         <SettingsModal
           visible={this.state.modalVisible}
-          close={() => this.setState({modalVisible: false})}
+          close={this.closeSettingsModal}
         />
       </View>
     )
@@ -89,6 +91,14 @@ class CategoryMenuContainer extends Component {
     return name === 'home'
       ? require('../assets/icons/icon-top-stories.png')
       : require('../assets/icons/icon-top-stories-secondary.png')
+  }
+
+  openSettingsModal() {
+    this.setState({modalVisible: true})
+  }
+
+  closeSettingsModal() {
+    this.setState({modalVisible: false})
   }
 
   renderCategories() {

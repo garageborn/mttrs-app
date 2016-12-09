@@ -58,7 +58,6 @@ class TimelineContainer extends Component {
 
     return (
       <Timeline
-        storyRenderer={this.renderStory}
         type={this.sceneType(props)}
         filter={filter}
       />
