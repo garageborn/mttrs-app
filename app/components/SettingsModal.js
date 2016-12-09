@@ -22,14 +22,6 @@ const messages = defineMessages({
 })
 
 class SettingsModal extends Component {
-  static propTypes = {
-    visible: PropTypes.bool.isRequired
-  }
-
-  static defaultProps = {
-    animationType: 'slide'
-  }
-
   render() {
     const { visible, close, animationType } = this.props
     const { formatMessage } = this.props.intl
@@ -74,6 +66,14 @@ class SettingsModal extends Component {
       </Modal>
     )
   }
+}
+
+SettingsModal.propTypes = {
+  visible: PropTypes.bool.isRequired
+}
+
+SettingsModal.defaultProps = {
+  animationType: 'slide'
 }
 
 export default injectIntl(SettingsModal)
