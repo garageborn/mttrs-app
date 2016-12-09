@@ -25,7 +25,6 @@ const messages = defineMessages({
 })
 
 class SettingsModal extends Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props)
     this.state = {
@@ -51,8 +50,6 @@ class SettingsModal extends Component {
     }
   }
 
-=======
->>>>>>> master
   render() {
     const { visible, close, animationType } = this.props
     const { formatMessage } = this.props.intl
@@ -72,7 +69,6 @@ class SettingsModal extends Component {
             <View style={styles.options}>
               <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
               <ScrollView style={styles.optionsList}>
-<<<<<<< HEAD
                 <TouchableHighlight onPress={() => this.onPressTenantButton('mttrs_us')}>
                   <View style={styles.optionItem}>
                     <Text style={styles.optionTitle}>English - USA/UK</Text>
@@ -83,18 +79,6 @@ class SettingsModal extends Component {
                   <View style={styles.optionItem}>
                     <Text style={styles.optionTitle}>Português - Brasil</Text>
                     {this.renderCheckmark('mttrs_br')}
-=======
-                <TouchableHighlight>
-                  <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>English - USA/UK</Text>
-                    <Image source={require('../assets/checkmark.png')} />
-                  </View>
-                </TouchableHighlight>
-                <TouchableHighlight>
-                  <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>Português - Brasil</Text>
-                    <Image source={require('../assets/checkmark.png')} />
->>>>>>> master
                   </View>
                 </TouchableHighlight>
               </ScrollView>
@@ -105,11 +89,7 @@ class SettingsModal extends Component {
               </TouchableHighlight>
             </View>
           </View>
-<<<<<<< HEAD
           <CloseButton onPress={() => this.onPressCloseButton()} />
-=======
-          <CloseButton onPress={close} />
->>>>>>> master
         </View>
       </Modal>
     )
@@ -124,7 +104,6 @@ SettingsModal.defaultProps = {
   animationType: 'slide'
 }
 
-<<<<<<< HEAD
 const mapStateToProps = (state) => {
   return {
     StorageReducer: state.StorageReducer
@@ -133,6 +112,3 @@ const mapStateToProps = (state) => {
 
 const intlSettingsModal = injectIntl(SettingsModal)
 export default connect(mapStateToProps)(intlSettingsModal)
-=======
-export default injectIntl(SettingsModal)
->>>>>>> master
