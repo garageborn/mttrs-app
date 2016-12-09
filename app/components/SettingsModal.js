@@ -17,7 +17,7 @@ const messages = defineMessages({
 
   feedback: {
     id: 'footer.feedback',
-    defaultMessage: 'Questions? Feedbacks? Let us know!'
+    defaultMessage: 'Questions? Feedback? Let us know!'
   }
 })
 
