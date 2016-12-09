@@ -35,8 +35,7 @@ class MenuContainer extends Component {
     this.state = {
       tabs: [
         { id: 'categories', label: categories, component: <CategoryMenuContainer params={ this.props.params }/> },
-        { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> },
-        { id: 'countries', label: countries, component: <NamespaceMenuContainer /> }
+        { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> }
       ]
     }
   }

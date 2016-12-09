@@ -4,15 +4,26 @@ import { DARK_COLOR } from '../constants/Colors'
 
 const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320
+const iphoneWidthLarge = 414
 const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
-const selectorHeight = 60
+const selectorHeight = width === iphoneWidthSmall ? 50 : 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
-
-const categoryVerticalMargin = Platform.select({
-  ios: width === iphoneWidthSmall ? 0 : 2.5,
+const settingsSectionTopOffset = Platform.select({
+  ios: width === iphoneWidthLarge ? 20 : 5,
   android: 0
 })
+
+const categoryVerticalMargin = Platform.select({
+  ios: width === iphoneWidthSmall ? 6 : 8.5,
+  android: 4
+})
+
+const centerXY = {
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center'
+}
 
 const styles = StyleSheet.create({
   menu: {
@@ -29,7 +40,7 @@ const styles = StyleSheet.create({
 
   selector: {
     paddingHorizontal: 45,
-    height: 60,
+    height: selectorHeight,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -39,14 +50,14 @@ const styles = StyleSheet.create({
   },
 
   topStoriesContainer: {
-    marginHorizontal: (width * .02),
-    marginBottom: height * .02
+    marginHorizontal: width * .02,
+    marginBottom: 5
   },
 
   topStories: {
     backgroundColor: '#2672D7',
     width: width - 35,
-    height: height / 7.5,
+    height: height / 8,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginBottom: 10
+    marginBottom: width === iphoneWidthSmall ? 8 : 10
   },
 
   category: {
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
   },
 
   categoryContainer: {
-    height: height / 6.5,
+    height: height / 8,
     marginHorizontal: 7.5,
     marginVertical: categoryVerticalMargin
   },
@@ -105,6 +116,29 @@ const styles = StyleSheet.create({
 
   isActive: {
     borderWidth: 3
+  },
+
+  namespaceTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#FFF',
+    opacity: .5
+  },
+
+  settings: {
+    ...centerXY,
+    marginTop: settingsSectionTopOffset
+  },
+
+  settingTouchContainer: {
+    ...centerXY,
+    marginHorizontal: 15
+  },
+
+  settingsTitle: {
+    fontSize: 14,
+    color: '#FFF',
+    marginHorizontal: 5
   }
 })
 
