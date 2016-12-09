@@ -5,7 +5,7 @@ import Tenant from '../common/utils/Tenant'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_NAMESPACE, NAMESPACE_RECEIVED
+  REQUEST_TENANT, TENANT_RECEIVED
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -64,17 +64,17 @@ export const receiveFavoritePublishers = (favoritePublishers) => ({
   favoritePublishers
 })
 
-export const requestNamespace = () => ({
-  type: REQUEST_NAMESPACE
+export const requestTenant = () => ({
+  type: REQUEST_TENANT
 })
 
-export const receiveNamespace = (namespace) => ({
-  type: NAMESPACE_RECEIVED,
-  namespace
+export const receiveTenant = (tenant) => ({
+  type: TENANT_RECEIVED,
+  tenant
 })
 
-function setTenant(namespace) {
-  Tenant.current = namespace
+function setTenant(tenant) {
+  Tenant.current = tenant
 }
 
 export function getFavoritePublishers() {
@@ -110,19 +110,19 @@ export function addFavoritePublisher(publisher) {
   }
 }
 
-export function setCurrentNamespace(namespace) {
+export function setCurrentTenant(tenant) {
   return (dispatch) => {
-    setTenant(namespace)
-    AsyncStorage.setItem('namespace', namespace)
-    return dispatch(receiveNamespace(namespace))
+    setTenant(tenant)
+    AsyncStorage.setItem('tenant', tenant)
+    return dispatch(receiveTenant(tenant))
   }
 }
 
-export function getCurrentNamespace() {
+export function getCurrentTenant() {
   return (dispatch) => {
-    dispatch(requestNamespace())
-    AsyncStorage.getItem('namespace', (error, namespace) => {
-      dispatch(this.setCurrentNamespace(namespace || "mttrs"))
+    dispatch(requestTenant())
+    AsyncStorage.getItem('tenant', (error, tenant) => {
+      dispatch(this.setCurrentTenant(tenant || 'mttrs_us'))
     })
   }
 }

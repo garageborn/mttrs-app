@@ -35,7 +35,7 @@ class TimelineContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(StorageActions.getFavoritePublishers())
-    this.props.dispatch(StorageActions.getCurrentNamespace())
+    this.props.dispatch(StorageActions.getCurrentTenant())
   }
 
   handleChangeTab = (index) => {
@@ -83,17 +83,17 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.namespaceWillChange(nextProps)) this.props.data.refetch()
+    if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
     this.menuWillChange(nextProps)
     this.sectionWillChange(nextProps)
   }
 
-  namespaceWillChange(nextProps) {
-    const willNamespaceLoad = nextProps.StorageReducer.namespace.isLoaded
-    const willNamespaceChange = this.props.StorageReducer.namespace.name !== nextProps.StorageReducer.namespace.name
-    return willNamespaceLoad && willNamespaceChange
+  tenantWillChange(nextProps) {
+    const willTenantLoad = nextProps.StorageReducer.tenant.isLoaded
+    const willTenantChange = this.props.StorageReducer.tenant.name !== nextProps.StorageReducer.tenant.name
+    return willTenantLoad && willTenantChange
   }
 
   categoriesWillChange(nextProps) {

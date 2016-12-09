@@ -5,7 +5,6 @@ import { injectIntl, defineMessages } from 'react-intl'
 import ButtonGroup from '../components/ButtonGroup'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
-import NamespaceMenuContainer from './NamespaceMenuContainer'
 import { MenuActions } from '../actions/index'
 import styles from '../styles/Menu'
 
@@ -17,10 +16,6 @@ const messages = defineMessages({
   headerPublishers: {
     id: 'header.publishers',
     defaultMessage: 'Publishers'
-  },
-  headerCountries: {
-    id: 'header.countries',
-    defaultMessage: 'Countries'
   }
 })
 
@@ -30,7 +25,6 @@ class MenuContainer extends Component {
     const { formatMessage } = this.props.intl
     const categories = formatMessage(messages.headerCategories)
     const publishers = formatMessage(messages.headerPublishers)
-    const countries = formatMessage(messages.headerCountries)
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [

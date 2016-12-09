@@ -8,7 +8,7 @@ import apolloClient from '../config/apolloClient'
 class NamespaceMenuContainer extends Component {
   onPressNamespaceButton(namespace) {
     this.props.dispatch(NavigationActions.home())
-    this.props.dispatch(StorageActions.setCurrentNamespace(namespace))
+    this.props.dispatch(StorageActions.setCurrentTenant(namespace))
     apolloClient.resetStore()
     this.props.dispatch(MenuActions.retractMenu())
   }
