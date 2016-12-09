@@ -11,7 +11,7 @@ const categoriesContainerHeight = height - menuHeader
 const settingsSectionTopOffset = Platform.OS === 'ios' ? 5 : 0
 
 const categoryVerticalMargin = Platform.select({
-  ios: width === iphoneWidthSmall ? 0 : 8.5,
+  ios: width === iphoneWidthSmall ? 5 : 8.5,
   android: 4
 })
 
