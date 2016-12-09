@@ -169,8 +169,7 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  category: PropTypes.object,
-  storyRenderer: PropTypes.func.isRequired
+  category: PropTypes.object
 }
 
 let mapStateToProps = (state, ownProps) => {
