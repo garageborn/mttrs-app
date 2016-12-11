@@ -15,7 +15,7 @@ dependencies:
     - yarn install
     - bundle install
   post:
-    - bundle exec rake pronto
+    - bundle exec rake lint
 
 test:
   override:
