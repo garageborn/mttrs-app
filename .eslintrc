@@ -16,6 +16,7 @@
     "babel/object-shorthand": 1,
     "babel/arrow-parens": 1,
     "babel/no-await-in-loop": 1,
+    "no-multiple-empty-lines": [2, {"max": 2}],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2

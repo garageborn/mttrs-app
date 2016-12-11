@@ -1,0 +1,22 @@
+machine:
+  node:
+    version: 'v6.1.0'
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - gem install bundler
+  cache_directories:
+    - ~/docker
+    - ~/.yarn-cache
+  override:
+    - yarn install
+    - bundle install
+  post:
+    - bundle exec rake lint
+
+test:
+  override:
+    - echo 'Skip'
