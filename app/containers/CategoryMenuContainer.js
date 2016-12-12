@@ -8,7 +8,7 @@ import CategoryTile from '../components/CategoryTile'
 import SettingsModal from '../components/SettingsModal'
 import styles from '../styles/Menu'
 import { NavigationActions, MenuActions } from '../actions/index'
-import { DARK_TRANSPARENT_COLOR } from '../constants/TouchUnderlayColors'
+import { DARK_TRANSPARENT_COLOR, COLORLESS } from '../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   topStories: {
@@ -55,8 +55,8 @@ class CategoryMenuContainer extends Component {
         </View>
 
         <View style={styles.settings}>
-          <Text style={styles.namespaceTitle}>English - USA/UK</Text>
-          <TouchableHighlight onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
+          <Text style={styles.namespaceTitle}>{this.getTenantName(this.props.StorageReducer.tenant.name)}</Text>
+          <TouchableHighlight underlayColor={COLORLESS} onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
             <View style={styles.settingTouchContainer}>
               <Image source={require('../assets/icons/icon-settings.png')} />
               <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
@@ -127,9 +127,24 @@ class CategoryMenuContainer extends Component {
     if (params.section == null || typeof params.section.model === 'undefined') return false
     return category.slug === params.section.model.slug
   }
+
+  getTenantName(tenant) {
+    const tenants = {
+      mttrs_us: 'English - USA/UK',
+      mttrs_br: 'Português - Brasil'
+    }
+
+    return tenants[tenant]
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    StorageReducer: state.StorageReducer
+  }
 }
 
 const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
 const intlCategoryMenuContainer = injectIntl(CategoryMenuContainer)
 const CategoryMenuContainerWithData = graphql(Query)(intlCategoryMenuContainer)
-export default connect()(CategoryMenuContainerWithData)
+export default connect(mapStateToProps)(CategoryMenuContainerWithData)

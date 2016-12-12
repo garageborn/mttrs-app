@@ -9,6 +9,7 @@ const topStoriesHeight = Platform.OS === 'ios' ? 100 : 80
 const selectorHeight = width === iphoneWidthSmall ? 50 : 60
 const menuHeader = headerHeight + topStoriesHeight + selectorHeight
 const categoriesContainerHeight = height - menuHeader
+
 const settingsSectionTopOffset = Platform.select({
   ios: width === iphoneWidthLarge ? 20 : 5,
   android: 0

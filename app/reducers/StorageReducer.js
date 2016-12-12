@@ -1,11 +1,11 @@
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_NAMESPACE, NAMESPACE_RECEIVED } from '../constants/ActionTypes'
+  REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
 
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
   favoritePublishers: { isFetching: false, isLoaded: false, items: [] },
-  namespace: { isFetching: false, isLoaded: false, name: ''}
+  tenant: { isFetching: false, isLoaded: false, name: ''}
 }
 
 export default function(state = defaultState, action) {
@@ -48,22 +48,22 @@ export default function(state = defaultState, action) {
           isLoaded: true
         }
       }
-    case REQUEST_NAMESPACE:
+    case REQUEST_TENANT:
       return {
         ...state,
-        namespace: {
-          ...state.namespace,
+        tenant: {
+          ...state.tenant,
           isFetching: true,
           isLoaded: false
         }
       }
-    case NAMESPACE_RECEIVED:
+    case TENANT_RECEIVED:
       return {
         ...state,
-        namespace: {
-          ...state.namespace,
+        tenant: {
+          ...state.tenant,
           isFetching: false,
-          name: action.namespace,
+          name: action.tenant,
           isLoaded: true
         }
       }
