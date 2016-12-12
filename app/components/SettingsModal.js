@@ -35,7 +35,7 @@ class SettingsModal extends Component {
   onPressTenantButton(tenant) {
     this.setState({
       tenant
-    });
+    })
   }
 
   onPressCloseButton() {

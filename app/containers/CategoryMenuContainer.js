@@ -8,7 +8,7 @@ import CategoryTile from '../components/CategoryTile'
 import SettingsModal from '../components/SettingsModal'
 import styles from '../styles/Menu'
 import { NavigationActions, MenuActions } from '../actions/index'
-import { DARK_TRANSPARENT_COLOR } from '../constants/TouchUnderlayColors'
+import { DARK_TRANSPARENT_COLOR, COLORLESS } from '../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   topStories: {
@@ -56,7 +56,7 @@ class CategoryMenuContainer extends Component {
 
         <View style={styles.settings}>
           <Text style={styles.namespaceTitle}>{this.getTenantName(this.props.StorageReducer.tenant.name)}</Text>
-          <TouchableHighlight onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
+          <TouchableHighlight underlayColor={COLORLESS} onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
             <View style={styles.settingTouchContainer}>
               <Image source={require('../assets/icons/icon-settings.png')} />
               <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
