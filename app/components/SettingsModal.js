@@ -39,8 +39,10 @@ class SettingsModal extends Component {
   }
 
   onPressCloseButton() {
-    this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
-    apolloClient.resetStore()
+    if (this.state.tenant !== this.props.StorageReducer.tenant.name) {
+      this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
+      apolloClient.resetStore()
+    }
     this.props.close()
   }
 
