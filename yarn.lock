@@ -2891,13 +2891,13 @@ mime-db@~1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.23.0.tgz#a31b4070adaea27d732ea333740a64d0ec9a6659"
 
-mime-types@2.1.11:
+mime-types@2.1.11, mime-types@~2.1.7, mime-types@~2.1.9:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.11.tgz#c259c471bda808a85d6cd193b430a5fae4473b3c"
   dependencies:
     mime-db "~1.23.0"
 
-mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6, mime-types@~2.1.7, mime-types@~2.1.9:
+mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
   dependencies:
@@ -3413,6 +3413,10 @@ react-native-drawer-layout@^1.0.0:
 react-native-fabric@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/react-native-fabric/-/react-native-fabric-0.3.2.tgz#cb1bf2f1c1dc2b6f01ae6ab318066e058e81db17"
+
+react-native-google-analytics-bridge@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-4.0.2.tgz#24adac55043adaddb01a61822d338fe5cd3ddd61"
 
 react-native-linear-gradient@^1.5.14:
   version "1.5.15"

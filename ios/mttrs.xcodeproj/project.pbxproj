@@ -30,6 +30,7 @@
 		A09BA2AA1DBF741000104DE1 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */; };
 		B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */; };
 		ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */; };
+		9B446C738C094C2F937B32D8 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED04769D8A2540C7882697AE /* libRCTGoogleAnalyticsBridge.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +315,8 @@
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
 		FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		DCAFCAFB6DB0463187DF4A21 /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; name = "RCTGoogleAnalyticsBridge.xcodeproj"; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		ED04769D8A2540C7882697AE /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; name = "libRCTGoogleAnalyticsBridge.a"; path = "libRCTGoogleAnalyticsBridge.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -344,6 +347,7 @@
 				ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */,
 				39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */,
 				B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */,
+				9B446C738C094C2F937B32D8 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +493,7 @@
 				75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */,
 				CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */,
 				F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */,
+				DCAFCAFB6DB0463187DF4A21 /* RCTGoogleAnalyticsBridge.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1041,6 +1046,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1063,6 +1069,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1092,6 +1099,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1128,6 +1136,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1191,6 +1200,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1239,6 +1249,7 @@
 					"$(SRCROOT)/../node_modules/react-native-linear-gradient/BVLinearGradient",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
+					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
