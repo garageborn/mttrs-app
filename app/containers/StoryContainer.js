@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
-import { NavigationActions, StorageActions } from '../actions/index'
+import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import analytics from '../config/Analytics'
 
 class StoryContainer extends Component {
@@ -35,10 +35,7 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    analytics.trackEvent(
-      this.props.story.main_link.url,
-      'Open'
-    )
+    this.props.dispatch(AnalyticsActions.trackLink(link))
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 

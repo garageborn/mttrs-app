@@ -44,15 +44,15 @@ class Timeline extends Component {
   componentWillReceiveProps(nextProps) {
     const renderCategory = nextProps.type === 'category'
     const renderPublisher = nextProps.type === 'publisher'
-    if (renderCategory || renderPublisher) return this.trackSection(nextProps.type, nextProps.filter)
+    if (renderCategory || renderPublisher) return this.trackSection(nextProps.filter)
   }
 
   trackHome() {
-    analytics.trackScreenView('/');
+    this.props.trackScreen('/')
   }
 
-  trackSection(type, filter) {
-    analytics.trackScreenView(`/${filter.slug}`);
+  trackSection(filter) {
+    this.props.trackScreen(`/${filter.slug}`)
   }
 
   renderSectionHeader(sectionData, date) {

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { MenuActions, NavigationActions, StorageActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import Timeline from '../components/Timeline'
 import Router from '../config/Router'
 import styles from '../styles/App'
@@ -24,6 +24,7 @@ class TimelineContainer extends Component {
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
+    this.trackScreen = this.trackScreen.bind(this)
     this.state = {
       menuPositionY: new Animated.Value(-height),
       navigationState: {
@@ -60,6 +61,7 @@ class TimelineContainer extends Component {
       <Timeline
         type={this.sceneType(props)}
         filter={filter}
+        trackScreen={this.trackScreen}
       />
     )
   }
@@ -233,6 +235,9 @@ class TimelineContainer extends Component {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
+  trackScreen(screen) {
+    this.props.dispatch(AnalyticsActions.trackScreen(screen))
+  }
 }
 
 let mapStateToProps = (state) => {
