@@ -35,13 +35,10 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    analytics.track({
-      anonymousId: '1', //TODO: Figure this out better!
-      event: 'Open Link',
-      properties: {
-        name: this.props.story.main_link.title
-      }
-    })
+    analytics.trackEvent(
+      this.props.story.main_link.url,
+      'Open'
+    )
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 

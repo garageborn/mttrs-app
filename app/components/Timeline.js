@@ -48,20 +48,11 @@ class Timeline extends Component {
   }
 
   trackHome() {
-    analytics.page({
-      anonymousId: '1', //TODO: Figure this out better!
-      name: 'home'
-    })
+    analytics.trackScreenView('/');
   }
 
   trackSection(type, filter) {
-    analytics.page({
-      anonymousId: '1', //TODO: Figure this out better!
-      name: type,
-      properties: {
-        title: filter.name
-      }
-    })
+    analytics.trackScreenView(`/${filter.slug}`);
   }
 
   renderSectionHeader(sectionData, date) {
