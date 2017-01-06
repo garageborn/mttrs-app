@@ -1,5 +1,11 @@
 package garageborn.mttrs;
 
+import android.graphics.Color;
+import android.os.Bundle;
+
+import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.bridge.ReactContext;
+
 import com.facebook.react.ReactActivity;
 import com.BV.LinearGradient.LinearGradientPackage;
 
@@ -12,5 +18,20 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "mttrs";
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        // After RN start, set our background
+        getReactNativeHost().getReactInstanceManager().addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
+            @Override
+            public void onReactContextInitialized(ReactContext context) {
+                // Hide Splash Screen
+                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+            }
+        });
+
+        super.onCreate(savedInstanceState);
     }
 }
