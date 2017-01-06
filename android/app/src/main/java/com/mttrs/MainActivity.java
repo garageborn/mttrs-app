@@ -28,7 +28,7 @@ public class MainActivity extends ReactActivity {
             @Override
             public void onReactContextInitialized(ReactContext context) {
                 // Hide Splash Screen
-                getWindow().getDecorView().setBackgroundColor(Color.WHITE);
+                getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
             }
         });
 
