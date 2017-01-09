@@ -3,7 +3,7 @@ import { headerHeight } from './Header'
 const { width, height } = Dimensions.get('window')
 
 const containerStyles = {
-  flex: 1,
+  flexGrow: 1,
   height: height - headerHeight,
   width
 }
