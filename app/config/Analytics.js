@@ -1,2 +1,2 @@
-import Analytics from 'analytics-react-native'
-export default new Analytics('nGpmJrQVXOTZToz1Xx3r4Jsc7xvarnPf')
+import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
+export default new GoogleAnalyticsTracker('UA-88576828-1')

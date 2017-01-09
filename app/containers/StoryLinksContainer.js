@@ -5,7 +5,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import StoryLinksComponent from '../components/StoryLinksComponent'
 import CloseButton from '../components/CloseButton'
-import { NavigationActions } from '../actions/index'
+import { NavigationActions, AnalyticsActions } from '../actions/index'
 import styles from '../styles/StoryLinks'
 
 class StoryLinksContainer extends Component {
@@ -22,6 +22,7 @@ class StoryLinksContainer extends Component {
   }
 
   openLink(link) {
+    this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }

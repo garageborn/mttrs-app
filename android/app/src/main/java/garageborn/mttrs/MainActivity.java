@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.ReactContext;
-
 import com.facebook.react.ReactActivity;
 import com.BV.LinearGradient.LinearGradientPackage;
 
