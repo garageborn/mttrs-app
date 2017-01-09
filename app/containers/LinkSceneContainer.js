@@ -69,6 +69,10 @@ class LinkSceneContainer extends Component {
     return <ProgressBar progress={this.getProgress()} />
   }
 
+  handleError = (e) => {
+    if (e === 'WebKitErrorDomain') return
+  }
+
   get contentInset() {
     return Platform.OS === 'ios' ? 0 : 11
   }
@@ -84,8 +88,10 @@ class LinkSceneContainer extends Component {
           contentInset={{top: this.contentInset}}
           startInLoadingState={true}
           renderLoading={this.renderProgressBar}
+          renderError={this.handleError}
           onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction={true}
+          shouldStartLoadWithRequest={false}
         />
       </View>
     )
