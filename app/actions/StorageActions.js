@@ -118,11 +118,13 @@ export function setCurrentTenant(tenant) {
   }
 }
 
-export function getCurrentTenant() {
+export function getCurrentTenant(locale) {
+  let localeTenant = 'mttrs_us'
+  if (locale === 'pt-BR') localeTenant = 'mttrs_br'
   return (dispatch) => {
     dispatch(requestTenant())
     AsyncStorage.getItem('tenant', (error, tenant) => {
-      dispatch(this.setCurrentTenant(tenant || 'mttrs_us'))
+      dispatch(this.setCurrentTenant(tenant || localeTenant))
     })
   }
 }
