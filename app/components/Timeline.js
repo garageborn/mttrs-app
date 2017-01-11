@@ -30,22 +30,22 @@ class Timeline extends Component {
     this.trackHome()
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.storiesWillChange(nextProps)
+  shouldComponentUpdate(nextProps) {
+    if (this.props.type === 'publisher') return true
+    return this.getActiveTimeline(nextProps)
   }
 
-  storiesWillChange(nextProps) {
-    if (!this.props.data.timeline) return true
-    const thisStoriesIds = this.props.data.timeline.map((item) => item.id)
-    const nextStoriesIds = nextProps.data.timeline.map((item) => item.id)
-    return thisStoriesIds !== nextStoriesIds
+  getActiveTimeline(nextProps) {
+    let currentRouteOnArray = nextProps.navigationState.routes.find(
+      (item) => item.filter === this.props.filter
+    )
+    return JSON.parse(currentRouteOnArray.key) === nextProps.navigationState.index
   }
 
   componentWillReceiveProps(nextProps) {
     const renderCategory = nextProps.type === 'category'
     const renderPublisher = nextProps.type === 'publisher'
     if (renderCategory || renderPublisher) return this.trackSection(nextProps.filter)
-    if (this.props.navigationIndex !== nextProps.navigationIndex) this.props.data.refetch()
   }
 
   trackHome() {
@@ -102,6 +102,7 @@ class Timeline extends Component {
   }
 
   render() {
+
     if (this.props.data.loading) return this.renderLoading()
 
     return (

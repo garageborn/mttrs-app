@@ -56,13 +56,12 @@ class TimelineContainer extends Component {
     } else {
       filter = props.route.filter
     }
-
     return (
       <Timeline
         type={this.sceneType(props)}
         filter={filter}
         trackScreen={this.trackScreen}
-        navigationIndex={this.state.navigationState.index}
+        navigationState={this.state.navigationState}
       />
     )
   }
