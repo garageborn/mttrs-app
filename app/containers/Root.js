@@ -36,6 +36,7 @@ class Root extends Component {
   componentWillMount() {
     this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
   }
+  
   render() {
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
 
