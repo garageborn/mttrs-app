@@ -45,6 +45,7 @@ class Timeline extends Component {
     const renderCategory = nextProps.type === 'category'
     const renderPublisher = nextProps.type === 'publisher'
     if (renderCategory || renderPublisher) return this.trackSection(nextProps.filter)
+    if (this.props.navigationIndex !== nextProps.navigationIndex) this.props.data.refetch()
   }
 
   trackHome() {
