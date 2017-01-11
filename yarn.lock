@@ -3334,9 +3334,9 @@ react-native-share@mrKlar/react-native-share:
   version "1.0.17"
   resolved "https://codeload.github.com/mrKlar/react-native-share/tar.gz/eafc0e830460b1b2ddfa590444b486ab498c2ed0"
 
-react-native-tab-view@0.0.40:
-  version "0.0.40"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.40.tgz#5339d1ea796878dcf4840e9d3592df865de361ef"
+react-native-tab-view@0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.41.tgz#d3946511881c4807c45e8338c77c9c57d01f0538"
 
 react-native-tab-view@0.0.42:
   version "0.0.42"
