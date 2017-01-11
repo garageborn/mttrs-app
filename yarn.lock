@@ -2821,13 +2821,13 @@ mime-db@~1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.23.0.tgz#a31b4070adaea27d732ea333740a64d0ec9a6659"
 
-mime-types@2.1.11, mime-types@~2.1.7:
+mime-types@2.1.11, mime-types@~2.1.7, mime-types@~2.1.9:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.11.tgz#c259c471bda808a85d6cd193b430a5fae4473b3c"
   dependencies:
     mime-db "~1.23.0"
 
-mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6, mime-types@~2.1.9:
+mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
   dependencies:
@@ -3352,9 +3352,9 @@ react-native-google-analytics-bridge@mcnamee/react-native-google-analytics-bridg
   version "4.0.2"
   resolved "https://codeload.github.com/mcnamee/react-native-google-analytics-bridge/tar.gz/20d805400e05cab2f7cb2e908df658954ee36b15"
 
-"react-native-linear-gradient@github:rh389/react-native-linear-gradient#rn040":
+react-native-linear-gradient@^2.0.0:
   version "2.0.0"
-  resolved "https://codeload.github.com/rh389/react-native-linear-gradient/tar.gz/8cbf850947ffdbd4ced0b477c3e835f393ee5389"
+  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.0.0.tgz#7442c00e1fcd9fca329119dcbaf744d12bcd1b5a"
 
 react-native-share@mrKlar/react-native-share:
   version "1.0.17"
