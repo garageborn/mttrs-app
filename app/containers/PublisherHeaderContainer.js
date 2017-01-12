@@ -31,11 +31,11 @@ class PublisherHeaderContainer extends Component {
           title={publisher.name}
           icon={this.icon}
         />
-      <TouchableHighlight
-        underlayColor={DARK_TRANSPARENT_COLOR}
-        style={styles.right}
-        onPress={() => this.toggleFavoritePublisher(this.props.publisher)}>
-          <Image source={this.favoritePublisherIcon}/>
+        <TouchableHighlight
+          underlayColor={DARK_TRANSPARENT_COLOR}
+          style={styles.right}
+          onPress={() => this.toggleFavoritePublisher(this.props.publisher)}>
+            <Image source={this.favoritePublisherIcon}/>
         </TouchableHighlight>
       </View>
     )

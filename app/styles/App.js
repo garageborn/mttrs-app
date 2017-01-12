@@ -27,15 +27,15 @@ const styles = StyleSheet.create({
   listViewContainer: {
     flex: 1,
     position: 'absolute',
-    marginTop: Platform.select({
-      ios: 15,
-      android: 0
-    }),
     width
   },
 
   listView: {
-    ...containerStyles
+    ...containerStyles,
+    marginTop: Platform.select({
+      ios: 15,
+      android: 0
+    }),
   },
 
   hideRefreshControl: {
