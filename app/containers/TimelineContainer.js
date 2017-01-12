@@ -36,7 +36,6 @@ class TimelineContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(StorageActions.getFavoritePublishers())
-    this.props.dispatch(StorageActions.getCurrentTenant())
   }
 
   handleChangeTab = (index) => {
