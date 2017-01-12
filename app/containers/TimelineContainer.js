@@ -71,16 +71,17 @@ class TimelineContainer extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    const home = nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index)
+    const willBePublisher = nextProps.params.section.name === 'publisher'
+    const willBeHome = (nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index))
     const newIndex = nextState.navigationState.index !== this.state.navigationState.index
+    const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
+
     const { dispatch } = this.props
+
     if (!newIndex) return
-    if (home) {
-      dispatch(NavigationActions.home())
-    } else {
-      const currentRoute = this.state.navigationState.routes[nextState.navigationState.index]
-      dispatch(NavigationActions.selectCategory(currentRoute.filter))
-    }
+    if (willBePublisher) return dispatch(NavigationActions.selectPublisher(nextProps.params.section.model))
+    if (willBeHome) return dispatch(NavigationActions.home())
+    return dispatch(NavigationActions.selectCategory(currentRoute.filter))
   }
 
   componentWillReceiveProps(nextProps) {
