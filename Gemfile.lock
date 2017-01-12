@@ -31,7 +31,7 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     fastimage (2.0.1)
       addressable (~> 2)
-    fastlane (2.7.0)
+    fastlane (2.8.0)
       activesupport (< 5)
       addressable (>= 2.3, < 3.0.0)
       babosa (>= 1.0.2, < 2.0.0)
@@ -67,7 +67,7 @@ GEM
       path_expander (~> 1.0)
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.0)
-    gh_inspector (1.0.2)
+    gh_inspector (1.0.3)
     gitlab (3.7.0)
       httparty (~> 0.13.0)
       terminal-table
@@ -196,7 +196,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fastlane (= 2.7.0)
+  fastlane (= 2.8.0)
   pronto (= 0.7.1)
   pronto-brakeman (= 0.7.0)
   pronto-eslint_npm (= 0.7.1)
