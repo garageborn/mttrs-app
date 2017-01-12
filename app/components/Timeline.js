@@ -186,7 +186,7 @@ const Query = gql`
           title
           url
           image_source_url
-          publisher { name icon_id }
+          publisher { name icon_id slug }
         }
         other_links(publisher_slug: $publisherSlug) {
           id
