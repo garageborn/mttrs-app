@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
   listView: {
     ...containerStyles,
-    marginTop: Platform.select({
+    top: Platform.select({
       ios: 15,
       android: 0
     }),
