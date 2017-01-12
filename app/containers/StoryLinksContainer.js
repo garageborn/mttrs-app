@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Modal, ActivityIndicator } from 'react-native'
+import { View, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -9,7 +9,7 @@ import { NavigationActions, AnalyticsActions } from '../actions/index'
 import styles from '../styles/StoryLinks'
 
 class StoryLinksContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.openLink = this.openLink.bind(this)
@@ -17,27 +17,27 @@ class StoryLinksContainer extends Component {
     this.close = this.close.bind(this)
   }
 
-  close() {
+  close () {
     this.props.dispatch(NavigationActions.storyLinks({ open: false }))
   }
 
-  openLink(link) {
+  openLink (link) {
     this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 
-  openPublisher(publisher) {
+  openPublisher (publisher) {
     this.close()
     this.props.dispatch(NavigationActions.selectPublisher(publisher))
   }
 
-  render() {
+  render () {
     return (
       <Modal
         animationType={'slide'}
-        transparent={true}
-        visible={true}
+        transparent
+        visible
         onRequestClose={this.close}>
         <View style={styles.modal}>
           { this.renderStoryLinks() }
@@ -47,11 +47,11 @@ class StoryLinksContainer extends Component {
     )
   }
 
-  renderStoryLinks() {
+  renderStoryLinks () {
     if (this.props.data.loading) {
       return (
         <View style={styles.loading}>
-          <ActivityIndicator size='large' color='#FFF'/>
+          <ActivityIndicator size='large' color='#FFF' />
         </View>
       )
     } else {
@@ -72,12 +72,14 @@ const Query = gql`
       main_link(publisher_slug: $publisherSlug) {
         title
         url
+        slug
         total_social
         publisher { name slug icon_id }
       }
       other_links(publisher_slug: $publisherSlug, popular: true) {
         title
         url
+        slug
         total_social
         publisher { name slug icon_id }
       }
@@ -87,13 +89,13 @@ const Query = gql`
 
 StoryLinksContainer.propTypes = {
   story: PropTypes.shape({
-    id: PropTypes.any.isRequired,
+    id: PropTypes.any.isRequired
   }).isRequired,
   publisherSlug: PropTypes.string
 }
 
 const StoryLinksContainerWithData = graphql(Query, {
-  options(props) {
+  options (props) {
     return {
       variables: {
         id: props.story.id,
