@@ -102,7 +102,6 @@ class Timeline extends Component {
   }
 
   render() {
-
     if (this.props.data.loading) return this.renderLoading()
 
     return (
