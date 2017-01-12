@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { View, WebView, Platform, Animated, Easing, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import LinkHeaderContainer from './LinkHeaderContainer'
+import withQuery from './Link.gql'
+import LinkHeaderContainer from '../containers/LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import { StorageActions } from '../actions/index'
 import { headerHeight } from '../styles/Header'
 import styles from '../styles/App'
 import { DARK_COLOR } from '../constants/Colors'
 
-class LinkSceneContainer extends Component {
+class Link extends Component {
   static route = Platform.select({
     ios: {
         navigationBar: {
@@ -16,16 +17,11 @@ class LinkSceneContainer extends Component {
           renderLeft: () =>  <View />,
           renderRight: () =>  <View />,
           backgroundColor: DARK_COLOR,
-          height: headerHeight + 20 // On LinkSceneContainer exclusively, we need to pass this value in order to be aligned
+          height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
         }
       },
     android: null
   })
-
-  renderNavbar(props) {
-    if (Platform.OS === 'ios') return
-    return <LinkHeaderContainer link={props.route.params.link} />
-  }
 
   constructor() {
     super()
@@ -34,6 +30,10 @@ class LinkSceneContainer extends Component {
 
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
     this.progress = new Animated.Value(0)
+  }
+
+  componentWillMount () {
+    this.createAccess()
   }
 
   componentDidMount() {
@@ -77,6 +77,11 @@ class LinkSceneContainer extends Component {
     return Platform.OS === 'ios' ? 0 : 11
   }
 
+  renderNavbar(props) {
+    if (Platform.OS === 'ios') return
+    return <LinkHeaderContainer link={props.route.params.link} />
+  }
+
   render() {
     const { url } = this.props.route.params.link
 
@@ -96,15 +101,22 @@ class LinkSceneContainer extends Component {
       </View>
     )
   }
+
+  createAccess () {
+    this.props.createLinkAccess()
+  }
 }
 
-LinkSceneContainer.propTypes = {
+Link.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
       story: PropTypes.object.isRequired,
-      link: PropTypes.object.isRequired
+      link: PropTypes.shape({
+        slug: PropTypes.string.isRequired
+      }).isRequired
     }).isRequired,
   }).isRequired
 }
 
-export default connect()(LinkSceneContainer)
+const LinkWithRedux = connect()(Link)
+export default withQuery(LinkWithRedux)

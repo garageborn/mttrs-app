@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import TimelineHeaderContainer from './TimelineHeaderContainer'
-import TimelineContainer from './TimelineContainer'
-import StoryLinksContainer from './StoryLinksContainer'
+import TimelineHeaderContainer from '../containers/TimelineHeaderContainer'
+import TimelineContainer from '../containers/TimelineContainer'
+import StoryLinksContainer from '../containers/StoryLinksContainer'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Header'
 import { DARK_COLOR } from '../constants/Colors'
 
-class TimelineSceneContainer extends Component {
+class Timeline extends Component {
   static route = {
     navigationBar: {
       renderTitle: (route) => <TimelineHeaderContainer params={route.params}/>,
@@ -15,7 +15,7 @@ class TimelineSceneContainer extends Component {
       renderRight: () => <View />,
       backgroundColor: DARK_COLOR,
       height: headerHeight
-   }
+    }
   }
 
   render() {
@@ -36,11 +36,8 @@ class TimelineSceneContainer extends Component {
     if (!storyLinks.open) return
     if (section.name === 'publisher') publisherSlug = params.section.model.slug
 
-    return <StoryLinksContainer
-      story={storyLinks.story}
-      publisherSlug={publisherSlug}
-      />
+    return <StoryLinksContainer story={storyLinks.story} publisherSlug={publisherSlug} />
   }
 }
 
-export default TimelineSceneContainer
+export default Timeline
