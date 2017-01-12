@@ -36,7 +36,6 @@ class TimelineContainer extends Component {
 
   componentWillMount() {
     this.props.dispatch(StorageActions.getFavoritePublishers())
-    this.props.dispatch(StorageActions.getCurrentTenant())
   }
 
   handleChangeTab = (index) => {
@@ -56,12 +55,12 @@ class TimelineContainer extends Component {
     } else {
       filter = props.route.filter
     }
-
     return (
       <Timeline
         type={this.sceneType(props)}
         filter={filter}
         trackScreen={this.trackScreen}
+        navigationState={this.state.navigationState}
       />
     )
   }

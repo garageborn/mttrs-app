@@ -3,6 +3,7 @@ import { StatusBar, Platform, NativeModules } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import { NavigationContext, NavigationProvider, StackNavigation, } from '@exponent/ex-navigation'
+import { StorageActions } from '../actions/index'
 import intl from 'intl'
 import localeData from 'react-intl/locale-data'
 import androidLocaleData from 'intl/locale-data/complete'
@@ -32,6 +33,10 @@ if (!__DEV__) {
 }
 
 class Root extends Component {
+  componentWillMount() {
+    this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
+  }
+  
   render() {
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
 
