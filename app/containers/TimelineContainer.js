@@ -8,7 +8,7 @@ import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from
 import Timeline from '../components/Timeline'
 import Router from '../config/Router'
 import styles from '../styles/App'
-import { headerHeight } from '../styles/Header'
+import { headerHeight } from '../styles/Global'
 import MenuContainer from './MenuContainer'
 
 import _isNil from 'lodash/isNil'

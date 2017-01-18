@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { injectIntl, defineMessages } from 'react-intl'
-import Header from '../components/Header/index'
+import Header from '../components/Header'
 
 const messages = defineMessages({
   headerTitle: {

@@ -5,7 +5,7 @@ import withQuery from './Link.gql'
 import LinkHeaderContainer from '../containers/LinkHeaderContainer'
 import ProgressBar from '../components/ProgressBar'
 import { StorageActions } from '../actions/index'
-import { headerHeight } from '../styles/Header'
+import { headerHeight } from '../styles/Global'
 import styles from '../styles/App'
 import { DARK_COLOR } from '../constants/Colors'
 

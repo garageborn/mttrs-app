@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-import { headerHeight } from './Header'
+import { headerHeight } from './Global'
 const { width, height } = Dimensions.get('window')
 
 const containerStyles = {
