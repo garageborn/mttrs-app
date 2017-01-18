@@ -5,16 +5,15 @@ import { MenuActions } from '../actions/index'
 import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
-import MenuContainer from './MenuContainer'
 import styles from '../styles/TimelineHeaderContainer'
 
 class TimelineHeaderContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         {this.renderHeader()}
@@ -22,12 +21,12 @@ class TimelineHeaderContainer extends Component {
     )
   }
 
-  renderHeader() {
+  renderHeader () {
     const { section } = this.props.params
 
     if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
 
-    switch(section.name) {
+    switch (section.name) {
       case 'category':
         return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
       case 'publisher':
@@ -37,7 +36,7 @@ class TimelineHeaderContainer extends Component {
     }
   }
 
-  toggleMenu() {
+  toggleMenu () {
     const { menu } = this.props.uiReducer
     if (menu.isOpen) {
       return this.props.dispatch(MenuActions.retractMenu())
@@ -49,10 +48,11 @@ class TimelineHeaderContainer extends Component {
 
 TimelineHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired,
-  uiReducer: PropTypes.object.isRequired
+  uiReducer: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return { uiReducer: state.uiReducer }
 }
 

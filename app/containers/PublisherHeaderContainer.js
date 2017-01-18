@@ -1,27 +1,27 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { View, TouchableHighlight, Image } from 'react-native'
 import { connect } from 'react-redux'
 import Header from '../components/Header'
 import PublisherLogo from '../components/PublisherLogo'
 import * as cloudinary from '../common/utils/Cloudinary'
-import { NavigationActions } from '@exponent/ex-navigation'
 import { StorageActions } from '../actions/index'
 import styles from '../styles/PublisherHeader'
 import { DARK_TRANSPARENT_COLOR } from '../constants/TouchUnderlayColors'
 
 class PublisherHeaderContainer extends Component {
-  getPublisherLogo() {
+  getPublisherLogo () {
     const { publisher } = this.props
     if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return { uri }
   }
 
-  get icon() {
+  get icon () {
     return <PublisherLogo skin='dark' source={this.getPublisherLogo()} />
   }
 
-  render() {
+  render () {
     const { toggleMenu, publisher } = this.props
     return (
       <View style={styles.container}>
@@ -34,14 +34,15 @@ class PublisherHeaderContainer extends Component {
         <TouchableHighlight
           underlayColor={DARK_TRANSPARENT_COLOR}
           style={styles.right}
-          onPress={() => this.toggleFavoritePublisher(this.props.publisher)}>
-            <Image source={this.favoritePublisherIcon}/>
+          onPress={() => this.toggleFavoritePublisher(this.props.publisher)}
+        >
+          <Image source={this.favoritePublisherIcon} />
         </TouchableHighlight>
       </View>
     )
   }
 
-  get favoritePublisherIcon() {
+  get favoritePublisherIcon () {
     if (this.props.isFavorite) {
       return require('../assets/starActive.png')
     }
@@ -49,7 +50,7 @@ class PublisherHeaderContainer extends Component {
     return require('../assets/starInactive.png')
   }
 
-  toggleFavoritePublisher() {
+  toggleFavoritePublisher () {
     if (this.props.isFavorite) {
       return this.removePublisherFromLocalStorage()
     }
@@ -57,12 +58,12 @@ class PublisherHeaderContainer extends Component {
     return this.addPublisherToLocalStorage()
   }
 
-  addPublisherToLocalStorage() {
+  addPublisherToLocalStorage () {
     const { dispatch, publisher } = this.props
     dispatch(StorageActions.addFavoritePublisher(publisher))
   }
 
-  removePublisherFromLocalStorage() {
+  removePublisherFromLocalStorage () {
     const { dispatch, publisher } = this.props
     dispatch(StorageActions.removeFavoritePublisher(publisher))
   }
@@ -72,7 +73,9 @@ PublisherHeaderContainer.propTypes = {
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired
   }).isRequired,
-  toggleMenu: PropTypes.func.isRequired
+  toggleMenu: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired
 }
 
 let mapStateToProps = (state, ownProps) => {

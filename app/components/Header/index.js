@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
-import styles from '../styles/Header'
-import { COLORLESS } from '../constants/TouchUnderlayColors'
+import styles from './styles'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 const Header = ({ title, toggleMenu, icon }) => {
   return (
@@ -10,7 +10,7 @@ const Header = ({ title, toggleMenu, icon }) => {
         <View style={styles.headerContainer}>
           {icon}
           <Text style={styles.headerTitle}>{title}</Text>
-          <Image source={require('../assets/arrow.png')} />
+          <Image source={require('../../assets/arrow.png')} />
         </View>
       </TouchableHighlight>
     </View>
