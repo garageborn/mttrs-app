@@ -1,6 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
-
-let { width } = Dimensions.get('window')
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   card: {
@@ -51,8 +49,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    fontWeight: '400',
-    fontFamily: 'Open Sans'
+    fontWeight: '400'
   },
 
   footer: {

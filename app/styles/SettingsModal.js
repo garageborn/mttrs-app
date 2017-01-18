@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#FFF',
-    marginHorizontal: 10,
+    marginHorizontal: 10
   },
 
   modalFooter: {

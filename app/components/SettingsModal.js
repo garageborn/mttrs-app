@@ -25,20 +25,20 @@ const messages = defineMessages({
 })
 
 class SettingsModal extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       tenant: this.props.StorageReducer.tenant.name
     }
   }
 
-  onPressTenantButton(tenant) {
+  onPressTenantButton (tenant) {
     this.setState({
       tenant
     })
   }
 
-  onPressCloseButton() {
+  onPressCloseButton () {
     if (this.state.tenant !== this.props.StorageReducer.tenant.name) {
       this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
       apolloClient.resetStore()
@@ -46,13 +46,13 @@ class SettingsModal extends Component {
     this.props.close()
   }
 
-  renderCheckmark(tenant) {
+  renderCheckmark (tenant) {
     if (this.state.tenant === tenant) {
       return <Image source={require('../assets/checkmark.png')} />
     }
   }
 
-  render() {
+  render () {
     const { visible, close, animationType } = this.props
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
@@ -61,7 +61,7 @@ class SettingsModal extends Component {
         visible={visible}
         animationType={animationType}
         onRequestClose={close}
-        >
+      >
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalHeader}>
