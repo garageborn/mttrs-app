@@ -2794,13 +2794,13 @@ mime-db@~1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.23.0.tgz#a31b4070adaea27d732ea333740a64d0ec9a6659"
 
-mime-types@2.1.11, mime-types@~2.1.7:
+mime-types@2.1.11, mime-types@~2.1.7, mime-types@~2.1.9:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.11.tgz#c259c471bda808a85d6cd193b430a5fae4473b3c"
   dependencies:
     mime-db "~1.23.0"
 
-mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6, mime-types@~2.1.9:
+mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
   dependencies:
@@ -3322,17 +3322,17 @@ react-native-fabric@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-native-fabric/-/react-native-fabric-0.4.0.tgz#cb52656fcde455b5524f02d73f435d44acd3c244"
 
-react-native-google-analytics-bridge@mcnamee/react-native-google-analytics-bridge:
-  version "4.0.2"
-  resolved "https://codeload.github.com/mcnamee/react-native-google-analytics-bridge/tar.gz/20d805400e05cab2f7cb2e908df658954ee36b15"
+react-native-google-analytics-bridge@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.0.0.tgz#2db1c050f5ce35a1a11fe9d1ab5352cd6079c9e6"
 
 react-native-linear-gradient@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.0.0.tgz#7442c00e1fcd9fca329119dcbaf744d12bcd1b5a"
 
-react-native-share@mrKlar/react-native-share:
-  version "1.0.17"
-  resolved "https://codeload.github.com/mrKlar/react-native-share/tar.gz/eafc0e830460b1b2ddfa590444b486ab498c2ed0"
+react-native-share@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.18.tgz#c7ef6dd8cbe1c24e70596c69f83ba895b0c3a9cc"
 
 react-native-tab-view@0.0.42:
   version "0.0.42"
