@@ -5,7 +5,7 @@ import Tenant from '../common/utils/Tenant'
 const networkInterface = createNetworkInterface({ uri: ENDPOINTS.GRAPHQL })
 
 networkInterface.use([{
-  applyMiddleware(req, next) {
+  applyMiddleware (req, next) {
     if (!req.options.headers) {
       req.options.headers = {
         'X-Tenant': Tenant.current

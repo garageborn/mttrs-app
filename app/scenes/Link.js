@@ -12,18 +12,18 @@ import { DARK_COLOR } from '../constants/Colors'
 class Link extends Component {
   static route = Platform.select({
     ios: {
-        navigationBar: {
-          renderTitle: (route) => <LinkHeaderContainer link={route.params.link}/>,
-          renderLeft: () =>  <View />,
-          renderRight: () =>  <View />,
-          backgroundColor: DARK_COLOR,
-          height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
-        }
-      },
+      navigationBar: {
+        renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
+        renderLeft: () => <View />,
+        renderRight: () => <View />,
+        backgroundColor: DARK_COLOR,
+        height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
+      }
+    },
     android: null
   })
 
-  constructor() {
+  constructor () {
     super()
 
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
@@ -36,16 +36,16 @@ class Link extends Component {
     this.createAccess()
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.progressTransition()
   }
 
-  addStoryToLocalStorage() {
+  addStoryToLocalStorage () {
     const { dispatch, story } = this.props
     dispatch(StorageActions.addVisitedStory(story))
   }
 
-  progressTransition() {
+  progressTransition () {
     this.progress.setValue(0)
     Animated.timing(
       this.progress,
@@ -57,7 +57,7 @@ class Link extends Component {
     ).start(() => this.progressTransition())
   }
 
-  getProgress() {
+  getProgress () {
     const { width } = Dimensions.get('window')
     return this.progress.interpolate({
       inputRange: [0, 1],
@@ -73,16 +73,16 @@ class Link extends Component {
     if (e === 'WebKitErrorDomain') return
   }
 
-  get contentInset() {
+  get contentInset () {
     return Platform.OS === 'ios' ? 0 : 11
   }
 
-  renderNavbar(props) {
+  renderNavbar (props) {
     if (Platform.OS === 'ios') return
     return <LinkHeaderContainer link={props.route.params.link} />
   }
 
-  render() {
+  render () {
     const { url } = this.props.route.params.link
 
     return (
@@ -114,7 +114,7 @@ Link.propTypes = {
       link: PropTypes.shape({
         slug: PropTypes.string.isRequired
       }).isRequired
-    }).isRequired,
+    }).isRequired
   }).isRequired
 }
 
