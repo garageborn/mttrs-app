@@ -1,8 +1,7 @@
 import Router from '../config/Router'
 import { NavigationActions } from '@exponent/ex-navigation'
-import _isNil from 'lodash/isNil'
 
-export function home() {
+export function home () {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
@@ -14,7 +13,7 @@ export function home() {
   }
 }
 
-export function link(story, link) {
+export function link (story, link) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const route = Router.getRoute('link', { story: story, link: link })
@@ -22,7 +21,7 @@ export function link(story, link) {
   }
 }
 
-export function selectCategory(category) {
+export function selectCategory (category) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
@@ -32,7 +31,7 @@ export function selectCategory(category) {
   }
 }
 
-export function selectPublisher(publisher) {
+export function selectPublisher (publisher) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
@@ -44,7 +43,7 @@ export function selectPublisher(publisher) {
   }
 }
 
-export function storyLinks(storyLinksParams) {
+export function storyLinks (storyLinksParams) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
@@ -55,28 +54,28 @@ export function storyLinks(storyLinksParams) {
   }
 }
 
-export function back() {
+export function back () {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
   }
 }
 
-function getNavigation(getState) {
+function getNavigation (getState) {
   return getState().navigation
 }
 
-function getCurrentNavigator(getState) {
+function getCurrentNavigator (getState) {
   const navigation = getNavigation(getState)
   return navigation.navigators[navigation.currentNavigatorUID]
 }
 
-function getCurrentRoute(getState) {
+function getCurrentRoute (getState) {
   const navigator = getCurrentNavigator(getState)
   return navigator.routes[navigator.index]
 }
 
-function getCurrentParams(getState) {
+function getCurrentParams (getState) {
   const currentRoute = getCurrentRoute(getState)
   return currentRoute.params
 }

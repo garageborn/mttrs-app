@@ -3,14 +3,13 @@ import { View } from 'react-native'
 import TimelineHeaderContainer from '../containers/TimelineHeaderContainer'
 import TimelineContainer from '../containers/TimelineContainer'
 import StoryLinksContainer from '../containers/StoryLinksContainer'
-import styles from '../styles/App'
 import { headerHeight } from '../styles/Header'
 import { DARK_COLOR } from '../constants/Colors'
 
 class Timeline extends Component {
   static route = {
     navigationBar: {
-      renderTitle: (route) => <TimelineHeaderContainer params={route.params}/>,
+      renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
       renderLeft: () => <View />,
       renderRight: () => <View />,
       backgroundColor: DARK_COLOR,
@@ -18,7 +17,7 @@ class Timeline extends Component {
     }
   }
 
-  render() {
+  render () {
     const { route } = this.props
     return (
       <TimelineContainer params={route.params}>
@@ -27,7 +26,7 @@ class Timeline extends Component {
     )
   }
 
-  renderStoryLinks() {
+  renderStoryLinks () {
     const { params } = this.props.route
     let section = params.section || {}
     let storyLinks = section.storyLinks || {}

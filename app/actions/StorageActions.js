@@ -17,7 +17,7 @@ export const receiveVisitedStories = (visitedStories) => ({
   visitedStories
 })
 
-export function getVisitedStories() {
+export function getVisitedStories () {
   return (dispatch, getState) => {
     if (isVisitedStoriesLoaded(getState)) return
     if (isVisitedStoriesFetching(getState)) return
@@ -29,7 +29,7 @@ export function getVisitedStories() {
   }
 }
 
-export function addVisitedStory(story) {
+export function addVisitedStory (story) {
   return (dispatch, getState) => {
     if (isVisitedStory(getState, story)) return
 
@@ -39,19 +39,19 @@ export function addVisitedStory(story) {
   }
 }
 
-function visitedStories(getState) {
+function visitedStories (getState) {
   return getState().StorageReducer.visitedStories
 }
 
-function isVisitedStoriesFetching(getState) {
+function isVisitedStoriesFetching (getState) {
   return visitedStories(getState).isFetching
 }
 
-function isVisitedStoriesLoaded(getState) {
+function isVisitedStoriesLoaded (getState) {
   return visitedStories(getState).isLoaded
 }
 
-function isVisitedStory(getState, story) {
+function isVisitedStory (getState, story) {
   return visitedStories(getState).items.indexOf(story.id) !== -1
 }
 
@@ -73,11 +73,11 @@ export const receiveTenant = (tenant) => ({
   tenant
 })
 
-function setTenant(tenant) {
+function setTenant (tenant) {
   Tenant.current = tenant
 }
 
-export function getFavoritePublishers() {
+export function getFavoritePublishers () {
   return (dispatch, getState) => {
     if (isFavoritePublishersLoaded(getState)) return
     if (isFavoritePublishersFetching(getState)) return
@@ -88,7 +88,7 @@ export function getFavoritePublishers() {
   }
 }
 
-export function removeFavoritePublisher(publisher) {
+export function removeFavoritePublisher (publisher) {
   return (dispatch, getState) => {
     if (!isFavoritePublisher(getState, publisher)) return
     let publishers = favoritePublishers(getState).items
@@ -100,7 +100,7 @@ export function removeFavoritePublisher(publisher) {
   }
 }
 
-export function addFavoritePublisher(publisher) {
+export function addFavoritePublisher (publisher) {
   return (dispatch, getState) => {
     if (isFavoritePublisher(getState, publisher)) return
 
@@ -110,7 +110,7 @@ export function addFavoritePublisher(publisher) {
   }
 }
 
-export function setCurrentTenant(tenant) {
+export function setCurrentTenant (tenant) {
   return (dispatch) => {
     setTenant(tenant)
     AsyncStorage.setItem('tenant', tenant)
@@ -118,7 +118,7 @@ export function setCurrentTenant(tenant) {
   }
 }
 
-export function getCurrentTenant(locale) {
+export function getCurrentTenant (locale) {
   let localeTenant = 'mttrs_us'
   if (locale === 'pt-BR') localeTenant = 'mttrs_br'
   return (dispatch) => {
@@ -129,25 +129,25 @@ export function getCurrentTenant(locale) {
   }
 }
 
-function removePublisherFromFavorite(publishers, index) {
+function removePublisherFromFavorite (publishers, index) {
   return [
     ...publishers.slice(0, index),
-    ...publishers.slice(index+1)
+    ...publishers.slice(index + 1)
   ]
 }
 
-function isFavoritePublishersFetching(getState) {
+function isFavoritePublishersFetching (getState) {
   return favoritePublishers(getState).isFetching
 }
 
-function isFavoritePublishersLoaded(getState) {
+function isFavoritePublishersLoaded (getState) {
   return favoritePublishers(getState).isLoaded
 }
 
-function favoritePublishers(getState) {
+function favoritePublishers (getState) {
   return getState().StorageReducer.favoritePublishers
 }
 
-function isFavoritePublisher(getState, publisher) {
+function isFavoritePublisher (getState, publisher) {
   return favoritePublishers(getState).items.indexOf(publisher.id) !== -1
 }
