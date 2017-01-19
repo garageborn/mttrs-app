@@ -1,26 +1,14 @@
-import React, { Component } from 'react'
-import { View, ScrollView, Text, Image, TouchableHighlight } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { injectIntl, defineMessages } from 'react-intl'
 import CategoryTile from '../components/CategoryTile'
+import TopStoriesCategory from '../components/TopStoriesCategory'
+import MenuSettingsLabel from '../components/MenuSettingsLabel'
 import SettingsModal from '../components/SettingsModal'
 import styles from '../styles/Menu'
 import { NavigationActions, MenuActions } from '../actions/index'
-import { DARK_TRANSPARENT_COLOR, COLORLESS } from '../constants/TouchUnderlayColors'
-
-const messages = defineMessages({
-  topStories: {
-    id: 'header.topStories',
-    defaultMessage: 'Top Stories'
-  },
-
-  settings: {
-    id: 'menu.settings',
-    defaultMessage: 'Settings'
-  }
-})
 
 class CategoryMenuContainer extends Component {
   constructor (props) {
@@ -36,60 +24,19 @@ class CategoryMenuContainer extends Component {
   }
 
   render () {
-    const { formatMessage } = this.props.intl
+    let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
       <View>
-        <View style={styles.topStoriesContainer}>
-          <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
-            <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
-              <Image style={styles.topStoriesIcon} source={this.topStoriesIcon} />
-              <Text style={this.topStoriesTitleStyles}>{formatMessage(messages.topStories)}</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-
+        <TopStoriesCategory openHome={this.openHome} />
         <View>
           <ScrollView contentContainerStyle={styles.categories}>
             {this.renderCategories()}
           </ScrollView>
         </View>
-
-        <View style={styles.settings}>
-          <Text style={styles.namespaceTitle}>{this.getTenantName(this.props.StorageReducer.tenant.name)}</Text>
-          <TouchableHighlight underlayColor={COLORLESS} onPress={this.toggleSettingsModal} style={styles.settingsTouch}>
-            <View style={styles.settingTouchContainer}>
-              <Image source={require('../assets/icons/icon-settings.png')} />
-              <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-
-        <SettingsModal
-          visible={this.state.modalVisible}
-          close={this.toggleSettingsModal}
-        />
+        <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} />
+        <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} />
       </View>
     )
-  }
-
-  get topStoriesStyles () {
-    const { name } = this.props.params.section
-
-    return name === 'home' ? styles.topStories : [styles.topStories, styles.topStoriesInactive]
-  }
-
-  get topStoriesTitleStyles () {
-    const { name } = this.props.params.section
-
-    return name === 'home' ? styles.topStoriesTitle : [styles.topStoriesTitle, styles.topStoriesTitleInactive]
-  }
-
-  get topStoriesIcon () {
-    const { name } = this.props.params.section
-
-    return name === 'home'
-      ? require('../assets/icons/icon-top-stories.png')
-      : require('../assets/icons/icon-top-stories-secondary.png')
   }
 
   toggleSettingsModal () {
@@ -144,7 +91,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+CategoryMenuContainer.propTypes = {
+  StorageReducer: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
+}
+
 const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
-const intlCategoryMenuContainer = injectIntl(CategoryMenuContainer)
-const CategoryMenuContainerWithData = graphql(Query)(intlCategoryMenuContainer)
+const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
 export default connect(mapStateToProps)(CategoryMenuContainerWithData)
