@@ -1,12 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
-import ButtonGroup from '../components/ButtonGroup'
+import Menu from '../components/Menu'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import { MenuActions } from '../actions/index'
-import styles from '../styles/Menu'
 
 const messages = defineMessages({
   headerCategories: {
@@ -41,20 +39,12 @@ class MenuContainer extends Component {
 
   render () {
     return (
-      <View style={styles.menu}>
-        <View style={styles.selector}>
-          <ButtonGroup
-            underlayColor={'rgba(255,255,255,.1)'}
-            selectedBackgroundColor='#F1F1F1'
-            onPress={this.changeCurrentTab}
-            selectedIndex={this.currentTabIndex}
-            buttons={this.labels}
-          />
-        </View>
-        <View style={styles.menuContainer}>
-          {this.currentTab.component}
-        </View>
-      </View>
+      <Menu
+        currentTab={this.currentTab.component}
+        currentTabIndex={this.currentTabIndex}
+        changeCurrentTab={this.changeCurrentTab}
+        buttonGroupLabels={this.labels}
+      />
     )
   }
 
