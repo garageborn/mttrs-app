@@ -6,20 +6,18 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import Timeline from '../components/Timeline'
-import Router from '../config/Router'
+import MenuContainer from './MenuContainer'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Global'
-import MenuContainer from './MenuContainer'
 
 import _isNil from 'lodash/isNil'
-import _isEmpty from 'lodash/isEmpty'
 
 const { height } = Dimensions.get('window')
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
 
 class TimelineContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
     this.closeMenu = this.closeMenu.bind(this)
@@ -34,7 +32,7 @@ class TimelineContainer extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.props.dispatch(StorageActions.getFavoritePublishers())
   }
 
@@ -47,7 +45,7 @@ class TimelineContainer extends Component {
     })
   }
 
-  renderScene(props) {
+  renderScene (props) {
     let filter
 
     if (this.sceneType(props) === 'publisher') {
@@ -65,12 +63,12 @@ class TimelineContainer extends Component {
     )
   }
 
-  componentDidMount() {
+  componentDidMount () {
     const { dispatch } = this.props
     dispatch(NavigationActions.home())
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate (nextProps, nextState) {
     const willBePublisher = nextProps.params.section.name === 'publisher'
     const willBeHome = (nextState.navigationState.index === 0 || _isNil(nextState.navigationState.index))
     const newIndex = nextState.navigationState.index !== this.state.navigationState.index
@@ -84,7 +82,7 @@ class TimelineContainer extends Component {
     return dispatch(NavigationActions.selectCategory(currentRoute.filter))
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
@@ -92,13 +90,13 @@ class TimelineContainer extends Component {
     this.sectionWillChange(nextProps)
   }
 
-  tenantWillChange(nextProps) {
+  tenantWillChange (nextProps) {
     const willTenantLoad = nextProps.StorageReducer.tenant.isLoaded
     const willTenantChange = this.props.StorageReducer.tenant.name !== nextProps.StorageReducer.tenant.name
     return willTenantLoad && willTenantChange
   }
 
-  categoriesWillChange(nextProps) {
+  categoriesWillChange (nextProps) {
     const hasCategories = !_isNil(this.props.data.categories)
     if (hasCategories) {
       const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
@@ -108,7 +106,7 @@ class TimelineContainer extends Component {
     }
   }
 
-  sectionWillChange(nextProps) {
+  sectionWillChange (nextProps) {
     let nextSection = nextProps.params.section || {}
     let currentSection = this.props.params.section || {}
     let sectionNameChanged = nextSection.name !== currentSection.name
@@ -116,7 +114,7 @@ class TimelineContainer extends Component {
     if (sectionNameChanged || sectionModelChanged) this.changeSection(nextProps)
   }
 
-  menuWillChange(nextProps) {
+  menuWillChange (nextProps) {
     let currentMenu = this.props.uiReducer.menu || {}
     let nextMenu = nextProps.uiReducer.menu || {}
 
@@ -125,12 +123,12 @@ class TimelineContainer extends Component {
 
     if (isOpenChanged && nextMenu.isOpen) {
       this.animate('in')
-    } else if(retractChanged && nextMenu.retract) {
+    } else if (retractChanged && nextMenu.retract) {
       this.animate('out')
     }
   }
 
-  changeSection(nextProps) {
+  changeSection (nextProps) {
     let { routes } = this.state.navigationState
     let nextIndex = 0
 
@@ -148,7 +146,7 @@ class TimelineContainer extends Component {
     })
   }
 
-  addSwipeRoutes(nextProps) {
+  addSwipeRoutes (nextProps) {
     const sameNavigationRoutes = nextProps.data.categories === this.props.data.categories
     const populatedRoutes = this.state.navigationState.routes.length > 1
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
@@ -160,13 +158,16 @@ class TimelineContainer extends Component {
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [homeRoute, ...newRoutes ]
+        routes: [ homeRoute, ...newRoutes ]
       }
     })
   }
 
-  animate(type) {
-    let value, callback, easing = null
+  animate (type) {
+    let value
+    let callback
+    let easing = null
+
     if (type === 'in') {
       value = 0
       easing = Easing.in(Easing.quad)
@@ -188,7 +189,7 @@ class TimelineContainer extends Component {
     )
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         {this.renderTimeline()}
@@ -200,7 +201,7 @@ class TimelineContainer extends Component {
     )
   }
 
-  renderTimeline() {
+  renderTimeline () {
     if (this.sectionType(this.props) === 'publisher') {
       return this.renderScene(this.props)
     } else {
@@ -210,32 +211,32 @@ class TimelineContainer extends Component {
           navigationState={this.state.navigationState}
           renderScene={this.renderScene}
           onRequestChangeTab={this.handleChangeTab}
-          lazy={true}
+          lazy
         />
       )
     }
   }
 
-  sectionType(props) {
+  sectionType (props) {
     if (_isNil(props.params.section)) return 'home'
     return props.params.section.name
   }
 
-  sceneType(props) {
+  sceneType (props) {
     if (_isNil(props.route)) return 'publisher'
     return props.route.type
   }
 
-  renderMenu() {
+  renderMenu () {
     const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <MenuContainer params={params}/>
+    if (uiReducer.menu.isOpen) return <MenuContainer params={params} />
   }
 
-  closeMenu() {
+  closeMenu () {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
-  trackScreen(screen) {
+  trackScreen (screen) {
     this.props.dispatch(AnalyticsActions.trackScreen(screen))
   }
 }

@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-import { headerHeight } from './Global'
-import { DARK_COLOR } from '../constants/Colors'
+import { headerHeight } from '../../styles/Global'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320

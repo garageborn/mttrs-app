@@ -1,5 +1,5 @@
+/* eslint-disable */
 // Via: https://github.com/react-native-community/react-native-elements/blob/master/src/buttons/ButtonGroup.js
-
 import React, { PropTypes } from 'react'
 import { View, StyleSheet, TouchableHighlight, Platform, Text } from 'react-native'
 
@@ -41,15 +41,15 @@ const ButtonGroup = ({
                 i < buttons.length - 1 && styles.borderRight,
                 i < buttons.length - 1 && borderStyle && borderStyle,
                 containerStyle && containerStyle,
-                selectedIndex === i && {backgroundColor: selectedBackgroundColor || '#FFF'}
-              ]}>
+                selectedIndex === i && {backgroundColor: selectedBackgroundColor || '#FFF'}]}
+            >
               <View style={{flex: 1}}>
                 <Text style={[
                   styles.buttonText,
                   textStyle && textStyle,
-                  selectedIndex === i && {color: '#FFF'},
-                  selectedIndex === i && selectedTextStyle && selectedTextStyle
-                ]}>{button}</Text>
+                  selectedIndex === i && {color: '#2D2D2B'},
+                  selectedIndex === i && selectedTextStyle && selectedTextStyle]}
+                >{button}</Text>
               </View>
             </Component>
           )
@@ -64,7 +64,7 @@ styles = StyleSheet.create({
     flex: 1
   },
   borderRight: {
-    borderRightColor: '#2672D7',
+    borderRightColor: '#F1F1F1',
     borderRightWidth: 1
   },
   container: {
@@ -72,7 +72,7 @@ styles = StyleSheet.create({
     marginRight: 10,
     marginBottom: 5,
     marginTop: 5,
-    borderColor: '#2672D7',
+    borderColor: '#F1F1F1',
     borderWidth: 2,
     flexDirection: 'row',
     borderRadius: 5,
@@ -86,7 +86,7 @@ styles = StyleSheet.create({
     paddingBottom: 5,
     textAlign: 'center',
     fontSize: 13,
-    color: '#FFF',
+    color: '#F1F1F1',
     ...Platform.select({
       ios: {
         fontWeight: '500'

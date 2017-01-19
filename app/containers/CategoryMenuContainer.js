@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ScrollView, Text, Image, TouchableHighlight, Modal } from 'react-native'
+import { View, ScrollView, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -23,7 +23,7 @@ const messages = defineMessages({
 })
 
 class CategoryMenuContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -35,13 +35,13 @@ class CategoryMenuContainer extends Component {
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
   }
 
-  render() {
+  render () {
     const { formatMessage } = this.props.intl
     return (
       <View>
         <View style={styles.topStoriesContainer}>
           <TouchableHighlight underlayColor={DARK_TRANSPARENT_COLOR} onPress={this.openHome}>
-            <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={.5} elevation={1}>
+            <View style={this.topStoriesStyles} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
               <Image style={styles.topStoriesIcon} source={this.topStoriesIcon} />
               <Text style={this.topStoriesTitleStyles}>{formatMessage(messages.topStories)}</Text>
             </View>
@@ -72,19 +72,19 @@ class CategoryMenuContainer extends Component {
     )
   }
 
-  get topStoriesStyles() {
+  get topStoriesStyles () {
     const { name } = this.props.params.section
 
     return name === 'home' ? styles.topStories : [styles.topStories, styles.topStoriesInactive]
   }
 
-  get topStoriesTitleStyles() {
+  get topStoriesTitleStyles () {
     const { name } = this.props.params.section
 
     return name === 'home' ? styles.topStoriesTitle : [styles.topStoriesTitle, styles.topStoriesTitleInactive]
   }
 
-  get topStoriesIcon() {
+  get topStoriesIcon () {
     const { name } = this.props.params.section
 
     return name === 'home'
@@ -92,11 +92,11 @@ class CategoryMenuContainer extends Component {
       : require('../assets/icons/icon-top-stories-secondary.png')
   }
 
-  toggleSettingsModal() {
+  toggleSettingsModal () {
     this.setState({modalVisible: !this.state.modalVisible})
   }
 
-  renderCategories() {
+  renderCategories () {
     const { categories, loading } = this.props.data
 
     if (loading) return
@@ -107,28 +107,28 @@ class CategoryMenuContainer extends Component {
           category={category}
           onPress={this.openCategory}
           isActive={this.isActive(category)}
-          />
+        />
       )
     })
   }
 
-  openHome() {
+  openHome () {
     this.props.dispatch(MenuActions.retractMenu())
     this.props.dispatch(NavigationActions.home())
   }
 
-  openCategory(category) {
+  openCategory (category) {
     this.props.dispatch(MenuActions.retractMenu())
     this.props.dispatch(NavigationActions.selectCategory(category))
   }
 
-  isActive(category) {
+  isActive (category) {
     const { params } = this.props
     if (params.section == null || typeof params.section.model === 'undefined') return false
     return category.slug === params.section.model.slug
   }
 
-  getTenantName(tenant) {
+  getTenantName (tenant) {
     const tenants = {
       mttrs_us: 'English - USA/UK',
       mttrs_br: 'Português - Brasil'
