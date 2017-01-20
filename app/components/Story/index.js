@@ -40,11 +40,16 @@ class Story extends Component {
           shadowOffset={{width: 0, height: 2}}
           style={[styles.card, this.storySpacing()]}
         >
-          <StoryMainLink onPress={openLink} mainLink={this.props.story.main_link} />
+          <StoryMainLink
+            onPress={openLink}
+            mainLink={this.mainLink}
+            mainCategory={this.mainCategory}
+            isSceneHome={this.props.isSceneHome}
+          />
           {this.renderSummary(story.headline, story.summary)}
           <StoryMetadata story={story} onPublishersPress={openStoryLinks} />
         </View>
-        {this.renderCategoryLabel()}
+
       </View>
     )
   }
@@ -80,22 +85,6 @@ class Story extends Component {
         marginTop: 16,
         marginBottom: 16
       }
-    }
-  }
-
-  renderCategoryLabel () {
-    const { isSceneHome, openCategory } = this.props
-
-    if (isSceneHome) {
-      return (
-        <TouchableHighlight
-          onPress={openCategory}
-          underlayColor={COLORLESS}
-          style={[styles.category, {backgroundColor: this.mainCategory.color}]}
-        >
-          <Text style={styles.categoryTitle}>{this.mainCategory.name.toUpperCase()}</Text>
-        </TouchableHighlight>
-      )
     }
   }
 
