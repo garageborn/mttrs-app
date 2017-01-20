@@ -4,8 +4,11 @@ const styles = StyleSheet.create({
   list: {
     flex: 1,
     flexDirection: 'row',
+    alignItems: 'center',
     position: 'absolute',
-    bottom: 0
+    height: 12,
+    bottom: -6,
+    zIndex: 1
   }
 })
 
