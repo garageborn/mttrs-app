@@ -8,7 +8,7 @@ const CategoryTile = ({ onPress, category }) => {
   return (
     <View style={styles.container}>
       <TouchableHighlight underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress(category)}>
-        <View style={styles.category} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
+        <View style={[styles.category, { borderBottomColor: category.color }]} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
           <Text style={styles.name}>{category.name}</Text>
         </View>
       </TouchableHighlight>

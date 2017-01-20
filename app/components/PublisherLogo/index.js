@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image } from 'react-native'
-import styles from '../styles/PublisherLogo'
+import styles from './styles'
 
 class PublisherLogo extends Component {
-  get logoContainerStyles() {
+  get logoContainerStyles () {
     const { skin, size } = this.props
     let offset = 2
     let styleArr = [styles.logoContainer, this.getSize(size + offset)]
@@ -15,7 +15,7 @@ class PublisherLogo extends Component {
     return styleArr
   }
 
-  get logoStyles() {
+  get logoStyles () {
     const { skin, size } = this.props
     let styleArr = [styles.logo, this.getSize(size)]
 
@@ -26,7 +26,7 @@ class PublisherLogo extends Component {
     return styleArr
   }
 
-  getSize(size) {
+  getSize (size) {
     return {
       width: size,
       height: size,
@@ -34,7 +34,7 @@ class PublisherLogo extends Component {
     }
   }
 
-  render() {
+  render () {
     const { source } = this.props
 
     return (

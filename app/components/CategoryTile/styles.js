@@ -16,17 +16,20 @@ const styles = StyleSheet.create({
   },
 
   category: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#555',
     width: (width - 51) / 2,
     height: height / 7.5,
     padding: 0,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'flex-end',
+    borderBottomWidth: 2
   },
 
   name: {
-    fontSize: 14,
-    fontWeight: 'bold'
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 10
   }
 })
 

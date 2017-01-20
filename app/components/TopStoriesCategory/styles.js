@@ -9,19 +9,20 @@ const styles = StyleSheet.create({
   },
 
   topStories: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#555',
     width: width - 35,
     height: height / 8,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    borderBottomWidth: 2
   },
 
   title: {
-    marginLeft: 12,
-    marginTop: -4,
-    color: '#FF5607',
-    fontSize: 18
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 10
   }
 })
 

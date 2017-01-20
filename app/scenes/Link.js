@@ -79,7 +79,7 @@ class Link extends Component {
 
   renderNavbar (props) {
     if (Platform.OS === 'ios') return
-    return <LinkHeaderContainer link={props.route.params.link} />
+    return <LinkHeaderContainer params={props.route.params} link={props.route.params.link} />
   }
 
   render () {
@@ -91,11 +91,11 @@ class Link extends Component {
         <WebView
           source={{uri: url}}
           contentInset={{top: this.contentInset}}
-          startInLoadingState={true}
+          startInLoadingState
           renderLoading={this.renderProgressBar}
           renderError={this.handleError}
           onLoadEnd={this.addStoryToLocalStorage}
-          mediaPlaybackRequiresUserAction={true}
+          mediaPlaybackRequiresUserAction
           shouldStartLoadWithRequest={false}
         />
       </View>
@@ -112,10 +112,11 @@ Link.propTypes = {
     params: PropTypes.shape({
       story: PropTypes.object.isRequired,
       link: PropTypes.shape({
-        slug: PropTypes.string.isRequired
+        url: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
-  }).isRequired
+  }).isRequired,
+  createLinkAccess: PropTypes.func.isRequired
 }
 
 const LinkWithRedux = connect()(Link)

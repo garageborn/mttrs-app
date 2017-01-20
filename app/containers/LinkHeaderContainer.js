@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import { View, Image, TouchableHighlight, Text } from 'react-native'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Share from 'react-native-share'
-import styles from '../styles/HeaderWebview'
-import PublisherLogo from '../components/PublisherLogo'
+import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { NavigationActions } from '../actions/index'
-import { COLORLESS } from '../constants/TouchUnderlayColors'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -27,6 +24,10 @@ class LinkHeaderContainer extends Component {
     return Share.open(shareOptions)
   }
 
+  close () {
+    this.props.dispatch(NavigationActions.back())
+  }
+
   get publisherLogo () {
     const { publisher } = this.props.link
     if (!publisher.icon_id) return
@@ -35,32 +36,20 @@ class LinkHeaderContainer extends Component {
   }
 
   render () {
-    const { link } = this.props
-
     return (
-      <View style={styles.header} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={0.1} elevation={1}>
-        <View style={styles.publisher}>
-          <PublisherLogo size={25} skin='dark' source={this.publisherLogo} />
-          <View style={styles.publisherInfo}>
-            <Text style={styles.title}>{link.publisher.name}</Text>
-            <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
-          </View>
-        </View>
-        <View style={styles.actions}>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={this.share}>
-            <Image style={styles.iconShare} source={require('../assets/icons/icon-share.png')} />
-          </TouchableHighlight>
-          <TouchableHighlight style={[styles.iconHighlight, styles.iconCloseHighlight]} underlayColor={COLORLESS} onPress={this.close}>
-            <Image style={styles.iconClose} source={require('../assets/icons/icon-close.png')} />
-          </TouchableHighlight>
-        </View>
-      </View>
+      <HeaderWebview
+        link={this.props.link}
+        share={this.share}
+        close={this.close}
+        publisherLogo={this.publisherLogo}
+      />
     )
   }
+}
 
-  close () {
-    this.props.dispatch(NavigationActions.back())
-  }
+LinkHeaderContainer.propTypes = {
+  link: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(LinkHeaderContainer)
