@@ -4,6 +4,5 @@ import gql from 'graphql-tag'
 const Query = gql `query { categories(ordered: true) { id slug color } }`
 
 export default function (CategoryColorsListContainer) {
-  return graphql(Query)(CategoryColorsListContainer
-  )
+  return graphql(Query)(CategoryColorsListContainer)
 }

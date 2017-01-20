@@ -22,5 +22,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-const withQueryCategoryColorsListContainer = withQuery(CategoryColorsListContainer)
-export default connect(mapStateToProps)(withQueryCategoryColorsListContainer)
+const CategoryColorsListContainerWithData = withQuery(CategoryColorsListContainer)
+export default connect(mapStateToProps)(CategoryColorsListContainerWithData)

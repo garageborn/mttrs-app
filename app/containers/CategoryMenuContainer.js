@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
 import MenuSettingsLabel from '../components/MenuSettingsLabel'
@@ -70,6 +69,5 @@ CategoryMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-const Query = gql`query { categories(ordered: true) { id name slug color icon_id } }`
-const CategoryMenuContainerWithData = graphql(Query)(CategoryMenuContainer)
+const CategoryMenuContainerWithData = withQuery(CategoryMenuContainer)
 export default connect(mapStateToProps)(CategoryMenuContainerWithData)
