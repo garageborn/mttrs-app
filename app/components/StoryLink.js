@@ -2,9 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import PublisherLogo from './PublisherLogo'
 import styles from '../styles/StoryLinks'
-import moment from '../common/utils/Moment'
-import ParseDate from '../common/utils/ParseDate'
-import SocialCount from '../common/utils/SocialCount'
+import SocialCountFormatter from '../common/utils/SocialCountFormatter'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { WHITE_TRANSPARENT_COLOR } from '../constants/TouchUnderlayColors'
 
@@ -54,7 +52,7 @@ class StoryLink extends Component {
             </TouchableHighlight>
             <View style={styles.shares}>
               <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
-              <Text style={styles.shareCount}>{SocialCount(link.total_social)}</Text>
+              <Text style={styles.shareCount}>{SocialCountFormatter(link.total_social)}</Text>
             </View>
           </View>
         </View>
