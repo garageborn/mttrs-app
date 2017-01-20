@@ -22,7 +22,10 @@ const styles = StyleSheet.create({
     padding: 0,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    borderBottomWidth: 2
+    borderBottomWidth: Platform.select({
+      ios: 2,
+      android: 7
+    })
   },
 
   name: {
