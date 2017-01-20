@@ -1,6 +1,5 @@
 import { StyleSheet, Platform } from 'react-native'
-import { headerHeight } from './Header.js'
-import { DARK_COLOR } from '../constants/Colors'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   header: {

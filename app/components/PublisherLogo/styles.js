@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { DARK_COLOR } from '../constants/Colors'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   logoContainer: {

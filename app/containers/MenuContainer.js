@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
-import ButtonGroup from '../components/ButtonGroup'
+import Menu from '../components/Menu'
 import CategoryMenuContainer from './CategoryMenuContainer'
 import PublisherMenuContainer from './PublisherMenuContainer'
 import { MenuActions } from '../actions/index'
-import styles from '../styles/Menu'
 
 const messages = defineMessages({
   headerCategories: {
@@ -20,7 +18,7 @@ const messages = defineMessages({
 })
 
 class MenuContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     const { formatMessage } = this.props.intl
     const categories = formatMessage(messages.headerCategories)
@@ -28,49 +26,51 @@ class MenuContainer extends Component {
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [
-        { id: 'categories', label: categories, component: <CategoryMenuContainer params={ this.props.params }/> },
+        { id: 'categories', label: categories, component: <CategoryMenuContainer params={this.props.params} /> },
         { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> }
       ]
     }
   }
 
-  changeCurrentTab(selectedIndex) {
+  changeCurrentTab (selectedIndex) {
     const selectedTab = this.state.tabs[selectedIndex]
     this.props.dispatch(MenuActions.changeMenuTab(selectedTab.id))
   }
 
-  render() {
+  render () {
     return (
-      <View style={styles.menu}>
-        <View style={styles.selector}>
-          <ButtonGroup
-            underlayColor={'rgba(255,255,255,.1)'}
-            selectedBackgroundColor='#2672D7'
-            onPress={this.changeCurrentTab}
-            selectedIndex={this.currentTabIndex}
-            buttons={this.labels} />
-        </View>
-        <View style={styles.menuContainer}>
-          {this.currentTab.component}
-        </View>
-      </View>
+      <Menu
+        currentTab={this.currentTab.component}
+        currentTabIndex={this.currentTabIndex}
+        changeCurrentTab={this.changeCurrentTab}
+        buttonGroupLabels={this.labels}
+      />
     )
   }
 
-  get labels() {
+  get labels () {
     return this.state.tabs.map(tab => tab.label)
   }
 
-  get currentTabIndex() {
+  get currentTabIndex () {
     return this.state.tabs.indexOf(this.currentTab)
   }
 
-  get currentTab() {
+  get currentTab () {
     return this.state.tabs.find((tab) => tab.id === this.props.uiReducer.menu.currentTab)
   }
 }
 
-function mapStateToProps(state) {
+MenuContainer.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+  params: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  uiReducer: PropTypes.object.isRequired
+}
+
+function mapStateToProps (state) {
   return { uiReducer: state.uiReducer }
 }
 

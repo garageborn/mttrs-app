@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native'
-
-export const headerHeight = 55
+import { headerHeight } from '../../styles/Global'
 
 const styles = StyleSheet.create({
   header: {

@@ -5,16 +5,15 @@ import { MenuActions } from '../actions/index'
 import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
-import MenuContainer from './MenuContainer'
 import styles from '../styles/TimelineHeaderContainer'
 
 class TimelineHeaderContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         {this.renderHeader()}
@@ -22,22 +21,23 @@ class TimelineHeaderContainer extends Component {
     )
   }
 
-  renderHeader() {
-    const { section } = this.props.params
+  renderHeader () {
+    const { params } = this.props
+    const { section } = params
 
-    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
 
-    switch(section.name) {
+    switch (section.name) {
       case 'category':
-        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
+        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} />
       case 'publisher':
         return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
       default:
-        return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+        return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
     }
   }
 
-  toggleMenu() {
+  toggleMenu () {
     const { menu } = this.props.uiReducer
     if (menu.isOpen) {
       return this.props.dispatch(MenuActions.retractMenu())
@@ -49,10 +49,11 @@ class TimelineHeaderContainer extends Component {
 
 TimelineHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired,
-  uiReducer: PropTypes.object.isRequired
+  uiReducer: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return { uiReducer: state.uiReducer }
 }
 
