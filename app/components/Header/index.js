@@ -4,7 +4,13 @@ import CategoryColorsListContainer from '../../containers/CategoryColorsListCont
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const Header = ({ title, toggleMenu, icon }) => {
+const Header = ({ title, toggleMenu, icon, params, type }) => {
+  let categoryColors = () => {
+    if (type === 'home' || type === 'category') {
+      return <CategoryColorsListContainer params={params} />
+    }
+  }
+
   return (
     <View style={styles.header}>
       <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
@@ -14,7 +20,7 @@ const Header = ({ title, toggleMenu, icon }) => {
           <Image source={require('../../assets/arrow.png')} />
         </View>
       </TouchableHighlight>
-      <CategoryColorsListContainer />
+      {categoryColors()}
     </View>
   )
 }
@@ -22,6 +28,8 @@ const Header = ({ title, toggleMenu, icon }) => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   toggleMenu: PropTypes.func.isRequired,
+  params: PropTypes.object,
+  type: PropTypes.string,
   icon: PropTypes.any
 }
 

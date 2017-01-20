@@ -9,14 +9,17 @@ const messages = defineMessages({
   }
 })
 
-const HomeHeaderContainer = ({ toggleMenu, category, intl }) => {
+const HomeHeaderContainer = ({ toggleMenu, category, intl, params }) => {
   let title = intl.formatMessage(messages.headerTitle)
+
   if (category) { title = category.name }
 
   return (
     <Header
       toggleMenu={toggleMenu}
       title={title}
+      params={params}
+      type='home'
     />
   )
 }
@@ -26,7 +29,8 @@ HomeHeaderContainer.propTypes = {
   category: PropTypes.object,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  params: PropTypes.object.isRequired
 }
 
 export default injectIntl(HomeHeaderContainer)

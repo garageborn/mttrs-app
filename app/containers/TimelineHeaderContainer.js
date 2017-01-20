@@ -22,17 +22,18 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader () {
-    const { section } = this.props.params
+    const { params } = this.props
+    const { section } = params
 
-    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
 
     switch (section.name) {
       case 'category':
-        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} />
+        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} />
       case 'publisher':
         return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} />
       default:
-        return <HomeHeaderContainer toggleMenu={this.toggleMenu} />
+        return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
     }
   }
 
