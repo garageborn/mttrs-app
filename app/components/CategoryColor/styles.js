@@ -1,8 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
+const numberOfCategories = 9
 
 const styles = StyleSheet.create({
   color: {
-    width: 42,
+    width: width / numberOfCategories,
     height: 2
   }
 })
