@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React, { Component, PropTypes } from 'react'
 import TimelineHeaderContainer from '../containers/TimelineHeaderContainer'
 import TimelineContainer from '../containers/TimelineContainer'
 import StoryLinksContainer from '../containers/StoryLinksContainer'
@@ -10,8 +9,8 @@ class Timeline extends Component {
   static route = {
     navigationBar: {
       renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
-      renderLeft: () => <View />,
-      renderRight: () => <View />,
+      renderLeft: () => null,
+      renderRight: () => null,
       backgroundColor: DARK_COLOR,
       height: headerHeight
     }
@@ -21,7 +20,7 @@ class Timeline extends Component {
     const { route } = this.props
     return (
       <TimelineContainer params={route.params}>
-        { this.renderStoryLinks() }
+        {this.renderStoryLinks()}
       </TimelineContainer>
     )
   }
@@ -37,6 +36,10 @@ class Timeline extends Component {
 
     return <StoryLinksContainer story={storyLinks.story} publisherSlug={publisherSlug} />
   }
+}
+
+Timeline.propTypes = {
+  route: PropTypes.object.isRequired
 }
 
 export default Timeline
