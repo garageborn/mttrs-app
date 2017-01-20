@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
 
 let imageSize = 120
@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 20,
-    fontWeight: '400'
+    lineHeight: Platform.select({ ios: 24, android: 26 }),
+    fontWeight: '500'
   }
 })
 

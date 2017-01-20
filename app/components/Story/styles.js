@@ -6,28 +6,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
     marginTop: 8,
     marginBottom: 8,
-    padding: 12,
+    padding: 10,
     backgroundColor: '#FFF'
-  },
-
-  lightText: {
-    fontSize: 13,
-    color: '#999'
-  },
-
-  darkText: {
-    fontSize: 13,
-    color: '#666'
-  },
-
-  publisher: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-
-  publisherLogo: {
-    width: 22,
-    height: 22
   }
 })
 

@@ -2,8 +2,13 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   lightText: {
-    fontSize: 13,
+    fontSize: 12,
     color: '#999'
+  },
+
+  darkText: {
+    fontSize: 12,
+    color: '#666'
   },
 
   publisher: {
@@ -12,8 +17,8 @@ const styles = StyleSheet.create({
   },
 
   publisherLogo: {
-    width: 22,
-    height: 22
+    width: 24,
+    height: 24
   }
 })
 

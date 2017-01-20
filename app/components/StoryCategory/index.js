@@ -2,17 +2,21 @@ import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import styles from './styles'
 
-const StoryTitle = ({category}) => {
+const StoryCategory = ({category}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>In <Text style={{ color: category.color }}>{category.name}</Text></Text>
+      <Text style={styles.text}>
+        in <Text style={[styles.category, { color: category.color }]}>
+          {category.name.toUpperCase()}
+        </Text>
+      </Text>
     </View>
 
   )
 }
 
-StoryTitle.propTypes = {
+StoryCategory.propTypes = {
   category: PropTypes.object
 }
 
-export default StoryTitle
+export default StoryCategory

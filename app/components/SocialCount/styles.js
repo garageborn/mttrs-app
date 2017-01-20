@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   shareIcon: {
     width: 8,
     height: 13,
-    marginRight: 5,
+    marginRight: 3,
     marginTop: -1
   },
 
   shareCount: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '500',
     color: '#999'
   }
