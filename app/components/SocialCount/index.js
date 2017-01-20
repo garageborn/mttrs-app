@@ -13,7 +13,7 @@ const SocialCount = ({totalSocial}) => {
 }
 
 SocialCount.propTypes = {
-  totalSocial: PropTypes.string.isRequired
+  totalSocial: PropTypes.number.isRequired
 }
 
 export default SocialCount
