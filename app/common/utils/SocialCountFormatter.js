@@ -1,7 +1,5 @@
 import KFormat from './KFormat'
 
-const SocialCount = number => {
+export default number => {
   return number > 999 ? `${KFormat(number)}+` : KFormat(number)
 }
-
-export default SocialCount

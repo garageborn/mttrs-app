@@ -1,11 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Image, Text, TouchableHighlight, View } from 'react-native'
+import { Text, TouchableHighlight, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import _capitalize from 'lodash/capitalize'
-import PublisherLogo from './PublisherLogo'
-import styles from '../styles/Story'
-import * as cloudinary from '../common/utils/Cloudinary'
-import { WHITE_COLOR } from '../constants/TouchUnderlayColors'
+import PublisherLogo from '../PublisherLogo'
+import styles from './styles'
+import * as cloudinary from '../../common/utils/Cloudinary'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   storyFrom: {
@@ -30,7 +29,7 @@ const messages = defineMessages({
 })
 
 class StoryPublishers extends Component {
-  render() {
+  render () {
     const { openStoryLinks } = this.props
     const { formatMessage } = this.props.intl
 
@@ -46,19 +45,19 @@ class StoryPublishers extends Component {
     )
   }
 
-  getMainPublisher() {
+  getMainPublisher () {
     const { main_link } = this.props.story
     return <Text style={styles.darkText}> {main_link.publisher.name}</Text>
   }
 
-  get publisherLogo() {
+  get publisherLogo () {
     const { main_link } = this.props.story
     if (!main_link.publisher.icon_id) return
     const uri = cloudinary.id(main_link.publisher.icon_id, { secure: true })
     return { uri }
   }
 
-  getCounter() {
+  getCounter () {
     const { formatMessage } = this.props.intl
     const { other_links } = this.props.story
     const and = formatMessage(messages.storyAnd)
@@ -77,14 +76,17 @@ class StoryPublishers extends Component {
 }
 
 StoryPublishers.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
   story: PropTypes.shape({
     main_link: PropTypes.shape({
       publisher: PropTypes.shape({
         name: PropTypes.string.isRequired,
         icon_id: PropTypes.string
-      }).isRequired,
+      }).isRequired
     }).isRequired,
-    other_links: PropTypes.array.isRequired,
+    other_links: PropTypes.array.isRequired
   }).isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }

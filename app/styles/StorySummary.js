@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const triangle = {
   width: 0,
@@ -8,7 +8,7 @@ const triangle = {
   borderLeftWidth: 7,
   borderRightWidth: 7,
   borderLeftColor: 'transparent',
-  borderRightColor: 'transparent',
+  borderRightColor: 'transparent'
 }
 
 const trianglePointingUp = {
@@ -46,62 +46,61 @@ const styles = StyleSheet.create({
     position: 'relative',
     marginTop: -2,
     padding: 15,
-    borderRadius: 5,
+    borderRadius: 3,
     backgroundColor: '#F1F1F1',
-    borderWidth: 1,
-    borderColor: '#DDDDDD'
+    borderColor: '#DDD',
+    borderWidth: 1
   },
   headlineContainer: {
     flexDirection: 'row',
-    marginBottom: 5,
     alignItems: 'center'
   },
   headline: {
     color: '#666666',
-    fontSize: 15,
-    fontWeight: 'bold',
-    marginTop: 5,
-    paddingLeft: 5
+    fontSize: 14,
+    fontWeight: '500',
+    marginTop: 3,
+    marginLeft: 5
   },
   summary: {
     color: '#666666',
-    fontSize: 15,
-    lineHeight: 23
+    fontSize: 14,
+    lineHeight: 23,
+    marginTop: 3
   },
   summaryExpanded: {
-    padding: 15
+    paddingBottom: 20
   },
   showLessTriangle: {
     ...expandButtonTriangle,
-    borderBottomWidth: 5,
+    borderBottomWidth: 5
   },
   showMoreTriangle: {
     ...expandButtonTriangle,
-    borderTopWidth: 5,
-
+    borderTopWidth: 5
   },
   buttonTextContainer: {
     flexDirection: 'row',
     marginVertical: 5,
+    backgroundColor: 'transparent'
   },
   expandButton: {
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F1F1F1'
+    alignItems: 'center'
   },
   expandButtonContainer: {
     backgroundColor: '#F1F1F1'
   },
   footer: {
     position: 'absolute',
-    bottom: 0,
+    bottom: -1,
     left: 0,
     right: 0,
     flexGrow: 1
   },
   gradient: {
     marginHorizontal: 1,
-    height: 80,
+    height: 50,
     backgroundColor: 'transparent'
   }
 })
