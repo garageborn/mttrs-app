@@ -6,5 +6,5 @@ gem 'pronto-eslint_npm', '0.7.1', require: false
 gem 'pronto-flay', '0.7.0', require: false
 gem 'pronto-rubocop', '0.7.0', require: false
 
-gem 'fastlane', '2.8.0'
+gem 'fastlane', '2.9.0'
 gem 'rake', '11.3.0'
