@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 
   category: {
-    backgroundColor: '#555',
+    backgroundColor: 'transparent',
     width: (width - 51) / 2,
     height: height / 7.5,
     padding: 0,
