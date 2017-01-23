@@ -1,16 +1,18 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import HeaderStripColor from '../components/HeaderStripColor'
 import CategoryColorList from '../components/CategoryColorList'
 import withQuery from './CategoryColorsListContainer.gql'
 
-const CategoryColorsListContainer = ({ type, data, params, uiReducer }) => {
+const HeaderBottomColorContainer = ({ type, data, params, uiReducer }) => {
   if (uiReducer.menu.isOpen) return false
-  return (
-    <CategoryColorList type={type} data={data} params={params} />
-  )
+
+  if (type === 'publisher') return <HeaderStripColor type={type} />
+
+  return <CategoryColorList type={type} data={data} params={params} />
 }
 
-CategoryColorsListContainer.propTypes = {
+HeaderBottomColorContainer.propTypes = {
   type: PropTypes.string,
   data: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
@@ -23,5 +25,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-const CategoryColorsListContainerWithData = withQuery(CategoryColorsListContainer)
-export default connect(mapStateToProps)(CategoryColorsListContainerWithData)
+const HeaderBottomColorContainerWithData = withQuery(HeaderBottomColorContainer)
+export default connect(mapStateToProps)(HeaderBottomColorContainerWithData)

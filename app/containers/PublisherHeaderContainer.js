@@ -30,6 +30,7 @@ class PublisherHeaderContainer extends Component {
           toggleMenu={toggleMenu}
           title={publisher.name}
           icon={this.icon}
+          type='publisher'
         />
         <TouchableHighlight
           underlayColor={DARK_TRANSPARENT_COLOR}

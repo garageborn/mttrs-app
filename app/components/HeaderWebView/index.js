@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
 import PublisherLogo from '../PublisherLogo'
-import CategoryColorsListContainer from '../../containers/CategoryColorsListContainer'
+import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
@@ -10,7 +10,7 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
   let categoryColors = null
 
   if (params.section.type === 'home' || params.section.type === 'category') {
-    categoryColors = <CategoryColorsListContainer type='link' params={params} />
+    categoryColors = <HeaderBottomColorContainer type='link' params={params} />
   }
 
   return (
