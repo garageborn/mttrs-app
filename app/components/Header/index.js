@@ -12,14 +12,16 @@ const Header = ({ title, toggleMenu, icon, params, type }) => {
   }
 
   return (
-    <View style={styles.header}>
-      <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
-        <View style={styles.headerContainer}>
-          {icon}
-          <Text style={styles.headerTitle}>{title}</Text>
-          <Image source={require('../../assets/arrow.png')} />
-        </View>
-      </TouchableHighlight>
+    <View>
+      <View style={styles.header}>
+        <TouchableHighlight onPress={toggleMenu} underlayColor={COLORLESS}>
+          <View style={styles.headerContainer}>
+            {icon}
+            <Text style={styles.headerTitle}>{title}</Text>
+            <Image source={require('../../assets/arrow.png')} />
+          </View>
+        </TouchableHighlight>
+      </View>
       {categoryColors()}
     </View>
   )
