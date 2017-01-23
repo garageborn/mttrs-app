@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { View } from 'react-native'
 import styles from './styles'
 import StorySummary from '../StorySummary'
 import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
-
-import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
   constructor (props) {
@@ -114,7 +112,6 @@ Story.propTypes = {
     }).isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
-  openCategory: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
   isSceneHome: PropTypes.bool.isRequired,
