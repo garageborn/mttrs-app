@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import CategoryColorList from '../components/CategoryColorList'
 import withQuery from './CategoryColorsListContainer.gql'
 
-const CategoryColorsListContainer = ({ data, params, uiReducer }) => {
+const CategoryColorsListContainer = ({ type, data, params, uiReducer }) => {
   if (uiReducer.menu.isOpen) return false
   return (
-    <CategoryColorList data={data} params={params} />
+    <CategoryColorList type={type} data={data} params={params} />
   )
 }
 
 CategoryColorsListContainer.propTypes = {
+  type: PropTypes.string,
   data: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   uiReducer: PropTypes.object.isRequired

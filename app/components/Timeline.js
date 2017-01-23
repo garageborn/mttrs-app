@@ -147,13 +147,18 @@ class Timeline extends Component {
   }
 
   renderRow (story) {
-    let isSceneHome = this.props.type === 'home'
-    return <StoryContainer
-      key={story.id}
-      story={story}
-      isSceneHome={isSceneHome}
-      scrollToY={this.scrollToY}
-    />
+    let section = {
+      type: this.props.type,
+      model: this.props.filter
+    }
+    return (
+      <StoryContainer
+        key={story.id}
+        story={story}
+        section={section}
+        scrollToY={this.scrollToY}
+      />
+    )
   }
 
   scrollToY (y) {
@@ -162,7 +167,8 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  category: PropTypes.object
+  type: PropTypes.string.isRequired,
+  filter: PropTypes.any
 }
 
 let mapStateToProps = (state, ownProps) => {

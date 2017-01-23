@@ -19,7 +19,8 @@ class StoryContainer extends Component {
   }
 
   render() {
-    const { story, isSceneHome, visited, scrollToY } = this.props
+    const { story, section, visited, scrollToY } = this.props
+    let isSceneHome = this.props.section.type === 'home'
 
     return (
       <Story
@@ -35,8 +36,9 @@ class StoryContainer extends Component {
   }
 
   openLink(link) {
-    this.props.dispatch(AnalyticsActions.trackLink(link))
-    this.props.dispatch(NavigationActions.link(this.props.story, link))
+    const { section, dispatch } = this.props
+    dispatch(AnalyticsActions.trackLink(link))
+    dispatch(NavigationActions.link(this.props.story, link, section))
   }
 
   openCategory() {

@@ -13,7 +13,7 @@ class Link extends Component {
   static route = Platform.select({
     ios: {
       navigationBar: {
-        renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
+        renderTitle: (route) => <LinkHeaderContainer params={route.params} />,
         renderLeft: () => <View />,
         renderRight: () => <View />,
         backgroundColor: DARK_COLOR,
@@ -79,7 +79,7 @@ class Link extends Component {
 
   renderNavbar (props) {
     if (Platform.OS === 'ios') return
-    return <LinkHeaderContainer params={props.route.params} link={props.route.params.link} />
+    return <LinkHeaderContainer params={props.route.params} />
   }
 
   render () {
