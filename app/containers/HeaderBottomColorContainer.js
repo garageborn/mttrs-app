@@ -15,7 +15,7 @@ const HeaderBottomColorContainer = ({ type, data, params, uiReducer }) => {
 HeaderBottomColorContainer.propTypes = {
   type: PropTypes.string,
   data: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired,
+  params: PropTypes.object,
   uiReducer: PropTypes.object.isRequired
 }
 

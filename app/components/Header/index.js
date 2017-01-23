@@ -4,8 +4,8 @@ import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContai
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const Header = ({ title, toggleMenu, icon, params }) => {
-  let headerBottomColors = () => <HeaderBottomColorContainer params={params} />
+const Header = ({ title, toggleMenu, icon, params, type }) => {
+  let headerBottomColors = () => <HeaderBottomColorContainer type={type} params={params} />
 
   return (
     <View>
@@ -25,6 +25,7 @@ const Header = ({ title, toggleMenu, icon, params }) => {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   params: PropTypes.object,
   icon: PropTypes.any
