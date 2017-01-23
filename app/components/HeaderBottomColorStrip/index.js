@@ -3,8 +3,8 @@ import { View } from 'react-native'
 import styles from './styles'
 
 const HeaderBottomColorStrip = () => (
-  <View style={styles.bottomColorWrapper}>
-    <View style={styles.bottomColorStrip} />
+  <View style={styles.container}>
+    <View style={styles.strip} />
   </View>
 )
 

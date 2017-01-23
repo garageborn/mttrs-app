@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  bottomColorWrapper: {
+  container: {
     alignItems: 'center',
     position: 'absolute',
     height: 2,
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     zIndex: 1
   },
 
-  bottomColorStrip: {
+  strip: {
     backgroundColor: '#999',
     height: 2,
     width
