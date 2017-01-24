@@ -6,7 +6,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import Timeline from '../components/Timeline'
-import MenuContainer from './MenuContainer'
+import Menu from '../components/Menu'
 import styles from '../styles/App'
 import { headerHeight } from '../styles/Global'
 
@@ -229,7 +229,7 @@ class TimelineContainer extends Component {
 
   renderMenu () {
     const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <MenuContainer params={params} />
+    if (uiReducer.menu.isOpen) return <Menu params={params} />
   }
 
   closeMenu () {

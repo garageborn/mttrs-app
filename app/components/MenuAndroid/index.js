@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { TabViewAnimated, TabBarTop } from 'react-native-tab-view'
 import PublisherMenuContainer from '../../containers/PublisherMenuContainer'
 import CategoryMenuContainer from '../../containers/CategoryMenuContainer'
@@ -52,13 +52,6 @@ class MenuAndroid extends Component {
       />
     )
   }
-}
-
-MenuAndroid.propTypes = {
-  currentTab: PropTypes.element.isRequired,
-  changeCurrentTab: PropTypes.func.isRequired,
-  currentTabIndex: PropTypes.number.isRequired,
-  buttonGroupLabels: PropTypes.array.isRequired
 }
 
 export default MenuAndroid
