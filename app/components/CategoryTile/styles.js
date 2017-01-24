@@ -45,7 +45,10 @@ const styles = StyleSheet.create({
   name: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: Platform.select({
+      ios: '500',
+      android: '300'
+    }),
     marginBottom: 10
   },
 

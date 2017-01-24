@@ -1,8 +1,12 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 
 const tileWidth = width - 35
+const imageHeight = Platform.select({
+  ios: 81,
+  android: 72
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +24,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: tileWidth,
-    height: 81,
+    height: imageHeight,
     alignItems: 'flex-end',
     justifyContent: 'center',
     flexDirection: 'row'
@@ -30,7 +34,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     color: '#FFF',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: Platform.select({
+      ios: '500',
+      android: '300'
+    }),
     marginBottom: 10
   },
 
