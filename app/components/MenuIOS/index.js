@@ -46,7 +46,7 @@ class MenuIOS extends Component {
           <ButtonGroup
             underlayColor={'rgba(255,255,255,.1)'}
             selectedBackgroundColor='#F1F1F1'
-            onPress={this.changeCurrentTab.bind(this)}
+            onPress={this.changeCurrentTab}
             selectedIndex={this.currentTabIndex}
             buttons={this.labels}
           />
