@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { View } from 'react-native'
 import styles from './styles'
 import StorySummary from '../StorySummary'
 import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
-
-import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class Story extends Component {
   constructor (props) {
@@ -38,7 +36,7 @@ class Story extends Component {
           shadowOpacity={0.1}
           shadowColor={'rgba(0, 0, 0, .6)'}
           shadowOffset={{width: 0, height: 2}}
-          style={[styles.card, this.storySpacing()]}
+          style={styles.card}
         >
           <StoryMainLink
             onPress={openLink}
@@ -77,17 +75,6 @@ class Story extends Component {
     this.setState({isSummaryExpanded: !this.state.isSummaryExpanded})
   }
 
-  storySpacing () {
-    const { isSceneHome } = this.props
-
-    if (isSceneHome) {
-      return {
-        marginTop: 16,
-        marginBottom: 16
-      }
-    }
-  }
-
   get mainLink () {
     return this.props.story.main_link
   }
@@ -114,7 +101,6 @@ Story.propTypes = {
     }).isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
-  openCategory: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
   isSceneHome: PropTypes.bool.isRequired,

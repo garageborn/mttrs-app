@@ -248,6 +248,6 @@ let mapStateToProps = (state) => {
   }
 }
 
-const Query = gql`query { categories(ordered: true) { id name slug icon_id } }`
+const Query = gql`query { categories(ordered: true) { id name slug image_id } }`
 const TimelineContainerWithData = graphql(Query)(TimelineContainer)
 export default connect(mapStateToProps)(TimelineContainerWithData)

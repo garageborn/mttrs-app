@@ -1,15 +1,11 @@
 import React, { PropTypes } from 'react'
 import { View, Text, Image, TouchableHighlight } from 'react-native'
-import CategoryColorsListContainer from '../../containers/CategoryColorsListContainer'
+import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
 const Header = ({ title, toggleMenu, icon, params, type }) => {
-  let categoryColors = () => {
-    if (type === 'home' || type === 'category') {
-      return <CategoryColorsListContainer params={params} />
-    }
-  }
+  let headerBottomColors = () => <HeaderBottomColorContainer type={type} params={params} />
 
   return (
     <View>
@@ -22,16 +18,16 @@ const Header = ({ title, toggleMenu, icon, params, type }) => {
           </View>
         </TouchableHighlight>
       </View>
-      {categoryColors()}
+      {headerBottomColors()}
     </View>
   )
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   toggleMenu: PropTypes.func.isRequired,
   params: PropTypes.object,
-  type: PropTypes.string,
   icon: PropTypes.any
 }
 
