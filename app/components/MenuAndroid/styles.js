@@ -1,19 +1,18 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const { width } = Dimensions.get('window')
-const iphoneWidthSmall = 320
-const selectorHeight = width === iphoneWidthSmall ? 50 : 60
+const horizontalMargin = 35
 
 const styles = StyleSheet.create({
-  selector: {
-    paddingHorizontal: 45,
-    height: selectorHeight,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  menuContainer: {
+  container: {
     flexGrow: 1
+  },
+  tabBar: {
+    backgroundColor: DARK_COLOR,
+    width: width - horizontalMargin,
+    alignSelf: 'center',
+    marginBottom: 10
   }
 })
 

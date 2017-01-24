@@ -1,37 +1,64 @@
-import React, { PropTypes } from 'react'
-import { View } from 'react-native'
-import ButtonGroup from '../../components/ButtonGroup'
+import React, { Component, PropTypes } from 'react'
+import { TabViewAnimated, TabBarTop } from 'react-native-tab-view'
+import PublisherMenuContainer from '../../containers/PublisherMenuContainer'
+import CategoryMenuContainer from '../../containers/CategoryMenuContainer'
 import styles from './styles'
 
-const Menu = ({
-  currentTab,
-  changeCurrentTab,
-  currentTabIndex,
-  buttonGroupLabels
-}) => {
-  return (
-    <View style={{flex: 1}}>
-      <View style={styles.selector}>
-        <ButtonGroup
-          underlayColor={'rgba(255,255,255,.1)'}
-          selectedBackgroundColor='#F1F1F1'
-          onPress={changeCurrentTab}
-          selectedIndex={currentTabIndex}
-          buttons={buttonGroupLabels}
-        />
-      </View>
-      <View style={styles.menuContainer}>
-        {currentTab}
-      </View>
-    </View>
-  )
+class MenuAndroid extends Component {
+  constructor () {
+    super()
+    this.handleChangeTab = this.handleChangeTab.bind(this)
+    this.state = {
+      index: 0,
+      routes: [
+        { key: '1', title: 'Categories' },
+        { key: '2', title: 'Publishers' }
+      ]
+    }
+  }
+
+  handleChangeTab (index) {
+    this.setState({ index })
+  };
+
+  renderHeader (props) {
+    return (
+      <TabBarTop
+        {...props}
+        style={styles.tabBar}
+      />
+    )
+  }
+
+  renderScene ({ route }) {
+    switch (route.key) {
+      case '1':
+        return <CategoryMenuContainer />
+      case '2':
+        return <PublisherMenuContainer />
+      default:
+        return null
+    }
+  }
+
+  render () {
+    return (
+      <TabViewAnimated
+        style={styles.container}
+        navigationState={this.state}
+        renderScene={this.renderScene}
+        renderHeader={this.renderHeader}
+        onRequestChangeTab={this.handleChangeTab}
+      />
+    )
+  }
 }
 
-Menu.propTypes = {
+MenuAndroid.propTypes = {
   currentTab: PropTypes.element.isRequired,
   changeCurrentTab: PropTypes.func.isRequired,
   currentTabIndex: PropTypes.number.isRequired,
   buttonGroupLabels: PropTypes.array.isRequired
 }
 
-export default Menu
+export default MenuAndroid

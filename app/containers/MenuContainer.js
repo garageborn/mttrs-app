@@ -44,6 +44,7 @@ class MenuContainer extends Component {
         currentTabIndex={this.currentTabIndex}
         changeCurrentTab={this.changeCurrentTab}
         buttonGroupLabels={this.labels}
+        params={this.props.params}
       />
     )
   }
