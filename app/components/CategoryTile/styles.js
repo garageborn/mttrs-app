@@ -9,7 +9,7 @@ const categoryVerticalMargin = Platform.select({
 })
 
 const imageHeight = Platform.select({
-  ios: 88,
+  ios: 86,
   android: 80
 })
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 
   category: {
-    backgroundColor: 'transparent',
+    backgroundColor: '#555',
     width: tileWidth,
     height: height / 7.5,
     padding: 0,
