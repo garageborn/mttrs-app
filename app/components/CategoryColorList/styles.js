@@ -1,12 +1,12 @@
 import { StyleSheet, Platform } from 'react-native'
 
 const defaultList = {
-  flex: 1,
+  flexGrow: 1,
   flexDirection: 'row',
   alignItems: 'center',
-  position: 'absolute',
+  position: 'relative',
   height: 12,
-  bottom: -6,
+  bottom: 6,
   zIndex: 1
 }
 
