@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     borderBottomWidth: Platform.select({
-      ios: 2,
+      ios: 2.5,
       android: 7
     })
   },

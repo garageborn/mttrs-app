@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@exponent/ex-navigation@^2.1.5":
+"@exponent/ex-navigation@^2.7.1":
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/@exponent/ex-navigation/-/ex-navigation-2.7.1.tgz#5166110011468a040df9f82740f8d0eda64e797b"
   dependencies:

@@ -4,8 +4,7 @@ import { headerHeight } from '../../styles/Global'
 const styles = StyleSheet.create({
   header: {
     height: headerHeight,
-    paddingTop: 18,
-    zIndex: 2
+    paddingTop: 18
   },
 
   headerContainer: {

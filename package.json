@@ -5,7 +5,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "@exponent/ex-navigation": "^2.1.5",
+    "@exponent/ex-navigation": "^2.7.1",
     "analytics-react-native": "^1.0.1",
     "apollo-client": "^0.7.1",
     "babel-cli": "^6.18.0",
