@@ -28,7 +28,7 @@ class MenuIOS extends Component {
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [
-        { id: 'categories', label: categories, component: <CategoryMenuContainer params={this.props.params} /> },
+        { id: 'categories', label: categories, component: <CategoryMenuContainer /> },
         { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> }
       ]
     }
