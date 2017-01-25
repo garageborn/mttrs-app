@@ -19,7 +19,6 @@ const messages = defineMessages({
 class MenuAndroid extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
     const { formatMessage } = props.intl
     const categories = formatMessage(messages.headerCategories)
     const publishers = formatMessage(messages.headerPublishers)
