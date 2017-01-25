@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     borderBottomWidth: Platform.select({
-      ios: 2,
+      ios: 2.5,
       android: 7
     })
   },
@@ -45,7 +45,10 @@ const styles = StyleSheet.create({
   name: {
     color: '#FFF',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: Platform.select({
+      ios: '500',
+      android: '300'
+    }),
     marginBottom: 10
   },
 
