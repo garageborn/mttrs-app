@@ -13,6 +13,7 @@ dependencies:
     - ~/.yarn-cache
   override:
     - yarn install
+    - gem update --system
     - bundle install
   post:
     - bundle exec rake lint
