@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   color: {
-    flex: 1,
+    flexGrow: 1,
     height: 2
   }
 })
