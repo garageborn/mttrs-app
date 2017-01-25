@@ -1,37 +1,19 @@
-import React, { PropTypes } from 'react'
-import { View } from 'react-native'
-import ButtonGroup from '../../components/ButtonGroup'
+import React from 'react'
+import { View, Platform } from 'react-native'
+import MenuIOS from '../MenuIOS'
+import MenuAndroid from '../MenuAndroid'
 import styles from './styles'
 
-const Menu = ({
-  currentTab,
-  changeCurrentTab,
-  currentTabIndex,
-  buttonGroupLabels
-}) => {
+const Menu = (props) => {
+  let menu = Platform.select({
+    ios: <MenuIOS {...props} />,
+    android: <MenuAndroid {...props} />
+  })
   return (
     <View style={styles.menu}>
-      <View style={styles.selector}>
-        <ButtonGroup
-          underlayColor={'rgba(255,255,255,.1)'}
-          selectedBackgroundColor='#F1F1F1'
-          onPress={changeCurrentTab}
-          selectedIndex={currentTabIndex}
-          buttons={buttonGroupLabels}
-        />
-      </View>
-      <View style={styles.menuContainer}>
-        {currentTab}
-      </View>
+      {menu}
     </View>
   )
-}
-
-Menu.propTypes = {
-  currentTab: PropTypes.element.isRequired,
-  changeCurrentTab: PropTypes.func.isRequired,
-  currentTabIndex: PropTypes.number.isRequired,
-  buttonGroupLabels: PropTypes.array.isRequired
 }
 
 export default Menu

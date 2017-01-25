@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
+import ButtonGroup from '../../components/ButtonGroup'
+import styles from './styles'
 import { injectIntl, defineMessages } from 'react-intl'
-import Menu from '../components/Menu'
-import CategoryMenuContainer from './CategoryMenuContainer'
-import PublisherMenuContainer from './PublisherMenuContainer'
-import { MenuActions } from '../actions/index'
+import CategoryMenuContainer from '../../containers/CategoryMenuContainer'
+import PublisherMenuContainer from '../../containers/PublisherMenuContainer'
+import { MenuActions } from '../../actions'
 
 const messages = defineMessages({
   headerCategories: {
@@ -17,7 +19,7 @@ const messages = defineMessages({
   }
 })
 
-class MenuContainer extends Component {
+class MenuIOS extends Component {
   constructor (props) {
     super(props)
     const { formatMessage } = this.props.intl
@@ -26,7 +28,7 @@ class MenuContainer extends Component {
     this.changeCurrentTab = this.changeCurrentTab.bind(this)
     this.state = {
       tabs: [
-        { id: 'categories', label: categories, component: <CategoryMenuContainer params={this.props.params} /> },
+        { id: 'categories', label: categories, component: <CategoryMenuContainer /> },
         { id: 'publishers', label: publishers, component: <PublisherMenuContainer /> }
       ]
     }
@@ -39,12 +41,20 @@ class MenuContainer extends Component {
 
   render () {
     return (
-      <Menu
-        currentTab={this.currentTab.component}
-        currentTabIndex={this.currentTabIndex}
-        changeCurrentTab={this.changeCurrentTab}
-        buttonGroupLabels={this.labels}
-      />
+      <View style={{flex: 1}}>
+        <View style={styles.selector}>
+          <ButtonGroup
+            underlayColor={'rgba(255,255,255,.1)'}
+            selectedBackgroundColor='#F1F1F1'
+            onPress={this.changeCurrentTab}
+            selectedIndex={this.currentTabIndex}
+            buttons={this.labels}
+          />
+        </View>
+        <View style={styles.menuContainer}>
+          {this.currentTab.component}
+        </View>
+      </View>
     )
   }
 
@@ -61,12 +71,12 @@ class MenuContainer extends Component {
   }
 }
 
-MenuContainer.propTypes = {
+MenuIOS.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  params: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  params: PropTypes.object.isRequired,
   uiReducer: PropTypes.object.isRequired
 }
 
@@ -74,5 +84,5 @@ function mapStateToProps (state) {
   return { uiReducer: state.uiReducer }
 }
 
-const intlMenuContainer = injectIntl(MenuContainer)
-export default connect(mapStateToProps)(intlMenuContainer)
+const intlMenuIOS = injectIntl(MenuIOS)
+export default connect(mapStateToProps)(intlMenuIOS)
