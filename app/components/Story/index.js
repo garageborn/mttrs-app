@@ -33,9 +33,6 @@ class Story extends Component {
         onLayout={this.getViewPosition}
       >
         <View
-          shadowOpacity={0.1}
-          shadowColor={'rgba(0, 0, 0, .6)'}
-          shadowOffset={{width: 0, height: 2}}
           style={styles.card}
         >
           <StoryMainLink
