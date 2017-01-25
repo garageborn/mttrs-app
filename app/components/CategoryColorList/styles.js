@@ -1,13 +1,16 @@
 import { StyleSheet, Platform } from 'react-native'
 
 const defaultList = {
-  flex: 1,
+  flexGrow: 1,
   flexDirection: 'row',
   alignItems: 'center',
-  position: 'absolute',
+  position: 'relative',
   height: 12,
-  bottom: -6,
-  zIndex: 1
+  bottom: Platform.select({
+    ios: 5,
+    android: 7
+  }),
+  zIndex: 10
 }
 
 const styles = StyleSheet.create({
@@ -16,10 +19,7 @@ const styles = StyleSheet.create({
   },
   linkList: {
     ...defaultList,
-    bottom: Platform.select({
-      ios: -17,
-      android: -6
-    })
+    bottom: -5
   }
 })
 

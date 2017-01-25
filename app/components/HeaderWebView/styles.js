@@ -2,22 +2,24 @@ import { StyleSheet, Platform } from 'react-native'
 import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
     ...Platform.select({
       ios: {
         paddingTop: 10
       },
       android: {
+        paddingTop: 5,
         height: 55
       }
     }),
-    paddingLeft: 28,
-    paddingRight: 20,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: DARK_COLOR,
-    zIndex: 2
+    backgroundColor: DARK_COLOR
+  },
+
+  header: {
+    flexDirection: 'row'
   },
 
   publisherInfo: {
