@@ -18,10 +18,7 @@ class StoryImage extends Component {
     if (this.state.imageLoaded) {
       return {uri: cloudinary.url(this.props.source, options)}
     } else {
-      return Platform.select({
-        ios: require('../../assets/mttrs-loading.gif'),
-        android: require('../../assets/mttrs-loading-static.png')
-      })
+      return require('../../assets/mttrs-loading.gif')
     }
   }
 
