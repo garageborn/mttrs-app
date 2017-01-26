@@ -23,8 +23,8 @@ class Provider extends Component {
     let msg = messages[language] || messages.en
 
     return (
-      <IntlProvider locale={language} defaultLocale='en' messages={msg}>
-        { this.props.children }
+      <IntlProvider locale={language} defaultLocale='pt' messages={msg}>
+        {this.props.children}
       </IntlProvider>
     )
   }
