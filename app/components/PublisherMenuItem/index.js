@@ -17,7 +17,7 @@ const PublisherMenuItem = ({ onPress, publisher }) => {
   return (
     <Touchable
       style={styles.touch}
-      onPress={(e) => onPress(publisher)}
+      onPress={e => onPress(publisher)}
       underlayColor={WHITE_TRANSPARENT_COLOR}
     >
       <View style={styles.publisher}>

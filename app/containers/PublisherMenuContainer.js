@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
-import _isNil from 'lodash/isNil'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../actions/index'
@@ -18,7 +17,7 @@ const messages = defineMessages({
 })
 
 class PublisherMenuContainer extends Component {
-  constructor() {
+  constructor () {
     super()
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
@@ -28,13 +27,13 @@ class PublisherMenuContainer extends Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate (nextProps, nextState) {
     if (this.state.query !== nextState.query) {
       this.rowsAndSections(nextState.query)
     }
   }
 
-  dataSource() {
+  dataSource () {
     let ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (r1, r2) => r1 !== r2
@@ -44,8 +43,8 @@ class PublisherMenuContainer extends Component {
     return ds.cloneWithRowsAndSections(rows, sections)
   }
 
-  rowsAndSections(query) {
-    const { publishers, loading } = this.props.data
+  rowsAndSections (query) {
+    const { publishers } = this.props.data
     let rows = {}
     let sections = []
     const queryMatcher = new RegExp(query, 'i')
@@ -74,10 +73,9 @@ class PublisherMenuContainer extends Component {
     return {rows, sections}
   }
 
-
-  renderSeparator(sectionData, section) {
+  renderSeparator (sectionData, section) {
     let renderSection = section === 'isFavorite'
-      ? <Image source={require('../assets/starActive.png')} style={styles.listHeaderImage}/>
+      ? <Image source={require('../assets/starActive.png')} style={styles.listHeaderImage} />
       : <Text style={styles.listHeaderText}>{section}</Text>
 
     return (
@@ -87,18 +85,18 @@ class PublisherMenuContainer extends Component {
     )
   }
 
-  renderRow(publisher) {
+  renderRow (publisher) {
     return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
-  render() {
+  render () {
     const { loading } = this.props.data
     if (loading) {
       return (
         <View style={styles.container}>
           <ActivityIndicator
-            size="large"
-            color="#AAA"
+            size='large'
+            color='#AAA'
           />
         </View>
       )
@@ -106,13 +104,13 @@ class PublisherMenuContainer extends Component {
 
     return (
       <View style={styles.container}>
-        { this.renderSearch() }
-        { this.renderList() }
+        {this.renderSearch()}
+        {this.renderList()}
       </View>
     )
   }
 
-  renderSearch() {
+  renderSearch () {
     const { formatMessage } = this.props.intl
     return (
       <View>
@@ -123,13 +121,14 @@ class PublisherMenuContainer extends Component {
             style={styles.searchInput}
             underlineColorAndroid={'transparent'}
             placeholder={formatMessage(messages.searchPlaceholder)}
-            onChangeText={_debounce((query) => this.setState({query}), 300)} />
+            onChangeText={_debounce((query) => this.setState({query}), 300)}
+          />
         </View>
       </View>
     )
   }
 
-  renderList() {
+  renderList () {
     return (
       <View style={styles.listContainer}>
         <ListView
@@ -142,9 +141,9 @@ class PublisherMenuContainer extends Component {
     )
   }
 
-  openPublisher(publisher) {
-    this.props.dispatch(NavigationActions.selectPublisher(publisher))
+  openPublisher (publisher) {
     this.props.dispatch(MenuActions.retractMenu())
+    this.props.dispatch(NavigationActions.selectPublisher(publisher))
   }
 }
 
@@ -152,6 +151,15 @@ const mapStateToProps = (state, ownProps) => {
   return {
     StorageReducer: state.StorageReducer
   }
+}
+
+PublisherMenuContainer.propTypes = {
+  StorageReducer: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  })
 }
 
 const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
