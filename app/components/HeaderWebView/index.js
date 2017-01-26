@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
+import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
