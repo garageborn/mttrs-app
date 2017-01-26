@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Modal, View, Text, Image, ScrollView, TouchableHighlight } from 'react-native'
+import { Modal, View, Text, Image, ScrollView } from 'react-native'
+import Touchable from './Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import { StorageActions } from '../actions/index'
 import apolloClient from '../config/apolloClient'
@@ -71,24 +72,24 @@ class SettingsModal extends Component {
             <View style={styles.options}>
               <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
               <ScrollView style={styles.optionsList}>
-                <TouchableHighlight onPress={() => this.onPressTenantButton('mttrs_us')}>
+                <Touchable onPress={() => this.onPressTenantButton('mttrs_us')}>
                   <View style={styles.optionItem}>
                     <Text style={styles.optionTitle}>English - USA/UK</Text>
                     {this.renderCheckmark('mttrs_us')}
                   </View>
-                </TouchableHighlight>
-                <TouchableHighlight onPress={() => this.onPressTenantButton('mttrs_br')}>
+                </Touchable>
+                <Touchable onPress={() => this.onPressTenantButton('mttrs_br')}>
                   <View style={styles.optionItem}>
                     <Text style={styles.optionTitle}>Português - Brasil</Text>
                     {this.renderCheckmark('mttrs_br')}
                   </View>
-                </TouchableHighlight>
+                </Touchable>
               </ScrollView>
             </View>
             <View style={styles.modalFooter}>
-              <TouchableHighlight>
+              <Touchable>
                 <Text style={styles.modalFooterText}>{formatMessage(messages.feedback)}</Text>
-              </TouchableHighlight>
+              </Touchable>
             </View>
           </View>
           <CloseButton onPress={() => this.onPressCloseButton()} />
