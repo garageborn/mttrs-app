@@ -49,8 +49,8 @@ class CategoryMenuContainer extends Component {
 
   getTenantName (tenant) {
     const tenants = {
-      mttrs_us: 'English - USA/UK',
-      mttrs_br: 'Português - Brasil'
+      mttrs_us: 'USA',
+      mttrs_br: 'Brasil'
     }
 
     return tenants[tenant]
