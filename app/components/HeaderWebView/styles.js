@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
 
   iconClose: Platform.select({
     ios: {
-      marginBottom: 1
+      marginBottom: 2,
+      marginRight: -5
     },
     android: {
       marginBottom: 5,
