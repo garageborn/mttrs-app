@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Image, Platform } from 'react-native'
+import { Image } from 'react-native'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
