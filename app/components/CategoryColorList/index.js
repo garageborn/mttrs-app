@@ -14,7 +14,14 @@ const CategoryColorList = ({ data, params, type }) => {
 
     const home = <CategoryColor key='home' color='#FF5607' isActive={isActive('home')} />
     let categories = data.categories.map(category => {
-      return <CategoryColor key={category.id} color={category.color} isActive={isActive(category)} />
+      return (
+        <CategoryColor
+          categoriesLength={data.categories.length}
+          key={category.id}
+          color={category.color}
+          isActive={isActive(category)}
+        />
+      )
     })
 
     categories = [home, ...categories]

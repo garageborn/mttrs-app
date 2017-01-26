@@ -1,10 +1,21 @@
 import React, { PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import styles from './styles'
 
-const CategoryColor = ({ color, isActive }) => {
+const { width } = Dimensions.get('window')
+
+const CategoryColor = ({ key, color, categoriesLength, isActive }) => {
+  let getBorderWidth = () => {
+    let currentSize = width
+    let colorsShown = categoriesLength + 1
+    while ((currentSize % colorsShown) !== 0) currentSize++
+    return currentSize - width
+  }
+
   let categoryColorStyles = () => {
-    return [styles.color, {backgroundColor: color, height: isActive ? 12 : 2}]
+    let categoryStyles = [styles.color, {backgroundColor: color, height: isActive ? 12 : 2}]
+    if (key === 'home') return [...categoryStyles, { borderRightWidth: getBorderWidth(), borderColor: color }]
+    return categoryStyles
   }
 
   return (
@@ -13,6 +24,8 @@ const CategoryColor = ({ color, isActive }) => {
 }
 
 CategoryColor.propTypes = {
+  categoriesLength: PropTypes.number,
+  key: PropTypes.string,
   color: PropTypes.string.isRequired,
   isActive: PropTypes.bool
 }

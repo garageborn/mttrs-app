@@ -7,10 +7,10 @@ const defaultList = {
   position: 'relative',
   height: 12,
   bottom: Platform.select({
-    ios: 5,
+    ios: 7,
     android: 7
   }),
-  zIndex: 10
+  zIndex: 1
 }
 
 const styles = StyleSheet.create({
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   linkList: {
     ...defaultList,
-    bottom: -5
+    bottom: -4
   }
 })
 
