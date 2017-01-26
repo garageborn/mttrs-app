@@ -12,7 +12,7 @@ const CategoryColorList = ({ data, params, type }) => {
   let categories = () => {
     if (data.loading) return
 
-    const home = <CategoryColor key='home' shouldGrowBorder color='#FF5607' isActive={isActive('home')} />
+    const home = <CategoryColor key='home' color='#FF5607' isActive={isActive('home')} />
     let categories = data.categories.map(category => {
       return (
         <CategoryColor

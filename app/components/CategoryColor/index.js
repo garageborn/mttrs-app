@@ -4,7 +4,7 @@ import styles from './styles'
 
 const { width } = Dimensions.get('window')
 
-const CategoryColor = ({ shouldGrowBorder, color, categoriesLength, isActive }) => {
+const CategoryColor = ({ key, color, categoriesLength, isActive }) => {
   let getBorderWidth = () => {
     let currentSize = width
     let colorsShown = categoriesLength + 1
@@ -14,7 +14,7 @@ const CategoryColor = ({ shouldGrowBorder, color, categoriesLength, isActive }) 
 
   let categoryColorStyles = () => {
     let categoryStyles = [styles.color, {backgroundColor: color, height: isActive ? 12 : 2}]
-    if (shouldGrowBorder) return [...categoryStyles, { borderRightWidth: getBorderWidth(), borderColor: color }]
+    if (key === 'home') return [...categoryStyles, { borderRightWidth: getBorderWidth(), borderColor: color }]
     return categoryStyles
   }
 
@@ -25,7 +25,7 @@ const CategoryColor = ({ shouldGrowBorder, color, categoriesLength, isActive }) 
 
 CategoryColor.propTypes = {
   categoriesLength: PropTypes.number,
-  shouldGrowBorder: PropTypes.bool,
+  key: PropTypes.string,
   color: PropTypes.string.isRequired,
   isActive: PropTypes.bool
 }
