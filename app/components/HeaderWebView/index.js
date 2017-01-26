@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { View, Image, TouchableHighlight, Text } from 'react-native'
+import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
@@ -24,12 +25,12 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
           </View>
         </View>
         <View style={styles.actions}>
-          <TouchableHighlight style={styles.iconHighlight} underlayColor={COLORLESS} onPress={share}>
+          <Touchable style={styles.iconHighlight} underlayColor={COLORLESS} onPress={share}>
             <Image style={styles.iconShare} source={require('../../assets/icons/icon-share.png')} />
-          </TouchableHighlight>
-          <TouchableHighlight style={[styles.iconHighlight, styles.iconCloseHighlight]} underlayColor={COLORLESS} onPress={close}>
+          </Touchable>
+          <Touchable style={[styles.iconHighlight, styles.iconCloseHighlight]} underlayColor={COLORLESS} onPress={close}>
             <Image style={styles.iconClose} source={require('../../assets/icons/icon-close.png')} />
-          </TouchableHighlight>
+          </Touchable>
         </View>
       </View>
       {categoryColors}

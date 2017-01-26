@@ -13,6 +13,11 @@ const imageHeight = Platform.select({
   android: 80
 })
 
+const categoryHeightDivider = Platform.select({
+  ios: 7.5,
+  android: 8
+})
+
 const tileWidth = (width - 51) / 2
 
 const styles = StyleSheet.create({
@@ -25,14 +30,11 @@ const styles = StyleSheet.create({
   category: {
     backgroundColor: '#555',
     width: tileWidth,
-    height: height / 7.5,
+    height: height / categoryHeightDivider,
     padding: 0,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    borderBottomWidth: Platform.select({
-      ios: 2.5,
-      android: 7
-    })
+    borderBottomWidth: 2.5
   },
 
   image: {

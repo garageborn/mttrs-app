@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { PropTypes } from 'react'
-import { View, Text, Image, TouchableHighlight } from 'react-native'
+import { View, Text, Image } from 'react-native'
+import Touchable from '../Touchable'
 import LinearGradient from 'react-native-linear-gradient'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import * as cloudinary from '../../common/utils/Cloudinary'
@@ -15,7 +16,7 @@ const CategoryTile = ({ onPress, category }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress(category)}>
+      <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress(category)}>
         <View style={[styles.category, { borderBottomColor: category.color }]} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
           <Image style={styles.image} source={{uri: image()}}>
             <LinearGradient
@@ -26,7 +27,7 @@ const CategoryTile = ({ onPress, category }) => {
             </LinearGradient>
           </Image>
         </View>
-      </TouchableHighlight>
+      </Touchable>
     </View>
   )
 }

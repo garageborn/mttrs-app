@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { Text, TouchableHighlight, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import styles from './styles'
 import * as cloudinary from '../../common/utils/Cloudinary'
@@ -34,14 +35,14 @@ class StoryPublishers extends Component {
     const { formatMessage } = this.props.intl
 
     return (
-      <TouchableHighlight onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
+      <Touchable onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
         <View style={styles.publisher}>
           <Text style={styles.lightText}>{formatMessage(messages.storyFrom)} </Text>
           <PublisherLogo source={this.publisherLogo} />
           {this.getMainPublisher()}
           {this.getCounter()}
         </View>
-      </TouchableHighlight>
+      </Touchable>
     )
   }
 

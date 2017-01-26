@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Image, TouchableHighlight, Text } from 'react-native'
+import { View, Image, Text } from 'react-native'
+import Touchable from './Touchable'
 import PublisherLogo from './PublisherLogo'
 import styles from '../styles/StoryLinks'
 import SocialCountFormatter from '../common/utils/SocialCountFormatter'
@@ -32,7 +33,7 @@ class StoryLink extends Component {
       <View
         style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
-          <TouchableHighlight
+          <Touchable
             style={styles.rowTouch}
             onPress={e => openPublisher(link.publisher)}
             underlayColor={WHITE_TRANSPARENT_COLOR}>
@@ -42,14 +43,14 @@ class StoryLink extends Component {
                 <Text style={styles.publisherName}>{link.publisher.name}</Text>
               </View>
             </View>
-          </TouchableHighlight>
+          </Touchable>
           <View style={styles.story}>
-            <TouchableHighlight
+            <Touchable
               style={styles.rowTouch}
               onPress={e => openLink(link)}
               underlayColor={WHITE_TRANSPARENT_COLOR}>
               <Text numberOfLines={1} style={styles.storyTitle}>{link.title}</Text>
-            </TouchableHighlight>
+            </Touchable>
             <View style={styles.shares}>
               <Image style={styles.shareIcon} source={require('../assets/icons/icon-hot.png')} />
               <Text style={styles.shareCount}>{SocialCountFormatter(link.total_social)}</Text>

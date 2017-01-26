@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react'
-import { TouchableHighlight, View } from 'react-native'
-import styles from './styles'
+import { View } from 'react-native'
+import Touchable from '../Touchable'
 import StoryImage from '../StoryImage'
 import StoryTitle from '../StoryTitle'
 import StoryCategory from '../StoryCategory'
+import styles from './styles'
 
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
@@ -11,7 +12,7 @@ const StoryMainLink = ({onPress, mainLink, mainCategory, isSceneHome}) => {
   let renderStoryCategory = null
   if (isSceneHome) renderStoryCategory = <StoryCategory category={mainCategory} />
   return (
-    <TouchableHighlight
+    <Touchable
       onPress={onPress}
       activeOpacity={0.7}
       underlayColor={WHITE_COLOR}
@@ -23,7 +24,7 @@ const StoryMainLink = ({onPress, mainLink, mainCategory, isSceneHome}) => {
           {renderStoryCategory}
         </View>
       </View>
-    </TouchableHighlight>
+    </Touchable>
   )
 }
 
