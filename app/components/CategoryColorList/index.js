@@ -11,16 +11,28 @@ const CategoryColorList = ({ data, params, type }) => {
 
   let categories = () => {
     if (data.loading) return
-    return data.categories.map(category => {
-      return <CategoryColor key={category.id} color={category.color} isActive={isActive(category)} />
+
+    const home = <CategoryColor key='home' color='#FF5607' isActive={isActive('home')} />
+    let categories = data.categories.map(category => {
+      return (
+        <CategoryColor
+          categoriesLength={data.categories.length}
+          key={category.id}
+          color={category.color}
+          isActive={isActive(category)}
+        />
+      )
     })
+
+    categories = [home, ...categories]
+
+    return categories
   }
 
   const listStyle = type !== 'link' ? styles.list : styles.linkList
 
   return (
     <View style={listStyle}>
-      <CategoryColor color='#FF5607' isActive={isActive('home')} />
       {categories()}
     </View>
   )
