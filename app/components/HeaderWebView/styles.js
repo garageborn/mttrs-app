@@ -40,7 +40,10 @@ const styles = StyleSheet.create({
 
   storyTitle: {
     fontSize: 14,
-    width: 150,
+    width: Platform.select({
+      ios: 150,
+      android: 180
+    }),
     color: '#FFF'
   },
 
@@ -54,9 +57,15 @@ const styles = StyleSheet.create({
     padding: 5
   },
 
-  iconClose: {
-    marginBottom: 1
-  },
+  iconClose: Platform.select({
+    ios: {
+      marginBottom: 1
+    },
+    android: {
+      marginBottom: 5,
+      marginLeft: 25
+    }
+  }),
 
   iconCloseHighlight: {
     paddingHorizontal: 10
