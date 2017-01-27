@@ -107,7 +107,7 @@ class Link extends Component {
           renderLoading={this.renderProgressBar}
           onProgress={this.onProgress}
           renderError={this.handleError}
-          onLoad={this.addStoryToLocalStorage}
+          onLoadEnd={this.addStoryToLocalStorage}
           shouldStartLoadWithRequest={false}
         />
       </View>
