@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
-import MenuSettingsLabel from '../components/MenuSettingsLabel'
-import SettingsModal from '../components/SettingsModal'
 import { NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
@@ -22,7 +20,8 @@ class CategoryMenuContainer extends Component {
   }
 
   render () {
-    let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
+    // TEMPORARY
+    // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
       <View>
         <TopStoriesCategory openHome={this.openHome} />
