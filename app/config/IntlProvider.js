@@ -24,7 +24,7 @@ class Provider extends Component {
 
     return (
       <IntlProvider locale={language} defaultLocale='en' messages={msg}>
-        { this.props.children }
+        {this.props.children}
       </IntlProvider>
     )
   }
