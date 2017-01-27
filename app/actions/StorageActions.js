@@ -119,13 +119,16 @@ export function setCurrentTenant (tenant) {
 }
 
 export function getCurrentTenant (locale) {
-  let localeTenant = 'mttrs_us'
-  if (locale === 'pt-BR') localeTenant = 'mttrs_br'
+  // TEMPORARY
+  // let localeTenant = 'mttrs_us'
+  // if (locale === 'pt-BR') localeTenant = 'mttrs_br'
   return (dispatch) => {
-    dispatch(requestTenant())
-    AsyncStorage.getItem('tenant', (error, tenant) => {
-      dispatch(this.setCurrentTenant(tenant || localeTenant))
-    })
+    dispatch(this.setCurrentTenant('mttrs_br'))
+    // TEMPORARY
+    // dispatch(requestTenant())
+    // AsyncStorage.getItem('tenant', (error, tenant) => {
+    //   dispatch(this.setCurrentTenant(tenant || localeTenant))
+    // })
   }
 }
 
