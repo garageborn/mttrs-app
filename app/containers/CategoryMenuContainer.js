@@ -27,8 +27,9 @@ class CategoryMenuContainer extends Component {
       <View>
         <TopStoriesCategory openHome={this.openHome} />
         <CategoryScrollView data={this.props.data} openCategory={this.openCategory} />
-        <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} />
-        <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} />
+        {/* Temporary disable */}
+        {/* <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} /> */}
+        {/* <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} /> */}
       </View>
     )
   }
