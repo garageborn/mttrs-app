@@ -20,10 +20,15 @@ class CategoryMenuContainer extends Component {
   }
 
   render () {
+    // TEMPORARY
+    // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
       <View>
         <TopStoriesCategory openHome={this.openHome} />
         <CategoryScrollView data={this.props.data} openCategory={this.openCategory} />
+        {/* Temporary disable */}
+        {/* <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} /> */}
+        {/* <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} /> */}
       </View>
     )
   }
