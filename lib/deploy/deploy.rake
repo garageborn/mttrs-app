@@ -49,3 +49,8 @@ namespace :deploy do
     system('bundle exec fastlane android alpha')
   end
 end
+
+desc 'Release iOS and Android'
+task :deploy do
+  Rake::Task['deploy:all'].execute
+end

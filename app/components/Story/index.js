@@ -91,7 +91,7 @@ Story.propTypes = {
         icon_id: PropTypes.string
       }).isRequired
     }).isRequired,
-    other_links: PropTypes.array.isRequired,
+    other_links_count: PropTypes.number.isRequired,
     main_category: PropTypes.shape({
       name: PropTypes.string.isRequired,
       color: PropTypes.string

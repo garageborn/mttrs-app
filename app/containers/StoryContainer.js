@@ -5,7 +5,7 @@ import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/
 import analytics from '../config/Analytics'
 
 class StoryContainer extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.openLink = this.openLink.bind(this)
     this.openStoryLinks = this.openStoryLinks.bind(this)
@@ -14,13 +14,13 @@ class StoryContainer extends Component {
     this.openPublisher = this.openPublisher.bind(this)
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.props.dispatch(StorageActions.getVisitedStories())
   }
 
-  render() {
+  render () {
     const { story, section, visited, scrollToY } = this.props
-    let isSceneHome = this.props.section.type === 'home'
+    let isSceneHome = section.type === 'home'
 
     return (
       <Story
@@ -35,39 +35,36 @@ class StoryContainer extends Component {
     )
   }
 
-  openLink(link) {
+  openLink (link) {
     const { section, dispatch } = this.props
     dispatch(AnalyticsActions.trackLink(link))
     dispatch(NavigationActions.link(this.props.story, link, section))
   }
 
-  openCategory() {
+  openCategory () {
     this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
   }
 
-  openPublisher() {
+  openPublisher () {
     this.props.dispatch(NavigationActions.selectPublisher(this.mainLink.publisher))
   }
 
-  openStoryLinks() {
-    if (this.otherLinks.length === 0) return this.openPublisher()
+  openStoryLinks () {
+    const otherLinksCount = this.props.story.other_links_count
+    if (otherLinksCount === 0) return this.openPublisher()
     const { dispatch, story } = this.props
     dispatch(NavigationActions.storyLinks({ story: story, open: true }))
   }
 
-  openMainLink() {
+  openMainLink () {
     this.openLink(this.mainLink)
   }
 
-  get mainLink() {
+  get mainLink () {
     return this.props.story.main_link
   }
 
-  get otherLinks() {
-    return this.props.story.other_links
-  }
-
-  get mainCategory() {
+  get mainCategory () {
     return this.props.story.main_category
   }
 }

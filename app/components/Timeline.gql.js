@@ -5,7 +5,7 @@ import _uniqBy from 'lodash/uniqBy'
 
 const defaultVariables = {
   categorySlug: '',
-  days: 7,
+  days: 5,
   offset: 0,
   perDay: 10,
   publisherSlug: '',
@@ -29,9 +29,7 @@ const Query = gql`
           image_source_url
           publisher { name icon_id slug }
         }
-        other_links(publisher_slug: $publisherSlug) {
-          id
-        }
+        other_links_count
       }
     }
   }

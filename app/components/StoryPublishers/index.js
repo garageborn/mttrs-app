@@ -60,17 +60,17 @@ class StoryPublishers extends Component {
 
   getCounter () {
     const { formatMessage } = this.props.intl
-    const { other_links } = this.props.story
     const and = formatMessage(messages.storyAnd)
     const other = formatMessage(messages.storyOther)
     const others = formatMessage(messages.storyOthers)
-    let linksLength = other_links.length
+    let otherLinksCount = this.props.story.other_links_count
 
-    if (!linksLength) return
+    if (!otherLinksCount) return
 
+    const otherMessage = otherLinksCount === 1 ? other : others
     return (
       <Text style={styles.lightText}> {and}
-        <Text style={styles.darkText}> {linksLength} {linksLength === 1 ? other : others}</Text>
+        <Text style={styles.darkText}> {otherLinksCount} {otherMessage}</Text>
       </Text>
     )
   }
@@ -87,7 +87,7 @@ StoryPublishers.propTypes = {
         icon_id: PropTypes.string
       }).isRequired
     }).isRequired,
-    other_links: PropTypes.array.isRequired
+    other_links_count: PropTypes.number.isRequired
   }).isRequired,
   openStoryLinks: PropTypes.func.isRequired
 }

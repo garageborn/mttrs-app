@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
-import MenuSettingsLabel from '../components/MenuSettingsLabel'
-import SettingsModal from '../components/SettingsModal'
 import { NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
@@ -22,13 +20,15 @@ class CategoryMenuContainer extends Component {
   }
 
   render () {
-    let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
+    // TEMPORARY
+    // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
       <View>
         <TopStoriesCategory openHome={this.openHome} />
         <CategoryScrollView data={this.props.data} openCategory={this.openCategory} />
-        <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} />
-        <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} />
+        {/* Temporary disable */}
+        {/* <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} /> */}
+        {/* <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} /> */}
       </View>
     )
   }
@@ -49,8 +49,8 @@ class CategoryMenuContainer extends Component {
 
   getTenantName (tenant) {
     const tenants = {
-      mttrs_us: 'English - USA/UK',
-      mttrs_br: 'Português - Brasil'
+      mttrs_us: 'USA',
+      mttrs_br: 'Brasil'
     }
 
     return tenants[tenant]
