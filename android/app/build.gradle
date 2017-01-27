@@ -164,6 +164,8 @@ dependencies {
         transitive = true;
     }
     compile 'com.facebook.fresco:animated-gif:1.0.1'
+    compile (name: "xwalk_core_library-22.52.561.4", ext: "aar")
+    compile project(':CrosswalkWebView')
 }
 
 // Run this once to be able to run the application with BUCK
