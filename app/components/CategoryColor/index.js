@@ -8,18 +8,13 @@ class CategoryColor extends React.Component {
   constructor () {
     super()
     this.state = {
-      h: new Animated.Value(2)
+      height: new Animated.Value(2)
     }
-  }
-
-  componentWillMount () {
-    if (!this.props.isActive) return
-    this.handleAnimation()
   }
 
   handleAnimation (direction) {
     Animated.timing(
-      this.state.h,
+      this.state.height,
       {
         toValue: direction === 'up' ? 12 : 2,
         duration: 230
@@ -36,7 +31,7 @@ class CategoryColor extends React.Component {
 
   categoryColorStyles () {
     let { isActive, color } = this.props
-    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.h}]
+    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
     if (isActive) {
       this.handleAnimation('up')
       return [...categoryStyles, {borderRightWidth: this.getBorderWidth(), borderColor: color}]
