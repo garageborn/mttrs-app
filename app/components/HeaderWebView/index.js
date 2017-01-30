@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react'
-import { View, Image, TouchableHighlight, Text } from 'react-native'
+import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
-import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
+// import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
 const HeaderWebview = ({ params, publisherLogo, share, close }) => {
   const { link } = params
-  let categoryColors = null
-
-  if (params.section.type === 'home' || params.section.type === 'category') {
-    categoryColors = <HeaderBottomColorContainer type='link' params={params} />
-  }
+  // let categoryColors = null
+  //
+  // if (params.section.type === 'home' || params.section.type === 'category') {
+  //   categoryColors = <HeaderBottomColorContainer type='link' params={params} />
+  // }
 
   return (
     <View style={styles.container} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={0.1} elevation={1}>
@@ -33,7 +33,7 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
           </Touchable>
         </View>
       </View>
-      {categoryColors}
+      {/* {categoryColors} */}
     </View>
   )
 }

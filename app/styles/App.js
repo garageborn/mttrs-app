@@ -11,7 +11,7 @@ const containerStyles = {
 const styles = StyleSheet.create({
   container: {
     ...containerStyles,
-    backgroundColor: '#F1F1F1',
+    backgroundColor: '#F1F1F1'
   },
 
   loading: {

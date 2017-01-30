@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform, Animated, Easing, Dimensions, StatusBar } from 'react-native'
+import { View, Platform, Animated, Easing, Dimensions, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './Link.gql'
 import LinkHeaderContainer from '../containers/LinkHeaderContainer'
+import WebView from '../components/WebView'
 import ProgressBar from '../components/ProgressBar'
 import { StorageActions } from '../actions/index'
 import { headerHeight } from '../styles/Global'
@@ -29,7 +30,10 @@ class Link extends Component {
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
 
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
-    this.progress = new Animated.Value(0)
+    // this.progress = new Animated.Value(0)
+    this.state = {
+      progress: 0
+    }
   }
 
   componentWillMount () {
@@ -37,7 +41,7 @@ class Link extends Component {
   }
 
   componentDidMount () {
-    this.progressTransition()
+    // this.progressTransition()
   }
 
   addStoryToLocalStorage () {
@@ -45,28 +49,28 @@ class Link extends Component {
     dispatch(StorageActions.addVisitedStory(story))
   }
 
-  progressTransition () {
-    this.progress.setValue(0)
-    Animated.timing(
-      this.progress,
-      {
-        toValue: 2,
-        duration: 15000,
-        easing: Easing.linear
-      }
-    ).start(() => this.progressTransition())
-  }
-
-  getProgress () {
-    const { width } = Dimensions.get('window')
-    return this.progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, width]
-    })
-  }
+  // progressTransition () {
+  //   this.progress.setValue(0)
+  //   Animated.timing(
+  //     this.progress,
+  //     {
+  //       toValue: 2,
+  //       duration: 15000,
+  //       easing: Easing.linear
+  //     }
+  //   ).start(() => this.progressTransition())
+  // }
+  //
+  // getProgress () {
+  //   const { width } = Dimensions.get('window')
+  //   return this.progress.interpolate({
+  //     inputRange: [0, 1],
+  //     outputRange: [0, width]
+  //   })
+  // }
 
   renderProgressBar = () => {
-    return <ProgressBar progress={this.getProgress()} />
+    return <ProgressBar progress={this.state.progress} styleAttr='Horizontal' color='#08C' />
   }
 
   handleError = (e) => {
@@ -74,28 +78,36 @@ class Link extends Component {
   }
 
   get contentInset () {
-    return Platform.OS === 'ios' ? 0 : 11
+    return Platform.OS === 'ios' ? 0 : 20
   }
 
-  renderNavbar (props) {
+  renderNavbar = (props) => {
     if (Platform.OS === 'ios') return
     return <LinkHeaderContainer params={props.route.params} />
   }
 
+  onProgress = (progress) => {
+    this.setState({
+      progress: progress
+    })
+  }
+
   render () {
     const { url } = this.props.route.params.link
+    const { width, height } = Dimensions.get('window')
 
     return (
       <View style={styles.container}>
         {this.renderNavbar(this.props)}
         <WebView
           source={{uri: url}}
+          style={{width, height}}
           contentInset={{top: this.contentInset}}
           startInLoadingState
           renderLoading={this.renderProgressBar}
+          onProgress={this.onProgress}
           renderError={this.handleError}
           onLoadEnd={this.addStoryToLocalStorage}
-          mediaPlaybackRequiresUserAction
           shouldStartLoadWithRequest={false}
         />
       </View>
@@ -110,13 +122,14 @@ class Link extends Component {
 Link.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
-      story: PropTypes.object.isRequired,
       link: PropTypes.shape({
         url: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
   }).isRequired,
-  createLinkAccess: PropTypes.func.isRequired
+  story: PropTypes.object.isRequired,
+  createLinkAccess: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 const LinkWithRedux = connect()(Link)
