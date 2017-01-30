@@ -7,7 +7,6 @@ import styles from './styles'
 
 const Header = ({ title, toggleMenu, icon, params, type }) => {
   let headerBottomColors = () => <HeaderBottomColorContainer type={type} params={params} />
-
   return (
     <View>
       <View style={styles.header}>

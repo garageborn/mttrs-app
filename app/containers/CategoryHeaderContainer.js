@@ -1,23 +1,37 @@
 import React, { PropTypes } from 'react'
+import { injectIntl, defineMessages } from 'react-intl'
 import Header from '../components/Header'
+import _isEmpty from 'lodash/isEmpty'
 
-const CategoryHeaderContainer = ({ toggleMenu, category, params }) => {
+const messages = defineMessages({
+  headerTitle: {
+    id: 'header.title',
+    defaultMessage: 'Top Stories'
+  }
+})
+
+const CategoryHeaderContainer = ({ toggleMenu, category, intl, params }) => {
+  let title = intl.formatMessage(messages.headerTitle)
+
+  if (!_isEmpty(category)) { title = category.name }
+
   return (
     <Header
-      title={category.name}
       toggleMenu={toggleMenu}
+      title={title}
       params={params}
-      type='category'
+      type='home'
     />
   )
 }
 
 CategoryHeaderContainer.propTypes = {
-  category: PropTypes.shape({
-    name: PropTypes.string.isRequired
+  toggleMenu: PropTypes.func.isRequired,
+  category: PropTypes.any,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  params: PropTypes.object.isRequired,
-  toggleMenu: PropTypes.func.isRequired
+  params: PropTypes.object.isRequired
 }
 
-export default CategoryHeaderContainer
+export default injectIntl(CategoryHeaderContainer)
