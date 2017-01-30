@@ -1,26 +1,50 @@
 import React, { PropTypes } from 'react'
-import { View, Dimensions } from 'react-native'
+import { Dimensions, Animated } from 'react-native'
 import styles from './styles'
 
 const { width } = Dimensions.get('window')
 
-const CategoryColor = ({ color, categoriesLength, isActive }) => {
-  let getBorderWidth = () => {
+class CategoryColor extends React.Component {
+  constructor () {
+    super()
+    this.state = {
+      height: new Animated.Value(2)
+    }
+  }
+
+  handleAnimation (direction) {
+    Animated.timing(
+      this.state.height,
+      {
+        toValue: direction === 'up' ? 12 : 2,
+        duration: 230
+      }
+    ).start()
+  }
+
+  getBorderWidth () {
     let currentSize = width
-    let colorsShown = categoriesLength + 1
+    let colorsShown = this.props.categoriesLength + 1
     while ((currentSize % colorsShown) !== 0) currentSize++
     return currentSize - width
   }
 
-  let categoryColorStyles = () => {
-    let categoryStyles = [styles.color, {backgroundColor: color, height: isActive ? 12 : 2}]
-    if (isActive) return [...categoryStyles, {borderRightWidth: getBorderWidth(), borderColor: color}]
+  categoryColorStyles () {
+    let { isActive, color } = this.props
+    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
+    if (isActive) {
+      this.handleAnimation('up')
+      return [...categoryStyles, {borderRightWidth: this.getBorderWidth(), borderColor: color}]
+    }
+    this.handleAnimation('down')
     return categoryStyles
   }
 
-  return (
-    <View style={categoryColorStyles()} />
-  )
+  render () {
+    return (
+      <Animated.View style={this.categoryColorStyles()} />
+    )
+  }
 }
 
 CategoryColor.propTypes = {
