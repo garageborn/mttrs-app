@@ -4,6 +4,7 @@ import Share from 'react-native-share'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { NavigationActions } from '../actions/index'
+import { TENANTS } from '../constants/Tenants'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -15,10 +16,12 @@ class LinkHeaderContainer extends Component {
   share () {
     const { link } = this.props.params
 
+    let url = this.buildUrl(link.slug)
+
     let shareOptions = {
       title: link.title,
       message: link.description || link.title,
-      url: link.url
+      url
     }
 
     return Share.open(shareOptions)
@@ -26,6 +29,13 @@ class LinkHeaderContainer extends Component {
 
   close () {
     this.props.dispatch(NavigationActions.back())
+  }
+
+  buildUrl (slug) {
+    let { currentTenantId } = this.props
+    let tenant = TENANTS.find(tenant => currentTenantId === tenant.id)
+
+    return tenant.sharingDomain + slug
   }
 
   get publisherLogo () {
@@ -49,7 +59,14 @@ class LinkHeaderContainer extends Component {
 
 LinkHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  currentTenantId: PropTypes.string.isRequired
 }
 
-export default connect()(LinkHeaderContainer)
+let mapStateToProps = (state) => {
+  return {
+    currentTenantId: state.StorageReducer.tenant.name
+  }
+}
+
+export default connect(mapStateToProps)(LinkHeaderContainer)
