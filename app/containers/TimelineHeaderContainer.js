@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { MenuActions } from '../actions/index'
-import HomeHeaderContainer from './HomeHeaderContainer'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
 import styles from '../styles/TimelineHeaderContainer'
@@ -25,16 +24,9 @@ class TimelineHeaderContainer extends Component {
     const { params } = this.props
     const { section } = params
 
-    if (!section) return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
-
-    switch (section.name) {
-      case 'category':
-        return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} />
-      case 'publisher':
-        return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} params={params} />
-      default:
-        return <HomeHeaderContainer toggleMenu={this.toggleMenu} params={params} />
-    }
+    if (!section) return <CategoryHeaderContainer toggleMenu={this.toggleMenu} params={params} />
+    if (section.name === 'publisher') return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} params={params} />
+    return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} />
   }
 
   toggleMenu () {
