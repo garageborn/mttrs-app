@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Image } from 'react-native'
+import { Image, Platform } from 'react-native'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
@@ -18,7 +18,10 @@ class StoryImage extends Component {
     if (this.state.imageLoaded) {
       return {uri: cloudinary.url(this.props.source, options)}
     } else {
-      return require('../../assets/mttrs-loading.gif')
+      return Platform.select({
+        ios: require('../../assets/mttrs-loading.gif'),
+        android: require('../../assets/mttrs-loading-static.png')
+      })
     }
   }
 
