@@ -4,15 +4,14 @@ import gql from 'graphql-tag'
 const Query = gql`
 query {
   categories(with_stories: true, ordered: true) {
-    color
     id
     image_id
-    name 
+    name
     slug
   }
 }
 `
 
-export default function (CategoryMenuContainer) {
-  return graphql(Query)(CategoryMenuContainer)
+export default function (TimelineContainer) {
+  return graphql(Query)(TimelineContainer)
 }

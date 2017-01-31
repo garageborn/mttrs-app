@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
+import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../actions/index'
@@ -162,7 +161,6 @@ PublisherMenuContainer.propTypes = {
   })
 }
 
-const Query = gql`query { publishers(order_by_name: true) { id name slug icon_id } }`
 const intlPublisherMenuContainer = injectIntl(PublisherMenuContainer)
-const PublisherMenuContainerWithData = graphql(Query)(intlPublisherMenuContainer)
+const PublisherMenuContainerWithData = withQuery(intlPublisherMenuContainer)
 export default connect(mapStateToProps)(PublisherMenuContainerWithData)

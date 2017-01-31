@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Animated, Dimensions, Easing, StyleSheet, Text, Platform, StatusBar } from 'react-native'
+import React, { Component } from 'react'
+import { View, Animated, Dimensions, Easing, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
+import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
 import Menu from '../components/Menu'
 import styles from '../styles/App'
@@ -23,6 +22,7 @@ class TimelineContainer extends Component {
     this.closeMenu = this.closeMenu.bind(this)
     this.renderScene = this.renderScene.bind(this)
     this.trackScreen = this.trackScreen.bind(this)
+    this.handleChangeTab = this.handleChangeTab.bind(this)
     this.state = {
       menuPositionY: new Animated.Value(-height),
       navigationState: {
@@ -36,7 +36,7 @@ class TimelineContainer extends Component {
     this.props.dispatch(StorageActions.getFavoritePublishers())
   }
 
-  handleChangeTab = (index) => {
+  handleChangeTab (index) {
     this.setState({
       navigationState: {
         index,
@@ -248,6 +248,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-const Query = gql`query { categories(ordered: true) { id name slug image_id } }`
-const TimelineContainerWithData = graphql(Query)(TimelineContainer)
+const TimelineContainerWithData = withQuery(TimelineContainer)
 export default connect(mapStateToProps)(TimelineContainerWithData)
