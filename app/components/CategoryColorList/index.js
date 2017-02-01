@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import CategoryColor from '../../components/CategoryColor'
 import styles from './styles'
 
-const CategoryColorList = ({ data, params, type }) => {
+const CategoryColorList = ({ data, params }) => {
   let isActive = (currentSection) => {
     return currentSection.slug === params.section.model.slug
   }
@@ -23,12 +23,10 @@ const CategoryColorList = ({ data, params, type }) => {
     return categories
   }
 
-  const listStyle = type !== 'link' ? styles.list : styles.linkList
-
   if (data.loading) return null
 
   return (
-    <View style={listStyle}>
+    <View style={styles.list}>
       <CategoryColor categoriesLength={data.categories.length} color='#FF5607' isActive={isActive('home')} />
       {categories()}
     </View>
@@ -36,7 +34,6 @@ const CategoryColorList = ({ data, params, type }) => {
 }
 
 CategoryColorList.propTypes = {
-  type: PropTypes.string,
   data: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 }
