@@ -24,7 +24,7 @@ class StoryLinksContainer extends Component {
   openLink (link) {
     this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
-    this.props.dispatch(NavigationActions.link(this.props.story, link))
+    this.props.dispatch(NavigationActions.link(this.props.story, link, 'header'))
   }
 
   openPublisher (publisher) {
@@ -59,7 +59,6 @@ class StoryLinksContainer extends Component {
         <StoryLinksComponent
           story={this.props.data.story}
           openLink={this.openLink}
-          openPublisher={this.openPublisher}
           />
       )
     }
