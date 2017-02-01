@@ -24,10 +24,6 @@ class StoryLinksContainer extends Component {
   openLink (link) {
     this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
-    let section = {
-      type: 'link',
-      model: 'brasil'
-    }
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
 
