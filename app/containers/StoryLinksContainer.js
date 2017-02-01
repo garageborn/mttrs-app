@@ -59,7 +59,6 @@ class StoryLinksContainer extends Component {
         <StoryLinksComponent
           story={this.props.data.story}
           openLink={this.openLink}
-          openPublisher={this.openPublisher}
           />
       )
     }

@@ -38,7 +38,7 @@ class StoryContainer extends Component {
   openLink (link) {
     const { section, dispatch } = this.props
     dispatch(AnalyticsActions.trackLink(link))
-    dispatch(NavigationActions.link(this.props.story, link, section))
+    dispatch(NavigationActions.link(this.props.story, link))
   }
 
   openCategory () {
