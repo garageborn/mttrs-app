@@ -3350,9 +3350,9 @@ react-native-share@^1.0.18:
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.18.tgz#c7ef6dd8cbe1c24e70596c69f83ba895b0c3a9cc"
 
-react-native-simple-onboarding@AgtLucas/react-native-simple-onboarding:
+"react-native-simple-onboarding@git://github.com/AgtLucas/react-native-simple-onboarding.git#master":
   version "0.1.1"
-  resolved "https://codeload.github.com/AgtLucas/react-native-simple-onboarding/tar.gz/a53158dfdbf015a51ae80aa974b6a4f840b43491"
+  resolved "git://github.com/AgtLucas/react-native-simple-onboarding.git#8642e4689de09d932cc8eedbd08976acd5442aa4"
   dependencies:
     tinycolor2 "^1.4.1"
 
