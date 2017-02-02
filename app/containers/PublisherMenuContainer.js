@@ -6,7 +6,7 @@ import _debounce from 'lodash/debounce'
 import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions, ErrorActions } from '../actions/index'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -88,6 +88,11 @@ class PublisherMenuContainer extends Component {
     return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
+  handleError () {
+    this.props.dispatch((ErrorActions.showErrorDisclaimer()))
+    return null
+  }
+
   render () {
     const { loading } = this.props.data
     if (loading) {
@@ -99,6 +104,10 @@ class PublisherMenuContainer extends Component {
           />
         </View>
       )
+    }
+
+    if (this.props.data.error) {
+      return this.handleError()
     }
 
     return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Animated, Dimensions, Easing, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
 import Menu from '../components/Menu'
@@ -152,6 +152,7 @@ class TimelineContainer extends Component {
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
     const isLoadingAndRoutesWillBeTheSame = nextProps.data.loading && sameNavigationRoutes
     if (hasRoutesAndWillBeTheSame || isLoadingAndRoutesWillBeTheSame) return
+    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     const newRoutes = nextProps.data.categories.map((item, idx) => {
       return { key: `${idx + 1}`, title: item.name, type: 'category', filter: item }
     })

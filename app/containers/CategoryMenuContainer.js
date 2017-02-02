@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
-import { NavigationActions, MenuActions } from '../actions/index'
+import { NavigationActions, MenuActions, ErrorActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
   constructor (props) {
@@ -19,7 +19,13 @@ class CategoryMenuContainer extends Component {
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
   }
 
+  handleError () {
+    this.props.dispatch((ErrorActions.showErrorDisclaimer()))
+    return null
+  }
+
   render () {
+    if (this.props.data.error) return this.handleError()
     // TEMPORARY
     // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
@@ -64,7 +70,6 @@ const mapStateToProps = (state) => {
 }
 
 CategoryMenuContainer.propTypes = {
-  StorageReducer: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }
