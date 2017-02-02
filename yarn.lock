@@ -3350,6 +3350,12 @@ react-native-share@^1.0.18:
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.18.tgz#c7ef6dd8cbe1c24e70596c69f83ba895b0c3a9cc"
 
+react-native-simple-onboarding@AgtLucas/react-native-simple-onboarding:
+  version "0.1.1"
+  resolved "https://codeload.github.com/AgtLucas/react-native-simple-onboarding/tar.gz/a53158dfdbf015a51ae80aa974b6a4f840b43491"
+  dependencies:
+    tinycolor2 "^1.4.1"
+
 react-native-tab-view@0.0.42:
   version "0.0.42"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.42.tgz#abaeda8e7ab856db98c09709d3d82d2a08b94564"
@@ -4066,6 +4072,10 @@ through@^2.3.6:
 time-stamp@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.0.1.tgz#9f4bd23559c9365966f3302dbba2b07c6b99b151"
+
+tinycolor2@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 tmpl@1.0.x:
   version "1.0.4"

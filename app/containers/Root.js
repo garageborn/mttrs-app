@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { StatusBar, Platform } from 'react-native'
+import { StatusBar, Platform, Image } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { NavigationContext, NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
+import OnBoarding from '../components/OnBoarding'
 import IntlProvider, { locale } from '../config/IntlProvider'
 import { StorageActions } from '../actions/index'
 import Router from '../config/Router'
@@ -9,8 +10,16 @@ import apolloClient from '../config/apolloClient'
 require('../config/sentry')
 
 class Root extends Component {
+  state = {
+    foo: true
+  }
+
   componentWillMount () {
     this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
+  }
+
+  onBoarding () {
+    return <OnBoarding done={() => this.setState({foo: false})} />
   }
 
   render () {
@@ -18,6 +27,8 @@ class Root extends Component {
 
     const { store } = this.props
     const navigationContext = new NavigationContext({ router: Router, store: store })
+
+    if (this.state.foo) return this.onBoarding()
 
     return (
       <IntlProvider>
