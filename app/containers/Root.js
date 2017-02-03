@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { StatusBar, Platform, Image } from 'react-native'
+import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { NavigationContext, NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import OnBoarding from '../components/OnBoarding'
@@ -19,7 +20,7 @@ class Root extends Component {
   }
 
   onBoarding () {
-    return <OnBoarding done={() => this.setState({foo: false})} />
+    return <OnBoarding onEnd={() => this.setState({foo: false})} />
   }
 
   render () {

@@ -28,7 +28,6 @@
     "react-native-google-analytics-bridge": "^5.0.0",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-share": "^1.0.18",
-    "react-native-simple-onboarding": "git://github.com/AgtLucas/react-native-simple-onboarding.git#master",
     "react-native-tab-view": "0.0.48",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
