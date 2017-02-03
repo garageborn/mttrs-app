@@ -151,8 +151,6 @@ export function setOnboardingStorageStatus () {
   }
 }
 
-AsyncStorage.removeItem('shouldShowOnboarding')
-
 export function getOnboardingStatus () {
   return dispatch => {
     dispatch(this.getOnboardingTriggered())
