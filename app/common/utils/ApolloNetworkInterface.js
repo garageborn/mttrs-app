@@ -36,6 +36,8 @@ HTTPFetchNetworkInterface.prototype.fetchFromRemoteEndpoint = function (req) {
     uri = `${ this._uri }?${ queryString.stringify(params) }`
   }
 
+  console.log(uri)
+
   return fetch(uri, Object.assign(
     {},
     this._opts,
