@@ -158,7 +158,7 @@ class TimelineContainer extends Component {
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [ homeRoute, ...newRoutes ]
+        routes: [homeRoute, ...newRoutes]
       }
     })
   }
