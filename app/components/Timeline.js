@@ -25,7 +25,6 @@ class Timeline extends Component {
 
   shouldComponentUpdate (nextProps) {
     if (this.props.type === 'publisher') return true
-    if (this.props.data.loading !== nextProps.data.loading) return true
     return this.getActiveTimeline(nextProps)
   }
 
