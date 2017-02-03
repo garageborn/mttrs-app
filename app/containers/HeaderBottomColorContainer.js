@@ -12,7 +12,7 @@ const HeaderBottomColorContainer = ({ type, data, params, uiReducer, dispatch })
 
   if (data.error) {
     dispatch((ErrorActions.showErrorDisclaimer()))
-    return
+    return null
   }
 
   return <CategoryColorList type={type} data={data} params={params} />
