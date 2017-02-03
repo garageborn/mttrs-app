@@ -4,15 +4,15 @@ import PageDots from './PageDots'
 import { SymbolButton, TextButton } from './Buttons'
 
 const SkipButton = ({ ...props }) => (
-  <TextButton {...props}>
-    Skip
+  <TextButton {...props} textStyle={{color: '#DADADA', fontSize: 12}}>
+    PULAR
   </TextButton>
 )
 
 const DoneButton = ({ size, ...props }) => (
-  <SymbolButton {...props} size={size} textStyle={{color: '#FFF'}} style={{borderRadius: size / 2, backgroundColor: '#FF5607'}}>
-    ✓
-  </SymbolButton>
+  <TextButton {...props} textStyle={{color: '#FF5607', fontSize: 12}}>
+    COMEÇAR
+  </TextButton>
 )
 
 const BUTTON_SIZE = 40
@@ -44,7 +44,7 @@ const styles = {
   container: {
     height: 60,
     backgroundColor: '#FFF',
-    paddingHorizontal: 0,
+    paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'

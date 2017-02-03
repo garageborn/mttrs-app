@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Text, Image, Platform } from 'react-native'
+import PageImage from './components/PageImage'
+import PageTitle from './components/PageTitle'
 
 const PageContent = ({ children }) => (
   <View style={styles.content}>
@@ -12,12 +14,14 @@ const PageContent = ({ children }) => (
 const Page = ({ image, imageStyle, title, description, icon, iconStyle, width, ...rest }) => (
   <View {...rest}>
     <PageContent>
-      <View style={styles.image}>
+      {/* <View style={styles.image}>
         <Image resizeMethod='resize' source={image} style={{ ...imageStyle, width: width }} />
-      </View>
+      </View> */}
+      <PageImage source={image} imageStyle={imageStyle} />
       <View style={[styles.textContainer, { width }]}>
         <View style={styles.headerContainer}>
-          <Text style={styles.title}>{title}</Text>
+          {/* <Text style={styles.title}>{title}</Text> */}
+          <PageTitle title={title} />
           <View style={iconStyle}>
             {icon}
           </View>
@@ -57,15 +61,15 @@ const styles = {
     backgroundColor: '#FFF',
     paddingHorizontal: 25,
     height: Platform.select({
-      ios: 200,
-      android: 170
+      ios: 180,
+      android: 120
     })
   },
 
   headerContainer: {
     paddingVertical: Platform.select({
-      ios: 25,
-      android: 20
+      ios: 20,
+      android: 18
     }),
     flexDirection: 'row'
   },
@@ -78,7 +82,7 @@ const styles = {
   title: {
     fontSize: Platform.select({
       ios: 24,
-      android: 20
+      android: 18
     }),
     fontWeight: '500',
     color: '#999'
