@@ -83,6 +83,7 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
@@ -98,12 +99,11 @@ class TimelineContainer extends Component {
 
   categoriesWillChange (nextProps) {
     const hasCategories = !_isNil(this.props.data.categories)
-    if (hasCategories) {
-      const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
-      const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
-      const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
-      return categoriesChanged
-    }
+    if (!hasCategories) return
+    const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
+    const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
+    const categoriesChanged = (firstCategoryHasChanged || categoriesNumberHasChanged)
+    return categoriesChanged
   }
 
   sectionWillChange (nextProps) {
@@ -152,7 +152,6 @@ class TimelineContainer extends Component {
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
     const isLoadingAndRoutesWillBeTheSame = nextProps.data.loading && sameNavigationRoutes
     if (hasRoutesAndWillBeTheSame || isLoadingAndRoutesWillBeTheSame) return
-    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     const newRoutes = nextProps.data.categories.map((item, idx) => {
       return { key: `${idx + 1}`, title: item.name, type: 'category', filter: item }
     })
