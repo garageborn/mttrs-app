@@ -52,7 +52,7 @@ class MenuAndroid extends Component {
       case '2':
         return <PublisherMenuContainer />
       default:
-        return null
+        return
     }
   }
 

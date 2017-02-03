@@ -21,7 +21,7 @@ class CategoryMenuContainer extends Component {
 
   handleError () {
     this.props.dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
+    return
   }
 
   render () {

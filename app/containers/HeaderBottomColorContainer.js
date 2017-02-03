@@ -12,7 +12,7 @@ const HeaderBottomColorContainer = ({ type, data, params, uiReducer, dispatch })
 
   if (data.error) {
     dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
+    return
   }
 
   return <CategoryColorList type={type} data={data} params={params} />
@@ -25,7 +25,7 @@ HeaderBottomColorContainer.propTypes = {
   uiReducer: PropTypes.object.isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
+let mapStateToProps = state => {
   return {
     uiReducer: state.uiReducer
   }
