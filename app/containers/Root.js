@@ -36,7 +36,7 @@ class Root extends Component {
     return (
       <IntlProvider>
         <ApolloProvider store={store} client={apolloClient}>
-          <AppContainer navigationContext={navigationContext}/>
+          <AppContainer navigationContext={navigationContext} />
         </ApolloProvider>
       </IntlProvider>
     )

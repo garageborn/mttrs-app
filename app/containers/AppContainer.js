@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { StorageActions } from '../actions/index'
 import OnBoarding from '../components/OnBoarding'
-import Timeline from '../scenes/Timeline'
 import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import Router from '../config/Router'
 

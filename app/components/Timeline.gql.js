@@ -1,7 +1,12 @@
+import { Platform } from 'react-native'
 import { graphql } from 'react-apollo'
+import AndroidIntl from 'intl'
 import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
+require('../config/IntlProvider').locale
+
+if (Platform.OS === 'android') global.Intl = AndroidIntl
 
 const defaultVariables = {
   categorySlug: '',
