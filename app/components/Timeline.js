@@ -20,12 +20,10 @@ class Timeline extends Component {
   }
 
   componentWillMount () {
-    console.log('componentWillMount')
     this.trackHome()
   }
 
   shouldComponentUpdate (nextProps) {
-    console.log('shouldComponentUpdate', nextProps.data)
     if (this.props.type === 'publisher') return true
     if (this.props.data.loading !== nextProps.data.loading) return true
     return this.getActiveTimeline(nextProps)
