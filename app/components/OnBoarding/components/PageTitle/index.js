@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react'
 import { Text } from 'react-native'
 import styles from './styles'
 
-const PageTitle = ({title}) => (
-  <Text style={styles.title}>{title}</Text>
+const PageTitle = ({ children }) => (
+  <Text style={styles.title}>{children}</Text>
 )
 
 PageTitle.propTypes = {
-  title: PropTypes.string.isRequired
+  children: PropTypes.node.isRequired
 }
 
 export default PageTitle

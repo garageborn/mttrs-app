@@ -10,7 +10,7 @@ const categories = require('../../assets/onboarding/05-categories.png')
 
 module.exports = [
   {
-    icon: <Image source={mttrs} />,
+    icon: mttrs,
     iconStyle: {marginLeft: 10, position: 'relative', top: 2},
     image: welcome,
     imageStyle: {marginTop: 0}, // 40 ios
