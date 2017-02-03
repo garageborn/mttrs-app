@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Button, ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
-import withQuery from './Timeline.gql'
-import StoryContainer from '../containers/StoryContainer'
-import ListViewHeader from './ListViewHeader'
-import ParseDate from '../common/utils/ParseDate'
-import apolloClient from '../config/apolloClient'
-import { ErrorActions } from '../actions/index'
-import styles from '../styles/App'
+import withQuery from './index.gql'
+import StoryContainer from '../../containers/StoryContainer'
+import TimelineError from '../TimelineError'
+import ListViewHeader from '../ListViewHeader'
+import ParseDate from '../../common/utils/ParseDate'
+import apolloClient from '../../config/apolloClient'
+import { ErrorActions } from '../../actions/index'
+import styles from './styles'
 
 class Timeline extends Component {
   constructor (props) {
@@ -102,24 +103,19 @@ class Timeline extends Component {
     )
   }
 
-  handleError () {
-    return (
-      <View>
-        <Button title='Reload' onPress={this.reloadTimeline}>
-          Reload
-        </Button>
-      </View>
-    )
+  renderError () {
+    return <TimelineError reloadTimeline={this.reloadTimeline} />
   }
 
   reloadTimeline () {
+    this.props.dispatch(ErrorActions.resetErrorState())
     return apolloClient.resetStore()
   }
 
   render () {
     if (this.props.data.loading) return this.renderLoading()
 
-    if (this.props.ErrorReducer.hasError || this.props.data.error) return this.handleError()
+    if (this.props.ErrorReducer.hasError || this.props.data.error) return this.renderError()
 
     return (
       <ListView
