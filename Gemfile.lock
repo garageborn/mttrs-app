@@ -15,6 +15,7 @@ GEM
     brakeman (3.5.0)
     claide (1.0.1)
     colored (1.2)
+    colored2 (3.1.1)
     commander (4.4.3)
       highline (~> 1.7.2)
     domain_name (0.5.20161129)
@@ -31,12 +32,12 @@ GEM
       faraday (>= 0.7.4, < 1.0)
     fastimage (2.0.1)
       addressable (~> 2)
-    fastlane (2.13.0)
+    fastlane (2.14.1)
       activesupport (< 5)
       addressable (>= 2.3, < 3.0.0)
       babosa (>= 1.0.2, < 2.0.0)
       bundler (>= 1.12.0, < 2.0.0)
-      colored
+      colored2 (>= 3.1.1, < 4.0.0)
       commander (>= 4.4.0, < 5.0.0)
       dotenv (>= 2.1.1, < 3.0.0)
       excon (>= 0.45.0, < 1.0.0)
@@ -161,7 +162,7 @@ GEM
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
     security (0.1.3)
-    sexp_processor (4.7.0)
+    sexp_processor (4.8.0)
     signet (0.7.3)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -196,7 +197,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fastlane (= 2.13.0)
+  fastlane (= 2.14.1)
   pronto (= 0.7.1)
   pronto-brakeman (= 0.7.0)
   pronto-eslint_npm (= 0.7.1)
