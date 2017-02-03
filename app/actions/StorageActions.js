@@ -5,7 +5,7 @@ import Tenant from '../common/utils/Tenant'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_TENANT, TENANT_RECEIVED
+  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING, HIDE_ONBOARDING
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -129,6 +129,38 @@ export function getCurrentTenant (locale) {
     // AsyncStorage.getItem('tenant', (error, tenant) => {
     //   dispatch(this.setCurrentTenant(tenant || localeTenant))
     // })
+  }
+}
+
+export const shouldShowOnboarding = () => ({
+  type: SHOW_ONBOARDING
+})
+
+export const getOnboardingTriggered = () => ({
+  type: REQUEST_ONBOARDING
+})
+
+export const shouldHideOnboarding = () => ({
+  type: HIDE_ONBOARDING
+})
+
+export function setOnboardingStorageStatus () {
+  return dispatch => {
+    dispatch(this.shouldHideOnboarding())
+    AsyncStorage.setItem('shouldShowOnboarding', JSON.stringify(false))
+  }
+}
+
+export function getOnboardingStatus () {
+  return dispatch => {
+    dispatch(this.getOnboardingTriggered())
+    AsyncStorage.getItem('shouldShowOnboarding', (error, data) => {
+      if (data === null) {
+        dispatch(this.shouldShowOnboarding())
+      } else {
+        dispatch(this.shouldHideOnboarding())
+      }
+    })
   }
 }
 
