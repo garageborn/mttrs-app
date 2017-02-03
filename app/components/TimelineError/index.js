@@ -3,6 +3,7 @@ import { View, Image, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
 import styles from './styles'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   textPrimary: {
@@ -30,8 +31,8 @@ const TimelineError = ({ intl, reloadTimeline }) => {
         <Image style={styles.icon} source={require('../../assets/icons/disconnected.png')} />
         <Text style={styles.textPrimary}>{textPrimary}</Text>
         <Text style={styles.textSecondary}>{textSecondary}</Text>
-        <Touchable onPress={reloadTimeline}>
-          <View style={styles.buttonContainer}>
+        <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} style={styles.buttonContainer} onPress={reloadTimeline}>
+          <View>
             <Text style={styles.buttonText}>{buttonText}</Text>
           </View>
         </Touchable>
