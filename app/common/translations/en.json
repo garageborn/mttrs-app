@@ -11,5 +11,7 @@
   "from": "From",
   "and": "and",
   "other": "other",
-  "others": "others"
+  "others": "others",
+  "paginator.skip": "Skip",
+  "paginator.start": "Start"
 }

@@ -164,6 +164,8 @@ export function getOnboardingStatus () {
   }
 }
 
+AsyncStorage.removeItem('shouldShowOnboarding')
+
 function removePublisherFromFavorite (publishers, index) {
   return [
     ...publishers.slice(0, index),

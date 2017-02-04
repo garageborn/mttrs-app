@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView, Dimensions } from 'react-native'
 import Page from './Page'
-import Paginator from './Paginator'
+import Paginator from './components/Paginator'
 import data from './data'
 
 class Onboarding extends Component {

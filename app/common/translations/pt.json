@@ -11,5 +11,7 @@
   "from": "Via",
   "and": "e",
   "other": "outro",
-  "others": "outros"
+  "others": "outros",
+  "paginator.skip": "Pular",
+  "paginator.start": "Começar"
 }
