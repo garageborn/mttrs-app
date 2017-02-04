@@ -1,52 +1,18 @@
-import React, { Component, PropTypes } from 'react'
-import { View, ScrollView, Dimensions } from 'react-native'
-import Page from './Page'
-import Paginator from './components/Paginator'
-import data from './data'
+import React, { PropTypes } from 'react'
+import Page from './components/Page'
+import PagesWrapper from './components/PagesWrapper'
 
-class Onboarding extends Component {
-  state = {
-    currentPage: 0
-  }
+const welcome = require('../../assets/onboarding/01-welcome.png')
 
-  updatePosition = (event) => {
-    const { contentOffset, layoutMeasurement } = event.nativeEvent
-    const pageFraction = contentOffset.x / layoutMeasurement.width
-    const page = Math.round(pageFraction)
-    const isLastPage = data.length === page + 1
-    if (isLastPage && pageFraction - page > 0.3) {
-      this.props.onEnd()
-    } else {
-      this.setState({currentPage: page})
-    }
-  }
-
-  render () {
-    const { width } = Dimensions.get('window')
-
-    return (
-      <View style={{flex: 1, backgroundColor: '#F1F1F1', justifyContent: 'center'}}>
-        <ScrollView
-          ref='scroll'
-          pagingEnabled
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          onScroll={this.updatePosition}
-          scrollEventThrottle={100}
-        >
-          {data.map((pg, id) => (
-            <Page key={id} image={pg.image} imageStyle={pg.imageStyle} title={pg.title} description={pg.description} icon={pg.icon} iconStyle={pg.iconStyle} width={width} />
-          ))}
-        </ScrollView>
-        <Paginator
-          pages={data.length}
-          currentPage={this.state.currentPage}
-          onEnd={this.props.onEnd}
-        />
-      </View>
-    )
-  }
-}
+const Onboarding = ({ onEnd }) => (
+  <PagesWrapper onEnd={onEnd}>
+    <Page key={1} image={welcome} title='Foo' description='Bar' />
+    <Page key={2} image={welcome} title='Foo 2' description='Bar' />
+    <Page key={3} image={welcome} title='Foo 3' description='Bar' />
+    <Page key={4} image={welcome} title='Foo 4' description='Bar' />
+    <Page key={5} image={welcome} title='Foo 5' description='Bar' />
+  </PagesWrapper>
+)
 
 Onboarding.propTypes = {
   onEnd: PropTypes.func.isRequired
