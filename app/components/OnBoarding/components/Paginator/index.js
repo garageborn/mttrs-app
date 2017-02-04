@@ -44,7 +44,7 @@ Paginator.propTypes = {
   onEnd: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  })
+  }).isRequired
 }
 
 export default injectIntl(Paginator)

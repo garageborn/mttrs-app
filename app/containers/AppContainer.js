@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { StorageActions } from '../actions/index'
-import OnBoarding from '../components/OnBoarding'
+import Onboarding from '../components/Onboarding'
 import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import Router from '../config/Router'
 
@@ -10,7 +10,7 @@ class AppContainer extends Component {
     const { StorageReducer } = this.props
 
     if (StorageReducer.onboarding.isFetching) return null
-    if (StorageReducer.onboarding.showing) return <OnBoarding onEnd={() => this.props.dispatch(StorageActions.setOnboardingStorageStatus())} />
+    if (StorageReducer.onboarding.showing) return <Onboarding onEnd={() => this.props.dispatch(StorageActions.setOnboardingStorageStatus())} />
 
     return (
       <NavigationProvider context={this.props.navigationContext}>
