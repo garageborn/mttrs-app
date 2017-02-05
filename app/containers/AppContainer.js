@@ -6,11 +6,15 @@ import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import Router from '../config/Router'
 
 class AppContainer extends Component {
-  render () {
-    const { StorageReducer } = this.props
+  onOnboardingEnd = () => {
+    this.props.dispatch(StorageActions.setOnboardingStorageStatus())
+  }
 
-    if (StorageReducer.onboarding.isFetching) return null
-    if (StorageReducer.onboarding.showing) return <Onboarding onEnd={() => this.props.dispatch(StorageActions.setOnboardingStorageStatus())} />
+  render () {
+    const { onboarding } = this.props.StorageReducer
+
+    if (onboarding.isFetching) return null
+    if (onboarding.showing) return <Onboarding onEnd={this.onOnboardingEnd} />
 
     return (
       <NavigationProvider context={this.props.navigationContext}>
@@ -18,6 +22,12 @@ class AppContainer extends Component {
       </NavigationProvider>
     )
   }
+}
+
+AppContainer.propTypes = {
+  navigationContext: PropTypes.object.isRequired,
+  StorageReducer: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 let mapStateToProps = (state) => {
