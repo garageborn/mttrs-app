@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { TabViewAnimated, TabBarTop } from 'react-native-tab-view'
+import { TabViewAnimated, TabBar } from 'react-native-tab-view'
 import { injectIntl, defineMessages } from 'react-intl'
 import PublisherMenuContainer from '../../containers/PublisherMenuContainer'
 import CategoryMenuContainer from '../../containers/CategoryMenuContainer'
@@ -38,7 +38,7 @@ class MenuAndroid extends Component {
 
   renderHeader (props) {
     return (
-      <TabBarTop
+      <TabBar
         {...props}
         style={styles.tabBar}
       />

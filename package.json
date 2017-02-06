@@ -45,5 +45,11 @@
     "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-standard": "^2.0.1",
     "redux-logger": "^2.7.0"
+  },
+
+  "standard": {
+    "globals": [
+      "__DEV__"
+    ]
   }
 }
