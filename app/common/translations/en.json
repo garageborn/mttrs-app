@@ -11,5 +11,8 @@
   "from": "From",
   "and": "and",
   "other": "other",
-  "others": "others"
+  "others": "others",
+  "disconnected.textPrimary": "No internet connection",
+  "disconnected.textSecondary": "Try again when you are online",
+  "disconnected.buttonText": "Reload"
 }

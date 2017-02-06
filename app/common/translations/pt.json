@@ -11,5 +11,8 @@
   "from": "Via",
   "and": "e",
   "other": "outro",
-  "others": "outros"
+  "others": "outros",
+  "disconnected.textPrimary": "Não foi possível conectar-se à Internet",
+  "disconnected.textSecondary": "Tente novamente quando estiver online",
+  "disconnected.buttonText": "Atualizar"
 }
