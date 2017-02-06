@@ -6,7 +6,7 @@ let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
   favoritePublishers: { isFetching: false, isLoaded: false, items: [] },
   tenant: { isFetching: false, isLoaded: false, name: '' },
-  onboarding: { isFetching: false, showing: false }
+  onboarding: { isFetching: false, show: false }
 }
 
 export default function (state = defaultState, action) {
@@ -81,15 +81,7 @@ export default function (state = defaultState, action) {
         ...state,
         onboarding: {
           isFetching: false,
-          showing: true
-        }
-      }
-    case HIDE_ONBOARDING:
-      return {
-        ...state,
-        onboarding: {
-          isFetching: false,
-          showing: false
+          show: action.show
         }
       }
     default:

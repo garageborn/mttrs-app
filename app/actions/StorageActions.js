@@ -132,39 +132,38 @@ export function getCurrentTenant (locale) {
   }
 }
 
-export const shouldShowOnboarding = () => ({
-  type: SHOW_ONBOARDING
-})
-
-export const getOnboardingTriggered = () => ({
+export const requestOnboarding = () => ({
   type: REQUEST_ONBOARDING
 })
 
-export const shouldHideOnboarding = () => ({
-  type: HIDE_ONBOARDING
+export const showOnboarding = show => ({
+  type: SHOW_ONBOARDING,
+  show
 })
 
-export function setOnboardingStorageStatus () {
+export function closeOnboarding () {
   return dispatch => {
-    dispatch(this.shouldHideOnboarding())
-    AsyncStorage.setItem('shouldShowOnboarding', JSON.stringify(false))
+    dispatch(this.showOnboarding(false))
+    AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
   }
 }
 
 export function getOnboardingStatus () {
   return dispatch => {
-    dispatch(this.getOnboardingTriggered())
-    AsyncStorage.getItem('shouldShowOnboarding', (error, data) => {
+    dispatch(this.requestOnboarding())
+    AsyncStorage.getItem('showOnboarding', (error, data) => {
+      if (error) {
+        throw new Error(error)
+      }
+
       if (data === null) {
-        dispatch(this.shouldShowOnboarding())
+        dispatch(this.showOnboarding(true))
       } else {
-        dispatch(this.shouldHideOnboarding())
+        dispatch(this.showOnboarding(false))
       }
     })
   }
 }
-
-AsyncStorage.removeItem('shouldShowOnboarding')
 
 function removePublisherFromFavorite (publishers, index) {
   return [

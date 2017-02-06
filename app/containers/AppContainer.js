@@ -7,14 +7,14 @@ import Router from '../config/Router'
 
 class AppContainer extends Component {
   onOnboardingEnd = () => {
-    this.props.dispatch(StorageActions.setOnboardingStorageStatus())
+    this.props.dispatch(StorageActions.closeOnboarding())
   }
 
   render () {
-    const { onboarding } = this.props.StorageReducer
+    const { isFetching, show } = this.props.StorageReducer.onboarding
 
-    if (onboarding.isFetching) return null
-    if (onboarding.showing) return <Onboarding onEnd={this.onOnboardingEnd} />
+    if (isFetching) return null
+    if (show) return <Onboarding onEnd={this.onOnboardingEnd} />
 
     return (
       <NavigationProvider context={this.props.navigationContext}>
