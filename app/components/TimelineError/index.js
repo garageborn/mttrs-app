@@ -26,12 +26,22 @@ const TimelineError = ({ intl, reloadTimeline }) => {
   const buttonText = intl.formatMessage(messages.buttonText)
   return (
     <View style={styles.container}>
-      <Image style={styles.bg} source={require('../../assets/disconnected-bg.png')} />
-      <View>
-        <Image style={styles.icon} source={require('../../assets/icons/disconnected.png')} />
+      <Image
+        style={styles.bg}
+        source={require('../../assets/disconnected-bg.png')}
+      />
+      <View style={styles.textContainer}>
+        <Image
+          style={styles.icon}
+          source={require('../../assets/icons/disconnected.png')}
+        />
         <Text style={styles.textPrimary}>{textPrimary}</Text>
         <Text style={styles.textSecondary}>{textSecondary}</Text>
-        <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} style={styles.buttonContainer} onPress={reloadTimeline}>
+        <Touchable
+          underlayColor={WHITE_TRANSPARENT_COLOR}
+          style={styles.buttonContainer}
+          onPress={reloadTimeline}
+        >
           <View>
             <Text style={styles.buttonText}>{buttonText}</Text>
           </View>

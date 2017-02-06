@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0
   },
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   textPrimary: {
     backgroundColor: 'transparent',
     color: '#999999',
