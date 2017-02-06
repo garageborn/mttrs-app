@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Animated, Dimensions, Easing, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
 import Menu from '../components/Menu'
@@ -83,6 +83,7 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
@@ -98,12 +99,11 @@ class TimelineContainer extends Component {
 
   categoriesWillChange (nextProps) {
     const hasCategories = !_isNil(this.props.data.categories)
-    if (hasCategories) {
-      const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
-      const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
-      const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
-      return categoriesChanged
-    }
+    if (!hasCategories) return
+    const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
+    const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
+    const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
+    return categoriesChanged
   }
 
   sectionWillChange (nextProps) {

@@ -4,7 +4,7 @@ import AndroidIntl from 'intl'
 import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
-require('../config/IntlProvider').locale
+require('../../config/IntlProvider').locale
 
 if (Platform.OS === 'android') global.Intl = AndroidIntl
 

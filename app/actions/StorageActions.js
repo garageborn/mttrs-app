@@ -163,7 +163,11 @@ export const showOnboarding = show => ({
 export function closeOnboarding () {
   return dispatch => {
     dispatch(this.showOnboarding(false))
-    AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+    try {
+      AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
