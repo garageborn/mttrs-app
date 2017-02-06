@@ -8,7 +8,7 @@ import styles from './styles'
 const Header = ({ title, toggleMenu, icon, params, type }) => {
   let headerBottomColors = () => <HeaderBottomColorContainer type={type} params={params} />
   return (
-    <View>
+    <View style={{zIndex: 2, position: 'relative'}}>
       <View style={styles.header}>
         <Touchable onPress={toggleMenu} underlayColor={COLORLESS}>
           <View style={styles.headerContainer}>

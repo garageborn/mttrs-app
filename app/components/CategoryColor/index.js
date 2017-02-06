@@ -16,7 +16,7 @@ class CategoryColor extends React.Component {
     Animated.timing(
       this.state.height,
       {
-        toValue: direction === 'up' ? 12 : 2,
+        toValue: direction === 'up' ? 9 : 3,
         duration: 230
       }
     ).start()

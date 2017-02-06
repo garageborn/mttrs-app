@@ -12,7 +12,8 @@ class Timeline extends Component {
       renderLeft: () => null,
       renderRight: () => null,
       backgroundColor: DARK_COLOR,
-      height: headerHeight
+      height: headerHeight,
+      elevation: 0
     }
   }
 
