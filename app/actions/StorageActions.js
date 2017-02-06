@@ -6,7 +6,7 @@ import captureError from '../common/utils/captureError'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING, HIDE_ONBOARDING
+  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -172,7 +172,7 @@ export function getOnboardingStatus () {
     dispatch(this.requestOnboarding())
     AsyncStorage.getItem('showOnboarding', (error, data) => {
       if (error) {
-        throw new Error(error)
+        captureError(error)
       }
 
       if (data === null) {
