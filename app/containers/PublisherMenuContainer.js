@@ -94,7 +94,7 @@ class PublisherMenuContainer extends Component {
   }
 
   render () {
-    const { loading } = this.props.data
+    const { loading, error } = this.props.data
     if (loading) {
       return (
         <View style={styles.container}>
@@ -106,9 +106,7 @@ class PublisherMenuContainer extends Component {
       )
     }
 
-    if (this.props.data.error) {
-      return this.handleError()
-    }
+    if (error) return this.handleError()
 
     return (
       <View style={styles.container}>

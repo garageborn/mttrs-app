@@ -102,7 +102,7 @@ class TimelineContainer extends Component {
     if (!hasCategories) return
     const firstCategoryHasChanged = this.props.data.categories[0].slug !== nextProps.data.categories[0].slug
     const categoriesNumberHasChanged = this.props.data.categories.length !== nextProps.data.categories.length
-    const categoriesChanged = (firstCategoryHasChanged || categoriesNumberHasChanged)
+    const categoriesChanged = firstCategoryHasChanged || categoriesNumberHasChanged
     return categoriesChanged
   }
 

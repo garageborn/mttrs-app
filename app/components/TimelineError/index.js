@@ -7,16 +7,13 @@ import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   textPrimary: {
-    id: 'disconnected.textPrimary',
-    defaultMessage: 'No internet connection'
+    id: 'disconnected.textPrimary'
   },
   textSecondary: {
-    id: 'disconnected.textSecondary',
-    defaultMessage: 'Try again when you are online'
+    id: 'disconnected.textSecondary'
   },
   buttonText: {
-    id: 'disconnected.buttonText',
-    defaultMessage: 'Reload'
+    id: 'disconnected.buttonText'
   }
 })
 
