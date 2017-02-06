@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
 import Tenant from '../common/utils/Tenant'
+import captureError from '../common/utils/captureError'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
@@ -23,9 +24,12 @@ export function getVisitedStories () {
     if (isVisitedStoriesFetching(getState)) return
 
     dispatch(requestVisitedStories())
-    return AsyncStorage.getItem('visitedStories', (error, stories) => {
+    try {
+      const stories = AsyncStorage.getItem('visitedStories')
       return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
-    })
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
@@ -34,8 +38,12 @@ export function addVisitedStory (story) {
     if (isVisitedStory(getState, story)) return
 
     let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    AsyncStorage.setItem('visitedStories', JSON.stringify(stories))
-    return dispatch(receiveVisitedStories(stories))
+    try {
+      AsyncStorage.setItem('visitedStories', JSON.stringify(stories))
+      return dispatch(receiveVisitedStories(stories))
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
@@ -73,18 +81,17 @@ export const receiveTenant = (tenant) => ({
   tenant
 })
 
-function setTenant (tenant) {
-  Tenant.current = tenant
-}
-
 export function getFavoritePublishers () {
   return (dispatch, getState) => {
     if (isFavoritePublishersLoaded(getState)) return
     if (isFavoritePublishersFetching(getState)) return
     dispatch(requestFavoritePublishers())
-    return AsyncStorage.getItem('favoritePublishers', (error, publishers) => {
+    try {
+      const publishers = AsyncStorage.getItem('favoritePublishers')
       return dispatch(receiveFavoritePublishers(JSON.parse(publishers) || []))
-    })
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
@@ -95,8 +102,12 @@ export function removeFavoritePublisher (publisher) {
     const publisherIndex = publishers.indexOf(publisher.id)
     publishers = removePublisherFromFavorite(publishers, publisherIndex)
 
-    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
-    return dispatch(receiveFavoritePublishers(publishers))
+    try {
+      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+      return dispatch(receiveFavoritePublishers(publishers))
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
@@ -105,16 +116,24 @@ export function addFavoritePublisher (publisher) {
     if (isFavoritePublisher(getState, publisher)) return
 
     let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
-    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
-    return dispatch(receiveFavoritePublishers(publishers))
+    try {
+      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+      return dispatch(receiveFavoritePublishers(publishers))
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 
 export function setCurrentTenant (tenant) {
   return (dispatch) => {
-    setTenant(tenant)
-    AsyncStorage.setItem('tenant', tenant)
-    return dispatch(receiveTenant(tenant))
+    Tenant.current = tenant
+    try {
+      AsyncStorage.setItem('tenant', tenant)
+      return dispatch(receiveTenant(tenant))
+    } catch (error) {
+      captureError(error)
+    }
   }
 }
 

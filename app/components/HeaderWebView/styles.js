@@ -4,14 +4,11 @@ import { DARK_COLOR } from '../../constants/Colors'
 const styles = StyleSheet.create({
   container: {
     ...Platform.select({
-      ios: {
-        paddingTop: 10
-      },
       android: {
-        paddingTop: 5,
         height: 55
       }
     }),
+    paddingTop: 10,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',

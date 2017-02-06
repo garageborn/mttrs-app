@@ -17,6 +17,7 @@ class Link extends Component {
         renderLeft: () => <View />,
         renderRight: () => <View />,
         backgroundColor: DARK_COLOR,
+        elevation: 0,
         height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
       }
     },
