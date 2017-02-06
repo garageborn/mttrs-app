@@ -10,15 +10,15 @@ import styles from './styles'
 
 const Page = ({
   image,
-  imageStyle,
+  imageStyles,
   icon,
-  iconStyle,
+  iconStyles,
   title,
   description,
   ...props
 }) => (
   <View style={styles.page} {...props}>
-    <PageImage source={image} imageStyle={imageStyle} />
+    <PageImage source={image} imageStyles={imageStyles} />
     <PageText>
       <PageHeader>
         <PageTitle>{title}</PageTitle>
@@ -33,9 +33,9 @@ const Page = ({
 
 Page.propTypes = {
   image: PropTypes.any.isRequired,
-  imageStyle: PropTypes.object,
+  imageStyles: PropTypes.object,
   icon: PropTypes.any,
-  iconStyle: PropTypes.object,
+  iconStyles: PropTypes.object,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
 }

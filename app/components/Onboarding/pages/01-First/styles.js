@@ -6,12 +6,6 @@ const styles = {
       ios: 40,
       android: 0
     })
-  },
-
-  icon: {
-    position: 'relative',
-    top: 2,
-    marginLeft: 10
   }
 }
 

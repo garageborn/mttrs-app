@@ -21,7 +21,7 @@ const Categories = ({ intl }) => {
   return (
     <Page
       image={image}
-      imageStyle={styles.image}
+      imageStyles={styles.image}
       title={title}
       description={description}
     />

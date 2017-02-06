@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native'
 
+const paginatorActions = {
+  fontSize: 12,
+  padding: 10
+}
+
 const styles = StyleSheet.create({
   container: {
     height: 60,
@@ -24,12 +29,12 @@ const styles = StyleSheet.create({
 
   skip: {
     color: '#DADADA',
-    fontSize: 12
+    ...paginatorActions
   },
 
   start: {
     color: '#FF5607',
-    fontSize: 12
+    ...paginatorActions
   }
 })
 

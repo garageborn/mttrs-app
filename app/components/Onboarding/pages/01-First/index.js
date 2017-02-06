@@ -22,9 +22,8 @@ const Welcome = ({ intl }) => {
   return (
     <Page
       image={image}
-      imageStyle={styles.image}
+      imageStyles={styles.image}
       icon={icon}
-      iconStyle={styles.icon}
       title={title}
       description={description}
     />
