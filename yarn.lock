@@ -3375,9 +3375,9 @@ react-native-tab-view@0.0.42:
   version "0.0.42"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.42.tgz#abaeda8e7ab856db98c09709d3d82d2a08b94564"
 
-react-native-tab-view@0.0.48:
-  version "0.0.48"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.48.tgz#0ea983fc112dcfc264d00fec3707f476df72eec8"
+react-native-tab-view@0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.54.tgz#838e2de5a791488353786e2fe7e8f77a72f03b87"
 
 react-native@0.40.0:
   version "0.40.0"

@@ -5,16 +5,16 @@ import _uniqBy from 'lodash/uniqBy'
 
 const defaultVariables = {
   categorySlug: '',
-  days: 5,
+  days: 2,
   offset: 0,
-  perDay: 10,
+  perDay: 16,
   publisherSlug: '',
   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
 }
 
 const Query = gql`
-  query($days: Int!, $offset: Int, $timezone: String, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
-    timeline(days: $days, offset: $offset, timezone: $timezone) {
+  query($days: Int!, $offset: Int, $timezone: String, $type: String!, $perDay: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(days: $days, offset: $offset, timezone: $timezone, type: $type) {
       date
       stories(limit: $perDay, popular: true, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
         id
@@ -63,12 +63,16 @@ const infiniteScroll = ({ fetchMore, variables, timeline }) => {
 export default function (Timeline) {
   return graphql(Query, {
     options (props) {
-      if (props.type === 'home') return { variables: defaultVariables }
+      let variables = {
+        ...defaultVariables,
+        type: props.type
+      }
+      if (props.type === 'home') return { variables: variables }
       return {
         variables: {
-          ...defaultVariables,
+          ...variables,
           publisherSlug: props.type === 'publisher' ? props.filter.slug : '',
-          categorySlug: props.type === 'category' ? props.filter.slug : ''
+          categorySlug: props.type === 'category' ? props.filter.slug : '',
         }
       }
     },
