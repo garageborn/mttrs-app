@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { injectIntl, defineMessages } from 'react-intl'
 import Page from '../../components/Page'
 import styles from './styles'
-const image = require('../assets/03-editorial.png')
+const image = require('./assets/03-editorial.png')
 
 const messages = defineMessages({
   title: {

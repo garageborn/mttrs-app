@@ -15,9 +15,9 @@ const Page = ({
   iconStyle,
   title,
   description,
-  ...rest
+  ...props
 }) => (
-  <View style={styles.page} {...rest}>
+  <View style={styles.page} {...props}>
     <PageImage source={image} imageStyle={imageStyle} />
     <PageText>
       <PageHeader>

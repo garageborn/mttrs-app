@@ -1,18 +1,18 @@
 import React, { PropTypes } from 'react'
 import PagesWrapper from './components/PagesWrapper'
-import Welcome from './pages/01-Welcome'
-import Highlights from './pages/02-Highlights'
-import Editorial from './pages/03-Editorial'
-import Publishers from './pages/04-Publishers'
-import Categories from './pages/05-Categories'
+import First from './pages/01-First'
+import Second from './pages/02-Second'
+import Third from './pages/03-Third'
+import Fourth from './pages/04-Fourth'
+import Fifth from './pages/05-Fifth'
 
 const Onboarding = ({ onEnd }) => (
   <PagesWrapper onEnd={onEnd}>
-    <Welcome />
-    <Highlights />
-    <Editorial />
-    <Publishers />
-    <Categories />
+    <First />
+    <Second />
+    <Third />
+    <Fourth />
+    <Fifth />
   </PagesWrapper>
 )
 
