@@ -6,7 +6,13 @@ import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import Router from '../config/Router'
 
 class AppContainer extends Component {
-  onOnboardingEnd = () => {
+  constructor () {
+    super()
+
+    this.onOnboardingEnd = this.onOnboardingEnd.bind(this)
+  }
+
+  onOnboardingEnd () {
     this.props.dispatch(StorageActions.closeOnboarding())
   }
 
