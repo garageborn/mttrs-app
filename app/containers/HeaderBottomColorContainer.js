@@ -5,29 +5,37 @@ import CategoryColorList from '../components/CategoryColorList'
 import withQuery from './CategoryColorsListContainer.gql'
 import { ErrorActions } from '../actions/index'
 
-const HeaderBottomColorContainer = ({ type, data, params, uiReducer, dispatch }) => {
-  if (uiReducer.menu.isOpen) return false
-
-  if (type === 'publisher') return <HeaderStripColor type={type} />
-
-  if (data.error) {
-    dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
+class HeaderBottomColorContainer extends React.Component {
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.error) this.props.dispatch((ErrorActions.showErrorDisclaimer()))
   }
 
-  return <CategoryColorList type={type} data={data} params={params} />
+  render () {
+    let { ErrorReducer, uiReducer, type, data, params } = this.props
+
+    if (uiReducer.menu.isOpen) return false
+
+    if (type === 'publisher') return <HeaderStripColor type={type} />
+
+    if (ErrorReducer.hasError) return null
+
+    return <CategoryColorList type={type} data={data} params={params} />
+  }
 }
 
 HeaderBottomColorContainer.propTypes = {
+  dispatch: PropTypes.func,
   type: PropTypes.string,
   data: PropTypes.object.isRequired,
   params: PropTypes.object,
-  uiReducer: PropTypes.object.isRequired
+  uiReducer: PropTypes.object.isRequired,
+  ErrorReducer: PropTypes.object
 }
 
 let mapStateToProps = state => {
   return {
-    uiReducer: state.uiReducer
+    uiReducer: state.uiReducer,
+    ErrorReducer: state.ErrorReducer
   }
 }
 

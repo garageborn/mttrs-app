@@ -19,13 +19,18 @@ class CategoryMenuContainer extends Component {
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
   }
 
+  componentWillReceiveProps (nextProps) {
+    let dataChanged = this.props.data !== nextProps.data
+    if (dataChanged && nextProps.data.error) this.handleError()
+  }
+
   handleError () {
     this.props.dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
   }
 
   render () {
-    if (this.props.data.error) return this.handleError()
+    console.log('passa')
+    if (this.props.ErrorReducer.hasError) return null
     // TEMPORARY
     // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
@@ -65,11 +70,13 @@ class CategoryMenuContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    ErrorReducer: state.ErrorReducer,
     StorageReducer: state.StorageReducer
   }
 }
 
 CategoryMenuContainer.propTypes = {
+  ErrorReducer: PropTypes.object,
   data: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }

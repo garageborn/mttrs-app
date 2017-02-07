@@ -30,6 +30,8 @@ class PublisherMenuContainer extends Component {
     if (this.state.query !== nextState.query) {
       this.rowsAndSections(nextState.query)
     }
+    let dataChanged = this.props.data !== nextProps.data
+    if (dataChanged && nextProps.data.error) this.handleError()
   }
 
   dataSource () {
@@ -90,11 +92,10 @@ class PublisherMenuContainer extends Component {
 
   handleError () {
     this.props.dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
   }
 
   render () {
-    const { loading, error } = this.props.data
+    const { loading } = this.props.data
     if (loading) {
       return (
         <View style={styles.container}>
@@ -106,7 +107,7 @@ class PublisherMenuContainer extends Component {
       )
     }
 
-    if (error) return this.handleError()
+    if (this.props.ErrorReducer.hasError) return null
 
     return (
       <View style={styles.container}>
@@ -155,11 +156,13 @@ class PublisherMenuContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    StorageReducer: state.StorageReducer
+    StorageReducer: state.StorageReducer,
+    ErrorReducer: state.ErrorReducer
   }
 }
 
 PublisherMenuContainer.propTypes = {
+  ErrorReducer: PropTypes.object.isRequired,
   StorageReducer: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
