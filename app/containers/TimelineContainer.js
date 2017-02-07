@@ -31,33 +31,6 @@ class TimelineContainer extends Component {
     this.props.dispatch(StorageActions.getFavoritePublishers())
   }
 
-  handleChangeTab (index) {
-    this.setState({
-      navigationState: {
-        index,
-        routes: this.state.navigationState.routes
-      }
-    })
-  }
-
-  renderScene (props) {
-    let filter
-
-    if (this.sceneType(props) === 'publisher') {
-      filter = props.params.section.model
-    } else {
-      filter = props.route.filter
-    }
-    return (
-      <Timeline
-        type={this.sceneType(props)}
-        filter={filter}
-        trackScreen={this.trackScreen}
-        navigationState={this.state.navigationState}
-      />
-    )
-  }
-
   componentDidMount () {
     const { dispatch } = this.props
     dispatch(NavigationActions.home())
@@ -143,14 +116,44 @@ class TimelineContainer extends Component {
     })
   }
 
-  render () {
-    const { children, params } = this.props
+  sectionType (props) {
+    if (_isNil(props.params.section)) return 'home'
+    return props.params.section.name
+  }
+
+  sceneType (props) {
+    if (_isNil(props.route)) return 'publisher'
+    return props.route.type
+  }
+
+  trackScreen (screen) {
+    this.props.dispatch(AnalyticsActions.trackScreen(screen))
+  }
+
+  handleChangeTab (index) {
+    this.setState({
+      navigationState: {
+        index,
+        routes: this.state.navigationState.routes
+      }
+    })
+  }
+
+  renderScene (props) {
+    let filter
+
+    if (this.sceneType(props) === 'publisher') {
+      filter = props.params.section.model
+    } else {
+      filter = props.route.filter
+    }
     return (
-      <View style={styles.container}>
-        {this.renderTimeline()}
-        <MenuContainer params={params} />
-        {children}
-      </View>
+      <Timeline
+        type={this.sceneType(props)}
+        filter={filter}
+        trackScreen={this.trackScreen}
+        navigationState={this.state.navigationState}
+      />
     )
   }
 
@@ -170,18 +173,15 @@ class TimelineContainer extends Component {
     }
   }
 
-  sectionType (props) {
-    if (_isNil(props.params.section)) return 'home'
-    return props.params.section.name
-  }
-
-  sceneType (props) {
-    if (_isNil(props.route)) return 'publisher'
-    return props.route.type
-  }
-
-  trackScreen (screen) {
-    this.props.dispatch(AnalyticsActions.trackScreen(screen))
+  render () {
+    const { children, params } = this.props
+    return (
+      <View style={styles.container}>
+        {this.renderTimeline()}
+        <MenuContainer params={params} />
+        {children}
+      </View>
+    )
   }
 }
 
