@@ -1,12 +1,8 @@
-import { Platform } from 'react-native'
 import { graphql } from 'react-apollo'
-import AndroidIntl from 'intl'
 import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
-require('../../config/IntlProvider').locale
-
-if (Platform.OS === 'android') global.Intl = AndroidIntl
+import { timezone } from '../../config/IntlProvider'
 
 const defaultVariables = {
   categorySlug: '',
@@ -14,7 +10,7 @@ const defaultVariables = {
   offset: 0,
   perDay: 16,
   publisherSlug: '',
-  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  timezone
 }
 
 const Query = gql`
@@ -77,7 +73,7 @@ export default function (Timeline) {
         variables: {
           ...variables,
           publisherSlug: props.type === 'publisher' ? props.filter.slug : '',
-          categorySlug: props.type === 'category' ? props.filter.slug : '',
+          categorySlug: props.type === 'category' ? props.filter.slug : ''
         }
       }
     },

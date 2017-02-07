@@ -16,6 +16,7 @@ Platform.select({
 })
 
 export const locale = new Intl.DateTimeFormat().resolvedOptions().locale
+export const timezone = new Intl.DateTimeFormat().resolvedOptions().timeZone
 
 class Provider extends Component {
   render () {
