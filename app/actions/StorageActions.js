@@ -24,12 +24,10 @@ export function getVisitedStories () {
     if (isVisitedStoriesFetching(getState)) return
 
     dispatch(requestVisitedStories())
-    try {
-      const stories = AsyncStorage.getItem('visitedStories')
+    AsyncStorage.getItem('visitedStories', (error, stories) => {
+      if (error) return captureError(error)
       return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -38,12 +36,10 @@ export function addVisitedStory (story) {
     if (isVisitedStory(getState, story)) return
 
     let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    try {
-      AsyncStorage.setItem('visitedStories', JSON.stringify(stories))
+    AsyncStorage.setItem('visitedStories', JSON.stringify(stories), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveVisitedStories(stories))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -86,12 +82,11 @@ export function getFavoritePublishers () {
     if (isFavoritePublishersLoaded(getState)) return
     if (isFavoritePublishersFetching(getState)) return
     dispatch(requestFavoritePublishers())
-    try {
-      const publishers = AsyncStorage.getItem('favoritePublishers')
+
+    AsyncStorage.getItem('favoritePublishers', (error, publishers) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(JSON.parse(publishers) || []))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -102,12 +97,10 @@ export function removeFavoritePublisher (publisher) {
     const publisherIndex = publishers.indexOf(publisher.id)
     publishers = removePublisherFromFavorite(publishers, publisherIndex)
 
-    try {
-      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(publishers))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -116,24 +109,21 @@ export function addFavoritePublisher (publisher) {
     if (isFavoritePublisher(getState, publisher)) return
 
     let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
-    try {
-      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(publishers))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
 export function setCurrentTenant (tenant) {
   return (dispatch) => {
     Tenant.current = tenant
-    try {
-      AsyncStorage.setItem('tenant', tenant)
+    AsyncStorage.setItem('tenant', tenant, (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveTenant(tenant))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 

@@ -45,9 +45,7 @@ class Timeline extends Component {
     const renderPublisher = nextProps.type === 'publisher'
     const errorWillChange = this.props.data.error !== nextProps.data.error
     const willHaveError = errorWillChange && nextProps.data.error
-    if (willHaveError) {
-      this.props.dispatch(ErrorActions.showErrorDisclaimer())
-    }
+    if (willHaveError) this.props.dispatch(ErrorActions.showErrorDisclaimer())
     if (renderCategory || renderPublisher) return this.trackSection(nextProps.filter)
   }
 
