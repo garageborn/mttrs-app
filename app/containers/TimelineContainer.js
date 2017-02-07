@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
-import { View, Animated, Dimensions, Easing, Platform, StatusBar } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { View, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { MenuActions, NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
+import _isNil from 'lodash/isNil'
+import { NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
+import MenuContainer from './MenuContainer'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
-import Menu from '../components/Menu'
 import styles from '../styles/App'
-import { headerHeight } from '../styles/Global'
-
-import _isNil from 'lodash/isNil'
-
-const { height } = Dimensions.get('window')
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
 
@@ -19,12 +15,11 @@ class TimelineContainer extends Component {
   constructor (props) {
     super(props)
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
-    this.closeMenu = this.closeMenu.bind(this)
+
     this.renderScene = this.renderScene.bind(this)
     this.trackScreen = this.trackScreen.bind(this)
     this.handleChangeTab = this.handleChangeTab.bind(this)
     this.state = {
-      menuPositionY: new Animated.Value(-height),
       navigationState: {
         index: 0,
         routes: [homeRoute]
@@ -87,7 +82,6 @@ class TimelineContainer extends Component {
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
-    this.menuWillChange(nextProps)
     this.sectionWillChange(nextProps)
   }
 
@@ -112,20 +106,6 @@ class TimelineContainer extends Component {
     let sectionNameChanged = nextSection.name !== currentSection.name
     let sectionModelChanged = nextSection.model !== currentSection.model
     if (sectionNameChanged || sectionModelChanged) this.changeSection(nextProps)
-  }
-
-  menuWillChange (nextProps) {
-    let currentMenu = this.props.uiReducer.menu || {}
-    let nextMenu = nextProps.uiReducer.menu || {}
-
-    let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
-    let retractChanged = currentMenu.retract !== nextMenu.retract
-
-    if (isOpenChanged && nextMenu.isOpen) {
-      this.animate('in')
-    } else if (retractChanged && nextMenu.retract) {
-      this.animate('out')
-    }
   }
 
   changeSection (nextProps) {
@@ -163,40 +143,13 @@ class TimelineContainer extends Component {
     })
   }
 
-  animate (type) {
-    let value
-    let callback
-    let easing = null
-
-    if (type === 'in') {
-      value = 0
-      easing = Easing.in(Easing.quad)
-    } else {
-      value = -height - headerHeight
-      callback = this.closeMenu
-      easing = Easing.out(Easing.quad)
-    }
-
-    return (
-      Animated.timing(
-        this.state.menuPositionY,
-        {
-          toValue: value,
-          duration: 330,
-          easing
-        }
-      ).start(callback)
-    )
-  }
-
   render () {
+    const { children, params } = this.props
     return (
       <View style={styles.container}>
         {this.renderTimeline()}
-        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-          {this.renderMenu()}
-        </Animated.View>
-        {this.props.children}
+        <MenuContainer params={params} />
+        {children}
       </View>
     )
   }
@@ -227,18 +180,17 @@ class TimelineContainer extends Component {
     return props.route.type
   }
 
-  renderMenu () {
-    const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <Menu params={params} />
-  }
-
-  closeMenu () {
-    this.props.dispatch(MenuActions.closeMenu())
-  }
-
   trackScreen (screen) {
     this.props.dispatch(AnalyticsActions.trackScreen(screen))
   }
+}
+
+TimelineContainer.propTypes = {
+  children: PropTypes.node,
+  dispatch: PropTypes.func.isRequired,
+  StorageReducer: PropTypes.object.isRequired,
+  params: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired
 }
 
 let mapStateToProps = (state) => {
