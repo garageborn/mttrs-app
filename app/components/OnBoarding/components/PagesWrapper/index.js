@@ -26,8 +26,6 @@ class PagesWrapper extends Component {
   }
 
   render () {
-    const numberOfPages = React.Children.count(this.props.children)
-
     return (
       <View style={styles.container}>
         <ScrollView
@@ -40,7 +38,7 @@ class PagesWrapper extends Component {
           {this.props.children}
         </ScrollView>
         <Paginator
-          pages={numberOfPages}
+          pages={this.state.numberOfPages}
           currentPage={this.state.currentPage}
           onEnd={this.props.onEnd}
         />
