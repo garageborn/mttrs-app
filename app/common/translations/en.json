@@ -14,5 +14,17 @@
   "others": "others",
   "disconnected.textPrimary": "No internet connection",
   "disconnected.textSecondary": "Try again when you are online",
-  "disconnected.buttonText": "Reload"
+  "disconnected.buttonText": "Reload",
+  "paginator.skip": "Skip",
+  "paginator.start": "Start",
+  "onboarding.welcome.title": "Welcome to",
+  "onboarding.welcome.description": "Your time is precious. Read news that matters.",
+  "onboarding.highlights.title": "Top Stories",
+  "onboarding.highlights.description": "Discover the top stories of the day...",
+  "onboarding.editorial.title": "Editorial",
+  "onboarding.editorial.description": "Carefully written by our team...",
+  "onboarding.publishers.title": "Publishers",
+  "onboarding.publishers.description": "Discover your favorite publisher...",
+  "onboarding.categories.title": "Categories",
+  "onboarding.categories.description": "All news categorized..."
 }

@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
-import { NavigationContext, NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
+import { NavigationContext } from '@exponent/ex-navigation'
+import AppContainer from './AppContainer'
 import IntlProvider, { locale } from '../config/IntlProvider'
 import { StorageActions } from '../actions/index'
-import Router from '../config/Router'
 import apolloClient from '../config/apolloClient'
+import Router from '../config/Router'
 require('../config/sentry')
 
 class Root extends Component {
+
   componentWillMount () {
+    this.props.store.dispatch(StorageActions.getOnboardingStatus())
     this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
   }
 
@@ -22,9 +25,7 @@ class Root extends Component {
     return (
       <IntlProvider>
         <ApolloProvider store={store} client={apolloClient}>
-          <NavigationProvider context={navigationContext}>
-            <StackNavigation initialRoute={Router.getRoute('timeline')} />
-          </NavigationProvider>
+          <AppContainer navigationContext={navigationContext} />
         </ApolloProvider>
       </IntlProvider>
     )

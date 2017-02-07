@@ -6,7 +6,7 @@ import captureError from '../common/utils/captureError'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_TENANT, TENANT_RECEIVED
+  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -138,6 +138,41 @@ export function getCurrentTenant (locale) {
     // AsyncStorage.getItem('tenant', (error, tenant) => {
     //   dispatch(this.setCurrentTenant(tenant || localeTenant))
     // })
+  }
+}
+
+export const requestOnboarding = () => ({
+  type: REQUEST_ONBOARDING
+})
+
+export const showOnboarding = show => ({
+  type: SHOW_ONBOARDING,
+  show
+})
+
+export function closeOnboarding () {
+  return dispatch => {
+    dispatch(this.showOnboarding(false))
+    try {
+      AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+    } catch (error) {
+      captureError(error)
+    }
+  }
+}
+
+export function getOnboardingStatus () {
+  return dispatch => {
+    dispatch(this.requestOnboarding())
+    AsyncStorage.getItem('showOnboarding', (error, data) => {
+      if (error) captureError(error)
+
+      if (data === null) {
+        dispatch(this.showOnboarding(true))
+      } else {
+        dispatch(this.showOnboarding(false))
+      }
+    })
   }
 }
 
