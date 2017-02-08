@@ -22,10 +22,11 @@ class CategoryColor extends React.Component {
 
   categoryColorStyles () {
     let { isActive, color } = this.props
+    const flexGrowValue = 1.075
     let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
     if (isActive) {
       this.handleAnimation('up')
-      return categoryStyles
+      return [...categoryStyles, { flexGrow: flexGrowValue }]
     }
     this.handleAnimation('down')
     return categoryStyles
