@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
+import ErrorDisclaimer from '../components/ErrorDisclaimer'
 import { NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
@@ -15,13 +16,21 @@ class CategoryMenuContainer extends Component {
     }
 
     this.openHome = this.openHome.bind(this)
+    this.refetchData = this.refetchData.bind(this)
     this.openCategory = this.openCategory.bind(this)
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
   }
 
+  renderError () {
+    return <ErrorDisclaimer refetchData={this.refetchData} />
+  }
+
+  refetchData () {
+    return this.props.data.refetch()
+  }
+
   render () {
-    console.log('passa')
-    if (this.props.data.error) return null
+    if (this.props.data.error) return this.renderError()
     // TEMPORARY
     // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (

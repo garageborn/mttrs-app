@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { View, Image, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
@@ -17,10 +17,11 @@ const messages = defineMessages({
   }
 })
 
-const TimelineError = ({ intl, reloadTimeline }) => {
+const ErrorDisclaimer = ({ intl, refetchData }) => {
   const textPrimary = intl.formatMessage(messages.textPrimary)
   const textSecondary = intl.formatMessage(messages.textSecondary)
   const buttonText = intl.formatMessage(messages.buttonText)
+  
   return (
     <View style={styles.container}>
       <Image
@@ -37,7 +38,7 @@ const TimelineError = ({ intl, reloadTimeline }) => {
         <Touchable
           underlayColor={WHITE_TRANSPARENT_COLOR}
           style={styles.buttonContainer}
-          onPress={reloadTimeline}
+          onPress={refetchData}
         >
           <View>
             <Text style={styles.buttonText}>{buttonText}</Text>
@@ -48,11 +49,11 @@ const TimelineError = ({ intl, reloadTimeline }) => {
   )
 }
 
-TimelineError.propTypes = {
+ErrorDisclaimer.propTypes = {
+  refetchData: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  reloadTimeline: PropTypes.func.isRequired
+  }).isRequired
 }
 
-export default injectIntl(TimelineError)
+export default injectIntl(ErrorDisclaimer)

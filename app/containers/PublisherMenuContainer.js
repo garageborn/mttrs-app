@@ -7,6 +7,7 @@ import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../actions/index'
+import ErrorDisclaimer from '../components/ErrorDisclaimer'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -21,6 +22,8 @@ class PublisherMenuContainer extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
+    this.refetchData = this.refetchData.bind(this)
+
     this.state = {
       query: ''
     }
@@ -88,6 +91,14 @@ class PublisherMenuContainer extends Component {
     return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
+  renderError () {
+    return <ErrorDisclaimer refetchData={this.refetchData} />
+  }
+
+  refetchData () {
+    return this.props.data.refetch()
+  }
+
   render () {
     const { loading, error } = this.props.data
     if (loading) {
@@ -101,7 +112,7 @@ class PublisherMenuContainer extends Component {
       )
     }
 
-    if (error) return null
+    if (error) return this.renderError()
 
     return (
       <View style={styles.container}>

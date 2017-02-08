@@ -3,10 +3,9 @@ import { connect } from 'react-redux'
 import { ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
 import withQuery from './index.gql'
 import StoryContainer from '../../containers/StoryContainer'
-import TimelineError from '../TimelineError'
+import ErrorDisclaimer from '../ErrorDisclaimer'
 import ListViewHeader from '../ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
-import apolloClient from '../../config/apolloClient'
 import styles from './styles'
 
 class Timeline extends Component {
@@ -16,7 +15,7 @@ class Timeline extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
-    this.reloadTimeline = this.reloadTimeline.bind(this)
+    this.refetchData = this.refetchData.bind(this)
     this.state = {
       loadingMore: false
     }
@@ -99,11 +98,11 @@ class Timeline extends Component {
   }
 
   renderError () {
-    return <TimelineError reloadTimeline={this.reloadTimeline} />
+    return <ErrorDisclaimer refetchData={this.refetchData} />
   }
 
-  reloadTimeline () {
-    return apolloClient.resetStore()
+  refetchData () {
+    return this.props.data.refetch()
   }
 
   render () {
