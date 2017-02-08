@@ -28,8 +28,11 @@ class MenuContainer extends Component {
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
     let retractChanged = currentMenu.retract !== nextMenu.retract
 
-    isOpenChanged && nextMenu.isOpen && this.animate('in')
-    retractChanged && nextMenu.retract && this.animate('out')
+    if (isOpenChanged && nextMenu.isOpen) {
+      this.animate('in')
+    } else if (retractChanged && nextMenu.retract) {
+      this.animate('out')
+    }
   }
 
   animate (type) {
