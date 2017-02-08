@@ -6,7 +6,7 @@ import _debounce from 'lodash/debounce'
 import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { NavigationActions, MenuActions, ErrorActions } from '../actions/index'
+import { NavigationActions, MenuActions } from '../actions/index'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -30,8 +30,6 @@ class PublisherMenuContainer extends Component {
     if (this.state.query !== nextState.query) {
       this.rowsAndSections(nextState.query)
     }
-    let dataChanged = this.props.data !== nextProps.data
-    if (dataChanged && nextProps.data.error) this.handleError()
   }
 
   dataSource () {
@@ -90,12 +88,8 @@ class PublisherMenuContainer extends Component {
     return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
-  handleError () {
-    this.props.dispatch((ErrorActions.showErrorDisclaimer()))
-  }
-
   render () {
-    const { loading } = this.props.data
+    const { loading, error } = this.props.data
     if (loading) {
       return (
         <View style={styles.container}>
@@ -107,7 +101,7 @@ class PublisherMenuContainer extends Component {
       )
     }
 
-    if (this.props.ErrorReducer.hasError) return null
+    if (error) return null
 
     return (
       <View style={styles.container}>
@@ -156,13 +150,11 @@ class PublisherMenuContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    StorageReducer: state.StorageReducer,
-    ErrorReducer: state.ErrorReducer
+    StorageReducer: state.StorageReducer
   }
 }
 
 PublisherMenuContainer.propTypes = {
-  ErrorReducer: PropTypes.object.isRequired,
   StorageReducer: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,

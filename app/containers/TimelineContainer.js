@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Animated, Dimensions, Easing, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { MenuActions, NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
+import { MenuActions, NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
 import Menu from '../components/Menu'
@@ -83,7 +83,6 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
@@ -147,6 +146,7 @@ class TimelineContainer extends Component {
   }
 
   addSwipeRoutes (nextProps) {
+    if (nextProps.data.error) return
     const sameNavigationRoutes = nextProps.data.categories === this.props.data.categories
     const populatedRoutes = this.state.navigationState.routes.length > 1
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes

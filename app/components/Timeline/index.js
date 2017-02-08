@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Button, ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
+import { ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
 import withQuery from './index.gql'
 import StoryContainer from '../../containers/StoryContainer'
 import TimelineError from '../TimelineError'
 import ListViewHeader from '../ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
 import apolloClient from '../../config/apolloClient'
-import { ErrorActions } from '../../actions/index'
 import styles from './styles'
 
 class Timeline extends Component {
@@ -43,11 +42,6 @@ class Timeline extends Component {
   componentWillReceiveProps (nextProps) {
     const renderCategory = nextProps.type === 'category'
     const renderPublisher = nextProps.type === 'publisher'
-    const errorWillChange = this.props.data.error !== nextProps.data.error
-    const willHaveError = errorWillChange && nextProps.data.error
-    if (willHaveError) {
-      this.props.dispatch(ErrorActions.showErrorDisclaimer())
-    }
     if (renderCategory || renderPublisher) return this.trackSection(nextProps.filter)
   }
 
@@ -109,14 +103,13 @@ class Timeline extends Component {
   }
 
   reloadTimeline () {
-    this.props.dispatch(ErrorActions.resetErrorState())
     return apolloClient.resetStore()
   }
 
   render () {
     if (this.props.data.loading) return this.renderLoading()
 
-    if (this.props.ErrorReducer.hasError || this.props.data.error) return this.renderError()
+    if (this.props.data.error) return this.renderError()
 
     return (
       <ListView
@@ -189,14 +182,12 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   data: PropTypes.object,
-  ErrorReducer: PropTypes.object,
   type: PropTypes.string.isRequired,
   filter: PropTypes.any
 }
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    ErrorReducer: state.ErrorReducer,
     uiReducer: state.uiReducer
   }
 }
