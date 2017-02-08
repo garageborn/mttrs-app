@@ -23,10 +23,10 @@ class CategoryColor extends React.Component {
   }
 
   getBorderWidth () {
-    let currentSize = width
-    let colorsShown = this.props.categoriesLength + 1
-    while ((currentSize % colorsShown) !== 0) currentSize++
-    return currentSize - width
+    // let currentSize = width
+    // let colorsShown = this.props.categoriesLength + 1
+    // while ((currentSize % colorsShown) !== 0) currentSize++
+    // return currentSize - width
   }
 
   categoryColorStyles () {

@@ -6,7 +6,6 @@ import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
 const Header = ({ title, toggleMenu, icon, params, type }) => {
-  let headerBottomColors = () => <HeaderBottomColorContainer type={type} params={params} />
   return (
     <View>
       <View style={styles.header}>
@@ -18,7 +17,7 @@ const Header = ({ title, toggleMenu, icon, params, type }) => {
           </View>
         </Touchable>
       </View>
-      {headerBottomColors()}
+      <HeaderBottomColorContainer type={type} params={params} />
     </View>
   )
 }
