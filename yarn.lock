@@ -298,7 +298,7 @@ babel-code-frame@^6.16.0, babel-code-frame@^6.22.0:
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-babel-core@^6.18.2, babel-core@^6.22.0, babel-core@^6.22.1, babel-core@^6.7.2:
+babel-core@^6.18.2, babel-core@^6.21.0, babel-core@^6.22.0, babel-core@^6.22.1, babel-core@^6.7.2:
   version "6.22.1"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.22.1.tgz#9c5fd658ba1772d28d721f6d25d968fc7ae21648"
   dependencies:
@@ -332,7 +332,7 @@ babel-eslint@^7.1.1:
     babylon "^6.13.0"
     lodash.pickby "^4.6.0"
 
-babel-generator@^6.19.0, babel-generator@^6.22.0:
+babel-generator@^6.21.0, babel-generator@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.22.0.tgz#d642bf4961911a8adc7c692b0c9297f325cda805"
   dependencies:
@@ -521,7 +521,7 @@ babel-plugin-syntax-object-rest-spread@^6.5.0, babel-plugin-syntax-object-rest-s
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
 
-babel-plugin-syntax-trailing-function-commas@^6.13.0, babel-plugin-syntax-trailing-function-commas@^6.5.0, babel-plugin-syntax-trailing-function-commas@^6.8.0:
+babel-plugin-syntax-trailing-function-commas@^6.20.0, babel-plugin-syntax-trailing-function-commas@^6.5.0, babel-plugin-syntax-trailing-function-commas@^6.8.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.22.0.tgz#ba0360937f8d06e40180a43fe0d5616fff532cf3"
 
@@ -715,7 +715,7 @@ babel-plugin-transform-export-extensions@^6.5.0:
     babel-plugin-syntax-export-extensions "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-flow-strip-types@^6.18.0, babel-plugin-transform-flow-strip-types@^6.5.0, babel-plugin-transform-flow-strip-types@^6.7.0, babel-plugin-transform-flow-strip-types@^6.8.0:
+babel-plugin-transform-flow-strip-types@^6.21.0, babel-plugin-transform-flow-strip-types@^6.5.0, babel-plugin-transform-flow-strip-types@^6.7.0, babel-plugin-transform-flow-strip-types@^6.8.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-flow-strip-types/-/babel-plugin-transform-flow-strip-types-6.22.0.tgz#84cb672935d43714fdc32bce84568d87441cf7cf"
   dependencies:
@@ -735,7 +735,7 @@ babel-plugin-transform-object-assign@^6.5.0:
   dependencies:
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-object-rest-spread@^6.19.0, babel-plugin-transform-object-rest-spread@^6.5.0, babel-plugin-transform-object-rest-spread@^6.6.5, babel-plugin-transform-object-rest-spread@^6.8.0:
+babel-plugin-transform-object-rest-spread@^6.20.2, babel-plugin-transform-object-rest-spread@^6.5.0, babel-plugin-transform-object-rest-spread@^6.6.5, babel-plugin-transform-object-rest-spread@^6.8.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.22.0.tgz#1d419b55e68d2e4f64a5ff3373bd67d73c8e83bc"
   dependencies:
@@ -776,7 +776,7 @@ babel-plugin-transform-strict-mode@^6.22.0:
     babel-runtime "^6.22.0"
     babel-types "^6.22.0"
 
-babel-polyfill@^6.16.0, babel-polyfill@^6.22.0:
+babel-polyfill@^6.20.0, babel-polyfill@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.22.0.tgz#1ac99ebdcc6ba4db1e2618c387b2084a82154a3b"
   dependencies:
@@ -873,7 +873,7 @@ babel-preset-react-native-stage-0@^1.0.1:
     babel-plugin-transform-function-bind "^6.5.2"
     babel-preset-react-native "^1.5.6"
 
-babel-preset-react-native@^1.5.6, babel-preset-react-native@^1.9.0:
+babel-preset-react-native@^1.5.6, babel-preset-react-native@^1.9.1:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-1.9.1.tgz#ec8e378274410d78f550fa9f8edd70353f3bb2fe"
   dependencies:
@@ -919,7 +919,7 @@ babel-register@^6.18.0, babel-register@^6.22.0:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0:
+babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.22.0.tgz#1cf8b4ac67c77a4ddb0db2ae1f74de52ac4ca611"
   dependencies:
@@ -936,7 +936,7 @@ babel-template@^6.22.0, babel-template@^6.3.0:
     babylon "^6.11.0"
     lodash "^4.2.0"
 
-babel-traverse@^6.15.0, babel-traverse@^6.19.0, babel-traverse@^6.22.0, babel-traverse@^6.22.1:
+babel-traverse@^6.15.0, babel-traverse@^6.21.0, babel-traverse@^6.22.0, babel-traverse@^6.22.1:
   version "6.22.1"
   resolved "https://registry.yarnpkg.com/babel-traverse/-/babel-traverse-6.22.1.tgz#3b95cd6b7427d6f1f757704908f2fc9748a5f59f"
   dependencies:
@@ -950,7 +950,7 @@ babel-traverse@^6.15.0, babel-traverse@^6.19.0, babel-traverse@^6.22.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.22.0:
+babel-types@^6.15.0, babel-types@^6.19.0, babel-types@^6.21.0, babel-types@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.22.0.tgz#2a447e8d0ea25d2512409e4175479fd78cc8b1db"
   dependencies:
@@ -2463,9 +2463,9 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jest-haste-map@17.0.3:
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-17.0.3.tgz#5232783e70577217b6b17d2a1c1766637a1d2fbd"
+jest-haste-map@18.0.0:
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-18.0.0.tgz#707d3b5ae3bcbda971c39e8b911d20ad8502c748"
   dependencies:
     fb-watchman "^1.9.0"
     graceful-fs "^4.1.6"
@@ -2814,13 +2814,13 @@ mime-db@~1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.23.0.tgz#a31b4070adaea27d732ea333740a64d0ec9a6659"
 
-mime-types@2.1.11, mime-types@~2.1.7, mime-types@~2.1.9:
+mime-types@2.1.11, mime-types@~2.1.7:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.11.tgz#c259c471bda808a85d6cd193b430a5fae4473b3c"
   dependencies:
     mime-db "~1.23.0"
 
-mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6:
+mime-types@^2.1.12, mime-types@~2.1.11, mime-types@~2.1.13, mime-types@~2.1.6, mime-types@~2.1.9:
   version "2.1.14"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.14.tgz#f7ef7d97583fcaf3b7d282b6f8b5679dab1e94ee"
   dependencies:
@@ -3371,12 +3371,6 @@ react-native-share@^1.0.18:
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.19.tgz#82c210efb156175d67ee271efee29ed9cf8e1449"
 
-"react-native-simple-onboarding@git://github.com/AgtLucas/react-native-simple-onboarding.git#master":
-  version "0.1.1"
-  resolved "git://github.com/AgtLucas/react-native-simple-onboarding.git#8642e4689de09d932cc8eedbd08976acd5442aa4"
-  dependencies:
-    tinycolor2 "^1.4.1"
-
 react-native-tab-view@0.0.42:
   version "0.0.42"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.42.tgz#abaeda8e7ab856db98c09709d3d82d2a08b94564"
@@ -3385,27 +3379,27 @@ react-native-tab-view@0.0.54:
   version "0.0.54"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.54.tgz#838e2de5a791488353786e2fe7e8f77a72f03b87"
 
-react-native@0.40.0:
-  version "0.40.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.40.0.tgz#ca7b86a8e8fbc7653634ad47ca2ffd69fdf18ad5"
+react-native@0.41.0:
+  version "0.41.0"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.41.0.tgz#09ea967b182885f302724f14587145da3b2d2e22"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
     async "^2.0.1"
-    babel-core "^6.18.2"
-    babel-generator "^6.19.0"
+    babel-core "^6.21.0"
+    babel-generator "^6.21.0"
     babel-plugin-external-helpers "^6.18.0"
-    babel-plugin-syntax-trailing-function-commas "^6.13.0"
-    babel-plugin-transform-flow-strip-types "^6.18.0"
-    babel-plugin-transform-object-rest-spread "^6.19.0"
-    babel-polyfill "^6.16.0"
+    babel-plugin-syntax-trailing-function-commas "^6.20.0"
+    babel-plugin-transform-flow-strip-types "^6.21.0"
+    babel-plugin-transform-object-rest-spread "^6.20.2"
+    babel-polyfill "^6.20.0"
     babel-preset-es2015-node "^6.1.1"
     babel-preset-fbjs "^2.1.0"
-    babel-preset-react-native "^1.9.0"
+    babel-preset-react-native "^1.9.1"
     babel-register "^6.18.0"
-    babel-runtime "^6.18.0"
-    babel-traverse "^6.19.0"
-    babel-types "^6.19.0"
+    babel-runtime "^6.20.0"
+    babel-traverse "^6.21.0"
+    babel-types "^6.21.0"
     babylon "^6.14.1"
     base64-js "^1.1.2"
     bser "^1.0.2"
@@ -3425,7 +3419,7 @@ react-native@0.40.0:
     immutable "~3.7.6"
     imurmurhash "^0.1.4"
     inquirer "^0.12.0"
-    jest-haste-map "17.0.3"
+    jest-haste-map "18.0.0"
     joi "^6.6.1"
     json-stable-stringify "^1.0.1"
     json5 "^0.4.0"
@@ -3440,7 +3434,6 @@ react-native@0.40.0:
     opn "^3.0.2"
     optimist "^0.6.1"
     plist "^1.2.0"
-    progress "^1.1.8"
     promise "^7.1.1"
     react-clone-referenced-element "^1.0.1"
     react-timer-mixin "^0.13.2"
@@ -4097,10 +4090,6 @@ through@^2.3.6:
 time-stamp@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.0.1.tgz#9f4bd23559c9365966f3302dbba2b07c6b99b151"
-
-tinycolor2@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.1.tgz#f4fad333447bc0b07d4dc8e9209d8f39a8ac77e8"
 
 tmpl@1.0.x:
   version "1.0.4"
