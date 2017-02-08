@@ -114,7 +114,7 @@ platform :android do
 
     gradle(task: 'clean', project_dir: 'android/') # Clean the Gradle project
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/') # Build the Release APK
-    supply(track: 'alpha', apk: 'android/app/build/outputs/apk/app-release.apk') # Upload the APK to the Play Store (beta)
+    supply(track: 'beta', apk: 'android/app/build/outputs/apk/app-release.apk') # Upload the APK to the Play Store (beta)
   end
 
   after_all do |lane|
