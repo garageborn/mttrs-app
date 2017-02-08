@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Button, ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
+import { ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
 import withQuery from './index.gql'
 import StoryContainer from '../../containers/StoryContainer'
 import TimelineError from '../TimelineError'
