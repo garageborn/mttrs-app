@@ -8,6 +8,7 @@ import { StorageActions } from '../actions/index'
 import { headerHeight } from '../styles/Global'
 import styles from '../styles/App'
 import { DARK_COLOR } from '../constants/Colors'
+import captureError from '../common/utils/captureError'
 
 class Link extends Component {
   static route = Platform.select({
@@ -71,6 +72,7 @@ class Link extends Component {
   }
 
   handleError = (e) => {
+    captureError(e)
     if (e === 'WebKitErrorDomain') return
   }
 

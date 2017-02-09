@@ -2,6 +2,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
+import { timezone } from '../../config/IntlProvider'
 
 const defaultVariables = {
   categorySlug: '',
@@ -9,7 +10,7 @@ const defaultVariables = {
   offset: 0,
   perDay: 16,
   publisherSlug: '',
-  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  timezone
 }
 
 const Query = gql`
@@ -72,7 +73,7 @@ export default function (Timeline) {
         variables: {
           ...variables,
           publisherSlug: props.type === 'publisher' ? props.filter.slug : '',
-          categorySlug: props.type === 'category' ? props.filter.slug : '',
+          categorySlug: props.type === 'category' ? props.filter.slug : ''
         }
       }
     },

@@ -6,7 +6,7 @@ import captureError from '../common/utils/captureError'
 
 import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
   REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_TENANT, TENANT_RECEIVED
+  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -24,12 +24,10 @@ export function getVisitedStories () {
     if (isVisitedStoriesFetching(getState)) return
 
     dispatch(requestVisitedStories())
-    try {
-      const stories = AsyncStorage.getItem('visitedStories')
+    AsyncStorage.getItem('visitedStories', (error, stories) => {
+      if (error) return captureError(error)
       return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -38,12 +36,10 @@ export function addVisitedStory (story) {
     if (isVisitedStory(getState, story)) return
 
     let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    try {
-      AsyncStorage.setItem('visitedStories', JSON.stringify(stories))
+    AsyncStorage.setItem('visitedStories', JSON.stringify(stories), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveVisitedStories(stories))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -86,12 +82,11 @@ export function getFavoritePublishers () {
     if (isFavoritePublishersLoaded(getState)) return
     if (isFavoritePublishersFetching(getState)) return
     dispatch(requestFavoritePublishers())
-    try {
-      const publishers = AsyncStorage.getItem('favoritePublishers')
+
+    AsyncStorage.getItem('favoritePublishers', (error, publishers) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(JSON.parse(publishers) || []))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -102,12 +97,10 @@ export function removeFavoritePublisher (publisher) {
     const publisherIndex = publishers.indexOf(publisher.id)
     publishers = removePublisherFromFavorite(publishers, publisherIndex)
 
-    try {
-      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(publishers))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -116,24 +109,21 @@ export function addFavoritePublisher (publisher) {
     if (isFavoritePublisher(getState, publisher)) return
 
     let publishers = _uniq(_flatten([favoritePublishers(getState).items, publisher.id]))
-    try {
-      AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers))
+
+    AsyncStorage.setItem('favoritePublishers', JSON.stringify(publishers), (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveFavoritePublishers(publishers))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
 export function setCurrentTenant (tenant) {
   return (dispatch) => {
     Tenant.current = tenant
-    try {
-      AsyncStorage.setItem('tenant', tenant)
+    AsyncStorage.setItem('tenant', tenant, (error) => {
+      if (error) return captureError(error)
       return dispatch(receiveTenant(tenant))
-    } catch (error) {
-      captureError(error)
-    }
+    })
   }
 }
 
@@ -148,6 +138,41 @@ export function getCurrentTenant (locale) {
     // AsyncStorage.getItem('tenant', (error, tenant) => {
     //   dispatch(this.setCurrentTenant(tenant || localeTenant))
     // })
+  }
+}
+
+export const requestOnboarding = () => ({
+  type: REQUEST_ONBOARDING
+})
+
+export const showOnboarding = show => ({
+  type: SHOW_ONBOARDING,
+  show
+})
+
+export function closeOnboarding () {
+  return dispatch => {
+    dispatch(this.showOnboarding(false))
+    try {
+      AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+    } catch (error) {
+      captureError(error)
+    }
+  }
+}
+
+export function getOnboardingStatus () {
+  return dispatch => {
+    dispatch(this.requestOnboarding())
+    AsyncStorage.getItem('showOnboarding', (error, data) => {
+      if (error) captureError(error)
+
+      if (data === null) {
+        dispatch(this.showOnboarding(true))
+      } else {
+        dispatch(this.showOnboarding(false))
+      }
+    })
   }
 }
 

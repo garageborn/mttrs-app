@@ -37,7 +37,6 @@ const errorHandler = {
         if (errors) {
           captureError('GraphQL Errors:', errors.map(e => e.message))
         }
-        next()
       })
     }
 
@@ -54,6 +53,9 @@ networkInterface.use([
   errorHandler
 ])
 
-const apolloClient = new ApolloClient({ networkInterface: networkInterface })
+const apolloClient = new ApolloClient({
+  networkInterface: networkInterface,
+  queryDeduplication: true
+})
 
 export default apolloClient

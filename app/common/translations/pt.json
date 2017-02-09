@@ -14,5 +14,17 @@
   "others": "outros",
   "disconnected.textPrimary": "Não foi possível conectar-se à Internet",
   "disconnected.textSecondary": "Tente novamente quando estiver online",
-  "disconnected.buttonText": "Atualizar"
+  "disconnected.buttonText": "Atualizar",
+  "paginator.skip": "Pular",
+  "paginator.start": "Começar",
+  "onboarding.welcome.title": "Bem vindo ao",
+  "onboarding.welcome.description": "Seu tempo é precioso. Leia as notícias que realmente importam no dia a dia.",
+  "onboarding.highlights.title": "Notícias em destaque",
+  "onboarding.highlights.description": "Encontre as principais notícias do dia, ordenadas pelos índices sociais da Internet. Se está na boca do povo, você encontra aqui.",
+  "onboarding.editorial.title": "Resumo do editor",
+  "onboarding.editorial.description": "Escritos cuidadosamente por nossa equipe. Muito úteis para a compreensão rápida da informação essencial de cada notícia.",
+  "onboarding.publishers.title": "Mantenha o foco",
+  "onboarding.publishers.description": "Concentre-se na informação e não perca tempo lendo várias vezes a mesma notícia. Se desejar, encontre o seu veículo de mídia preferido.",
+  "onboarding.categories.title": "Seu interesse a um clique",
+  "onboarding.categories.description": "Todas as notícias são separadas em categorias. Encontre tudo organizado e leia sobre os assuntos que mais lhe interessam."
 }

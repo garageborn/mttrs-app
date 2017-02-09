@@ -1,14 +1,12 @@
 import React, { PropTypes } from 'react'
-import { Dimensions, Animated } from 'react-native'
+import { Animated } from 'react-native'
 import styles from './styles'
-
-const { width } = Dimensions.get('window')
 
 class CategoryColor extends React.Component {
   constructor () {
     super()
     this.state = {
-      height: new Animated.Value(2)
+      height: new Animated.Value(3)
     }
   }
 
@@ -22,19 +20,13 @@ class CategoryColor extends React.Component {
     ).start()
   }
 
-  getBorderWidth () {
-    let currentSize = width
-    let colorsShown = this.props.categoriesLength + 1
-    while ((currentSize % colorsShown) !== 0) currentSize++
-    return currentSize - width
-  }
-
   categoryColorStyles () {
     let { isActive, color } = this.props
+    const flexGrowValue = 1.075
     let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
     if (isActive) {
       this.handleAnimation('up')
-      return [...categoryStyles, {borderRightWidth: this.getBorderWidth(), borderColor: color}]
+      return [...categoryStyles, { flexGrow: flexGrowValue }]
     }
     this.handleAnimation('down')
     return categoryStyles
@@ -48,7 +40,6 @@ class CategoryColor extends React.Component {
 }
 
 CategoryColor.propTypes = {
-  categoriesLength: PropTypes.number,
   color: PropTypes.string.isRequired,
   isActive: PropTypes.bool
 }
