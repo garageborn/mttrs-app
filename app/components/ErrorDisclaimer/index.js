@@ -6,11 +6,8 @@ import styles from './styles'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
-  textPrimary: {
+  text: {
     id: 'disconnected.textPrimary'
-  },
-  textSecondary: {
-    id: 'disconnected.textSecondary'
   },
   buttonText: {
     id: 'disconnected.buttonText'
@@ -19,7 +16,6 @@ const messages = defineMessages({
 
 const ErrorDisclaimer = ({ from, intl, data }) => {
   const textPrimary = intl.formatMessage(messages.textPrimary)
-  const textSecondary = intl.formatMessage(messages.textSecondary)
   const buttonText = intl.formatMessage(messages.buttonText)
 
   let types = {
@@ -51,7 +47,6 @@ const ErrorDisclaimer = ({ from, intl, data }) => {
           source={require('../../assets/icons/disconnected.png')}
         /> */}
         <Text style={styles.textPrimary}>{textPrimary}</Text>
-        <Text style={styles.textSecondary}>{textSecondary}</Text>
         <Touchable
           underlayColor={WHITE_TRANSPARENT_COLOR}
           style={styles.buttonContainer}
