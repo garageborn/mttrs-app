@@ -33,13 +33,11 @@ const errorHandler = {
   applyAfterware: ({ response }, next) => {
     if (!response.ok) {
       apolloClient.store.dispatch(ErrorActions.showErrorDisclaimer())
-      next()
     } else {
       response.clone().json().then(({ errors }) => {
         if (errors) {
           captureError('GraphQL Errors:', errors.map(e => e.message))
         }
-        next()
       })
     }
 
@@ -56,6 +54,9 @@ networkInterface.use([
   errorHandler
 ])
 
-const apolloClient = new ApolloClient({ networkInterface: networkInterface })
+const apolloClient = new ApolloClient({
+  networkInterface: networkInterface,
+  queryDeduplication: true
+})
 
 export default apolloClient
