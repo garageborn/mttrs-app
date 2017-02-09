@@ -34,6 +34,12 @@ class Link extends Component {
     this.progress = new Animated.Value(0)
   }
 
+  shouldComponentUpdate (nextProps) {
+    const currentUrl = this.props.route.params.link.url
+    const newUrl = nextProps.route.params.link.url
+    return currentUrl !== newUrl
+  }
+
   componentWillMount () {
     this.createAccess()
   }

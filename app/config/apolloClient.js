@@ -36,7 +36,9 @@ const errorHandler = {
     } else {
       response.clone().json().then(({ errors }) => {
         if (errors) {
-          captureError('GraphQL Errors:', errors.map(e => e.message))
+          const message = `${response.url}\n${errors.map(e => e.message).join('\n')}`
+          const error = { name: 'GraphQL Error', message: message }
+          captureError(error)
         }
       })
     }
