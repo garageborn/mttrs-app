@@ -148,6 +148,7 @@ class TimelineContainer extends Component {
     } else {
       filter = props.route.filter
     }
+
     return (
       <Timeline
         type={this.sceneType(props)}

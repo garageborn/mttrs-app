@@ -14,18 +14,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textPrimary: {
+  text: {
     backgroundColor: 'transparent',
-    color: '#999999',
     fontWeight: '500',
     fontSize: 16,
     marginBottom: 5,
-    alignSelf: 'center'
-  },
-  textSecondary: {
-    backgroundColor: 'transparent',
-    color: '#999999',
-    fontSize: 12,
     alignSelf: 'center'
   },
   buttonContainer: {

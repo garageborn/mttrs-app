@@ -2,12 +2,12 @@ import React, { PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
-import styles from './styles'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import styles from './styles'
 
 const messages = defineMessages({
   text: {
-    id: 'disconnected.textPrimary'
+    id: 'disconnected.text'
   },
   buttonText: {
     id: 'disconnected.buttonText'
@@ -15,16 +15,18 @@ const messages = defineMessages({
 })
 
 const ErrorDisclaimer = ({ from, intl, data }) => {
-  const textPrimary = intl.formatMessage(messages.textPrimary)
+  const text = intl.formatMessage(messages.text)
   const buttonText = intl.formatMessage(messages.buttonText)
 
   let types = {
     timeline: {
-      color: 'grey',
+      textColor: '#999999',
+      iconSource: require('./assets/icon-light.png'),
       backgroundSource: require('./assets/bg-light.png')
     },
     menu: {
-      color: 'grey',
+      textColor: '#F1F1F1',
+      iconSource: require('./assets/icon-dark.png'),
       backgroundSource: require('./assets/bg-dark.png')
     }
   }
@@ -42,11 +44,11 @@ const ErrorDisclaimer = ({ from, intl, data }) => {
         source={types[from].backgroundSource}
       />
       <View style={styles.textContainer}>
-        {/* <Image
+        <Image
           style={styles.icon}
-          source={require('../../assets/icons/disconnected.png')}
-        /> */}
-        <Text style={styles.textPrimary}>{textPrimary}</Text>
+          source={types[from].iconSource}
+        />
+        <Text style={[{color: types[from].textColor}, styles.text]}>{text}</Text>
         <Touchable
           underlayColor={WHITE_TRANSPARENT_COLOR}
           style={styles.buttonContainer}
@@ -62,8 +64,8 @@ const ErrorDisclaimer = ({ from, intl, data }) => {
 }
 
 ErrorDisclaimer.propTypes = {
-  from: PropTypes.string,
-  data: PropTypes.object,
+  from: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
