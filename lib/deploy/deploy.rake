@@ -44,10 +44,5 @@ namespace :deploy do
     task :alpha do
       system('bundle exec fastlane android alpha')
     end
-
-    desc 'Release new Android Beta version'
-    task :beta do
-      system('bundle exec fastlane android beta')
-    end
   end
 end
