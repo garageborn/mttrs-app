@@ -21,28 +21,36 @@ namespace :deploy do
     "android version #{ android_version[:last_version] } => #{ android_version[:current_version] }"
   end
 
+  desc 'Release iOS and Android'
+  task :all do
+    Rake::Task['deploy:ios'].execute
+    Rake::Task['deploy:android'].execute
+    Rake::Task['deploy:commit'].execute
+  end
+
   desc 'Commit all changes'
   task :commit do
     message = "#{ ios_changes_message } #{ android_changes_message }".strip
     system "git commit -am '#{ message }'"
   end
 
-  namespace :ios do
-    desc 'Release new iOS Beta version'
-    task :beta do
-      match_password = ENV['MATCH_PASSWORD']
-      if match_password.blank?
-        STDOUT.puts 'Enter MATCH_PASSWORD'
-        match_password = STDIN.gets.strip
-      end
-      system("MATCH_PASSWORD=\"#{ match_password }\" bundle exec fastlane ios beta")
+  desc 'Release new iOS version'
+  task :ios do
+    match_password = ENV['MATCH_PASSWORD']
+    if match_password.blank?
+      STDOUT.puts 'Enter MATCH_PASSWORD'
+      match_password = STDIN.gets.strip
     end
+    system("MATCH_PASSWORD=\"#{ match_password }\" bundle exec fastlane ios beta")
   end
 
-  namespace :android do
-    desc 'Release new Android Alpha version'
-    task :alpha do
-      system('bundle exec fastlane android alpha')
-    end
+  desc 'Release new Android version'
+  task :android do
+    system('bundle exec fastlane android alpha')
   end
+end
+
+desc 'Release iOS and Android'
+task :deploy do
+  Rake::Task['deploy:all'].execute
 end
