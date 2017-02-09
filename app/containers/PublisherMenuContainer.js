@@ -22,7 +22,6 @@ class PublisherMenuContainer extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
-    this.refetchData = this.refetchData.bind(this)
 
     this.state = {
       query: ''
@@ -92,7 +91,7 @@ class PublisherMenuContainer extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer refetchData={this.refetchData} />
+    return <ErrorDisclaimer from='menu' data={this.props.data} />
   }
 
   refetchData () {

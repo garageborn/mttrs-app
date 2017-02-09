@@ -16,13 +16,12 @@ class CategoryMenuContainer extends Component {
     }
 
     this.openHome = this.openHome.bind(this)
-    this.refetchData = this.refetchData.bind(this)
     this.openCategory = this.openCategory.bind(this)
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
   }
 
   renderError () {
-    return <ErrorDisclaimer refetchData={this.refetchData} />
+    return <ErrorDisclaimer from='menu' data={this.props.data} />
   }
 
   refetchData () {

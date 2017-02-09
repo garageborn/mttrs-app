@@ -15,7 +15,6 @@ class Timeline extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
-    this.refetchData = this.refetchData.bind(this)
     this.state = {
       loadingMore: false
     }
@@ -98,11 +97,7 @@ class Timeline extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer refetchData={this.refetchData} />
-  }
-
-  refetchData () {
-    return this.props.data.refetch()
+    return <ErrorDisclaimer from='timeline' data={this.props.data} />
   }
 
   render () {
