@@ -94,10 +94,6 @@ class PublisherMenuContainer extends Component {
     return <ErrorDisclaimer from='menu' data={this.props.data} />
   }
 
-  refetchData () {
-    return this.props.data.refetch()
-  }
-
   render () {
     const { loading, error } = this.props.data
     if (loading) {

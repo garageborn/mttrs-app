@@ -24,10 +24,6 @@ class CategoryMenuContainer extends Component {
     return <ErrorDisclaimer from='menu' data={this.props.data} />
   }
 
-  refetchData () {
-    return this.props.data.refetch()
-  }
-
   render () {
     if (this.props.data.error) return this.renderError()
     // TEMPORARY

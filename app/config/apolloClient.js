@@ -31,7 +31,7 @@ const skipCacheMiddleware = {
 const errorHandler = {
   applyAfterware: ({ response }, next) => {
     if (!response.ok) {
-      next()
+      captureError('applyAfterware !response.ok')
     } else {
       response.clone().json().then(({ errors }) => {
         if (errors) {

@@ -3,6 +3,10 @@ import { View, Image, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import iconLight from './assets/icon-light.png'
+import iconDark from './assets/icon-dark.png'
+import bgLight from './assets/bg-light.png'
+import bgDark from './assets/bg-dark.png'
 import styles from './styles'
 
 const messages = defineMessages({
@@ -21,13 +25,13 @@ const ErrorDisclaimer = ({ from, intl, data }) => {
   let types = {
     timeline: {
       textColor: '#999999',
-      iconSource: require('./assets/icon-light.png'),
-      backgroundSource: require('./assets/bg-light.png')
+      iconSource: iconLight,
+      backgroundSource: bgLight
     },
     menu: {
       textColor: '#F1F1F1',
-      iconSource: require('./assets/icon-dark.png'),
-      backgroundSource: require('./assets/bg-dark.png')
+      iconSource: iconDark,
+      backgroundSource: bgDark
     }
   }
 
