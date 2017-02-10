@@ -90,13 +90,15 @@ class Link extends Component {
   render () {
     const { url } = this.props.route.params.link
 
-    // Tem disable progress bar
+    // Temporary disable progress bar
     return (
       <View style={styles.container}>
         {this.renderNavbar(this.props)}
         <WebView
           source={{uri: url}}
           renderError={this.handleError}
+          onLoadEnd={this.addStoryToLocalStorage}
+          mediaPlaybackRequiresUserAction
         />
       </View>
     )
@@ -109,10 +111,8 @@ class Link extends Component {
           startInLoadingState
           renderLoading={this.renderProgressBar}
           renderError={this.handleError}
+          onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction
-
-          onLoadStart={ () => console.info('Load Start', new Date()) }
-          onLoadEnd={ () => console.info('Load End', new Date()) }
         />
       </View>
     )
