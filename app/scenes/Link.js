@@ -39,7 +39,7 @@ class Link extends Component {
     dispatch(StorageActions.addVisitedStory(story))
   }
 
-  renderAndroidHeader (props) {
+  renderHeader (props) {
     if (Platform.OS === 'ios') return
     return <LinkHeaderContainer params={props.route.params} />
   }
@@ -54,7 +54,7 @@ class Link extends Component {
     return (
       <StoryWebView
         url={url}
-        header={this.renderAndroidHeader(this.props)}
+        header={this.renderHeader(this.props)}
         onLoadEnd={this.addStoryToLocalStorage}
       />
     )
