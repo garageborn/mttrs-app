@@ -11,52 +11,38 @@ import styles from './styles'
 
 const messages = defineMessages({
   text: {
-    id: 'disconnected.text'
+    id: 'error.text'
   },
   buttonText: {
-    id: 'disconnected.buttonText'
+    id: 'error.buttonText'
   }
 })
 
-const ErrorDisclaimer = ({ from, intl, data }) => {
+const Error = ({ intl, skinType, onPressReload }) => {
   const text = intl.formatMessage(messages.text)
   const buttonText = intl.formatMessage(messages.buttonText)
 
-  let types = {
-    timeline: {
-      textColor: '#999999',
-      iconSource: iconLight,
-      backgroundSource: bgLight
-    },
-    menu: {
-      textColor: '#F1F1F1',
-      iconSource: iconDark,
-      backgroundSource: bgDark
-    }
-  }
-
-  let refetchData = () => {
-    return data.refetch({
-      notifyOnNetworkStatusChange: true
-    })
+  const skin = {
+    dark: { bg: bgDark, icon: iconDark, textColor: styles.textInDark },
+    light: { bg: bgLight, icon: iconLight, textColor: styles.textInLight }
   }
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.bg}
-        source={types[from].backgroundSource}
+        source={skin[skinType].bg}
       />
       <View style={styles.textContainer}>
         <Image
           style={styles.icon}
-          source={types[from].iconSource}
+          source={skin[skinType].icon}
         />
-        <Text style={[{color: types[from].textColor}, styles.text]}>{text}</Text>
+        <Text style={[skin[skinType].textColor, styles.text]}>{text}</Text>
         <Touchable
           underlayColor={WHITE_TRANSPARENT_COLOR}
           style={styles.buttonContainer}
-          onPress={refetchData}
+          onPress={onPressReload}
         >
           <View>
             <Text style={styles.buttonText}>{buttonText}</Text>
@@ -67,12 +53,16 @@ const ErrorDisclaimer = ({ from, intl, data }) => {
   )
 }
 
-ErrorDisclaimer.propTypes = {
-  from: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired,
+Error.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  onPressReload: PropTypes.func.isRequired,
+  skinType: PropTypes.string
 }
 
-export default injectIntl(ErrorDisclaimer)
+Error.defaultProps = {
+  skinType: 'light'
+}
+
+export default injectIntl(Error)

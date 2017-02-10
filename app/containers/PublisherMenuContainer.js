@@ -7,7 +7,7 @@ import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../actions/index'
-import ErrorDisclaimer from '../components/ErrorDisclaimer'
+import ApolloError from '../components/ApolloError'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -91,7 +91,7 @@ class PublisherMenuContainer extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer from='menu' data={this.props.data} />
+    return <ApolloError skinType='dark' data={this.props.data} />
   }
 
   render () {

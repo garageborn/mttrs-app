@@ -6,14 +6,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+
   bg: {
     position: 'absolute',
     top: 0
   },
+
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
+
   text: {
     backgroundColor: 'transparent',
     fontWeight: '500',
@@ -21,15 +24,26 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     alignSelf: 'center'
   },
+
+  textInDark: {
+    color: '#F1F1F1'
+  },
+
+  textInLight: {
+    color: '#999999'
+  },
+
   buttonContainer: {
     marginTop: 16,
     alignSelf: 'center'
   },
+
   buttonText: {
     color: '#FF5607',
     fontSize: 24,
     fontWeight: '500'
   },
+
   icon: {
     alignSelf: 'center',
     marginBottom: 16

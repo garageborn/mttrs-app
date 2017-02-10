@@ -7,7 +7,7 @@ import _isNil from 'lodash/isNil'
 import MenuContainer from './MenuContainer'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
-import ErrorDisclaimer from '../components/ErrorDisclaimer'
+import ApolloError from '../components/ApolloError'
 import styles from '../styles/App'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
@@ -176,7 +176,7 @@ class TimelineContainer extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer from='timeline' data={this.props.data} />
+    return <ApolloError data={this.props.data} />
   }
 
   render () {

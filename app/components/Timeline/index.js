@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ListView, View, RefreshControl, ActivityIndicator } from 'react-native'
 import withQuery from './index.gql'
 import StoryContainer from '../../containers/StoryContainer'
-import ErrorDisclaimer from '../ErrorDisclaimer'
+import ApolloError from '../ApolloError'
 import ListViewHeader from '../ListViewHeader'
 import ParseDate from '../../common/utils/ParseDate'
 import styles from './styles'
@@ -97,7 +97,7 @@ class Timeline extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer from='timeline' data={this.props.data} />
+    return <ApolloError data={this.props.data} />
   }
 
   render () {

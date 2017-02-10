@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import withQuery from './CategoryMenuContainer.gql'
 import CategoryScrollView from '../components/CategoryScrollView'
 import TopStoriesCategory from '../components/TopStoriesCategory'
-import ErrorDisclaimer from '../components/ErrorDisclaimer'
+import ApolloError from '../components/ApolloError'
 import { NavigationActions, MenuActions } from '../actions/index'
 
 class CategoryMenuContainer extends Component {
@@ -21,7 +21,7 @@ class CategoryMenuContainer extends Component {
   }
 
   renderError () {
-    return <ErrorDisclaimer from='menu' data={this.props.data} />
+    return <ApolloError skinType='dark' data={this.props.data} />
   }
 
   render () {
