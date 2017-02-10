@@ -3,11 +3,13 @@ import { Image, View } from 'react-native'
 import Touchable from '../Touchable'
 import styles from './styles'
 
+const closeButtonIcon = require('../../assets/icons/icon-close-modal.png')
+
 const CloseButton = ({ onPress }) => {
   return (
     <View style={styles.closeButton}>
       <Touchable onPress={onPress} underlayColor={'transparent'}>
-        <Image style={styles.closeButtonIcon} source={require('../../assets/icons/icon-close-modal.png')} />
+        <Image style={styles.closeButtonIcon} source={closeButtonIcon} />
       </Touchable>
     </View>
   )

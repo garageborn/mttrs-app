@@ -4,14 +4,22 @@ import _sample from 'lodash/sample'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
+const loading = require('../../assets/mttrs-loading.gif')
+const staticLoading = require('../../assets/mttrs-loading-static.png')
+const placeholders = [
+  require('./assets/placeholder-01.png'),
+  require('./assets/placeholder-02.png'),
+  require('./assets/placeholder-03.png'),
+  require('./assets/placeholder-04.png'),
+  require('./assets/placeholder-05.png')
+]
+
 class StoryImage extends Component {
   constructor () {
     super()
     this.handleImageLoad = this.handleImageLoad.bind(this)
     this.handleImageError = this.handleImageError.bind(this)
-    this.state = {
-      status: 'loading'
-    }
+    this.state = { status: 'loading' }
   }
 
   getSource () {
@@ -55,22 +63,11 @@ class StoryImage extends Component {
   }
 
   getPlaceholder () {
-    const placeholders = [
-      require('./assets/placeholder-01.png'),
-      require('./assets/placeholder-02.png'),
-      require('./assets/placeholder-03.png'),
-      require('./assets/placeholder-04.png'),
-      require('./assets/placeholder-05.png')
-    ]
-
     return _sample(placeholders)
   }
 
   getLoading () {
-    return Platform.select({
-      ios: require('../../assets/mttrs-loading.gif'),
-      android: require('../../assets/mttrs-loading-static.png')
-    })
+    return Platform.select({ ios: loading, android: staticLoading })
   }
 }
 
