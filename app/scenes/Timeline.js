@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../containers/TimelineHeaderContainer'
 import TimelineContainer from '../containers/TimelineContainer'
 import StoryLinksContainer from '../containers/StoryLinksContainer'
 import { headerHeight } from '../styles/Global'
 import { DARK_COLOR } from '../constants/Colors'
+import { BackAndroid, Platform } from 'react-native'
+import { NavigationActions, MenuActions } from '../actions/index'
 
 class Timeline extends Component {
   static route = {
@@ -15,6 +18,39 @@ class Timeline extends Component {
       height: headerHeight,
       elevation: 0
     }
+  }
+
+  componentWillMount () {
+    if (Platform.OS === 'android') this.listenToBackAndroid()
+  }
+
+  componentWillUnmount () {
+    if (Platform.OS === 'android') this.unlistenToBackAndroid()
+  }
+
+  listenToBackAndroid () {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      let { route, uiReducer } = this.props
+      if (uiReducer.menu.isOpen) return this.retractMenu()
+      if (route.params.section.name !== 'home') return this.openHome()
+      return
+    })
+  }
+
+  unlistenToBackAndroid () {
+    BackAndroid.removeEventListener('hardwareBackPress')
+  }
+
+  retractMenu () {
+    this.props.dispatch(MenuActions.retractMenu())
+    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
+    return true
+  }
+
+  openHome () {
+    this.props.dispatch(NavigationActions.home())
+    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
+    return true
   }
 
   render () {
@@ -40,7 +76,15 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  uiReducer: PropTypes.object.isRequired
 }
 
-export default Timeline
+const mapStateToProps = state => {
+  return {
+    uiReducer: state.uiReducer
+  }
+}
+
+export default connect(mapStateToProps)(Timeline)

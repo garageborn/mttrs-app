@@ -199,7 +199,8 @@ TimelineContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   StorageReducer: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  uiReducer: PropTypes.object.isRequired
 }
 
 let mapStateToProps = (state) => {
