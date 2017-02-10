@@ -8,6 +8,7 @@ class StoryWebView extends Component {
   constructor () {
     super()
 
+    this.handleError = this.handleError.bind(this)
     this.reloadWebView = this.reloadWebView.bind(this)
     this.openInBrowser = this.openInBrowser.bind(this)
   }
@@ -26,7 +27,7 @@ class StoryWebView extends Component {
       .catch(e => captureError(e))
   }
 
-  handleError = (e) => {
+  handleError (e) {
     captureError(e)
     return (
       <WebViewError
