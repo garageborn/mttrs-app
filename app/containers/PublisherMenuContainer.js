@@ -23,9 +23,7 @@ class PublisherMenuContainer extends Component {
     this.renderSeparator = this.renderSeparator.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
 
-    this.state = {
-      query: ''
-    }
+    this.state = { query: '' }
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -49,10 +47,12 @@ class PublisherMenuContainer extends Component {
     let rows = {}
     let sections = []
     const queryMatcher = new RegExp(query, 'i')
-    const filteredPublishers = publishers.filter(publisher => publisher.name.match(queryMatcher))
+    const filteredPublishers = publishers.filter(publisher => {
+      return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
+    })
 
     filteredPublishers.map(publisher => {
-      let section = this.props.StorageReducer.favoritePublishers.items.indexOf(publisher.id) !== -1 ? 'isFavorite' : publisher.name.substring(0, 1).toUpperCase()
+      let section = this.getSection(publisher)
       if (sections.indexOf(section) === -1) {
         sections.push(section)
         rows[section] = []
@@ -148,6 +148,14 @@ class PublisherMenuContainer extends Component {
   openPublisher (publisher) {
     this.props.dispatch(MenuActions.retractMenu())
     this.props.dispatch(NavigationActions.selectPublisher(publisher))
+  }
+
+  getSection (publisher) {
+    if (this.props.StorageReducer.favoritePublishers.items.indexOf(publisher.id) !== -1) {
+      return 'isFavorite'
+    } else {
+      return publisher.slug.substring(0, 1).toUpperCase()
+    }
   }
 }
 
