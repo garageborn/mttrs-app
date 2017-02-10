@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
       ios: 10,
       android: 0
     }),
-    paddingHorizontal: 10,
     height: height - headerHeight
   },
 

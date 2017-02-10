@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -14,18 +14,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textPrimary: {
+  text: {
     backgroundColor: 'transparent',
-    color: '#999999',
     fontWeight: '500',
     fontSize: 16,
     marginBottom: 5,
-    alignSelf: 'center'
-  },
-  textSecondary: {
-    backgroundColor: 'transparent',
-    color: '#999999',
-    fontSize: 12,
     alignSelf: 'center'
   },
   buttonContainer: {

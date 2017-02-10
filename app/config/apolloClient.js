@@ -3,7 +3,6 @@ import * as ENDPOINTS from '../constants/APIEndpoints'
 import Tenant from '../common/utils/Tenant'
 import createNetworkInterface from '../common/utils/ApolloNetworkInterface'
 import captureError from '../common/utils/captureError'
-import { ErrorActions } from '../actions/index'
 
 const tenantMiddleware = {
   applyMiddleware: (req, next) => {
@@ -32,7 +31,7 @@ const skipCacheMiddleware = {
 const errorHandler = {
   applyAfterware: ({ response }, next) => {
     if (!response.ok) {
-      apolloClient.store.dispatch(ErrorActions.showErrorDisclaimer())
+      captureError('applyAfterware !response.ok')
     } else {
       response.clone().json().then(({ errors }) => {
         if (errors) {

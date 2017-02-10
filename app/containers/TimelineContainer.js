@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { View, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
+import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import _isNil from 'lodash/isNil'
-import { NavigationActions, StorageActions, AnalyticsActions, ErrorActions } from '../actions/index'
 import MenuContainer from './MenuContainer'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
+import ErrorDisclaimer from '../components/ErrorDisclaimer'
 import styles from '../styles/App'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', filter: 'home' }
@@ -51,7 +52,6 @@ class TimelineContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.data.error) return this.props.dispatch((ErrorActions.showErrorDisclaimer()))
     if (this.tenantWillChange(nextProps)) this.props.data.refetch()
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
@@ -100,6 +100,7 @@ class TimelineContainer extends Component {
   }
 
   addSwipeRoutes (nextProps) {
+    if (nextProps.data.error) return
     const sameNavigationRoutes = nextProps.data.categories === this.props.data.categories
     const populatedRoutes = this.state.navigationState.routes.length > 1
     const hasRoutesAndWillBeTheSame = populatedRoutes && sameNavigationRoutes
@@ -147,6 +148,7 @@ class TimelineContainer extends Component {
     } else {
       filter = props.route.filter
     }
+
     return (
       <Timeline
         type={this.sceneType(props)}
@@ -173,8 +175,15 @@ class TimelineContainer extends Component {
     }
   }
 
+  renderError () {
+    return <ErrorDisclaimer from='timeline' data={this.props.data} />
+  }
+
   render () {
-    const { children, params } = this.props
+    const { children, params, data } = this.props
+
+    if (data.error) return this.renderError()
+
     return (
       <View style={styles.container}>
         {this.renderTimeline()}
