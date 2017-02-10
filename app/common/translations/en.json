@@ -12,9 +12,8 @@
   "and": "and",
   "other": "other",
   "others": "others",
-  "disconnected.textPrimary": "No internet connection",
-  "disconnected.textSecondary": "Try again when you are online",
-  "disconnected.buttonText": "Reload",
+  "error.text": "Oops! Something went wrong.",
+  "error.buttonText": "Reload",
   "paginator.skip": "Skip",
   "paginator.start": "Start",
   "onboarding.welcome.title": "Welcome to",
@@ -26,5 +25,6 @@
   "onboarding.publishers.title": "Publishers",
   "onboarding.publishers.description": "Discover your favorite publisher...",
   "onboarding.categories.title": "Categories",
-  "onboarding.categories.description": "All news categorized..."
+  "onboarding.categories.description": "All news categorized...",
+  "webview.openInBrowser": "Open in browser"
 }

@@ -55,11 +55,6 @@ Deploy a new version to the App Store
 fastlane android alpha
 ```
 Submit a new Alpha Build to Play Store
-### android beta
-```
-fastlane android beta
-```
-Submit a new Beta Build to Play Store
 
 ----
 

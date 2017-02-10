@@ -1,17 +1,39 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform } from 'react-native'
+import { View, WebView, Platform, Linking } from 'react-native'
+import WebViewError from '../WebViewError'
 import captureError from '../../common/utils/captureError'
 import styles from './styles'
 
 class StoryWebView extends Component {
+  constructor () {
+    super()
+
+    this.reloadWebView = this.reloadWebView.bind(this)
+    this.openInBrowser = this.openInBrowser.bind(this)
+  }
+
   contentInset () {
     return Platform.OS === 'ios' ? 0 : 11
   }
 
+  reloadWebView () {
+    this.refs.webview.reload()
+  }
+
+  openInBrowser () {
+    Linking
+      .openURL(this.props.url)
+      .catch(e => captureError(e))
+  }
+
   handleError = (e) => {
     captureError(e)
-    if (e === 'WebKitErrorDomain') return
-    // return <View></View>
+    return (
+      <WebViewError
+        onPressReload={this.reloadWebView}
+        onPressOpenInBrowser={this.openInBrowser}
+      />
+    )
   }
 
   render () {

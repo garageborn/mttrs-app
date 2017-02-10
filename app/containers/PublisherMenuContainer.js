@@ -6,7 +6,8 @@ import _debounce from 'lodash/debounce'
 import withQuery from './PublisherMenuContainer.gql'
 import PublisherMenuItem from '../components/PublisherMenuItem'
 import styles from '../styles/MenuPublishers'
-import { NavigationActions, MenuActions, ErrorActions } from '../actions/index'
+import { NavigationActions, MenuActions } from '../actions/index'
+import ApolloError from '../components/ApolloError'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -21,6 +22,7 @@ class PublisherMenuContainer extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
     this.openPublisher = this.openPublisher.bind(this)
+
     this.state = {
       query: ''
     }
@@ -88,9 +90,8 @@ class PublisherMenuContainer extends Component {
     return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
   }
 
-  handleError () {
-    this.props.dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
+  renderError () {
+    return <ApolloError skinType='dark' data={this.props.data} />
   }
 
   render () {
@@ -106,7 +107,7 @@ class PublisherMenuContainer extends Component {
       )
     }
 
-    if (error) return this.handleError()
+    if (error) return this.renderError()
 
     return (
       <View style={styles.container}>

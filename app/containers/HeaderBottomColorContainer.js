@@ -3,17 +3,13 @@ import { connect } from 'react-redux'
 import HeaderStripColor from '../components/HeaderStripColor'
 import CategoryColorList from '../components/CategoryColorList'
 import withQuery from './CategoryColorsListContainer.gql'
-import { ErrorActions } from '../actions/index'
 
-const HeaderBottomColorContainer = ({ type, data, params, uiReducer, dispatch }) => {
+const HeaderBottomColorContainer = ({uiReducer, type, data, params}) => {
   if (uiReducer.menu.isOpen) return false
 
   if (type === 'publisher') return <HeaderStripColor type={type} />
 
-  if (data.error) {
-    dispatch((ErrorActions.showErrorDisclaimer()))
-    return null
-  }
+  if (data.error) return null
 
   return <CategoryColorList type={type} data={data} params={params} />
 }
