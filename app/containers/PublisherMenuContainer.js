@@ -99,10 +99,7 @@ class PublisherMenuContainer extends Component {
     if (loading) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator
-            size='large'
-            color='#AAA'
-          />
+          <ActivityIndicator size='large' color='#AAA' />
         </View>
       )
     }

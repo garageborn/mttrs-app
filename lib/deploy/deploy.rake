@@ -23,8 +23,8 @@ namespace :deploy do
 
   desc 'Release iOS and Android'
   task :all do
-    Rake::Task['deploy:ios'].execute
     Rake::Task['deploy:android'].execute
+    Rake::Task['deploy:ios'].execute
     Rake::Task['deploy:commit'].execute
   end
 
