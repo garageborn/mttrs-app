@@ -25,10 +25,6 @@ export const timezone = new Intl.DateTimeFormat().resolvedOptions().timeZone
 
 class Provider extends Component {
   render () {
-    console.log('render provider')
-    console.log('locale', locale)
-    console.log('language', language)
-
     let msg = messages[language] || messages.en
 
     return (
