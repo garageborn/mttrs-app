@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform, Linking } from 'react-native'
+import { View, WebView, Platform } from 'react-native'
 import WebViewError from '../WebViewError'
 import captureError from '../../common/utils/captureError'
 import styles from './styles'
@@ -10,7 +10,6 @@ class StoryWebView extends Component {
 
     this.handleError = this.handleError.bind(this)
     this.reloadWebView = this.reloadWebView.bind(this)
-    this.openInBrowser = this.openInBrowser.bind(this)
   }
 
   contentInset () {
@@ -21,19 +20,10 @@ class StoryWebView extends Component {
     this.refs.webview.reload()
   }
 
-  openInBrowser () {
-    Linking
-      .openURL(this.props.url)
-      .catch(e => captureError(e))
-  }
-
   handleError (e) {
     captureError(e)
     return (
-      <WebViewError
-        onPressReload={this.reloadWebView}
-        onPressOpenInBrowser={this.openInBrowser}
-      />
+      <WebViewError onPressReload={this.reloadWebView} />
     )
   }
 

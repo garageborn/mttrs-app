@@ -18,7 +18,7 @@ const messages = defineMessages({
   }
 })
 
-const Error = ({ intl, skinType, onPressReload, children }) => {
+const Error = ({ intl, skinType, onPressReload }) => {
   const text = intl.formatMessage(messages.text)
   const buttonText = intl.formatMessage(messages.buttonText)
 
@@ -49,7 +49,6 @@ const Error = ({ intl, skinType, onPressReload, children }) => {
             <Text style={styles.buttonText}>{buttonText}</Text>
           </View>
         </Touchable>
-        {children}
       </View>
     </View>
   )
@@ -60,7 +59,6 @@ Error.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   onPressReload: PropTypes.func.isRequired,
-  children: PropTypes.node,
   skinType: PropTypes.string
 }
 
