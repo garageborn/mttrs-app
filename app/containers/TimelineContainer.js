@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
 import _isNil from 'lodash/isNil'
-import MenuContainer from './MenuContainer'
 import withQuery from './TimelineContainer.gql'
 import Timeline from '../components/Timeline'
 import ErrorDisclaimer from '../components/ErrorDisclaimer'
@@ -187,7 +186,6 @@ class TimelineContainer extends Component {
     return (
       <View style={styles.container}>
         {this.renderTimeline()}
-        <MenuContainer params={params} />
         {children}
       </View>
     )
