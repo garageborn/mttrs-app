@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../containers/TimelineHeaderContainer'
 import TimelineContainer from '../containers/TimelineContainer'
 import StoryLinksContainer from '../containers/StoryLinksContainer'
+import MenuContainer from '../containers/MenuContainer'
 import { headerHeight } from '../styles/Global'
 import { DARK_COLOR } from '../constants/Colors'
 import { BackAndroid, Platform } from 'react-native'
@@ -57,6 +58,7 @@ class Timeline extends Component {
     const { route } = this.props
     return (
       <TimelineContainer params={route.params}>
+        <MenuContainer params={route.params} />
         {this.renderStoryLinks()}
       </TimelineContainer>
     )
