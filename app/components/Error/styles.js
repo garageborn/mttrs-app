@@ -25,6 +25,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
 
+  textInDark: {
+    color: '#F1F1F1'
+  },
+
+  textInLight: {
+    color: '#999999'
+  },
+
   buttonContainer: {
     marginTop: 16,
     alignSelf: 'center'

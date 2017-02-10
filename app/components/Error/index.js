@@ -22,24 +22,23 @@ const Error = ({ intl, skinType, onPressReload }) => {
   const text = intl.formatMessage(messages.text)
   const buttonText = intl.formatMessage(messages.buttonText)
 
-  let skin = {
-    bg: skinType === 'dark' ? bgDark : bgLight,
-    icon: skinType === 'dark' ? iconDark : iconLight,
-    textColor: skinType === 'dark' ? '#F1F1F1' : '#999999'
+  const skin = {
+    dark: { bg: bgDark, icon: iconDark, textColor: styles.textInDark },
+    light: { bg: bgLight, icon: iconLight, textColor: styles.textInLight }
   }
 
   return (
     <View style={styles.container}>
       <Image
         style={styles.bg}
-        source={skin.bg}
+        source={skin[skinType].bg}
       />
       <View style={styles.textContainer}>
         <Image
           style={styles.icon}
-          source={skin.icon}
+          source={skin[skinType].icon}
         />
-        <Text style={[{color: skin.textColor}, styles.text]}>{text}</Text>
+        <Text style={[skin[skinType].textColor, styles.text]}>{text}</Text>
         <Touchable
           underlayColor={WHITE_TRANSPARENT_COLOR}
           style={styles.buttonContainer}
@@ -60,6 +59,10 @@ Error.propTypes = {
   }).isRequired,
   onPressReload: PropTypes.func.isRequired,
   skinType: PropTypes.string
+}
+
+Error.defaultProps = {
+  skinType: 'light'
 }
 
 export default injectIntl(Error)
