@@ -3,7 +3,6 @@ import { Platform } from 'react-native'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import intl from 'intl'
 import { NativeModules } from 'react-native'
-
 import * as messages from '../common/translations/i18n'
 import localeData from 'react-intl/locale-data'
 import androidLocaleData from 'intl/locale-data/complete'
