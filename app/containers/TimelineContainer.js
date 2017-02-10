@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Platform, StatusBar } from 'react-native'
+import { View, Platform, StatusBar, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
+import { NavigationActions, StorageActions, AnalyticsActions, MenuActions } from '../actions/index'
 import _isNil from 'lodash/isNil'
 import MenuContainer from './MenuContainer'
 import withQuery from './TimelineContainer.gql'
@@ -35,6 +35,12 @@ class TimelineContainer extends Component {
   componentDidMount () {
     const { dispatch } = this.props
     dispatch(NavigationActions.home())
+
+    if (Platform.OS === 'android') this.listenToBackAndroid()
+  }
+
+  componentWillUnmount () {
+    if (Platform.OS === 'android') this.unlistenToBackAndroid()
   }
 
   componentWillUpdate (nextProps, nextState) {
@@ -56,6 +62,31 @@ class TimelineContainer extends Component {
     if (this.sectionType(nextProps) !== 'publisher') this.addSwipeRoutes(nextProps)
     if (this.categoriesWillChange(nextProps)) this.addSwipeRoutes(nextProps)
     this.sectionWillChange(nextProps)
+  }
+
+  listenToBackAndroid () {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
+      let { params, uiReducer } = this.props
+      if (uiReducer.menu.isOpen) return this.retractMenu()
+      if (params.section.name !== 'home') return this.openHome()
+      return
+    })
+  }
+
+  unlistenToBackAndroid () {
+    BackAndroid.removeEventListener('hardwareBackPress')
+  }
+
+  retractMenu () {
+    this.props.dispatch(MenuActions.retractMenu())
+    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
+    return true
+  }
+
+  openHome () {
+    this.props.dispatch(NavigationActions.home())
+    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
+    return true
   }
 
   tenantWillChange (nextProps) {
@@ -199,7 +230,8 @@ TimelineContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   StorageReducer: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  uiReducer: PropTypes.object.isRequired
 }
 
 let mapStateToProps = (state) => {
