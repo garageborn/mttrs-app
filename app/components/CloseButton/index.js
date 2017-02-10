@@ -7,7 +7,7 @@ const CloseButton = ({ onPress }) => {
   return (
     <View style={styles.closeButton}>
       <Touchable onPress={onPress} underlayColor={'transparent'}>
-        <Image style={styles.closeButtonIcon} source={require('../../assets/icons/icon-close-modal@3x.png')} />
+        <Image style={styles.closeButtonIcon} source={require('../../assets/icons/icon-close-modal.png')} />
       </Touchable>
     </View>
   )
