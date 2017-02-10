@@ -12,6 +12,12 @@ class StoryWebView extends Component {
     this.reloadWebView = this.reloadWebView.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    const currentUrl = this.props.params.link.url
+    const newUrl = nextProps.params.link.url
+    return currentUrl !== newUrl
+  }
+
   contentInset () {
     return Platform.OS === 'ios' ? 0 : 11
   }
@@ -47,7 +53,8 @@ class StoryWebView extends Component {
 StoryWebView.propTypes = {
   header: PropTypes.element,
   onLoadEnd: PropTypes.func.isRequired,
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  params: PropTypes.object.isRequired
 }
 
 export default StoryWebView

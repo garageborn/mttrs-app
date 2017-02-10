@@ -30,12 +30,6 @@ class Link extends Component {
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
-  shouldComponentUpdate (nextProps) {
-    const currentUrl = this.props.route.params.link.url
-    const newUrl = nextProps.route.params.link.url
-    return currentUrl !== newUrl
-  }
-
   componentWillMount () {
     this.createAccess()
   }
@@ -60,6 +54,7 @@ class Link extends Component {
     return (
       <StoryWebView
         url={url}
+        params={this.props.route.params}
         header={this.renderHeader(this.props)}
         onLoadEnd={this.addStoryToLocalStorage}
       />
