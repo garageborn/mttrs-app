@@ -82,10 +82,6 @@ class Link extends Component {
     if (e === 'WebKitErrorDomain') return
   }
 
-  get contentInset () {
-    return Platform.OS === 'ios' ? 0 : 11
-  }
-
   renderNavbar (props) {
     if (Platform.OS === 'ios') return
     return <LinkHeaderContainer params={props.route.params} />
@@ -94,18 +90,29 @@ class Link extends Component {
   render () {
     const { url } = this.props.route.params.link
 
+    // Tem disable progress bar
     return (
       <View style={styles.container}>
         {this.renderNavbar(this.props)}
         <WebView
           source={{uri: url}}
-          contentInset={{top: this.contentInset}}
+          renderError={this.handleError}
+        />
+      </View>
+    )
+
+    return (
+      <View style={styles.container}>
+        {this.renderNavbar(this.props)}
+        <WebView
+          source={{uri: url}}
           startInLoadingState
           renderLoading={this.renderProgressBar}
           renderError={this.handleError}
-          onLoadEnd={this.addStoryToLocalStorage}
           mediaPlaybackRequiresUserAction
-          shouldStartLoadWithRequest={false}
+
+          onLoadStart={ () => console.info('Load Start', new Date()) }
+          onLoadEnd={ () => console.info('Load End', new Date()) }
         />
       </View>
     )
