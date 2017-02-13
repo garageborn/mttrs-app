@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: Platform.OS === 'ios' ? 2 : 15,
+    marginBottom: Platform.OS === 'ios' ? 0 : 10,
     borderRadius: 5
   },
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingTop: 8,
     marginBottom: 3,
-    paddingBottom: 3,
+    paddingBottom: 3
   },
 
   listHeaderText: {
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
 
   touch: {
-    backgroundColor: '#F1F1F1',
+    backgroundColor: '#F1F1F1'
   }
 })
 
