@@ -27,5 +27,10 @@
   "onboarding.categories.title": "Seu interesse a um clique",
   "onboarding.categories.description": "Todas as notícias são separadas em categorias. Encontre tudo organizado e leia sobre os assuntos que mais lhe interessam.",
   "webview.openInBrowser": "Abrir no navegador",
-  "storyCategory.in": "em"
+  "storyCategory.in": "em",
+  "today": "Hoje",
+  "yesterday": "Ontem",
+  "lastWeek": "Na última semana",
+  "lastMonth": "No último mês",
+  "dateFormat": "D MMMM"
 }

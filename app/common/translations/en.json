@@ -27,5 +27,10 @@
   "onboarding.categories.title": "Categories",
   "onboarding.categories.description": "All news categorized...",
   "webview.openInBrowser": "Open in browser",
-  "storyCategory.in": "in"
+  "storyCategory.in": "in",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "lastWeek": "Last Week",
+  "lastMonth": "Last Month",
+  "dateFormat": "MMMM D"
 }
