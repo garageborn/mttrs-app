@@ -23,7 +23,7 @@ const CategoryTile = ({ onPress, category }) => {
               colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)']}
               style={styles.gradient}
             >
-              <Text style={styles.name}>{category.name}</Text>
+              <Text style={styles.name} numberOfLines={2}>{category.name}</Text>
             </LinearGradient>
           </Image>
         </View>

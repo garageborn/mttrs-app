@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
@@ -39,9 +39,12 @@ const styles = StyleSheet.create({
   },
 
   publisherName: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#666666',
-    fontWeight: 'bold'
+    fontWeight: Platform.select({
+      ios: '700',
+      android: '500'
+    })
   },
 
   story: {
@@ -52,13 +55,13 @@ const styles = StyleSheet.create({
   },
 
   storyTitle: {
-    fontSize: 16,
+    fontSize: 14,
     width: width - 110,
     paddingRight: 40,
     letterSpacing: -0.73,
     lineHeight: 22,
     color: '#333333',
-    fontWeight: 'bold'
+    fontWeight: '500'
   },
 
   shares: {

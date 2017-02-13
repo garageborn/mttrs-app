@@ -50,6 +50,9 @@ class ParsedDate extends Component {
 }
 
 ParsedDate.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }),
   date: PropTypes.number,
   style: PropTypes.number
 }

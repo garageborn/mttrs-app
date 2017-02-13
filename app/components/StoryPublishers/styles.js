@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   lightText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#999'
   },
 
   darkText: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#666'
   },
 

@@ -4,13 +4,11 @@ import Touchable from '../Touchable'
 import StoryImage from '../StoryImage'
 import StoryTitle from '../StoryTitle'
 import StoryCategory from '../StoryCategory'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
-
 const StoryMainLink = ({onPress, mainLink, mainCategory, isSceneHome}) => {
-  let renderStoryCategory = null
-  if (isSceneHome) renderStoryCategory = <StoryCategory category={mainCategory} />
+  let renderStoryCategory = <StoryCategory category={mainCategory} />
   return (
     <Touchable
       onPress={onPress}

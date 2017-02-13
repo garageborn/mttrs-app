@@ -41,6 +41,7 @@ class MenuAndroid extends Component {
       <TabBar
         {...props}
         style={styles.tabBar}
+        indicatorStyle={styles.indicatorStyle}
       />
     )
   }
@@ -72,8 +73,7 @@ class MenuAndroid extends Component {
 MenuAndroid.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  params: PropTypes.object.isRequired
+  }).isRequired
 }
 
 const intlMenuAndroid = injectIntl(MenuAndroid)

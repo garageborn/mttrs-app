@@ -47,10 +47,12 @@ const styles = StyleSheet.create({
   name: {
     color: '#FFF',
     fontSize: 16,
+    textAlign: 'center',
     fontWeight: Platform.select({
       ios: '500',
       android: '300'
     }),
+    marginHorizontal: 5,
     marginBottom: 10
   },
 
