@@ -61,25 +61,32 @@ class StoryPublishers extends Component {
   getCounter () {
     const { formatMessage } = this.props.intl
     const and = formatMessage(messages.storyAnd)
-    const other = formatMessage(messages.storyOther)
-    const others = formatMessage(messages.storyOthers)
     let otherLinksCount = this.props.story.other_links_count
-
     if (!otherLinksCount) return
+    let othersText = this.getOtherText(this.props.intl.locale, otherLinksCount)
 
-    const otherMessage = otherLinksCount === 1 ? other : others
-    
     return (
       <Text style={styles.lightText}> {and}
-        <Text style={styles.darkText}> {otherLinksCount} {otherMessage}</Text>
+        <Text style={styles.darkText}> {othersText}</Text>
       </Text>
     )
+  }
+
+  getOtherText (locale, otherLinksCount) {
+    const { formatMessage } = this.props.intl
+    const other = formatMessage(messages.storyOther)
+    const others = formatMessage(messages.storyOthers)
+    const otherMessage = otherLinksCount === 1 ? other : others
+
+    if (locale === 'pt') return `${otherMessage} ${otherLinksCount}`
+    return `${otherLinksCount} ${otherMessage}`
   }
 }
 
 StoryPublishers.propTypes = {
   intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired
   }).isRequired,
   story: PropTypes.shape({
     main_link: PropTypes.shape({
