@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, ListView } from 'react-native'
 import styles from '../styles/StoryLinks'
 import StoryLink from '../components/StoryLink'
 import LinearGradient from 'react-native-linear-gradient'
 
 class StoryLinksComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -34,7 +34,7 @@ class StoryLinksComponent extends Component {
     )
   }
 
-  dataSource() {
+  dataSource () {
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
