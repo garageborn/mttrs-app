@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
 
+  arrowUp: {
+    transform: [{ rotate: '180deg' }]
+  },
+
   icon: {
     marginTop: 3,
     width: 19,

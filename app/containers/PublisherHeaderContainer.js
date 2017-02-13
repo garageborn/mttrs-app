@@ -16,12 +16,13 @@ class PublisherHeaderContainer extends Component {
   }
 
   render () {
-    const { toggleMenu, publisher } = this.props
+    const { toggleMenu, publisher, menuIsOpen } = this.props
     return (
       <Header
         toggleMenu={toggleMenu}
         title={publisher.name}
         icon={this.icon}
+        menuIsOpen={menuIsOpen}
         type='publisher'
       />
     )
@@ -32,7 +33,8 @@ PublisherHeaderContainer.propTypes = {
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired
   }).isRequired,
-  toggleMenu: PropTypes.func.isRequired
+  toggleMenu: PropTypes.func.isRequired,
+  menuIsOpen: PropTypes.bool.isRequired
 }
 
 export default PublisherHeaderContainer

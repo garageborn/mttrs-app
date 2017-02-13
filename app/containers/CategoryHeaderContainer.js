@@ -10,7 +10,7 @@ const messages = defineMessages({
   }
 })
 
-const CategoryHeaderContainer = ({ toggleMenu, category, intl, params }) => {
+const CategoryHeaderContainer = ({ toggleMenu, category, intl, params, menuIsOpen }) => {
   let title = intl.formatMessage(messages.headerTitle)
 
   if (!_isEmpty(category)) { title = category.name }
@@ -20,6 +20,7 @@ const CategoryHeaderContainer = ({ toggleMenu, category, intl, params }) => {
       toggleMenu={toggleMenu}
       title={title}
       params={params}
+      menuIsOpen={menuIsOpen}
       type='home'
     />
   )
@@ -31,7 +32,8 @@ CategoryHeaderContainer.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  params: PropTypes.object.isRequired
+  params: PropTypes.object.isRequired,
+  menuIsOpen: PropTypes.bool.isRequired
 }
 
 export default injectIntl(CategoryHeaderContainer)

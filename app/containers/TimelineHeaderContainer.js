@@ -21,12 +21,13 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader () {
-    const { params } = this.props
+    const { params, uiReducer } = this.props
+    const { isOpen } = uiReducer.menu
     const { section } = params
 
-    if (!section) return <CategoryHeaderContainer toggleMenu={this.toggleMenu} params={params} />
-    if (section.name === 'publisher') return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} params={params} />
-    return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} />
+    if (!section) return <CategoryHeaderContainer toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
+    if (section.name === 'publisher') return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
+    return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
   }
 
   toggleMenu () {
