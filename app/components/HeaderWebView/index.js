@@ -19,11 +19,15 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
           </View>
         </View>
         <View style={styles.actions}>
-          <Touchable style={styles.iconHighlight} underlayColor={COLORLESS} onPress={share}>
-            <Image style={styles.iconShare} source={require('../../assets/icons/icon-share.png')} />
+          <Touchable underlayColor={COLORLESS} onPress={share}>
+            <View style={styles.iconHighlight}>
+              <Image style={styles.iconShare} source={require('../../assets/icons/icon-share.png')} />
+            </View>
           </Touchable>
-          <Touchable style={[styles.iconHighlight, styles.iconCloseHighlight]} underlayColor={COLORLESS} onPress={close}>
-            <Image style={styles.iconClose} source={require('../../assets/icons/icon-close.png')} />
+          <Touchable underlayColor={COLORLESS} onPress={close}>
+            <View style={[styles.iconHighlight, styles.iconCloseHighlight]}>
+              <Image style={styles.iconClose} source={require('../../assets/icons/icon-close.png')} />
+            </View>
           </Touchable>
         </View>
       </View>

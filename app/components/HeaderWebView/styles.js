@@ -1,5 +1,7 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { DARK_COLOR } from '../../constants/Colors'
+
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +18,11 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flexDirection: 'row'
+    position: 'relative',
+    flexDirection: 'row',
+    paddingHorizontal: 0,
+    paddingLeft: 15,
+    width
   },
 
   publisherInfo: {
@@ -24,6 +30,7 @@ const styles = StyleSheet.create({
   },
 
   publisher: {
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -36,36 +43,30 @@ const styles = StyleSheet.create({
   },
 
   storyTitle: {
+    flexGrow: 1,
     fontSize: 14,
-    width: Platform.select({
-      ios: 150,
-      android: 180
-    }),
+    width: 200,
     color: '#FFF'
   },
 
   actions: {
+    position: 'relative',
+    right: 0,
+    justifyContent: 'flex-end',
     flexDirection: 'row',
     alignItems: 'flex-end'
   },
 
   iconHighlight: {
-    marginHorizontal: 8,
     padding: 5
   },
 
-  iconClose: Platform.select({
-    ios: {
-      marginBottom: 1
-    },
-    android: {
-      marginBottom: 5,
-      marginLeft: 25
-    }
-  }),
-
   iconCloseHighlight: {
-    paddingHorizontal: 10
+    marginHorizontal: 15,
+    marginBottom: Platform.select({
+      ios: 0,
+      android: 3
+    })
   }
 })
 
