@@ -1,14 +1,14 @@
 {
-  "header.title": "Principais histórias",
-  "header.topStories": "Principais histórias",
+  "header.title": "Destaques",
+  "header.topStories": "Destaques",
   "header.categories": "Categorias",
-  "header.publishers": "Editores",
+  "header.publishers": "Sites",
   "header.countries": "Países",
   "menu.settings": "Configurações",
   "modal.subTitle": "Idioma & País",
   "footer.feedback": "Dúvidas? Feedback? Avise-nos!",
-  "search.placeholder": "Busca de editores",
-  "from": "Via",
+  "search.placeholder": "Buscar por sites",
+  "from": "De",
   "and": "e",
   "other": "outro",
   "others": "outros",
@@ -21,10 +21,11 @@
   "onboarding.highlights.title": "Notícias em destaque",
   "onboarding.highlights.description": "Encontre as principais notícias do dia, ordenadas pelos índices sociais da Internet. Se está na boca do povo, você encontra aqui.",
   "onboarding.editorial.title": "Resumo do editor",
-  "onboarding.editorial.description": "Escritos cuidadosamente por nossa equipe. Muito úteis para a compreensão rápida da informação essencial de cada notícia.",
+  "onboarding.editorial.description": "Capture a mensagem principal de cada notícia em segundos. Resumos são escritos cuidadosamente por nossa equipe.",
   "onboarding.publishers.title": "Mantenha o foco",
   "onboarding.publishers.description": "Concentre-se na informação e não perca tempo lendo várias vezes a mesma notícia. Se desejar, encontre o seu veículo de mídia preferido.",
   "onboarding.categories.title": "Seu interesse a um clique",
   "onboarding.categories.description": "Todas as notícias são separadas em categorias. Encontre tudo organizado e leia sobre os assuntos que mais lhe interessam.",
-  "webview.openInBrowser": "Abrir no navegador"
+  "webview.openInBrowser": "Abrir no navegador",
+  "storyCategory.in": "em"
 }

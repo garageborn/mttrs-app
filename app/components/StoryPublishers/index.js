@@ -68,6 +68,7 @@ class StoryPublishers extends Component {
     if (!otherLinksCount) return
 
     const otherMessage = otherLinksCount === 1 ? other : others
+    
     return (
       <Text style={styles.lightText}> {and}
         <Text style={styles.darkText}> {otherLinksCount} {otherMessage}</Text>

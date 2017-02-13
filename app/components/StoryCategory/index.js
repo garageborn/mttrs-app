@@ -1,12 +1,20 @@
 import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
+import { injectIntl, defineMessages } from 'react-intl'
 import styles from './styles'
 
-const StoryCategory = ({category}) => {
+const messages = defineMessages({
+  in: {
+    id: 'storyCategory.in'
+  }
+})
+
+const StoryCategory = ({intl, category}) => {
+  const text = intl.formatMessage(messages.in)
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        in <Text style={[styles.category, { color: category.color }]}>
+        {text} <Text style={[styles.category, { color: category.color }]}>
           {category.name.toUpperCase()}
         </Text>
       </Text>
@@ -16,7 +24,8 @@ const StoryCategory = ({category}) => {
 }
 
 StoryCategory.propTypes = {
-  category: PropTypes.object
+  category: PropTypes.object,
+  intl: PropTypes.object
 }
 
-export default StoryCategory
+export default injectIntl(StoryCategory)
