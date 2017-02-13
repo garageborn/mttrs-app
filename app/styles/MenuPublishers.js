@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   search: {
     position: 'relative',
     backgroundColor: '#FFF',
-    marginLeft: 15,
-    marginRight: 15,
+    marginLeft: 10,
+    marginRight: 10,
     marginBottom: Platform.OS === 'ios' ? 2 : 15,
     borderRadius: 5
   },

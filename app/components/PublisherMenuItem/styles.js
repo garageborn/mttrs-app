@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   publisher: {
@@ -13,7 +13,10 @@ const styles = StyleSheet.create({
 
   name: {
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: Platform.select({
+      ios: '500',
+      android: '400'
+    }),
     color: '#666',
     marginLeft: 10
   },

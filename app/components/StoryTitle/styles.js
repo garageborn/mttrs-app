@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 16,
-    lineHeight: Platform.select({ ios: 24, android: 26 }),
+    lineHeight: Platform.select({ ios: 24, android: 20 }),
     fontWeight: '500'
   }
 })
