@@ -5,7 +5,6 @@ import withQuery from './index.gql'
 import StoryContainer from '../../containers/StoryContainer'
 import ApolloError from '../ApolloError'
 import ListViewHeader from '../ListViewHeader'
-import ParseDate from '../../common/utils/ParseDate'
 import styles from './styles'
 
 class Timeline extends Component {
@@ -52,7 +51,7 @@ class Timeline extends Component {
   }
 
   renderSectionHeader (sectionData, date) {
-    return <ListViewHeader date={ParseDate(date)} />
+    return <ListViewHeader date={date} />
   }
 
   dataSource () {
