@@ -32,5 +32,6 @@
   "yesterday": "Ontem",
   "lastWeek": "Na última semana",
   "lastMonth": "No último mês",
-  "dateFormat": "D MMMM"
+  "dateFormat": "D MMMM",
+  "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}"
 }

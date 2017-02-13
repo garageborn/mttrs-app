@@ -32,5 +32,7 @@
   "yesterday": "Yesterday",
   "lastWeek": "Last Week",
   "lastMonth": "Last Month",
-  "dateFormat": "MMMM D"
+  "dateFormat": "MMMM D",
+  "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}"
+
 }

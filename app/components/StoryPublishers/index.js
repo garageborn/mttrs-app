@@ -12,20 +12,11 @@ const messages = defineMessages({
     id: 'from',
     defaultMessage: 'From'
   },
-
-  storyAnd: {
-    id: 'and',
-    defaultMessage: 'and'
+  and: {
+    id: 'and'
   },
-
-  storyOther: {
-    id: 'other',
-    defaultMessage: 'other'
-  },
-
-  storyOthers: {
-    id: 'others',
-    defaultMessage: 'others'
+  others: {
+    id: 'storyPublishers.others'
   }
 })
 
@@ -60,26 +51,16 @@ class StoryPublishers extends Component {
 
   getCounter () {
     const { formatMessage } = this.props.intl
-    const and = formatMessage(messages.storyAnd)
+    const and = formatMessage(messages.and)
+    const othersText = formatMessage(messages.others, {itemCount: this.props.story.other_links_count})
     let otherLinksCount = this.props.story.other_links_count
     if (!otherLinksCount) return
-    let othersText = this.getOtherText(this.props.intl.locale, otherLinksCount)
 
     return (
       <Text style={styles.lightText}> {and}
-        <Text style={styles.darkText}> {othersText}</Text>
+        <Text style={styles.darkText}>{othersText}</Text>
       </Text>
     )
-  }
-
-  getOtherText (locale, otherLinksCount) {
-    const { formatMessage } = this.props.intl
-    const other = formatMessage(messages.storyOther)
-    const others = formatMessage(messages.storyOthers)
-    const otherMessage = otherLinksCount === 1 ? other : others
-
-    if (locale === 'pt') return `${otherMessage} ${otherLinksCount}`
-    return `${otherLinksCount} ${otherMessage}`
   }
 }
 
