@@ -3,6 +3,7 @@ import { View, Text, Image } from 'react-native'
 import Touchable from '../Touchable'
 import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
+import arrow from './assets/arrow.png'
 import styles from './styles'
 
 const Header = ({ title, toggleMenu, icon, params, type, menuIsOpen }) => {
@@ -13,7 +14,7 @@ const Header = ({ title, toggleMenu, icon, params, type, menuIsOpen }) => {
           <View style={styles.headerContainer}>
             {icon}
             <Text style={styles.headerTitle}>{title}</Text>
-            <Image style={menuIsOpen && styles.arrowUp} source={require('../../assets/arrow.png')} />
+            <Image style={menuIsOpen && styles.arrowUp} source={arrow} />
           </View>
         </Touchable>
       </View>

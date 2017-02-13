@@ -5,7 +5,6 @@ import styles from './styles'
 
 const ListViewHeader = ({ date }) => (
   <View style={styles.header}>
-    {/* <Text style={styles.title}>{date.toUpperCase()}</Text> */}
     <ParsedDate style={styles.title} date={date} />
   </View>
 )

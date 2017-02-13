@@ -3,6 +3,8 @@ import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
+import iconShare from './assets/icon-share.png'
+import iconClose from './assets/icon-close.png'
 import styles from './styles'
 
 const HeaderWebview = ({ params, publisherLogo, share, close }) => {
@@ -21,12 +23,12 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
         <View style={styles.actions}>
           <Touchable underlayColor={COLORLESS} onPress={share}>
             <View style={styles.iconHighlight}>
-              <Image style={styles.iconShare} source={require('../../assets/icons/icon-share.png')} />
+              <Image style={styles.iconShare} source={iconShare} />
             </View>
           </Touchable>
           <Touchable underlayColor={COLORLESS} onPress={close}>
             <View style={[styles.iconHighlight, styles.iconCloseHighlight]}>
-              <Image style={styles.iconClose} source={require('../../assets/icons/icon-close.png')} />
+              <Image style={styles.iconClose} source={iconClose} />
             </View>
           </Touchable>
         </View>
