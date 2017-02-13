@@ -19,7 +19,6 @@ const messages = defineMessages({
   dateFormat: {
     id: 'dateFormat'
   }
-
 })
 
 class ParsedDate extends Component {
