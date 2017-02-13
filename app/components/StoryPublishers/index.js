@@ -12,20 +12,11 @@ const messages = defineMessages({
     id: 'from',
     defaultMessage: 'From'
   },
-
-  storyAnd: {
-    id: 'and',
-    defaultMessage: 'and'
+  and: {
+    id: 'and'
   },
-
-  storyOther: {
-    id: 'other',
-    defaultMessage: 'other'
-  },
-
-  storyOthers: {
-    id: 'others',
-    defaultMessage: 'others'
+  others: {
+    id: 'storyPublishers.others'
   }
 })
 
@@ -60,17 +51,14 @@ class StoryPublishers extends Component {
 
   getCounter () {
     const { formatMessage } = this.props.intl
-    const and = formatMessage(messages.storyAnd)
-    const other = formatMessage(messages.storyOther)
-    const others = formatMessage(messages.storyOthers)
+    const and = formatMessage(messages.and)
+    const othersText = formatMessage(messages.others, {itemCount: this.props.story.other_links_count})
     let otherLinksCount = this.props.story.other_links_count
-
     if (!otherLinksCount) return
 
-    const otherMessage = otherLinksCount === 1 ? other : others
     return (
       <Text style={styles.lightText}> {and}
-        <Text style={styles.darkText}> {otherLinksCount} {otherMessage}</Text>
+        <Text style={styles.darkText}>{othersText}</Text>
       </Text>
     )
   }
@@ -78,7 +66,8 @@ class StoryPublishers extends Component {
 
 StoryPublishers.propTypes = {
   intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired
   }).isRequired,
   story: PropTypes.shape({
     main_link: PropTypes.shape({

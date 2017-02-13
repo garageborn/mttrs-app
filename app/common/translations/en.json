@@ -26,5 +26,13 @@
   "onboarding.publishers.description": "Discover your favorite publisher...",
   "onboarding.categories.title": "Categories",
   "onboarding.categories.description": "All news categorized...",
-  "webview.openInBrowser": "Open in browser"
+  "webview.openInBrowser": "Open in browser",
+  "storyCategory.in": "in",
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "lastWeek": "Last Week",
+  "lastMonth": "Last Month",
+  "dateFormat": "MMMM D",
+  "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}"
+
 }
