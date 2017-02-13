@@ -10,7 +10,7 @@ const imageHeight = Platform.select({
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: width * 0.02,
+    marginHorizontal: 17,
     marginBottom: 5
   },
 

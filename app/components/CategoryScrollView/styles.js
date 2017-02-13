@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
   categories: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginHorizontal: 10,
     marginBottom: width === iphoneWidthSmall ? 8 : 10
   }
 })
