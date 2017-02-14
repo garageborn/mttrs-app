@@ -2,11 +2,11 @@ import React, { PropTypes, Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import ButtonGroup from '../../components/ButtonGroup'
-import styles from './styles'
 import { injectIntl, defineMessages } from 'react-intl'
 import CategoryMenuContainer from '../../containers/CategoryMenuContainer'
 import PublisherMenuContainer from '../../containers/PublisherMenuContainer'
 import { MenuActions } from '../../actions'
+import styles from './styles'
 
 const messages = defineMessages({
   headerCategories: {
