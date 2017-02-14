@@ -20,12 +20,12 @@ class StoryContainer extends Component {
 
   render () {
     const { story, section, visited, scrollToY } = this.props
-    let isSceneHome = section.type === 'home'
+    let isHomeScene = section.type === 'home'
 
     return (
       <Story
         story={story}
-        isSceneHome={isSceneHome}
+        isHomeScene={isHomeScene}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
