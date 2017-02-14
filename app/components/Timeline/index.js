@@ -115,6 +115,7 @@ class Timeline extends Component {
         refreshControl={this.refreshControl()}
         renderFooter={() => this.renderFooter()}
         onEndReached={() => this.onEndReached()}
+        collapsable={false}
       />
     )
   }
@@ -163,6 +164,8 @@ class Timeline extends Component {
         story={story}
         section={section}
         scrollToY={this.scrollToY}
+        timelineRef={this.refs.timeline}
+        collapsable={false}
       />
     )
   }
