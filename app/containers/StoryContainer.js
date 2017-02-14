@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
 import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
-import analytics from '../config/Analytics'
 
 class StoryContainer extends Component {
   constructor (props) {
@@ -19,7 +18,7 @@ class StoryContainer extends Component {
   }
 
   render () {
-    const { story, section, visited, scrollToY } = this.props
+    const { story, section, visited, scrollToY, timelineRef } = this.props
     let isHomeScene = section.type === 'home'
 
     return (
@@ -31,12 +30,13 @@ class StoryContainer extends Component {
         openStoryLinks={this.openStoryLinks}
         visited={visited}
         scrollToY={scrollToY}
+        timelineRef={timelineRef}
       />
     )
   }
 
   openLink (link) {
-    const { section, dispatch } = this.props
+    const { dispatch } = this.props
     dispatch(AnalyticsActions.trackLink(link))
     dispatch(NavigationActions.link(this.props.story, link))
   }
@@ -70,7 +70,12 @@ class StoryContainer extends Component {
 }
 
 StoryContainer.propTypes = {
-  story: PropTypes.object.isRequired
+  story: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  section: PropTypes.object,
+  visited: PropTypes.bool,
+  timelineRef: PropTypes.object,
+  scrollToY: PropTypes.func.isRequired
 }
 
 let mapStateToProps = (state, ownProps) => {
