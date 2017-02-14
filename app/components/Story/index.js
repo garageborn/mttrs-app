@@ -25,7 +25,7 @@ class Story extends Component {
   }
 
   render () {
-    const { story, openLink, openStoryLinks } = this.props
+    const { isHomeScene, openLink, openStoryLinks, story } = this.props
     return (
       <View
         ref={story.id}
@@ -40,7 +40,8 @@ class Story extends Component {
             onPress={openLink}
             mainLink={this.mainLink}
             mainCategory={this.mainCategory}
-            isHomeScene={this.props.isHomeScene}
+            isHomeScene={isHomeScene}
+            story={story}
           />
           {this.renderSummary(story.headline, story.summary)}
           <StoryMetadata story={story} onPublishersPress={openStoryLinks} />

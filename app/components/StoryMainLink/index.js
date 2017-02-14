@@ -9,7 +9,7 @@ import styles from './styles'
 
 class StoryMainLink extends Component {
   render () {
-    const { onPress, mainLink } = this.props
+    const { onPress, mainLink, story } = this.props
     return (
       <Touchable
         onPress={onPress}
@@ -17,7 +17,7 @@ class StoryMainLink extends Component {
         underlayColor={WHITE_COLOR}
       >
         <View style={styles.content}>
-          <StoryImage source={mainLink.image_source_url} />
+          <StoryImage source={mainLink.image_source_url} story={story} />
           <View>
             <StoryTitle title={mainLink.title} />
             {this.renderStoryCategory()}
@@ -34,10 +34,13 @@ class StoryMainLink extends Component {
 }
 
 StoryMainLink.propTypes = {
-  onPress: PropTypes.func.isRequired,
+  isHomeScene: PropTypes.bool.isRequired,
   mainLink: PropTypes.object.isRequired,
   mainCategory: PropTypes.object.isRequired,
-  isHomeScene: PropTypes.bool.isRequired
+  onPress: PropTypes.func.isRequired,
+  story: PropTypes.shape({
+    id: PropTypes.any.isRequired
+  }).isRequired
 }
 
 export default StoryMainLink

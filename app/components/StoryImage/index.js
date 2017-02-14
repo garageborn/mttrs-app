@@ -1,18 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Platform } from 'react-native'
-import _sample from 'lodash/sample'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import Placeholder from './components/Placeholder'
 import styles from './styles'
 
 const loading = require('../../assets/mttrs-loading.gif')
 const staticLoading = require('../../assets/mttrs-loading-static.png')
-const placeholders = [
-  require('./assets/placeholder-01.png'),
-  require('./assets/placeholder-02.png'),
-  require('./assets/placeholder-03.png'),
-  require('./assets/placeholder-04.png'),
-  require('./assets/placeholder-05.png')
-]
 
 class StoryImage extends Component {
   constructor () {
@@ -47,7 +40,7 @@ class StoryImage extends Component {
   }
 
   render () {
-    if (this.state.status === 'error') return this.renderPlaceholder()
+    if (this.state.status === 'error') return <Placeholder story={this.props.story} />
     return (
       <Image
         style={styles.image}
@@ -59,17 +52,9 @@ class StoryImage extends Component {
     )
   }
 
-  renderPlaceholder () {
-    return <Image style={styles.image} resizeMode='cover' source={this.getPlaceholder()} />
-  }
-
   getImage () {
     let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
     return { uri: cloudinary.url(this.props.source, options) }
-  }
-
-  getPlaceholder () {
-    return _sample(placeholders)
   }
 
   getLoading () {
@@ -78,7 +63,10 @@ class StoryImage extends Component {
 }
 
 StoryImage.propTypes = {
-  source: PropTypes.string
+  source: PropTypes.string,
+  story: PropTypes.shape({
+    id: PropTypes.any.isRequired
+  }).isRequired
 }
 
 export default StoryImage
