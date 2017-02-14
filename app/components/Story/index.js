@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { View, findNodeHandle } from 'react-native'
-import styles from './styles'
 import StorySummary from '../StorySummary'
 import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
+import styles from './styles'
 
 class Story extends Component {
   constructor (props) {
@@ -52,9 +52,16 @@ class Story extends Component {
 
   getViewPosition () {
     const storyTopHeight = 40
-    this.refs[this.props.story.id].measure((ox, oy) => {
-      this.setState({storyPosition: oy - storyTopHeight})
-    })
+    // this.refs[this.props.story.id].measure((ox, oy) => {
+    //   this.setState({storyPosition: oy - storyTopHeight})
+    // })
+    if (!this.props.timelineRef) return
+    this.refs[this.props.story.id].measureLayout(
+      findNodeHandle(this.props.timelineRef),
+      (x, y) => {
+        this.setState({storyPosition: y - storyTopHeight})
+      }
+    )
   }
 
   renderSummary (headline, summary) {
