@@ -22,9 +22,15 @@ class StoryImage extends Component {
     this.state = { status: 'loading' }
   }
 
-  getSource () {
-    if (!this.props.source) return this.getPlaceholder()
+  componentWillMount () {
+    if (!this.props.source) this.setState({ status: 'error' })
+  }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.source !== nextProps.source || this.state.status !== nextState.status
+  }
+
+  getSource () {
     if (this.state.status === 'loading') {
       return this.getLoading()
     } else {
