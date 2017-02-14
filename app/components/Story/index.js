@@ -106,7 +106,7 @@ Story.propTypes = {
   visited: PropTypes.bool.isRequired,
   isHomeScene: PropTypes.bool.isRequired,
   scrollToY: PropTypes.func.isRequired,
-  timelineRef: PropTypes.object.isRequired
+  timelineRef: PropTypes.object
 }
 
 export default Story

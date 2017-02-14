@@ -1,9 +1,9 @@
 import React, { PropTypes, Component } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import styles from '../styles/StorySummary'
+import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient'
-import { DARK_TRANSPARENT_COLOR } from '../constants/TouchUnderlayColors'
+import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 
 const charsThreshold = 200
 
