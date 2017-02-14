@@ -39,7 +39,7 @@ class Story extends Component {
             onPress={openLink}
             mainLink={this.mainLink}
             mainCategory={this.mainCategory}
-            isSceneHome={this.props.isSceneHome}
+            isHomeScene={this.props.isHomeScene}
           />
           {this.renderSummary(story.headline, story.summary)}
           <StoryMetadata story={story} onPublishersPress={openStoryLinks} />
@@ -100,7 +100,7 @@ Story.propTypes = {
   openLink: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
-  isSceneHome: PropTypes.bool.isRequired,
+  isHomeScene: PropTypes.bool.isRequired,
   scrollToY: PropTypes.func.isRequired
 }
 

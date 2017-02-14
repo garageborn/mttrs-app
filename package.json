@@ -7,7 +7,7 @@
   "dependencies": {
     "@exponent/ex-navigation": "^2.9.1",
     "analytics-react-native": "^1.0.1",
-    "apollo-client": "^0.8.2",
+    "apollo-client": "^0.8.5",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
@@ -22,7 +22,7 @@
     "raven": "^1.1.2",
     "raven-js": "^3.9.0",
     "react": "~15.4.1",
-    "react-apollo": "^0.10.0",
+    "react-apollo": "^0.10.1",
     "react-intl": "^2.1.5",
     "react-native": "0.41.2",
     "react-native-fabric": "0.4.1",

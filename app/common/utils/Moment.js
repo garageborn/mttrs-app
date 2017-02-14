@@ -1,4 +1,5 @@
 import moment from 'moment-timezone'
-moment.tz.setDefault('UTC')
+import { timezone } from '../../config/IntlProvider'
+moment.tz.setDefault(timezone)
 
 export default moment

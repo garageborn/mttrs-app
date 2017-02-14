@@ -5,21 +5,22 @@ import intl from 'intl'
 import * as messages from '../common/translations/i18n'
 import localeData from 'react-intl/locale-data'
 import androidLocaleData from 'intl/locale-data/complete'
+import moment from 'moment-timezone'
 
 Platform.select({
-  ios: addLocaleData([...localeData]),
+  ios: () => addLocaleData([...localeData]),
   android: () => {
-    addLocaleData([...androidLocaleData])
+    addLocaleData([...localeData, ...androidLocaleData])
     global.Intl = intl
   }
-})
+})()
 
 export const locale = Platform.select({
   ios: () => NativeModules.SettingsManager.settings.AppleLocale,
   android: () => NativeModules.I18nManager.localeIdentifier
 })()
 export const language = locale.substr(0, 2)
-export const timezone = new Intl.DateTimeFormat().resolvedOptions().timeZone
+export const timezone = moment.tz.guess()
 
 class Provider extends Component {
   render () {
