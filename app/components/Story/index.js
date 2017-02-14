@@ -52,9 +52,6 @@ class Story extends Component {
 
   getViewPosition () {
     const storyTopHeight = 40
-    // this.refs[this.props.story.id].measure((ox, oy) => {
-    //   this.setState({storyPosition: oy - storyTopHeight})
-    // })
     if (!this.props.timelineRef) return
     this.refs[this.props.story.id].measureLayout(
       findNodeHandle(this.props.timelineRef),
