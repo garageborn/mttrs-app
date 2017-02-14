@@ -18,19 +18,4 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "mttrs";
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        // After RN start, set our background
-        getReactNativeHost().getReactInstanceManager().addReactInstanceEventListener(new ReactInstanceManager.ReactInstanceEventListener() {
-            @Override
-            public void onReactContextInitialized(ReactContext context) {
-                // Hide Splash Screen
-                getWindow().getDecorView().setBackgroundColor(Color.TRANSPARENT);
-            }
-        });
-
-        super.onCreate(savedInstanceState);
-    }
 }
