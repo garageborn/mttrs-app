@@ -23,14 +23,18 @@ const Paginator = ({ pages, currentPage, onEnd, intl }) => {
     <View style={styles.container}>
       <View style={styles.buttonLeft}>
         <Touchable onPress={onEnd}>
-          <Text style={styles.skip}>{buttonSkip.toUpperCase()}</Text>
+          <View>
+            <Text style={styles.skip}>{buttonSkip.toUpperCase()}</Text>
+          </View>
         </Touchable>
       </View>
       <PaginatorDots pages={pages} currentPage={currentPage} />
       <View style={styles.buttonRight}>
         {currentPage + 1 === pages &&
           <Touchable onPress={onEnd}>
-            <Text style={styles.start}>{buttonStart.toUpperCase()}</Text>
+            <View>
+              <Text style={styles.start}>{buttonStart.toUpperCase()}</Text>
+            </View>
           </Touchable>
         }
       </View>
