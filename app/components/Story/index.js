@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { View } from 'react-native'
+import { View, findNodeHandle } from 'react-native'
 import styles from './styles'
 import StorySummary from '../StorySummary'
 import StoryMainLink from '../StoryMainLink'
@@ -31,6 +31,7 @@ class Story extends Component {
         ref={story.id}
         style={{ opacity: this.props.visited ? 0.4 : 1 }}
         onLayout={this.getViewPosition}
+        collapsable={false}
       >
         <View
           style={styles.card}
@@ -51,9 +52,12 @@ class Story extends Component {
 
   getViewPosition () {
     const storyTopHeight = 40
-    this.refs[this.props.story.id].measure((ox, oy) => {
-      this.setState({storyPosition: oy - storyTopHeight})
-    })
+    this.refs[this.props.story.id].measureLayout(
+      findNodeHandle(this.props.timelineRef),
+      (x, y) => {
+        this.setState({storyPosition: y - storyTopHeight})
+      }
+    )
   }
 
   renderSummary (headline, summary) {
@@ -101,7 +105,8 @@ Story.propTypes = {
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
   isHomeScene: PropTypes.bool.isRequired,
-  scrollToY: PropTypes.func.isRequired
+  scrollToY: PropTypes.func.isRequired,
+  timelineRef: PropTypes.object.isRequired
 }
 
 export default Story

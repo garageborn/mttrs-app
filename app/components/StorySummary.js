@@ -118,7 +118,8 @@ class StorySummary extends Component {
 StorySummary.propTypes = {
   summary: PropTypes.string,
   isExpanded: PropTypes.bool,
-  pressExpandButton: PropTypes.func
+  pressExpandButton: PropTypes.func,
+  intl: PropTypes.object
 }
 
 export default injectIntl(StorySummary)
