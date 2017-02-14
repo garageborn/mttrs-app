@@ -33,5 +33,8 @@
   "lastWeek": "Na última semana",
   "lastMonth": "No último mês",
   "dateFormat": "D MMMM",
-  "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}"
+  "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}",
+  "summary.title": "Resumo do editor",
+  "summary.showMore": "ver mais",
+  "summary.showLess": "ver menos",
 }
