@@ -4,7 +4,7 @@ import styles from './styles'
 
 const PageImage = ({ source, imageStyles }) => (
   <View style={styles.container}>
-    <Image source={source} style={[styles.image, { ...imageStyles }]} />
+    <Image resizeMode='contain' source={source} style={[styles.image, { ...imageStyles }]} />
   </View>
 )
 

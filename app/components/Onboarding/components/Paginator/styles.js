@@ -1,10 +1,5 @@
 import { StyleSheet } from 'react-native'
 
-const paginatorActions = {
-  fontSize: 12,
-  padding: 10
-}
-
 const styles = StyleSheet.create({
   container: {
     height: 60,
@@ -16,25 +11,29 @@ const styles = StyleSheet.create({
   },
 
   buttonLeft: {
-    width: 70,
+    width: 95,
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'flex-start',
+    paddingLeft: 5
   },
 
   buttonRight: {
-    width: 70,
+    width: 95,
     justifyContent: 'flex-end',
-    alignItems: 'center'
+    alignItems: 'flex-end'
   },
 
   skip: {
     color: '#DADADA',
-    ...paginatorActions
+    fontSize: 12,
+    padding: 10
   },
 
   start: {
     color: '#FF5607',
-    ...paginatorActions
+    fontSize: 14,
+    fontWeight: '500',
+    padding: 10
   }
 })
 
