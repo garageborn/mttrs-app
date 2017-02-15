@@ -27,10 +27,9 @@ class PublisherTimeline extends Component {
   }
 
   render () {
-    console.log('render')
     return (
       <AndroidBackButtonBehavior
-        isFocused={true}
+        isFocused={false}
         onBackButtonPress={this.goHome}
       >
         <View style={styles.listViewContainer}>

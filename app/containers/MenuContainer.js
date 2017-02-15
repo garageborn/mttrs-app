@@ -62,21 +62,32 @@ class MenuContainer extends Component {
   }
 
   closeMenu () {
-    return this.props.dispatch(MenuActions.closeMenu())
+    return Promise.resolve(this.props.dispatch(MenuActions.closeMenu()))
+  }
+
+  renderMenu () {
+    return (
+      <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+        <Menu params={this.props.params} />
+      </Animated.View>
+    )
   }
 
   render () {
-    console.log("render MenuContainer")
-    return (
-      <AndroidBackButtonBehavior
-        isFocused={this.props.uiReducer.menu.isOpen}
-        onBackButtonPress={this.closeMenu}
-      >
-        <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-          <Menu params={this.props.params} />
-        </Animated.View>
-      </AndroidBackButtonBehavior>
-    )
+    const { isOpen } = this.props.uiReducer.menu
+
+    if (isOpen) {
+      return (
+        <AndroidBackButtonBehavior
+          isFocused
+          onBackButtonPress={this.closeMenu}
+        >
+          {this.renderMenu()}
+        </AndroidBackButtonBehavior>
+      )
+    }
+
+    return this.renderMenu()
   }
 }
 
