@@ -5,7 +5,7 @@ import styles from './styles'
 
 const CategoryColorList = ({ data, params }) => {
   let isActive = (currentSection) => {
-    if (!params.section) return
+    if (currentSection === 'home' && params.section.model.name === 'home') return true
     return currentSection.slug === params.section.model.slug
   }
 
