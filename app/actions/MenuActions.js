@@ -1,11 +1,7 @@
-import { OPEN_MENU, CLOSE_MENU, RETRACT_MENU, CHANGE_MENU_TAB } from '../constants/ActionTypes'
+import { OPEN_MENU, CLOSE_MENU, CHANGE_MENU_TAB } from '../constants/ActionTypes'
 
 export const openMenu = () => ({
   type: OPEN_MENU
-})
-
-export const retractMenu = () => ({
-  type: RETRACT_MENU
 })
 
 export const closeMenu = () => ({

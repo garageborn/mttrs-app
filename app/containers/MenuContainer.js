@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Animated, Easing, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
+import { AndroidBackButtonBehavior } from '@exponent/ex-navigation'
+
 import { MenuActions } from '../actions/index'
 import Menu from '../components/Menu'
 import { headerHeight } from '../styles/Global'
@@ -23,21 +25,20 @@ class MenuContainer extends Component {
   }
 
   menuWillChange (nextProps) {
-    let currentMenu = this.props.uiReducer.menu || {}
-    let nextMenu = nextProps.uiReducer.menu || {}
+    let currentMenu = this.props.uiReducer.menu
+    let nextMenu = nextProps.uiReducer.menu
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
-    let retractChanged = currentMenu.retract !== nextMenu.retract
+    if (!isOpenChanged) return
 
-    if (isOpenChanged && nextMenu.isOpen) {
+    if (nextMenu.isOpen) {
       this.animate('in')
-    } else if (retractChanged && nextMenu.retract) {
+    } else {
       this.animate('out')
     }
   }
 
   animate (type) {
     let value
-    let callback
     let easing = null
 
     if (type === 'in') {
@@ -45,9 +46,9 @@ class MenuContainer extends Component {
       easing = Easing.out(Easing.quad)
     } else {
       value = -height
-      callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
+
     return (
       Animated.timing(
         this.state.menuPositionY,
@@ -56,20 +57,37 @@ class MenuContainer extends Component {
           duration: 330,
           easing
         }
-      ).start(callback)
-    )
+      )
+    ).start()
   }
 
   closeMenu () {
-    this.props.dispatch(MenuActions.closeMenu())
+    return Promise.resolve(this.props.dispatch(MenuActions.closeMenu()))
   }
 
-  render () {
+  renderMenu () {
     return (
       <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
         <Menu params={this.props.params} />
       </Animated.View>
     )
+  }
+
+  render () {
+    const { isOpen } = this.props.uiReducer.menu
+
+    if (isOpen) {
+      return (
+        <AndroidBackButtonBehavior
+          isFocused
+          onBackButtonPress={this.closeMenu}
+        >
+          {this.renderMenu()}
+        </AndroidBackButtonBehavior>
+      )
+    }
+
+    return this.renderMenu()
   }
 }
 

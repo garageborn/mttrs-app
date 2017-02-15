@@ -64,7 +64,7 @@ class TimelineHeaderContainer extends Component {
   toggleMenu () {
     const { menu } = this.props.uiReducer
     if (menu.isOpen) {
-      return this.props.dispatch(MenuActions.retractMenu())
+      return this.props.dispatch(MenuActions.closeMenu())
     } else {
       return this.props.dispatch(MenuActions.openMenu())
     }
