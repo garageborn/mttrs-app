@@ -26,7 +26,6 @@ class MenuContainer extends Component {
   }
 
   menuWillChange (nextProps) {
-    console.info('menuWillChange', nextProps.uiReducer.menu)
     let currentMenu = this.props.uiReducer.menu || {}
     let nextMenu = nextProps.uiReducer.menu || {}
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
@@ -52,7 +51,6 @@ class MenuContainer extends Component {
       callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
-    console.log('this.state.menuPositionY', this.state.menuPositionY, 'toValue', value)
     return (
       Animated.timing(
         this.state.menuPositionY,

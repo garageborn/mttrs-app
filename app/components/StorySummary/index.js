@@ -1,16 +1,14 @@
 import React, { PropTypes, Component } from 'react'
-import { View, Text, TouchableHighlight } from 'react-native'
+import { View, Text, TouchableHighlight, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import iconMttrs from './assets/icon-mttrs.png'
+import styles from './styles'
 
 const charsThreshold = 200
 
 const messages = defineMessages({
-  title: {
-    id: 'summary.title'
-  },
   showMore: {
     id: 'summary.showMore'
   },
@@ -21,19 +19,12 @@ const messages = defineMessages({
 
 class StorySummary extends Component {
   render () {
-    let { intl } = this.props
-    let title = intl.formatMessage(messages.title)
-
     return (
       <View style={styles.container}>
-        <View style={styles.triangleContainer}>
-          <View style={styles.outerTriangle} />
-          <View style={styles.innerTriangle} />
-        </View>
         <View style={this.boxStyles}>
           <View style={styles.headlineContainer}>
-            <Text>👔</Text>
-            <Text style={styles.headline}>{title}</Text>
+            <Image style={styles.icon} source={iconMttrs} />
+            <Text style={styles.headline}>{this.props.headline}</Text>
           </View>
           <Text style={this.summaryStyles()}>{this.props.summary}</Text>
           {this.renderFooter()}
@@ -116,6 +107,7 @@ class StorySummary extends Component {
 }
 
 StorySummary.propTypes = {
+  headline: PropTypes.string.isRequired,
   summary: PropTypes.string,
   isExpanded: PropTypes.bool,
   pressExpandButton: PropTypes.func,

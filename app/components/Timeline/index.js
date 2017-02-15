@@ -75,10 +75,6 @@ class Timeline extends Component {
     )
   }
 
-  renderActivityIndicator () {
-    return <ActivityIndicator size='large' color='#AAA' />
-  }
-
   renderRow (story) {
     return (
       <StoryContainer

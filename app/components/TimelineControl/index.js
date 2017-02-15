@@ -33,19 +33,23 @@ class TimelineControl extends Component {
   renderLoading () {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator size='large' color='#AAA' />
+        {this.renderActivityIndicator()}
       </View>
     )
   }
 
   onEndReached () {
     if (this.state.loadingMore) return
-    const storiesArray = this.props.data.timeline.filter((item) => item.stories.length)
+
+    const storiesCount = this.props.data.timeline.reduce((sum, item) => {
+      return sum + item.stories.length
+    }, 0)
+
     const minStoriesInTheViewport = 3
-    if (storiesArray.length < minStoriesInTheViewport) return
+    if (storiesCount < minStoriesInTheViewport) return
     // Reference: https://github.com/apollostack/react-apollo/issues/228
     this.setState({ loadingMore: true })
-    this.props.data.infiniteScroll().then((data) => {
+    this.props.data.infiniteScroll().then(() => {
       this.setState({ loadingMore: false })
     })
   }
@@ -57,6 +61,10 @@ class TimelineControl extends Component {
         {this.renderActivityIndicator()}
       </View>
     )
+  }
+
+  renderActivityIndicator () {
+    return <ActivityIndicator size='large' color='#AAA' />
   }
 }
 
