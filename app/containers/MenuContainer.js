@@ -18,7 +18,6 @@ class MenuContainer extends Component {
     }
 
     this.closeMenu = this.closeMenu.bind(this)
-    this.retractMenu = this.retractMenu.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -26,21 +25,20 @@ class MenuContainer extends Component {
   }
 
   menuWillChange (nextProps) {
-    let currentMenu = this.props.uiReducer.menu || {}
-    let nextMenu = nextProps.uiReducer.menu || {}
+    let currentMenu = this.props.uiReducer.menu
+    let nextMenu = nextProps.uiReducer.menu
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
-    let retractChanged = currentMenu.retract !== nextMenu.retract
+    if (!isOpenChanged) return
 
-    if (isOpenChanged && nextMenu.isOpen) {
+    if (nextMenu.isOpen) {
       this.animate('in')
-    } else if (retractChanged && nextMenu.retract) {
+    } else {
       this.animate('out')
     }
   }
 
   animate (type) {
     let value
-    let callback
     let easing = null
 
     if (type === 'in') {
@@ -48,9 +46,9 @@ class MenuContainer extends Component {
       easing = Easing.out(Easing.quad)
     } else {
       value = -height
-      callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
+
     return (
       Animated.timing(
         this.state.menuPositionY,
@@ -59,12 +57,8 @@ class MenuContainer extends Component {
           duration: 330,
           easing
         }
-      ).start(callback)
-    )
-  }
-
-  retractMenu () {
-    return this.props.dispatch(MenuActions.retractMenu())
+      )
+    ).start()
   }
 
   closeMenu () {
@@ -72,9 +66,11 @@ class MenuContainer extends Component {
   }
 
   render () {
+    console.log("render MenuContainer")
     return (
-      <AndroidBackButtonBehavior isFocused={this.props.uiReducer.menu.isOpen}
-        onBackButtonPress={this.retractMenu}
+      <AndroidBackButtonBehavior
+        isFocused={this.props.uiReducer.menu.isOpen}
+        onBackButtonPress={this.closeMenu}
       >
         <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
           <Menu params={this.props.params} />
