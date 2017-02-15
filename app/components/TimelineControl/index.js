@@ -58,7 +58,7 @@ class TimelineControl extends Component {
     if (!this.state.loadingMore) return
     return (
       <View style={styles.infiniteScrollLoadingContainer}>
-        {this.renderActivityIndicator}
+        {this.renderActivityIndicator()}
       </View>
     )
   }
