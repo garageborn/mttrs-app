@@ -28,15 +28,14 @@ class StoryMainLink extends Component {
   }
 
   renderStoryCategory () {
-    const { mainCategory, isHomeScene } = this.props
-    if (isHomeScene) return <StoryCategory category={mainCategory} />
+    const { mainCategory } = this.props
+    if (mainCategory) return <StoryCategory category={mainCategory} />
   }
 }
 
 StoryMainLink.propTypes = {
-  isHomeScene: PropTypes.bool.isRequired,
   mainLink: PropTypes.object.isRequired,
-  mainCategory: PropTypes.object.isRequired,
+  mainCategory: PropTypes.object,
   onPress: PropTypes.func.isRequired,
   story: PropTypes.shape({
     id: PropTypes.any.isRequired

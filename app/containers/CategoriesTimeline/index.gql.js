@@ -5,13 +5,12 @@ const Query = gql`
 query {
   categories(with_stories: true, ordered: true) {
     id
-    image_id
     name
     slug
   }
 }
 `
 
-export default function (TimelineContainer) {
-  return graphql(Query)(TimelineContainer)
+export default function (HomeTimeline) {
+  return graphql(Query)(HomeTimeline)
 }

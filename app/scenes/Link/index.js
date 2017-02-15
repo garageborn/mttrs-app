@@ -1,15 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
-import withQuery from './Link.gql'
-import LinkHeaderContainer from '../containers/LinkHeaderContainer'
-import { StorageActions } from '../actions/index'
-import { headerHeight } from '../styles/Global'
-import { DARK_COLOR } from '../constants/Colors'
+import withQuery from './index.gql'
+import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
+import { StorageActions } from '../../actions/index'
+import { headerHeight } from '../../styles/Global'
+import { DARK_COLOR } from '../../constants/Colors'
+import StoryWebView from '../../components/StoryWebView'
 
-import StoryWebView from '../components/StoryWebView'
-
-class Link extends Component {
+class LinkScene extends Component {
   static route = Platform.select({
     ios: {
       navigationBar: {
@@ -26,7 +25,6 @@ class Link extends Component {
 
   constructor () {
     super()
-    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
@@ -62,7 +60,7 @@ class Link extends Component {
   }
 }
 
-Link.propTypes = {
+LinkScene.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.shape({
       link: PropTypes.shape({
@@ -75,5 +73,5 @@ Link.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-const LinkWithRedux = connect()(Link)
-export default withQuery(LinkWithRedux)
+const LinkSceneWithRedux = connect()(LinkScene)
+export default withQuery(LinkSceneWithRedux)

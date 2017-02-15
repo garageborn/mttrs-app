@@ -25,7 +25,7 @@ class Story extends Component {
   }
 
   render () {
-    const { isHomeScene, openLink, openStoryLinks, story } = this.props
+    const { openLink, openStoryLinks, story } = this.props
     return (
       <View
         ref={story.id}
@@ -40,7 +40,6 @@ class Story extends Component {
             onPress={openLink}
             mainLink={this.mainLink}
             mainCategory={this.mainCategory}
-            isHomeScene={isHomeScene}
             story={story}
           />
           {this.renderSummary(story.headline, story.summary)}
@@ -97,12 +96,11 @@ Story.propTypes = {
     main_category: PropTypes.shape({
       name: PropTypes.string.isRequired,
       color: PropTypes.string
-    }).isRequired
+    })
   }).isRequired,
   openLink: PropTypes.func.isRequired,
   openStoryLinks: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired,
-  isHomeScene: PropTypes.bool.isRequired,
   scrollToY: PropTypes.func.isRequired,
   timelineRef: PropTypes.object
 }

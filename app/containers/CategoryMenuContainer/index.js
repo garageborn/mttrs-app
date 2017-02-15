@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import withQuery from './CategoryMenuContainer.gql'
-import CategoryScrollView from '../components/CategoryScrollView'
-import TopStoriesCategory from '../components/TopStoriesCategory'
-import ApolloError from '../components/ApolloError'
-import { NavigationActions, MenuActions } from '../actions/index'
+import withQuery from './index.gql'
+import CategoryScrollView from '../../components/CategoryScrollView'
+import TopStoriesCategory from '../../components/TopStoriesCategory'
+import ApolloError from '../../components/ApolloError'
+import { NavigationActions, MenuActions } from '../../actions/index'
 
 class CategoryMenuContainer extends Component {
   constructor (props) {

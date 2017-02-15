@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import HeaderStripColor from '../components/HeaderStripColor'
-import CategoryColorList from '../components/CategoryColorList'
-import withQuery from './CategoryColorsListContainer.gql'
+import HeaderStripColor from '../../components/HeaderStripColor'
+import CategoryColorList from '../../components/CategoryColorList'
+import withQuery from './index.gql'
 
 const HeaderBottomColorContainer = ({uiReducer, type, data, params}) => {
   if (uiReducer.menu.isOpen) return false

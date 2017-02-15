@@ -18,13 +18,11 @@ class StoryContainer extends Component {
   }
 
   render () {
-    const { story, section, visited, scrollToY, timelineRef } = this.props
-    let isHomeScene = section.type === 'home'
+    const { scrollToY, story, timelineRef, visited } = this.props
 
     return (
       <Story
         story={story}
-        isHomeScene={isHomeScene}
         openLink={this.openMainLink}
         openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
@@ -72,7 +70,6 @@ class StoryContainer extends Component {
 StoryContainer.propTypes = {
   story: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  section: PropTypes.object,
   visited: PropTypes.bool,
   timelineRef: PropTypes.object,
   scrollToY: PropTypes.func.isRequired

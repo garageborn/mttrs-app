@@ -4,9 +4,7 @@ import { injectIntl, defineMessages } from 'react-intl'
 import styles from './styles'
 
 const messages = defineMessages({
-  in: {
-    id: 'storyCategory.in'
-  }
+  in: { id: 'storyCategory.in' }
 })
 
 const StoryCategory = ({intl, category}) => {
@@ -19,12 +17,14 @@ const StoryCategory = ({intl, category}) => {
         </Text>
       </Text>
     </View>
-
   )
 }
 
 StoryCategory.propTypes = {
-  category: PropTypes.object,
+  category: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string
+  }).isRequired,
   intl: PropTypes.object
 }
 
