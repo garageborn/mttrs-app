@@ -13,7 +13,9 @@ import { NavigationActions, MenuActions } from '../../actions/index'
 class TimelineScene extends Component {
   static route = {
     navigationBar: {
-      renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
+      renderTitle: (route) => {
+        return <TimelineHeaderContainer params={route.params} />
+      },
       renderLeft: () => null,
       renderRight: () => null,
       backgroundColor: DARK_COLOR,
