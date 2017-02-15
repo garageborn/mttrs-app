@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {View}  from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/Timeline/CategoriesTimeline'
@@ -8,9 +8,6 @@ import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import MenuContainer from '../../containers/MenuContainer'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
-import { BackAndroid, Platform } from 'react-native'
-import { NavigationActions, MenuActions } from '../../actions/index'
-import styles from '../../styles/App'
 
 class TimelineScene extends Component {
   static route = {
@@ -22,38 +19,6 @@ class TimelineScene extends Component {
       height: headerHeight,
       elevation: 0
     }
-  }
-
-  componentWillMount () {
-    if (Platform.OS === 'android') this.listenToBackAndroid()
-  }
-
-  componentWillUnmount () {
-    if (Platform.OS === 'android') this.unlistenToBackAndroid()
-  }
-
-  listenToBackAndroid () {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
-      if (this.props.uiReducer.menu.isOpen) return this.retractMenu()
-      if (this.isHomeSection) return this.openHome()
-      return
-    })
-  }
-
-  unlistenToBackAndroid () {
-    BackAndroid.removeEventListener('hardwareBackPress')
-  }
-
-  retractMenu () {
-    this.props.dispatch(MenuActions.retractMenu())
-    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
-    return true
-  }
-
-  openHome () {
-    this.props.dispatch(NavigationActions.home())
-    /* REFERENCE: http://stackoverflow.com/questions/38206234/backandroid-app-still-closes */
-    return true
   }
 
   render () {
@@ -85,7 +50,7 @@ class TimelineScene extends Component {
     return <StoryLinksContainer story={storyLinks.story} publisherSlug={publisherSlug} />
   }
 
-  get currentSection() {
+  get currentSection () {
     const { params } = this.props.route
     return params.section || {}
   }
@@ -100,9 +65,7 @@ class TimelineScene extends Component {
 }
 
 TimelineScene.propTypes = {
-  route: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-  uiReducer: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => {
