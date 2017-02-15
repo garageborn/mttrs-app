@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, RefreshControl, ActivityIndicator } from 'react-native'
+import { ListView, RefreshControl } from 'react-native'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
 import styles from './styles'

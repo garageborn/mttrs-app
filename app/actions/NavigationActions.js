@@ -50,6 +50,7 @@ export function storyLinks (storyLinksParams) {
 
     let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })
     let newParams = Object.assign({}, params, { section: sectionParams })
+
     dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }

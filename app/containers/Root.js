@@ -10,6 +10,11 @@ import Router from '../config/Router'
 require('../config/sentry')
 
 class Root extends Component {
+  constructor () {
+    super()
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
+  }
+
   componentWillMount () {
     this.props.store.dispatch(StorageActions.getOnboardingStatus())
     this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
