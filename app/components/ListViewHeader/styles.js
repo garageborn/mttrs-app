@@ -1,10 +1,18 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   header: {
+    ...Platform.select({
+      ios: {
+        height: 60,
+        paddingTop: 20
+      },
+      android: {
+        height: 65,
+        paddingTop: 30
+      }
+    }),
     backgroundColor: '#F1F1F1',
-    height: 45,
-    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'center'
   },

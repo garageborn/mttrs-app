@@ -14,6 +14,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+
+  container: {
+    ...Platform.select({
+      ios: {
+        bottom: 0,
+        paddingBottom: 0
+      },
+      android: {
+        bottom: 45,
+        paddingBottom: 30
+      }
+    }),
+    position: 'relative',
+    flexGrow: 1,
+    backgroundColor: '#F1F1F1'
+  },
+
   infiniteScrollLoadingContainer: Platform.select({
     ios: {
       padding: 10,
