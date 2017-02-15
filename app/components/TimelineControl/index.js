@@ -18,11 +18,13 @@ class TimelineControl extends Component {
     if (data.error) return this.renderError()
 
     return (
-      <Timeline
-        data={data}
-        onEndReached={this.onEndReached}
-        renderFooter={this.renderFooter}
-      />
+      <View style={styles.container}>
+        <Timeline
+          data={data}
+          onEndReached={this.onEndReached}
+          renderFooter={this.renderFooter}
+        />
+      </View>
     )
   }
 

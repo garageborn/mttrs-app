@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import {View}  from 'react-native'
+import { View, BackAndroid, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/Timeline/CategoriesTimeline'
@@ -8,9 +8,7 @@ import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import MenuContainer from '../../containers/MenuContainer'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
-import { BackAndroid, Platform } from 'react-native'
 import { NavigationActions, MenuActions } from '../../actions/index'
-import styles from '../../styles/App'
 
 class TimelineScene extends Component {
   static route = {
