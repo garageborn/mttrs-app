@@ -18,21 +18,6 @@ const styles = StyleSheet.create({
       ios: 15,
       android: 0
     })
-  },
-  infiniteScrollLoadingContainer: Platform.select({
-    ios: {
-      padding: 10,
-      marginBottom: 20
-    },
-    android: {
-      marginBottom: 30
-    }
-  }),
-
-  loading: {
-    ...containerStyles,
-    alignItems: 'center',
-    justifyContent: 'center'
   }
 })
 

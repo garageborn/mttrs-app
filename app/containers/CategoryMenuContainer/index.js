@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import CategoryScrollView from '../../components/CategoryScrollView'
@@ -45,12 +45,18 @@ class CategoryMenuContainer extends Component {
 
   openHome () {
     this.props.dispatch(MenuActions.retractMenu())
-    this.props.dispatch(NavigationActions.home())
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.home())
+    })
+    // this.props.dispatch(NavigationActions.home())
   }
 
   openCategory (category) {
     this.props.dispatch(MenuActions.retractMenu())
-    this.props.dispatch(NavigationActions.selectCategory(category))
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.selectCategory(category))
+    })
+    // this.props.dispatch(NavigationActions.selectCategory(category))
   }
 
   getTenantName (tenant) {

@@ -23,6 +23,7 @@ class MenuContainer extends Component {
   }
 
   menuWillChange (nextProps) {
+    console.info('menuWillChange', nextProps.uiReducer.menu)
     let currentMenu = this.props.uiReducer.menu || {}
     let nextMenu = nextProps.uiReducer.menu || {}
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
@@ -42,13 +43,13 @@ class MenuContainer extends Component {
 
     if (type === 'in') {
       value = 0
-      easing = Easing.in(Easing.quad)
-    } else {
-      value = -height - headerHeight
-      callback = this.closeMenu
       easing = Easing.out(Easing.quad)
+    } else {
+      value = -height
+      callback = this.closeMenu
+      easing = Easing.in(Easing.quad)
     }
-
+    console.log('this.state.menuPositionY', this.state.menuPositionY, 'toValue', value)
     return (
       Animated.timing(
         this.state.menuPositionY,
@@ -65,16 +66,10 @@ class MenuContainer extends Component {
     this.props.dispatch(MenuActions.closeMenu())
   }
 
-  renderMenu () {
-    const { params, uiReducer } = this.props
-    if (uiReducer.menu.isOpen) return <Menu params={params} />
-  }
-
   render () {
-    const { menuPositionY } = this.state
     return (
-      <Animated.View style={{transform: [{translateY: menuPositionY}]}}>
-        {this.renderMenu()}
+      <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+        <Menu params={this.props.params} />
       </Animated.View>
     )
   }

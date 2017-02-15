@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { NavigationActions } from '../../actions/index'
+import { NavigationActions } from '../../../actions/index'
 import withQuery from './index.gql'
-import HomeTimeline from '../Timeline/Home'
-import CategoryTimeline from '../Timeline/Category'
-import ApolloError from '../../components/ApolloError'
-import styles from '../../styles/App'
+import HomeTimeline from '../HomeTimeline'
+import CategoryTimeline from '../CategoryTimeline'
+import ApolloError from '../../../components/ApolloError'
+import styles from '../../../styles/App'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', model: { } }
 
@@ -98,27 +97,21 @@ class CategoriesTimeline extends Component {
   }
 
   render () {
-    const { children, data } = this.props
-
-    if (data.error) return this.renderError()
+    if (this.props.data.error) return this.renderError()
 
     return (
-      <View style={styles.container}>
-        <TabViewAnimated
-          style={styles.listViewContainer}
-          navigationState={this.state.navigationState}
-          renderScene={this.renderScene}
-          onRequestChangeTab={this.handleChangeTab}
-          lazy
-        />
-        {children}
-      </View>
+      <TabViewAnimated
+        style={styles.listViewContainer}
+        navigationState={this.state.navigationState}
+        renderScene={this.renderScene}
+        onRequestChangeTab={this.handleChangeTab}
+        lazy
+      />
     )
   }
 }
 
 CategoriesTimeline.propTypes = {
-  children: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
   params: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired

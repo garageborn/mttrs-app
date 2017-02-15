@@ -1,14 +1,16 @@
 import React, { Component, PropTypes } from 'react'
+import {View}  from 'react-native'
 import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
-import CategoriesTimeline from '../../containers/CategoriesTimeline'
-import PublisherTimeline from '../../containers/Timeline/Publisher'
+import CategoriesTimeline from '../../containers/Timeline/CategoriesTimeline'
+import PublisherTimeline from '../../containers/Timeline/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import MenuContainer from '../../containers/MenuContainer'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import { BackAndroid, Platform } from 'react-native'
 import { NavigationActions, MenuActions } from '../../actions/index'
+import styles from '../../styles/App'
 
 class TimelineScene extends Component {
   static route = {
@@ -55,29 +57,21 @@ class TimelineScene extends Component {
   }
 
   render () {
+    return (
+      <View>
+        {this.renderTimeline()}
+        <MenuContainer params={this.props.route.params} />
+        {this.renderStoryLinks()}
+      </View>
+    )
+  }
+
+  renderTimeline () {
     if (this.isPublisherSection) {
-      return this.renderPublisherTimeline()
+      return <PublisherTimeline model={this.currentSection.model} />
     } else {
-      return this.renderCategoriesTimeline()
+      return <CategoriesTimeline params={this.props.route.params} />
     }
-  }
-
-  renderCategoriesTimeline () {
-    return (
-      <CategoriesTimeline params={this.props.route.params}>
-        <MenuContainer params={this.props.route.params} />
-        {this.renderStoryLinks()}
-      </CategoriesTimeline>
-    )
-  }
-
-  renderPublisherTimeline () {
-    return (
-      <PublisherTimeline model={this.currentSection.model}>
-        <MenuContainer params={this.props.route.params} />
-        {this.renderStoryLinks()}
-      </PublisherTimeline>
-    )
   }
 
   renderStoryLinks () {

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import { AnalyticsActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
+import styles from '../../../styles/App'
 
 class PublisherTimeline extends Component {
   componentWillMount () {
@@ -15,12 +17,15 @@ class PublisherTimeline extends Component {
   }
 
   render () {
-    return <TimelineControl data={this.props.data} />
+    return (
+      <View style={styles.listViewContainer}>
+        <TimelineControl data={this.props.data} />
+      </View>
+    )
   }
 }
 
 PublisherTimeline.propTypes = {
-  children: PropTypes.node.isRequired,
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   model: PropTypes.object.isRequired
