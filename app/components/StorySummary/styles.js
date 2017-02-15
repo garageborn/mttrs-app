@@ -11,11 +11,6 @@ const triangle = {
   borderRightColor: 'transparent'
 }
 
-const trianglePointingUp = {
-  ...triangle,
-  borderBottomWidth: 8
-}
-
 const expandButtonTriangle = {
   ...triangle,
   borderLeftWidth: 5,
@@ -29,19 +24,7 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10
   },
-  triangleContainer: {
-    marginLeft: 15,
-    zIndex: 2
-  },
-  outerTriangle: {
-    ...trianglePointingUp,
-    borderBottomColor: '#DDDDDD'
-  },
-  innerTriangle: {
-    ...trianglePointingUp,
-    marginTop: -6,
-    borderBottomColor: '#F1F1F1'
-  },
+
   box: {
     position: 'relative',
     marginTop: -2,
@@ -51,46 +34,77 @@ const styles = StyleSheet.create({
     borderColor: '#DDD',
     borderWidth: 1
   },
+
   headlineContainer: {
     flexDirection: 'row',
     alignItems: 'center'
   },
-  headline: {
-    color: '#666666',
-    fontSize: 14,
-    fontWeight: '500',
-    marginTop: 3,
-    marginLeft: 5
+
+  icon: {
+    marginRight: 5
   },
-  summary: {
+
+  headline: {
+    ...Platform.select({
+      ios: {
+        fontSize: 14,
+        fontWeight: '600'
+      },
+      android: {
+        fontSize: 12,
+        fontWeight: '500'
+      }
+    }),
     color: '#666666',
-    fontSize: 14,
-    lineHeight: 23,
+    marginTop: 3,
+    marginLeft: 5,
+    marginBottom: 5
+  },
+
+  summary: {
+    ...Platform.select({
+      ios: {
+        fontSize: 14,
+        lineHeight: 22
+      },
+      android: {
+        fontSize: 12,
+        lineHeight: 20
+      }
+    }),
+    color: '#666666',
     marginTop: 3
   },
+
   summaryExpanded: {
     paddingBottom: 20
   },
+
   showLessTriangle: {
     ...expandButtonTriangle,
     borderBottomWidth: 5
   },
+
   showMoreTriangle: {
     ...expandButtonTriangle,
     borderTopWidth: 5
   },
+
   buttonTextContainer: {
     flexDirection: 'row',
     marginVertical: 5,
     backgroundColor: 'transparent'
   },
+
   expandButton: {
     justifyContent: 'center',
     alignItems: 'center'
   },
+
   expandButtonContainer: {
     backgroundColor: '#F1F1F1'
   },
+
   footer: {
     position: 'absolute',
     bottom: -1,
@@ -98,6 +112,7 @@ const styles = StyleSheet.create({
     right: 0,
     flexGrow: 1
   },
+
   gradient: {
     marginHorizontal: 1,
     height: 50,
