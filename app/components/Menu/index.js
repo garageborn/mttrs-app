@@ -5,10 +5,6 @@ import MenuAndroid from '../MenuAndroid'
 import styles from './styles'
 
 class Menu extends Component {
-  constructor () {
-    super()
-  }
-
   render () {
     let menu = Platform.select({
       ios: <MenuIOS {...this.props} />,
