@@ -10,6 +10,10 @@ import Router from '../config/Router'
 require('../config/sentry')
 
 class Root extends Component {
+  constructor () {
+    super()
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
+  }
 
   componentWillMount () {
     this.props.store.dispatch(StorageActions.getOnboardingStatus())
@@ -17,8 +21,6 @@ class Root extends Component {
   }
 
   render () {
-    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
-
     const { store } = this.props
     const navigationContext = new NavigationContext({ router: Router, store: store })
 

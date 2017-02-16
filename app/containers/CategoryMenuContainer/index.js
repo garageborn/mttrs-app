@@ -1,19 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
-import withQuery from './CategoryMenuContainer.gql'
-import CategoryScrollView from '../components/CategoryScrollView'
-import TopStoriesCategory from '../components/TopStoriesCategory'
-import ApolloError from '../components/ApolloError'
-import { NavigationActions, MenuActions } from '../actions/index'
+import withQuery from './index.gql'
+import CategoryScrollView from '../../components/CategoryScrollView'
+import TopStoriesCategory from '../../components/TopStoriesCategory'
+import ApolloError from '../../components/ApolloError'
+import { NavigationActions, MenuActions } from '../../actions/index'
 
 class CategoryMenuContainer extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      modalVisible: false
-    }
+    this.state = { modalVisible: false }
 
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
@@ -40,17 +38,21 @@ class CategoryMenuContainer extends Component {
   }
 
   toggleSettingsModal () {
-    this.setState({modalVisible: !this.state.modalVisible})
+    this.setState({ modalVisible: !this.state.modalVisible })
   }
 
   openHome () {
-    this.props.dispatch(MenuActions.retractMenu())
-    this.props.dispatch(NavigationActions.home())
+    this.props.dispatch(MenuActions.closeMenu())
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.home())
+    })
   }
 
   openCategory (category) {
-    this.props.dispatch(MenuActions.retractMenu())
-    this.props.dispatch(NavigationActions.selectCategory(category))
+    this.props.dispatch(MenuActions.closeMenu())
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.selectCategory(category))
+    })
   }
 
   getTenantName (tenant) {

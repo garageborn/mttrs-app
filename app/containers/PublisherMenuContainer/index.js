@@ -3,11 +3,11 @@ import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
-import withQuery from './PublisherMenuContainer.gql'
-import PublisherMenuItem from '../components/PublisherMenuItem'
-import styles from '../styles/MenuPublishers'
-import { NavigationActions, MenuActions } from '../actions/index'
-import ApolloError from '../components/ApolloError'
+import withQuery from './index.gql'
+import PublisherMenuItem from '../../components/PublisherMenuItem'
+import styles from '../../styles/MenuPublishers'
+import { NavigationActions, MenuActions } from '../../actions/index'
+import ApolloError from '../../components/ApolloError'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -76,7 +76,7 @@ class PublisherMenuContainer extends Component {
 
   renderSeparator (sectionData, section) {
     let renderSection = section === 'isFavorite'
-      ? <Image source={require('../assets/starActive.png')} style={styles.listHeaderImage} />
+      ? <Image source={require('../../assets/starActive.png')} style={styles.listHeaderImage} />
       : <Text style={styles.listHeaderText}>{section}</Text>
 
     return (
@@ -120,7 +120,7 @@ class PublisherMenuContainer extends Component {
       <View>
         <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
         <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
-          <Image style={styles.searchIcon} source={require('../assets/icons/icon-search.png')} />
+          <Image style={styles.searchIcon} source={require('../../assets/icons/icon-search.png')} />
           <TextInput
             style={styles.searchInput}
             underlineColorAndroid={'transparent'}
@@ -146,7 +146,7 @@ class PublisherMenuContainer extends Component {
   }
 
   openPublisher (publisher) {
-    this.props.dispatch(MenuActions.retractMenu())
+    this.props.dispatch(MenuActions.closeMenu())
     this.props.dispatch(NavigationActions.selectPublisher(publisher))
   }
 

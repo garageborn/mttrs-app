@@ -21,19 +21,50 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader () {
-    const { params, uiReducer } = this.props
-    const { isOpen } = uiReducer.menu
-    const { section } = params
+    const { section } = this.props.params
 
-    if (!section) return <CategoryHeaderContainer toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
-    if (section.name === 'publisher') return <PublisherHeaderContainer publisher={section.model} toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
-    return <CategoryHeaderContainer category={section.model} toggleMenu={this.toggleMenu} params={params} menuIsOpen={isOpen} />
+    if (!section) return this.renderHome()
+    if (section.name === 'publisher') return this.renderPublisher()
+    return this.renderCategory()
+  }
+
+  renderHome () {
+    let params = { section: { name: 'home' } }
+    return (
+      <CategoryHeaderContainer
+        toggleMenu={this.toggleMenu}
+        params={params}
+        menuIsOpen={this.props.uiReducer.menu.isOpen}
+      />
+    )
+  }
+
+  renderPublisher () {
+    return (
+      <PublisherHeaderContainer
+        publisher={this.props.params.section.model}
+        toggleMenu={this.toggleMenu}
+        params={this.props.params}
+        menuIsOpen={this.props.uiReducer.menu.isOpen}
+      />
+    )
+  }
+
+  renderCategory () {
+    return (
+      <CategoryHeaderContainer
+        category={this.props.params.section.model}
+        toggleMenu={this.toggleMenu}
+        params={this.props.params}
+        menuIsOpen={this.props.uiReducer.menu.isOpen}
+      />
+    )
   }
 
   toggleMenu () {
     const { menu } = this.props.uiReducer
     if (menu.isOpen) {
-      return this.props.dispatch(MenuActions.retractMenu())
+      return this.props.dispatch(MenuActions.closeMenu())
     } else {
       return this.props.dispatch(MenuActions.openMenu())
     }

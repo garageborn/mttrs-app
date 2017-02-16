@@ -10,13 +10,16 @@ class CategoryColor extends React.Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    return this.props.color !== nextProps.color || this.props.isActive !== nextProps.isActive
+  }
+
   handleAnimation (direction) {
+    const nextHeight = direction === 'up' ? 9 : 3
+    if (this.state.height === nextHeight) return
+
     Animated.timing(
-      this.state.height,
-      {
-        toValue: direction === 'up' ? 9 : 3,
-        duration: 230
-      }
+      this.state.height, { toValue: nextHeight, duration: 230 }
     ).start()
   }
 
@@ -27,15 +30,14 @@ class CategoryColor extends React.Component {
     if (isActive) {
       this.handleAnimation('up')
       return [...categoryStyles, { flexGrow: flexGrowValue }]
+    } else {
+      this.handleAnimation('down')
+      return categoryStyles
     }
-    this.handleAnimation('down')
-    return categoryStyles
   }
 
   render () {
-    return (
-      <Animated.View style={this.categoryColorStyles()} />
-    )
+    return <Animated.View style={this.categoryColorStyles()} />
   }
 }
 
