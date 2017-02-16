@@ -29,7 +29,7 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHome () {
-    let params = { section: { model: { name: 'home' } } }
+    let params = { section: { name: 'home' } }
     return (
       <CategoryHeaderContainer
         toggleMenu={this.toggleMenu}

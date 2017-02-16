@@ -49,7 +49,7 @@ class CategoryColorList extends Component {
   isHome () {
     const { section } = this.props.params
     if (!section.model) return true
-    return section.model.name === 'home'
+    return section.name === 'home'
   }
 }
 
