@@ -22,6 +22,7 @@ class StoryLinksContainer extends Component {
   }
 
   openLink (link) {
+    if (!this.props.story) return
     this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
     this.props.dispatch(NavigationActions.link(this.props.story, link))
@@ -38,7 +39,8 @@ class StoryLinksContainer extends Component {
         animationType={'slide'}
         transparent
         visible
-        onRequestClose={this.close}>
+        onRequestClose={this.close}
+      >
         <View style={styles.modal}>
           { this.renderStoryLinks() }
           <CloseButton onPress={this.close} />
@@ -48,7 +50,7 @@ class StoryLinksContainer extends Component {
   }
 
   renderStoryLinks () {
-    if (this.props.data.loading) {
+    if (this.props.data.loading || !this.props.data.story) {
       return (
         <View style={styles.loading}>
           <ActivityIndicator size='large' color='#FFF' />
@@ -59,7 +61,7 @@ class StoryLinksContainer extends Component {
         <StoryLinksComponent
           story={this.props.data.story}
           openLink={this.openLink}
-          />
+        />
       )
     }
   }
@@ -87,10 +89,14 @@ const Query = gql`
 `
 
 StoryLinksContainer.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool,
+    story: PropTypes.object
+  }),
   story: PropTypes.shape({
     id: PropTypes.any.isRequired
   }).isRequired,
-  publisherSlug: PropTypes.string
+  dispatch: PropTypes.func
 }
 
 const StoryLinksContainerWithData = graphql(Query, {
