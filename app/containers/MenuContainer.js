@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Animated, Easing, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
+import { AndroidBackButtonBehavior } from '@exponent/ex-navigation'
 import { MenuActions } from '../actions/index'
 import Menu from '../components/Menu'
-import { headerHeight } from '../styles/Global'
 
 const { height } = Dimensions.get('window')
 
@@ -23,31 +23,29 @@ class MenuContainer extends Component {
   }
 
   menuWillChange (nextProps) {
-    let currentMenu = this.props.uiReducer.menu || {}
-    let nextMenu = nextProps.uiReducer.menu || {}
+    let currentMenu = this.props.uiReducer.menu
+    let nextMenu = nextProps.uiReducer.menu
     let isOpenChanged = currentMenu.isOpen !== nextMenu.isOpen
-    let retractChanged = currentMenu.retract !== nextMenu.retract
+    if (!isOpenChanged) return
 
-    if (isOpenChanged && nextMenu.isOpen) {
+    if (nextMenu.isOpen) {
       this.animate('in')
-    } else if (retractChanged && nextMenu.retract) {
+    } else {
       this.animate('out')
     }
   }
 
   animate (type) {
-    let value
-    let callback
-    let easing = null
+    let value, easing
 
     if (type === 'in') {
       value = 0
       easing = Easing.out(Easing.quad)
     } else {
       value = -height
-      callback = this.closeMenu
       easing = Easing.in(Easing.quad)
     }
+
     return (
       Animated.timing(
         this.state.menuPositionY,
@@ -56,18 +54,30 @@ class MenuContainer extends Component {
           duration: 330,
           easing
         }
-      ).start(callback)
-    )
+      )
+    ).start()
   }
 
   closeMenu () {
-    this.props.dispatch(MenuActions.closeMenu())
+    return Promise.resolve(this.props.dispatch(MenuActions.closeMenu()))
+  }
+
+  renderMenu () {
+    if (this.props.uiReducer.menu.isOpen) {
+      return (
+        <AndroidBackButtonBehavior isFocused onBackButtonPress={this.closeMenu}>
+          <Menu params={this.props.params} />
+        </AndroidBackButtonBehavior>
+      )
+    } else {
+      return <Menu params={this.props.params} />
+    }
   }
 
   render () {
     return (
       <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-        <Menu params={this.props.params} />
+        {this.renderMenu()}
       </Animated.View>
     )
   }
