@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
+import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
@@ -10,9 +11,9 @@ import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
 class PublisherTimeline extends Component {
   constructor (props) {
     super(props)
-
     this.goHome = this.goHome.bind(this)
   }
+
   componentWillMount () {
     this.analyticsTrack()
   }
@@ -28,15 +29,16 @@ class PublisherTimeline extends Component {
 
   render () {
     return (
-      <BackButtonBehaviour
-        isFocused
-        onBackButtonPress={this.goHome}
-      >
+      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
         <View style={styles.listViewContainer}>
           <TimelineControl data={this.props.data} />
         </View>
       </BackButtonBehaviour>
     )
+  }
+
+  get isFocused () {
+    return this.props.isActiveRoute
   }
 }
 
@@ -46,5 +48,13 @@ PublisherTimeline.propTypes = {
   model: PropTypes.object.isRequired
 }
 
+const mapStateToProps = (state, ownProps) => {
+  const currentRoute = ownProps.navigator.getCurrentRoute()
+  return {
+    isActiveRoute: currentRoute.routeName === 'timeline'
+  }
+}
+
 const PublisherTimelineWithData = withQuery(PublisherTimeline)
-export default connect()(PublisherTimelineWithData)
+const PublisherTimelineWithRedux = connect(mapStateToProps)(PublisherTimelineWithData)
+export default withNavigation(PublisherTimelineWithRedux)

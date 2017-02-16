@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
@@ -33,7 +34,7 @@ class CategoryTimeline extends Component {
   }
 
   get isFocused () {
-    return this.isActiveTimeline && !this.props.uiReducer.menu.isOpen
+    return this.props.isActiveRoute && this.isActiveTimeline && !this.props.uiReducer.menu.isOpen
   }
 
   get isActiveTimeline () {
@@ -48,18 +49,20 @@ CategoryTimeline.propTypes = {
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   model: PropTypes.any,
-  params: PropTypes.any,
   navigationState: PropTypes.shape({
     index: PropTypes.number.isRequired,
     routes: PropTypes.array.isRequired
   }).isRequired
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const currentRoute = ownProps.navigator.getCurrentRoute()
   return {
+    isActiveRoute: currentRoute.routeName === 'timeline',
     uiReducer: state.uiReducer
   }
 }
 
 const CategoryTimelineWithData = withQuery(CategoryTimeline)
-export default connect(mapStateToProps)(CategoryTimelineWithData)
+const CategoryWithRedux = connect(mapStateToProps)(CategoryTimelineWithData)
+export default withNavigation(CategoryWithRedux)
