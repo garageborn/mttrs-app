@@ -3,13 +3,17 @@ import { View } from 'react-native'
 import styles from './styles'
 import StoryPublishers from '../StoryPublishers'
 import SocialCount from '../SocialCount'
+import Touchable from '../Touchable'
+import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 const StoryMainLink = ({story, onPublishersPress}) => {
   return (
-    <View style={styles.footer}>
-      <StoryPublishers story={story} openStoryLinks={onPublishersPress} />
-      <SocialCount totalSocial={story.total_social} />
-    </View>
+    <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
+      <View style={styles.footer}>
+        <StoryPublishers story={story} />
+        <SocialCount totalSocial={story.total_social} />
+      </View>
+    </Touchable>
   )
 }
 
