@@ -6,7 +6,6 @@ import CategoryScrollView from '../../components/CategoryScrollView'
 import TopStoriesCategory from '../../components/TopStoriesCategory'
 import ApolloError from '../../components/ApolloError'
 import { NavigationActions, MenuActions } from '../../actions/index'
-import _isEqual from 'lodash/isEqual'
 
 class CategoryMenuContainer extends Component {
   constructor (props) {

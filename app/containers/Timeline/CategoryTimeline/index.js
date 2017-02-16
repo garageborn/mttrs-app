@@ -21,7 +21,6 @@ class CategoryTimeline extends Component {
   }
 
   goHome () {
-    console.log('gohome')
     return Promise.resolve(this.props.dispatch(NavigationActions.home()))
   }
 

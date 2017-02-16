@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
-import _isEqual from 'lodash/isEqual'
 import CategoryTile from '../../components/CategoryTile'
 import styles from './styles'
 
