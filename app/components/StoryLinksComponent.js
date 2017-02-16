@@ -9,7 +9,6 @@ class StoryLinksComponent extends Component {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
-    this.renderListView = this.renderListView.bind(this)
   }
 
   render () {
@@ -23,7 +22,7 @@ class StoryLinksComponent extends Component {
             openLink={this.props.openLink}
           />
         </View>
-        {this.renderListView}
+        {this.renderListView()}
         <LinearGradient
           colors={['rgba(255,255,255,.2)', 'rgba(255,255,255,.6)', 'rgba(255,255,255,.8)']}
           style={styles.gradient}
