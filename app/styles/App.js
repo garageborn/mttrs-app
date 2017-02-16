@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
 
   listViewContainer: {
-    flex: 1,
     position: 'absolute',
     ...containerStyles
   }
