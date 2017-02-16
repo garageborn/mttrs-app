@@ -31,6 +31,8 @@ class Timeline extends Component {
     let sections = []
     const { timeline } = this.props.data
 
+    if (!timeline) return
+
     timeline.forEach(item => {
       if (item.stories.length) {
         let section = item.date
