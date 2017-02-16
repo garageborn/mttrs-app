@@ -6,14 +6,13 @@ import CategoryScrollView from '../../components/CategoryScrollView'
 import TopStoriesCategory from '../../components/TopStoriesCategory'
 import ApolloError from '../../components/ApolloError'
 import { NavigationActions, MenuActions } from '../../actions/index'
+import _isEqual from 'lodash/isEqual'
 
 class CategoryMenuContainer extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      modalVisible: false
-    }
+    this.state = { modalVisible: false }
 
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
@@ -40,7 +39,7 @@ class CategoryMenuContainer extends Component {
   }
 
   toggleSettingsModal () {
-    this.setState({modalVisible: !this.state.modalVisible})
+    this.setState({ modalVisible: !this.state.modalVisible })
   }
 
   openHome () {
