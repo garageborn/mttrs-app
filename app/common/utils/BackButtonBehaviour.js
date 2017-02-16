@@ -38,7 +38,7 @@ class BackButtonBehaviour extends Component {
 
     this.buttonManager.pushListener(() => { return this.props.onBackButtonPress() })
 
-    this.setState({ enabled: true, listenerIndex: this.listeners.length - 1 })
+    this.setState({ enabled: true, listener: this.listeners[this.listeners.length - 1] })
   }
 
   disable () {
@@ -46,10 +46,13 @@ class BackButtonBehaviour extends Component {
     console.info('disable', this.props.name)
 
     let newListeners = [...this.listeners]
-    newListeners.splice(this.state.listenerIndex, 1)
-    console.log('listeners count before', this.props.name, this.listeners)
-    this.buttonManager._setListeners(newListeners)
-    console.log('listeners count after', this.props.name, this.listeners.length)
+    const listenerIndex = newListeners.indexOf(this.state.listener)
+    if (listenerIndex !== -1) {
+      newListeners.splice(listenerIndex, 1)
+      console.log('    listeners count before', this.props.name, this.listeners)
+      this.buttonManager._setListeners(newListeners)
+      console.log('    listeners count after', this.props.name, this.listeners)
+    }
 
     if (this.listeners.length === 1) this.buttonManager.ensureGlobalListener()
 

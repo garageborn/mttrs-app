@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
 import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
-import { withNavigation } from '@exponent/ex-navigation'
 
 class CategoryTimeline extends Component {
   constructor () {
@@ -66,6 +66,3 @@ const mapStateToProps = (state, ownProps) => {
 const CategoryTimelineWithData = withQuery(CategoryTimeline)
 const CategoryWithRedux = connect(mapStateToProps)(CategoryTimelineWithData)
 export default withNavigation(CategoryWithRedux)
-
-// const CategoryTimelineWithNavigation = withNavigation(CategoryTimelineWithData)
-// export default connect(mapStateToProps)(CategoryTimelineWithNavigation)
