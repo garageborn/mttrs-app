@@ -45,13 +45,11 @@ class BackButtonBehaviour extends Component {
     if (!this.state.enabled) return
     console.info('disable', this.props.name)
 
-    let newListeners = [...this.listeners]
-    const listenerIndex = newListeners.indexOf(this.state.listener)
+    const listenerIndex = this.listeners.indexOf(this.state.listener)
     if (listenerIndex !== -1) {
+      let newListeners = [...this.listeners]
       newListeners.splice(listenerIndex, 1)
-      console.log('    listeners count before', this.props.name, this.listeners)
       this.buttonManager._setListeners(newListeners)
-      console.log('    listeners count after', this.props.name, this.listeners)
     }
 
     if (this.listeners.length === 1) this.buttonManager.ensureGlobalListener()

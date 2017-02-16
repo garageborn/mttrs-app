@@ -27,7 +27,7 @@ class CategoryTimeline extends Component {
 
   render () {
     return (
-      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome} name={this.props.model.slug}>
+      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
         <TimelineControl data={this.props.data} />
       </BackButtonBehaviour>
     )

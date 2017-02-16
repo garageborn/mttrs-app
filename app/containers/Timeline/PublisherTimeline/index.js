@@ -29,7 +29,7 @@ class PublisherTimeline extends Component {
 
   render () {
     return (
-      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome} name={this.props.model.slug}>
+      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
         <View style={styles.listViewContainer}>
           <TimelineControl data={this.props.data} />
         </View>
