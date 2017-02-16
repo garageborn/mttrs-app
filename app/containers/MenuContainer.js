@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Animated, Easing, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { AndroidBackButtonBehavior } from '@exponent/ex-navigation'
+import BackButtonBehaviour from '../common/utils/BackButtonBehaviour'
 import { MenuActions } from '../actions/index'
 import Menu from '../components/Menu'
 
@@ -62,22 +62,14 @@ class MenuContainer extends Component {
     return Promise.resolve(this.props.dispatch(MenuActions.closeMenu()))
   }
 
-  renderMenu () {
-    if (this.props.uiReducer.menu.isOpen) {
-      return (
-        <AndroidBackButtonBehavior isFocused onBackButtonPress={this.closeMenu}>
-          <Menu params={this.props.params} />
-        </AndroidBackButtonBehavior>
-      )
-    } else {
-      return <Menu params={this.props.params} />
-    }
-  }
-
   render () {
+    const { isOpen } = this.props.uiReducer.menu
+
     return (
       <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-        {this.renderMenu()}
+        <BackButtonBehaviour isFocused={isOpen} onBackButtonPress={this.closeMenu} batata={'menu'}>
+          <Menu params={this.props.params} />
+        </BackButtonBehaviour>
       </Animated.View>
     )
   }

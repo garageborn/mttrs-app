@@ -1,30 +1,27 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import CategoryTile from '../../components/CategoryTile'
 import styles from './styles'
 
-const CategoryScrollView = ({data, openCategory}) => {
-  let renderCategories = () => {
+class CategoryScrollView extends Component {
+  render () {
+    return (
+      <View>
+        <ScrollView contentContainerStyle={styles.categories}>
+          {this.renderCategories()}
+        </ScrollView>
+      </View>
+    )
+  }
+
+  renderCategories () {
+    const { data, openCategory } = this.props
     if (data.loading) return
 
     return data.categories.map(category => {
-      return (
-        <CategoryTile
-          key={category.id}
-          category={category}
-          onPress={openCategory}
-        />
-      )
+      return <CategoryTile key={category.id} category={category} onPress={openCategory} />
     })
   }
-
-  return (
-    <View>
-      <ScrollView contentContainerStyle={styles.categories}>
-        {renderCategories()}
-      </ScrollView>
-    </View>
-  )
 }
 
 CategoryScrollView.propTypes = {

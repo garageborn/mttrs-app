@@ -11,9 +11,7 @@ class CategoryMenuContainer extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      modalVisible: false
-    }
+    this.state = { modalVisible: false }
 
     this.openHome = this.openHome.bind(this)
     this.openCategory = this.openCategory.bind(this)
@@ -40,7 +38,7 @@ class CategoryMenuContainer extends Component {
   }
 
   toggleSettingsModal () {
-    this.setState({modalVisible: !this.state.modalVisible})
+    this.setState({ modalVisible: !this.state.modalVisible })
   }
 
   openHome () {
