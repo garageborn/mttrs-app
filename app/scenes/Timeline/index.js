@@ -83,7 +83,7 @@ class TimelineScene extends Component {
     return <StoryLinksContainer story={storyLinks.story} publisherSlug={publisherSlug} />
   }
 
-  get currentSection() {
+  get currentSection () {
     const { params } = this.props.route
     return params.section || {}
   }

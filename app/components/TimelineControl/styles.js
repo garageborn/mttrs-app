@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         bottom: 0,
-        paddingBottom: 0
+        paddingBottom: 0,
+        paddingTop: 20
       },
       android: {
-        bottom: 45,
-        paddingBottom: 30
+        top: 0,
+        bottom: 0,
+        paddingBottom: 25
       }
     }),
-    position: 'relative',
     flexGrow: 1,
     backgroundColor: '#F1F1F1'
   },

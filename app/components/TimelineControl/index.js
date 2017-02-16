@@ -72,7 +72,8 @@ class TimelineControl extends Component {
 
 TimelineControl.propTypes = {
   data: PropTypes.shape({
-    infiniteScroll: PropTypes.func.isRequired
+    infiniteScroll: PropTypes.func.isRequired,
+    timeline: PropTypes.array
   }).isRequired
 }
 
