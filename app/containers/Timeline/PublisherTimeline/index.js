@@ -5,7 +5,7 @@ import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
 import styles from '../../../styles/App'
-import { AndroidBackButtonBehavior } from '@exponent/ex-navigation'
+import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
 
 class PublisherTimeline extends Component {
   constructor (props) {
@@ -28,14 +28,14 @@ class PublisherTimeline extends Component {
 
   render () {
     return (
-      <AndroidBackButtonBehavior
-        isFocused={false}
+      <BackButtonBehaviour
+        isFocused
         onBackButtonPress={this.goHome}
       >
         <View style={styles.listViewContainer}>
           <TimelineControl data={this.props.data} />
         </View>
-      </AndroidBackButtonBehavior>
+      </BackButtonBehaviour>
     )
   }
 }
