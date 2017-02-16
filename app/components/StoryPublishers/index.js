@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import styles from './styles'
 import * as cloudinary from '../../common/utils/Cloudinary'
-import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 const messages = defineMessages({
   storyFrom: {
@@ -22,18 +20,15 @@ const messages = defineMessages({
 
 class StoryPublishers extends Component {
   render () {
-    const { openStoryLinks } = this.props
     const { formatMessage } = this.props.intl
 
     return (
-      <Touchable onPress={openStoryLinks} underlayColor={WHITE_COLOR}>
-        <View style={styles.publisher}>
-          <Text style={styles.lightText}>{formatMessage(messages.storyFrom)} </Text>
-          <PublisherLogo source={this.publisherLogo} />
-          {this.getMainPublisher()}
-          {this.getCounter()}
-        </View>
-      </Touchable>
+      <View style={styles.publisher}>
+        <Text style={styles.lightText}>{formatMessage(messages.storyFrom)} </Text>
+        <PublisherLogo source={this.publisherLogo} />
+        {this.getMainPublisher()}
+        {this.getCounter()}
+      </View>
     )
   }
 
@@ -77,8 +72,7 @@ StoryPublishers.propTypes = {
       }).isRequired
     }).isRequired,
     other_links_count: PropTypes.number.isRequired
-  }).isRequired,
-  openStoryLinks: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default injectIntl(StoryPublishers)

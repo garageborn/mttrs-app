@@ -10,7 +10,6 @@ class StoryContainer extends Component {
     this.openStoryLinks = this.openStoryLinks.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
     this.openCategory = this.openCategory.bind(this)
-    this.openPublisher = this.openPublisher.bind(this)
   }
 
   componentWillMount () {
@@ -43,13 +42,7 @@ class StoryContainer extends Component {
     this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
   }
 
-  openPublisher () {
-    this.props.dispatch(NavigationActions.selectPublisher(this.mainLink.publisher))
-  }
-
   openStoryLinks () {
-    const otherLinksCount = this.props.story.other_links_count
-    if (otherLinksCount === 0) return this.openPublisher()
     const { dispatch, story } = this.props
     dispatch(NavigationActions.storyLinks({ story: story, open: true }))
   }
