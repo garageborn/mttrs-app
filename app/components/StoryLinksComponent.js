@@ -9,9 +9,11 @@ class StoryLinksComponent extends Component {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.dataSource = this.dataSource.bind(this)
+    this.renderListView = this.renderListView.bind(this)
   }
 
   render () {
+    if (!this.mainLink) return
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -21,16 +23,23 @@ class StoryLinksComponent extends Component {
             openLink={this.props.openLink}
           />
         </View>
-        <ListView
-          style={styles.linksList}
-          dataSource={this.dataSource()}
-          renderRow={this.renderRow}
-        />
+        {this.renderListView}
         <LinearGradient
           colors={['rgba(255,255,255,.2)', 'rgba(255,255,255,.6)', 'rgba(255,255,255,.8)']}
           style={styles.gradient}
         />
       </View>
+    )
+  }
+
+  renderListView () {
+    if (!this.otherLinks) return
+    return (
+      <ListView
+        style={styles.linksList}
+        dataSource={this.dataSource()}
+        renderRow={this.renderRow}
+      />
     )
   }
 
@@ -41,7 +50,7 @@ class StoryLinksComponent extends Component {
     return ds.cloneWithRows(this.otherLinks)
   }
 
-  renderRow(rowData, sectionID, rowID) {
+  renderRow (rowData, sectionID, rowID) {
     return (
       <StoryLink
         linkType='list'
@@ -52,11 +61,11 @@ class StoryLinksComponent extends Component {
     )
   }
 
-  get mainLink() {
+  get mainLink () {
     return this.props.story.main_link
   }
 
-  get otherLinks() {
+  get otherLinks () {
     return this.props.story.other_links
   }
 }
