@@ -67,7 +67,7 @@ class MenuContainer extends Component {
 
     return (
       <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-        <BackButtonBehaviour isFocused={isOpen} onBackButtonPress={this.closeMenu} batata={'menu'}>
+        <BackButtonBehaviour isFocused={isOpen} onBackButtonPress={this.closeMenu}>
           <Menu params={this.props.params} />
         </BackButtonBehaviour>
       </Animated.View>

@@ -33,7 +33,6 @@ class BackButtonBehavior extends Component {
   }
 
   enable () {
-    console.info('enable', this.props.batata)
     if (this.state.enabled) return
 
     this.buttonManager.pushListener(() => { return this.props.onBackButtonPress() })
@@ -42,7 +41,6 @@ class BackButtonBehavior extends Component {
   }
 
   disable () {
-    console.info('disable', this.props.batata)
     if (!this.state.enabled) return
 
     let newListeners = [...this.listeners]
