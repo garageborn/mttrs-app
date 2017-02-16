@@ -36,7 +36,7 @@ class TimelineScene extends Component {
   renderTimeline () {
     if (this.isPublisherSection) {
       return <PublisherTimeline model={this.currentSection.model} />
-    } else {
+    } else if (this.isCategoriesSection) {
       return <CategoriesTimeline params={this.props.route.params} />
     }
   }
@@ -57,8 +57,9 @@ class TimelineScene extends Component {
     return params.section || {}
   }
 
-  get isHomeSection () {
-    return this.currentSection.name === 'home'
+  get isCategoriesSection () {
+    if (!this.currentSection.name) return true
+    return this.currentSection.name === 'home' || this.currentSection.name === 'category'
   }
 
   get isPublisherSection () {

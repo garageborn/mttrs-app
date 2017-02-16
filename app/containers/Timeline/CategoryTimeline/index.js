@@ -4,6 +4,7 @@ import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../../actions/index'
 import TimelineControl from '../../../components/TimelineControl'
 import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
+import { withNavigation } from '@exponent/ex-navigation'
 
 class CategoryTimeline extends Component {
   constructor () {
@@ -26,14 +27,14 @@ class CategoryTimeline extends Component {
 
   render () {
     return (
-      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
+      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome} name={this.props.model.slug}>
         <TimelineControl data={this.props.data} />
       </BackButtonBehaviour>
     )
   }
 
   get isFocused () {
-    return this.isActiveTimeline && !this.props.uiReducer.menu.isOpen
+    return this.props.isActiveRoute && this.isActiveTimeline && !this.props.uiReducer.menu.isOpen
   }
 
   get isActiveTimeline () {
@@ -48,18 +49,23 @@ CategoryTimeline.propTypes = {
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   model: PropTypes.any,
-  params: PropTypes.any,
   navigationState: PropTypes.shape({
     index: PropTypes.number.isRequired,
     routes: PropTypes.array.isRequired
   }).isRequired
 }
 
-let mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const currentRoute = ownProps.navigator.getCurrentRoute()
   return {
+    isActiveRoute: currentRoute.routeName === 'timeline',
     uiReducer: state.uiReducer
   }
 }
 
 const CategoryTimelineWithData = withQuery(CategoryTimeline)
-export default connect(mapStateToProps)(CategoryTimelineWithData)
+const CategoryWithRedux = connect(mapStateToProps)(CategoryTimelineWithData)
+export default withNavigation(CategoryWithRedux)
+
+// const CategoryTimelineWithNavigation = withNavigation(CategoryTimelineWithData)
+// export default connect(mapStateToProps)(CategoryTimelineWithNavigation)

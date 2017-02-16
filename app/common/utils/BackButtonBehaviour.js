@@ -4,7 +4,7 @@
 import { Component, PropTypes } from 'react'
 import { getBackButtonManager } from '@exponent/ex-navigation'
 
-class BackButtonBehavior extends Component {
+class BackButtonBehaviour extends Component {
   constructor () {
     super()
     this.state = { enabled: false }
@@ -34,6 +34,7 @@ class BackButtonBehavior extends Component {
 
   enable () {
     if (this.state.enabled) return
+    console.info('enable', this.props.name)
 
     this.buttonManager.pushListener(() => { return this.props.onBackButtonPress() })
 
@@ -42,10 +43,13 @@ class BackButtonBehavior extends Component {
 
   disable () {
     if (!this.state.enabled) return
+    console.info('disable', this.props.name)
 
     let newListeners = [...this.listeners]
     newListeners.splice(this.state.listenerIndex, 1)
+    console.log('listeners count before', this.props.name, this.listeners)
     this.buttonManager._setListeners(newListeners)
+    console.log('listeners count after', this.props.name, this.listeners.length)
 
     if (this.listeners.length === 1) this.buttonManager.ensureGlobalListener()
 
@@ -61,10 +65,10 @@ class BackButtonBehavior extends Component {
   }
 }
 
-BackButtonBehavior.propTypes = {
+BackButtonBehaviour.propTypes = {
   isFocused: PropTypes.bool.isRequired,
   onBackButtonPress: PropTypes.func.isRequired,
   children: PropTypes.node
 }
 
-export default BackButtonBehavior
+export default BackButtonBehaviour

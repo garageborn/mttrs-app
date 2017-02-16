@@ -10,9 +10,9 @@ import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
 class PublisherTimeline extends Component {
   constructor (props) {
     super(props)
-
     this.goHome = this.goHome.bind(this)
   }
+
   componentWillMount () {
     this.analyticsTrack()
   }
@@ -28,10 +28,7 @@ class PublisherTimeline extends Component {
 
   render () {
     return (
-      <BackButtonBehaviour
-        isFocused
-        onBackButtonPress={this.goHome}
-      >
+      <BackButtonBehaviour isFocused onBackButtonPress={this.goHome} name={this.props.model.slug}>
         <View style={styles.listViewContainer}>
           <TimelineControl data={this.props.data} />
         </View>
