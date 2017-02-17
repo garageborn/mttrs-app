@@ -11,7 +11,7 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
   const { link } = params
 
   return (
-    <View style={styles.container} shadowOffset={{width: 0, height: 5}} shadowColor={'rgba(0, 0, 0, .6)'} shadowOpacity={0.1} elevation={1}>
+    <View style={styles.container} elevation={2}>
       <View style={styles.header}>
         <View style={styles.publisher}>
           <PublisherLogo size={25} skin='dark' source={publisherLogo} />
