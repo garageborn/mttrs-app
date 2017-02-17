@@ -26,6 +26,7 @@ class Story extends Component {
 
   render () {
     const { openLink, openStoryLinks, story } = this.props
+    if (!story) return null
     return (
       <View
         ref={story.id}
@@ -62,7 +63,7 @@ class Story extends Component {
   }
 
   renderSummary (headline, summary) {
-    if (!summary) return
+    if (!headline || !summary) return null
     return (
       <StorySummary
         summary={summary}
