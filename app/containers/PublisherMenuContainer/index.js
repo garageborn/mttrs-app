@@ -136,7 +136,7 @@ class PublisherMenuContainer extends Component {
   }
 
   renderList () {
-    let {publishers} = this.props.data
+    let { publishers } = this.props.data
     if (!publishers || !publishers.length) return
 
     return (
