@@ -1,4 +1,7 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Platform, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
+const headlineOffset = 105
 
 const triangle = {
   width: 0,
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
         fontWeight: '500'
       }
     }),
+    width: width - headlineOffset,
     color: '#666666',
     marginTop: 3,
     marginLeft: 5,
