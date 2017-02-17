@@ -47,7 +47,7 @@ class PublisherMenuContainer extends Component {
     let sections = []
     const { publishers } = this.props.data
 
-    if (!publishers || publishers.length) return {rows, sections}
+    if (!publishers || !publishers.length) return {rows, sections}
 
     const queryMatcher = new RegExp(query, 'i')
     const filteredPublishers = publishers.filter(publisher => {
