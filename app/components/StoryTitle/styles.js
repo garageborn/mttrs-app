@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 
 let imageSize = 120
-let imagePadding = 24
+let imagePadding = 40
 
 let image = imageSize + imagePadding
 
