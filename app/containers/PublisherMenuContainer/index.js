@@ -43,9 +43,12 @@ class PublisherMenuContainer extends Component {
   }
 
   rowsAndSections (query) {
-    const { publishers } = this.props.data
     let rows = {}
     let sections = []
+    const { publishers } = this.props.data
+
+    if (!publishers || publishers.length) return {rows, sections}
+
     const queryMatcher = new RegExp(query, 'i')
     const filteredPublishers = publishers.filter(publisher => {
       return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
@@ -133,6 +136,9 @@ class PublisherMenuContainer extends Component {
   }
 
   renderList () {
+    let {publishers} = this.props.data
+    if (!publishers || !publishers.length) return
+
     return (
       <View style={styles.listContainer}>
         <ListView
