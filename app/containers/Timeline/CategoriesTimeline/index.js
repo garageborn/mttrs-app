@@ -53,6 +53,7 @@ class CategoriesTimeline extends Component {
   }
 
   addSwipeRoutes (nextProps) {
+    if (!nextProps.data.categories || !nextProps.data.categories.length) return
     if (nextProps.data.loading || nextProps.data.error) return
     if (nextProps.data.categories === this.props.data.categories) return
     if (this.state.navigationState.routes.length > 1) return

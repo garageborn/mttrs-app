@@ -31,7 +31,7 @@ class Timeline extends Component {
     let sections = []
     const { timeline } = this.props.data
 
-    if (!timeline) return
+    if (!timeline || !timeline.length) return {rows, sections}
 
     timeline.forEach(item => {
       if (item.stories.length) {
@@ -60,6 +60,10 @@ class Timeline extends Component {
   }
 
   render () {
+    const { timeline } = this.props.data
+
+    if (!timeline || !timeline.length) return null
+
     return (
       <ListView
         ref={'timeline'}

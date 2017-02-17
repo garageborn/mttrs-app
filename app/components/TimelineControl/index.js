@@ -41,7 +41,7 @@ class TimelineControl extends Component {
   }
 
   onEndReached () {
-    if (this.state.loadingMore) return
+    if (this.state.loadingMore || !this.props.data.timeline || !this.props.data.timeline.length) return
 
     const storiesCount = this.props.data.timeline.reduce((sum, item) => {
       return sum + item.stories.length

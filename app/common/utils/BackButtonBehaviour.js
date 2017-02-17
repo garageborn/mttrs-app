@@ -34,7 +34,6 @@ class BackButtonBehaviour extends Component {
 
   enable () {
     if (this.state.enabled) return
-    console.info('enable', this.props.name)
 
     this.buttonManager.pushListener(() => { return this.props.onBackButtonPress() })
 
@@ -43,7 +42,6 @@ class BackButtonBehaviour extends Component {
 
   disable () {
     if (!this.state.enabled) return
-    console.info('disable', this.props.name)
 
     const listenerIndex = this.listeners.indexOf(this.state.listener)
     if (listenerIndex !== -1) {

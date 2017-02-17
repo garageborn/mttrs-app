@@ -16,7 +16,7 @@ class CategoryScrollView extends Component {
 
   renderCategories () {
     const { data, openCategory } = this.props
-    if (data.loading) return
+    if (data.loading || !data.categories || !data.categories.length) return
 
     return data.categories.map(category => {
       return <CategoryTile key={category.id} category={category} onPress={openCategory} />
