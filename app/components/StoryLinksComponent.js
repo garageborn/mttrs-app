@@ -32,7 +32,7 @@ class StoryLinksComponent extends Component {
   }
 
   renderListView () {
-    if (!this.otherLinks) return
+    if (!this.otherLinks || !this.otherLinks.length) return
     return (
       <ListView
         style={styles.linksList}
