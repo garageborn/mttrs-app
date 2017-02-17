@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
+import { iphoneWidthSmall } from '../../styles/Global'
 
 const { width, height } = Dimensions.get('window')
 
@@ -11,14 +12,13 @@ const imageHeight = Platform.select({
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 17,
-    marginBottom: 5
+    marginBottom: width === iphoneWidthSmall ? 12 : 5
   },
 
   topStories: {
     backgroundColor: '#555',
     width: tileWidth,
     height: height / 8,
-
     borderBottomWidth: 2
   },
 

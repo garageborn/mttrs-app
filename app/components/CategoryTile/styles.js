@@ -1,15 +1,14 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-
+import { iphoneWidthSmall } from '../../styles/Global'
 const { width, height } = Dimensions.get('window')
-const iphoneWidthSmall = 320
 
 const categoryVerticalMargin = Platform.select({
-  ios: width === iphoneWidthSmall ? 6 : 8.5,
+  ios: width === iphoneWidthSmall ? 8 : 8.5,
   android: 4
 })
 
 const imageHeight = Platform.select({
-  ios: 86,
+  ios: width === iphoneWidthSmall ? 75 : 86,
   android: 80
 })
 
