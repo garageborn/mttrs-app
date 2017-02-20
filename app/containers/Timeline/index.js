@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import Timeline from '../Timeline'
-import ApolloError from '../ApolloError'
-import styles from './styles'
+import TimelineComponent from '../../components/Timeline'
 
 const minStoriesInTheViewport = 4
 
-class TimelineControl extends Component {
+class Timeline extends Component {
   constructor (props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
-    this.renderFooter = this.renderFooter.bind(this)
-    this.state = { loadingMore: false }
+    this.onPullToRefresh = this.onPullToRefresh.bind(this)
+    this.state = {
+      loadingMore: false,
+      loadingPullToRefresh: false
+    }
   }
 
   componentDidUpdate () {
@@ -20,29 +20,14 @@ class TimelineControl extends Component {
 
   render () {
     const { data } = this.props
-    if (data.loading) return this.renderLoading()
-    if (data.error) return this.renderError()
-
     return (
-      <View style={styles.container}>
-        <Timeline
-          data={data}
-          onEndReached={this.onEndReached}
-          renderFooter={this.renderFooter}
-        />
-      </View>
-    )
-  }
-
-  renderError () {
-    return <ApolloError data={this.props.data} />
-  }
-
-  renderLoading () {
-    return (
-      <View style={styles.loading}>
-        {this.renderActivityIndicator()}
-      </View>
+      <TimelineComponent
+        data={data}
+        loadingMore={this.state.loadingMore}
+        loadingPullToRefresh={this.state.loadingPullToRefresh}
+        onEndReached={this.onEndReached}
+        onPullToRefresh={this.onPullToRefresh}
+      />
     )
   }
 
@@ -55,23 +40,17 @@ class TimelineControl extends Component {
     infiniteScroll().then(() => this.setState({ loadingMore: false }))
   }
 
+  onPullToRefresh () {
+    const { pullToRefresh } = this.props.data
+    if (this.state.loadingPullToRefresh) return
+    this.setState({ loadingPullToRefresh: true })
+    pullToRefresh().then(() => this.setState({ loadingPullToRefresh: false }))
+  }
+
   fillTimeline () {
     const storiesCount = this.storiesCount
     if (this.props.loading || !storiesCount) return
     if (storiesCount < minStoriesInTheViewport) this.onEndReached()
-  }
-
-  renderFooter () {
-    if (!this.state.loadingMore) return
-    return (
-      <View style={styles.infiniteScrollLoadingContainer}>
-        {this.renderActivityIndicator()}
-      </View>
-    )
-  }
-
-  renderActivityIndicator () {
-    return <ActivityIndicator size='large' color='#AAA' />
   }
 
   get storiesCount () {
@@ -86,11 +65,12 @@ class TimelineControl extends Component {
   }
 }
 
-TimelineControl.propTypes = {
+Timeline.propTypes = {
   data: PropTypes.shape({
     infiniteScroll: PropTypes.func.isRequired,
+    pullToRefresh: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired
 }
 
-export default TimelineControl
+export default Timeline

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import { AnalyticsActions } from '../../../actions/index'
-import TimelineControl from '../../../components/TimelineControl'
+import { AnalyticsActions } from '../../actions/index'
+import Timeline from '../Timeline'
 
 class HomeTimeline extends Component {
   componentWillMount () {
@@ -23,7 +23,7 @@ class HomeTimeline extends Component {
   }
 
   render () {
-    return <TimelineControl data={this.props.data} />
+    return <Timeline data={this.props.data} />
   }
 }
 
