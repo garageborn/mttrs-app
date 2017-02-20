@@ -1,5 +1,4 @@
 import { graphql } from 'react-apollo'
-import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
 import _isArray from 'lodash/isArray'
 import { timezone } from '../../config/IntlProvider'
@@ -11,12 +10,15 @@ export const defaultVariables = {
 
 const pullToRefresh = ({ fetchMore, variables }) => {
   return fetchMore({
-    variables: { ...variables },
+    variables: { ...variables, cursor: null },
     updateQuery: (previousResult, { fetchMoreResult }) => {
-      if (!fetchMoreResult.data) { return previousResult }
-      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      if (!fetchMoreResult.data) return previousResult
+
+      const newTimeline = fetchMoreResult.data.timeline
+      if (!newTimeline) return previousResult
+
+      let timeline = [newTimeline].concat(previousResult.timeline)
       timeline = _uniqBy(timeline, item => item.date)
-      timeline = _sortBy(timeline, item => -item.date)
       return Object.assign({}, previousResult, { timeline: [...timeline] })
     }
   })
