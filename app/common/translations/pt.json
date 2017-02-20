@@ -32,7 +32,7 @@
   "yesterday": "Ontem",
   "lastWeek": "Na última semana",
   "lastMonth": "No último mês",
-  "dateFormat": "D MMMM",
+  "dateFormat": "D [de] MMMM",
   "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}",
   "summary.title": "Resumo do editor",
   "summary.showMore": "ver mais",
