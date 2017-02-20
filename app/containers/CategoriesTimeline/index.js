@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
-import { NavigationActions } from '../../../actions/index'
+import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
 import CategoryTimeline from '../CategoryTimeline'
-import ApolloError from '../../../components/ApolloError'
-import styles from '../../../styles/App'
+import ApolloError from '../../components/ApolloError'
+import styles from '../../styles/App'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', model: { } }
 

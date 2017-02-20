@@ -25,7 +25,7 @@ const pullToRefresh = ({ fetchMore, variables }) => {
 }
 
 const infiniteScroll = ({ fetchMore, variables, timeline }) => {
-  const items = _isArray(timeline) ? timeline : [timeline]
+  const items = timelineToItems(timeline)
   if (!hasMore(items)) return
 
   const lastItem = items[items.length - 1]
@@ -35,11 +35,9 @@ const infiniteScroll = ({ fetchMore, variables, timeline }) => {
     updateQuery: (previousResult, { fetchMoreResult }) => {
       if (!fetchMoreResult.data) return previousResult
 
-      const previousTimeline = _isArray(previousResult.timeline) ? previousResult.timeline : [previousResult.timeline]
-
-      return {
-        timeline: previousTimeline.concat(fetchMoreResult.data.timeline)
-      }
+      const previousTimeline = timelineToItems(previousResult.timeline)
+      const nextTimeline = fetchMoreResult.data.timeline
+      return { timeline: previousTimeline.concat(nextTimeline) }
     }
   })
 }
@@ -49,11 +47,16 @@ const hasMore = (items) => {
   return lastItem && lastItem.stories && lastItem.stories.length > 0
 }
 
+const timelineToItems = (timeline) => {
+  if (!timeline) return []
+  return _isArray(timeline) ? timeline : [timeline]
+}
+
 export default function (Query, options) {
   const defaultOptions = {
     props ({ data }) {
       const { error, loading, timeline, variables } = data
-      const items = _isArray(timeline) ? timeline : [timeline]
+      const items = timelineToItems(timeline)
 
       return {
         data: {

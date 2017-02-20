@@ -1,56 +1,51 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, RefreshControl } from 'react-native'
-import StoryContainer from '../../containers/StoryContainer'
-import ListViewHeader from '../ListViewHeader'
+import { ActivityIndicator, RefreshControl, View } from 'react-native'
+import TimelineList from '../TimelineList'
+import ApolloError from '../ApolloError'
 import styles from './styles'
 
 class Timeline extends Component {
   constructor (props) {
     super(props)
-    this.renderRow = this.renderRow.bind(this)
-    this.renderSectionHeader = this.renderSectionHeader.bind(this)
-    this.scrollToY = this.scrollToY.bind(this)
+    this.renderFooter = this.renderFooter.bind(this)
+    this.refreshControl = this.refreshControl.bind(this)
   }
 
-  renderSectionHeader (sectionData, date) {
-    return <ListViewHeader date={date} />
+  render () {
+    const { data, onEndReached } = this.props
+    if (data.loading) return this.renderLoading()
+    if (data.error) return this.renderError()
+
+    return (
+      <View style={styles.container}>
+        <TimelineList
+          data={data}
+          onEndReached={onEndReached}
+          renderFooter={this.renderFooter}
+          refreshControl={this.refreshControl}
+        />
+      </View>
+    )
   }
 
-  dataSource () {
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-    })
-
-    let { rows, sections } = this.rowsAndSections()
-    return ds.cloneWithRowsAndSections(rows, sections)
+  renderError () {
+    return <ApolloError data={this.props.data} />
   }
 
-  rowsAndSections () {
-    let rows = {}
-    let sections = []
-
-    const { items } = this.props.data
-
-    if (!items || !items.length) return { rows, sections }
-
-    items.forEach(item => {
-      const { date, stories } = item
-      if (!stories.length) return
-      sections.push(date)
-      rows[date] = stories
-    })
-
-    return { rows, sections }
+  renderLoading () {
+    return (
+      <View style={styles.loading}>
+        {this.renderActivityIndicator()}
+      </View>
+    )
   }
 
   refreshControl () {
-    const { loading, pullToRefresh } = this.props.data
     return (
       <RefreshControl
         style={styles.hideRefreshControl}
-        refreshing={loading}
-        onRefresh={pullToRefresh}
+        refreshing={this.props.loadingPullToRefresh}
+        onRefresh={this.props.onPullToRefresh}
         tintColor='#DDD'
         title='Refreshing...'
         titleColor='#AAA'
@@ -59,52 +54,28 @@ class Timeline extends Component {
     )
   }
 
-  render () {
-    const { items } = this.props.data
-    if (!items || !items.length) return null
-
+  renderFooter () {
+    if (!this.props.loadingMore) return
     return (
-      <ListView
-        ref={'timeline'}
-        pageSize={4}
-        style={styles.listView}
-        dataSource={this.dataSource()}
-        renderRow={this.renderRow}
-        renderSectionHeader={this.renderSectionHeader}
-        refreshControl={this.refreshControl()}
-        renderFooter={this.props.renderFooter}
-        onEndReachedThreshold={200}
-        onEndReached={this.props.onEndReached}
-        collapsable={false}
-      />
+      <View style={styles.infiniteScrollLoadingContainer}>
+        {this.renderActivityIndicator()}
+      </View>
     )
   }
 
-  renderRow (story) {
-    return (
-      <StoryContainer
-        key={story.id}
-        story={story}
-        scrollToY={this.scrollToY}
-        timelineRef={this.refs.timeline}
-        collapsable={false}
-      />
-    )
-  }
-
-  scrollToY (y) {
-    return this.refs.timeline.scrollTo({ x: 0, y, animated: true })
+  renderActivityIndicator () {
+    return <ActivityIndicator size='large' color='#AAA' />
   }
 }
 
 Timeline.propTypes = {
   data: PropTypes.shape({
-    items: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
-    pullToRefresh: PropTypes.func.isRequired
+    items: PropTypes.array.isRequired
   }).isRequired,
+  loadingMore: PropTypes.bool.isRequired,
+  loadingPullToRefresh: PropTypes.bool.isRequired,
   onEndReached: PropTypes.func.isRequired,
-  renderFooter: PropTypes.func.isRequired
+  onPullToRefresh: PropTypes.func.isRequired
 }
 
 export default Timeline

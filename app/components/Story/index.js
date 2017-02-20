@@ -17,6 +17,7 @@ class Story extends Component {
   }
 
   componentWillUpdate (nextProps, nextState) {
+    if (!this.isExpandable) return
     const summaryExpandedWillChange = nextState.isSummaryExpanded !== this.state.isSummaryExpanded
     const nextSummaryNotExpanded = !nextState.isSummaryExpanded
     if (summaryExpandedWillChange && nextSummaryNotExpanded) {
@@ -34,9 +35,7 @@ class Story extends Component {
         onLayout={this.getViewPosition}
         collapsable={false}
       >
-        <View
-          style={styles.card}
-        >
+        <View style={styles.card}>
           <StoryMainLink
             onPress={openLink}
             mainLink={this.mainLink}
@@ -46,28 +45,30 @@ class Story extends Component {
           {this.renderSummary(story.headline, story.summary)}
           <StoryMetadata story={story} onPublishersPress={openStoryLinks} />
         </View>
-
       </View>
     )
   }
 
   getViewPosition () {
+    if (!this.isExpandable) return
+
     const storyTopHeight = 40
     if (!this.props.timelineRef) return
     this.refs[this.props.story.id].measureLayout(
       findNodeHandle(this.props.timelineRef),
       (x, y) => {
-        this.setState({storyPosition: y - storyTopHeight})
+        this.setState({ storyPosition: y - storyTopHeight })
       }
     )
   }
 
-  renderSummary (headline, summary) {
-    if (!headline || !summary) return null
+  renderSummary () {
+    if (!this.isExpandable) return null
+
     return (
       <StorySummary
-        summary={summary}
-        headline={headline}
+        summary={this.props.story.summary}
+        headline={this.props.story.headline}
         isExpanded={this.state.isSummaryExpanded}
         pressExpandButton={this.pressExpandButton}
       />
@@ -75,7 +76,7 @@ class Story extends Component {
   }
 
   pressExpandButton () {
-    this.setState({isSummaryExpanded: !this.state.isSummaryExpanded})
+    this.setState({ isSummaryExpanded: !this.state.isSummaryExpanded })
   }
 
   get mainLink () {
@@ -84,6 +85,13 @@ class Story extends Component {
 
   get mainCategory () {
     return this.props.story.main_category
+  }
+
+  get isExpandable () {
+    const { headline, summary } = this.props.story
+    const hasHeadline = headline && headline.length > 0
+    const hasSummary = summary && summary.length > 0
+    return hasHeadline && hasSummary
   }
 }
 

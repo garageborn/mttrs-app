@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
-import { AnalyticsActions, NavigationActions } from '../../../actions/index'
-import TimelineControl from '../../../components/TimelineControl'
-import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
+import { AnalyticsActions, NavigationActions } from '../../actions/index'
+import Timeline from '../Timeline'
+import BackButtonBehaviour from '../../common/utils/BackButtonBehaviour'
 
 class CategoryTimeline extends Component {
   constructor () {
@@ -28,7 +28,7 @@ class CategoryTimeline extends Component {
   render () {
     return (
       <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
-        <TimelineControl data={this.props.data} />
+        <Timeline data={this.props.data} />
       </BackButtonBehaviour>
     )
   }

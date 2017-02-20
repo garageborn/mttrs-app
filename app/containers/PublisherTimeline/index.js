@@ -3,10 +3,10 @@ import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
-import { AnalyticsActions, NavigationActions } from '../../../actions/index'
-import TimelineControl from '../../../components/TimelineControl'
-import styles from '../../../styles/App'
-import BackButtonBehaviour from '../../../common/utils/BackButtonBehaviour'
+import { AnalyticsActions, NavigationActions } from '../../actions/index'
+import Timeline from '../Timeline'
+import styles from '../../styles/App'
+import BackButtonBehaviour from '../../common/utils/BackButtonBehaviour'
 
 class PublisherTimeline extends Component {
   constructor (props) {
@@ -31,7 +31,7 @@ class PublisherTimeline extends Component {
     return (
       <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
         <View style={styles.listViewContainer}>
-          <TimelineControl data={this.props.data} />
+          <Timeline data={this.props.data} />
         </View>
       </BackButtonBehaviour>
     )
