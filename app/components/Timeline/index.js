@@ -29,19 +29,19 @@ class Timeline extends Component {
   rowsAndSections () {
     let rows = {}
     let sections = []
-    const { timeline } = this.props.data
 
-    if (!timeline || !timeline.length) return {rows, sections}
+    const { items } = this.props.data
 
-    timeline.forEach(item => {
-      if (item.stories.length) {
-        let section = item.date
-        sections.push(section)
-        rows[section] = item.stories
-      }
+    if (!items || !items.length) return { rows, sections }
+
+    items.forEach(item => {
+      const { date, stories } = item
+      if (!stories.length) return
+      sections.push(date)
+      rows[date] = stories
     })
 
-    return {rows, sections}
+    return { rows, sections }
   }
 
   refreshControl () {
@@ -60,9 +60,8 @@ class Timeline extends Component {
   }
 
   render () {
-    const { timeline } = this.props.data
-
-    if (!timeline || !timeline.length) return null
+    const { items } = this.props.data
+    if (!items || !items.length) return null
 
     return (
       <ListView
@@ -99,7 +98,11 @@ class Timeline extends Component {
 }
 
 Timeline.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    items: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    pullToRefresh: PropTypes.func.isRequired
+  }).isRequired,
   onEndReached: PropTypes.func.isRequired,
   renderFooter: PropTypes.func.isRequired
 }
