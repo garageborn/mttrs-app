@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Image, Platform } from 'react-native'
+import { Image, Platform, PixelRatio } from 'react-native'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import Placeholder from './components/Placeholder'
 import styles from './styles'
@@ -53,7 +53,7 @@ class StoryImage extends Component {
   }
 
   getImage () {
-    let options = { type: 'fetch', width: 240, height: 180, crop: 'fit', secure: true }
+    let options = { type: 'fetch', width: 120, height: 90, dpr: PixelRatio.get(), crop: 'fit', secure: true }
     return { uri: cloudinary.url(this.props.source, options) }
   }
 
