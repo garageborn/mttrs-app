@@ -2,10 +2,10 @@ import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../index.gql'
 
 const Query = gql`
-  query($days: Int!, $offset: Int, $timezone: String, $type: String!, $perDay: Int!, $publisherSlug: String) {
-    timeline(days: $days, offset: $offset, timezone: $timezone, type: $type) {
+  query($cursor: Int, $timezone: String, $type: String!, $limit: Int!, $publisherSlug: String) {
+    timeline(cursor: $cursor, timezone: $timezone, type: $type, limit: $limit, publisher_slug: $publisherSlug) {
       date
-      stories(limit: $perDay, popular: true, publisher_slug: $publisherSlug) {
+      stories {
         id
         total_social
         headline

@@ -1,46 +1,67 @@
 import { graphql } from 'react-apollo'
-import _sortBy from 'lodash/sortBy'
 import _uniqBy from 'lodash/uniqBy'
+import _isArray from 'lodash/isArray'
 import { timezone } from '../../config/IntlProvider'
 
 export const defaultVariables = {
-  days: 1,
-  offset: 0,
-  perDay: 16,
+  limit: 16,
   timezone
 }
 
 const pullToRefresh = ({ fetchMore, variables }) => {
   return fetchMore({
-    variables: { ...variables, days: 1, offset: 0 },
+    variables: { ...variables, cursor: null },
     updateQuery: (previousResult, { fetchMoreResult }) => {
-      if (!fetchMoreResult.data) { return previousResult }
-      let timeline = fetchMoreResult.data.timeline.concat(previousResult.timeline)
+      if (!fetchMoreResult.data) return previousResult
+
+      const newTimeline = fetchMoreResult.data.timeline
+      if (!newTimeline) return previousResult
+
+      let timeline = [newTimeline].concat(previousResult.timeline)
       timeline = _uniqBy(timeline, item => item.date)
-      timeline = _sortBy(timeline, item => -item.date)
       return Object.assign({}, previousResult, { timeline: [...timeline] })
     }
   })
 }
 
 const infiniteScroll = ({ fetchMore, variables, timeline }) => {
+  const items = _isArray(timeline) ? timeline : [timeline]
+  if (!hasMore(items)) return
+
+  const lastItem = items[items.length - 1]
+
   return fetchMore({
-    variables: { ...variables, days: 1, offset: timeline.length },
+    variables: { ...variables, cursor: lastItem.date },
     updateQuery: (previousResult, { fetchMoreResult }) => {
-      if (!fetchMoreResult.data) { return previousResult }
-      return Object.assign({}, previousResult, {
-        timeline: [...previousResult.timeline, ...fetchMoreResult.data.timeline]
-      })
+      if (!fetchMoreResult.data) return previousResult
+
+      const previousTimeline = _isArray(previousResult.timeline) ? previousResult.timeline : [previousResult.timeline]
+
+      return {
+        timeline: previousTimeline.concat(fetchMoreResult.data.timeline)
+      }
     }
   })
+}
+
+const hasMore = (items) => {
+  const lastItem = items[items.length - 1]
+  return lastItem && lastItem.stories && lastItem.stories.length > 0
 }
 
 export default function (Query, options) {
   const defaultOptions = {
     props ({ data }) {
+      const { error, loading, timeline, variables } = data
+      const items = _isArray(timeline) ? timeline : [timeline]
+
       return {
         data: {
-          ...data,
+          loading,
+          error,
+          variables,
+          items,
+          hasMore: hasMore(items),
           pullToRefresh: pullToRefresh.bind(this, data),
           infiniteScroll: infiniteScroll.bind(this, data)
         }

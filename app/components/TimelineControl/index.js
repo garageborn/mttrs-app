@@ -41,17 +41,12 @@ class TimelineControl extends Component {
   }
 
   onEndReached () {
-    if (this.state.loadingMore || !this.props.data.timeline || !this.props.data.timeline.length) return
+    const { hasMore, infiniteScroll } = this.props.data
 
-    const storiesCount = this.props.data.timeline.reduce((sum, item) => {
-      return sum + item.stories.length
-    }, 0)
+    if (this.state.loadingMore || !hasMore) return
 
-    const minStoriesInTheViewport = 3
-    if (storiesCount < minStoriesInTheViewport) return
-    // Reference: https://github.com/apollostack/react-apollo/issues/228
     this.setState({ loadingMore: true })
-    this.props.data.infiniteScroll().then(() => {
+    infiniteScroll().then(() => {
       this.setState({ loadingMore: false })
     })
   }
@@ -73,7 +68,7 @@ class TimelineControl extends Component {
 TimelineControl.propTypes = {
   data: PropTypes.shape({
     infiniteScroll: PropTypes.func.isRequired,
-    timeline: PropTypes.array
+    items: PropTypes.array.isRequired
   }).isRequired
 }
 

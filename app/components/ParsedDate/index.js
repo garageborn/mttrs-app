@@ -24,6 +24,7 @@ const messages = defineMessages({
 class ParsedDate extends Component {
   parser (date) {
     let { intl } = this.props
+    moment.locale(intl.locale)
     switch (date) {
       case 'last_week':
         return intl.formatMessage(messages.lastWeek)
