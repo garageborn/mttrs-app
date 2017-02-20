@@ -4,12 +4,18 @@ import Timeline from '../Timeline'
 import ApolloError from '../ApolloError'
 import styles from './styles'
 
+const minStoriesInTheViewport = 4
+
 class TimelineControl extends Component {
   constructor (props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
     this.state = { loadingMore: false }
+  }
+
+  componentDidUpdate () {
+    this.fillTimeline()
   }
 
   render () {
@@ -46,9 +52,13 @@ class TimelineControl extends Component {
     if (this.state.loadingMore || !hasMore) return
 
     this.setState({ loadingMore: true })
-    infiniteScroll().then(() => {
-      this.setState({ loadingMore: false })
-    })
+    infiniteScroll().then(() => this.setState({ loadingMore: false }))
+  }
+
+  fillTimeline () {
+    const storiesCount = this.storiesCount
+    if (this.props.loading || !storiesCount) return
+    if (storiesCount < minStoriesInTheViewport) this.onEndReached()
   }
 
   renderFooter () {
@@ -62,6 +72,17 @@ class TimelineControl extends Component {
 
   renderActivityIndicator () {
     return <ActivityIndicator size='large' color='#AAA' />
+  }
+
+  get storiesCount () {
+    const { items } = this.props.data
+    if (!items || items.length === 0) return 0
+
+    return items.reduce((sum, item) => {
+      let length = 0
+      if (item && item.stories && item.stories.length) length = item.stories.length
+      return sum + length
+    }, 0)
   }
 }
 

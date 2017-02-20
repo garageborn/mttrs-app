@@ -53,7 +53,14 @@ class StoryImage extends Component {
   }
 
   getImage () {
-    let options = { type: 'fetch', width: 120, height: 90, dpr: PixelRatio.get(), crop: 'fit', secure: true }
+    let options = {
+      crop: 'fit',
+      dpr: PixelRatio.get(),
+      height: 90,
+      secure: true,
+      type: 'fetch',
+      width: 120
+    }
     return { uri: cloudinary.url(this.props.source, options) }
   }
 

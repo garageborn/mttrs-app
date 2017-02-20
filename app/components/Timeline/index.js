@@ -65,17 +65,17 @@ class Timeline extends Component {
 
     return (
       <ListView
-        ref={'timeline'}
-        pageSize={4}
-        style={styles.listView}
+        collapsable={false}
         dataSource={this.dataSource()}
-        renderRow={this.renderRow}
-        renderSectionHeader={this.renderSectionHeader}
+        onEndReached={this.props.onEndReached}
+        onEndReachedThreshold={200}
+        pageSize={4}
+        ref={'timeline'}
         refreshControl={this.refreshControl()}
         renderFooter={this.props.renderFooter}
-        onEndReachedThreshold={200}
-        onEndReached={this.props.onEndReached}
-        collapsable={false}
+        renderRow={this.renderRow}
+        renderSectionHeader={this.renderSectionHeader}
+        style={styles.listView}
       />
     )
   }
