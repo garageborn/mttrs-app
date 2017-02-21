@@ -99,23 +99,7 @@ module Fastlane
         end
 
         def sentry_release
-          "#{ platform }_#{ version_number }_#{ build_number }"
-        end
-
-        def version_number
-          if platform == :ios
-            GetVersionNumberAction.run(xcodeproj: 'ios/mttrs.xcodeproj')
-          else
-            GetAndroidReleaseAction.run[:version_name]
-          end
-        end
-
-        def build_number
-          if platform == :ios
-            GetBuildNumberAction.run(xcodeproj: 'ios/mttrs.xcodeproj')
-          else
-            GetAndroidReleaseAction.run[:version_code]
-          end
+          GetReleaseIdAction.run(platform: platform)
         end
       end
     end
