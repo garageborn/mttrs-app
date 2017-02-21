@@ -13,6 +13,7 @@ GEM
     ast (2.3.0)
     babosa (1.0.2)
     brakeman (3.5.0)
+    byebug (9.0.6)
     claide (1.0.1)
     colored (1.2)
     commander (4.4.3)
@@ -198,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  byebug (= 9.0.6)
   fastlane (= 2.17.1)
   pronto (= 0.8.1)
   pronto-brakeman (= 0.8.0)

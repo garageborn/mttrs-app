@@ -9,4 +9,8 @@ group :development do
 
   gem 'fastlane', '2.17.1'
   gem 'rake', '12.0.0'
+  gem 'byebug', '9.0.6'
 end
+
+plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
+eval(File.read(plugins_path), binding) if File.exist?(plugins_path)
