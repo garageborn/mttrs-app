@@ -81,10 +81,10 @@ module Fastlane
 
         def cleanup
           UI.message 'cleanup'
-          sh <<-CMD
-            cd #{ ENV['PWD'] } &&
-            rm -rf #{ JSBUNDLE_NAME } #{ JSBUNDLE_MAP_NAME } #{ JSBUNDLE_META_NAME }
-          CMD
+          # sh <<-CMD
+          #   cd #{ ENV['PWD'] } &&
+          #   rm -rf #{ JSBUNDLE_NAME } #{ JSBUNDLE_MAP_NAME } #{ JSBUNDLE_META_NAME }
+          # CMD
         end
 
         def platform
