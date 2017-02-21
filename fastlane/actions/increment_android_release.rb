@@ -1,6 +1,6 @@
 module Fastlane
   module Actions
-    class PersistNextReleaseAction < Action
+    class IncrementAndroidReleaseAction < Action
       class << self
         def run(_params = {})
           UI.message 'Persist Next Release'
