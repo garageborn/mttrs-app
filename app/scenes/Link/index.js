@@ -65,7 +65,7 @@ class LinkScene extends Component {
 
   render () {
     const { url } = this.props.route.params.link
-    if (this.state.appState !== 'active ') return null
+    if (this.state.appState !== 'active') return null
     return (
       <StoryWebView
         url={url}
