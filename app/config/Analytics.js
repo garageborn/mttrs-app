@@ -1,2 +1,4 @@
 import { GoogleAnalyticsTracker } from 'react-native-google-analytics-bridge'
-export default new GoogleAnalyticsTracker('UA-88576828-1')
+let analyticsId = 'UA-88576828-1'
+if (this.__DEV__) analyticsId = ''
+export default new GoogleAnalyticsTracker(analyticsId)
