@@ -1,9 +1,5 @@
 module Fastlane
   module Actions
-    module SharedValues
-      SENTRY_RELEASE_CUSTOM_VALUE = :SENTRY_RELEASE_CUSTOM_VALUE
-    end
-
     class SentryReleaseAction < Action
       class << self
         SENTRY_ORGANIZATION = 'garage-born'.freeze
@@ -110,6 +106,7 @@ module Fastlane
           if platform == :ios
             GetVersionNumberAction.run(xcodeproj: 'ios/mttrs.xcodeproj')
           else
+            GetAndroidReleaseAction.run[:version_name]
           end
         end
 
@@ -117,6 +114,7 @@ module Fastlane
           if platform == :ios
             GetBuildNumberAction.run(xcodeproj: 'ios/mttrs.xcodeproj')
           else
+            GetAndroidReleaseAction.run[:version_code]
           end
         end
       end
