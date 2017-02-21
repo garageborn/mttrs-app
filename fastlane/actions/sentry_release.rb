@@ -17,6 +17,7 @@ module Fastlane
           create_release
           upload_jsbundle
           upload_jsbundle_map
+          upload_dsym
           cleanup
         end
 
@@ -77,6 +78,17 @@ module Fastlane
             -F file=@#{ JSBUNDLE_MAP_NAME } \
             -F name="/#{ JSBUNDLE_MAP_NAME }"
           CMD
+        end
+
+        def upload_dsym
+          return unless platform == :ios
+          SentryUploadDsymAction.run(
+            api_host: 'https://sentry.io/api/0',
+            auth_token: SENTRY_TOKEN,
+            dsym_path: 'mttrs.app.dSYM.zip',
+            org_slug: SENTRY_ORGANIZATION,
+            project_slug: SENTRY_APP_NAME,
+          )
         end
 
         def cleanup
