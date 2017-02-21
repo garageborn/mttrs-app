@@ -6,7 +6,7 @@ module Fastlane
       VERSION_NAME_MATCHER = /versionName\s+"(\d+\.\d+)"/.freeze
 
       class << self
-        def run
+        def run(_params = {})
           UI.message 'Get Android Release'
 
           { version_code: version_code, version_name: version_name }

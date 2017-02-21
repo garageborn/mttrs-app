@@ -1,18 +1,9 @@
 update_fastlane
 fastlane_version '2.7.0'
-
 default_platform :ios
 
 platform :ios do
-  before_all do  end
-
-  desc 'Runs all the tests'
-  lane :test do
-    scan
-  end
-
   desc 'Submit a new Beta Build to Apple TestFlight'
-  desc 'This will also make sure the profile is up to date'
   lane :beta do
     # answer = UI.select('Would you like to add a Changelog?', ['Yes', 'No'])
     # changelog = ask('Type Changelog message:') if answer == 'Yes'
@@ -23,27 +14,12 @@ platform :ios do
     pilot(skip_waiting_for_build_processing: true)
   end
 
-  desc 'Deploy a new version to the App Store'
-  lane :release do
-    # match(type: 'appstore')
-    # snapshot
-    gym(scheme: 'mttrs') # Build your app - more options available
-    deliver(force: true)
-    # frameit
-  end
-
-  after_all do |lane|
+  after_all do |_lane|
     sentry_release
-  end
-
-  error do |lane, exception|
   end
 end
 
 platform :android do
-  before_all do
-  end
-
   desc 'Submit a new Alpha Build to Play Store'
   lane :alpha do
     increment_android_release
@@ -52,7 +28,7 @@ platform :android do
     supply(track: 'alpha', apk: 'android/app/build/outputs/apk/app-release.apk') # Upload the APK to the Play Store (alpha)
   end
 
-  after_all do |lane|
+  after_all do |_lane|
     sentry_release
   end
 end

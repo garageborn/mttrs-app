@@ -2,15 +2,11 @@ module Fastlane
   module Actions
     class IncrementAndroidReleaseAction < Action
       class << self
-        def run
+        def run(_params = {})
           UI.message 'Increment Android Release'
 
-          current_release = GetAndroidReleaseAction.run
-          new_version_code = current_release[:version_core] + 1
-
           new_content = File.read(build_file_path).tap do |build_file|
-            versionCode = build_file[matcher, 1].to_i
-            build_file[version_code_matcher, 1] = new_version_code.to_s
+            build_file[version_code_matcher, 1] = next_version_code.to_s
             build_file
           end
 
@@ -29,6 +25,11 @@ module Fastlane
 
         def version_code_matcher
           Fastlane::Actions::GetAndroidReleaseAction::VERSION_CODE_MATCHER
+        end
+
+        def next_version_code
+          current_release = GetAndroidReleaseAction.run
+          current_release[:version_code] + 1
         end
       end
     end
