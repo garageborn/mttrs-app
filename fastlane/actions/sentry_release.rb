@@ -87,15 +87,15 @@ module Fastlane
         end
 
         def jsbundle_name
-          "main.#{ platform }.jsbundle"
+          'main.jsbundle'
         end
 
         def jsbundle_meta_name
-          "main.#{ platform }.jsbundle.meta"
+          'main.jsbundle.meta'
         end
 
         def jsbundle_map_name
-          "main.#{ platform }.jsbundle.map"
+          'main.jsbundle.map'
         end
 
         def sentry_release
