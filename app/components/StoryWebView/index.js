@@ -33,14 +33,6 @@ class StoryWebView extends Component {
     )
   }
 
-  // renderWebView () {
-  //   if (this.props.appState === 'background' && this.props.appState === 'inactive') return <View />
-  //
-  //   return (
-  //
-  //   )
-  // }
-
   render () {
     return (
       <View style={styles.container}>

@@ -3,7 +3,7 @@ import { View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
-import { StorageActions, NavigationActions } from '../../actions/index'
+import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
@@ -47,14 +47,7 @@ class LinkScene extends Component {
   }
 
   handleAppStateChange (appState) {
-    console.log(appState)
-    if (appState === 'background' && appState === 'inactive') return NavigationActions.back()
-    let previousAppStates = this.state.previousAppStates.slice()
-    previousAppStates.push(this.state.appState)
-    this.setState({
-      appState,
-      previousAppStates
-    })
+    this.setState({appState})
   }
 
   addStoryToLocalStorage () {
@@ -73,13 +66,14 @@ class LinkScene extends Component {
 
   render () {
     const { url } = this.props.route.params.link
-
+    if (this.state.appState !== 'active') return null
     return (
       <StoryWebView
         url={url}
         params={this.props.route.params}
         header={this.renderHeader(this.props)}
         onLoadEnd={this.addStoryToLocalStorage}
+        appState={this.state.appState}
       />
     )
   }
