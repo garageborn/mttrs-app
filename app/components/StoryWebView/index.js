@@ -33,18 +33,26 @@ class StoryWebView extends Component {
     )
   }
 
+  renderWebView () {
+    if (this.props.appState !== 'active') return
+
+    return (
+      <WebView
+        ref='webview'
+        source={{uri: this.props.url}}
+        contentInset={{top: this.contentInset()}}
+        renderError={this.handleError}
+        onLoadEnd={this.props.onLoadEnd}
+        mediaPlaybackRequiresUserAction
+      />
+    )
+  }
+
   render () {
     return (
       <View style={styles.container}>
         {this.props.header}
-        <WebView
-          ref='webview'
-          source={{uri: this.props.url}}
-          contentInset={{top: this.contentInset()}}
-          renderError={this.handleError}
-          onLoadEnd={this.props.onLoadEnd}
-          mediaPlaybackRequiresUserAction
-        />
+        {this.renderWebView()}
       </View>
     )
   }
@@ -52,6 +60,7 @@ class StoryWebView extends Component {
 
 StoryWebView.propTypes = {
   header: PropTypes.element,
+  appState: PropTypes.string.isRequired,
   onLoadEnd: PropTypes.func.isRequired,
   url: PropTypes.string.isRequired,
   params: PropTypes.object.isRequired

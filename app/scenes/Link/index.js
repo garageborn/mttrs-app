@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Platform, StatusBar } from 'react-native'
+import { View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
@@ -24,11 +24,35 @@ class LinkScene extends Component {
 
   constructor () {
     super()
+
+    this.state = {
+      appState: AppState.currentState,
+      previousAppStates: []
+    }
+
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
     this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
   componentWillMount () {
     this.createAccess()
+  }
+
+  componentDidMount () {
+    AppState.addEventListener('change', this.handleAppStateChange)
+  }
+
+  componentWillUnmount () {
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange (appState) {
+    let previousAppStates = this.state.previousAppStates.slice()
+    previousAppStates.push(this.state.appState)
+    this.setState({
+      appState,
+      previousAppStates
+    })
   }
 
   addStoryToLocalStorage () {
@@ -51,6 +75,7 @@ class LinkScene extends Component {
     return (
       <StoryWebView
         url={url}
+        appState={this.state.appState}
         params={this.props.route.params}
         header={this.renderHeader(this.props)}
         onLoadEnd={this.addStoryToLocalStorage}
