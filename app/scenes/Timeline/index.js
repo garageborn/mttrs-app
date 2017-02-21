@@ -23,6 +23,7 @@ class TimelineScene extends Component {
   }
 
   render () {
+    return batata
     return (
       <View>
         {this.renderTimeline()}
