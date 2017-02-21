@@ -35,7 +35,7 @@ module Fastlane
           sh <<-CMD
             cd #{ ENV['PWD'] } &&
             react-native bundle \
-              --dev false \
+              --dev true \
               --platform #{ platform } \
               --entry-file index.#{ platform }.js \
               --bundle-output #{ JSBUNDLE_NAME } \
@@ -81,10 +81,10 @@ module Fastlane
 
         def cleanup
           UI.message 'cleanup'
-          # sh <<-CMD
-          #   cd #{ ENV['PWD'] } &&
-          #   rm -rf #{ JSBUNDLE_NAME } #{ JSBUNDLE_MAP_NAME } #{ JSBUNDLE_META_NAME }
-          # CMD
+          sh <<-CMD
+            cd #{ ENV['PWD'] } &&
+            rm -rf #{ JSBUNDLE_NAME } #{ JSBUNDLE_MAP_NAME } #{ JSBUNDLE_META_NAME }
+          CMD
         end
 
         def platform
@@ -97,10 +97,7 @@ module Fastlane
 
         def remove_pwd_from_sourcemap
           new_content = File.read(JSBUNDLE_MAP_PATH)
-          p '-------------------------------------'
-          p ENV['PWD']
-          matcher = "#{ ENV['PWD'] }/"
-          new_content.gsub!(matcher, '')
+          new_content.gsub!(ENV['PWD'], '')
           File.write(JSBUNDLE_MAP_PATH, new_content)
         end
       end
