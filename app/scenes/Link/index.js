@@ -72,7 +72,6 @@ class LinkScene extends Component {
         params={this.props.route.params}
         header={this.renderHeader(this.props)}
         onLoadEnd={this.addStoryToLocalStorage}
-        appState={this.state.appState}
       />
     )
   }
