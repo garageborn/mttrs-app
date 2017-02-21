@@ -35,7 +35,7 @@ module Fastlane
           sh <<-CMD
             cd #{ ENV['PWD'] } &&
             react-native bundle \
-              --dev true \
+              --dev false \
               --platform #{ platform } \
               --entry-file index.#{ platform }.js \
               --bundle-output #{ JSBUNDLE_NAME } \
