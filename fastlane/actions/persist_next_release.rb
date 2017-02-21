@@ -7,7 +7,7 @@ module Fastlane
         def run(_params = {})
           UI.message 'Persist Next Release'
 
-          File.write(BUILD_FILE_PATH, new_content.to_json)
+          File.write(BUILD_FILE_PATH, versions.to_json)
         end
 
         def is_supported?(platform)

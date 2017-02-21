@@ -2,11 +2,11 @@ module Fastlane
   module Actions
     class GetReleaseIdAction < Action
       class << self
-        def run(_params = {})
+        def run(params = {})
           UI.message 'Get Next Release ID'
 
           platform = params[:platform]
-          "#{ platform }_#{ version_number }_#{ build_number }"
+          "#{ platform }_#{ version_number(platform) }_#{ build_number(platform) }"
         end
 
         def is_supported?(platform)
