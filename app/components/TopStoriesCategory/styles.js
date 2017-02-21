@@ -9,20 +9,30 @@ const imageHeight = Platform.select({
   android: 72
 })
 
+const categoryHeightDivider = Platform.select({
+  ios: 7.5,
+  android: 8
+})
+
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 17,
-    marginBottom: width === iphoneWidthSmall ? 12 : 5
+    marginBottom: width === iphoneWidthSmall ? 8 : 4
   },
 
   topStories: {
     backgroundColor: '#555',
     width: tileWidth,
-    height: height / 8,
-    borderBottomWidth: 2
+    height: height / categoryHeightDivider
+  },
+
+  borderBottom: {
+    height: 2.5,
+    width: tileWidth
   },
 
   image: {
+    flexGrow: 1,
     width: tileWidth,
     height: imageHeight,
     alignItems: 'flex-end',

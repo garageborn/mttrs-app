@@ -17,13 +17,14 @@ const CategoryTile = ({ onPress, category }) => {
   return (
     <View style={styles.container}>
       <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress(category)}>
-        <View style={[styles.category, { borderBottomColor: category.color }]} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
+        <View style={styles.category} shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} elevation={1}>
           <Image style={styles.image} source={{uri: image()}}>
             <LinearGradient
               colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)']}
               style={styles.gradient}
             >
               <Text style={styles.name} numberOfLines={2}>{category.name}</Text>
+              <View style={[styles.borderBottom, {backgroundColor: category.color}]} />
             </LinearGradient>
           </Image>
         </View>
