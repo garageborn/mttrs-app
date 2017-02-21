@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
 import CategoryTimeline from '../CategoryTimeline'
+import HeaderBottomColorContainer from '../HeaderBottomColorContainer'
 import ApolloError from '../../components/ApolloError'
 import styles from '../../styles/App'
 
@@ -105,8 +107,25 @@ class CategoriesTimeline extends Component {
         style={styles.listViewContainer}
         navigationState={this.state.navigationState}
         renderScene={this.renderScene}
+        renderHeader={this.renderHeader}
         onRequestChangeTab={this.handleChangeTab}
         lazy
+      />
+    )
+  }
+
+  renderHeader (props) {
+    const { getLastPosition, position, subscribe } = props
+    // console.log('')
+    // console.log('renderHeader', props)
+    // console.log('  getLastPosition', props.getLastPosition())
+    // console.log('  position', props.position)
+    // return <View><Text>Batata</Text></View>
+    return (
+      <HeaderBottomColorContainer
+        lastPosition={getLastPosition()}
+        position={position}
+        subscribe={subscribe}
       />
     )
   }

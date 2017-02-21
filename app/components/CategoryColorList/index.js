@@ -16,46 +16,55 @@ class CategoryColorList extends Component {
   }
 
   renderHome () {
+    const { lastPosition, position, subscribe } = this.props
     return (
       <CategoryColor
-        categoriesLength={this.props.data.categories.length}
+        index={0}
         color='#FF5607'
-        isActive={this.isHome()}
+        isActive={false}
+        lastPosition={lastPosition}
+        position={position}
+        subscribe={subscribe}
       />
     )
   }
 
   renderCategories () {
-    return this.props.data.categories.map(category => this.renderCategory(category))
+    const { data, lastPosition, position, subscribe } = this.props
+
+    return data.categories.map((category, index) => {
+      return (
+        <CategoryColor
+          index={index + 1}
+          key={category.id}
+          color={category.color}
+          isActive={false}
+          lastPosition={lastPosition}
+          position={position}
+          subscribe={subscribe}
+        />
+      )
+    })
   }
 
-  renderCategory (category) {
-    return (
-      <CategoryColor
-        categoriesLength={this.props.data.categories.length}
-        key={category.id}
-        color={category.color}
-        isActive={this.isActive(category)}
-      />
-    )
-  }
+  // isActive (currentSection) {
+  //   const { section } = this.props.params
+  //   if (!section.model) return false
+  //   return currentSection.slug === section.model.slug
+  // }
 
-  isActive (currentSection) {
-    const { section } = this.props.params
-    if (!section.model) return false
-    return currentSection.slug === section.model.slug
-  }
-
-  isHome () {
-    const { section } = this.props.params
-    if (!section.model) return true
-    return section.name === 'home'
-  }
+  // isHome () {
+  //   const { section } = this.props.params
+  //   if (!section.model) return true
+  //   return section.name === 'home'
+  // }
 }
 
 CategoryColorList.propTypes = {
   data: PropTypes.object.isRequired,
-  params: PropTypes.object.isRequired
+  lastPosition: PropTypes.number.isRequired,
+  position: PropTypes.any.isRequired,
+  subscribe: PropTypes.func.isRequired
 }
 
 export default CategoryColorList

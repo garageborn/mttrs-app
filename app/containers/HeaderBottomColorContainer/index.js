@@ -1,31 +1,27 @@
-import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
-import HeaderStripColor from '../../components/HeaderStripColor'
+import React, { Component, PropTypes } from 'react'
 import CategoryColorList from '../../components/CategoryColorList'
 import withQuery from './index.gql'
 
-const HeaderBottomColorContainer = ({uiReducer, type, data, params}) => {
-  if (uiReducer.menu.isOpen) return false
-
-  if (type === 'publisher') return <HeaderStripColor type={type} />
-
-  if (data.error) return null
-
-  return <CategoryColorList type={type} data={data} params={params} />
-}
-
-HeaderBottomColorContainer.propTypes = {
-  type: PropTypes.string,
-  data: PropTypes.object.isRequired,
-  params: PropTypes.object,
-  uiReducer: PropTypes.object.isRequired
-}
-
-let mapStateToProps = state => {
-  return {
-    uiReducer: state.uiReducer
+class HeaderBottomColorContainer extends Component {
+  render () {
+    const { data, lastPosition, position, subscribe } = this.props
+    if (data.error) return null
+    return (
+      <CategoryColorList
+        data={data}
+        lastPosition={lastPosition}
+        position={position}
+        subscribe={subscribe}
+      />
+    )
   }
 }
 
-const HeaderBottomColorContainerWithData = withQuery(HeaderBottomColorContainer)
-export default connect(mapStateToProps)(HeaderBottomColorContainerWithData)
+HeaderBottomColorContainer.propTypes = {
+  data: PropTypes.object.isRequired,
+  lastPosition: PropTypes.number.isRequired,
+  position: PropTypes.any.isRequired,
+  subscribe: PropTypes.func.isRequired
+}
+
+export default withQuery(HeaderBottomColorContainer)
