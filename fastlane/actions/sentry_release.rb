@@ -5,6 +5,10 @@ module Fastlane
         SENTRY_ORGANIZATION = 'garage-born'.freeze
         SENTRY_TOKEN = 'cb656b3c64924e48a38150b665ff456b7bde20c4b19c40258eb52bffebcb48af'.freeze
         SENTRY_APP_NAME = 'mttrs-app'.freeze
+        JSBUNDLE_NAME = 'main.jsbundle'.freeze
+        JSBUNDLE_META_NAME = 'main.jsbundle.meta'.freeze
+        JSBUNDLE_MAP_NAME = 'main.jsbundle.map'.freeze
+        JSBUNDLE_MAP_PATH = File.expand_path("../../../#{ JSBUNDLE_MAP_NAME }", __FILE__)
 
         def run(params)
           UI.message 'Sentry Release'
@@ -34,9 +38,10 @@ module Fastlane
               --dev false \
               --platform #{ platform } \
               --entry-file index.#{ platform }.js \
-              --bundle-output #{ jsbundle_name } \
-              --sourcemap-output #{ jsbundle_map_name }
+              --bundle-output #{ JSBUNDLE_NAME } \
+              --sourcemap-output #{ JSBUNDLE_MAP_NAME }
           CMD
+          remove_pwd_from_sourcemap
         end
 
         def create_release
@@ -57,8 +62,8 @@ module Fastlane
             curl https://sentry.io/api/0/projects/#{ SENTRY_ORGANIZATION }/#{ SENTRY_APP_NAME }/releases/#{ sentry_release }/files/ \
               -X POST \
               -H 'Authorization: Bearer #{ SENTRY_TOKEN }' \
-              -F file=@#{ jsbundle_name } \
-              -F name="/#{ jsbundle_name }"
+              -F file=@#{ JSBUNDLE_NAME } \
+              -F name="/#{ JSBUNDLE_NAME }"
           CMD
         end
 
@@ -69,8 +74,8 @@ module Fastlane
             curl https://sentry.io/api/0/projects/#{ SENTRY_ORGANIZATION }/#{ SENTRY_APP_NAME }/releases/#{ sentry_release }/files/ \
             -X POST \
             -H 'Authorization: Bearer #{ SENTRY_TOKEN }' \
-            -F file=@#{ jsbundle_map_name } \
-            -F name="/#{ jsbundle_map_name }"
+            -F file=@#{ JSBUNDLE_MAP_NAME } \
+            -F name="/#{ JSBUNDLE_MAP_NAME }"
           CMD
         end
 
@@ -78,7 +83,7 @@ module Fastlane
           UI.message 'cleanup'
           sh <<-CMD
             cd #{ ENV['PWD'] } &&
-            rm -rf #{ jsbundle_name } #{ jsbundle_map_name } #{ jsbundle_meta_name }
+            rm -rf #{ JSBUNDLE_NAME } #{ JSBUNDLE_MAP_NAME } #{ JSBUNDLE_META_NAME }
           CMD
         end
 
@@ -86,20 +91,14 @@ module Fastlane
           lane_context[:PLATFORM_NAME]
         end
 
-        def jsbundle_name
-          'main.jsbundle'
-        end
-
-        def jsbundle_meta_name
-          'main.jsbundle.meta'
-        end
-
-        def jsbundle_map_name
-          'main.jsbundle.map'
-        end
-
         def sentry_release
           GetReleaseIdAction.run(platform: platform)
+        end
+
+        def remove_pwd_from_sourcemap
+          new_content = File.read(JSBUNDLE_MAP_PATH)
+          new_content.gsub!(ENV['PWD'], '')
+          File.write(JSBUNDLE_MAP_PATH, new_content)
         end
       end
     end
