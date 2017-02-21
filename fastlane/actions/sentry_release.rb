@@ -97,7 +97,10 @@ module Fastlane
 
         def remove_pwd_from_sourcemap
           new_content = File.read(JSBUNDLE_MAP_PATH)
-          new_content.gsub!(ENV['PWD'], '')
+          p '-------------------------------------'
+          p ENV['PWD']
+          matcher = "#{ ENV['PWD'] }/"
+          new_content.gsub!(matcher, '')
           File.write(JSBUNDLE_MAP_PATH, new_content)
         end
       end

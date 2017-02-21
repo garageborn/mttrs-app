@@ -23,7 +23,7 @@ class TimelineScene extends Component {
   }
 
   render () {
-    return LuciferEORei
+    return CapetaCapetaCapeta
     return (
       <View>
         {this.renderTimeline()}
