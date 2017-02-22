@@ -4,7 +4,7 @@ import Touchable from '../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import LinearGradient from 'react-native-linear-gradient'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
-import cover from './assets/highlights.jpg'
+import cover from './assets/highlights.png'
 import styles from './styles'
 
 const messages = defineMessages({
