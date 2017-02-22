@@ -11,7 +11,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: 0,
+    marginBottom: Platform.select({
+      ios: 0,
+      android: 10
+    }),
     borderRadius: 5
   },
 
