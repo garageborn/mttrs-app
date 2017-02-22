@@ -11,16 +11,15 @@ import { DARK_COLOR } from '../../constants/Colors'
 
 class TimelineScene extends Component {
   static route = {
-    navigationBar: null
-    // navigationBar: {
-    //   renderTitle: (route) => {
-    //     return <TimelineHeaderContainer params={route.params} />
-    //   },
-    //   renderLeft: () => null,
-    //   renderRight: () => null,
-    //   backgroundColor: DARK_COLOR,
-    //   height: headerHeight
-    // }
+    navigationBar: {
+      renderTitle: (route) => {
+        return <TimelineHeaderContainer params={route.params} />
+      },
+      renderLeft: () => null,
+      renderRight: () => null,
+      backgroundColor: DARK_COLOR,
+      height: headerHeight
+    }
   }
 
   render () {

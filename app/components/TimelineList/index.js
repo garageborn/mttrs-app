@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { ListView } from 'react-native'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
+import _isEqual from 'lodash/isEqual'
 
 class TimelineList extends Component {
   constructor (props) {
@@ -9,6 +10,10 @@ class TimelineList extends Component {
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
   renderSectionHeader (sectionData, date) {
@@ -46,6 +51,9 @@ class TimelineList extends Component {
   render () {
     const { items } = this.props.data
     if (!items || !items.length) return null
+
+    console.log('render', this.props.data.variables)
+
 
     return (
       <ListView

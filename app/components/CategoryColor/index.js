@@ -1,21 +1,22 @@
 import React, { PropTypes } from 'react'
-import { Animated } from 'react-native'
+import { View } from 'react-native'
 import styles from './styles'
+
+const activeHeight = 20
+const defaultHeight = 3
 
 class CategoryColor extends React.Component {
   constructor () {
     super()
     this.adjustScroll = this.adjustScroll.bind(this)
     this.state = {
-      height: new Animated.Value(3)
+      height: defaultHeight
     }
   }
 
   componentDidMount () {
-    console.log(this.props)
-    // if (this.props.index === 1) {
-      this.positionListener = this.props.subscribe('position', this.adjustScroll)
-    // }
+    if (this.props.lastPosition === this.props.index) this.activate()
+    this.positionListener = this.props.subscribe('position', this.adjustScroll)
   }
 
   componentWillUnmount () {
@@ -24,46 +25,56 @@ class CategoryColor extends React.Component {
 
   adjustScroll (position) {
     const { index } = this.props
-    const isAnimating = position >= index - 1 && position < index + 1
+    const isAnimating = position >= index - 1 && position <= index + 1
     const isTransitioning = !Number.isInteger(position)
-    // console.log('adjustScroll', { position, lastPosition: this.props.lastPosition, isAnimating, isTransitioning })
 
-    // if (!isAnimating) return
+    if (!isAnimating) return
+    if (position === index) return this.activate()
+    if (!isTransitioning) return this.deactivate()
 
-    if (position === index) return this.handleAnimation('up')
-    if (!isTransitioning) return this.handleAnimation('down')
+    this.handleAnimation(this.getPercentage(position))
   }
 
-  shouldComponentUpdate (nextProps) {
-    return this.props.color !== nextProps.color
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.color !== nextProps.color || this.state.height !== nextState.height
   }
 
-  handleAnimation (direction) {
-    console.log('handleAnimation', direction)
-    const nextHeight = direction === 'up' ? 9 : 3
+  handleAnimation (percentage) {
+    const nextHeight = this.getNextHeight(percentage)
     if (this.state.height === nextHeight) return
 
-    Animated.timing(
-      this.state.height, { toValue: nextHeight, duration: 230 }
-    ).start()
-  }
-
-  categoryColorStyles () {
-    let { isActive, color } = this.props
-    // const flexGrowValue = 1.075
-    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
-    return categoryStyles
-    // if (isActive) {
-    //   this.handleAnimation('up')
-    //   return [...categoryStyles, { flexGrow: flexGrowValue }]
-    // } else {
-    //   this.handleAnimation('down')
-    //   return categoryStyles
-    // }
+    this.setState({ height: nextHeight })
   }
 
   render () {
-    return <Animated.View style={this.categoryColorStyles()} />
+    let style = [styles.color, { backgroundColor: this.props.color, height: this.state.height }]
+    return <View style={style} />
+  }
+
+  deactivate () {
+    this.handleAnimation(0)
+  }
+
+  activate () {
+    this.handleAnimation(100)
+  }
+
+  getPercentage (position) {
+    const { index } = this.props
+    let positionDifference
+
+    if (position <= index) {
+      positionDifference = (1 - (index - position)) * 100
+    } else {
+      positionDifference = ((index + 1) - position) * 100
+    }
+
+    return Math.round(positionDifference)
+  }
+
+  getNextHeight (percentage) {
+    const heightDifference = (activeHeight - defaultHeight) * (percentage / 100)
+    return Math.round((defaultHeight + heightDifference) * 100) / 100
   }
 }
 

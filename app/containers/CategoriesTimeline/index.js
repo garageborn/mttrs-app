@@ -116,11 +116,7 @@ class CategoriesTimeline extends Component {
 
   renderHeader (props) {
     const { getLastPosition, position, subscribe } = props
-    // console.log('')
-    // console.log('renderHeader', props)
-    // console.log('  getLastPosition', props.getLastPosition())
-    // console.log('  position', props.position)
-    // return <View><Text>Batata</Text></View>
+
     return (
       <HeaderBottomColorContainer
         lastPosition={getLastPosition()}

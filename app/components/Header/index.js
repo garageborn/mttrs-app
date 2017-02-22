@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Text, Image } from 'react-native'
 import Touchable from '../Touchable'
-import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
+// import HeaderBottomColorContainer from '../../containers/HeaderBottomColorContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import arrow from './assets/arrow.png'
 import styles from './styles'
@@ -18,7 +18,7 @@ const Header = ({ title, toggleMenu, icon, params, type, menuIsOpen }) => {
           </View>
         </Touchable>
       </View>
-      <HeaderBottomColorContainer type={type} params={params} />
+      {/*<HeaderBottomColorContainer type={type} params={params} />*/}
     </View>
   )
 }
