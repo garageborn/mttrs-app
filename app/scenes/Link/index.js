@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Platform, AppState } from 'react-native'
+import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
@@ -24,13 +24,8 @@ class LinkScene extends Component {
 
   constructor () {
     super()
-
-    this.state = {
-      appState: AppState.currentState
-    }
-
+    this.state = { appState: AppState.currentState }
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
-    this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
   componentWillMount () {
@@ -39,6 +34,7 @@ class LinkScene extends Component {
 
   componentDidMount () {
     AppState.addEventListener('change', this.handleAppStateChange)
+    InteractionManager.runAfterInteractions(() => this.addStoryToLocalStorage())
   }
 
   componentWillUnmount () {
@@ -46,7 +42,7 @@ class LinkScene extends Component {
   }
 
   handleAppStateChange (appState) {
-    this.setState({appState})
+    this.setState({ appState })
   }
 
   addStoryToLocalStorage () {
@@ -71,7 +67,6 @@ class LinkScene extends Component {
         url={url}
         params={this.props.route.params}
         header={this.renderHeader(this.props)}
-        onLoadEnd={this.addStoryToLocalStorage}
       />
     )
   }
