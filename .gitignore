@@ -61,6 +61,9 @@ tsconfig.json
 /fastlane/screenshots/screenshots.html
 /fastlane/screenshots/*/*-portrait_framed.png
 /fastlane/screenshots/*/*-landscape_framed.png
+*.jsbundle
+*.jsbundle.map
+*.jsbundle.meta
 # fastlane
 #
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the

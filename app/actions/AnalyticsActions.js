@@ -5,10 +5,5 @@ export function trackScreen (screen) {
 }
 
 export function trackLink (link) {
-  return () => {
-    analytics.trackEvent(
-      link.url,
-      'Open'
-    )
-  }
+  return () => analytics.trackEvent(link.url, 'Open')
 }

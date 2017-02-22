@@ -4,12 +4,7 @@ const { width, height } = Dimensions.get('window')
 
 const categoryVerticalMargin = Platform.select({
   ios: width === iphoneWidthSmall ? 8 : 8.5,
-  android: 4
-})
-
-const imageHeight = Platform.select({
-  ios: width === iphoneWidthSmall ? 75 : 86,
-  android: 80
+  android: 4.5
 })
 
 const categoryHeightDivider = Platform.select({
@@ -32,15 +27,19 @@ const styles = StyleSheet.create({
     height: height / categoryHeightDivider,
     padding: 0,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    borderBottomWidth: 2.5
+    justifyContent: 'flex-end'
+  },
+
+  borderBottom: {
+    height: 2.5,
+    width: tileWidth
   },
 
   image: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    width: tileWidth,
-    height: imageHeight
+    width: tileWidth
   },
 
   name: {

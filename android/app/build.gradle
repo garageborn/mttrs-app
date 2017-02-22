@@ -102,13 +102,13 @@ repositories {
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 24
-        versionCode 117
+        versionCode 120
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
