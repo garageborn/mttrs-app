@@ -3,12 +3,17 @@ import { ActivityIndicator, RefreshControl, View } from 'react-native'
 import TimelineList from '../TimelineList'
 import ApolloError from '../ApolloError'
 import styles from './styles'
+import _isEqual from 'lodash/isEqual'
 
 class Timeline extends Component {
   constructor (props) {
     super(props)
     this.renderFooter = this.renderFooter.bind(this)
     this.refreshControl = this.refreshControl.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
   render () {
