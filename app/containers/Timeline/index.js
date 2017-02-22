@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import TimelineComponent from '../../components/Timeline'
+import { StorageActions } from '../../actions/index'
 
 const minStoriesInTheViewport = 4
 
@@ -12,6 +14,10 @@ class Timeline extends Component {
       loadingMore: false,
       loadingPullToRefresh: false
     }
+  }
+
+  componentWillMount () {
+    this.props.dispatch(StorageActions.getVisitedStories())
   }
 
   componentDidUpdate () {
@@ -73,4 +79,4 @@ Timeline.propTypes = {
   }).isRequired
 }
 
-export default Timeline
+export default connect()(Timeline)

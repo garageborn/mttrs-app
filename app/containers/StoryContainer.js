@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
-import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
+import { NavigationActions, AnalyticsActions } from '../actions/index'
 
 class StoryContainer extends Component {
   constructor (props) {
@@ -10,10 +10,6 @@ class StoryContainer extends Component {
     this.openStoryLinks = this.openStoryLinks.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
     this.openCategory = this.openCategory.bind(this)
-  }
-
-  componentWillMount () {
-    this.props.dispatch(StorageActions.getVisitedStories())
   }
 
   render () {
