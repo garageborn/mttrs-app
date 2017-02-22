@@ -35,7 +35,7 @@ class LinkHeaderContainer extends Component {
     let { currentTenantId } = this.props
     let tenant = TENANTS.find(tenant => currentTenantId === tenant.id)
 
-    return tenant.sharingDomain + 'link/' + slug
+    return `${tenant.sharingDomain}/link/${slug}`
   }
 
   get publisherLogo () {
