@@ -17,14 +17,14 @@ class Timeline extends Component {
     if (data.error) return this.renderError()
 
     return (
-      <View style={styles.container}>
+
         <TimelineList
           data={data}
           onEndReached={onEndReached}
           renderFooter={this.renderFooter}
           refreshControl={this.refreshControl}
         />
-      </View>
+
     )
   }
 
@@ -35,7 +35,6 @@ class Timeline extends Component {
   renderLoading () {
     return (
       <View style={styles.loading}>
-        {this.renderActivityIndicator()}
       </View>
     )
   }

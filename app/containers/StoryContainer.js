@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { View,Text } from 'react-native'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
 import { NavigationActions, StorageActions, AnalyticsActions } from '../actions/index'
@@ -13,12 +14,12 @@ class StoryContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(StorageActions.getVisitedStories())
+    // this.props.dispatch(StorageActions.getVisitedStories())
   }
 
   render () {
     const { scrollToY, story, timelineRef, visited } = this.props
-
+    return <View><Text>{story.main_link.title}</Text></View>
     return (
       <Story
         story={story}
