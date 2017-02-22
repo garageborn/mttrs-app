@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { ListView } from 'react-native'
+import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
-import _isEqual from 'lodash/isEqual'
 
 class TimelineList extends Component {
   constructor (props) {
@@ -52,9 +52,6 @@ class TimelineList extends Component {
     const { items } = this.props.data
     if (!items || !items.length) return null
 
-    console.log('render', this.props.data.variables)
-
-
     return (
       <ListView
         collapsable={false}
@@ -90,9 +87,7 @@ class TimelineList extends Component {
 
 TimelineList.propTypes = {
   data: PropTypes.shape({
-    items: PropTypes.array.isRequired,
-    loading: PropTypes.bool.isRequired,
-    pullToRefresh: PropTypes.func.isRequired
+    items: PropTypes.array.isRequired
   }).isRequired,
   onEndReached: PropTypes.func.isRequired,
   refreshControl: PropTypes.func.isRequired,

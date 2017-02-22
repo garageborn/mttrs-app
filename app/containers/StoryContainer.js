@@ -13,13 +13,9 @@ class StoryContainer extends Component {
     this.openCategory = this.openCategory.bind(this)
   }
 
-  componentWillMount () {
-    // this.props.dispatch(StorageActions.getVisitedStories())
-  }
-
   render () {
     const { scrollToY, story, timelineRef, visited } = this.props
-    return <View><Text>{story.main_link.title}</Text></View>
+
     return (
       <Story
         story={story}
