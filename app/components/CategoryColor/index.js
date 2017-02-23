@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react'
-import { Animated } from 'react-native'
-import styles from './styles'
+import { Animated, Easing } from 'react-native'
+import styles, { activeHeight, inactiveHeight } from './styles'
 
 class CategoryColor extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    const initialHeight = props.isActive ? activeHeight : inactiveHeight
     this.state = {
-      height: new Animated.Value(3)
+      height: new Animated.Value(initialHeight)
     }
   }
 
@@ -14,30 +15,47 @@ class CategoryColor extends React.Component {
     return this.props.color !== nextProps.color || this.props.isActive !== nextProps.isActive
   }
 
-  handleAnimation (direction) {
-    const nextHeight = direction === 'up' ? 9 : 3
-    if (this.state.height === nextHeight) return
+  componentWillMount () {
+    this.toggle(this.props)
+  }
 
-    Animated.timing(
-      this.state.height, { toValue: nextHeight, duration: 230 }
-    ).start()
+  componentWillReceiveProps (nextProps) {
+    this.toggle(nextProps)
   }
 
   categoryColorStyles () {
     let { isActive, color } = this.props
-    const flexGrowValue = 1.075
-    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
+    let defaultStyle = { backgroundColor: color, height: this.state.height }
+
     if (isActive) {
-      this.handleAnimation('up')
-      return [...categoryStyles, { flexGrow: flexGrowValue }]
+      return [styles.active, defaultStyle]
     } else {
-      this.handleAnimation('down')
-      return categoryStyles
+      return [styles.inactive, defaultStyle]
     }
   }
 
   render () {
     return <Animated.View style={this.categoryColorStyles()} />
+  }
+
+  activate () {
+    this.changeHeight(activeHeight, Easing.out(Easing.quad))
+  }
+
+  deactivate () {
+    this.changeHeight(inactiveHeight, Easing.in(Easing.quad))
+  }
+
+  toggle (props) {
+    props.isActive ? this.activate() : this.deactivate()
+  }
+
+  changeHeight (toValue, easing) {
+    if (this.state.height === toValue) return
+
+    Animated.timing(
+      this.state.height, { duration: 200, easing, toValue }
+    ).start()
   }
 }
 
