@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import TimelineComponent from '../../components/Timeline'
 import { StorageActions } from '../../actions/index'
 
@@ -19,6 +20,13 @@ class Timeline extends Component {
   componentWillMount () {
     this.props.dispatch(StorageActions.getVisitedStories())
   }
+
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   let loadingChanged = this.props.data.loading !== nextProps.data.loading
+  //   let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
+  //   if (loadingChanged || hasMoreChanged) return true
+  //   return !_isEqual(this.props.data.items, nextProps.data.items)
+  // }
 
   componentDidUpdate () {
     this.fillTimeline()

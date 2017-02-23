@@ -1,28 +1,54 @@
 import React, { Component, PropTypes } from 'react'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../actions/index'
 import Timeline from '../Timeline'
 import BackButtonBehaviour from '../../common/utils/BackButtonBehaviour'
-import _isEqual from 'lodash/isEqual'
 
 class CategoryTimeline extends Component {
   constructor () {
     super()
     this.goHome = this.goHome.bind(this)
+    this.state = { renderPlaceholderOnly: true }
   }
 
   componentWillMount () {
     this.analyticsTrack()
   }
 
-  shouldComponentUpdate (nextProps) {
-    if (this.isActiveTimeline(nextProps)) return true
-    let loadingChanged = this.props.data.loading !== nextProps.data.loading
-    let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
-    if (loadingChanged || hasMoreChanged) return true
-    return !_isEqual(this.props.data.items, nextProps.data.items)
+  componentDidMount () {
+    this.renderPlaceholderInteracion = InteractionManager.runAfterInteractions(() => {
+      this.setState({ renderPlaceholderOnly: false })
+    })
+  }
+
+  componentWillReceiveProps (nextProps, nextState) {
+    console.log(this.props.model.slug, 'componentWillReceiveProps', { isRenderable: this.isRenderable(nextProps) })
+
+    if (this.renderPlaceholderInteracion) this.renderPlaceholderInteracion.cancel()
+
+    if (this.isRenderable(nextProps)) {
+      this.setState({ renderPlaceholderOnly: false })
+    } else {
+      this.renderPlaceholderInteracion = InteractionManager.runAfterInteractions(() => {
+        this.setState({ renderPlaceholderOnly: true })
+      })
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    console.log(nextProps.model.slug, 'shouldComponentUpdate', {
+      isRenderable: this.isRenderable(nextProps),
+      renderPlaceholderOnlyChanged: this.state.renderPlaceholderOnly !== nextState.renderPlaceholderOnly
+    })
+
+    return this.state.renderPlaceholderOnly !== nextState.renderPlaceholderOnly
+  }
+
+  componentWillUnmount () {
+    if (this.renderPlaceholderInteracion) this.renderPlaceholderInteracion.cancel()
   }
 
   analyticsTrack () {
@@ -37,20 +63,42 @@ class CategoryTimeline extends Component {
   render () {
     return (
       <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
-        <Timeline data={this.props.data} />
+        { this.renderTimeline() }
       </BackButtonBehaviour>
     )
   }
 
-  get isFocused () {
-    return this.props.isActiveRoute && this.isActiveTimeline(this.props) && !this.props.uiReducer.menu.isOpen
+  renderTimeline () {
+    console.log(this.props.model.slug, 'renderTimeline', { renderPlaceholderOnly: this.state.renderPlaceholderOnly })
+    if (this.state.renderPlaceholderOnly) return null
+    return <Timeline data={this.props.data} />
   }
 
-  isActiveTimeline (props) {
+  isCurrentTimeline (props) {
+    return this.currentRouteOnArray(props) === props.navigationState.index
+  }
+
+  isNextTimeline (props) {
+    return this.currentRouteOnArray(props) === props.navigationState.index + 1
+  }
+
+  isPreviousTimeline (props) {
+    return this.currentRouteOnArray(props) === props.navigationState.index - 1
+  }
+
+  isRenderable (props) {
+    return this.isCurrentTimeline(props) || this.isNextTimeline(props) || this.isPreviousTimeline(props)
+  }
+
+  currentRouteOnArray (props) {
     let currentRouteOnArray = props.navigationState.routes.find((item) =>
       item.model === props.model
     )
-    return JSON.parse(currentRouteOnArray.key) === props.navigationState.index
+    return JSON.parse(currentRouteOnArray.key)
+  }
+
+  get isFocused () {
+    return this.props.isActiveRoute && this.isCurrentTimeline(this.props) && !this.props.uiReducer.menu.isOpen
   }
 }
 
