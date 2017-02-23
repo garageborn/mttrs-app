@@ -37,6 +37,7 @@ class CategoriesTimeline extends Component {
     if (_isEqual(nextProps.params.section, this.props.params.section)) return
 
     let { routes } = this.state.navigationState
+    if (!nextProps.params.section.model) return
     let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
     let nextIndex = parseInt(nextRoute.key)
 
