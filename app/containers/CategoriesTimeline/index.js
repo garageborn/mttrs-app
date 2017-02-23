@@ -7,6 +7,7 @@ import HomeTimeline from '../HomeTimeline'
 import CategoryTimeline from '../CategoryTimeline'
 import ApolloError from '../../components/ApolloError'
 import styles from '../../styles/App'
+import _isEqual from 'lodash/isEqual'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', model: { } }
 
@@ -21,6 +22,13 @@ class CategoriesTimeline extends Component {
         routes: [homeRoute]
       }
     }
+  }
+
+  shouldComponentUpdate (nextProps) {
+    let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    if (this.props.params !== nextProps.params) return true
+    if (loadingChanged) return true
+    return !_isEqual(this.props.data.categories, nextProps.data.categories)
   }
 
   componentWillReceiveProps (nextProps) {
