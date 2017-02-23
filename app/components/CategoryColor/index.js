@@ -1,49 +1,88 @@
 import React, { PropTypes } from 'react'
-import { Animated } from 'react-native'
+import { View } from 'react-native'
 import styles from './styles'
+
+const activeHeight = 20
+const defaultHeight = 3
 
 class CategoryColor extends React.Component {
   constructor () {
     super()
+    this.adjustScroll = this.adjustScroll.bind(this)
     this.state = {
-      height: new Animated.Value(3)
+      height: defaultHeight
     }
   }
 
-  shouldComponentUpdate (nextProps) {
-    return this.props.color !== nextProps.color || this.props.isActive !== nextProps.isActive
+  componentDidMount () {
+    if (this.props.lastPosition === this.props.index) this.activate()
+    this.positionListener = this.props.subscribe('position', this.adjustScroll)
   }
 
-  handleAnimation (direction) {
-    const nextHeight = direction === 'up' ? 9 : 3
+  componentWillUnmount () {
+    this.positionListener.remove()
+  }
+
+  adjustScroll (position) {
+    const { index } = this.props
+    const isAnimating = position >= index - 1 && position <= index + 1
+    const isTransitioning = !Number.isInteger(position)
+
+    if (!isAnimating) return
+    if (position === index) return this.activate()
+    if (!isTransitioning) return this.deactivate()
+
+    this.handleAnimation(this.getPercentage(position))
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.color !== nextProps.color || this.state.height !== nextState.height
+  }
+
+  handleAnimation (percentage) {
+    const nextHeight = this.getNextHeight(percentage)
     if (this.state.height === nextHeight) return
 
-    Animated.timing(
-      this.state.height, { toValue: nextHeight, duration: 230 }
-    ).start()
-  }
-
-  categoryColorStyles () {
-    let { isActive, color } = this.props
-    const flexGrowValue = 1.075
-    let categoryStyles = [styles.color, {backgroundColor: color, height: this.state.height}]
-    if (isActive) {
-      this.handleAnimation('up')
-      return [...categoryStyles, { flexGrow: flexGrowValue }]
-    } else {
-      this.handleAnimation('down')
-      return categoryStyles
-    }
+    this.setState({ height: nextHeight })
   }
 
   render () {
-    return <Animated.View style={this.categoryColorStyles()} />
+    let style = [styles.color, { backgroundColor: this.props.color, height: this.state.height }]
+    return <View style={style} />
+  }
+
+  deactivate () {
+    this.handleAnimation(0)
+  }
+
+  activate () {
+    this.handleAnimation(100)
+  }
+
+  getPercentage (position) {
+    const { index } = this.props
+    let positionDifference
+
+    if (position <= index) {
+      positionDifference = (1 - (index - position)) * 100
+    } else {
+      positionDifference = ((index + 1) - position) * 100
+    }
+
+    return Math.round(positionDifference)
+  }
+
+  getNextHeight (percentage) {
+    const heightDifference = (activeHeight - defaultHeight) * (percentage / 100)
+    return Math.round((defaultHeight + heightDifference) * 100) / 100
   }
 }
 
 CategoryColor.propTypes = {
   color: PropTypes.string.isRequired,
-  isActive: PropTypes.bool
+  lastPosition: PropTypes.number.isRequired,
+  position: PropTypes.any.isRequired,
+  subscribe: PropTypes.func.isRequired
 }
 
 export default CategoryColor
