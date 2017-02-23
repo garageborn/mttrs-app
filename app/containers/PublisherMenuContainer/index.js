@@ -5,6 +5,7 @@ import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import PublisherMenuItem from '../../components/PublisherMenuItem'
+import PublisherSearch from '../../components/PublisherSearch'
 import styles from '../../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../../actions/index'
 import ApolloError from '../../components/ApolloError'
@@ -122,7 +123,7 @@ class PublisherMenuContainer extends Component {
     return (
       <View>
         <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
-        <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={4}>
+        {/* <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={4}>
           <Image style={styles.searchIcon} source={require('../../assets/icons/icon-search.png')} />
           <TextInput
             style={styles.searchInput}
@@ -130,7 +131,8 @@ class PublisherMenuContainer extends Component {
             placeholder={formatMessage(messages.searchPlaceholder)}
             onChangeText={_debounce((query) => this.setState({query}), 300)}
           />
-        </View>
+        </View> */}
+        <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
       </View>
     )
   }
