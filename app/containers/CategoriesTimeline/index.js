@@ -25,9 +25,8 @@ class CategoriesTimeline extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    let loadingChanged = this.props.data.loading !== nextProps.data.loading
-    if (this.props.params !== nextProps.params) return true
-    if (loadingChanged) return true
+    if (this.props.data.loading !== nextProps.data.loading) return true
+    if (!_isEqual(this.props.params !== nextProps.params)) return true
     return !_isEqual(this.props.data.categories, nextProps.data.categories)
   }
 
