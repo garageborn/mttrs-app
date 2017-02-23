@@ -24,6 +24,12 @@ class CategoriesTimeline extends Component {
     }
   }
 
+  shouldComponentUpdate (nextProps) {
+    if (this.props.data.loading !== nextProps.data.loading) return true
+    if (!_isEqual(this.props.params !== nextProps.params)) return true
+    return !_isEqual(this.props.data.categories, nextProps.data.categories)
+  }
+
   componentWillReceiveProps (nextProps) {
     this.addSwipeRoutes(nextProps)
     this.changeSection(nextProps)
@@ -37,6 +43,7 @@ class CategoriesTimeline extends Component {
     if (_isEqual(nextProps.params.section, this.props.params.section)) return
 
     let { routes } = this.state.navigationState
+    if (!nextProps.params.section.model) return
     let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
     let nextIndex = parseInt(nextRoute.key)
 
