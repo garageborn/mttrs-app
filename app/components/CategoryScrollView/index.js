@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
+import _isEqual from 'lodash/isEqual'
 import CategoryTile from '../../components/CategoryTile'
 import styles from './styles'
 
 class CategoryScrollView extends Component {
+  shouldComponentUpdate (nextProps) {
+    let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    if (loadingChanged) return true
+    return !_isEqual(this.props.data.categories, nextProps.data.categories)
+  }
+
   render () {
     return (
       <View>
