@@ -18,11 +18,14 @@ class CategoryTimeline extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    if (!this.isActiveTimeline(nextProps)) return false
-    let listChanged = !_isEqual(this.props.data.items, nextProps.data.items)
-    let loadingChanged = this.props.data.loading !== nextProps.data.loading
-    let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
-    return listChanged || loadingChanged || hasMoreChanged
+    console.log(nextProps.data)
+    console.log(this.props.data)
+    // if (!this.isActiveTimeline(nextProps)) return false
+    // let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    // let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
+    // if (loadingChanged || hasMoreChanged) return true
+    // return !_isEqual(this.props.data.items, nextProps.data.items)
+    return true
   }
 
   analyticsTrack () {

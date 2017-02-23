@@ -14,9 +14,9 @@ class Timeline extends Component {
 
   shouldComponentUpdate (nextProps) {
     let loadingChanged = this.props.data.loading !== nextProps.data.loading
-    let errorChanged = this.props.data.error !== nextProps.data.console
-    let listChanged = !_isEqual(this.props.data.items, nextProps.data.items)
-    return loadingChanged || errorChanged || listChanged
+    let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
+    if (loadingChanged || hasMoreChanged) return true
+    return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
   render () {
@@ -78,7 +78,9 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   data: PropTypes.shape({
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    hasMore: PropTypes.bool,
+    loading: PropTypes.bool
   }).isRequired,
   loadingMore: PropTypes.bool.isRequired,
   loadingPullToRefresh: PropTypes.bool.isRequired,
