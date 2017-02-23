@@ -8,7 +8,6 @@ import HomeTimeline from '../HomeTimeline'
 import CategoryTimeline from '../CategoryTimeline'
 import ApolloError from '../../components/ApolloError'
 import styles from '../../styles/App'
-import _isEqual from 'lodash/isEqual'
 
 const homeRoute = { key: '0', title: 'Top Stories', type: 'home', model: { } }
 
