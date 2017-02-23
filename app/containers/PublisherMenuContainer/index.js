@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TextInput, ListView, ActivityIndicator } from 'react-native'
+import { View, Text, Image, TextInput, ListView, ActivityIndicator, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
@@ -153,7 +153,9 @@ class PublisherMenuContainer extends Component {
 
   openPublisher (publisher) {
     this.props.dispatch(MenuActions.closeMenu())
-    this.props.dispatch(NavigationActions.selectPublisher(publisher))
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.selectPublisher(publisher))
+    })
   }
 
   getSection (publisher) {

@@ -26,6 +26,7 @@ class LinkScene extends Component {
     super()
     this.state = { appState: AppState.currentState }
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
+    this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
   componentWillMount () {
@@ -34,7 +35,7 @@ class LinkScene extends Component {
 
   componentDidMount () {
     AppState.addEventListener('change', this.handleAppStateChange)
-    InteractionManager.runAfterInteractions(() => this.addStoryToLocalStorage())
+    InteractionManager.runAfterInteractions(this.addStoryToLocalStorage)
   }
 
   componentWillUnmount () {
