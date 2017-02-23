@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, TextInput, ListView, ActivityIndicator, InteractionManager } from 'react-native'
+import { View, Text, Image, ListView, ActivityIndicator, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
-import { injectIntl, defineMessages } from 'react-intl'
 import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import PublisherMenuItem from '../../components/PublisherMenuItem'
@@ -9,13 +8,6 @@ import PublisherSearch from '../../components/PublisherSearch'
 import styles from '../../styles/MenuPublishers'
 import { NavigationActions, MenuActions } from '../../actions/index'
 import ApolloError from '../../components/ApolloError'
-
-const messages = defineMessages({
-  searchPlaceholder: {
-    id: 'search.placeholder',
-    defaultMessage: 'Search for publishers'
-  }
-})
 
 class PublisherMenuContainer extends Component {
   constructor () {
@@ -119,19 +111,8 @@ class PublisherMenuContainer extends Component {
   }
 
   renderSearch () {
-    const { formatMessage } = this.props.intl
     return (
       <View>
-        <View style={{marginBottom: 14, height: 1}} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.2} />
-        {/* <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={4}>
-          <Image style={styles.searchIcon} source={require('../../assets/icons/icon-search.png')} />
-          <TextInput
-            style={styles.searchInput}
-            underlineColorAndroid={'transparent'}
-            placeholder={formatMessage(messages.searchPlaceholder)}
-            onChangeText={_debounce((query) => this.setState({query}), 300)}
-          />
-        </View> */}
         <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
       </View>
     )
@@ -178,12 +159,8 @@ const mapStateToProps = (state, ownProps) => {
 PublisherMenuContainer.propTypes = {
   StorageReducer: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired,
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
-  })
+  data: PropTypes.object.isRequired
 }
 
-const intlPublisherMenuContainer = injectIntl(PublisherMenuContainer)
-const PublisherMenuContainerWithData = withQuery(intlPublisherMenuContainer)
+const PublisherMenuContainerWithData = withQuery(PublisherMenuContainer)
 export default connect(mapStateToProps)(PublisherMenuContainerWithData)
