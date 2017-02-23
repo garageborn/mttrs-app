@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
+import _isEqual from 'lodash/isEqual'
 import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
@@ -25,18 +26,16 @@ class CategoriesTimeline extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.addSwipeRoutes(nextProps)
-    this.sectionWillChange(nextProps)
+    this.changeSection(nextProps)
   }
 
-  sectionWillChange (nextProps) {
-    let nextSection = nextProps.params.section || {}
-    let currentSection = this.props.params.section || {}
-    let sectionNameChanged = nextSection.name !== currentSection.name
-    let sectionModelChanged = nextSection.model !== currentSection.model
-    if (sectionNameChanged || sectionModelChanged) this.changeSection(nextProps)
+  componentWillUnmount () {
+    if (this.tabChangeListener) this.tabChangeListener.remove()
   }
 
   changeSection (nextProps) {
+    if (_isEqual(nextProps.params.section, this.props.params.section)) return
+
     let { routes } = this.state.navigationState
     let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
     let nextIndex = parseInt(nextRoute.key)
@@ -53,10 +52,8 @@ class CategoriesTimeline extends Component {
   }
 
   addSwipeRoutes (nextProps) {
-    if (!nextProps.data.categories || !nextProps.data.categories.length) return
     if (nextProps.data.loading || nextProps.data.error) return
-    if (nextProps.data.categories === this.props.data.categories) return
-    if (this.state.navigationState.routes.length > 1) return
+    if (_isEqual(nextProps.data.categories, this.props.data.categories)) return
 
     const newRoutes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
@@ -84,6 +81,7 @@ class CategoriesTimeline extends Component {
   }
 
   renderScene (sceneProps) {
+    this.subscribeToTabChange(sceneProps.subscribe)
     const props = { model: sceneProps.route.model, navigationState: this.state.navigationState }
 
     if (sceneProps.route.type === 'home') {
@@ -91,6 +89,11 @@ class CategoriesTimeline extends Component {
     } else {
       return <CategoryTimeline {...props} />
     }
+  }
+
+  subscribeToTabChange (subscribe) {
+    if (this.tabChangeListener) return
+    this.tabChangeListener = subscribe('jump', this.handleChangeTab)
   }
 
   renderError () {
