@@ -9,8 +9,12 @@ class PublisherMenuListView extends Component {
 
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
+  }
 
-    this.state = { query: '' }
+  componentWillUpdate (nextProps) {
+    if (this.props.query !== nextProps.query) {
+      this.rowsAndSections(nextProps.query)
+    }
   }
 
   render () {
@@ -48,7 +52,7 @@ class PublisherMenuListView extends Component {
       sectionHeaderHasChanged: (r1, r2) => r1 !== r2
     })
 
-    let { rows, sections } = this.rowsAndSections(this.state.query)
+    let { rows, sections } = this.rowsAndSections(this.props.query)
     return ds.cloneWithRowsAndSections(rows, sections)
   }
 
@@ -65,7 +69,7 @@ class PublisherMenuListView extends Component {
     })
 
     filteredPublishers.map(publisher => {
-      let section = this.props.getSection(publisher)
+      let section = this.getSection(publisher)
       if (sections.indexOf(section) === -1) {
         sections.push(section)
         rows[section] = []
@@ -73,23 +77,18 @@ class PublisherMenuListView extends Component {
       rows[section].push(publisher)
     })
 
-    // const favoriteSectionIndex = sections.indexOf('isFavorite')
-    //
-    // if (favoriteSectionIndex !== -1) {
-    //   sections = [
-    //     'isFavorite',
-    //     ...sections.slice(0, favoriteSectionIndex),
-    //     ...sections.slice(favoriteSectionIndex + 1)
-    //   ]
-    //   return { rows, sections }
-    // }
-
     return { rows, sections }
+  }
+
+  getSection (publisher) {
+    return publisher.slug.substring(0, 1).toUpperCase()
   }
 }
 
 PublisherMenuListView.propTypes = {
-  publishers: PropTypes.array.isRequired
+  publishers: PropTypes.array.isRequired,
+  openPublisher: PropTypes.func.isRequired,
+  query: PropTypes.string.isRequired
 }
 
 export default PublisherMenuListView

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: Platform.select({
       ios: '600',
-      android: '500'
+      android: '400'
     }),
     height: 35,
     borderRadius: 2,

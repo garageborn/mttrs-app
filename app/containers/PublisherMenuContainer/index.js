@@ -1,133 +1,19 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, ListView, ActivityIndicator, InteractionManager } from 'react-native'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
-import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
-import PublisherMenuItem from '../../components/PublisherMenuItem'
-import PublisherSearch from '../../components/PublisherSearch'
-import styles from '../../styles/MenuPublishers'
+import PublisherMenu from '../../components/PublisherMenu'
 import { NavigationActions, MenuActions } from '../../actions/index'
-import ApolloError from '../../components/ApolloError'
 
 class PublisherMenuContainer extends Component {
   constructor () {
     super()
-    this.renderRow = this.renderRow.bind(this)
-    this.renderSeparator = this.renderSeparator.bind(this)
+
     this.openPublisher = this.openPublisher.bind(this)
-
-    this.state = { query: '' }
-  }
-
-  componentWillUpdate (nextProps, nextState) {
-    if (this.state.query !== nextState.query) {
-      this.rowsAndSections(nextState.query)
-    }
-  }
-
-  dataSource () {
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-    })
-
-    let { rows, sections } = this.rowsAndSections(this.state.query)
-    return ds.cloneWithRowsAndSections(rows, sections)
-  }
-
-  rowsAndSections (query) {
-    let rows = {}
-    let sections = []
-    const { publishers } = this.props.data
-
-    if (!publishers || !publishers.length) return {rows, sections}
-
-    const queryMatcher = new RegExp(query, 'i')
-    const filteredPublishers = publishers.filter(publisher => {
-      return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
-    })
-
-    filteredPublishers.map(publisher => {
-      let section = this.getSection(publisher)
-      if (sections.indexOf(section) === -1) {
-        sections.push(section)
-        rows[section] = []
-      }
-      rows[section].push(publisher)
-    })
-
-    const favoriteSectionIndex = sections.indexOf('isFavorite')
-
-    if (favoriteSectionIndex !== -1) {
-      sections = [
-        'isFavorite',
-        ...sections.slice(0, favoriteSectionIndex),
-        ...sections.slice(favoriteSectionIndex + 1)
-      ]
-      return {rows, sections}
-    }
-
-    return {rows, sections}
-  }
-
-  renderSeparator (sectionData, section) {
-    return (
-      <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1}>
-        <View style={styles.listHeader}>
-          <Text style={styles.listHeaderText}>{section}</Text>
-        </View>
-      </View>
-    )
-  }
-
-  renderRow (publisher) {
-    return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.openPublisher} />
-  }
-
-  renderError () {
-    return <ApolloError skinType='dark' data={this.props.data} />
   }
 
   render () {
-    const { loading, error } = this.props.data
-    if (loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size='large' color='#AAA' />
-        </View>
-      )
-    }
-
-    if (error) return this.renderError()
-
-    return (
-      <View style={styles.container}>
-        {this.renderSearch()}
-        {this.renderList()}
-      </View>
-    )
-  }
-
-  renderSearch () {
-    return (
-      <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
-    )
-  }
-
-  renderList () {
-    let { publishers } = this.props.data
-    if (!publishers || !publishers.length) return
-
-    return (
-      <View style={styles.listContainer}>
-        <ListView
-          style={styles.listView}
-          dataSource={this.dataSource()}
-          renderRow={this.renderRow}
-          renderSectionHeader={this.renderSeparator}
-        />
-      </View>
-    )
+    return <PublisherMenu data={this.props.data} openPublisher={this.openPublisher} />
   }
 
   openPublisher (publisher) {
@@ -135,14 +21,6 @@ class PublisherMenuContainer extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.props.dispatch(NavigationActions.selectPublisher(publisher))
     })
-  }
-
-  getSection (publisher) {
-    if (this.props.StorageReducer.favoritePublishers.items.indexOf(publisher.id) !== -1) {
-      return 'isFavorite'
-    } else {
-      return publisher.slug.substring(0, 1).toUpperCase()
-    }
   }
 }
 
@@ -153,7 +31,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 PublisherMenuContainer.propTypes = {
-  StorageReducer: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired
 }
