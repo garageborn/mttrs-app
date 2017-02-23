@@ -55,7 +55,7 @@ class Timeline extends Component {
 
   fillTimeline () {
     const storiesCount = this.storiesCount
-    if (this.props.loading || !storiesCount) return
+    if (this.props.data.loading || !storiesCount) return
     if (storiesCount < minStoriesInTheViewport) this.onEndReached()
   }
 
@@ -75,7 +75,9 @@ Timeline.propTypes = {
   data: PropTypes.shape({
     infiniteScroll: PropTypes.func.isRequired,
     pullToRefresh: PropTypes.func.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired,
+    hasMore: PropTypes.bool
   }).isRequired
 }
 

@@ -13,7 +13,10 @@ class Timeline extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return !_isEqual(this.props.data.items, nextProps.data.items)
+    let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    let errorChanged = this.props.data.error !== nextProps.data.console
+    let listChanged = !_isEqual(this.props.data.items, nextProps.data.items)
+    return loadingChanged || errorChanged || listChanged
   }
 
   render () {
