@@ -18,7 +18,7 @@ class CategoryTimeline extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    if (!this.isActiveTimeline(nextProps)) return false
+    if (this.isActiveTimeline(nextProps)) return true
     let loadingChanged = this.props.data.loading !== nextProps.data.loading
     let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
     if (loadingChanged || hasMoreChanged) return true
@@ -50,6 +50,8 @@ class CategoryTimeline extends Component {
     let currentRouteOnArray = props.navigationState.routes.find((item) =>
       item.model === props.model
     )
+    console.log(props.navigationState.index)
+    console.log(currentRouteOnArray.key)
     return JSON.parse(currentRouteOnArray.key) === props.navigationState.index
   }
 }
