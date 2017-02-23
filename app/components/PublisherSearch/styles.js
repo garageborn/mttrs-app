@@ -1,9 +1,11 @@
 import { StyleSheet, Platform } from 'react-native'
 
+export const textColor = '#DADADA'
+
 const styles = StyleSheet.create({
   search: {
     position: 'relative',
-    backgroundColor: '#999999',
+    backgroundColor: '#787877',
     marginHorizontal: 10,
     marginTop: 12,
     marginBottom: Platform.select({
@@ -21,8 +23,8 @@ const styles = StyleSheet.create({
 
   searchInput: {
     position: 'relative',
-    backgroundColor: '#999999',
-    color: '#DADADA',
+    backgroundColor: '#787877',
+    color: textColor,
     fontSize: 14,
     fontWeight: Platform.select({
       ios: '600',

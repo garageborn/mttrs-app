@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, TextInput, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import icon from './assets/icon.png'
-import styles from './styles'
+import styles, { textColor } from './styles'
 
 const messages = defineMessages({
   searchPlaceholder: {
@@ -20,7 +20,7 @@ const PublisherSearch = ({ intl, onChangeText }) => {
         style={styles.searchInput}
         underlineColorAndroid={'transparent'}
         placeholder={placeholder}
-        placeholderTextColor='#DADADA'
+        placeholderTextColor={textColor}
         onChangeText={onChangeText}
       />
     </View>

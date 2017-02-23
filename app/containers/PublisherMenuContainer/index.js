@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, ListView, ActivityIndicator, InteractionManager } from 'react-native'
+import { View, Text, ListView, ActivityIndicator, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
@@ -71,13 +71,11 @@ class PublisherMenuContainer extends Component {
   }
 
   renderSeparator (sectionData, section) {
-    let renderSection = section === 'isFavorite'
-      ? <Image source={require('../../assets/starActive.png')} style={styles.listHeaderImage} />
-      : <Text style={styles.listHeaderText}>{section}</Text>
-
     return (
       <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1}>
-        <View style={styles.listHeader}>{renderSection}</View>
+        <View style={styles.listHeader}>
+          <Text style={styles.listHeaderText}>{section}</Text>
+        </View>
       </View>
     )
   }
@@ -112,9 +110,7 @@ class PublisherMenuContainer extends Component {
 
   renderSearch () {
     return (
-      <View>
-        <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
-      </View>
+      <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
     )
   }
 
