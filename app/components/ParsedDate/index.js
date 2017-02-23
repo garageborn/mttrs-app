@@ -22,6 +22,10 @@ const messages = defineMessages({
 })
 
 class ParsedDate extends Component {
+  shouldComponentUpdate (nextProps) {
+    return this.props.date !== nextProps.date
+  }
+
   parser (date) {
     let { intl } = this.props
     switch (date) {
