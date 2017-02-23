@@ -11,7 +11,7 @@ class HeaderBottomColorContainer extends Component {
   }
 
   componentDidMount () {
-    InteractionManager.runAfterInteractions(() => {
+    this.renderPlaceholderInteracion = InteractionManager.runAfterInteractions(() => {
       this.setState({ renderPlaceholderOnly: false })
     })
   }
@@ -21,10 +21,15 @@ class HeaderBottomColorContainer extends Component {
 
     if (nextProps.uiReducer.menu.isOpen === false) {
       this.setState({ renderPlaceholderOnly: true })
-      InteractionManager.runAfterInteractions(() => {
+      if (this.renderPlaceholderInteracion) this.renderPlaceholderInteracion.cancel()
+      this.renderPlaceholderInteracion = InteractionManager.runAfterInteractions(() => {
         this.setState({ renderPlaceholderOnly: false })
       })
     }
+  }
+
+  componentWillUnmount () {
+    if (this.renderPlaceholderInteracion) this.renderPlaceholderInteracion.cancel()
   }
 
   render () {
