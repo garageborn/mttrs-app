@@ -18,7 +18,6 @@ class CategoryColorList extends Component {
   renderHome () {
     return (
       <CategoryColor
-        categoriesLength={this.props.data.categories.length}
         color='#FF5607'
         isActive={this.isHome()}
       />
@@ -32,7 +31,6 @@ class CategoryColorList extends Component {
   renderCategory (category) {
     return (
       <CategoryColor
-        categoriesLength={this.props.data.categories.length}
         key={category.id}
         color={category.color}
         isActive={this.isActive(category)}
