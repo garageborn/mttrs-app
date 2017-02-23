@@ -6,7 +6,7 @@ import SocialCount from '../SocialCount'
 import Touchable from '../Touchable'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
-const StoryMainLink = ({story, onPublishersPress}) => {
+const StoryMetadata = ({story, onPublishersPress}) => {
   return (
     <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
       <View style={styles.footer}>
@@ -17,9 +17,9 @@ const StoryMainLink = ({story, onPublishersPress}) => {
   )
 }
 
-StoryMainLink.propTypes = {
+StoryMetadata.propTypes = {
   onPublishersPress: PropTypes.func.isRequired,
   story: PropTypes.object.isRequired
 }
 
-export default StoryMainLink
+export default StoryMetadata

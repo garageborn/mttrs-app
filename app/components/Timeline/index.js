@@ -3,12 +3,20 @@ import { ActivityIndicator, RefreshControl, View } from 'react-native'
 import TimelineList from '../TimelineList'
 import ApolloError from '../ApolloError'
 import styles from './styles'
+import _isEqual from 'lodash/isEqual'
 
 class Timeline extends Component {
   constructor (props) {
     super(props)
     this.renderFooter = this.renderFooter.bind(this)
     this.refreshControl = this.refreshControl.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
+    if (loadingChanged || hasMoreChanged) return true
+    return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
   render () {
@@ -70,7 +78,9 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   data: PropTypes.shape({
-    items: PropTypes.array.isRequired
+    items: PropTypes.array.isRequired,
+    hasMore: PropTypes.bool,
+    loading: PropTypes.bool
   }).isRequired,
   loadingMore: PropTypes.bool.isRequired,
   loadingPullToRefresh: PropTypes.bool.isRequired,

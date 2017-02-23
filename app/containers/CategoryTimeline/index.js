@@ -5,6 +5,7 @@ import withQuery from './index.gql'
 import { AnalyticsActions, NavigationActions } from '../../actions/index'
 import Timeline from '../Timeline'
 import BackButtonBehaviour from '../../common/utils/BackButtonBehaviour'
+import _isEqual from 'lodash/isEqual'
 
 class CategoryTimeline extends Component {
   constructor () {
@@ -14,6 +15,14 @@ class CategoryTimeline extends Component {
 
   componentWillMount () {
     this.analyticsTrack()
+  }
+
+  shouldComponentUpdate (nextProps) {
+    if (this.isActiveTimeline(nextProps)) return true
+    let loadingChanged = this.props.data.loading !== nextProps.data.loading
+    let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
+    if (loadingChanged || hasMoreChanged) return true
+    return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
   analyticsTrack () {
@@ -34,14 +43,14 @@ class CategoryTimeline extends Component {
   }
 
   get isFocused () {
-    return this.props.isActiveRoute && this.isActiveTimeline && !this.props.uiReducer.menu.isOpen
+    return this.props.isActiveRoute && this.isActiveTimeline(this.props) && !this.props.uiReducer.menu.isOpen
   }
 
-  get isActiveTimeline () {
-    let currentRouteOnArray = this.props.navigationState.routes.find((item) =>
-      item.model === this.props.model
+  isActiveTimeline (props) {
+    let currentRouteOnArray = props.navigationState.routes.find((item) =>
+      item.model === props.model
     )
-    return JSON.parse(currentRouteOnArray.key) === this.props.navigationState.index
+    return JSON.parse(currentRouteOnArray.key) === props.navigationState.index
   }
 }
 
@@ -52,7 +61,9 @@ CategoryTimeline.propTypes = {
   navigationState: PropTypes.shape({
     index: PropTypes.number.isRequired,
     routes: PropTypes.array.isRequired
-  }).isRequired
+  }).isRequired,
+  isActiveRoute: PropTypes.bool,
+  uiReducer: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
