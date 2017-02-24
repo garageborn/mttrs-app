@@ -31,7 +31,7 @@ class PublisherMenu extends Component {
 
     return (
       <View style={styles.container}>
-        <PublisherSearch onChangeText={_debounce(query => this.setState({ query }), 300)} />
+        <PublisherSearch onChangeText={this.onChangeText()} />
         <PublisherMenuListView
           query={this.state.query}
           publishers={publishers}
@@ -39,6 +39,10 @@ class PublisherMenu extends Component {
         />
       </View>
     )
+  }
+
+  onChangeText () {
+    return _debounce(query => this.setState({ query }), 300)
   }
 }
 
