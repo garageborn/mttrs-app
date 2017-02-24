@@ -13,7 +13,7 @@ class HeaderBottomColorContainer extends Component {
   }
 
   componentDidMount () {
-    this.iteractionManagerEnabled = true
+    this.interactionManagerEnabled = true
     InteractionManager.runAfterInteractions(this.cancelRenderPlaceholderHandler)
   }
 
@@ -27,11 +27,11 @@ class HeaderBottomColorContainer extends Component {
   }
 
   componentWillUnmount () {
-    this.iteractionManagerEnabled = false
+    this.interactionManagerEnabled = false
   }
 
   cancelRenderPlaceholderHandler () {
-    if (!this.iteractionManagerEnabled) return
+    if (!this.interactionManagerEnabled) return
     this.setState({ renderPlaceholderOnly: false })
   }
 
