@@ -55,7 +55,7 @@ const timelineToItems = (timeline) => {
 export default function (Query, options) {
   const defaultOptions = {
     props ({ data }) {
-      const { error, loading, timeline, variables } = data
+      const { error, loading, timeline, variables, refetch } = data
       const items = timelineToItems(timeline)
 
       return {
@@ -64,6 +64,7 @@ export default function (Query, options) {
           error,
           variables,
           items,
+          refetch,
           hasMore: hasMore(items),
           pullToRefresh: pullToRefresh.bind(this, data),
           infiniteScroll: infiniteScroll.bind(this, data)
