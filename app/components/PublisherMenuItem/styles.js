@@ -2,22 +2,22 @@ import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   publisher: {
-    backgroundColor: '#F1F1F1',
+    backgroundColor: '#434341',
     flexDirection: 'row',
     alignItems: 'center',
     height: 60,
     paddingHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#DDD'
+    borderBottomColor: '#2D2D2B'
   },
 
   name: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: Platform.select({
       ios: '500',
       android: '400'
     }),
-    color: '#666',
+    color: '#FFF',
     marginLeft: 10
   },
 
