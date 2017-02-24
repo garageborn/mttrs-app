@@ -30,7 +30,6 @@ class StoryContainer extends Component {
 
   openLink (link) {
     const { dispatch } = this.props
-    dispatch(AnalyticsActions.trackLink(link))
     dispatch(NavigationActions.link(this.props.story, link))
   }
 

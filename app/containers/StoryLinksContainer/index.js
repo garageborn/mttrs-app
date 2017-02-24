@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
-import StoryLinksComponent from '../components/StoryLinksComponent'
-import CloseButton from '../components/CloseButton'
-import { NavigationActions, AnalyticsActions } from '../actions/index'
-import styles from '../styles/StoryLinks'
+import withQuery from './index.gql'
+import StoryLinksComponent from '../../components/StoryLinksComponent'
+import CloseButton from '../../components/CloseButton'
+import { NavigationActions } from '../../actions/index'
+import styles from '../../styles/StoryLinks'
 
 class StoryLinksContainer extends Component {
   constructor (props) {
@@ -23,7 +22,6 @@ class StoryLinksContainer extends Component {
 
   openLink (link) {
     if (!this.props.story) return
-    this.props.dispatch(AnalyticsActions.trackLink(link))
     this.close()
     this.props.dispatch(NavigationActions.link(this.props.story, link))
   }
@@ -67,27 +65,6 @@ class StoryLinksContainer extends Component {
   }
 }
 
-const Query = gql`
-  query($id: ID!, $publisherSlug: String) {
-    story(id: $id) {
-      main_link(publisher_slug: $publisherSlug) {
-        title
-        url
-        slug
-        total_social
-        publisher { name slug icon_id }
-      }
-      other_links(publisher_slug: $publisherSlug, popular: true) {
-        title
-        url
-        slug
-        total_social
-        publisher { name slug icon_id }
-      }
-    }
-  }
-`
-
 StoryLinksContainer.propTypes = {
   data: PropTypes.shape({
     loading: PropTypes.bool,
@@ -99,15 +76,5 @@ StoryLinksContainer.propTypes = {
   dispatch: PropTypes.func
 }
 
-const StoryLinksContainerWithData = graphql(Query, {
-  options (props) {
-    return {
-      variables: {
-        id: props.story.id,
-        publisherSlug: props.publisherSlug
-      }
-    }
-  }
-})(StoryLinksContainer)
-
+const StoryLinksContainerWithData = withQuery(StoryLinksContainer)
 export default connect()(StoryLinksContainerWithData)
