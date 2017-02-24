@@ -4,16 +4,17 @@ import { connect } from 'react-redux'
 import HeaderStripColor from '../../components/HeaderStripColor'
 import CategoryColorList from '../../components/CategoryColorList'
 import withQuery from './index.gql'
+
 class HeaderBottomColorContainer extends Component {
   constructor () {
     super()
     this.state = { renderPlaceholderOnly: true }
+    this.cancelRenderPlaceholderHandler = this.cancelRenderPlaceholderHandler.bind(this)
   }
 
   componentDidMount () {
-    InteractionManager.runAfterInteractions(() => {
-      this.setState({ renderPlaceholderOnly: false })
-    })
+    this.iteractionManagerEnabled = true
+    InteractionManager.runAfterInteractions(this.cancelRenderPlaceholderHandler)
   }
 
   componentWillReceiveProps (nextProps, nextState) {
@@ -21,10 +22,17 @@ class HeaderBottomColorContainer extends Component {
 
     if (nextProps.uiReducer.menu.isOpen === false) {
       this.setState({ renderPlaceholderOnly: true })
-      InteractionManager.runAfterInteractions(() => {
-        this.setState({ renderPlaceholderOnly: false })
-      })
+      InteractionManager.runAfterInteractions(this.cancelRenderPlaceholderHandler)
     }
+  }
+
+  componentWillUnmount () {
+    this.iteractionManagerEnabled = false
+  }
+
+  cancelRenderPlaceholderHandler () {
+    if (!this.iteractionManagerEnabled) return
+    this.setState({ renderPlaceholderOnly: false })
   }
 
   render () {
