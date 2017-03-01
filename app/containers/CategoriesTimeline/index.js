@@ -47,7 +47,7 @@ class CategoriesTimeline extends Component {
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [homeRoute, ...routes],
+        routes: routes,
         index: activeRouteKey
       }
     })
@@ -62,11 +62,13 @@ class CategoriesTimeline extends Component {
   getRoutes (nextProps) {
     const hasSwipeRoutes = this.state.navigationState.routes.length > 1
     if (hasSwipeRoutes && _isEqual(this.props.data.categories, nextProps.data.categories)) {
-      return this.state.navigationState.routes.slice(1)
+      return this.state.navigationState.routes
     }
-    return nextProps.data.categories.map((category, idx) => {
+    let routes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
+
+    return [homeRoute, ...routes]
   }
 
   handleChangeTab (index) {
