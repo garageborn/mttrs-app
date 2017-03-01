@@ -16,7 +16,6 @@ class CategoriesTimeline extends Component {
     super(props)
     this.renderScene = this.renderScene.bind(this)
     this.handleChangeTab = this.handleChangeTab.bind(this)
-    this.changeSection = this.changeSection.bind(this)
     this.state = {
       navigationState: {
         routesUpdated: false,
