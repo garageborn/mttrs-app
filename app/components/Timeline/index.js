@@ -15,7 +15,8 @@ class Timeline extends Component {
   shouldComponentUpdate (nextProps) {
     let loadingChanged = this.props.data.loading !== nextProps.data.loading
     let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
-    if (loadingChanged || hasMoreChanged) return true
+    let loadingMore = this.props.loadingMore !== nextProps.loadingMore
+    if (loadingChanged || hasMoreChanged || loadingMore) return true
     return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 

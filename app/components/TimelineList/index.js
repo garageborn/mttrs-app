@@ -7,34 +7,42 @@ import ListViewHeader from '../ListViewHeader'
 class TimelineList extends Component {
   constructor (props) {
     super(props)
+    let ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
+    })
+    this.state = { dataSource: ds }
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
   }
 
-  shouldComponentUpdate (nextProps) {
-    return !_isEqual(this.props.data.items, nextProps.data.items)
+  componentWillReceiveProps (nextProps) {
+    if (_isEqual(this.props.data.items, nextProps.data.items)) return
+
+    this.updateDataSource(nextProps)
+  }
+
+  componentWillMount () {
+    this.updateDataSource(this.props)
+  }
+
+  updateDataSource (props) {
+    let { rows, sections } = this.rowsAndSections(props)
+    return this.setState({
+      dataSource: this.state.dataSource.cloneWithRowsAndSections(rows, sections)
+    })
   }
 
   renderSectionHeader (sectionData, date) {
     return <ListViewHeader date={date} />
   }
 
-  dataSource () {
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-    })
-
-    let { rows, sections } = this.rowsAndSections()
-    return ds.cloneWithRowsAndSections(rows, sections)
-  }
-
-  rowsAndSections () {
+  rowsAndSections (props) {
     let rows = {}
     let sections = []
 
-    const { items } = this.props.data
+    const { items } = props.data
 
     if (!items || !items.length) return { rows, sections }
 
@@ -55,7 +63,7 @@ class TimelineList extends Component {
     return (
       <ListView
         collapsable={false}
-        dataSource={this.dataSource()}
+        dataSource={this.state.dataSource}
         onEndReached={this.props.onEndReached}
         onEndReachedThreshold={200}
         pageSize={4}

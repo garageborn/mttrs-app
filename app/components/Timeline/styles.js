@@ -32,15 +32,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1F1F1'
   },
 
-  infiniteScrollLoadingContainer: Platform.select({
-    ios: {
-      padding: 10,
-      marginBottom: 20
-    },
-    android: {
-      marginBottom: 30
-    }
-  }),
+  infiniteScrollLoadingContainer: {
+    padding: 10,
+    marginBottom: 20
+  },
 
   hideRefreshControl: {
     left: 20
