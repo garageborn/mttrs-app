@@ -18,28 +18,21 @@ class CategoriesTimeline extends Component {
     this.handleChangeTab = this.handleChangeTab.bind(this)
     this.state = {
       navigationState: {
+        routesUpdated: false,
         index: 0,
         routes: [homeRoute]
       }
     }
   }
 
-  // shouldComponentUpdate (nextProps) {
-  //   return true
-  //   if (this.props.data.loading !== nextProps.data.loading) return true
-  //   if (!_isEqual(this.props.params !== nextProps.params)) return true
-  //   return !_isEqual(this.props.data.categories, nextProps.data.categories)
-  // }
-
-  componentWillUpdate (nextProps, nextState) {
-    if (!nextState.navigationState) return
-    if (nextProps.data.categories.length === nextState.navigationState.routes.length) return
-    if (nextState.navigationState.routes.length > 1) this.changeSection(nextProps)
+  shouldComponentUpdate (nextProps) {
+    if (this.props.data.loading !== nextProps.data.loading) return true
+    if (!_isEqual(this.props.params !== nextProps.params)) return true
+    return !_isEqual(this.props.data.categories, nextProps.data.categories)
   }
 
   componentWillReceiveProps (nextProps) {
-    this.addSwipeRoutes(nextProps)
-    if (this.state.navigationState.routes.length > 1) this.changeSection(nextProps)
+    this.addSwipeRoutes(nextProps).then(() => this.changeSection(nextProps))
   }
 
   componentWillUnmount () {
@@ -47,12 +40,9 @@ class CategoriesTimeline extends Component {
   }
 
   changeSection (nextProps) {
-    // if (_isEqual(nextProps.params.section, this.props.params.section)) return
-
     let { routes } = this.state.navigationState
     if (!nextProps.params.section) return
     let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
-    if (!nextRoute) return
     let nextIndex = parseInt(nextRoute.key)
 
     if (nextIndex === this.state.navigationState.index) return
@@ -68,18 +58,21 @@ class CategoriesTimeline extends Component {
 
   addSwipeRoutes (nextProps) {
     if (nextProps.data.loading || nextProps.data.error) return
-    // if (_isEqual(nextProps.data.categories, this.props.data.categories)) return
+    if (this.state.navigationState.routesUpdated) return Promise.resolve()
 
     const newRoutes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
 
-    this.setState({
-      navigationState: {
-        ...this.state.navigationState,
-        routes: [homeRoute, ...newRoutes]
-      }
-    })
+    return Promise.resolve(
+      this.setState({
+        navigationState: {
+          ...this.state.navigationState,
+          routes: [homeRoute, ...newRoutes],
+          routesUpdated: true
+        }
+      })
+    )
   }
 
   handleChangeTab (index) {
@@ -117,8 +110,6 @@ class CategoriesTimeline extends Component {
 
   render () {
     if (this.props.data.error) return this.renderError()
-
-    console.log(this.state)
 
     return (
       <TabViewAnimated
