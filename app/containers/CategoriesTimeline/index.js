@@ -33,7 +33,7 @@ class CategoriesTimeline extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.addSwipeRoutes(nextProps).then(this.changeSection)
+    this.addSwipeRoutes(nextProps).then(() => this.changeSection(nextProps))
   }
 
   componentWillUnmount () {
