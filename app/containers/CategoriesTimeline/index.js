@@ -64,7 +64,7 @@ class CategoriesTimeline extends Component {
     if (hasSwipeRoutes && _isEqual(this.props.data.categories, nextProps.data.categories)) {
       return this.state.navigationState.routes
     }
-    let routes = nextProps.data.categories.map((category, idx) => {
+    const routes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
 
