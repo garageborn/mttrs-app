@@ -44,8 +44,6 @@ class CategoriesTimeline extends Component {
     const routes = this.getRoutes(nextProps)
     const activeRouteKey = this.getActiveRouteKey(nextProps, routes)
 
-    console.log(routes)
-
     this.setState({
       navigationState: {
         ...this.state.navigationState,
@@ -56,7 +54,6 @@ class CategoriesTimeline extends Component {
   }
 
   getActiveRouteKey (props, routes) {
-    console.log(props.params.section)
     if (!props.params.section || props.params.section.name === 'home') return 0
     const activeRoute = routes.find(route => route.model.slug === props.params.section.model.slug)
     return parseInt(activeRoute.key)
