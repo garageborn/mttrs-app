@@ -44,6 +44,8 @@ class CategoriesTimeline extends Component {
     const routes = this.getRoutes(nextProps)
     const activeRouteKey = this.getActiveRouteKey(nextProps, routes)
 
+    console.log(routes)
+
     this.setState({
       navigationState: {
         ...this.state.navigationState,
@@ -54,6 +56,7 @@ class CategoriesTimeline extends Component {
   }
 
   getActiveRouteKey (props, routes) {
+    console.log(props.params.section)
     if (!props.params.section || props.params.section.name === 'home') return 0
     const activeRoute = routes.find(route => route.model.slug === props.params.section.model.slug)
     return parseInt(activeRoute.key)
@@ -61,7 +64,9 @@ class CategoriesTimeline extends Component {
 
   getRoutes (nextProps) {
     const hasSwipeRoutes = this.state.navigationState.routes.length > 1
-    if (hasSwipeRoutes && !_isEqual(this.props.data.categories, nextProps.data.categories)) return
+    if (hasSwipeRoutes && _isEqual(this.props.data.categories, nextProps.data.categories)) {
+      return this.state.navigationState.routes.slice(1)
+    }
     return nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
