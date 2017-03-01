@@ -18,6 +18,7 @@ class CategoriesTimeline extends Component {
     this.handleChangeTab = this.handleChangeTab.bind(this)
     this.state = {
       navigationState: {
+        routesUpdated: false,
         index: 0,
         routes: [homeRoute]
       }
@@ -31,8 +32,7 @@ class CategoriesTimeline extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.addSwipeRoutes(nextProps)
-    this.changeSection(nextProps)
+    this.addSwipeRoutes(nextProps).then(() => this.changeSection(nextProps))
   }
 
   componentWillUnmount () {
@@ -40,10 +40,8 @@ class CategoriesTimeline extends Component {
   }
 
   changeSection (nextProps) {
-    if (_isEqual(nextProps.params.section, this.props.params.section)) return
-
     let { routes } = this.state.navigationState
-    if (!nextProps.params.section.model) return
+    if (!nextProps.params.section) return
     let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
     let nextIndex = parseInt(nextRoute.key)
 
@@ -60,7 +58,7 @@ class CategoriesTimeline extends Component {
 
   addSwipeRoutes (nextProps) {
     if (nextProps.data.loading || nextProps.data.error) return
-    if (_isEqual(nextProps.data.categories, this.props.data.categories)) return
+    if (this.state.navigationState.routesUpdated) return Promise.resolve()
 
     const newRoutes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
@@ -69,9 +67,12 @@ class CategoriesTimeline extends Component {
     this.setState({
       navigationState: {
         ...this.state.navigationState,
-        routes: [homeRoute, ...newRoutes]
+        routes: [homeRoute, ...newRoutes],
+        routesUpdated: true
       }
     })
+
+    return Promise.resolve()
   }
 
   handleChangeTab (index) {
