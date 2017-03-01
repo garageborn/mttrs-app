@@ -46,7 +46,7 @@ class StoryLink extends Component {
                 </View>
               </View>
               <View style={styles.story}>
-                <Text numberOfLines={1} style={styles.storyTitle}>{link.title}</Text>
+                <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>
                 <View style={styles.shares}>
                   <Image style={styles.shareIcon} source={require('../../assets/icons/icon-hot.png')} />
                   <Text style={styles.shareCount}>{SocialCountFormatter(link.total_social)}</Text>

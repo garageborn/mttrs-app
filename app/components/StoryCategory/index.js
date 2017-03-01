@@ -9,10 +9,11 @@ const messages = defineMessages({
 
 const StoryCategory = ({intl, category}) => {
   const text = intl.formatMessage(messages.in)
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
-        {text} <Text style={[styles.category, { color: category.color }]}>
+        {text} <Text style={[...styles.category, { color: category.color }]}>
           {category.name.toUpperCase()}
         </Text>
       </Text>
