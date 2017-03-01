@@ -41,7 +41,6 @@ class Timeline extends Component {
     const { hasMore, infiniteScroll } = this.props.data
 
     if (this.state.loadingMore || !hasMore) return
-
     this.setState({ loadingMore: true })
     infiniteScroll().then(() => this.setState({ loadingMore: false }))
   }
@@ -78,7 +77,8 @@ Timeline.propTypes = {
     items: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
-  }).isRequired
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(Timeline)
