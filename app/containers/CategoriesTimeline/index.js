@@ -16,6 +16,7 @@ class CategoriesTimeline extends Component {
     super(props)
     this.renderScene = this.renderScene.bind(this)
     this.handleChangeTab = this.handleChangeTab.bind(this)
+    this.changeSection = this.changeSection.bind(this)
     this.state = {
       navigationState: {
         routesUpdated: false,
@@ -32,7 +33,7 @@ class CategoriesTimeline extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.addSwipeRoutes(nextProps).then(() => this.changeSection(nextProps))
+    this.addSwipeRoutes(nextProps).then(this.changeSection)
   }
 
   componentWillUnmount () {
@@ -64,15 +65,15 @@ class CategoriesTimeline extends Component {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
 
-    return Promise.resolve(
-      this.setState({
-        navigationState: {
-          ...this.state.navigationState,
-          routes: [homeRoute, ...newRoutes],
-          routesUpdated: true
-        }
-      })
-    )
+    this.setState({
+      navigationState: {
+        ...this.state.navigationState,
+        routes: [homeRoute, ...newRoutes],
+        routesUpdated: true
+      }
+    })
+
+    return Promise.resolve()
   }
 
   handleChangeTab (index) {
