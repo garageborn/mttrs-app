@@ -18,7 +18,6 @@ class CategoriesTimeline extends Component {
     this.handleChangeTab = this.handleChangeTab.bind(this)
     this.state = {
       navigationState: {
-        routesUpdated: false,
         index: 0,
         routes: [homeRoute]
       }
@@ -32,47 +31,44 @@ class CategoriesTimeline extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.addSwipeRoutes(nextProps).then(() => this.changeSection(nextProps))
+    this.addSwipeRoutes(nextProps)
   }
 
   componentWillUnmount () {
     if (this.tabChangeListener) this.tabChangeListener.remove()
   }
 
-  changeSection (nextProps) {
-    let { routes } = this.state.navigationState
-    if (!nextProps.params.section) return
-    let nextRoute = routes.find(route => route.model.slug === nextProps.params.section.model.slug)
-    let nextIndex = parseInt(nextRoute.key)
+  addSwipeRoutes (nextProps) {
+    if (nextProps.data.loading || nextProps.data.error) return
 
-    if (nextIndex === this.state.navigationState.index) return
+    const routes = this.getRoutes(nextProps)
+    const activeRouteKey = this.getActiveRouteKey(nextProps, routes)
 
     this.setState({
-      ...this.state,
       navigationState: {
         ...this.state.navigationState,
-        index: nextIndex
+        routes: routes,
+        index: activeRouteKey
       }
     })
   }
 
-  addSwipeRoutes (nextProps) {
-    if (nextProps.data.loading || nextProps.data.error) return
-    if (this.state.navigationState.routesUpdated) return Promise.resolve()
+  getActiveRouteKey (props, routes) {
+    if (!props.params.section || props.params.section.name === 'home') return 0
+    const activeRoute = routes.find(route => route.model.slug === props.params.section.model.slug)
+    return parseInt(activeRoute.key)
+  }
 
-    const newRoutes = nextProps.data.categories.map((category, idx) => {
+  getRoutes (nextProps) {
+    const hasSwipeRoutes = this.state.navigationState.routes.length > 1
+    if (hasSwipeRoutes && _isEqual(this.props.data.categories, nextProps.data.categories)) {
+      return this.state.navigationState.routes
+    }
+    const routes = nextProps.data.categories.map((category, idx) => {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
 
-    this.setState({
-      navigationState: {
-        ...this.state.navigationState,
-        routes: [homeRoute, ...newRoutes],
-        routesUpdated: true
-      }
-    })
-
-    return Promise.resolve()
+    return [homeRoute, ...routes]
   }
 
   handleChangeTab (index) {
