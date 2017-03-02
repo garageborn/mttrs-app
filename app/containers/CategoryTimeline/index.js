@@ -7,9 +7,6 @@ import Timeline from '../Timeline'
 import _isEqual from 'lodash/isEqual'
 
 class CategoryTimeline extends Component {
-  constructor () {
-    super()
-  }
 
   componentWillMount () {
     this.analyticsTrack()
@@ -30,10 +27,6 @@ class CategoryTimeline extends Component {
 
   render () {
     return <Timeline data={this.props.data} />
-  }
-
-  get isFocused () {
-    return this.props.isActiveRoute && this.isActiveTimeline(this.props) && !this.props.uiReducer.menu.isOpen
   }
 
   isActiveTimeline (props) {

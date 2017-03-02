@@ -28,10 +28,6 @@ class PublisherTimeline extends Component {
       </View>
     )
   }
-
-  get isFocused () {
-    return this.props.isActiveRoute
-  }
 }
 
 PublisherTimeline.propTypes = {
