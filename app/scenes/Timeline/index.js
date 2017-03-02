@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import MenuContainer from '../../containers/MenuContainer'
+import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 
@@ -20,6 +21,26 @@ class TimelineScene extends Component {
       backgroundColor: DARK_COLOR,
       height: headerHeight
     }
+  }
+  
+  constructor () {
+    super()
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
+  }
+
+  componentDidMount () {
+    if (Platform.OS === 'ios') return
+    return AppState.addEventListener('change', this.handleAppStateChange)
+  }
+
+  componentWillUnmount () {
+    if (Platform.OS === 'ios') return
+    AppState.removeEventListener('change', this.handleAppStateChange)
+  }
+
+  handleAppStateChange (appState) {
+    if (appState === 'active') return
+    return this.props.dispatch(MenuActions.closeMenu())
   }
 
   render () {
@@ -67,6 +88,7 @@ class TimelineScene extends Component {
 }
 
 TimelineScene.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired
 }
 

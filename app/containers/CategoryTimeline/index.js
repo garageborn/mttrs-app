@@ -2,16 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
-import { AnalyticsActions, NavigationActions } from '../../actions/index'
+import { AnalyticsActions } from '../../actions/index'
 import Timeline from '../Timeline'
-import BackButtonBehaviour from '../../common/utils/BackButtonBehaviour'
 import _isEqual from 'lodash/isEqual'
 
 class CategoryTimeline extends Component {
-  constructor () {
-    super()
-    this.goHome = this.goHome.bind(this)
-  }
 
   componentWillMount () {
     this.analyticsTrack()
@@ -30,20 +25,8 @@ class CategoryTimeline extends Component {
     dispatch(AnalyticsActions.trackScreen(`/${model.slug}`))
   }
 
-  goHome () {
-    return Promise.resolve(this.props.dispatch(NavigationActions.home()))
-  }
-
   render () {
-    return (
-      <BackButtonBehaviour isFocused={this.isFocused} onBackButtonPress={this.goHome}>
-        <Timeline data={this.props.data} />
-      </BackButtonBehaviour>
-    )
-  }
-
-  get isFocused () {
-    return this.props.isActiveRoute && this.isActiveTimeline(this.props) && !this.props.uiReducer.menu.isOpen
+    return <Timeline data={this.props.data} />
   }
 
   isActiveTimeline (props) {
@@ -58,10 +41,6 @@ CategoryTimeline.propTypes = {
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   model: PropTypes.any,
-  navigationState: PropTypes.shape({
-    index: PropTypes.number.isRequired,
-    routes: PropTypes.array.isRequired
-  }).isRequired,
   isActiveRoute: PropTypes.bool,
   uiReducer: PropTypes.object.isRequired
 }
