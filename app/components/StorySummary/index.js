@@ -22,20 +22,15 @@ class StorySummary extends Component {
     return (
       <View style={styles.container}>
         <View style={this.boxStyles}>
-          <View style={styles.headlineContainer}>
+          <View style={this.headlineStyles}>
             <Image style={styles.icon} source={iconMttrs} />
             <Text style={styles.headline}>{this.props.headline}</Text>
           </View>
-          <Text style={this.summaryStyles()}>{this.props.summary}</Text>
+          <Text style={this.summaryStyles}>{this.props.summary}</Text>
           {this.renderFooter()}
         </View>
       </View>
     )
-  }
-
-  summaryStyles () {
-    if (this.props.isExpanded) return [styles.summary, styles.summaryExpanded]
-    return styles.summary
   }
 
   renderFooter () {
@@ -84,13 +79,30 @@ class StorySummary extends Component {
       <View style={styles.expandButtonContainer}>
         <TouchableHighlight
           underlayColor={DARK_TRANSPARENT_COLOR}
-          style={styles.expandButton}
+          style={this.expandButtonStyles}
           onPress={() => this.props.pressExpandButton()}
         >
           {buttonText}
         </TouchableHighlight>
       </View>
     )
+  }
+
+  get expandButtonStyles () {
+    if (!this.props.visited) return styles.expandButton
+    return [styles.expandButton, styles.expandButtonVisited]
+  }
+
+  get summaryStyles () {
+    let summaryStyles = [styles.summary]
+    if (this.props.isExpanded) summaryStyles = [...summaryStyles, styles.summaryExpanded]
+    if (this.props.visited) summaryStyles = [...summaryStyles, styles.summaryVisited]
+    return summaryStyles
+  }
+
+  get headlineStyles () {
+    if (!this.props.visited) return styles.headlineContainer
+    return [styles.headlineContainer, styles.headlineVisited]
   }
 
   get boxStyles () {
@@ -107,6 +119,7 @@ class StorySummary extends Component {
 }
 
 StorySummary.propTypes = {
+  visited: PropTypes.bool.isRequired,
   headline: PropTypes.string.isRequired,
   summary: PropTypes.string,
   isExpanded: PropTypes.bool,

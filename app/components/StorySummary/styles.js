@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
 
+  headlineVisited: {
+    opacity: 0.7
+  },
+
   headline: {
     ...Platform.select({
       ios: {
@@ -78,6 +82,10 @@ const styles = StyleSheet.create({
     }),
     color: '#666666',
     marginTop: 3
+  },
+
+  summaryVisited: {
+    opacity: 0.5
   },
 
   summaryExpanded: {
@@ -115,6 +123,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     flexGrow: 1
+  },
+
+  expandButtonVisited: {
+    opacity: 0.5
   },
 
   gradient: {
