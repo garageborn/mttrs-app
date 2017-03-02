@@ -1,9 +1,8 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   listContainer: {
     flex: 1,
-    marginBottom: Platform.OS === 'ios' ? 10 : 40,
     marginHorizontal: 10
   },
 
