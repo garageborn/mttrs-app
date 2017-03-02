@@ -4,9 +4,9 @@ import { DARK_COLOR } from '../constants/Colors'
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: DARK_COLOR,
     height: headerHeight,
-    zIndex: 1,
-    backgroundColor: DARK_COLOR
+    zIndex: 1
   }
 })
 
