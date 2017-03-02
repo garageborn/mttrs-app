@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Animated, Easing, Dimensions } from 'react-native'
+import { Animated, Easing, Dimensions, BackAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import BackButtonBehaviour from '../common/utils/BackButtonBehaviour'
 import { MenuActions } from '../actions/index'
@@ -59,7 +59,8 @@ class MenuContainer extends Component {
   }
 
   closeMenu () {
-    return Promise.resolve(this.props.dispatch(MenuActions.closeMenu()))
+    this.props.dispatch(MenuActions.closeMenu())
+    return Promise.resolve(BackAndroid.exitApp())
   }
 
   render () {
