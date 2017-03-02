@@ -23,12 +23,11 @@ const styles = StyleSheet.create({
         paddingTop: 20
       },
       android: {
-        top: 0,
-        bottom: 0,
-        paddingBottom: 25
+        top: headerHeight,
+        bottom: 0
       }
     }),
-    flexGrow: 1,
+    ...containerStyles,
     backgroundColor: '#F1F1F1'
   },
 

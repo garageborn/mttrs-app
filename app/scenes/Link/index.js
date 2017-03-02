@@ -63,7 +63,7 @@ class LinkScene extends Component {
 
   analyticsTrack () {
     const { slug } = this.props.route.params.link
-    this.props.dispatch(AnalyticsActions.trackScreen(`/link/${ slug }`))
+    this.props.dispatch(AnalyticsActions.trackScreen(`/link/${slug}`))
   }
 
   render () {

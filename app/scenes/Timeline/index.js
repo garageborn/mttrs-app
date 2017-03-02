@@ -10,21 +10,22 @@ import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 
 class TimelineScene extends Component {
-  static route = {
-    navigationBar: {
-      renderTitle: (route) => {
-        return <TimelineHeaderContainer params={route.params} />
-      },
-      renderLeft: () => null,
-      renderRight: () => null,
-      backgroundColor: DARK_COLOR,
-      height: headerHeight
-    }
-  }
+  // static route = {
+  //   navigationBar: {
+  //     renderTitle: (route) => {
+  //       return <TimelineHeaderContainer params={route.params} />
+  //     },
+  //     renderLeft: () => null,
+  //     renderRight: () => null,
+  //     backgroundColor: DARK_COLOR,
+  //     height: headerHeight
+  //   }
+  // }
 
   render () {
     return (
       <View>
+        <TimelineHeaderContainer params={this.props.route.params} />
         {this.renderTimeline()}
         <MenuContainer params={this.props.route.params} />
         {this.renderStoryLinks()}

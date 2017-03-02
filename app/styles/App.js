@@ -21,7 +21,10 @@ const styles = StyleSheet.create({
 
   listViewContainer: {
     position: 'absolute',
-    ...containerStyles
+    marginBottom: 40,
+    // ...containerStyles
+    height,
+    width
   }
 })
 

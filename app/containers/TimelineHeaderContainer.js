@@ -14,10 +14,15 @@ class TimelineHeaderContainer extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} elevation={this.headerElevation()}>
         {this.renderHeader()}
       </View>
     )
+  }
+
+  headerElevation () {
+    const { menu } = this.props.uiReducer
+    return menu.isOpen ? 0 : 4
   }
 
   renderHeader () {
