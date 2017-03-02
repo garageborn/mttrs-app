@@ -54,7 +54,10 @@ class CategoriesTimeline extends Component {
   }
 
   getActiveRouteKey (props, routes) {
-    if (!props.params.section || props.params.section.name === 'home') return 0
+    const { params } = props
+    if (!params.section || !params.section.model || params.section.name === 'home') {
+      return this.state.navigationState.index
+    }
     const activeRoute = routes.find(route => route.model.slug === props.params.section.model.slug)
     return parseInt(activeRoute.key)
   }
