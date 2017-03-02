@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform, Dimensions } from 'react-native'
+const { height } = Dimensions.get('window')
+const headerOffset = Platform.OS === 'android' ? 140 : 125
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: height - headerOffset
   }
 })
 
