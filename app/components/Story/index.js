@@ -26,24 +26,28 @@ class Story extends Component {
   }
 
   render () {
-    const { openLink, openStoryLinks, story } = this.props
+    const { openLink, openStoryLinks, story, visited } = this.props
     if (!story) return null
     return (
       <View
         ref={story.id}
-        style={{ opacity: this.props.visited ? 0.4 : 1 }}
         onLayout={this.getViewPosition}
         collapsable={false}
       >
         <View style={styles.card}>
           <StoryMainLink
+            visited={visited}
             onPress={openLink}
             mainLink={this.mainLink}
             mainCategory={this.mainCategory}
             story={story}
           />
           {this.renderSummary(story.headline, story.summary)}
-          <StoryMetadata story={story} onPublishersPress={openStoryLinks} />
+          <StoryMetadata
+            visited={visited}
+            story={story}
+            onPublishersPress={openStoryLinks}
+          />
         </View>
       </View>
     )
@@ -67,6 +71,7 @@ class Story extends Component {
 
     return (
       <StorySummary
+        visited={this.props.visited}
         summary={this.props.story.summary}
         headline={this.props.story.headline}
         isExpanded={this.state.isSummaryExpanded}
@@ -98,6 +103,8 @@ class Story extends Component {
 Story.propTypes = {
   story: PropTypes.shape({
     id: PropTypes.string,
+    headline: PropTypes.string,
+    summary: PropTypes.string,
     main_link: PropTypes.shape({
       image_source_url: PropTypes.string,
       publisher: PropTypes.shape({

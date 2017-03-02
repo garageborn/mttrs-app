@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
 
   category: {
     fontWeight: '600'
+  },
+
+  visited: {
+    opacity: 0.5
   }
 })
 

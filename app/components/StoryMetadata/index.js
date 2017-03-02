@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import { View } from 'react-native'
 import styles from './styles'
 import StoryPublishers from '../StoryPublishers'
@@ -6,18 +6,27 @@ import SocialCount from '../SocialCount'
 import Touchable from '../Touchable'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
-const StoryMetadata = ({story, onPublishersPress}) => {
-  return (
-    <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
-      <View style={styles.footer}>
-        <StoryPublishers story={story} />
-        <SocialCount totalSocial={story.total_social} />
-      </View>
-    </Touchable>
-  )
+class StoryMetadata extends Component {
+  render () {
+    const { onPublishersPress, story } = this.props
+    return (
+      <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
+        <View style={this.containerStyles}>
+          <StoryPublishers story={story} />
+          <SocialCount totalSocial={story.total_social} />
+        </View>
+      </Touchable>
+    )
+  }
+
+  get containerStyles () {
+    if (!this.props.visited) return styles.container
+    return [styles.container, styles.visited]
+  }
 }
 
 StoryMetadata.propTypes = {
+  visited: PropTypes.bool.isRequired,
   onPublishersPress: PropTypes.func.isRequired,
   story: PropTypes.object.isRequired
 }

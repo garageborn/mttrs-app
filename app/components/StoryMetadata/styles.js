@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  footer: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#F1F1F1'
+  },
+
+  visited: {
+    opacity: 0.5
   },
 
   shares: {

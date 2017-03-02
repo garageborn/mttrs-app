@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     height: 90,
     borderWidth: 2,
     borderColor: '#F1F1F1'
+  },
+
+  visited: {
+    opacity: 0.7
   }
 })
 
