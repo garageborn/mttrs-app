@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import _isEqual from 'lodash/isEqual'
+import _result from 'lodash/result'
 import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
@@ -54,8 +55,9 @@ class CategoriesTimeline extends Component {
   }
 
   getActiveRouteKey (props, routes) {
-    if (!props.params.section || props.params.section.name === 'home') return 0
-    const activeRoute = routes.find(route => route.model.slug === props.params.section.model.slug)
+    const { section } = props.params
+    if (!_result(section, 'model')) return this.state.navigationState.index
+    const activeRoute = routes.find(route => route.model.slug === section.model.slug)
     return parseInt(activeRoute.key)
   }
 
