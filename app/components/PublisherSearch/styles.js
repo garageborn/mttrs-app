@@ -14,11 +14,6 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: '#787877',
     marginHorizontal: 10,
-    // marginTop: 0,
-    // marginBottom: Platform.select({
-    //   ios: 0,
-    //   android: 0
-    // }),
     borderRadius: 2
   },
 
