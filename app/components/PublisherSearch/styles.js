@@ -7,14 +7,16 @@ const styles = StyleSheet.create({
     position: 'relative',
     backgroundColor: DARK_COLOR,
     height: 50,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    elevation: 4
   },
 
   search: {
     position: 'relative',
     backgroundColor: '#787877',
     marginHorizontal: 10,
-    borderRadius: 2
+    borderRadius: 2,
+    elevation: 2
   },
 
   icon: {

@@ -14,8 +14,8 @@ const PublisherSearch = ({ intl, onChangeText }) => {
   let placeholder = intl.formatMessage(messages.searchPlaceholder)
 
   return (
-    <View style={styles.container} elevation={4}>
-      <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0} elevation={0}>
+    <View style={styles.container}>
+      <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
         <Image style={styles.icon} source={icon} />
         <TextInput
           style={styles.searchInput}
