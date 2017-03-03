@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, ListView } from 'react-native'
 import PublisherMenuItem from '../PublisherMenuItem'
+import PublisherMenuListViewSeparator from '../PublisherMenuListViewSeparator'
 import styles from './styles'
 
 class PublisherMenuListView extends Component {
@@ -22,7 +23,7 @@ class PublisherMenuListView extends Component {
     if (!publishers || !publishers.length) return
 
     return (
-      <View style={styles.listContainer}>
+      <View style={styles.container}>
         <ListView
           dataSource={this.dataSource()}
           renderRow={this.renderRow}
@@ -33,13 +34,7 @@ class PublisherMenuListView extends Component {
   }
 
   renderSeparator (sectionData, section) {
-    return (
-      <View shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1}>
-        <View style={styles.listHeader}>
-          <Text style={styles.listHeaderText}>{section}</Text>
-        </View>
-      </View>
-    )
+    return <PublisherMenuListViewSeparator section={section} />
   }
 
   renderRow (publisher) {
