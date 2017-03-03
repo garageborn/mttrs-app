@@ -36,6 +36,7 @@ class PublisherMenu extends Component {
         <PublisherSearch
           onChangeText={this.onChangeText()}
           onCleanSearch={this.onCleanSearch}
+          inputIsEmpty={this.state.query === ''}
         />
         <PublisherMenuListView
           query={this.state.query}

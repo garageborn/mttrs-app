@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
-import { View, TextInput, Image, Platform } from 'react-native'
+import { View, TextInput, Image, Platform, TouchableNativeFeedback } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
 import icon from './assets/icon.png'
 import close from './assets/close.png'
 import styles, { textColor } from './styles'
@@ -25,11 +24,11 @@ class PublisherSearch extends Component {
   }
 
   clearButton () {
-    if (Platform.OS === 'ios') return
+    if (Platform.OS === 'ios' || this.props.inputIsEmpty) return
     return (
-      <Touchable onPress={this.clear}>
+      <TouchableNativeFeedback onPress={this.clear}>
         <Image style={styles.close} source={close} />
-      </Touchable>
+      </TouchableNativeFeedback>
     )
   }
 
@@ -60,6 +59,7 @@ PublisherSearch.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
+  inputIsEmpty: PropTypes.bool.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onCleanSearch: PropTypes.func.isRequired
 }
