@@ -19,6 +19,10 @@ class PublisherMenu extends Component {
     return <ApolloError skinType='dark' data={this.props.data} />
   }
 
+  inputIsEmpty () {
+    return this.state.query === ''
+  }
+
   render () {
     const { loading, error, publishers } = this.props.data
     if (loading) {
@@ -36,7 +40,7 @@ class PublisherMenu extends Component {
         <PublisherSearch
           onChangeText={this.onChangeText()}
           onCleanSearch={this.onCleanSearch}
-          inputIsEmpty={this.state.query === ''}
+          inputIsEmpty={this.inputIsEmpty()}
         />
         <PublisherMenuListView
           query={this.state.query}
