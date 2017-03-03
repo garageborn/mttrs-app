@@ -1,4 +1,6 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable camelcase  */
+/* eslint-disable react/jsx-no-bind  */
+
 import React, { PropTypes, Component } from 'react'
 import { View, Text } from 'react-native'
 import Touchable from '../Touchable'
@@ -14,7 +16,7 @@ class PublisherMenuItem extends Component {
     return (
       <Touchable
         style={styles.touch}
-        onPress={e => onPress(publisher)}
+        onPress={() => onPress(publisher)}
         underlayColor={WHITE_TRANSPARENT_COLOR}
       >
         <View style={styles.container}>
@@ -38,16 +40,16 @@ class PublisherMenuItem extends Component {
   }
 
   get count () {
-    let { todaysNews } = this.props.publisher
-    if (!todaysNews) return '--'
-    return todaysNews
+    let { today_stories_count } = this.props.publisher
+    if (!today_stories_count) return '--'
+    return today_stories_count
   }
 }
 
 PublisherMenuItem.propTypes = {
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    todaysNews: PropTypes.number
+    today_stories_count: PropTypes.number
   }),
   onPress: PropTypes.func.isRequired
 }

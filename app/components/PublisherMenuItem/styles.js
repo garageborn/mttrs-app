@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
 
   rightContainer: {
-    marginRight: 12
+    width: 40
   },
 
   name: {
@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
 
   count: {
     fontSize: 14,
-    color: '#999999'
+    color: '#999999',
+    textAlign: 'center'
   }
 })
 

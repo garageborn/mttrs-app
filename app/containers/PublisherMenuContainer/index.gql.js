@@ -8,6 +8,7 @@ query {
     id
     name
     slug
+    today_stories_count
   }
 }
 `
