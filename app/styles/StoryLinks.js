@@ -1,11 +1,15 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { DARK_COLOR } from '../constants/Colors'
 const { width, height } = Dimensions.get('window')
-const heightOffset = Platform.OS === 'ios' ? 90 : 110
+const heightOffset = Platform.OS === 'ios' ? 100 : 110
 
 const styles = StyleSheet.create({
   modal: {
     flex: 1,
+    paddingTop: Platform.select({
+      ios: 10,
+      android: 0
+    }),
     backgroundColor: DARK_COLOR
   },
 
@@ -22,14 +26,14 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 8,
     borderRadius: 4,
-    backgroundColor: '#FFF',
+    backgroundColor: '#FFF'
   },
 
   header: {
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     paddingTop: 1,
-    backgroundColor: 'rgba(38,44,91,.1)',
+    backgroundColor: 'rgba(38,44,91,.1)'
   },
 
   subHeaderText: {
@@ -38,7 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
     marginBottom: 5,
     marginHorizontal: 15,
-    color: '#3A7EFE',
+    color: '#3A7EFE'
   },
 
   row: {
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     width: width - 110,
     paddingRight: 40,
-    letterSpacing: -.73,
+    letterSpacing: -0.73,
     lineHeight: 22,
     color: '#333333',
     fontWeight: 'bold'
