@@ -4,6 +4,7 @@ import _debounce from 'lodash/debounce'
 import ApolloError from '../ApolloError'
 import PublisherSearch from '../PublisherSearch'
 import PublisherMenuListView from '../PublisherMenuListView'
+import PublisherMenuSuggestion from '../PublisherMenuSuggestion'
 import styles from './styles'
 
 class PublisherMenu extends Component {
@@ -42,10 +43,14 @@ class PublisherMenu extends Component {
           onCleanSearch={this.onCleanSearch}
           inputIsEmpty={this.inputIsEmpty()}
         />
-        <PublisherMenuListView
+        {/* <PublisherMenuListView
           query={this.state.query}
           publishers={publishers}
           openPublisher={this.props.openPublisher}
+        /> */}
+        <PublisherMenuSuggestion
+          publisher={this.state.query}
+          sendSuggestion={() => console.log(123)}
         />
       </View>
     )
