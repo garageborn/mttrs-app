@@ -21,14 +21,16 @@ const styles = StyleSheet.create({
 
   icon: {
     position: 'absolute',
-    top: 8,
+    top: 6,
     left: 12
   },
 
   close: {
     position: 'absolute',
-    top: 10,
-    right: 10
+    top: 3,
+    right: 3,
+    paddingHorizontal: 5,
+    paddingVertical: 5
   },
 
   searchInput: {

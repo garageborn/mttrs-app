@@ -27,7 +27,9 @@ class PublisherSearch extends Component {
     if (Platform.OS === 'ios' || this.props.inputIsEmpty) return
     return (
       <TouchableNativeFeedback onPress={this.clear}>
-        <Image style={styles.close} source={close} />
+        <View style={styles.close}>
+          <Image source={close} />
+        </View>
       </TouchableNativeFeedback>
     )
   }
