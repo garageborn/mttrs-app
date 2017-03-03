@@ -33,6 +33,16 @@ const messages = defineMessages({
 })
 
 class PublisherMenuSuggestion extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      success: false
+    }
+
+    this.actions = this.actions.bind(this)
+  }
+
   error () {
     const { intl } = this.props
     let error = intl.formatMessage(messages.error)
@@ -45,11 +55,25 @@ class PublisherMenuSuggestion extends Component {
     return <Text style={styles.success}>{success}</Text>
   }
 
+  actions () {
+    if (this.state.success) return this.success()
+
+    const { intl } = this.props
+    let label = intl.formatMessage(messages.sendButton)
+
+    return (
+      <Touchable onPress={() => this.setState({success: true})} underlayColor={WHITE_TRANSPARENT_COLOR}>
+        <View style={styles.sendButton}>
+          <Text style={styles.label}>{label.toUpperCase()}</Text>
+        </View>
+      </Touchable>
+    )
+  }
+
   render () {
     const { intl } = this.props
     let title = intl.formatMessage(messages.title)
     let subTitle = intl.formatMessage(messages.subTitle)
-    let label = intl.formatMessage(messages.sendButton)
 
     return (
       <View style={styles.container}>
@@ -57,11 +81,7 @@ class PublisherMenuSuggestion extends Component {
         <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
         <Text style={styles.publisher}>Nome do Site</Text>
-        <Touchable onPress={this.props.sendSuggestion} underlayColor={WHITE_TRANSPARENT_COLOR}>
-          <View style={styles.sendButton}>
-            <Text style={styles.label}>{label.toUpperCase()}</Text>
-          </View>
-        </Touchable>
+        {this.actions()}
       </View>
     )
   }
