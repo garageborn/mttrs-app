@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import Touchable from '../Touchable'
 import icon from './assets/icon.png'
 import styles from './styles'
@@ -32,18 +33,33 @@ const messages = defineMessages({
 })
 
 class PublisherMenuSuggestion extends Component {
+  error () {
+    const { intl } = this.props
+    let error = intl.formatMessage(messages.error)
+    return <Text style={styles.error}>{error}</Text>
+  }
+
+  success () {
+    const { intl } = this.props
+    let success = intl.formatMessage(messages.success)
+    return <Text style={styles.success}>{success}</Text>
+  }
+
   render () {
     const { intl } = this.props
+    let title = intl.formatMessage(messages.title)
+    let subTitle = intl.formatMessage(messages.subTitle)
+    let label = intl.formatMessage(messages.sendButton)
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{intl.formatMessage(messages.title)}</Text>
-        <Text style={styles.subTitle}>{intl.formatMessage(messages.subTitle)}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
         <Text style={styles.publisher}>Nome do Site</Text>
-        <Touchable onPress={this.props.sendSuggestion}>
+        <Touchable onPress={this.props.sendSuggestion} underlayColor={WHITE_TRANSPARENT_COLOR}>
           <View style={styles.sendButton}>
-            <Text style={styles.label}>{intl.formatMessage(messages.sendButton)}</Text>
+            <Text style={styles.label}>{label.toUpperCase()}</Text>
           </View>
         </Touchable>
       </View>

@@ -1,5 +1,12 @@
 import { StyleSheet } from 'react-native'
 
+const green = '#23E2D4'
+const feedbackMessage = {
+  fontSize: 13,
+  lineHeight: 22,
+  textAlign: 'center'
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -25,12 +32,12 @@ const styles = StyleSheet.create({
   publisher: {
     fontSize: 24,
     color: '#FFF',
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 35
   },
 
   sendButton: {
-    backgroundColor: '#23E2D4',
-    marginTop: 35,
+    backgroundColor: green,
     paddingVertical: 8,
     paddingHorizontal: 25,
     borderRadius: 2,
@@ -39,6 +46,16 @@ const styles = StyleSheet.create({
 
   label: {
     color: '#2D2D2B'
+  },
+
+  success: {
+    ...feedbackMessage,
+    color: green
+  },
+
+  error: {
+    ...feedbackMessage,
+    color: '#FF5607'
   }
 })
 
