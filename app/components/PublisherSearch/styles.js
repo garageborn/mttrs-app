@@ -21,8 +21,16 @@ const styles = StyleSheet.create({
 
   icon: {
     position: 'absolute',
-    top: 8,
+    top: 6,
     left: 12
+  },
+
+  close: {
+    position: 'absolute',
+    top: 3,
+    right: 3,
+    paddingHorizontal: 5,
+    paddingVertical: 5
   },
 
   searchInput: {
@@ -37,7 +45,11 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 2,
     padding: 5,
-    marginLeft: 35
+    marginLeft: 35,
+    marginRight: Platform.select({
+      ios: 0,
+      android: 35
+    })
   }
 })
 

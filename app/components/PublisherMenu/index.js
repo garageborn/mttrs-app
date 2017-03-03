@@ -11,10 +11,16 @@ class PublisherMenu extends Component {
     super()
 
     this.state = { query: '' }
+
+    this.onCleanSearch = this.onCleanSearch.bind(this)
   }
 
   renderError () {
     return <ApolloError skinType='dark' data={this.props.data} />
+  }
+
+  inputIsEmpty () {
+    return this.state.query === ''
   }
 
   render () {
@@ -31,7 +37,11 @@ class PublisherMenu extends Component {
 
     return (
       <View style={styles.container}>
-        <PublisherSearch onChangeText={this.onChangeText()} />
+        <PublisherSearch
+          onChangeText={this.onChangeText()}
+          onCleanSearch={this.onCleanSearch}
+          inputIsEmpty={this.inputIsEmpty()}
+        />
         <PublisherMenuListView
           query={this.state.query}
           publishers={publishers}
@@ -43,6 +53,10 @@ class PublisherMenu extends Component {
 
   onChangeText () {
     return _debounce(query => this.setState({ query }), 300)
+  }
+
+  onCleanSearch () {
+    this.setState({ query: '' })
   }
 }
 
