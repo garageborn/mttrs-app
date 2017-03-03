@@ -25,6 +25,12 @@ const styles = StyleSheet.create({
     left: 12
   },
 
+  close: {
+    position: 'absolute',
+    top: 10,
+    right: 10
+  },
+
   searchInput: {
     position: 'relative',
     backgroundColor: '#787877',
@@ -37,7 +43,11 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 2,
     padding: 5,
-    marginLeft: 35
+    marginLeft: 35,
+    marginRight: Platform.select({
+      ios: 0,
+      android: 35
+    })
   }
 })
 
