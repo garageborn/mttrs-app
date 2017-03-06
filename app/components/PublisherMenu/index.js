@@ -1,66 +1,16 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import _debounce from 'lodash/debounce'
-import ApolloError from '../ApolloError'
+import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherMenuListView from '../PublisherMenuListView'
 import PublisherMenuSuggestion from '../PublisherMenuSuggestion'
 import styles from './styles'
 
 class PublisherMenu extends Component {
-  constructor () {
-    super()
-
-    this.state = {
-      query: '',
-      hasPublishers: true
-    }
-
-    this.onCleanSearch = this.onCleanSearch.bind(this)
-    this.hasPublishers = this.hasPublishers.bind(this)
-  }
-
-  renderError () {
-    return <ApolloError skinType='dark' data={this.props.data} />
-  }
-
-  inputIsEmpty () {
-    return this.state.query === ''
-  }
-
-  hasPublishers () {
-    this.setState({ hasPublishers: false })
-  }
-
   renderView () {
-    const { publishers } = this.props.data
-    if (this.state.hasPublishers) {
-      return (
-        <PublisherMenuListView
-          query={this.state.query}
-          hasPublishers={this.hasPublishers}
-          publishers={publishers}
-          openPublisher={this.props.openPublisher}
-        />
-      )
-    } else {
-      return (
-        <PublisherMenuSuggestion
-          publisher={this.state.query}
-          sendSuggestion={() => console.log(123)}
-        />
-      )
-    }
-  }
-
-  renderListView () {
-    const { publishers } = this.props.data
-    console.log(this.state.hasPublishers)
-    if (!this.state.hasPublishers) return
-
+    const { publishers } = this.props
+    if (!publishers.length) return this.renderSuggestionView()
     return (
       <PublisherMenuListView
-        query={this.state.query}
         hasPublishers={this.hasPublishers}
         publishers={publishers}
         openPublisher={this.props.openPublisher}
@@ -69,58 +19,36 @@ class PublisherMenu extends Component {
   }
 
   renderSuggestionView () {
-    if (this.state.hasPublishers) return
-
     return (
       <PublisherMenuSuggestion
-        publisher={this.state.query}
-        sendSuggestion={() => console.log(123)}
+        publisher={this.props.query}
+        sendSuggestion={this.props.sendSuggestion}
       />
     )
   }
 
   render () {
-    const { loading, error, publishers } = this.props.data
-    if (loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size='large' color='#AAA' />
-        </View>
-      )
-    }
-
-    if (error) return this.renderError()
-
     return (
       <View style={styles.container}>
         <PublisherSearch
-          onChangeText={this.onChangeText()}
-          onCleanSearch={this.onCleanSearch}
-          inputIsEmpty={this.inputIsEmpty()}
+          onChangeText={this.props.onChangeText}
+          onCleanSearch={this.props.onCleanSearch}
+          emptyInput={this.props.emptyInput}
         />
-        {/* <PublisherMenuListView
-          query={this.state.query}
-          hasPublishers={this.hasPublishers}
-          publishers={publishers}
-          openPublisher={this.props.openPublisher}
-        /> */}
         {this.renderView()}
       </View>
     )
   }
-
-  onChangeText () {
-    return _debounce(query => this.setState({ query }), 300)
-  }
-
-  onCleanSearch () {
-    this.setState({ query: '' })
-  }
 }
 
 PublisherMenu.propTypes = {
-  data: PropTypes.object.isRequired,
-  openPublisher: PropTypes.func.isRequired
+  query: PropTypes.string.isRequired,
+  publishers: PropTypes.array.isRequired,
+  openPublisher: PropTypes.func.isRequired,
+  emptyInput: PropTypes.func.isRequired,
+  onCleanSearch: PropTypes.func.isRequired,
+  sendSuggestion: PropTypes.func.isRequired,
+  onChangeText: PropTypes.func.isRequired
 }
 
 export default PublisherMenu

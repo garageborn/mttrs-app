@@ -24,7 +24,7 @@ class PublisherSearch extends Component {
   }
 
   clearButton () {
-    if (Platform.OS === 'ios' || this.props.inputIsEmpty) return
+    if (Platform.OS === 'ios' || this.props.emptyInput) return
     return (
       <TouchableNativeFeedback onPress={this.clear}>
         <View style={styles.close}>
@@ -61,7 +61,7 @@ PublisherSearch.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  inputIsEmpty: PropTypes.bool.isRequired,
+  emptyInput: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
   onCleanSearch: PropTypes.func.isRequired
 }

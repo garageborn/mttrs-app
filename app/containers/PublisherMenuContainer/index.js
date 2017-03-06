@@ -1,19 +1,79 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
+import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
+import ApolloError from '../../components/ApolloError'
 import PublisherMenu from '../../components/PublisherMenu'
+import Loader from '../../components/PublisherMenuLoader'
 import { NavigationActions, MenuActions } from '../../actions/index'
 
 class PublisherMenuContainer extends Component {
   constructor () {
     super()
 
+    this.state = {
+      query: ''
+    }
+
     this.openPublisher = this.openPublisher.bind(this)
+    this.getPublishers = this.getPublishers.bind(this)
+    this.onCleanSearch = this.onCleanSearch.bind(this)
+    this.onChangeText = _debounce(this.onChangeText.bind(this), 300)
+    this.emptyInput = this.emptyInput.bind(this)
+  }
+
+  emptyInput () {
+    return this.state.query === ''
+  }
+
+  getPublishers (query) {
+    if (!query) return this.props.data.publishers
+
+    const queryMatcher = new RegExp(query, 'i')
+    const publishers = this.props.data.publishers.filter(publisher => {
+      return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
+    })
+
+    return publishers
   }
 
   render () {
-    return <PublisherMenu data={this.props.data} openPublisher={this.openPublisher} />
+    const { loading, error } = this.props.data
+
+    if (loading) {
+      return (
+        <Loader />
+      )
+    }
+
+    if (error) return this.renderError()
+
+    return (
+      <PublisherMenu
+        query={this.state.query}
+        emptyInput={this.emptyInput}
+        publishers={this.getPublishers(this.state.query)}
+        openPublisher={this.openPublisher}
+        onChangeText={this.onChangeText}
+        onCleanSearch={this.onCleanSearch}
+        sendSuggestion={this.sendSuggestion}
+      />
+    )
+  }
+
+  onChangeText (query) {
+    this.setState({
+      query
+    })
+  }
+
+  onCleanSearch () {
+    this.setState({ query: '' })
+  }
+
+  renderError () {
+    return <ApolloError skinType='dark' data={this.props.data} />
   }
 
   openPublisher (publisher) {
@@ -21,6 +81,10 @@ class PublisherMenuContainer extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.props.dispatch(NavigationActions.selectPublisher(publisher))
     })
+  }
+
+  sendSuggestion (name) {
+    return alert(`${name} sent as suggestion`)
   }
 }
 
@@ -32,7 +96,11 @@ const mapStateToProps = (state, ownProps) => {
 
 PublisherMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  data: PropTypes.object.isRequired
+  data: PropTypes.shape({
+    publishers: PropTypes.array,
+    loading: PropTypes.bool.isRequired,
+    error: PropTypes.any
+  })
 }
 
 const PublisherMenuContainerWithData = withQuery(PublisherMenuContainer)

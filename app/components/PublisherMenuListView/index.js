@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, ListView } from 'react-native'
-import _isEmpty from 'lodash/isEmpty'
 import PublisherMenuItem from '../PublisherMenuItem'
 import styles from './styles'
 
@@ -10,12 +9,6 @@ class PublisherMenuListView extends Component {
 
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
-  }
-
-  componentWillUpdate (nextProps) {
-    if (this.props.query !== nextProps.query) {
-      this.rowsAndSections(nextProps.query)
-    }
   }
 
   render () {
@@ -53,27 +46,17 @@ class PublisherMenuListView extends Component {
       sectionHeaderHasChanged: (r1, r2) => r1 !== r2
     })
 
-    let { rows, sections } = this.rowsAndSections(this.props.query)
+    let { rows, sections } = this.rowsAndSections()
     return ds.cloneWithRowsAndSections(rows, sections)
   }
 
-  rowsAndSections (query) {
-    let rows = {}
-    let sections = []
+  rowsAndSections () {
     const { publishers } = this.props
 
-    if (!publishers || !publishers.length) return {rows, sections}
+    let rows = {}
+    let sections = []
 
-    const queryMatcher = new RegExp(query, 'i')
-    const filteredPublishers = publishers.filter(publisher => {
-      return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
-    })
-    //
-    // console.log('PUBLISHERS', filteredPublishers)
-    //
-    if (_isEmpty(filteredPublishers)) this.props.hasPublishers()
-
-    filteredPublishers.map(publisher => {
+    publishers.map(publisher => {
       let section = this.getSection(publisher)
       if (sections.indexOf(section) === -1) {
         sections.push(section)
@@ -92,8 +75,7 @@ class PublisherMenuListView extends Component {
 
 PublisherMenuListView.propTypes = {
   publishers: PropTypes.array.isRequired,
-  openPublisher: PropTypes.func.isRequired,
-  query: PropTypes.string.isRequired
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default PublisherMenuListView
