@@ -11,9 +11,13 @@ class PublisherMenu extends Component {
   constructor () {
     super()
 
-    this.state = { query: '' }
+    this.state = {
+      query: '',
+      hasPublishers: true
+    }
 
     this.onCleanSearch = this.onCleanSearch.bind(this)
+    this.hasPublishers = this.hasPublishers.bind(this)
   }
 
   renderError () {
@@ -22,6 +26,57 @@ class PublisherMenu extends Component {
 
   inputIsEmpty () {
     return this.state.query === ''
+  }
+
+  hasPublishers () {
+    this.setState({ hasPublishers: false })
+  }
+
+  renderView () {
+    const { publishers } = this.props.data
+    if (this.state.hasPublishers) {
+      return (
+        <PublisherMenuListView
+          query={this.state.query}
+          hasPublishers={this.hasPublishers}
+          publishers={publishers}
+          openPublisher={this.props.openPublisher}
+        />
+      )
+    } else {
+      return (
+        <PublisherMenuSuggestion
+          publisher={this.state.query}
+          sendSuggestion={() => console.log(123)}
+        />
+      )
+    }
+  }
+
+  renderListView () {
+    const { publishers } = this.props.data
+    console.log(this.state.hasPublishers)
+    if (!this.state.hasPublishers) return
+
+    return (
+      <PublisherMenuListView
+        query={this.state.query}
+        hasPublishers={this.hasPublishers}
+        publishers={publishers}
+        openPublisher={this.props.openPublisher}
+      />
+    )
+  }
+
+  renderSuggestionView () {
+    if (this.state.hasPublishers) return
+
+    return (
+      <PublisherMenuSuggestion
+        publisher={this.state.query}
+        sendSuggestion={() => console.log(123)}
+      />
+    )
   }
 
   render () {
@@ -45,13 +100,11 @@ class PublisherMenu extends Component {
         />
         {/* <PublisherMenuListView
           query={this.state.query}
+          hasPublishers={this.hasPublishers}
           publishers={publishers}
           openPublisher={this.props.openPublisher}
         /> */}
-        <PublisherMenuSuggestion
-          publisher={this.state.query}
-          sendSuggestion={() => console.log(123)}
-        />
+        {this.renderView()}
       </View>
     )
   }

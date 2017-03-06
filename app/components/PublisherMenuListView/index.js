@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, ListView } from 'react-native'
+import _isEmpty from 'lodash/isEmpty'
 import PublisherMenuItem from '../PublisherMenuItem'
 import styles from './styles'
 
@@ -67,6 +68,10 @@ class PublisherMenuListView extends Component {
     const filteredPublishers = publishers.filter(publisher => {
       return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
     })
+    //
+    // console.log('PUBLISHERS', filteredPublishers)
+    //
+    if (_isEmpty(filteredPublishers)) this.props.hasPublishers()
 
     filteredPublishers.map(publisher => {
       let section = this.getSection(publisher)
