@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import withQuery from './index.gql'
+import withMutation from './index.gql'
 import PublisherMenuSuggestion from '../../components/PublisherMenuSuggestion'
 
 class PublisherMenuSuggestionContainer extends Component {
@@ -35,5 +35,4 @@ PublisherMenuSuggestionContainer.propTypes = {
   publisher: PropTypes.string.isRequired
 }
 
-const PublisherMenuSuggestionContainerWithData = withQuery(PublisherMenuSuggestionContainer)
-export default PublisherMenuSuggestionContainerWithData
+export default withMutation(PublisherMenuSuggestionContainer)

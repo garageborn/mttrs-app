@@ -19,11 +19,7 @@ class PublisherMenu extends Component {
   }
 
   renderSuggestionView () {
-    return (
-      <PublisherMenuSuggestionContainer
-        publisher={this.props.query}
-      />
-    )
+    return <PublisherMenuSuggestionContainer publisher={this.props.query} />
   }
 
   render () {
@@ -31,7 +27,7 @@ class PublisherMenu extends Component {
       <View style={styles.container}>
         <PublisherSearch
           onChangeText={this.props.onChangeText}
-          onCleanSearch={this.props.onCleanSearch}
+          onClearSearch={this.props.onClearSearch}
           emptyInput={this.props.emptyInput}
         />
         {this.renderView()}
@@ -45,8 +41,7 @@ PublisherMenu.propTypes = {
   publishers: PropTypes.array.isRequired,
   openPublisher: PropTypes.func.isRequired,
   emptyInput: PropTypes.func.isRequired,
-  onCleanSearch: PropTypes.func.isRequired,
-  sendSuggestion: PropTypes.func.isRequired,
+  onClearSearch: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired
 }
 

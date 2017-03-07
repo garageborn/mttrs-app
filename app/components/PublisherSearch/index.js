@@ -20,7 +20,7 @@ class PublisherSearch extends Component {
 
   clear () {
     this.refs.textInput.clear()
-    this.props.onCleanSearch()
+    this.props.onClearSearch()
   }
 
   clearButton () {
@@ -63,7 +63,7 @@ PublisherSearch.propTypes = {
   }).isRequired,
   emptyInput: PropTypes.func.isRequired,
   onChangeText: PropTypes.func.isRequired,
-  onCleanSearch: PropTypes.func.isRequired
+  onClearSearch: PropTypes.func.isRequired
 }
 
 export default injectIntl(PublisherSearch)
