@@ -37,5 +37,11 @@
   "summary.title": "Editor's summary",
   "summary.showMore": "show more",
   "summary.showLess": "show less",
+  "publisher.suggestion.title": "Couldn't find what you were looking for?",
+  "publisher.suggestion.subTitle": "Send us your suggestion!",
+  "publisher.suggestion.sendButton": "Send",
+  "publisher.suggestion.success": "Suggested publisher submitted.\nThanks for contributing.",
+  "publisher.suggestion.error": "Oops! Something went wrong. :(",
+  "publisher.suggestion.refreshButton": "Refresh",
   "publisherListSeparator.todaysNews": "today's news"
 }

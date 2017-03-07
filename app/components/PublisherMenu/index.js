@@ -1,68 +1,46 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ActivityIndicator } from 'react-native'
-import _debounce from 'lodash/debounce'
-import ApolloError from '../ApolloError'
+import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherMenuListView from '../PublisherMenuListView'
+import PublisherMenuSuggestionContainer from '../../containers/PublisherMenuSuggestionContainer'
 import styles from './styles'
 
 class PublisherMenu extends Component {
-  constructor () {
-    super()
-
-    this.state = { query: '' }
-
-    this.onCleanSearch = this.onCleanSearch.bind(this)
-  }
-
-  renderError () {
-    return <ApolloError skinType='dark' data={this.props.data} />
-  }
-
-  inputIsEmpty () {
-    return this.state.query === ''
-  }
-
-  render () {
-    const { loading, error, publishers } = this.props.data
-    if (loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size='large' color='#AAA' />
-        </View>
-      )
-    }
-
-    if (error) return this.renderError()
-
+  renderView () {
+    const { publishers } = this.props
+    if (!publishers.length) return this.renderSuggestionView()
     return (
-      <View style={styles.container}>
-        <PublisherSearch
-          onChangeText={this.onChangeText()}
-          onCleanSearch={this.onCleanSearch}
-          inputIsEmpty={this.inputIsEmpty()}
-        />
-        <PublisherMenuListView
-          query={this.state.query}
-          publishers={publishers}
-          openPublisher={this.props.openPublisher}
-        />
-      </View>
+      <PublisherMenuListView
+        hasPublishers={this.hasPublishers}
+        publishers={publishers}
+        openPublisher={this.props.openPublisher}
+      />
     )
   }
 
-  onChangeText () {
-    return _debounce(query => this.setState({ query }), 300)
+  renderSuggestionView () {
+    return <PublisherMenuSuggestionContainer publisher={this.props.query} />
   }
 
-  onCleanSearch () {
-    this.setState({ query: '' })
+  render () {
+    return (
+      <View style={styles.container}>
+        <PublisherSearch
+          handleQuery={this.props.handleQuery}
+          emptyInput={this.props.emptyInput}
+        />
+        {this.renderView()}
+      </View>
+    )
   }
 }
 
 PublisherMenu.propTypes = {
-  data: PropTypes.object.isRequired,
-  openPublisher: PropTypes.func.isRequired
+  query: PropTypes.string.isRequired,
+  publishers: PropTypes.array.isRequired,
+  openPublisher: PropTypes.func.isRequired,
+  emptyInput: PropTypes.func.isRequired,
+  handleQuery: PropTypes.func.isRequired
 }
 
 export default PublisherMenu
