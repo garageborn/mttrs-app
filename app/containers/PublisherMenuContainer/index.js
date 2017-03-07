@@ -57,7 +57,6 @@ class PublisherMenuContainer extends Component {
         openPublisher={this.openPublisher}
         onChangeText={this.onChangeText}
         onCleanSearch={this.onCleanSearch}
-        sendSuggestion={this.sendSuggestion}
       />
     )
   }
@@ -81,10 +80,6 @@ class PublisherMenuContainer extends Component {
     InteractionManager.runAfterInteractions(() => {
       this.props.dispatch(NavigationActions.selectPublisher(publisher))
     })
-  }
-
-  sendSuggestion (name) {
-    return alert(`${name} sent as suggestion`)
   }
 }
 

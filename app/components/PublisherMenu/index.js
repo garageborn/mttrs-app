@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherMenuListView from '../PublisherMenuListView'
-import PublisherMenuSuggestion from '../PublisherMenuSuggestion'
+import PublisherMenuSuggestionContainer from '../../containers/PublisherMenuSuggestionContainer'
 import styles from './styles'
 
 class PublisherMenu extends Component {
@@ -20,9 +20,8 @@ class PublisherMenu extends Component {
 
   renderSuggestionView () {
     return (
-      <PublisherMenuSuggestion
+      <PublisherMenuSuggestionContainer
         publisher={this.props.query}
-        sendSuggestion={this.props.sendSuggestion}
       />
     )
   }

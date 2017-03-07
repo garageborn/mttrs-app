@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native'
 
-const green = '#23E2D4'
-const orange = '#FF5607'
-const feedbackMessage = {
+export const actionColor = '#23E2D4'
+export const dangerColor = '#FF5607'
+export const feedbackMessage = {
   fontSize: 13,
   lineHeight: 22,
   textAlign: 'center'
@@ -37,46 +37,17 @@ const styles = StyleSheet.create({
     marginBottom: 35
   },
 
-  button: {
-    paddingVertical: 8,
-    paddingHorizontal: 25,
-    borderRadius: 2,
-    elevation: 2,
-    textAlign: 'center'
-  },
-
-  sendButton: {
-    backgroundColor: green,
-    color: '#2D2D2B'
-  },
-
-  refreshButton: {
-    backgroundColor: orange,
-    color: '#FFF',
-    width: 130
-  },
-
-  success: {
-    ...feedbackMessage,
-    color: green
-  },
-
-  errorContainer: {
-    alignItems: 'center'
-  },
-
-  errorMessage: {
-    position: 'relative',
-    marginBottom: 20
-  },
-
-  errorText: {
-    ...feedbackMessage,
-    color: orange
-  },
-
   loading: {
     marginVertical: 10
+  },
+
+  button: {
+    backgroundColor: actionColor
+  },
+
+  buttonText: {
+    color: 'black',
+    textAlign: 'center'
   }
 })
 

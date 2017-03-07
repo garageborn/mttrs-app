@@ -12,7 +12,7 @@ const messages = defineMessages({
 const Success = ({ intl }) => {
   let success = intl.formatMessage(messages.success)
 
-  return <Text style={styles.success}>{success}</Text>
+  return <Text style={styles.text}>{success}</Text>
 }
 
 Success.propTypes = {

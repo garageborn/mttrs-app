@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Image, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Success from './success'
-import Error from './error'
-import Button from './button'
+import Success from './components/Success'
+import Error from './components/Error'
+import Button from './components/Button'
 import icon from './assets/icon.png'
 import styles from './styles'
 
@@ -25,37 +25,24 @@ class PublisherMenuSuggestion extends Component {
   constructor () {
     super()
 
-    this.state = {
-      success: false
-    }
-
-    this.actions = this.actions.bind(this)
-  }
-
-  error () {
-    return <Error />
-  }
-
-  success () {
-    return <Success />
+    this.onButtonPress = this.onButtonPress.bind(this)
   }
 
   activityIndicator () {
     return <ActivityIndicator style={styles.loading} size='small' />
   }
 
-  actions () {
-    if (this.state.success) return this.success()
+  renderStatus () {
+    if (this.props.status === 'success') return <Success />
+    if (this.props.status === 'error') return <Error />
 
     const { intl } = this.props
     let label = intl.formatMessage(messages.sendButton)
 
     return (
-      <Button
-        onPress={() => this.setState({success: true})}
-        label={label.toUpperCase()}
-        skin={styles.sendButton}
-      />
+      <Button onPress={this.onButtonPress} skin={styles.button}>
+        <Text style={styles.buttonText}>{label.toUpperCase()}</Text>
+      </Button>
     )
   }
 
@@ -70,9 +57,13 @@ class PublisherMenuSuggestion extends Component {
         <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
         <Text style={styles.publisher}>{publisher}</Text>
-        {this.actions()}
+        {this.renderStatus()}
       </View>
     )
+  }
+
+  onButtonPress () {
+    return this.props.sendSuggestion()
   }
 }
 
@@ -80,8 +71,9 @@ PublisherMenuSuggestion.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  sendSuggestion: PropTypes.func.isRequired,
-  publisher: PropTypes.string
+  sendSuggestion: PropTypes.func,
+  publisher: PropTypes.string,
+  status: PropTypes.string.isRequired
 }
 
 export default injectIntl(PublisherMenuSuggestion)
