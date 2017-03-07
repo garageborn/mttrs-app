@@ -18,8 +18,7 @@ class PublisherMenuContainer extends Component {
 
     this.openPublisher = this.openPublisher.bind(this)
     this.getPublishers = this.getPublishers.bind(this)
-    this.onClearSearch = this.onClearSearch.bind(this)
-    this.onChangeText = _debounce(this.onChangeText.bind(this), 300)
+    this.handleQuery = _debounce(this.handleQuery.bind(this), 300)
     this.emptyInput = this.emptyInput.bind(this)
   }
 
@@ -51,18 +50,13 @@ class PublisherMenuContainer extends Component {
         emptyInput={this.emptyInput}
         publishers={this.getPublishers(this.state.query)}
         openPublisher={this.openPublisher}
-        onChangeText={this.onChangeText}
-        onClearSearch={this.onClearSearch}
+        handleQuery={this.handleQuery}
       />
     )
   }
 
-  onChangeText (query) {
+  handleQuery (query) {
     this.setState({query})
-  }
-
-  onClearSearch () {
-    this.setState({ query: '' })
   }
 
   renderError () {

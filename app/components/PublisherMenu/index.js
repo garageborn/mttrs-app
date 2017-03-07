@@ -26,8 +26,7 @@ class PublisherMenu extends Component {
     return (
       <View style={styles.container}>
         <PublisherSearch
-          onChangeText={this.props.onChangeText}
-          onClearSearch={this.props.onClearSearch}
+          handleQuery={this.props.handleQuery}
           emptyInput={this.props.emptyInput}
         />
         {this.renderView()}
@@ -41,8 +40,7 @@ PublisherMenu.propTypes = {
   publishers: PropTypes.array.isRequired,
   openPublisher: PropTypes.func.isRequired,
   emptyInput: PropTypes.func.isRequired,
-  onClearSearch: PropTypes.func.isRequired,
-  onChangeText: PropTypes.func.isRequired
+  handleQuery: PropTypes.func.isRequired
 }
 
 export default PublisherMenu
