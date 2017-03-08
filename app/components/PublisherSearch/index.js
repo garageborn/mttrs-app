@@ -20,11 +20,11 @@ class PublisherSearch extends Component {
 
   clear () {
     this.refs.textInput.clear()
-    this.props.onCleanSearch()
+    this.props.handleQuery('')
   }
 
   clearButton () {
-    if (Platform.OS === 'ios' || this.props.inputIsEmpty) return
+    if (Platform.OS === 'ios' || this.props.emptyInput) return
     return (
       <TouchableNativeFeedback onPress={this.clear}>
         <View style={styles.close}>
@@ -35,7 +35,7 @@ class PublisherSearch extends Component {
   }
 
   render () {
-    const { intl, onChangeText } = this.props
+    const { intl, handleQuery } = this.props
     let placeholder = intl.formatMessage(messages.searchPlaceholder)
     return (
       <View style={styles.container}>
@@ -47,7 +47,7 @@ class PublisherSearch extends Component {
             underlineColorAndroid={'transparent'}
             placeholder={placeholder}
             placeholderTextColor={textColor}
-            onChangeText={onChangeText}
+            onChangeText={handleQuery}
             clearButtonMode='while-editing'
           />
           {this.clearButton()}
@@ -61,9 +61,8 @@ PublisherSearch.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  inputIsEmpty: PropTypes.bool.isRequired,
-  onChangeText: PropTypes.func.isRequired,
-  onCleanSearch: PropTypes.func.isRequired
+  emptyInput: PropTypes.func.isRequired,
+  handleQuery: PropTypes.func.isRequired
 }
 
 export default injectIntl(PublisherSearch)
