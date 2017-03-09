@@ -1,7 +1,7 @@
 import ApolloClient from 'apollo-client'
 import * as ENDPOINTS from '../constants/APIEndpoints'
 import Tenant from '../common/utils/Tenant'
-import { timezone } from '../../config/IntlProvider'
+import { timezone } from './IntlProvider'
 import createNetworkInterface from '../common/utils/ApolloNetworkInterface'
 import captureError from '../common/utils/captureError'
 
