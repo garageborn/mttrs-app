@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Button from '../Button'
+import Button from '../../../Button'
 import styles from './styles'
 
 const messages = defineMessages({
