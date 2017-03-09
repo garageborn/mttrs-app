@@ -1,6 +1,7 @@
 import ApolloClient from 'apollo-client'
 import * as ENDPOINTS from '../constants/APIEndpoints'
 import Tenant from '../common/utils/Tenant'
+import { timezone } from '../../config/IntlProvider'
 import createNetworkInterface from '../common/utils/ApolloNetworkInterface'
 import captureError from '../common/utils/captureError'
 
@@ -8,6 +9,14 @@ const tenantMiddleware = {
   applyMiddleware: (req, next) => {
     if (!req.options.headers) req.options.headers = {}
     req.options.headers['X-Tenant'] = Tenant.current
+    next()
+  }
+}
+
+const timezoneMiddleware = {
+  applyMiddleware: (req, next) => {
+    if (!req.options.headers) req.options.headers = {}
+    req.options.headers['X-Timezone'] = timezone
     next()
   }
 }
@@ -49,6 +58,7 @@ const networkInterface = createNetworkInterface({ uri: ENDPOINTS.GRAPHQL })
 
 networkInterface.use([
   tenantMiddleware,
+  timezoneMiddleware,
   skipCacheMiddleware
 ]).useAfter([
   errorHandler
