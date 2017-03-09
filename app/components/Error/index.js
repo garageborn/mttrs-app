@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
-import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import Button from '../Button'
 import iconLight from './assets/icon-light.png'
 import iconDark from './assets/icon-dark.png'
 import bgLight from './assets/bg-light.png'
@@ -39,15 +38,9 @@ const Error = ({ intl, skinType, onPressReload }) => {
           source={skin[skinType].icon}
         />
         <Text style={[skin[skinType].textColor, styles.text]}>{text}</Text>
-        <Touchable
-          underlayColor={WHITE_TRANSPARENT_COLOR}
-          style={styles.buttonContainer}
-          onPress={onPressReload}
-        >
-          <View>
-            <Text style={styles.buttonText}>{buttonText}</Text>
-          </View>
-        </Touchable>
+        <Button skin={styles.buttonContainer} onPress={onPressReload}>
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </Button>
       </View>
     </View>
   )

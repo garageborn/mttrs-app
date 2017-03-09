@@ -3,7 +3,7 @@ import { View, Text, Image, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Success from './components/Success'
 import Error from './components/Error'
-import Button from './components/Button'
+import Button from '../Button'
 import icon from './assets/icon.png'
 import styles from './styles'
 
