@@ -1,7 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+import { headerHeight } from '../../styles/Global'
+const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    top: -headerHeight,
+    height,
+    width,
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center'
@@ -9,7 +15,8 @@ const styles = StyleSheet.create({
 
   bg: {
     position: 'absolute',
-    top: 0
+    top: 0,
+    width
   },
 
   textContainer: {
