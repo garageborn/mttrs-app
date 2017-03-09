@@ -29,17 +29,13 @@ class Story extends Component {
     const { openLink, openStoryLinks, story, visited } = this.props
     if (!story) return null
     return (
-      <View
-        ref={story.id}
-        onLayout={this.getViewPosition}
-        collapsable={false}
-      >
+      <View ref={story.id} onLayout={this.getViewPosition} collapsable={false}>
         <View style={styles.card}>
           <StoryMainLink
             visited={visited}
             onPress={openLink}
             mainLink={this.mainLink}
-            mainCategory={this.mainCategory}
+            category={story.category}
             story={story}
           />
           {this.renderSummary(story.headline, story.summary)}
@@ -88,10 +84,6 @@ class Story extends Component {
     return this.props.story.main_link
   }
 
-  get mainCategory () {
-    return this.props.story.main_category
-  }
-
   get isExpandable () {
     const { headline, summary } = this.props.story
     const hasHeadline = headline && headline.length > 0
@@ -113,7 +105,7 @@ Story.propTypes = {
       }).isRequired
     }).isRequired,
     other_links_count: PropTypes.number.isRequired,
-    main_category: PropTypes.shape({
+    category: PropTypes.shape({
       name: PropTypes.string.isRequired,
       color: PropTypes.string
     })

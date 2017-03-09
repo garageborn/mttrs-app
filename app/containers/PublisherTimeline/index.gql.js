@@ -2,14 +2,15 @@ import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../Timeline/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $timezone: String, $type: String!, $limit: Int!, $publisherSlug: String) {
-    timeline(cursor: $cursor, timezone: $timezone, type: $type, limit: $limit, publisher_slug: $publisherSlug) {
+  query($cursor: Int, $type: String!, $limit: Int!, $publisherSlug: String) {
+    timeline(cursor: $cursor, type: $type, limit: $limit, publisher_slug: $publisherSlug) {
       date
       stories {
         id
         total_social
         headline
         summary
+        category { name color slug }
         main_link(publisher_slug: $publisherSlug) {
           title
           url

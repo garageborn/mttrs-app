@@ -9,17 +9,14 @@ class StoryContainer extends Component {
     this.openLink = this.openLink.bind(this)
     this.openStoryLinks = this.openStoryLinks.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
-    this.openCategory = this.openCategory.bind(this)
   }
 
   render () {
     const { scrollToY, story, timelineRef, visited } = this.props
-
     return (
       <Story
         story={story}
         openLink={this.openMainLink}
-        openCategory={this.openCategory}
         openStoryLinks={this.openStoryLinks}
         visited={visited}
         scrollToY={scrollToY}
@@ -33,10 +30,6 @@ class StoryContainer extends Component {
     dispatch(NavigationActions.link(this.props.story, link))
   }
 
-  openCategory () {
-    this.props.dispatch(NavigationActions.selectCategory(this.mainCategory))
-  }
-
   openStoryLinks () {
     const { dispatch, story } = this.props
     dispatch(NavigationActions.storyLinks({ story: story, open: true }))
@@ -48,10 +41,6 @@ class StoryContainer extends Component {
 
   get mainLink () {
     return this.props.story.main_link
-  }
-
-  get mainCategory () {
-    return this.props.story.main_category
   }
 }
 

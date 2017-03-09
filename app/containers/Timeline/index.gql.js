@@ -1,12 +1,8 @@
 import { graphql } from 'react-apollo'
 import _uniqBy from 'lodash/uniqBy'
 import _isArray from 'lodash/isArray'
-import { timezone } from '../../config/IntlProvider'
 
-export const defaultVariables = {
-  limit: 16,
-  timezone
-}
+export const defaultVariables = { limit: 16 }
 
 const pullToRefresh = ({ fetchMore, variables }) => {
   return fetchMore({
