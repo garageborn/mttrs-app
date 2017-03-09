@@ -10,6 +10,7 @@ const Query = gql`
         total_social
         headline
         summary
+        category { name color slug }
         main_link {
           title
           url
