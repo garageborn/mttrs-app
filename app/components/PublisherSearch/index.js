@@ -24,7 +24,7 @@ class PublisherSearch extends Component {
   }
 
   clearButton () {
-    if (Platform.OS === 'ios' || this.props.emptyInput) return
+    if (Platform.OS === 'ios' || this.props.emptyInput()) return
     return (
       <TouchableNativeFeedback onPress={this.clear}>
         <View style={styles.close}>
