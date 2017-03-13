@@ -19,7 +19,7 @@ class HomeTimeline extends Component {
   }
 
   analyticsTrack () {
-    this.props.dispatch(AnalyticsActions.trackScreen())
+    this.props.dispatch(AnalyticsActions.trackScreen('/'))
   }
 
   render () {
