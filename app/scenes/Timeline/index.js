@@ -44,7 +44,7 @@ class TimelineScene extends Component {
 
   handleAnalytics () {
     const { dispatch, section } = this.props
-    if (section.name === 'home') dispatch(AnalyticsActions.trackScreen(`/home`))
+    if (section.name === 'home') return dispatch(AnalyticsActions.trackScreen(`/home`))
     return dispatch(AnalyticsActions.trackScreen(`/${section.model.slug}`))
   }
 
