@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
+import { AnalyticsActions } from '../../actions/index'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
@@ -22,25 +23,29 @@ class TimelineScene extends Component {
       height: headerHeight
     }
   }
-  
+
   constructor () {
     super()
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
   }
 
   componentDidMount () {
-    if (Platform.OS === 'ios') return
     return AppState.addEventListener('change', this.handleAppStateChange)
   }
 
   componentWillUnmount () {
-    if (Platform.OS === 'ios') return
     AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
   handleAppStateChange (appState) {
-    if (appState === 'active') return
+    if (appState === 'active') return this.handleAnalytics()
     return this.props.dispatch(MenuActions.closeMenu())
+  }
+
+  handleAnalytics () {
+    const { dispatch, section } = this.props
+    if (section.name === 'home') return dispatch(AnalyticsActions.trackScreen(`/home`))
+    return dispatch(AnalyticsActions.trackScreen(`/${section.model.slug}`))
   }
 
   render () {
@@ -89,7 +94,8 @@ class TimelineScene extends Component {
 
 TimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  section: PropTypes.object
 }
 
 const mapStateToProps = state => {

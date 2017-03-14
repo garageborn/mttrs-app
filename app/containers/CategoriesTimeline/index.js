@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { TabViewAnimated } from 'react-native-tab-view'
 import _isEqual from 'lodash/isEqual'
 import _result from 'lodash/result'
+import _isEmpty from 'lodash/isEmpty'
 import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
@@ -22,6 +23,12 @@ class CategoriesTimeline extends Component {
         index: 0,
         routes: [homeRoute]
       }
+    }
+  }
+
+  componentWillMount () {
+    if (_isEmpty(this.props.params)) {
+      this.props.dispatch(NavigationActions.home())
     }
   }
 

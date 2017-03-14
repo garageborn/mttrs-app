@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../components/Story'
-import { NavigationActions, AnalyticsActions } from '../actions/index'
+import { NavigationActions } from '../actions/index'
 
 class StoryContainer extends Component {
   constructor (props) {
