@@ -6,10 +6,6 @@ import styles from './styles'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
 const messages = defineMessages({
-  storyFrom: {
-    id: 'from',
-    defaultMessage: 'From'
-  },
   and: {
     id: 'and'
   },
@@ -20,11 +16,8 @@ const messages = defineMessages({
 
 class StoryPublishers extends Component {
   render () {
-    const { formatMessage } = this.props.intl
-
     return (
       <View style={styles.publisher}>
-        <Text style={styles.lightText}>{formatMessage(messages.storyFrom)} </Text>
         <PublisherLogo source={this.publisherLogo} />
         {this.getMainPublisher()}
         {this.getCounter()}
