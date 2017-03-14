@@ -3,7 +3,7 @@ import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
-import { AnalyticsActions, StorageActions } from '../../actions/index'
+import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
@@ -30,7 +30,6 @@ class LinkScene extends Component {
   }
 
   componentWillMount () {
-    this.analyticsTrack()
     this.createAccess()
   }
 
@@ -59,11 +58,6 @@ class LinkScene extends Component {
 
   createAccess () {
     this.props.createLinkAccess()
-  }
-
-  analyticsTrack () {
-    const { slug } = this.props.route.params.link
-    this.props.dispatch(AnalyticsActions.trackScreen(`/link/${ slug }`))
   }
 
   render () {
