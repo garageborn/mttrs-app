@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
+import { AnalyticsActions } from '../../actions/index'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
 import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
@@ -43,7 +44,14 @@ class LinkScene extends Component {
   }
 
   handleAppStateChange (appState) {
+    if (appState === 'active') this.handleAnalytics()
     this.setState({ appState })
+  }
+
+  handleAnalytics () {
+    this.props.dispatch(
+      AnalyticsActions.trackScreen(`/link/${this.props.route.params.link.slug}`)
+    )
   }
 
   addStoryToLocalStorage () {
