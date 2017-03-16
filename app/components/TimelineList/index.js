@@ -16,7 +16,6 @@ class TimelineList extends Component {
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
     this.setScrolled = this.setScrolled.bind(this)
-
   }
 
   componentWillReceiveProps (nextProps) {

@@ -12,7 +12,7 @@ class StoryContainer extends Component {
   }
 
   render () {
-    const { scrollToY, timelinePosition, story, timelineRef, visited } = this.props
+    const { scrollToY, story, timelineRef, visited } = this.props
     return (
       <Story
         story={story}

@@ -20,7 +20,7 @@ class Story extends Component {
   componentWillUpdate (nextProps, nextState) {
     if (!this.isExpandable) return
 
-    this.handleStoryHeight(nextState)
+    this.handleStoryPosition(nextState)
     this.handleScroll(nextState)
   }
 
@@ -80,7 +80,7 @@ class Story extends Component {
     }
   }
 
-  handleStoryHeight (nextState) {
+  handleStoryPosition (nextState) {
     if (this.state.isSummaryExpanded === nextState.isSummaryExpanded) return
     return this.handleMeasure()
   }
