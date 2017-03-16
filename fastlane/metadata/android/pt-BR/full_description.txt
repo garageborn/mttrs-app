@@ -1,6 +1,6 @@
 <b>Seu tempo é muito precioso. Dedique apenas 15 minutos ao dia para saber as notícias que realmente importam.</b>
 
-<b>Mttrs é o agregador de notícias definitivo que ajuda você a se informar com as principais notícias do momento.</b> Acabe com a intensa procura por notícias relevantes. Encontre notícias de <b><u>mais de 50 sites em um só lugar</b></u>, apresentadas conforme o nível de interação social recebido por elas na Internet.
+<b>mttrs é o agregador de notícias definitivo que ajuda você a se informar com as principais notícias do momento.</b> Acabe com a intensa procura por notícias relevantes. Encontre notícias de <b><u>mais de 50 sites em um só lugar</b></u>, apresentadas conforme o nível de interação social recebido por elas na Internet.
 
 Se preferir, <b>navegue pelas categorias e leia notícias focadas no assunto que realmente importa para você.</b>
 
@@ -8,4 +8,4 @@ Se preferir, <b>navegue pelas categorias e leia notícias focadas no assunto que
 
 Agilize sua leitura através dos resumos. <b>Entenda a mensagem principal da notícia sem precisar acessá-la.</b>
 
-<i>"Muito prazer, eu sou o Mttrs! Muita gente não sabe dizer meu nome, mas é bem simples. Basta lembrar da palavra em inglês "Matters", que significa "aquilo que importa”."</i>
+<i>"Muito prazer, eu sou o <b>mttrs</b>! Muita gente não sabe dizer meu nome, mas é bem simples. Basta lembrar da palavra em inglês "Matters", que significa "aquilo que importa”."</i>
