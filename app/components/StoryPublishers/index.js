@@ -34,7 +34,6 @@ class StoryPublishers extends Component {
 
   getMainPublisher () {
     const { main_link } = this.props.story
-    console.log(this.props.story)
     return (
       <View style={styles.restrictContent}>
         <Text style={styles.darkText}> {main_link.publisher.name}</Text>
