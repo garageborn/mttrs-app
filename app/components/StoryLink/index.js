@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
+import RestrictContentLabel from '../RestrictContentLabel'
 import PublisherLogo from '../PublisherLogo'
 import SocialCountFormatter from '../../common/utils/SocialCountFormatter'
 import * as cloudinary from '../../common/utils/Cloudinary'
@@ -28,6 +29,11 @@ class StoryLink extends Component {
     return { uri }
   }
 
+  get restrictContentLabel () {
+    const { publisher } = this.props.link
+    if (publisher.restrict_content) return <RestrictContentLabel />
+  }
+
   render () {
     const { link, openLink } = this.props
     return (
@@ -44,6 +50,7 @@ class StoryLink extends Component {
                 <View style={styles.publisherInfo}>
                   <Text style={styles.publisherName}>{link.publisher.name}</Text>
                 </View>
+                {this.restrictContentLabel}
               </View>
               <View style={styles.story}>
                 <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>

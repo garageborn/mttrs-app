@@ -42,5 +42,6 @@
   "publisher.suggestion.success": "Suggested publisher submitted.\nThanks for contributing.",
   "publisher.suggestion.error": "Oops! Something went wrong. :(",
   "publisher.suggestion.refreshButton": "Refresh",
-  "publisherListSeparator.todaysNews": "today's news"
+  "publisherListSeparator.todaysNews": "today's news",
+  "restrict.content": "only for subscribers"
 }
