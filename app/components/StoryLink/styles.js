@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
 
   publisherName: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#666666',
     fontWeight: Platform.select({
       ios: '700',

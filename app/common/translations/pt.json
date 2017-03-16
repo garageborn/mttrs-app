@@ -42,5 +42,6 @@
   "publisher.suggestion.success": "Sugestão de site enviada.\nObrigado por contribuir.",
   "publisher.suggestion.error": "Oops! Algo deu errado. :(",
   "publisher.suggestion.refreshButton": "Atualizar",
-  "publisherListSeparator.todaysNews": "notícias de hoje"
+  "publisherListSeparator.todaysNews": "notícias de hoje",
+  "restrict.content": "somente para assinantes"
 }

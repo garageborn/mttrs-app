@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import RestrictContentLabel from '../RestrictContentLabel'
 import PublisherLogo from '../PublisherLogo'
 import styles from './styles'
 import * as cloudinary from '../../common/utils/Cloudinary'
@@ -25,9 +26,20 @@ class StoryPublishers extends Component {
     )
   }
 
+  getRestrictContentLabel () {
+    const { story } = this.props
+    if (story.other_links_count > 0) return
+    if (story.main_link.publisher.restrict_content) return <RestrictContentLabel />
+  }
+
   getMainPublisher () {
     const { main_link } = this.props.story
-    return <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+    return (
+      <View style={styles.restrictContent}>
+        <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+        {this.getRestrictContentLabel()}
+      </View>
+    )
   }
 
   get publisherLogo () {

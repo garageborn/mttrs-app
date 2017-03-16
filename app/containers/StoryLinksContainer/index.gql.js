@@ -9,14 +9,14 @@ const Query = gql`
         url
         slug
         total_social
-        publisher { name slug icon_id }
+        publisher { name slug icon_id restrict_content }
       }
       other_links(publisher_slug: $publisherSlug, popular: true) {
         title
         url
         slug
         total_social
-        publisher { name slug icon_id }
+        publisher { name slug icon_id restrict_content }
       }
     }
   }
