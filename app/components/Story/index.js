@@ -9,6 +9,7 @@ import styles from './styles'
 class Story extends Component {
   constructor (props) {
     super(props)
+    this.measureView = this.measureView.bind(this)
     this.pressExpandButton = this.pressExpandButton.bind(this)
     this.ref = this.ref.bind(this)
     this.state = {
@@ -17,15 +18,8 @@ class Story extends Component {
     }
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (!this.isExpandable) return
-
-    this.handleStoryPosition(nextState)
-    this.handleScroll(nextState)
-  }
-
-  ref (c) {
-    return this.view = c
+  ref (component) {
+    return this.view = component
   }
 
   render () {
@@ -70,22 +64,20 @@ class Story extends Component {
   }
 
   pressExpandButton () {
+    if (this.state.isSummaryExpanded) {
+      this.handleScroll()
+    } else {
+      this.measureView()
+    }
+
     this.setState({ isSummaryExpanded: !this.state.isSummaryExpanded })
   }
 
-  handleScroll (nextState) {
-    const changedExpanded = this.state.isSummaryExpanded !== nextState.isSummaryExpanded
-    if (changedExpanded & !nextState.isSummaryExpanded) {
-      return this.props.scrollToY(this.state.storyPosition)
-    }
+  handleScroll () {
+    return this.props.scrollToY(this.state.storyPosition)
   }
 
-  handleStoryPosition (nextState) {
-    if (this.state.isSummaryExpanded === nextState.isSummaryExpanded) return
-    return this.handleMeasure()
-  }
-
-  handleMeasure () {
+  measureView () {
     if (!this.props.timelineRef) return
     this.view.measureLayout(
       findNodeHandle(this.props.timelineRef),

@@ -90,6 +90,7 @@ class TimelineList extends Component {
         scrollToY={this.scrollToY}
         timelineRef={this.refs.timeline}
         collapsable={false}
+        scrolled={this.state.scrolled}
       />
     )
   }
