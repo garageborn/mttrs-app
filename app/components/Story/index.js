@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React, { PropTypes, Component } from 'react'
 import { View, findNodeHandle } from 'react-native'
 import StorySummary from '../StorySummary'
@@ -8,28 +9,27 @@ import styles from './styles'
 class Story extends Component {
   constructor (props) {
     super(props)
-    this.getViewPosition = this.getViewPosition.bind(this)
+    this.measureView = this.measureView.bind(this)
     this.pressExpandButton = this.pressExpandButton.bind(this)
+    this.ref = this.ref.bind(this)
     this.state = {
-      storyPosition: 0,
+      storyPosition: null,
       isSummaryExpanded: false
     }
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (!this.isExpandable) return
-    const summaryExpandedWillChange = nextState.isSummaryExpanded !== this.state.isSummaryExpanded
-    const nextSummaryNotExpanded = !nextState.isSummaryExpanded
-    if (summaryExpandedWillChange && nextSummaryNotExpanded) {
-      this.props.scrollToY(this.state.storyPosition)
-    }
+  ref (component) {
+    return this.view = component
   }
 
   render () {
     const { openLink, openStoryLinks, story, visited } = this.props
     if (!story) return null
     return (
-      <View ref={story.id} onLayout={this.getViewPosition} collapsable={false}>
+      <View
+        ref={this.ref}
+        collapsable={false}
+      >
         <View style={styles.card}>
           <StoryMainLink
             visited={visited}
@@ -49,19 +49,6 @@ class Story extends Component {
     )
   }
 
-  getViewPosition () {
-    if (!this.isExpandable) return
-
-    const storyTopHeight = 40
-    if (!this.props.timelineRef) return
-    this.refs[this.props.story.id].measureLayout(
-      findNodeHandle(this.props.timelineRef),
-      (x, y) => {
-        this.setState({ storyPosition: y - storyTopHeight })
-      }
-    )
-  }
-
   renderSummary () {
     if (!this.isExpandable) return null
 
@@ -77,7 +64,26 @@ class Story extends Component {
   }
 
   pressExpandButton () {
+    if (this.state.isSummaryExpanded) {
+      this.handleScroll()
+    } else {
+      this.measureView()
+    }
+
     this.setState({ isSummaryExpanded: !this.state.isSummaryExpanded })
+  }
+
+  handleScroll () {
+    return this.props.scrollToY(this.state.storyPosition)
+  }
+
+  measureView () {
+    if (!this.props.timelineRef) return
+    this.view.measureLayout(
+      findNodeHandle(this.props.timelineRef),
+      (x, y, width, height) => {
+        this.setState({ storyPosition: y })
+      })
   }
 
   get mainLink () {

@@ -11,10 +11,11 @@ class TimelineList extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (r1, r2) => r1 !== r2
     })
-    this.state = { dataSource: ds }
+    this.state = { dataSource: ds, scrolled: false }
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
     this.scrollToY = this.scrollToY.bind(this)
+    this.setScrolled = this.setScrolled.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -72,8 +73,13 @@ class TimelineList extends Component {
         renderFooter={this.props.renderFooter}
         renderRow={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
+        onScroll={this.setScrolled}
       />
     )
+  }
+
+  setScrolled () {
+    return this.setState({ scrolled: true })
   }
 
   renderRow (story) {
@@ -84,6 +90,7 @@ class TimelineList extends Component {
         scrollToY={this.scrollToY}
         timelineRef={this.refs.timeline}
         collapsable={false}
+        scrolled={this.state.scrolled}
       />
     )
   }
