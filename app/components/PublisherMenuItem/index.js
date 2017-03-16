@@ -22,7 +22,9 @@ class PublisherMenuItem extends Component {
         <View style={styles.container}>
           <View style={styles.leftContainer}>
             {this.icon}
-            <Text style={styles.name}>{publisher.name}</Text>
+            <Text style={styles.name}>
+              {publisher.display_name || publisher.name}
+            </Text>
           </View>
           <View style={styles.rightContainer}>
             <Text style={styles.count}>{this.count}</Text>

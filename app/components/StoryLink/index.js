@@ -34,6 +34,11 @@ class StoryLink extends Component {
     if (publisher.restrict_content) return <RestrictContentLabel />
   }
 
+  get publisherName () {
+    const { publisher } = this.props.link
+    return publisher.display_name || publisher.name
+  }
+
   render () {
     const { link, openLink } = this.props
     return (
@@ -48,7 +53,7 @@ class StoryLink extends Component {
               <View style={styles.publisher}>
                 <PublisherLogo size={30} source={this.publisherLogo} />
                 <View style={styles.publisherInfo}>
-                  <Text style={styles.publisherName}>{link.publisher.name}</Text>
+                  <Text style={styles.publisherName}>{this.publisherName}</Text>
                 </View>
                 {this.restrictContentLabel}
               </View>
