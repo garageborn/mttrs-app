@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
+import _isNull from 'lodash/isNull'
 import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
@@ -31,10 +32,17 @@ class PublisherMenuContainer extends Component {
 
     const queryMatcher = new RegExp(query, 'i')
     const publishers = this.props.data.publishers.filter(publisher => {
-      return publisher.name.match(queryMatcher) || publisher.slug.match(queryMatcher)
+      return this.matchDisplayName(publisher, queryMatcher) ||
+        publisher.name.match(queryMatcher) ||
+        publisher.slug.match(queryMatcher)
     })
 
     return publishers
+  }
+
+  matchDisplayName (publisher, queryMatcher) {
+    if (_isNull(publisher.display_name)) return
+    return publisher.display_name.match(queryMatcher)
   }
 
   render () {

@@ -16,7 +16,9 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
         <View style={styles.publisher}>
           <PublisherLogo size={25} skin='dark' source={publisherLogo} />
           <View style={styles.publisherInfo}>
-            <Text style={styles.title}>{link.publisher.name}</Text>
+            <Text style={styles.title}>
+              {link.publisher.display_name || link.publisher.name}
+            </Text>
             <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
           </View>
         </View>

@@ -33,13 +33,17 @@ class StoryPublishers extends Component {
   }
 
   getMainPublisher () {
-    const { main_link } = this.props.story
     return (
       <View style={styles.restrictContent}>
-        <Text style={styles.darkText}> {main_link.publisher.name}</Text>
+        <Text style={styles.darkText}> {this.name}</Text>
         {this.getRestrictContentLabel()}
       </View>
     )
+  }
+
+  get name () {
+    const { publisher } = this.props.story.main_link
+    return publisher.display_name || publisher.name
   }
 
   get publisherLogo () {

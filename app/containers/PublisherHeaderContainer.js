@@ -15,12 +15,17 @@ class PublisherHeaderContainer extends Component {
     return <PublisherLogo skin='dark' source={this.getPublisherLogo()} />
   }
 
+  get title () {
+    const { publisher } = this.props
+    return publisher.display_name || publisher.name
+  }
+
   render () {
-    const { toggleMenu, publisher, menuIsOpen } = this.props
+    const { toggleMenu, menuIsOpen } = this.props
     return (
       <Header
         toggleMenu={toggleMenu}
-        title={publisher.name}
+        title={this.title}
         icon={this.icon}
         menuIsOpen={menuIsOpen}
         type='publisher'
