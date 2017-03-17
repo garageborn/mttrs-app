@@ -3,7 +3,7 @@ import { ListView, Platform } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
-import { height as sectionHeaderHeight } from '../ListViewHeader/styles.js'
+import { height as sectionHeaderHeight } from '../ListViewHeader/styles'
 
 class TimelineList extends Component {
   constructor (props) {
