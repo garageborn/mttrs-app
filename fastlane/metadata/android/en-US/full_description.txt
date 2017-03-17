@@ -1,6 +1,6 @@
 <b>Your time is precious. Just take 15 minutes a day to find out the news that matters.</b>
 
-<b>`Mttrs` is the definitive news aggregator that helps you get informed with the top news of the moment.</b> Quell the intense search for relevant news. Find news from <b><u>more than 50 sites in one place</b></u>, presented according to the level of social interaction they receive on the Internet.
+<b>`mttrs` is the definitive news aggregator that helps you get informed with the top news of the moment.</b> Quell the intense search for relevant news. Find news from <b><u>more than 50 sites in one place</b></u>, presented according to the level of social interaction they receive on the Internet.
 
 If you prefer, <b>browse through the categories and read the topic-focused news that really matters to you.</b>
 
