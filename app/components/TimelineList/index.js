@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView } from 'react-native'
+import { ListView, Platform } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
+import { height as sectionHeaderHeight } from '../ListViewHeader/styles'
 
 class TimelineList extends Component {
   constructor (props) {
@@ -96,7 +97,9 @@ class TimelineList extends Component {
   }
 
   scrollToY (y) {
-    return this.refs.timeline.scrollTo({ x: 0, y, animated: true })
+    let scrollY = y
+    if (Platform.OS === 'ios') scrollY = y - sectionHeaderHeight
+    return this.refs.timeline.scrollTo({ x: 0, y: scrollY, animated: true })
   }
 }
 
