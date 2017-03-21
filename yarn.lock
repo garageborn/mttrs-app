@@ -2862,8 +2862,8 @@ moment-timezone@^0.5.10:
     moment ">= 2.6.0"
 
 moment@2.x.x, "moment@>= 2.6.0", moment@^2.18.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.0.tgz#6cfec6a495eca915d02600a67020ed994937252c"
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
 morgan@~1.6.1:
   version "1.6.1"
@@ -3274,8 +3274,8 @@ range-parser@~1.0.3:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.0.3.tgz#6872823535c692e2c2a0103826afd82c2e0ff175"
 
 raven-js@^3.12.0:
-  version "3.12.1"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.12.1.tgz#bec1aebbc0b14fbfe651ffff4c5692931065d418"
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.13.0.tgz#baf9d7f913524e8782578e766931194dba2ac93a"
   dependencies:
     json-stringify-safe "^5.0.1"
 
