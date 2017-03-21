@@ -5,7 +5,7 @@
 Quell the intense search for relevant news. Find news from <u>more than 50 sites in one place</u>, presented according to the level of social interaction they receive on the Internet.
 
 • <b>News summaries</b>
-Quickly find out about the <b>core message of each news through our news summaries.</b>
+Quickly find out about the <u>core message of each news through our news summaries.</u>
 
 • <b>Many sites, the same news.</b>
 <u>Avoid reading the same story more than once</u>. Use news consolidation from different websites talking about the same subject. Everything is grouped to speed up your reading moment. If you prefer feel free to read the news of your favorite site.
