@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import CategoryScrollView from '../../components/CategoryScrollView'
 import TopStoriesCategory from '../../components/TopStoriesCategory'
+import MenuSettingsLabel from '../../components/MenuSettingsLabel'
+import SettingsModal from '../../components/SettingsModal'
 import ApolloError from '../../components/ApolloError'
 import { NavigationActions, MenuActions } from '../../actions/index'
 
@@ -25,14 +27,14 @@ class CategoryMenuContainer extends Component {
   render () {
     if (this.props.data.error) return this.renderError()
     // TEMPORARY
-    // let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
+    let namespaceTitle = this.getTenantName(this.props.StorageReducer.tenant.name)
     return (
       <View>
         <TopStoriesCategory openHome={this.openHome} />
         <CategoryScrollView data={this.props.data} openCategory={this.openCategory} />
         {/* Temporary disable */}
-        {/* <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} /> */}
-        {/* <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} /> */}
+        <MenuSettingsLabel onPress={this.toggleSettingsModal} namespace={namespaceTitle} />
+        <SettingsModal visible={this.state.modalVisible} close={this.toggleSettingsModal} />
       </View>
     )
   }
