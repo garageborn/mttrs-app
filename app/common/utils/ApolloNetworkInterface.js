@@ -16,7 +16,7 @@ HTTPFetchNetworkInterface.prototype.fetchFromRemoteEndpoint = function (req) {
 
   const headers = Object.assign(
     {},
-    { Accept: '*/*', 'Content-Type': 'application/json' },
+    { Accept: '*/*', 'Content-Type': 'application/json', 'pragma': 'no-cache', 'cache-control': 'no-cache' },
     options.headers
   )
   const method = options.method || 'POST'
@@ -33,6 +33,8 @@ HTTPFetchNetworkInterface.prototype.fetchFromRemoteEndpoint = function (req) {
 
     uri = `${ this._uri }?${ queryString.stringify(params) }`
   }
+
+  console.log({ uri, headers })
 
   return fetch(uri, Object.assign(
     {},
