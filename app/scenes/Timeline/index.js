@@ -6,7 +6,7 @@ import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
-import MenuContainer from '../../containers/MenuContainer'
+import MenuPanelContainer from '../../containers/MenuPanelContainer'
 import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
@@ -52,7 +52,7 @@ class TimelineScene extends Component {
     return (
       <View>
         {this.renderTimeline()}
-        <MenuContainer params={this.props.route.params} />
+        <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryLinks()}
       </View>
     )
