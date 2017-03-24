@@ -1,13 +1,16 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
 const settingsHeight = 50
-const settingsBottom = 10
+const settingsBottom = Platform.select({
+  ios: 10,
+  android: 20
+})
 export const height = settingsHeight + settingsBottom
 
 const centerXY = {
   flexDirection: 'row',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
 }
 
 const styles = StyleSheet.create({
