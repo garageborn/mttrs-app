@@ -8,7 +8,7 @@ import styles from './styles'
 const messages = defineMessages({
   settings: {
     id: 'menu.settings',
-    defaultMessage: 'Settings'
+    defaultMessage: 'settings'
   }
 })
 
@@ -18,7 +18,7 @@ const MenuSettingsLabel = ({ intl, namespace, onPress }) => {
       <Text style={styles.namespace}>{namespace}</Text>
       <Touchable underlayColor={COLORLESS} onPress={onPress} style={styles.touch}>
         <View style={styles.touchContainer}>
-          <Image source={require('../../assets/icons/icon-settings.png')} />
+          <Image style={styles.image} source={require('./assets/image.png')} />
           <Text style={styles.settingsTitle}>{intl.formatMessage(messages.settings)}</Text>
         </View>
       </Touchable>

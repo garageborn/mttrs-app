@@ -1,6 +1,9 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
-const settingsHeight = 50
+const settingsHeight = Platform.select({
+  ios: 50,
+  android: 70
+})
 const settingsBottom = Platform.select({
   ios: 10,
   android: 20
@@ -10,7 +13,7 @@ export const height = settingsHeight + settingsBottom
 const centerXY = {
   flexDirection: 'row',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'center'
 }
 
 const styles = StyleSheet.create({
@@ -19,20 +22,24 @@ const styles = StyleSheet.create({
     height: settingsHeight,
     width,
     position: 'absolute',
-    bottom: settingsBottom
+    bottom: settingsBottom,
+    opacity: 0.4
+  },
+
+  image: {
+    marginHorizontal: 10
   },
 
   settingsTitle: {
-    fontSize: 14,
-    color: '#FFF',
-    marginHorizontal: 5
+    fontSize: 12,
+    bottom: 1,
+    color: '#F1F1F1'
   },
 
   namespace: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#FFF',
-    opacity: 0.5
+    fontSize: 12,
+    marginLeft: 16,
+    color: '#F1F1F1'
   },
 
   touchContainer: {

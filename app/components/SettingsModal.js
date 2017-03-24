@@ -66,7 +66,7 @@ class SettingsModal extends Component {
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalHeader}>
-              <Image source={require('../assets/icons/icon-settings.png')} />
+              <Image source={require('./MenuSettingsLabel/assets/image.png')} />
               <Text style={styles.modalTitle}>{formatMessage(messages.settings)}</Text>
             </View>
             <View style={styles.options}>
