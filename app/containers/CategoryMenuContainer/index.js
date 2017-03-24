@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { View, InteractionManager } from 'react-native'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import CategoryScrollView from '../../components/CategoryScrollView'
-import TopStoriesCategory from '../../components/TopStoriesCategory'
+import CategoryMenu from '../../components/CategoryMenu'
 import ApolloError from '../../components/ApolloError'
 import { NavigationActions, MenuActions } from '../../actions/index'
 
@@ -22,10 +21,11 @@ class CategoryMenuContainer extends Component {
   render () {
     if (this.props.data.error) return this.renderError()
     return (
-      <View>
-        <TopStoriesCategory openHome={this.openHome} />
-        <CategoryScrollView data={this.props.data} openCategory={this.openCategory} />
-      </View>
+      <CategoryMenu
+        openHome={this.openHome}
+        openCategory={this.openCategory}
+        data={this.props.data}
+      />
     )
   }
 

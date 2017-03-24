@@ -1,12 +1,8 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native'
-
+import { StyleSheet, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
-const iphoneWidthLarge = 414
-
-const settingsSectionTopOffset = Platform.select({
-  ios: width === iphoneWidthLarge ? 20 : 5,
-  android: 0
-})
+const settingsHeight = 50
+const settingsBottom = 10
+export const height = settingsHeight + settingsBottom
 
 const centerXY = {
   flexDirection: 'row',
@@ -17,7 +13,10 @@ const centerXY = {
 const styles = StyleSheet.create({
   settings: {
     ...centerXY,
-    marginTop: settingsSectionTopOffset
+    height: settingsHeight,
+    width,
+    position: 'absolute',
+    bottom: settingsBottom
   },
 
   settingsTitle: {
@@ -34,8 +33,7 @@ const styles = StyleSheet.create({
   },
 
   touchContainer: {
-    ...centerXY,
-    marginHorizontal: 15
+    ...centerXY
   }
 })
 

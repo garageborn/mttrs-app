@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native'
+import { mainComponentHeight as iosHeight } from '../MenuIOS/styles'
+import { height as publisherSearchHeight } from '../PublisherSearch/styles'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    height: iosHeight - publisherSearchHeight
   },
   list: {
     padding: 10
