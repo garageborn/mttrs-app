@@ -30,8 +30,8 @@ class MenuContainer extends Component {
 
   getTenantName (tenant) {
     const tenants = {
-      mttrs_us: 'USA',
-      mttrs_br: 'Brasil'
+      mttrs_us: 'English - USA',
+      mttrs_br: 'Português - Brasil'
     }
 
     return tenants[tenant]
