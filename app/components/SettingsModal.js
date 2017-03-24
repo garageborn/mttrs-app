@@ -1,9 +1,11 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Modal, View, Text, Image, ScrollView } from 'react-native'
 import Touchable from './Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import { StorageActions } from '../actions/index'
+import { capitalize } from '../common/utils/formatText'
 import apolloClient from '../config/apolloClient'
 import CloseButton from './CloseButton'
 import styles from '../styles/SettingsModal'
@@ -20,8 +22,7 @@ const messages = defineMessages({
   },
 
   feedback: {
-    id: 'footer.feedback',
-    defaultMessage: 'Questions? Feedback? Let us know!'
+    id: 'footer.feedback'
   }
 })
 
@@ -29,7 +30,7 @@ class SettingsModal extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      tenant: this.props.StorageReducer.tenant.name
+      tenant: this.props.tenantName
     }
   }
 
@@ -40,7 +41,7 @@ class SettingsModal extends Component {
   }
 
   onPressCloseButton () {
-    if (this.state.tenant !== this.props.StorageReducer.tenant.name) {
+    if (this.state.tenant !== this.props.tenantName) {
       this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
       apolloClient.resetStore()
     }
@@ -57,6 +58,7 @@ class SettingsModal extends Component {
     const { visible, close, animationType } = this.props
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
+    const title = capitalize(formatMessage(messages.settings))
     return (
       <Modal
         visible={visible}
@@ -66,15 +68,14 @@ class SettingsModal extends Component {
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalHeader}>
-              <Image source={require('./MenuSettingsLabel/assets/image.png')} />
-              <Text style={styles.modalTitle}>{formatMessage(messages.settings)}</Text>
+              <Text style={styles.modalTitle}>{title}</Text>
             </View>
             <View style={styles.options}>
               <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
               <ScrollView style={styles.optionsList}>
                 <Touchable onPress={() => this.onPressTenantButton('mttrs_us')}>
                   <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>English - USA/UK</Text>
+                    <Text style={styles.optionTitle}>English - USA</Text>
                     {this.renderCheckmark('mttrs_us')}
                   </View>
                 </Touchable>
@@ -100,7 +101,14 @@ class SettingsModal extends Component {
 }
 
 SettingsModal.propTypes = {
-  visible: PropTypes.bool.isRequired
+  visible: PropTypes.bool.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  tenantName: PropTypes.string.isRequired,
+  animationType: PropTypes.string.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+  close: PropTypes.func.isRequired
 }
 
 SettingsModal.defaultProps = {
@@ -109,7 +117,7 @@ SettingsModal.defaultProps = {
 
 const mapStateToProps = (state) => {
   return {
-    StorageReducer: state.StorageReducer
+    tenantName: state.StorageReducer.tenant.name
   }
 }
 
