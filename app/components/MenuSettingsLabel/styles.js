@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     color: '#F1F1F1'
   },
 
-  namespace: {
+  tenant: {
     fontSize: 12,
     marginLeft: 16,
     color: '#F1F1F1'

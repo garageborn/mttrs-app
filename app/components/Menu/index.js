@@ -8,16 +8,14 @@ import styles from './styles'
 
 class Menu extends Component {
   render () {
-    const { namespace, settingsOpen, toggleSettingsModal } = this.props
+    const { tenant, settingsOpened, toggleSettingsModal, getTenantName } = this.props
     return (
       <View style={styles.menu}>
         {this.renderMenu()}
-        <MenuSettingsLabel
-          onPress={toggleSettingsModal}
-          namespace={namespace}
-        />
+        <MenuSettingsLabel onPress={toggleSettingsModal} tenant={tenant} />
         <SettingsModal
-          visible={settingsOpen}
+          visible={settingsOpened}
+          getTenantName={getTenantName}
           close={toggleSettingsModal}
         />
       </View>
@@ -33,9 +31,10 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  namespace: PropTypes.string.isRequired,
-  settingsOpen: PropTypes.bool.isRequired,
-  toggleSettingsModal: PropTypes.func.isRequired
+  tenant: PropTypes.string.isRequired,
+  settingsOpened: PropTypes.bool.isRequired,
+  toggleSettingsModal: PropTypes.func.isRequired,
+  getTenantName: PropTypes.func.isRequired
 }
 
 export default Menu

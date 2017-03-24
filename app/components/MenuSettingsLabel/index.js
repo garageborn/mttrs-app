@@ -12,10 +12,10 @@ const messages = defineMessages({
   }
 })
 
-const MenuSettingsLabel = ({ intl, namespace, onPress }) => {
+const MenuSettingsLabel = ({ intl, tenant, onPress }) => {
   return (
     <View style={styles.settings}>
-      <Text style={styles.namespace}>{namespace}</Text>
+      <Text style={styles.tenant}>{tenant}</Text>
       <Touchable underlayColor={COLORLESS} onPress={onPress} style={styles.touch}>
         <View style={styles.touchContainer}>
           <Image style={styles.image} source={require('./assets/image.png')} />
@@ -30,7 +30,7 @@ MenuSettingsLabel.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  namespace: PropTypes.string.isRequired,
+  tenant: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 }
 

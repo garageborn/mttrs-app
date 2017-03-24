@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     height: Platform.select({
       ios: iosHeight - publisherSearchHeight,
-      android: (androidHeight - publisherSearchHeight)
+      android: androidHeight - publisherSearchHeight
     })
   },
   list: {

@@ -55,7 +55,7 @@ class SettingsModal extends Component {
   }
 
   render () {
-    const { visible, close, animationType } = this.props
+    const { visible, close, animationType, getTenantName } = this.props
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
     const title = capitalize(formatMessage(messages.settings))
@@ -75,13 +75,13 @@ class SettingsModal extends Component {
               <ScrollView style={styles.optionsList}>
                 <Touchable onPress={() => this.onPressTenantButton('mttrs_us')}>
                   <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>English - USA</Text>
+                    <Text style={styles.optionTitle}>{getTenantName('mttrs_us')}</Text>
                     {this.renderCheckmark('mttrs_us')}
                   </View>
                 </Touchable>
                 <Touchable onPress={() => this.onPressTenantButton('mttrs_br')}>
                   <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>Português - Brasil</Text>
+                    <Text style={styles.optionTitle}>{getTenantName('mttrs_br')}</Text>
                     {this.renderCheckmark('mttrs_br')}
                   </View>
                 </Touchable>
@@ -108,7 +108,8 @@ SettingsModal.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  close: PropTypes.func.isRequired
+  close: PropTypes.func.isRequired,
+  getTenantName: PropTypes.func.isRequiredx
 }
 
 SettingsModal.defaultProps = {

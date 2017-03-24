@@ -7,9 +7,10 @@ class MenuContainer extends Component {
     super()
 
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
+    this.getTenantName = this.getTenantName.bind(this)
 
     this.state = {
-      settingsOpen: false
+      settingsOpened: false
     }
   }
 
@@ -17,15 +18,16 @@ class MenuContainer extends Component {
     return (
       <Menu
         {...this.props}
-        namespace={this.getTenantName(this.props.tenantName)}
-        settingsOpen={this.state.settingsOpen}
+        tenant={this.getTenantName(this.props.tenantName)}
+        settingsOpened={this.state.settingsOpened}
         toggleSettingsModal={this.toggleSettingsModal}
+        getTenantName={this.getTenantName}
       />
     )
   }
 
   toggleSettingsModal () {
-    this.setState({ settingsOpen: !this.state.settingsOpen })
+    this.setState({ settingsOpened: !this.state.settingsOpened })
   }
 
   getTenantName (tenant) {
