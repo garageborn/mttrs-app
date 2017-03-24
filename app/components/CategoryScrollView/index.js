@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import CategoryTile from '../../components/CategoryTile'
 import styles from './styles'
@@ -13,11 +13,9 @@ class CategoryScrollView extends Component {
 
   render () {
     return (
-      <View>
-        <ScrollView contentContainerStyle={styles.categories}>
-          {this.renderCategories()}
-        </ScrollView>
-      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        {this.renderCategories()}
+      </ScrollView>
     )
   }
 

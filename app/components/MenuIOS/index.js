@@ -41,7 +41,7 @@ class MenuIOS extends Component {
 
   render () {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
         <View style={styles.selector}>
           <ButtonGroup
             underlayColor={'rgba(255,255,255,.1)'}

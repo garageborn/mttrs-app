@@ -1,12 +1,13 @@
 import { StyleSheet, Platform } from 'react-native'
 import { DARK_COLOR } from '../../constants/Colors'
+export const height = 50
 export const textColor = '#DADADA'
 
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
     backgroundColor: DARK_COLOR,
-    height: 50,
+    height,
     justifyContent: 'center',
     elevation: 4
   },

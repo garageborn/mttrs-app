@@ -14,6 +14,8 @@ const categoryHeightDivider = Platform.select({
   android: 8
 })
 
+export const topStoriesHeight = height / categoryHeightDivider
+
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 17,
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
   topStories: {
     backgroundColor: '#555',
     width: tileWidth,
-    height: height / categoryHeightDivider
+    height: topStoriesHeight
   },
 
   borderBottom: {

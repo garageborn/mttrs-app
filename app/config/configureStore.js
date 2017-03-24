@@ -14,7 +14,7 @@ const createStoreWithNavigation = createNavigationEnabledStore({
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
-  // applyMiddleware(loggerMiddleware)
+  // applyMiddleware(loggerMiddleware),
   applyMiddleware(apolloClient.middleware())
 )(createStoreWithNavigation)
 

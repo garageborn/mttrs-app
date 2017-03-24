@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { Animated, Easing, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import Menu from '../components/Menu'
+import MenuContainer from './MenuContainer'
 
 const { height } = Dimensions.get('window')
 
-class MenuContainer extends Component {
+class MenuPanelContainer extends Component {
   constructor () {
     super()
 
@@ -16,6 +16,14 @@ class MenuContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.menuWillChange(nextProps)
+  }
+
+  render () {
+    return (
+      <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
+        <MenuContainer params={this.props.params} />
+      </Animated.View>
+    )
   }
 
   menuWillChange (nextProps) {
@@ -53,26 +61,18 @@ class MenuContainer extends Component {
       )
     ).start()
   }
-
-  render () {
-    return (
-      <Animated.View style={{transform: [{translateY: this.state.menuPositionY}]}}>
-        <Menu params={this.props.params} />
-      </Animated.View>
-    )
-  }
 }
 
-MenuContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+MenuPanelContainer.propTypes = {
   uiReducer: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired
 }
 
 let mapStateToProps = state => {
   return {
+    tenantName: state.StorageReducer.tenant.name,
     uiReducer: state.uiReducer
   }
 }
 
-export default connect(mapStateToProps)(MenuContainer)
+export default connect(mapStateToProps)(MenuPanelContainer)
