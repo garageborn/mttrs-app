@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
+import _result from 'lodash/result'
 import withQuery from './index.gql'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
-import { StorageActions, AnalyticsActions } from '../../actions/index'
+import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
@@ -43,14 +45,7 @@ class LinkScene extends Component {
   }
 
   handleAppStateChange (appState) {
-    if (appState === 'active') this.handleAnalytics()
     this.setState({ appState })
-  }
-
-  handleAnalytics () {
-    this.props.dispatch(
-      AnalyticsActions.trackScreen(`/link/${this.props.route.params.link.slug}`)
-    )
   }
 
   addStoryToLocalStorage () {
@@ -71,12 +66,21 @@ class LinkScene extends Component {
     const { url } = this.props.route.params.link
     if (this.state.appState !== 'active') return null
     return (
-      <StoryWebView
-        url={url}
-        params={this.props.route.params}
-        header={this.renderHeader(this.props)}
-      />
+      <View>
+        <AnalyticsContainer screen={this.analyticsScreen} />
+        <StoryWebView
+          url={url}
+          params={this.props.route.params}
+          header={this.renderHeader(this.props)}
+        />
+      </View>
     )
+  }
+
+  get analyticsScreen () {
+    let slug = _result(this.props, 'route.params.link.slug')
+    if (!slug) return
+    return `/link/${ slug }`
   }
 }
 

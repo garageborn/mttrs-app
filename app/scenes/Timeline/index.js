@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
-import { AnalyticsActions } from '../../actions/index'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
@@ -38,19 +38,14 @@ class TimelineScene extends Component {
   }
 
   handleAppStateChange (appState) {
-    if (appState === 'active') return this.handleAnalytics()
+    if (appState === 'active') return
     return this.props.dispatch(MenuActions.closeMenu())
-  }
-
-  handleAnalytics () {
-    const { dispatch, section } = this.props
-    if (section.name === 'home') return dispatch(AnalyticsActions.trackScreen(`/home`))
-    return dispatch(AnalyticsActions.trackScreen(`/${section.model.slug}`))
   }
 
   render () {
     return (
       <View>
+        <AnalyticsContainer screen={this.analyticsScreen} />
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryLinks()}
@@ -89,6 +84,11 @@ class TimelineScene extends Component {
 
   get isPublisherSection () {
     return this.currentSection.name === 'publisher'
+  }
+
+  get analyticsScreen () {
+    if (!this.currentSection.name || this.currentSection.name === 'home') return '/home'
+    return `/${this.currentSection.model.slug}`
   }
 }
 
