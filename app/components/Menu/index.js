@@ -3,21 +3,17 @@ import { View, Platform } from 'react-native'
 import MenuIOS from '../MenuIOS'
 import MenuAndroid from '../MenuAndroid'
 import MenuSettingsLabel from '../MenuSettingsLabel'
-import SettingsModal from '../SettingsModal'
+import SettingsModalContainer from '../../containers/SettingsModalContainer'
 import styles from './styles'
 
 class Menu extends Component {
   render () {
-    const { tenant, settingsOpened, toggleSettingsModal, getTenantName } = this.props
+    const { tenant, settingsOpened, toggleSettingsModal } = this.props
     return (
       <View style={styles.menu}>
         {this.renderMenu()}
         <MenuSettingsLabel onPress={toggleSettingsModal} tenant={tenant} />
-        <SettingsModal
-          visible={settingsOpened}
-          getTenantName={getTenantName}
-          close={toggleSettingsModal}
-        />
+        <SettingsModalContainer visible={settingsOpened} close={toggleSettingsModal} />
       </View>
     )
   }
@@ -31,10 +27,11 @@ class Menu extends Component {
 }
 
 Menu.propTypes = {
-  tenant: PropTypes.string.isRequired,
+  tenant: PropTypes.shape({
+    id: PropTypes.string
+  }).isRequired,
   settingsOpened: PropTypes.bool.isRequired,
   toggleSettingsModal: PropTypes.func.isRequired,
-  getTenantName: PropTypes.func.isRequired
 }
 
 export default Menu

@@ -6,22 +6,16 @@ class MenuContainer extends Component {
   constructor () {
     super()
 
+    this.state = { settingsOpened: false }
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this)
-    this.getTenantName = this.getTenantName.bind(this)
-
-    this.state = {
-      settingsOpened: false
-    }
   }
 
   render () {
     return (
       <Menu
-        {...this.props}
-        tenant={this.getTenantName(this.props.tenantName)}
+        tenant={this.props.tenant}
         settingsOpened={this.state.settingsOpened}
         toggleSettingsModal={this.toggleSettingsModal}
-        getTenantName={this.getTenantName}
       />
     )
   }
@@ -29,24 +23,17 @@ class MenuContainer extends Component {
   toggleSettingsModal () {
     this.setState({ settingsOpened: !this.state.settingsOpened })
   }
-
-  getTenantName (tenant) {
-    const tenants = {
-      mttrs_us: 'English - USA',
-      mttrs_br: 'Português - Brasil'
-    }
-
-    return tenants[tenant]
-  }
 }
 
 MenuContainer.propTypes = {
-  tenantName: PropTypes.string.isRequired
+  tenant: PropTypes.shape({
+    id: PropTypes.string
+  }).isRequired
 }
 
 let mapStateToProps = state => {
   return {
-    tenantName: state.StorageReducer.tenant.name
+    tenant: state.StorageReducer.tenant
   }
 }
 

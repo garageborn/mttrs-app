@@ -1,11 +1,15 @@
-import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED,
-  REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED,
-  REQUEST_TENANT, TENANT_RECEIVED, SHOW_ONBOARDING, REQUEST_ONBOARDING } from '../constants/ActionTypes'
+import {
+  REQUEST_VISITED_STORIES,
+  VISITED_STORIES_RECEIVED,
+  REQUEST_TENANT,
+  TENANT_RECEIVED,
+  SHOW_ONBOARDING,
+  REQUEST_ONBOARDING
+} from '../constants/ActionTypes'
 
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
-  favoritePublishers: { isFetching: false, isLoaded: false, items: [] },
-  tenant: { isFetching: false, isLoaded: false, name: '' },
+  tenant: { isFetching: false, isLoaded: false, id: null },
   onboarding: { isFetching: false, show: false }
 }
 
@@ -30,25 +34,6 @@ export default function (state = defaultState, action) {
           isLoaded: true
         }
       }
-    case REQUEST_FAVORITE_PUBLISHERS:
-      return {
-        ...state,
-        favoritePublishers: {
-          ...state.favoritePublishers,
-          isFetching: true,
-          isLoaded: false
-        }
-      }
-    case FAVORITE_PUBLISHERS_RECEIVED:
-      return {
-        ...state,
-        favoritePublishers: {
-          ...state.favoritePublishers,
-          isFetching: false,
-          items: action.favoritePublishers,
-          isLoaded: true
-        }
-      }
     case REQUEST_TENANT:
       return {
         ...state,
@@ -64,7 +49,7 @@ export default function (state = defaultState, action) {
         tenant: {
           ...state.tenant,
           isFetching: false,
-          name: action.tenant,
+          id: action.tenant,
           isLoaded: true
         }
       }

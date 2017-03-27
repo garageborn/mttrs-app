@@ -8,7 +8,6 @@ import Router from '../config/Router'
 class AppContainer extends Component {
   constructor () {
     super()
-
     this.onOnboardingEnd = this.onOnboardingEnd.bind(this)
   }
 

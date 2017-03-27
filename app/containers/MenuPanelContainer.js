@@ -69,10 +69,7 @@ MenuPanelContainer.propTypes = {
 }
 
 let mapStateToProps = state => {
-  return {
-    tenantName: state.StorageReducer.tenant.name,
-    uiReducer: state.uiReducer
-  }
+  return { uiReducer: state.uiReducer }
 }
 
 export default connect(mapStateToProps)(MenuPanelContainer)

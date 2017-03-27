@@ -11,7 +11,7 @@ const createStoreWithNavigation = createNavigationEnabledStore({
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
-  applyMiddleware(apolloClient.middleware())
+  applyMiddleware(apolloClient.middleware()),
 )(createStoreWithNavigation)
 
 const rootReducer = combineReducers(reducers)
