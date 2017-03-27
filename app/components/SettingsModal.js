@@ -109,7 +109,7 @@ SettingsModal.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   close: PropTypes.func.isRequired,
-  getTenantName: PropTypes.func.isRequiredx
+  getTenantName: PropTypes.func.isRequired
 }
 
 SettingsModal.defaultProps = {
