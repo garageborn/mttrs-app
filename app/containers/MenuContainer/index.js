@@ -13,7 +13,7 @@ class MenuContainer extends Component {
   render () {
     return (
       <Menu
-        {...this.props}
+        tenant={this.props.tenant}
         settingsOpened={this.state.settingsOpened}
         toggleSettingsModal={this.toggleSettingsModal}
       />

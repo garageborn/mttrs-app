@@ -23,7 +23,7 @@ class SettingsModal extends Component {
     if (this.props.tenant.id === tenant) return <Image source={checkmark} />
   }
 
-  renderButton(tenantId) {
+  renderButton (tenantId) {
     const { changeTenant, intl } = this.props
     const tenantLabel = intl.formatMessage(messages[tenantId])
 

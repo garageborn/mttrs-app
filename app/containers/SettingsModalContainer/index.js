@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
-import { locale } from '../../config/IntlProvider'
 import apolloClient from '../../config/apolloClient'
 import { MenuActions, NavigationActions, StorageActions } from '../../actions/index'
 import { AppRegistry } from 'react-native'
@@ -43,7 +42,10 @@ class SettingsModalContainer extends Component {
 SettingsModalContainer.propTypes = {
   close: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
+  tenant: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }).isRequired,
+  visible: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
