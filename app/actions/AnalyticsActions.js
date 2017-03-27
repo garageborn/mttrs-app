@@ -1,7 +1,7 @@
 import analytics from '../config/Analytics'
 import { InteractionManager } from 'react-native'
 
-const heartBeatIntervalSeconds = 3
+const heartBeatIntervalSeconds = 30
 let heartBeatInterval = null
 
 export function trackScreen (screen) {
