@@ -2,13 +2,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Modal, View, Text, Image, ScrollView } from 'react-native'
-import Touchable from './Touchable'
+import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
-import { StorageActions } from '../actions/index'
-import { capitalize } from '../common/utils/formatText'
-import apolloClient from '../config/apolloClient'
-import CloseButton from './CloseButton'
-import styles from '../styles/SettingsModal'
+import { StorageActions } from '../../actions/index'
+import { capitalize } from '../../common/utils/formatText'
+import apolloClient from '../../config/apolloClient'
+import CloseButton from './../CloseButton'
+import styles from './styles'
 
 const messages = defineMessages({
   settings: {
@@ -29,42 +29,46 @@ const messages = defineMessages({
 class SettingsModal extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      tenant: this.props.tenantName
-    }
+    this.onPressCloseButton = this.onPressCloseButton.bind(this)
   }
 
   onPressTenantButton (tenant) {
-    this.setState({
-      tenant
-    })
+    if (this.props.tenantName === tenant) return this.onPressCloseButton()
+
+    // if (this.state.tenant !== this.props.tenantName) {
+    //   this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
+    //   apolloClient.resetStore()
+    // }
   }
 
   onPressCloseButton () {
-    if (this.state.tenant !== this.props.tenantName) {
-      this.props.dispatch(StorageActions.setCurrentTenant(this.state.tenant))
-      apolloClient.resetStore()
-    }
     this.props.close()
   }
 
   renderCheckmark (tenant) {
-    if (this.state.tenant === tenant) {
-      return <Image source={require('../assets/checkmark.png')} />
+    if (this.props.tenantName === tenant) {
+      return <Image source={require('./assets/checkmark.png')} />
     }
   }
 
+  renderButton(tenantName) {
+    return (
+      <Touchable onPress={() => this.onPressTenantButton(tenantName)}>
+        <View style={styles.optionItem}>
+          <Text style={styles.optionTitle}>{this.props.getTenantName(tenantName)}</Text>
+          {this.renderCheckmark(tenantName)}
+        </View>
+      </Touchable>
+    )
+  }
+
   render () {
-    const { visible, close, animationType, getTenantName } = this.props
+    const { visible, close, animationType } = this.props
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
     const title = capitalize(formatMessage(messages.settings))
     return (
-      <Modal
-        visible={visible}
-        animationType={animationType}
-        onRequestClose={close}
-      >
+      <Modal visible={visible} animationType={animationType} onRequestClose={close}>
         <View style={styles.modal}>
           <View style={styles.modalContainer}>
             <View style={styles.modalHeader}>
@@ -73,18 +77,8 @@ class SettingsModal extends Component {
             <View style={styles.options}>
               <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
               <ScrollView style={styles.optionsList}>
-                <Touchable onPress={() => this.onPressTenantButton('mttrs_us')}>
-                  <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>{getTenantName('mttrs_us')}</Text>
-                    {this.renderCheckmark('mttrs_us')}
-                  </View>
-                </Touchable>
-                <Touchable onPress={() => this.onPressTenantButton('mttrs_br')}>
-                  <View style={styles.optionItem}>
-                    <Text style={styles.optionTitle}>{getTenantName('mttrs_br')}</Text>
-                    {this.renderCheckmark('mttrs_br')}
-                  </View>
-                </Touchable>
+                { this.renderButton('mttrs_us') }
+                { this.renderButton('mttrs_br') }
               </ScrollView>
             </View>
             <View style={styles.modalFooter}>
@@ -93,7 +87,7 @@ class SettingsModal extends Component {
               </Touchable>
             </View>
           </View>
-          <CloseButton onPress={() => this.onPressCloseButton()} />
+          <CloseButton onPress={this.onPressCloseButton} />
         </View>
       </Modal>
     )
