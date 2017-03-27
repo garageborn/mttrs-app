@@ -9,17 +9,14 @@ class AnalyticsContainer extends Component {
   constructor () {
     super()
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
-    this.heartBeat = this.heartBeat.bind(this)
   }
 
   componentDidMount () {
-    console.info('componentDidMount', this.props.screen)
     AppState.addEventListener('change', this.handleAppStateChange)
     this.startHeartBeat()
   }
 
   componentWillUnmount () {
-    console.info('componentWillUnmount', this.props.screen)
     AppState.removeEventListener('change', this.handleAppStateChange)
     this.stopHeartBeat()
   }
@@ -36,25 +33,15 @@ class AnalyticsContainer extends Component {
   trackScreen () {
     const { dispatch, screen } = this.props
     if (!screen) return
-    InteractionManager.runAfterInteractions(() => {
-      dispatch(AnalyticsActions.trackScreen(screen))
-    })
+    dispatch(AnalyticsActions.trackScreen(screen))
   }
 
   startHeartBeat () {
-    this.stopHeartBeat()
-    this.heartBeatInterval = setInterval(this.heartBeat, (heartBeatIntervalSeconds * 1000))
+    this.props.dispatch(AnalyticsActions.startHeartBeat())
   }
 
   stopHeartBeat () {
-    if (this.heartBeatInterval) clearTimeout(this.heartBeatInterval)
-  }
-
-  heartBeat () {
-    InteractionManager.runAfterInteractions(() => {
-      console.log('heartBeat', this.props.screen)
-      this.props.dispatch(AnalyticsActions.trackEvent('heartbeat', 'beat'))
-    })
+    this.props.dispatch(AnalyticsActions.stopHeartBeat())
   }
 
   render () {
