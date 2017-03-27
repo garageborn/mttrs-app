@@ -3,8 +3,6 @@ import { AppState, InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { AnalyticsActions } from '../../actions/index'
 
-const heartBeatIntervalSeconds = 3
-
 class AnalyticsContainer extends Component {
   constructor () {
     super()
