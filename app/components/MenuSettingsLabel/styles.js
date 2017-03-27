@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
   },
 
   touchContainer: {
-    ...centerXY
+    ...centerXY,
+    padding: 10
   }
 })
 

@@ -60,7 +60,9 @@ class LinkHeaderContainer extends Component {
 LinkHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  tenant: PropTypes.string.isRequired
+  tenant: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }).isRequired
 }
 
 let mapStateToProps = (state) => {

@@ -5,6 +5,7 @@ import SettingsModal from '../../components/SettingsModal'
 import { locale } from '../../config/IntlProvider'
 import apolloClient from '../../config/apolloClient'
 import { MenuActions, NavigationActions, StorageActions } from '../../actions/index'
+import { AppRegistry } from 'react-native'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
@@ -28,14 +29,13 @@ class SettingsModalContainer extends Component {
     const { close, dispatch, tenant } = this.props
     if (tenant.id === tenantId) return close()
 
-    dispatch(StorageActions.setCurrentTenant(tenantId))
-    apolloClient.resetStore()
-
+    close()
     dispatch(MenuActions.closeMenu())
 
     InteractionManager.runAfterInteractions(() => {
-      this.props.dispatch(NavigationActions.home())
-      close()
+      dispatch(StorageActions.setCurrentTenant(tenantId))
+      apolloClient.resetStore()
+      dispatch(NavigationActions.home())
     })
   }
 }
