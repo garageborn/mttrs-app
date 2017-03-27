@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { Modal, View, Text, Image, ScrollView } from 'react-native'
 import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
@@ -91,7 +90,7 @@ SettingsModal.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  close: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired
 }
 
 SettingsModal.defaultProps = {
