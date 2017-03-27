@@ -32,8 +32,8 @@ class LinkHeaderContainer extends Component {
   }
 
   buildUrl (slug) {
-    let { currentTenantId } = this.props
-    let tenant = TENANTS.find(tenant => currentTenantId === tenant.id)
+    let tenantId = this.props.tenant.id
+    let tenant = TENANTS.find(tenant => tenantId === tenant.id)
 
     return `${tenant.sharingDomain}/link/${slug}`
   }
@@ -60,12 +60,12 @@ class LinkHeaderContainer extends Component {
 LinkHeaderContainer.propTypes = {
   params: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  currentTenantId: PropTypes.string.isRequired
+  tenant: PropTypes.string.isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
-    currentTenantId: state.StorageReducer.tenant.name
+    tenant: state.StorageReducer.tenant
   }
 }
 

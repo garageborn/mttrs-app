@@ -9,7 +9,7 @@ import {
 
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
-  tenant: { isFetching: false, isLoaded: false, name: '' },
+  tenant: { isFetching: false, isLoaded: false, id: null },
   onboarding: { isFetching: false, show: false }
 }
 
@@ -49,7 +49,7 @@ export default function (state = defaultState, action) {
         tenant: {
           ...state.tenant,
           isFetching: false,
-          name: action.tenant,
+          id: action.tenant,
           isLoaded: true
         }
       }
