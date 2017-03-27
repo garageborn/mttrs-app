@@ -15,9 +15,9 @@ const messages = defineMessages({
 const MenuSettingsLabel = ({ intl, tenant, onPress }) => {
   return (
     <View style={styles.settings}>
-      <Text style={styles.tenant}>{tenant}</Text>
       <Touchable underlayColor={COLORLESS} onPress={onPress} style={styles.touch}>
         <View style={styles.touchContainer}>
+          <Text style={styles.tenant}>{tenant}</Text>
           <Image style={styles.image} source={require('./assets/image.png')} />
           <Text style={styles.settingsTitle}>{intl.formatMessage(messages.settings)}</Text>
         </View>
