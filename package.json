@@ -2,7 +2,8 @@
   "name": "mttrs",
   "version": "0.1.0",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "postinstall": "rm -f node_modules/intl/.babelrc"
   },
   "dependencies": {
     "@exponent/ex-navigation": "^2.9.1",
@@ -24,7 +25,7 @@
     "react": "~15.4.1",
     "react-apollo": "^0.10.1",
     "react-intl": "^2.1.5",
-    "react-native": "0.41.2",
+    "react-native": "0.42.3",
     "react-native-fabric": "0.4.1",
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
