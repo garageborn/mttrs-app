@@ -21,7 +21,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [Fabric with:@[[Crashlytics class]]];
-  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"bb1d8cac-7fb9-46c6-ada6-1113f667fa4f"];
+  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+  appId:@"bb1d8cac-7fb9-46c6-ada6-1113f667fa4f"
+  settings:@{kOSSettingsKeyAutoPrompt: @false}];
+
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
