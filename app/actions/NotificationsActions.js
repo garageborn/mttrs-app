@@ -18,8 +18,19 @@ export function removeListeners () {
   }
 }
 
+export function requestPermissions () {
+  return dispatch => {
+    const permissions = {
+      alert: true,
+      badge: true,
+      sound: true
+    }
+    return OneSignal.requestPermissions(permissions)
+  }
+}
+
 function onReceived(notification) {
-    console.log("Notification received: ", notification)
+  console.log("Notification received: ", notification)
 }
 
 function onOpened(openResult) {
@@ -30,7 +41,7 @@ function onOpened(openResult) {
 }
 
 function onRegistered(notifData) {
-    console.log("Device had been registered for push notifications!", notifData)
+  console.log("Device had been registered for push notifications!", notifData)
 }
 
 function onIds(device) {

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { StorageActions } from '../actions/index'
+import { StorageActions, NotificationsActions } from '../actions/index'
 import Onboarding from '../components/Onboarding'
 import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import Router from '../config/Router'
@@ -12,8 +12,8 @@ class AppContainer extends Component {
     this.onOnboardingEnd = this.onOnboardingEnd.bind(this)
   }
 
-  onOnboardingEnd () {
-    this.props.dispatch(StorageActions.closeOnboarding())
+  componentWillReceiveProps (nextProps) {
+    this.handleNotificationPermissions(nextProps)
   }
 
   render () {
@@ -27,6 +27,16 @@ class AppContainer extends Component {
         <StackNavigation initialRoute={Router.getRoute('timeline')} />
       </NavigationProvider>
     )
+  }
+
+  handleNotificationPermissions (nextProps) {
+    if (nextProps.StorageReducer.visitedStories.items.length < 3) return
+    if (nextProps.StorageReducer.visitedStories.items.length === this.props.StorageReducer.visitedStories.items.length) return
+    return this.props.dispatch(NotificationsActions.requestPermissions())
+  }
+
+  onOnboardingEnd () {
+    this.props.dispatch(StorageActions.closeOnboarding())
   }
 }
 

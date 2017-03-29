@@ -21,7 +21,7 @@ class Root extends Component {
     this.props.store.dispatch(NotificationsActions.addListeners())
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.store.dispatch(NotificationsActions.removeListeners())
   }
 
