@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { StorageActions, NotificationsActions } from '../actions/index'
+import { StorageActions } from '../actions/index'
 import Onboarding from '../components/Onboarding'
 import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
+import NotificationsContainer from './NotificationsContainer'
 import Router from '../config/Router'
 
 class AppContainer extends Component {
@@ -11,12 +12,8 @@ class AppContainer extends Component {
     this.onOnboardingEnd = this.onOnboardingEnd.bind(this)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.handleNotificationPermissions(nextProps)
-  }
-
   render () {
-    const { tenant, onboarding } = this.props.StorageReducer
+    const { tenant, onboarding } = this.props
 
     if (onboarding.isFetching) return null
     if (onboarding.show) return <Onboarding onEnd={this.onOnboardingEnd} />
@@ -24,16 +21,12 @@ class AppContainer extends Component {
     if (tenant.isFetching) return null
 
     return (
-      <NavigationProvider context={this.props.navigationContext}>
-        <StackNavigation initialRoute={Router.getRoute('timeline')} />
-      </NavigationProvider>
+      <NotificationsContainer>
+        <NavigationProvider context={this.props.navigationContext}>
+          <StackNavigation initialRoute={Router.getRoute('timeline')} />
+        </NavigationProvider>
+      </NotificationsContainer>
     )
-  }
-
-  handleNotificationPermissions (nextProps) {
-    if (nextProps.StorageReducer.visitedStories.items.length < 3) return
-    if (nextProps.StorageReducer.visitedStories.items.length === this.props.StorageReducer.visitedStories.items.length) return
-    return this.props.dispatch(NotificationsActions.requestPermissions())
   }
 
   onOnboardingEnd () {
@@ -43,13 +36,15 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
   navigationContext: PropTypes.object.isRequired,
-  StorageReducer: PropTypes.object.isRequired,
+  tenant: PropTypes.object.isRequired,
+  onboarding: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
-    StorageReducer: state.StorageReducer
+    tenant: state.StorageReducer.tenant,
+    onboarding: state.StorageReducer.onboarding
   }
 }
 

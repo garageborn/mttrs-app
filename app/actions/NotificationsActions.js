@@ -27,22 +27,22 @@ export function requestPermissions () {
       badge: true,
       sound: true
     }
-    dispatch(registerTenant())
+    dispatch(handleTags())
     return OneSignal.requestPermissions(permissions)
   }
 }
 
-export function registerTenant () {
+export function handleTags () {
   return (dispatch, getState) => {
     const tenant = getState().StorageReducer.tenant.id
 
     OneSignal.getTags((receivedTags) => {
-      dispatch(tenantTags(tenant, receivedTags))
+      dispatch(setTags(tenant, receivedTags))
     })
   }
 }
 
-function tenantTags (tenant, receivedTags) {
+function setTags (tenant, receivedTags) {
   return dispatch => {
     if (!_isEmpty(receivedTags)) {
       let hasTenant = _find(receivedTags, (key) => key === tenant)
@@ -64,8 +64,8 @@ function onOpened(openResult) {
   console.log('openResult: ', openResult)
 }
 
-function onRegistered(notifData) {
-  console.log("Device had been registered for push notifications!", notifData)
+function onRegistered () {
+  console.log('registered')
 }
 
 function onIds(device) {

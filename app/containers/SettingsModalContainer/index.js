@@ -32,7 +32,7 @@ class SettingsModalContainer extends Component {
 
     InteractionManager.runAfterInteractions(() => {
       dispatch(StorageActions.setCurrentTenant(tenantId))
-      dispatch(NotificationsActions.registerTenant())
+      dispatch(NotificationsActions.handleTags())
       apolloClient.resetStore()
       dispatch(NavigationActions.home())
     })
