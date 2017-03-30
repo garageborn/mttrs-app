@@ -4,6 +4,7 @@ import { TabViewAnimated } from 'react-native-tab-view'
 import _isEqual from 'lodash/isEqual'
 import _result from 'lodash/result'
 import _isEmpty from 'lodash/isEmpty'
+import { injectIntl, defineMessages } from 'react-intl'
 import { NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
 import HomeTimeline from '../HomeTimeline'
@@ -11,7 +12,9 @@ import CategoryTimeline from '../CategoryTimeline'
 import ApolloError from '../../components/ApolloError'
 import styles from '../../styles/App'
 
-const homeRoute = { key: '0', title: 'Top Stories', type: 'home', model: { } }
+const messages = defineMessages({
+  topStories: { id: 'header.topStories' }
+})
 
 class CategoriesTimeline extends Component {
   constructor (props) {
@@ -21,7 +24,7 @@ class CategoriesTimeline extends Component {
     this.state = {
       navigationState: {
         index: 0,
-        routes: [homeRoute]
+        routes: [this.homeRoute]
       }
     }
   }
@@ -77,7 +80,7 @@ class CategoriesTimeline extends Component {
       return { key: `${idx + 1}`, title: category.name, type: 'category', model: category }
     })
 
-    return [homeRoute, ...routes]
+    return [this.homeRoute, ...routes]
   }
 
   handleChangeTab (index) {
@@ -126,13 +129,22 @@ class CategoriesTimeline extends Component {
       />
     )
   }
+
+  get homeRoute () {
+    let title = this.props.intl.formatMessage(messages.topStories)
+    return { key: '0', title: title, type: 'home', model: { } }
+  }
 }
 
 CategoriesTimeline.propTypes = {
+  data: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
   params: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired
 }
 
-const CategoriesTimelineWithData = withQuery(CategoriesTimeline)
+const IntlCategoriesTimeline = injectIntl(CategoriesTimeline)
+const CategoriesTimelineWithData = withQuery(IntlCategoriesTimeline)
 export default connect()(CategoriesTimelineWithData)

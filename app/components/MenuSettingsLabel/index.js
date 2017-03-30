@@ -6,20 +6,22 @@ import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
 const messages = defineMessages({
-  settings: {
-    id: 'menu.settings',
-    defaultMessage: 'Settings'
-  }
+  settings: { id: 'menu.settings' },
+  mttrs_us: { id: 'mttrs_us.label' },
+  mttrs_br: { id: 'mttrs_br.label' }
 })
 
-const MenuSettingsLabel = ({ intl, namespace, onPress }) => {
+const MenuSettingsLabel = ({ intl, tenant, onPress }) => {
+  const { formatMessage } = intl
+  const tenantLabel = formatMessage(messages[tenant.id])
+
   return (
     <View style={styles.settings}>
-      <Text style={styles.namespace}>{namespace}</Text>
       <Touchable underlayColor={COLORLESS} onPress={onPress} style={styles.touch}>
         <View style={styles.touchContainer}>
-          <Image source={require('../../assets/icons/icon-settings.png')} />
-          <Text style={styles.settingsTitle}>{intl.formatMessage(messages.settings)}</Text>
+          <Text style={styles.tenant}>{tenantLabel}</Text>
+          <Image style={styles.image} source={require('./assets/image.png')} />
+          <Text style={styles.settingsTitle}>{formatMessage(messages.settings)}</Text>
         </View>
       </Touchable>
     </View>
@@ -30,7 +32,9 @@ MenuSettingsLabel.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  namespace: PropTypes.string.isRequired,
+  tenant: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }).isRequired,
   onPress: PropTypes.func.isRequired
 }
 

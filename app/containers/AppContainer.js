@@ -8,7 +8,6 @@ import Router from '../config/Router'
 class AppContainer extends Component {
   constructor () {
     super()
-
     this.onOnboardingEnd = this.onOnboardingEnd.bind(this)
   }
 
@@ -17,10 +16,12 @@ class AppContainer extends Component {
   }
 
   render () {
-    const { isFetching, show } = this.props.StorageReducer.onboarding
+    const { tenant, onboarding } = this.props.StorageReducer
 
-    if (isFetching) return null
-    if (show) return <Onboarding onEnd={this.onOnboardingEnd} />
+    if (onboarding.isFetching) return null
+    if (onboarding.show) return <Onboarding onEnd={this.onOnboardingEnd} />
+
+    if (tenant.isFetching) return null
 
     return (
       <NavigationProvider context={this.props.navigationContext}>

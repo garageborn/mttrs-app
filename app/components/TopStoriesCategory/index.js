@@ -8,10 +8,7 @@ import cover from './assets/highlights.png'
 import styles from './styles'
 
 const messages = defineMessages({
-  topStories: {
-    id: 'header.topStories',
-    defaultMessage: 'Top Stories'
-  }
+  topStories: { id: 'header.topStories' }
 })
 
 const TopStoriesCategory = ({ intl, openHome }) => {

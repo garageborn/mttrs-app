@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
+import { height as menuSettingsHeight } from '../MenuSettingsLabel/styles'
 
 const { width, height } = Dimensions.get('window')
 const iphoneWidthSmall = 320

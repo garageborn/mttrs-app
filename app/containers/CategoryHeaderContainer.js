@@ -4,10 +4,7 @@ import Header from '../components/Header'
 import _isEmpty from 'lodash/isEmpty'
 
 const messages = defineMessages({
-  headerTitle: {
-    id: 'header.title',
-    defaultMessage: 'Top Stories'
-  }
+  headerTitle: { id: 'header.topStories' }
 })
 
 const CategoryHeaderContainer = ({ toggleMenu, category, intl, params, menuIsOpen }) => {

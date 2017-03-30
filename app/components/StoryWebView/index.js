@@ -38,11 +38,12 @@ class StoryWebView extends Component {
       <View style={styles.container}>
         {this.props.header}
         <WebView
-          ref='webview'
-          source={{uri: this.props.url}}
           contentInset={{top: this.contentInset()}}
-          renderError={this.handleError}
+          domStorageEnabled
           mediaPlaybackRequiresUserAction
+          ref='webview'
+          renderError={this.handleError}
+          source={{uri: this.props.url}}
         />
       </View>
     )
