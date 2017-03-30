@@ -3,7 +3,7 @@ import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
 import apolloClient from '../../config/apolloClient'
-import { MenuActions, NavigationActions, StorageActions } from '../../actions/index'
+import { MenuActions, NavigationActions, StorageActions, NotificationsActions } from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
@@ -32,6 +32,7 @@ class SettingsModalContainer extends Component {
 
     InteractionManager.runAfterInteractions(() => {
       dispatch(StorageActions.setCurrentTenant(tenantId))
+      dispatch(NotificationsActions.registerTenant())
       apolloClient.resetStore()
       dispatch(NavigationActions.home())
     })
