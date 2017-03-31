@@ -16,6 +16,7 @@ export function home () {
 }
 
 export function link (story, link) {
+  console.log('navactions', story)
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const route = Router.getRoute('link', { story: story, link: link })
