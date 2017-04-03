@@ -15,10 +15,10 @@ class AppContainer extends Component {
   render () {
     const { tenant, onboarding } = this.props
 
-    if (onboarding.isFetching) return null
-    if (onboarding.show) return <Onboarding onEnd={this.onOnboardingEnd} />
-
-    if (tenant.isFetching) return null
+    // if (onboarding.isFetching) return null
+    // if (onboarding.show) return <Onboarding onEnd={this.onOnboardingEnd} />
+    //
+    // if (tenant.isFetching) return null
 
     return (
       <NotificationsContainer>

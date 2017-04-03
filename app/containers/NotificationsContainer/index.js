@@ -1,19 +1,29 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
-import withQuery from './index.gql'
-import { NavigationActions, NotificationsActions } from '../../actions/index'
+import { NotificationsActions } from '../../actions/index'
+import NotificationOpenedContainer from '../NotificationOpenedContainer'
 
 class NotificationsContainer extends Component {
   constructor () {
     super()
     this.handleOpen = this.handleOpen.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
+
+    this.state = {
+      opened: false,
+      model: {
+        slug: null
+      }
+    }
   }
+
   componentWillMount () {
+    console.log('NotificationsContainer componentWillMount')
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
-    OneSignal.addEventListener('registered', this.handleRegister)
+    // OneSignal.addEventListener('registered', this.handleRegister)
   }
 
   componentWillUnmount () {
@@ -25,14 +35,27 @@ class NotificationsContainer extends Component {
     this.handlePermissions(nextProps)
   }
 
+  // componentWillUpdate (nextProps, nextState) {
+  //   console.log(nextState)
+  // }
+
   render () {
-    console.log(this.props.data)
+    if (this.state.opened) return this.rendferNotificationOpenedContainer()
     return this.props.children
   }
 
   handleOpen (result) {
+    console.log('NotificationsContainer handleOpen', result)
     let { model } = result.notification.payload.additionalData
-    return this.props.data.fetchMore({ variables: { id: model.id, slug: model.slug } })
+    this.setState({ opened: true, model })
+  }
+
+  rendferNotificationOpenedContainer () {
+    return (
+      <NotificationOpenedContainer model={this.state.model}>
+        {this.props.children}
+      </NotificationOpenedContainer>
+    )
   }
 
   handleRegister () {
@@ -58,5 +81,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const NotificationsContainerWithData = withQuery(NotificationsContainer)
-export default connect(mapStateToProps)(NotificationsContainerWithData)
+export default connect(mapStateToProps)(NotificationsContainer)
