@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import { NotificationsActions } from '../../actions/index'
-import NotificationOpenedContainer from '../NotificationOpenedContainer'
+import LinkNotificationContainer from '../LinkNotificationContainer'
 
 class NotificationsContainer extends Component {
   constructor () {
@@ -35,27 +35,21 @@ class NotificationsContainer extends Component {
     this.handlePermissions(nextProps)
   }
 
-  // componentWillUpdate (nextProps, nextState) {
-  //   console.log(nextState)
-  // }
-
   render () {
-    if (this.state.opened) return this.rendferNotificationOpenedContainer()
-    return this.props.children
+    let { opened, model, type } = this.state
+    if (!opened) return null
+    switch (type) {
+      case 'link':
+        return <LinkNotificationContainer model={model} />
+      default:
+        return null
+    }
   }
 
   handleOpen (result) {
     console.log('NotificationsContainer handleOpen', result)
-    let { model } = result.notification.payload.additionalData
-    this.setState({ opened: true, model })
-  }
-
-  rendferNotificationOpenedContainer () {
-    return (
-      <NotificationOpenedContainer model={this.state.model}>
-        {this.props.children}
-      </NotificationOpenedContainer>
-    )
+    let { model, type } = result.notification.payload.additionalData
+    this.setState({ opened: true, model, type })
   }
 
   handleRegister () {
