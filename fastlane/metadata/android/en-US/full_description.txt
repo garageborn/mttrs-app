@@ -1,4 +1,4 @@
-<b>Your time is precious. Just take 15 minutes a day to find out the news that matters.</b> `Mttrs` is the definitive news aggregator that helps you get informed with the top news of the moment.
+<b>Your time is precious. Just take 15 minutes a day to find out the news that matter.</b> `Mttrs` is the definitive news aggregator that helps you get informed with the top news of the moment.
 
 <b><u>FEATURES</b></u>
 • <b>All your favorite sites in one place.</b>
@@ -11,4 +11,4 @@ Quickly find out about the <u>core message of each news through our news summari
 <u>Avoid reading the same story more than once</u>. Use news consolidation from different websites talking about the same subject. Everything is grouped to speed up your reading moment. If you prefer feel free to read the news of your favorite site.
 
 • <b>Intelligent news division.</b>
-<u>Browse through the categories</u> and read the topic-focused news that really matters to you.
+<u>Browse through the categories</u> and read the topic-focused news that really matter to you.
