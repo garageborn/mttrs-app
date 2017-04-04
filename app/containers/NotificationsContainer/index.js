@@ -4,6 +4,9 @@ import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import { NotificationsActions } from '../../actions/index'
 import LinkNotificationContainer from '../LinkNotificationContainer'
+import PublisherNotificationContainer from '../PublisherNotificationContainer'
+import CategoryNotificationContainer from '../CategoryNotificationContainer'
+import HomeNotificationContainer from '../HomeNotificationContainer'
 
 class NotificationsContainer extends Component {
   constructor () {
@@ -41,15 +44,19 @@ class NotificationsContainer extends Component {
     switch (type) {
       case 'link':
         return <LinkNotificationContainer model={model} />
+      case 'publisher':
+        return <PublisherNotificationContainer model={model} />
+      case 'category':
+        return <CategoryNotificationContainer model={model} />
       default:
-        return null
+        return <HomeNotificationContainer />
     }
   }
 
   handleOpen (result) {
-    console.log('NotificationsContainer handleOpen', result)
+    if (!result.notification.payload.additionalData) return this.setState({ opened: true })
     let { model, type } = result.notification.payload.additionalData
-    this.setState({ opened: true, model, type })
+    return this.setState({ opened: true, model, type })
   }
 
   handleRegister () {

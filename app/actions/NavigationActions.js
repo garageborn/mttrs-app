@@ -7,6 +7,8 @@ export function home () {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
 
+    if (!navigation) return null
+
     let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'home', model: {} })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
@@ -16,9 +18,11 @@ export function home () {
 }
 
 export function link (story, link) {
-  console.log('navactions', story)
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
+
+    if (!navigation) return null
+
     const route = Router.getRoute('link', { story: story, link: link })
     dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
     dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
@@ -29,6 +33,9 @@ export function selectCategory (category) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
+
+    if (!navigation) return null
+
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
@@ -40,6 +47,8 @@ export function selectPublisher (publisher) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
+
+    if (!navigation) return null
 
     let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
@@ -74,15 +83,18 @@ function getNavigation (getState) {
 
 function getCurrentNavigator (getState) {
   const navigation = getNavigation(getState)
+  if (!navigation) return
   return navigation.navigators[navigation.currentNavigatorUID]
 }
 
 function getCurrentRoute (getState) {
   const navigator = getCurrentNavigator(getState)
+  if (!navigator) return
   return navigator.routes[navigator.index]
 }
 
 function getCurrentParams (getState) {
   const currentRoute = getCurrentRoute(getState)
+  if (!currentRoute) return
   return currentRoute.params
 }
