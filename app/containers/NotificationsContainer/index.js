@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
-import { NotificationsActions } from '../../actions/index'
+import { NotificationsActions, AnalyticsActions } from '../../actions/index'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -54,6 +53,7 @@ class NotificationsContainer extends Component {
   }
 
   handleOpen (result) {
+    this.props.dispatch(AnalyticsActions.trackEvent('notification', 'open'))
     if (!result.notification.payload.additionalData) return this.setState({ opened: true })
     let { model, type } = result.notification.payload.additionalData
     return this.setState({ opened: true, model, type })
