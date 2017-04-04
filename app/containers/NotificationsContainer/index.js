@@ -53,9 +53,8 @@ class NotificationsContainer extends Component {
   }
 
   handleOpen (result) {
-    this.props.dispatch(AnalyticsActions.trackEvent('notification', 'open'))
-    if (!result.notification.payload.additionalData) return this.setState({ opened: true })
     let { model, type } = result.notification.payload.additionalData
+    this.props.dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
     return this.setState({ opened: true, model, type })
   }
 
