@@ -6,7 +6,8 @@ group :development do
   gem 'pronto-eslint_npm', '0.8.1', require: false
   gem 'pronto-flay', '0.8.0', require: false
   gem 'pronto-rubocop', '0.8.0', require: false
-  gem 'fastlane', '2.23.0'
+
+  gem 'fastlane', '2.25.0'
   gem 'rake', '12.0.0'
   gem 'byebug', '9.0.6'
 end
