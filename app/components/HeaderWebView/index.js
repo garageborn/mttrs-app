@@ -7,9 +7,7 @@ import iconShare from './assets/icon-share.png'
 import iconClose from './assets/icon-close.png'
 import styles from './styles'
 
-const HeaderWebview = ({ params, publisherLogo, share, close }) => {
-  const { link } = params
-
+const HeaderWebview = ({ link, publisherLogo, share, close }) => {
   return (
     <View style={styles.container} elevation={2}>
       <View style={styles.header}>
@@ -40,7 +38,13 @@ const HeaderWebview = ({ params, publisherLogo, share, close }) => {
 }
 
 HeaderWebview.propTypes = {
-  params: PropTypes.object.isRequired,
+  link: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    publisher: PropTypes.shape({
+      display_name: PropTypes.string,
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  }).isRequired,
   publisherLogo: PropTypes.any.isRequired,
   share: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired

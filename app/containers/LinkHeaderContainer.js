@@ -15,13 +15,14 @@ class LinkHeaderContainer extends Component {
   }
 
   share () {
-    const { link } = this.props.params
+    const { link } = this.props
 
     let shareUrl = this.buildUrl(link.slug)
 
     let shareOptions = {
       title: link.title,
       message: link.description || link.title,
+      subject: link.title, // for email
       url: shareUrl
     }
 
@@ -43,16 +44,17 @@ class LinkHeaderContainer extends Component {
   }
 
   get publisherLogo () {
-    const { publisher } = this.props.params.link
+    const { publisher } = this.props.link
     if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return { uri }
   }
 
   render () {
+    const { link } = this.props
     return (
       <HeaderWebview
-        params={this.props.params}
+        link={link}
         share={this.share}
         close={this.close}
         publisherLogo={this.publisherLogo}
@@ -62,7 +64,14 @@ class LinkHeaderContainer extends Component {
 }
 
 LinkHeaderContainer.propTypes = {
-  params: PropTypes.object.isRequired,
+  link: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    publisher: PropTypes.shape({
+      icon_id: PropTypes.string
+    }).isRequired
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
