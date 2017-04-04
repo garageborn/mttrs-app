@@ -14,9 +14,7 @@ class LinkScene extends Component {
   static route = Platform.select({
     ios: {
       navigationBar: {
-        renderTitle: (route) => {
-          return <LinkHeaderContainer params={route.params} />
-        },
+        renderTitle: (route) => <LinkHeaderContainer params={route.params} />,
         renderLeft: () => <View />,
         renderRight: () => <View />,
         backgroundColor: DARK_COLOR,
