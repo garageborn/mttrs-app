@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "@exponent/ex-navigation": "^2.9.1",
-    "analytics-react-native": "1.1.0",
     "apollo-client": "^0.8.7",
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
