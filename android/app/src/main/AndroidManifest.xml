@@ -35,6 +35,17 @@
         android:name="io.fabric.ApiKey"
         android:value="a8b990db4d133876f5769c49b553559eec79d323" />
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-    </application>
 
+      <!-- Used for Google Play Store Campaign Measurement-->
+      <receiver android:name="com.google.android.gms.analytics.CampaignTrackingReceiver"
+          android:enabled="true"
+          android:exported="true">
+          <intent-filter>
+              <action android:name="com.android.vending.INSTALL_REFERRER" />
+          </intent-filter>
+      </receiver>
+      <service android:name="com.google.android.gms.analytics.CampaignTrackingService"
+          android:enabled="true"
+          android:exported="false" />
+    </application>
 </manifest>
