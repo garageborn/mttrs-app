@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Share from 'react-native-share'
+import url from 'url'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { NavigationActions } from '../actions/index'
@@ -16,12 +17,12 @@ class LinkHeaderContainer extends Component {
   share () {
     const { link } = this.props.params
 
-    let url = this.buildUrl(link.slug)
+    let shareUrl = this.buildUrl(link.slug)
 
     let shareOptions = {
       title: link.title,
       message: link.description || link.title,
-      url
+      url: shareUrl
     }
 
     return Share.open(shareOptions)
@@ -34,8 +35,11 @@ class LinkHeaderContainer extends Component {
   buildUrl (slug) {
     let tenantId = this.props.tenant.id
     let tenant = TENANTS.find(tenant => tenantId === tenant.id)
+    const { host, protocol } = tenant
+    let pathname = `/link/${slug}`
+    let query = { utm_source: 'app', utm_medium: 'share' }
 
-    return `${tenant.sharingDomain}/link/${slug}`
+    return url.format({ protocol, host, pathname, query })
   }
 
   get publisherLogo () {
