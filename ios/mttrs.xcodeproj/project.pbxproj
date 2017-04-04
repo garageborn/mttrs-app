@@ -42,7 +42,6 @@
 		A09BA2A81DBF741000104DE1 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A51DBF741000104DE1 /* OpenSans-Bold.ttf */; };
 		A09BA2A91DBF741000104DE1 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */; };
 		A09BA2AA1DBF741000104DE1 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */; };
-		AA1AFFA31E940084008BFF50 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1AFFA21E940084008BFF50 /* libAdIdAccess.a */; };
 		B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
@@ -300,7 +299,6 @@
 		A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A41DB4DA405944109603735C /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
-		AA1AFFA21E940084008BFF50 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		DCAE53141E1EC20200ABFD11 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -342,7 +340,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */,
 				39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */,
-				AA1AFFA31E940084008BFF50 /* libAdIdAccess.a in Frameworks */,
 				B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */,
 				050EFC92354146218F93F1C7 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 			);
@@ -592,7 +589,6 @@
 			children = (
 				DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */,
 				DCAE53181E1EC22400ABFD11 /* libz.tbd */,
-				AA1AFFA21E940084008BFF50 /* libAdIdAccess.a */,
 				DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */,
 				DCAE53141E1EC20200ABFD11 /* CoreData.framework */,
 			);
