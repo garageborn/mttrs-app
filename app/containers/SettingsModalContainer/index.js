@@ -12,13 +12,14 @@ class SettingsModalContainer extends Component {
   }
 
   render () {
-    const { close, tenant, visible } = this.props
+    const { close, tenant, visible, notificationStatus } = this.props
     return (
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
         tenant={tenant}
         visible={visible}
+        notificationStatus={notificationStatus}
       />
     )
   }
@@ -37,6 +38,11 @@ class SettingsModalContainer extends Component {
       dispatch(NavigationActions.home())
     })
   }
+
+  toggleNotificationStatus () {
+    let { active } = this.props.notificationStatus
+    return this.props.dispatch(StorageActions.setNotificationStatus(!active))
+  }
 }
 
 SettingsModalContainer.propTypes = {
@@ -45,12 +51,16 @@ SettingsModalContainer.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
+  notificationStatus: PropTypes.shape({
+    active: PropTypes.bool.isRequired
+  }),
   visible: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant
+    tenant: state.StorageReducer.tenant,
+    notificationStatus: state.StorageReducer.notificationStatus
   }
 }
 

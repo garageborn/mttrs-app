@@ -17,6 +17,8 @@ export function requestPermissions () {
 export function handleTags () {
   return (dispatch, getState) => {
     const tenant = getState().StorageReducer.tenant.id
+    console.log(getState().StorageReducer)
+    console.log('handleTags', tenant)
 
     OneSignal.getTags((receivedTags) => {
       dispatch(setTags(tenant, receivedTags))
@@ -30,6 +32,8 @@ function setTags (tenant, receivedTags) {
       let hasTenant = _find(receivedTags, (key) => key === tenant)
       if (hasTenant) return null
     }
+
+    console.log('setTags', tenant)
 
     return OneSignal.sendTag(tenant, 'true')
   }

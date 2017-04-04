@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
-import { NotificationsActions, AnalyticsActions } from '../../actions/index'
+import { NotificationsActions, AnalyticsActions, StorageActions } from '../../actions/index'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -22,10 +23,10 @@ class NotificationsContainer extends Component {
   }
 
   componentWillMount () {
-    console.log('NotificationsContainer componentWillMount')
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
     // OneSignal.addEventListener('registered', this.handleRegister)
+    this.handleNotificationStatus()
   }
 
   componentWillUnmount () {
@@ -39,6 +40,7 @@ class NotificationsContainer extends Component {
 
   render () {
     let { opened, model, type } = this.state
+
     if (!opened) return null
     switch (type) {
       case 'link':
@@ -50,6 +52,11 @@ class NotificationsContainer extends Component {
       default:
         return <HomeNotificationContainer />
     }
+  }
+
+  handleNotificationStatus () {
+    if (Platform.OS === 'ios') return null
+    return this.props.dispatch(StorageActions.getNotificationStatus())
   }
 
   handleOpen (result) {

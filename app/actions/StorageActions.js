@@ -10,7 +10,9 @@ import {
   REQUEST_TENANT,
   TENANT_RECEIVED,
   SHOW_ONBOARDING,
-  REQUEST_ONBOARDING
+  REQUEST_ONBOARDING,
+  REQUEST_NOTIFICATION_STATUS,
+  RECEIVE_NOTIFICATION_STATUS
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -125,5 +127,32 @@ export function getOnboardingStatus () {
         dispatch(this.showOnboarding(false))
       }
     })
+  }
+}
+
+export const requestNotificationStatus = () => ({
+  type: REQUEST_NOTIFICATION_STATUS
+})
+
+export const receiveNotificationStatus = (payload) => ({
+  type: RECEIVE_NOTIFICATION_STATUS,
+  payload
+})
+
+export function getNotificationStatus () {
+  return dispatch => {
+    dispatch(requestNotificationStatus())
+    AsyncStorage.getItem('notificationStatus', (error, data) => {
+      if (error) return captureError(error)
+      if (!data) return dispatch(setNotificationStatus(true))
+      dispatch(receiveNotificationStatus(JSON.parse(data)))
+    })
+  }
+}
+
+export function setNotificationStatus (status) {
+  return dispatch => {
+    AsyncStorage.setItem('notificationStatus', JSON.stringify(status))
+    dispatch(receiveNotificationStatus(status))
   }
 }

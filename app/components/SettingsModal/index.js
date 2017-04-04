@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { Modal, View, Text, Image, ScrollView } from 'react-native'
+import { Modal, View, Text, Image, ScrollView, Switch } from 'react-native'
 import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import { capitalize } from '../../common/utils/formatText'
@@ -55,6 +55,17 @@ class SettingsModal extends Component {
     )
   }
 
+  renderNotificationsStatus () {
+    return (
+      <Touchable onPress={() => this.props.toggleNotificationStatus()}>
+        <View style={styles.optionItem}>
+          <Text style={styles.optionTitle}>NOTIFICATIONS</Text>
+          <Switch value={this.props.notificationStatus} />
+        </View>
+      </Touchable>
+    )
+  }
+
   renderContent () {
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
@@ -81,6 +92,7 @@ class SettingsModal extends Component {
 
 SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
+  toggleNotificationStatus: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired,
