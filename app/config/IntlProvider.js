@@ -31,7 +31,10 @@ class Provider extends Component {
 }
 
 Provider.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  tenant: PropTypes.shape({
+    language: PropTypes.string
+  }).isRequired
 }
 
 const mapStateToProps = (state) => {
