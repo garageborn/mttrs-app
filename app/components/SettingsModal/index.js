@@ -5,14 +5,15 @@ import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import { capitalize } from '../../common/utils/formatText'
 import CloseButton from './../CloseButton'
-import styles from './styles'
+import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
 const messages = defineMessages({
   feedback: { id: 'footer.feedback' },
   modalSubTitle: { id: 'modal.subTitle' },
   mttrs_br: { id: 'mttrs_br.label' },
   mttrs_us: { id: 'mttrs_us.label' },
-  settings: { id: 'menu.settings' }
+  settings: { id: 'menu.settings' },
+  notifications: { id: 'notifications' }
 })
 
 const checkmark = require('./assets/checkmark.png')
@@ -55,19 +56,32 @@ class SettingsModal extends Component {
     )
   }
 
-  renderNotificationsStatus () {
+  renderNotificationStatus (tenantId) {
+    const { toggleNotificationStatus, notificationStatus, intl } = this.props
+    const tenantLabel = intl.formatMessage(messages[tenantId])
     return (
       <View style={styles.optionItem}>
-        <Text style={styles.optionTitle}>NOTIFICATIONS</Text>
-        <Switch value={this.props.notificationStatus.active} onValueChange={this.props.toggleNotificationStatus}/>
+        <Text style={styles.optionTitle}>{tenantLabel}</Text>
+        <Switch
+          tintColor={tintColor}
+          onTintColor={onTintColor}
+          thumbTintColor={this.thumbTintColor}
+          value={notificationStatus.active}
+          onValueChange={toggleNotificationStatus}
+        />
       </View>
     )
+  }
+
+  get thumbTintColor () {
+    return this.props.notificationStatus.active ? thumbTintActive : thumbTintColor
   }
 
   renderContent () {
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
     const feedback = formatMessage(messages.feedback)
+    const notifications = formatMessage(messages.notifications)
 
     return (
       <View style={styles.options}>
@@ -77,9 +91,10 @@ class SettingsModal extends Component {
             { this.renderButton('mttrs_us') }
             { this.renderButton('mttrs_br') }
           </View>
-          <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
+          <Text style={styles.optionsSubTitle}>{notifications}</Text>
           <View style={styles.optionsList}>
-            { this.renderNotificationsStatus() }
+            { this.renderNotificationStatus('mttrs_us') }
+            { this.renderNotificationStatus('mttrs_br') }
           </View>
         </View>
         <View style={styles.modalFooter}>
