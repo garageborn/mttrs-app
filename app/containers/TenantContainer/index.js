@@ -7,7 +7,7 @@ import Router from '../../config/Router'
 
 class TenantContainer extends Component {
   componentWillMount () {
-    this.props.dispatch(TenantActions.getCurrentTenant(locale))
+    this.props.dispatch(TenantActions.getCurrent(locale))
   }
 
   render () {

@@ -1,7 +1,16 @@
 import { AsyncStorage } from 'react-native'
+import { InteractionManager } from 'react-native'
+import apolloClient from '../config/apolloClient'
 import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
 import { REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
+import {
+  MenuActions,
+  NavigationActions,
+  NotificationsActions,
+  StorageActions,
+  TenantActions
+} from '../actions/index'
 
 const tenantKey = 'tenant'
 
@@ -14,24 +23,48 @@ export const receiveTenant = (tenant) => ({
   tenant
 })
 
-export function setCurrentTenant (tenant) {
-  return (dispatch) => {
+export function setCurrent (tenantId) {
+  const tenant = Tenant.find(tenantId)
+
+  return (dispatch, getState) => {
+    console.log('------setCurrent', getState().TenantReducer, tenant)
+    const currentTenantId = getState().TenantReducer.id
+
+    if (currentTenantId === tenant.id) return
+
     Tenant.current = tenant
-    AsyncStorage.setItem(tenantKey, tenant, (error) => {
+    AsyncStorage.setItem(tenantKey, tenant.id, (error) => {
       if (error) return captureError(error)
-      return dispatch(receiveTenant(tenant))
+      dispatch(receiveTenant(tenant.id))
+      if (currentTenantId && currentTenantId !== tenant.id) dispatch(reloadApp())
     })
   }
 }
 
-export function getCurrentTenant (locale) {
-  let fallbackTenant = Tenant.findByLocale(locale)
+export function getCurrent (locale) {
   return (dispatch) => {
     dispatch(requestTenant())
-    AsyncStorage.getItem(tenantKey, (error, tenant) => {
+
+    AsyncStorage.getItem(tenantKey, (error, storageTenant) => {
       if (error) return captureError(error)
-      dispatch(setCurrentTenant(tenant || fallbackTenant))
+
+      if (storageTenant) {
+        dispatch(receiveTenant(storageTenant))
+      } else {
+        dispatch(setCurrent(Tenant.findByLocale(locale)))
+      }
     })
   }
 }
 
+function reloadApp () {
+  return (dispatch) => {
+    dispatch(MenuActions.closeMenu())
+
+    InteractionManager.runAfterInteractions(() => {
+      apolloClient.resetStore()
+      dispatch(NotificationsActions.handleTags())
+      dispatch(NavigationActions.home())
+    })
+  }
+}

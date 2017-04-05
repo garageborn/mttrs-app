@@ -1,15 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
-import apolloClient from '../../config/apolloClient'
-import {
-  MenuActions,
-  NavigationActions,
-  NotificationsActions,
-  StorageActions,
-  TenantActions
-} from '../../actions/index'
+import { StorageActions, TenantActions } from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
@@ -37,14 +29,7 @@ class SettingsModalContainer extends Component {
     if (tenant.id === tenantId) return close()
 
     close()
-    dispatch(MenuActions.closeMenu())
-
-    InteractionManager.runAfterInteractions(() => {
-      dispatch(TenantActions.setCurrentTenant(tenantId))
-      dispatch(NotificationsActions.handleTags())
-      apolloClient.resetStore()
-      dispatch(NavigationActions.home())
-    })
+    dispatch(TenantActions.setCurrent(tenantId))
   }
 
   toggleNotificationStatus () {
