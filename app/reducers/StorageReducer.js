@@ -1,8 +1,6 @@
 import {
   REQUEST_VISITED_STORIES,
   VISITED_STORIES_RECEIVED,
-  REQUEST_TENANT,
-  TENANT_RECEIVED,
   SHOW_ONBOARDING,
   REQUEST_ONBOARDING,
   REQUEST_NOTIFICATION_STATUS,
@@ -11,7 +9,6 @@ import {
 
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
-  tenant: { isFetching: false, isLoaded: false, id: null },
   onboarding: { isFetching: false, show: false }
 }
 
@@ -33,25 +30,6 @@ export default function (state = defaultState, action) {
           ...state.visitedStories,
           isFetching: false,
           items: action.visitedStories,
-          isLoaded: true
-        }
-      }
-    case REQUEST_TENANT:
-      return {
-        ...state,
-        tenant: {
-          ...state.tenant,
-          isFetching: true,
-          isLoaded: false
-        }
-      }
-    case TENANT_RECEIVED:
-      return {
-        ...state,
-        tenant: {
-          ...state.tenant,
-          isFetching: false,
-          id: action.tenant,
           isLoaded: true
         }
       }
