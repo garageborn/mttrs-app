@@ -2,12 +2,17 @@ import React, { Component, PropTypes } from 'react'
 import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
-import { NotificationsActions, AnalyticsActions, StorageActions } from '../../actions/index'
 import Tenant from '../../common/utils/Tenant'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
 import HomeNotificationContainer from '../HomeNotificationContainer'
+import {
+  AnalyticsActions,
+  NotificationsActions,
+  StorageActions,
+  TenantActions
+} from '../../actions/index'
 
 class NotificationsContainer extends Component {
   constructor () {
@@ -61,9 +66,11 @@ class NotificationsContainer extends Component {
   }
 
   handleOpen (result) {
-    console.log('handleOpen', result)
+    const { dispatch } = this.props
     let { model, type, tenant } = result.notification.payload.additionalData
-    this.props.dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
+
+    this.setTenant(tenant)
+    dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
     return this.setState({ opened: true, model, type })
   }
 
@@ -78,7 +85,8 @@ class NotificationsContainer extends Component {
   }
 
   setTenant (id) {
-
+    const { dispatch } = this.props
+    dispatch(TenantActions.setCurrent(id))
   }
 }
 

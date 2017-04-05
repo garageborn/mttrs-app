@@ -27,9 +27,7 @@ export function setCurrent (tenantId) {
   const tenant = Tenant.find(tenantId)
 
   return (dispatch, getState) => {
-    console.log('------setCurrent', getState().TenantReducer, tenant)
     const currentTenantId = getState().TenantReducer.id
-
     if (currentTenantId === tenant.id) return
 
     Tenant.current = tenant
