@@ -1,15 +1,14 @@
 import {
   REQUEST_VISITED_STORIES,
   VISITED_STORIES_RECEIVED,
-  REQUEST_TENANT,
-  TENANT_RECEIVED,
   SHOW_ONBOARDING,
-  REQUEST_ONBOARDING
+  REQUEST_ONBOARDING,
+  REQUEST_NOTIFICATION_STATUS,
+  RECEIVE_NOTIFICATION_STATUS
 } from '../constants/ActionTypes'
 
 let defaultState = {
   visitedStories: { isFetching: false, isLoaded: false, items: [] },
-  tenant: { isFetching: false, isLoaded: false, id: null },
   onboarding: { isFetching: false, show: false }
 }
 
@@ -34,25 +33,6 @@ export default function (state = defaultState, action) {
           isLoaded: true
         }
       }
-    case REQUEST_TENANT:
-      return {
-        ...state,
-        tenant: {
-          ...state.tenant,
-          isFetching: true,
-          isLoaded: false
-        }
-      }
-    case TENANT_RECEIVED:
-      return {
-        ...state,
-        tenant: {
-          ...state.tenant,
-          isFetching: false,
-          id: action.tenant,
-          isLoaded: true
-        }
-      }
     case REQUEST_ONBOARDING:
       return {
         ...state,
@@ -67,6 +47,21 @@ export default function (state = defaultState, action) {
         onboarding: {
           isFetching: false,
           show: action.show
+        }
+      }
+    case REQUEST_NOTIFICATION_STATUS:
+      return {
+        ...state,
+        notificationStatus: {
+          isFetching: true
+        }
+      }
+    case RECEIVE_NOTIFICATION_STATUS:
+      return {
+        ...state,
+        notificationStatus: {
+          isFetching: false,
+          active: action.payload
         }
       }
     default:

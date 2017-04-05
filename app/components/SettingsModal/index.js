@@ -1,18 +1,19 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { Modal, View, Text, Image, ScrollView } from 'react-native'
+import { Modal, View, Text, Image, ScrollView, Switch } from 'react-native'
 import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
 import { capitalize } from '../../common/utils/formatText'
 import CloseButton from './../CloseButton'
-import styles from './styles'
+import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
 const messages = defineMessages({
   feedback: { id: 'footer.feedback' },
   modalSubTitle: { id: 'modal.subTitle' },
   mttrs_br: { id: 'mttrs_br.label' },
   mttrs_us: { id: 'mttrs_us.label' },
-  settings: { id: 'menu.settings' }
+  settings: { id: 'menu.settings' },
+  notifications: { id: 'notifications' }
 })
 
 const checkmark = require('./assets/checkmark.png')
@@ -55,19 +56,46 @@ class SettingsModal extends Component {
     )
   }
 
+  renderNotificationStatus (tenantId) {
+    const { toggleNotificationStatus, notificationStatus, intl } = this.props
+    const tenantLabel = intl.formatMessage(messages[tenantId])
+    return (
+      <View style={styles.optionItem}>
+        <Text style={styles.optionTitle}>{tenantLabel}</Text>
+        <Switch
+          tintColor={tintColor}
+          onTintColor={onTintColor}
+          thumbTintColor={this.thumbTintColor}
+          value={notificationStatus.active}
+          onValueChange={toggleNotificationStatus}
+        />
+      </View>
+    )
+  }
+
+  get thumbTintColor () {
+    return this.props.notificationStatus.active ? thumbTintActive : thumbTintColor
+  }
+
   renderContent () {
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
     const feedback = formatMessage(messages.feedback)
+    const notifications = formatMessage(messages.notifications)
 
     return (
       <View style={styles.options}>
         <View style={styles.options}>
           <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
-          <ScrollView style={styles.optionsList}>
+          <View style={styles.optionsList}>
             { this.renderButton('mttrs_us') }
             { this.renderButton('mttrs_br') }
-          </ScrollView>
+          </View>
+          <Text style={styles.optionsSubTitle}>{notifications}</Text>
+          <View style={styles.optionsList}>
+            { this.renderNotificationStatus('mttrs_us') }
+            { this.renderNotificationStatus('mttrs_br') }
+          </View>
         </View>
         <View style={styles.modalFooter}>
           <Touchable>
@@ -81,10 +109,14 @@ class SettingsModal extends Component {
 
 SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
+  toggleNotificationStatus: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired
+  }).isRequired,
+  notificationStatus: PropTypes.shape({
+    active: PropTypes.bool.isRequired
   }).isRequired,
   animationType: PropTypes.string.isRequired,
   intl: PropTypes.shape({

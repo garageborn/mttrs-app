@@ -3,22 +3,31 @@ import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
 import apolloClient from '../../config/apolloClient'
-import { MenuActions, NavigationActions, StorageActions } from '../../actions/index'
+import {
+  MenuActions,
+  NavigationActions,
+  NotificationsActions,
+  StorageActions,
+  TenantActions
+} from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
     super(props)
     this.changeTenant = this.changeTenant.bind(this)
+    this.toggleNotificationStatus = this.toggleNotificationStatus.bind(this)
   }
 
   render () {
-    const { close, tenant, visible } = this.props
+    const { close, tenant, visible, notificationStatus } = this.props
     return (
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
+        toggleNotificationStatus={this.toggleNotificationStatus}
         tenant={tenant}
         visible={visible}
+        notificationStatus={notificationStatus}
       />
     )
   }
@@ -31,10 +40,16 @@ class SettingsModalContainer extends Component {
     dispatch(MenuActions.closeMenu())
 
     InteractionManager.runAfterInteractions(() => {
-      dispatch(StorageActions.setCurrentTenant(tenantId))
+      dispatch(TenantActions.setCurrentTenant(tenantId))
+      dispatch(NotificationsActions.handleTags())
       apolloClient.resetStore()
       dispatch(NavigationActions.home())
     })
+  }
+
+  toggleNotificationStatus () {
+    let { active } = this.props.notificationStatus
+    return this.props.dispatch(StorageActions.setNotificationStatus(!active))
   }
 }
 
@@ -44,12 +59,16 @@ SettingsModalContainer.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
+  notificationStatus: PropTypes.shape({
+    active: PropTypes.bool.isRequired
+  }),
   visible: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant
+    tenant: state.TenantReducer,
+    notificationStatus: state.StorageReducer.notificationStatus
   }
 }
 

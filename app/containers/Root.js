@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { NavigationContext } from '@exponent/ex-navigation'
-import AppContainer from './AppContainer'
-import IntlProvider, { locale } from '../config/IntlProvider'
-import { StorageActions } from '../actions/index'
+import EventsContainer from './EventsContainer'
+import TenantContainer from './TenantContainer'
+import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
 import Router from '../config/Router'
 require('../config/sentry')
@@ -15,11 +15,6 @@ class Root extends Component {
     if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
   }
 
-  componentWillMount () {
-    this.props.store.dispatch(StorageActions.getOnboardingStatus())
-    this.props.store.dispatch(StorageActions.getCurrentTenant(locale))
-  }
-
   render () {
     const { store } = this.props
     const navigationContext = new NavigationContext({ router: Router, store: store })
@@ -27,7 +22,9 @@ class Root extends Component {
     return (
       <IntlProvider>
         <ApolloProvider store={store} client={apolloClient}>
-          <AppContainer navigationContext={navigationContext} />
+          <EventsContainer>
+            <TenantContainer navigationContext={navigationContext} />
+          </EventsContainer>
         </ApolloProvider>
       </IntlProvider>
     )

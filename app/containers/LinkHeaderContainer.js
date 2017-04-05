@@ -4,8 +4,8 @@ import Share from 'react-native-share'
 import url from 'url'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
+import Tenant from '../common/utils/Tenant'
 import { NavigationActions } from '../actions/index'
-import { TENANTS } from '../constants/Tenants'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -35,7 +35,7 @@ class LinkHeaderContainer extends Component {
 
   buildUrl (slug) {
     let tenantId = this.props.tenant.id
-    let tenant = TENANTS.find(tenant => tenantId === tenant.id)
+    let tenant = Tenant.find(tenantId)
     const { host, protocol } = tenant
     let pathname = `/link/${slug}`
     let query = { utm_source: 'app', utm_medium: 'share' }
@@ -80,7 +80,7 @@ LinkHeaderContainer.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant
+    tenant: state.TenantReducer
   }
 }
 
