@@ -14,7 +14,7 @@ class LinkScene extends Component {
   static route = Platform.select({
     ios: {
       navigationBar: {
-        renderTitle: (route) => <LinkHeaderContainer params={route.params} />,
+        renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
         renderLeft: () => <View />,
         renderRight: () => <View />,
         backgroundColor: DARK_COLOR,
@@ -53,9 +53,10 @@ class LinkScene extends Component {
     dispatch(StorageActions.addVisitedStory(story))
   }
 
-  renderHeader (props) {
+  renderHeader () {
     if (Platform.OS === 'ios') return
-    return <LinkHeaderContainer params={props.route.params} />
+    const { link } = this.props
+    return <LinkHeaderContainer link={link} />
   }
 
   createAccess () {
@@ -71,7 +72,7 @@ class LinkScene extends Component {
         <StoryWebView
           url={url}
           params={this.props.route.params}
-          header={this.renderHeader(this.props)}
+          header={this.renderHeader()}
         />
       </View>
     )

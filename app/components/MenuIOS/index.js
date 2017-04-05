@@ -76,7 +76,6 @@ MenuIOS.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  params: PropTypes.object.isRequired,
   uiReducer: PropTypes.object.isRequired
 }
 
