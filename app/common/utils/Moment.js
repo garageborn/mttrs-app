@@ -5,7 +5,7 @@ import { AVAILABLE_LANGUAGES, DEFAULT_LANGUAGE, TIMEZONE } from '../../constants
 
 export default function (language) {
   moment.tz.setDefault(TIMEZONE)
-  if (_includes(AVAILABLE_LANGUAGES), language) {
+  if (_includes(AVAILABLE_LANGUAGES, language)) {
     moment.locale(language)
   } else {
     moment.locale(DEFAULT_LANGUAGE)
