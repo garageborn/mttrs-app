@@ -4,9 +4,7 @@ import {
   REQUEST_TENANT,
   TENANT_RECEIVED,
   SHOW_ONBOARDING,
-  REQUEST_ONBOARDING,
-  REQUEST_NOTIFICATION_STATUS,
-  RECEIVE_NOTIFICATION_STATUS
+  REQUEST_ONBOARDING
 } from '../constants/ActionTypes'
 
 let defaultState = {
@@ -69,21 +67,6 @@ export default function (state = defaultState, action) {
         onboarding: {
           isFetching: false,
           show: action.show
-        }
-      }
-    case REQUEST_NOTIFICATION_STATUS:
-      return {
-        ...state,
-        notificationStatus: {
-          isFetching: true
-        }
-      }
-    case RECEIVE_NOTIFICATION_STATUS:
-      return {
-        ...state,
-        notificationStatus: {
-          isFetching: false,
-          active: action.payload
         }
       }
     default:

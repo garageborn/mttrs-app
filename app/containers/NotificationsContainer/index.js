@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
-import { NotificationsActions, AnalyticsActions, StorageActions } from '../../actions/index'
+import _isEmpty from 'lodash/isEmpty'
+import { NotificationsActions, AnalyticsActions } from '../../actions/index'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -55,10 +56,11 @@ class NotificationsContainer extends Component {
   }
 
   handleNotificationStatus (nextProps) {
+    if (!_isEmpty(this.props.notificationsStatus)) return
     if (Platform.OS === 'ios') return null
     if (this.props.tenant === nextProps.tenant) return
-    if (!nextProps.tenant.isFetching) return
-    return this.props.dispatch(StorageActions.getNotificationStatus())
+    if (nextProps.tenant.isFetching) return
+    return this.props.dispatch(NotificationsActions.getNotificationsStatus())
   }
 
   handleOpen (result) {
@@ -82,13 +84,15 @@ NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
   tenant: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.any
+  children: PropTypes.any,
+  notificationsStatus: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     visitedStories: state.StorageReducer.visitedStories,
-    tenant: state.StorageReducer.tenant
+    tenant: state.StorageReducer.tenant,
+    notificationsStatus: state.NotificationsReducer.status
   }
 }
 

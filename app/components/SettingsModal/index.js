@@ -66,7 +66,7 @@ class SettingsModal extends Component {
           tintColor={tintColor}
           onTintColor={onTintColor}
           thumbTintColor={this.thumbTintColor}
-          value={notificationStatus.active}
+          value
           onValueChange={toggleNotificationStatus}
         />
       </View>
@@ -74,7 +74,7 @@ class SettingsModal extends Component {
   }
 
   get thumbTintColor () {
-    return this.props.notificationStatus.active ? thumbTintActive : thumbTintColor
+    return true ? thumbTintActive : thumbTintColor
   }
 
   renderContent () {
@@ -114,9 +114,6 @@ SettingsModal.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired
-  }).isRequired,
-  notificationStatus: PropTypes.shape({
-    active: PropTypes.bool.isRequired
   }).isRequired,
   animationType: PropTypes.string.isRequired,
   intl: PropTypes.shape({

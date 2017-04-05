@@ -1,6 +1,13 @@
+import { AsyncStorage } from 'react-native'
 import OneSignal from 'react-native-onesignal'
+import captureError from '../common/utils/captureError'
 import _isEmpty from 'lodash/isEmpty'
-import _find from 'lodash/find'
+import _isNil from 'lodash/isNil'
+
+import {
+  REQUEST_NOTIFICATIONS_STATUS,
+  RECEIVE_NOTIFICATIONS_STATUS
+} from '../constants/ActionTypes'
 
 export function requestPermissions () {
   return dispatch => {
@@ -17,24 +24,55 @@ export function requestPermissions () {
 export function handleTags () {
   return (dispatch, getState) => {
     const tenant = getState().StorageReducer.tenant.id
-    console.log(getState().StorageReducer)
-    console.log('handleTags', tenant)
 
-    OneSignal.getTags((receivedTags) => {
-      dispatch(setTags(tenant, receivedTags))
+    let tags = {
+      mttrs_br: 'false',
+      mttrs_us: 'false'
+    }
+
+    tags[tenant] = 'true'
+    OneSignal.sendTags(tags)
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags))
+    return dispatch(receiveNotificationsStatus(tags))
+  }
+}
+
+export function getNotificationsStatus () {
+  return (dispatch, getState) => {
+    dispatch(requestNotificationsStatus())
+    AsyncStorage.getItem('notificationsStatus', (error, data) => {
+      if (error) captureError(error)
+      if (_isNil(data)) return dispatch(handleTags())
+      return dispatch(receiveNotificationsStatus(JSON.parse(data)))
     })
   }
 }
 
-function setTags (tenant, receivedTags) {
+export function setNotificationsStatus (receivedTags) {
   return dispatch => {
-    if (!_isEmpty(receivedTags)) {
-      let hasTenant = _find(receivedTags, (key) => key === tenant)
-      if (hasTenant) return null
-    }
-
-    console.log('setTags', tenant)
-
-    return OneSignal.sendTag(tenant, 'true')
+    let tags = receivedTags || {}
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags))
+    dispatch(receiveNotificationsStatus(receivedTags))
   }
 }
+
+export function setTenantNotificationStatus (tenant, tenantStatus) {
+  return (dispatch, getState) => {
+    let notificationsStatus = getState().NotificationsReducer.status
+    let tenantStatusStringified = JSON.stringify(tenantStatus)
+    let notificationsStatusManipulated = notificationsStatus
+    notificationsStatusManipulated[tenant] = tenantStatusStringified
+    OneSignal.sendTag(tenant, tenantStatusStringified)
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatusManipulated))
+    dispatch(receiveNotificationsStatus(notificationsStatusManipulated))
+  }
+}
+
+export const requestNotificationsStatus = () => ({
+  type: REQUEST_NOTIFICATIONS_STATUS
+})
+
+export const receiveNotificationsStatus = (payload) => ({
+  type: RECEIVE_NOTIFICATIONS_STATUS,
+  payload
+})
