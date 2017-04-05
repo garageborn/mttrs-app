@@ -26,7 +26,6 @@ class NotificationsContainer extends Component {
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
     // OneSignal.addEventListener('registered', this.handleRegister)
-    this.handleNotificationStatus()
   }
 
   componentWillUnmount () {
@@ -36,6 +35,7 @@ class NotificationsContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.handlePermissions(nextProps)
+    this.handleNotificationStatus(nextProps)
   }
 
   render () {
@@ -54,8 +54,10 @@ class NotificationsContainer extends Component {
     }
   }
 
-  handleNotificationStatus () {
+  handleNotificationStatus (nextProps) {
     if (Platform.OS === 'ios') return null
+    if (this.props.tenant === nextProps.tenant) return
+    if (!nextProps.tenant.isFetching) return
     return this.props.dispatch(StorageActions.getNotificationStatus())
   }
 
@@ -78,13 +80,15 @@ class NotificationsContainer extends Component {
 
 NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
+  tenant: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   children: PropTypes.any
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    visitedStories: state.StorageReducer.visitedStories
+    visitedStories: state.StorageReducer.visitedStories,
+    tenant: state.StorageReducer.tenant
   }
 }
 
