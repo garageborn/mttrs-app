@@ -2,11 +2,11 @@ import Timeline from '../scenes/Timeline'
 import Link from '../scenes/Link'
 import { createRouter } from '@exponent/ex-navigation'
 
-const Routes = {
+const routes = {
   timeline: () => Timeline,
   link: () => Link
 }
 
-const Router = createRouter(() => Routes)
+const Router = createRouter(() => routes)
 
 export default Router

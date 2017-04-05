@@ -8,7 +8,7 @@ import captureError from '../common/utils/captureError'
 const tenantMiddleware = {
   applyMiddleware: (req, next) => {
     if (!req.options.headers) req.options.headers = {}
-    req.options.headers['X-Tenant'] = Tenant.current
+    req.options.headers['X-Tenant'] = Tenant.current.id
     next()
   }
 }

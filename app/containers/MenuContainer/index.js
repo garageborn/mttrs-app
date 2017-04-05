@@ -33,7 +33,7 @@ MenuContainer.propTypes = {
 
 let mapStateToProps = state => {
   return {
-    tenant: state.TenantReducer
+    tenant: state.TenantReducer.current
   }
 }
 
