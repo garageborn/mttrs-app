@@ -16,7 +16,7 @@ export function requestPermissions () {
 
 export function handleTags () {
   return (dispatch, getState) => {
-    const tenant = getState().StorageReducer.tenant.id
+    const tenant = getState().TenantReducer.id
     console.log(getState().StorageReducer)
     console.log('handleTags', tenant)
 

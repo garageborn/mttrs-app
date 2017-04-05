@@ -3,7 +3,13 @@ import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
 import apolloClient from '../../config/apolloClient'
-import { MenuActions, NavigationActions, StorageActions, NotificationsActions } from '../../actions/index'
+import {
+  MenuActions,
+  NavigationActions,
+  NotificationsActions,
+  StorageActions,
+  TenantActions
+} from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
@@ -34,7 +40,7 @@ class SettingsModalContainer extends Component {
     dispatch(MenuActions.closeMenu())
 
     InteractionManager.runAfterInteractions(() => {
-      dispatch(StorageActions.setCurrentTenant(tenantId))
+      dispatch(TenantActions.setCurrentTenant(tenantId))
       dispatch(NotificationsActions.handleTags())
       apolloClient.resetStore()
       dispatch(NavigationActions.home())
@@ -61,7 +67,7 @@ SettingsModalContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant,
+    tenant: state.TenantReducer,
     notificationStatus: state.StorageReducer.notificationStatus
   }
 }

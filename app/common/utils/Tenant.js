@@ -12,4 +12,12 @@ export default class Tenant {
   static get defaultTenant () {
     return TENANTS.find((item) => { return item.default })
   }
+
+  static find (id) {
+    return TENANTS.find(tenant => tenant.id === id) || this.defaultTenant
+  }
+
+  static findByLocale (locale) {
+    return TENANTS.find(tenant => tenant.locale === locale) || this.defaultTenant
+  }
 }

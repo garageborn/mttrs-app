@@ -3,6 +3,7 @@ import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import { NotificationsActions, AnalyticsActions, StorageActions } from '../../actions/index'
+import Tenant from '../../common/utils/Tenant'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -39,6 +40,8 @@ class NotificationsContainer extends Component {
   }
 
   render () {
+    console.log('------', Tenant.find('batata'))
+
     let { opened, model, type } = this.state
 
     if (!opened) return null
@@ -60,7 +63,8 @@ class NotificationsContainer extends Component {
   }
 
   handleOpen (result) {
-    let { model, type } = result.notification.payload.additionalData
+    console.log('handleOpen', result)
+    let { model, type, tenant } = result.notification.payload.additionalData
     this.props.dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
     return this.setState({ opened: true, model, type })
   }
@@ -74,16 +78,23 @@ class NotificationsContainer extends Component {
     if (nextProps.visitedStories.items.length === this.props.visitedStories.items.length) return
     return this.props.dispatch(NotificationsActions.requestPermissions())
   }
+
+  setTenant (id) {
+
+  }
 }
 
 NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  children: PropTypes.any
+  tenant: PropTypes.shape({
+    id: PropTypes.string
+  }).isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    tenant: state.TenantReducer,
     visitedStories: state.StorageReducer.visitedStories
   }
 }
