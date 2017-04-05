@@ -40,8 +40,6 @@ class NotificationsContainer extends Component {
   }
 
   render () {
-    console.log('------', Tenant.find('batata'))
-
     let { opened, model, type } = this.state
 
     if (!opened) return null
