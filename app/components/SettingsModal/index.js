@@ -57,12 +57,10 @@ class SettingsModal extends Component {
 
   renderNotificationsStatus () {
     return (
-      <Touchable onPress={() => this.props.toggleNotificationStatus()}>
-        <View style={styles.optionItem}>
-          <Text style={styles.optionTitle}>NOTIFICATIONS</Text>
-          <Switch value={this.props.notificationStatus} />
-        </View>
-      </Touchable>
+      <View style={styles.optionItem}>
+        <Text style={styles.optionTitle}>NOTIFICATIONS</Text>
+        <Switch value={this.props.notificationStatus.active} onValueChange={this.props.toggleNotificationStatus}/>
+      </View>
     )
   }
 
@@ -75,10 +73,14 @@ class SettingsModal extends Component {
       <View style={styles.options}>
         <View style={styles.options}>
           <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
-          <ScrollView style={styles.optionsList}>
+          <View style={styles.optionsList}>
             { this.renderButton('mttrs_us') }
             { this.renderButton('mttrs_br') }
-          </ScrollView>
+          </View>
+          <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
+          <View style={styles.optionsList}>
+            { this.renderNotificationsStatus() }
+          </View>
         </View>
         <View style={styles.modalFooter}>
           <Touchable>
@@ -97,6 +99,9 @@ SettingsModal.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired,
     isFetching: PropTypes.bool.isRequired
+  }).isRequired,
+  notificationStatus: PropTypes.shape({
+    active: PropTypes.bool.isRequired
   }).isRequired,
   animationType: PropTypes.string.isRequired,
   intl: PropTypes.shape({

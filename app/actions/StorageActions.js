@@ -151,6 +151,7 @@ export function getNotificationStatus () {
 }
 
 export function setNotificationStatus (status) {
+  debugger
   return dispatch => {
     AsyncStorage.setItem('notificationStatus', JSON.stringify(status))
     dispatch(receiveNotificationStatus(status))

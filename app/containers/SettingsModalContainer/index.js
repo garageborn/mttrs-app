@@ -9,6 +9,7 @@ class SettingsModalContainer extends Component {
   constructor (props) {
     super(props)
     this.changeTenant = this.changeTenant.bind(this)
+    this.toggleNotificationStatus = this.toggleNotificationStatus.bind(this)
   }
 
   render () {
@@ -17,6 +18,7 @@ class SettingsModalContainer extends Component {
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
+        toggleNotificationStatus={this.toggleNotificationStatus}
         tenant={tenant}
         visible={visible}
         notificationStatus={notificationStatus}
