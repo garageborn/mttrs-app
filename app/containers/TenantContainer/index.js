@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
-import { locale } from '../../config/IntlProvider'
 import { TenantActions } from '../../actions/index'
 import Router from '../../config/Router'
 
 class TenantContainer extends Component {
   componentWillMount () {
-    this.props.dispatch(TenantActions.getCurrent(locale))
+    this.props.dispatch(TenantActions.getCurrent())
   }
 
   render () {

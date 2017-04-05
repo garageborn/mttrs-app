@@ -20,13 +20,13 @@ class Root extends Component {
     const navigationContext = new NavigationContext({ router: Router, store: store })
 
     return (
-      <IntlProvider>
-        <ApolloProvider store={store} client={apolloClient}>
+      <ApolloProvider store={store} client={apolloClient}>
+        <IntlProvider>
           <EventsContainer>
             <TenantContainer navigationContext={navigationContext} />
           </EventsContainer>
-        </ApolloProvider>
-      </IntlProvider>
+        </IntlProvider>
+      </ApolloProvider>
     )
   }
 }

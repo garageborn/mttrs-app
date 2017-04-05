@@ -3,6 +3,7 @@ import { InteractionManager } from 'react-native'
 import apolloClient from '../config/apolloClient'
 import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
+import { DEVICE_LANGUAGE } from '../constants/Locale'
 import { ASSIGN_TENANT, REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
 import {
   MenuActions,
@@ -44,14 +45,14 @@ export function setCurrent (tenantId) {
   }
 }
 
-export function getCurrent (locale) {
+export function getCurrent () {
   return (dispatch, getState) => {
     if (getState().TenantReducer.isFetching || getState().TenantReducer.isAssigning) return
     dispatch(requestTenant())
 
     AsyncStorage.getItem(tenantKey, (error, storageTenant) => {
       if (error) return captureError(error)
-      dispatch(onGetCurrent(storageTenant, locale))
+      dispatch(onGetCurrent(storageTenant))
     })
   }
 }
@@ -66,8 +67,8 @@ function onSetCurrent (previousTenant, tenant) {
   }
 }
 
-function onGetCurrent (storageTenant, locale) {
-  const fallbackTenant = Tenant.findByLocale(locale)
+function onGetCurrent (storageTenant) {
+  const fallbackTenant = Tenant.findByLanguage(DEVICE_LANGUAGE)
   return (dispatch, getState) => {
     if (getState().TenantReducer.isAssigning) return
 

@@ -4,21 +4,11 @@ import moment from '../../common/utils/Moment'
 import { injectIntl, defineMessages } from 'react-intl'
 
 const messages = defineMessages({
-  lastWeek: {
-    id: 'lastWeek'
-  },
-  lastMonth: {
-    id: 'lastMonth'
-  },
-  today: {
-    id: 'today'
-  },
-  yesterday: {
-    id: 'yesterday'
-  },
-  dateFormat: {
-    id: 'dateFormat'
-  }
+  lastWeek: { id: 'lastWeek' },
+  lastMonth: { id: 'lastMonth' },
+  today: { id: 'today' },
+  yesterday: { id: 'yesterday' },
+  dateFormat: { id: 'dateFormat' }
 })
 
 class ParsedDate extends Component {
@@ -26,36 +16,35 @@ class ParsedDate extends Component {
     return this.props.date !== nextProps.date
   }
 
-  parser (date) {
-    let { intl } = this.props
-    switch (date) {
-      case 'last_week':
-        return intl.formatMessage(messages.lastWeek)
-      case 'last_month':
-        return intl.formatMessage(messages.lastMonth)
-      default:
-        return moment.unix(date).calendar(null, {
-          sameDay: `[${intl.formatMessage(messages.today)}]`,
-          lastDay: `[${intl.formatMessage(messages.yesterday)}]`,
-          lastWeek: intl.formatMessage(messages.dateFormat),
-          sameElse: intl.formatMessage(messages.dateFormat)
-        })
-    }
+  render () {
+    let text = this.parsedDate.toUpperCase()
+    return <Text style={this.props.style}>{text}</Text>
   }
 
-  render () {
+  get parsedDate () {
     let { date } = this.props
-    let parsedDate = this.parser(date)
-    let text = parsedDate.toUpperCase()
-    return (
-      <Text style={this.props.style}>{text}</Text>
-    )
+    let { formatMessage, locale } = this.props.intl
+
+    switch (date) {
+      case 'last_week':
+        return formatMessage(messages.lastWeek)
+      case 'last_month':
+        return formatMessage(messages.lastMonth)
+      default:
+        return moment(locale).unix(date).calendar(null, {
+          sameDay: `[${formatMessage(messages.today)}]`,
+          lastDay: `[${formatMessage(messages.yesterday)}]`,
+          lastWeek: formatMessage(messages.dateFormat),
+          sameElse: formatMessage(messages.dateFormat)
+        })
+    }
   }
 }
 
 ParsedDate.propTypes = {
   intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired
+    formatMessage: PropTypes.func.isRequired,
+    locale: PropTypes.string.isRequired
   }),
   date: PropTypes.number,
   style: PropTypes.number

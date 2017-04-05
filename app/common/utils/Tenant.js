@@ -17,7 +17,7 @@ export default class Tenant {
     return TENANTS.find(tenant => tenant.id === id) || this.defaultTenant
   }
 
-  static findByLocale (locale) {
-    return TENANTS.find(tenant => tenant.locale === locale) || this.defaultTenant
+  static findByLanguage (language) {
+    return TENANTS.find(tenant => tenant.language === language) || this.defaultTenant
   }
 }

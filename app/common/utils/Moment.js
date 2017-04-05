@@ -1,13 +1,15 @@
 import moment from 'moment-timezone'
+import _includes from 'lodash/includes'
 import 'moment/locale/pt'
-import { timezone, language } from '../../config/IntlProvider'
+import { AVAILABLE_LANGUAGES, DEFAULT_LANGUAGE } from '../../constants/Locale'
+import { timezone } from '../../config/IntlProvider'
 
-if (language === 'pt') {
-  moment.locale('pt')
-} else {
-  moment.locale('en')
+export default function (language) {
+  moment.tz.setDefault(timezone)
+  if (_includes(AVAILABLE_LANGUAGES), language) {
+    moment.locale(language)
+  } else {
+    moment.locale(DEFAULT_LANGUAGE)
+  }
+  return moment
 }
-
-moment.tz.setDefault(timezone)
-
-export default moment
