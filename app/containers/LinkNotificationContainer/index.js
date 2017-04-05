@@ -15,10 +15,11 @@ class LinkNotificationContainer extends Component {
   }
 
   openLink (props) {
-    if (props.data.loading) return
+    const { dispatch, model, data } = props
+    if (data.loading) return
 
     InteractionManager.runAfterInteractions(() => {
-      return this.props.dispatch(NavigationActions.link(props.model.story, props.data.link))
+      return dispatch(NavigationActions.link(model.story, data.link))
     })
   }
 }
