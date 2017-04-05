@@ -1,5 +1,4 @@
-import { AsyncStorage } from 'react-native'
-import { InteractionManager } from 'react-native'
+import { AsyncStorage, InteractionManager } from 'react-native'
 import apolloClient from '../config/apolloClient'
 import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
