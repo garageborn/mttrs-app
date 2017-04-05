@@ -3,7 +3,7 @@ import { InteractionManager } from 'react-native'
 import apolloClient from '../config/apolloClient'
 import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
-import { REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
+import { ASSIGN_TENANT, REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
 import {
   MenuActions,
   NavigationActions,
@@ -18,49 +18,75 @@ export const requestTenant = () => ({
   type: REQUEST_TENANT
 })
 
-export const receiveTenant = (tenant) => ({
-  type: TENANT_RECEIVED,
-  tenant
+export const assignTenant = () => ({
+  type: ASSIGN_TENANT
 })
+
+export const receiveTenant = (tenant) => {
+  return (dispatch, getState) => {
+    Tenant.current = tenant
+    return dispatch({ type: TENANT_RECEIVED, tenant })
+  }
+}
 
 export function setCurrent (tenantId) {
   const tenant = Tenant.find(tenantId)
 
   return (dispatch, getState) => {
-    const currentTenantId = getState().TenantReducer.id
-    if (currentTenantId === tenant.id) return
+    const previousTenant = getState().TenantReducer.current
+    if (previousTenant === tenant) return
 
-    Tenant.current = tenant
+    dispatch(assignTenant())
     AsyncStorage.setItem(tenantKey, tenant.id, (error) => {
       if (error) return captureError(error)
-      dispatch(receiveTenant(tenant.id))
-      if (currentTenantId && currentTenantId !== tenant.id) dispatch(reloadApp())
+      dispatch(onSetCurrent(previousTenant, tenant))
     })
   }
 }
 
 export function getCurrent (locale) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    if (getState().TenantReducer.isFetching || getState().TenantReducer.isAssigning) return
     dispatch(requestTenant())
 
     AsyncStorage.getItem(tenantKey, (error, storageTenant) => {
       if (error) return captureError(error)
-
-      if (storageTenant) {
-        dispatch(receiveTenant(storageTenant))
-      } else {
-        dispatch(setCurrent(Tenant.findByLocale(locale)))
-      }
+      dispatch(onGetCurrent(storageTenant, locale))
     })
   }
 }
 
-function reloadApp () {
+function onSetCurrent (previousTenant, tenant) {
+  return (dispatch, getState) => {
+    if (previousTenant && previousTenant !== tenant) {
+      dispatch(reloadApp(tenant))
+    } else {
+      dispatch(receiveTenant(tenant))
+    }
+  }
+}
+
+function onGetCurrent (storageTenant, locale) {
+  const fallbackTenant = Tenant.findByLocale(locale)
+  return (dispatch, getState) => {
+    if (getState().TenantReducer.isAssigning) return
+
+    if (storageTenant) {
+      dispatch(receiveTenant(Tenant.find(storageTenant)))
+    } else {
+      dispatch(setCurrent(fallbackTenant.id))
+    }
+  }
+}
+
+function reloadApp (tenant) {
   return (dispatch) => {
     dispatch(MenuActions.closeMenu())
 
     InteractionManager.runAfterInteractions(() => {
       apolloClient.resetStore()
+      dispatch(receiveTenant(tenant))
+
       dispatch(NotificationsActions.handleTags())
       dispatch(NavigationActions.home())
     })

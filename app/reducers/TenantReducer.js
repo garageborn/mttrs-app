@@ -1,8 +1,8 @@
-import { REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
+import { ASSIGN_TENANT, TENANT_RECEIVED, REQUEST_TENANT } from '../constants/ActionTypes'
 import Tenant from '../common/utils/Tenant'
 
 let defaultState = {
-  isFetching: false, isLoaded: false, id: null
+  isFetching: false, isLoaded: false, isAssigning: false, current: {}
 }
 
 export default function (state = defaultState, action) {
@@ -13,12 +13,19 @@ export default function (state = defaultState, action) {
         isFetching: true,
         isLoaded: false
       }
+    case ASSIGN_TENANT:
+      return {
+        ...state,
+        isAssigning: true,
+        isLoaded: false
+      }
     case TENANT_RECEIVED:
       return {
         ...state,
         isFetching: false,
+        isAssigning: false,
         isLoaded: true,
-        id: action.tenant
+        current: action.tenant
       }
     default:
       return state

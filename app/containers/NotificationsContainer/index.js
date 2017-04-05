@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import Tenant from '../../common/utils/Tenant'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
@@ -19,13 +20,7 @@ class NotificationsContainer extends Component {
     super()
     this.handleOpen = this.handleOpen.bind(this)
     this.handleRegister = this.handleRegister.bind(this)
-
-    this.state = {
-      opened: false,
-      model: {
-        slug: null
-      }
-    }
+    this.state = { opened: false, model: {} }
   }
 
   componentWillMount () {
@@ -42,6 +37,12 @@ class NotificationsContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.handlePermissions(nextProps)
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.opened !== nextState.opened) return true
+    if (this.state.type !== nextState.type) return true
+    return !_isEqual(this.state.model, nextState.model)
   }
 
   render () {
@@ -85,6 +86,7 @@ class NotificationsContainer extends Component {
   }
 
   setTenant (id) {
+    if (this.props.tenant.id === id) return
     const { dispatch } = this.props
     dispatch(TenantActions.setCurrent(id))
   }
@@ -98,9 +100,9 @@ NotificationsContainer.propTypes = {
   }).isRequired
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    tenant: state.TenantReducer,
+    tenant: state.TenantReducer.current,
     visitedStories: state.StorageReducer.visitedStories
   }
 }

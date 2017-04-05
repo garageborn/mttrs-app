@@ -11,6 +11,6 @@ query {
 }
 `
 
-export default function (HomeTimeline) {
-  return graphql(Query)(HomeTimeline)
+export default function (CategoriesTimeline) {
+  return graphql(Query)(CategoriesTimeline)
 }

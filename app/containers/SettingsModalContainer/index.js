@@ -52,7 +52,7 @@ SettingsModalContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.TenantReducer,
+    tenant: state.TenantReducer.current,
     notificationStatus: state.StorageReducer.notificationStatus
   }
 }
