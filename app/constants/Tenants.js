@@ -3,13 +3,13 @@ export const TENANTS = [
     default: true,
     host: 'mttrs.com.br',
     id: 'mttrs_br',
-    locale: 'pt-BR',
+    language: 'pt',
     protocol: 'https'
   },
   {
     host: 'mtt.rs',
     id: 'mttrs_us',
-    locale: 'en',
+    language: 'en',
     protocol: 'https'
   }
 ]
