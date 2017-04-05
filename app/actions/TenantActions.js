@@ -8,8 +8,7 @@ import {
   MenuActions,
   NavigationActions,
   NotificationsActions,
-  StorageActions,
-  TenantActions
+  StorageActions
 } from '../actions/index'
 
 const tenantKey = 'tenant'
