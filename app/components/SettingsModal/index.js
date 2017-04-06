@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { Modal, View, Text, Image, ScrollView, Switch } from 'react-native'
-import Touchable from './../Touchable'
 import { injectIntl, defineMessages } from 'react-intl'
+import _isEmpty from 'lodash/isEmpty'
 import { capitalize } from '../../common/utils/formatText'
+import Touchable from './../Touchable'
 import CloseButton from './../CloseButton'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
@@ -57,7 +58,7 @@ class SettingsModal extends Component {
   }
 
   renderNotificationStatus (tenantId) {
-    const { toggleNotificationStatus, notificationStatus, intl } = this.props
+    const { toggleTenantNotification, intl } = this.props
     const tenantLabel = intl.formatMessage(messages[tenantId])
     return (
       <View style={styles.optionItem}>
@@ -65,16 +66,23 @@ class SettingsModal extends Component {
         <Switch
           tintColor={tintColor}
           onTintColor={onTintColor}
-          thumbTintColor={this.thumbTintColor}
-          value
-          onValueChange={toggleNotificationStatus}
+          thumbTintColor={this.thumbTintColor(tenantId)}
+          value={this.getNotificationsStatus(tenantId)}
+          onValueChange={() => toggleTenantNotification(tenantId, !this.getNotificationsStatus(tenantId))}
         />
       </View>
     )
   }
 
-  get thumbTintColor () {
-    return true ? thumbTintActive : thumbTintColor
+  getNotificationsStatus (tenantId) {
+    let { notificationsStatus } = this.props
+    if (_isEmpty(notificationsStatus)) return false
+    if (!notificationsStatus[tenantId]) return false
+    return JSON.parse(notificationsStatus[tenantId])
+  }
+
+  thumbTintColor (tenantId) {
+    return this.getNotificationsStatus(tenantId) ? thumbTintActive : thumbTintColor
   }
 
   renderContent () {
@@ -109,7 +117,8 @@ class SettingsModal extends Component {
 
 SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
-  toggleNotificationStatus: PropTypes.func.isRequired,
+  toggleTenantNotification: PropTypes.func.isRequired,
+  notificationsStatus: PropTypes.object.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
