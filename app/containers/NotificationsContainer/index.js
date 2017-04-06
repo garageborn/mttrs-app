@@ -24,6 +24,7 @@ class NotificationsContainer extends Component {
   }
 
   componentWillMount () {
+    OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
     // OneSignal.addEventListener('registered', this.handleRegister)
