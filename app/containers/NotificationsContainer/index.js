@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
-import Tenant from '../../common/utils/Tenant'
+import _isEmpty from 'lodash/isEmpty'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -11,7 +11,6 @@ import HomeNotificationContainer from '../HomeNotificationContainer'
 import {
   AnalyticsActions,
   NotificationsActions,
-  StorageActions,
   TenantActions
 } from '../../actions/index'
 
@@ -27,7 +26,6 @@ class NotificationsContainer extends Component {
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
     // OneSignal.addEventListener('registered', this.handleRegister)
-    this.handleNotificationStatus()
   }
 
   componentWillUnmount () {
@@ -37,6 +35,7 @@ class NotificationsContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.handlePermissions(nextProps)
+    this.handleNotificationStatus(nextProps)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -61,9 +60,11 @@ class NotificationsContainer extends Component {
     }
   }
 
-  handleNotificationStatus () {
+  handleNotificationStatus (nextProps) {
+    if (!_isEmpty(this.props.notificationsStatus)) return
     if (Platform.OS === 'ios') return null
-    return this.props.dispatch(StorageActions.getNotificationStatus())
+    if (this.props.tenant === nextProps.tenant) return
+    return this.props.dispatch(NotificationsActions.getNotificationsStatus())
   }
 
   handleOpen (result) {
@@ -80,8 +81,9 @@ class NotificationsContainer extends Component {
   }
 
   handlePermissions (nextProps) {
-    if (nextProps.visitedStories.items.length < 3) return
+    if (nextProps.visitedStories.items.length > 3) return
     if (nextProps.visitedStories.items.length === this.props.visitedStories.items.length) return
+    if (this.props.visitedStories.items.length < 3) return
     return this.props.dispatch(NotificationsActions.requestPermissions())
   }
 
@@ -95,6 +97,7 @@ class NotificationsContainer extends Component {
 NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  notificationsStatus: PropTypes.object.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string
   }).isRequired
@@ -102,6 +105,7 @@ NotificationsContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
+    notificationsStatus: state.NotificationsReducer.status,
     tenant: state.TenantReducer.current,
     visitedStories: state.StorageReducer.visitedStories
   }
