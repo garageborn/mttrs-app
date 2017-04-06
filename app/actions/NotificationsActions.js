@@ -31,8 +31,10 @@ export function handleTags () {
 
     tags[tenant] = 'true'
     OneSignal.sendTags(tags)
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags))
-    return dispatch(receiveNotificationsStatus(tags))
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags), (error) => {
+      if (error) return captureError(error)
+      return dispatch(receiveNotificationsStatus(tags))
+    })
   }
 }
 
@@ -40,18 +42,10 @@ export function getNotificationsStatus () {
   return (dispatch, getState) => {
     dispatch(requestNotificationsStatus())
     AsyncStorage.getItem('notificationsStatus', (error, data) => {
-      if (error) captureError(error)
+      if (error) return captureError(error)
       if (_isNil(data)) return dispatch(handleTags())
       return dispatch(receiveNotificationsStatus(JSON.parse(data)))
     })
-  }
-}
-
-export function setNotificationsStatus (receivedTags) {
-  return dispatch => {
-    let tags = receivedTags || {}
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags))
-    dispatch(receiveNotificationsStatus(receivedTags))
   }
 }
 
@@ -64,8 +58,10 @@ export function setTenantNotificationStatus (tenant, tenantStatus) {
       [tenant]: tenantStatusStringified
     }
     OneSignal.sendTag(tenant, tenantStatusStringified)
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatus))
-    dispatch(receiveNotificationsStatus(notificationsStatus))
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatus), (error) => {
+      if (error) return captureError(error)
+      return dispatch(receiveNotificationsStatus(notificationsStatus))
+    })
   }
 }
 
