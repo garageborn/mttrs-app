@@ -1,25 +1,26 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
-import { StorageActions, TenantActions } from '../../actions/index'
+import { TenantActions, NotificationsActions } from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
     super(props)
     this.changeTenant = this.changeTenant.bind(this)
-    this.toggleNotificationStatus = this.toggleNotificationStatus.bind(this)
+    this.toggleTenantNotification = this.toggleTenantNotification.bind(this)
   }
 
   render () {
-    const { close, tenant, visible, notificationStatus } = this.props
+    const { close, tenant, visible, notificationsStatus, notificationsPermissions } = this.props
     return (
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
-        toggleNotificationStatus={this.toggleNotificationStatus}
+        toggleTenantNotification={this.toggleTenantNotification}
         tenant={tenant}
         visible={visible}
-        notificationStatus={notificationStatus}
+        notificationsStatus={notificationsStatus}
+        notificationsPermissions={notificationsPermissions}
       />
     )
   }
@@ -29,12 +30,12 @@ class SettingsModalContainer extends Component {
     if (tenant.id === tenantId) return close()
 
     close()
+
     dispatch(TenantActions.setCurrent(tenantId))
   }
 
-  toggleNotificationStatus () {
-    let { active } = this.props.notificationStatus
-    return this.props.dispatch(StorageActions.setNotificationStatus(!active))
+  toggleTenantNotification (tenant, status) {
+    return this.props.dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
   }
 }
 
@@ -44,16 +45,15 @@ SettingsModalContainer.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
-  notificationStatus: PropTypes.shape({
-    active: PropTypes.bool.isRequired
-  }),
-  visible: PropTypes.bool.isRequired
+  notificationsStatus: PropTypes.object.isRequired,
+  notificationsPermissions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     tenant: state.TenantReducer.current,
-    notificationStatus: state.StorageReducer.notificationStatus
+    notificationsStatus: state.NotificationsReducer.status,
+    notificationsPermissions: state.NotificationsReducer.permissions
   }
 }
 
