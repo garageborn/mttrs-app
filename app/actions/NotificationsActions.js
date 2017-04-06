@@ -5,7 +5,8 @@ import _isNil from 'lodash/isNil'
 
 import {
   REQUEST_NOTIFICATIONS_STATUS,
-  RECEIVE_NOTIFICATIONS_STATUS
+  RECEIVE_NOTIFICATIONS_STATUS,
+  RECEIVE_NOTIFICATIONS_PERMISSIONS
 } from '../constants/ActionTypes'
 
 export function requestPermissions () {
@@ -17,6 +18,23 @@ export function requestPermissions () {
     }
     dispatch(handleTags())
     return OneSignal.requestPermissions(permissions)
+  }
+}
+
+export function setPermissions (status) {
+  return (dispatch) => {
+    AsyncStorage.setItem('notificationsPermissions', JSON.stringify(status))
+    return dispatch(receiveNotificationsPermissions(status))
+  }
+}
+
+export function checkPermissions () {
+  return (dispatch) => {
+    OneSignal.checkPermissions((permissions) => {
+      let allowed = permissions.alert || permissions.badge || permissions.sound
+      if (allowed) return this.handleTags()
+      dispatch(setPermissions(false))
+    })
   }
 }
 
@@ -32,6 +50,7 @@ export function handleTags () {
     tags[tenant] = 'true'
     OneSignal.sendTags(tags)
     AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags))
+    dispatch(setPermissions(true))
     return dispatch(receiveNotificationsStatus(tags))
   }
 }
@@ -75,5 +94,10 @@ export const requestNotificationsStatus = () => ({
 
 export const receiveNotificationsStatus = (payload) => ({
   type: RECEIVE_NOTIFICATIONS_STATUS,
+  payload
+})
+
+export const receiveNotificationsPermissions = (payload) => ({
+  type: RECEIVE_NOTIFICATIONS_PERMISSIONS,
   payload
 })

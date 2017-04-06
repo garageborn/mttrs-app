@@ -11,7 +11,7 @@ class SettingsModalContainer extends Component {
   }
 
   render () {
-    const { close, tenant, visible, notificationsStatus } = this.props
+    const { close, tenant, visible, notificationsStatus, notificationsPermissions } = this.props
     return (
       <SettingsModal
         close={close}
@@ -20,6 +20,7 @@ class SettingsModalContainer extends Component {
         tenant={tenant}
         visible={visible}
         notificationsStatus={notificationsStatus}
+        notificationsPermissions={notificationsPermissions}
       />
     )
   }
@@ -44,13 +45,15 @@ SettingsModalContainer.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
-  notificationsStatus: PropTypes.object.isRequired
+  notificationsStatus: PropTypes.object.isRequired,
+  notificationsPermissions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     tenant: state.TenantReducer.current,
-    notificationsStatus: state.NotificationsReducer.status
+    notificationsStatus: state.NotificationsReducer.status,
+    notificationsPermissions: state.NotificationsReducer.permissions
   }
 }
 

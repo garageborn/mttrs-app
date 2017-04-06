@@ -75,9 +75,10 @@ class SettingsModal extends Component {
   }
 
   getNotificationsStatus (tenantId) {
-    let { notificationsStatus } = this.props
+    let { notificationsStatus, notificationsPermissions } = this.props
     if (_isEmpty(notificationsStatus)) return false
     if (!notificationsStatus[tenantId]) return false
+    if (!notificationsPermissions) return false
     return JSON.parse(notificationsStatus[tenantId])
   }
 
@@ -119,6 +120,7 @@ SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
   toggleTenantNotification: PropTypes.func.isRequired,
   notificationsStatus: PropTypes.object.isRequired,
+  notificationsPermissions: PropTypes.bool.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
