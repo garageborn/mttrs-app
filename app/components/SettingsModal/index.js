@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { Modal, View, Text, Image, ScrollView, Switch } from 'react-native'
+import { Modal, View, Text, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import _isEmpty from 'lodash/isEmpty'
 import { capitalize } from '../../common/utils/formatText'
+import NotificationsMenuContainer from '../../containers/NotificationsMenuContainer'
 import Touchable from './../Touchable'
 import CloseButton from './../CloseButton'
-import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
+import styles from './styles'
 
 const messages = defineMessages({
   feedback: { id: 'footer.feedback' },
   modalSubTitle: { id: 'modal.subTitle' },
   mttrs_br: { id: 'mttrs_br.label' },
   mttrs_us: { id: 'mttrs_us.label' },
-  settings: { id: 'menu.settings' },
-  notifications: { id: 'notifications' }
+  settings: { id: 'menu.settings' }
 })
 
 const checkmark = require('./assets/checkmark.png')
@@ -57,40 +56,10 @@ class SettingsModal extends Component {
     )
   }
 
-  renderNotificationStatus (tenantId) {
-    const { toggleTenantNotification, intl } = this.props
-    const tenantLabel = intl.formatMessage(messages[tenantId])
-    return (
-      <View style={styles.optionItem}>
-        <Text style={styles.optionTitle}>{tenantLabel}</Text>
-        <Switch
-          tintColor={tintColor}
-          onTintColor={onTintColor}
-          thumbTintColor={this.thumbTintColor(tenantId)}
-          value={this.getNotificationsStatus(tenantId)}
-          onValueChange={() => toggleTenantNotification(tenantId, !this.getNotificationsStatus(tenantId))}
-        />
-      </View>
-    )
-  }
-
-  getNotificationsStatus (tenantId) {
-    let { notificationsStatus, notificationsPermissions } = this.props
-    if (_isEmpty(notificationsStatus)) return false
-    if (!notificationsStatus[tenantId]) return false
-    if (!notificationsPermissions) return false
-    return JSON.parse(notificationsStatus[tenantId])
-  }
-
-  thumbTintColor (tenantId) {
-    return this.getNotificationsStatus(tenantId) ? thumbTintActive : thumbTintColor
-  }
-
   renderContent () {
     const { formatMessage } = this.props.intl
     const subTitle = formatMessage(messages.modalSubTitle)
     const feedback = formatMessage(messages.feedback)
-    const notifications = formatMessage(messages.notifications)
 
     return (
       <View style={styles.options}>
@@ -100,11 +69,7 @@ class SettingsModal extends Component {
             { this.renderButton('mttrs_us') }
             { this.renderButton('mttrs_br') }
           </View>
-          <Text style={styles.optionsSubTitle}>{notifications}</Text>
-          <View style={styles.optionsList}>
-            { this.renderNotificationStatus('mttrs_us') }
-            { this.renderNotificationStatus('mttrs_br') }
-          </View>
+          <NotificationsMenuContainer />
         </View>
         <View style={styles.modalFooter}>
           <Touchable>
@@ -118,9 +83,6 @@ class SettingsModal extends Component {
 
 SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
-  toggleTenantNotification: PropTypes.func.isRequired,
-  notificationsStatus: PropTypes.object.isRequired,
-  notificationsPermissions: PropTypes.bool.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
