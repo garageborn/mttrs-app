@@ -23,12 +23,12 @@ const HeaderWebview = ({ link, publisherLogo, share, close }) => {
         <View style={styles.actions}>
           <Touchable underlayColor={COLORLESS} onPress={share}>
             <View style={styles.iconHighlight}>
-              <Image style={styles.iconShare} source={iconShare} />
+              <Image source={iconShare} />
             </View>
           </Touchable>
           <Touchable underlayColor={COLORLESS} onPress={close}>
             <View style={[styles.iconHighlight, styles.iconCloseHighlight]}>
-              <Image style={styles.iconClose} source={iconClose} />
+              <Image source={iconClose} />
             </View>
           </Touchable>
         </View>

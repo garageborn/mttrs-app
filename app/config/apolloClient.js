@@ -1,14 +1,14 @@
 import ApolloClient from 'apollo-client'
 import * as ENDPOINTS from '../constants/APIEndpoints'
 import Tenant from '../common/utils/Tenant'
-import { timezone } from './IntlProvider'
+import { TIMEZONE } from '../constants/Locale'
 import createNetworkInterface from '../common/utils/ApolloNetworkInterface'
 import captureError from '../common/utils/captureError'
 
 const tenantMiddleware = {
   applyMiddleware: (req, next) => {
     if (!req.options.headers) req.options.headers = {}
-    req.options.headers['X-Tenant'] = Tenant.current
+    req.options.headers['X-Tenant'] = Tenant.current.id
     next()
   }
 }
@@ -16,7 +16,7 @@ const tenantMiddleware = {
 const timezoneMiddleware = {
   applyMiddleware: (req, next) => {
     if (!req.options.headers) req.options.headers = {}
-    req.options.headers['X-Timezone'] = timezone
+    req.options.headers['X-Timezone'] = TIMEZONE
     next()
   }
 }

@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { NativeModules, Platform } from 'react-native'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import intl from 'intl'
-import * as messages from '../common/translations/i18n'
+import { DEFAULT_LANGUAGE } from '../constants/Locale'
+import * as translations from '../common/translations/i18n'
 import localeData from 'react-intl/locale-data'
 import androidLocaleData from 'intl/locale-data/complete'
-import moment from 'moment-timezone'
+import { connect } from 'react-redux'
 
 Platform.select({
   ios: () => addLocaleData([...localeData]),
@@ -15,27 +16,31 @@ Platform.select({
   }
 })()
 
-export const locale = Platform.select({
-  ios: () => NativeModules.SettingsManager.settings.AppleLocale,
-  android: () => NativeModules.I18nManager.localeIdentifier
-})()
-export const language = locale.substr(0, 2)
-export const timezone = moment.tz.guess()
-
 class Provider extends Component {
   render () {
-    let msg = messages[language] || messages.en
+    const { tenant, children } = this.props
+    const language = tenant.language || DEFAULT_LANGUAGE
+    let messages = translations[language] || translations[DEFAULT_LANGUAGE]
 
     return (
-      <IntlProvider locale={language} defaultLocale='en' messages={msg}>
-        {this.props.children}
+      <IntlProvider locale={language} defaultLocale={DEFAULT_LANGUAGE} messages={messages}>
+        {children}
       </IntlProvider>
     )
   }
 }
 
 Provider.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  tenant: PropTypes.shape({
+    language: PropTypes.string
+  }).isRequired
 }
 
-export default Provider
+const mapStateToProps = (state) => {
+  return {
+    tenant: state.TenantReducer.current
+  }
+}
+
+export default connect(mapStateToProps)(Provider)
