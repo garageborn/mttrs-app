@@ -4,7 +4,9 @@ import {
 } from '../constants/ActionTypes'
 
 let defaultState = {
-  notificationsStatus: { isFetching: false, isLoaded: false, status: {} }
+  isFetching: false,
+  isLoaded: false,
+  status: {}
 }
 
 export default function (state = defaultState, action) {
@@ -15,7 +17,6 @@ export default function (state = defaultState, action) {
         isFetching: true
       }
     case RECEIVE_NOTIFICATIONS_STATUS:
-      console.log(action.payload)
       return {
         ...state,
         isFetching: false,

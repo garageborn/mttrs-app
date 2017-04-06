@@ -59,11 +59,13 @@ export function setTenantNotificationStatus (tenant, tenantStatus) {
   return (dispatch, getState) => {
     let notificationsStatus = getState().NotificationsReducer.status
     let tenantStatusStringified = JSON.stringify(tenantStatus)
-    let notificationsStatusManipulated = notificationsStatus
-    notificationsStatusManipulated[tenant] = tenantStatusStringified
+    notificationsStatus = {
+      ...notificationsStatus,
+      [tenant]: tenantStatusStringified
+    }
     OneSignal.sendTag(tenant, tenantStatusStringified)
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatusManipulated))
-    dispatch(receiveNotificationsStatus(notificationsStatusManipulated))
+    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatus))
+    dispatch(receiveNotificationsStatus(notificationsStatus))
   }
 }
 
