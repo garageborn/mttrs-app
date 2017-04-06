@@ -16,16 +16,18 @@ class LinkNotificationContainer extends Component {
 
   openLink (props) {
     const { dispatch, model, data } = props
-    if (data.loading) return
+    if (data.loading || !data.link) return
 
     InteractionManager.runAfterInteractions(() => {
-      return dispatch(NavigationActions.link(model.story, data.link))
+      return dispatch(NavigationActions.link(data.link.story, data.link))
     })
   }
 }
 
 LinkNotificationContainer.propTypes = {
-  model: PropTypes.object.isRequired
+  model: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired
 }
 
 const LinkNotificationContainerWithData = withQuery(LinkNotificationContainer)

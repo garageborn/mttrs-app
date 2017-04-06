@@ -94,7 +94,9 @@ LinkScene.propTypes = {
       }).isRequired
     }).isRequired
   }).isRequired,
-  story: PropTypes.object.isRequired,
+  story: PropTypes.shape({
+    id: PropTypes.any.isRequired
+  }).isRequired,
   createLinkAccess: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
 }

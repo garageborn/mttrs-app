@@ -8,11 +8,7 @@ import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
 import HomeNotificationContainer from '../HomeNotificationContainer'
-import {
-  AnalyticsActions,
-  NotificationsActions,
-  TenantActions
-} from '../../actions/index'
+import { AnalyticsActions, NotificationsActions, TenantActions } from '../../actions/index'
 
 class NotificationsContainer extends Component {
   constructor () {
@@ -40,15 +36,18 @@ class NotificationsContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
+    if (this.props.tenant.isLoaded !== nextProps.tenant.isLoaded) return true
     if (this.state.opened !== nextState.opened) return true
     if (this.state.type !== nextState.type) return true
     return !_isEqual(this.state.model, nextState.model)
   }
 
   render () {
-    let { opened, model, type } = this.state
+    const { tenant } = this.props
+    const { opened, model, type } = this.state
 
-    if (!opened) return null
+    if (!tenant.isLoaded || !opened) return null
+
     switch (type) {
       case 'link':
         return <LinkNotificationContainer model={model} />
@@ -89,7 +88,7 @@ class NotificationsContainer extends Component {
   }
 
   setTenant (id) {
-    if (this.props.tenant.id === id) return
+    if (this.props.tenant.current.id === id) return
     const { dispatch } = this.props
     dispatch(TenantActions.setCurrent(id))
   }
@@ -100,14 +99,17 @@ NotificationsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   notificationsStatus: PropTypes.object.isRequired,
   tenant: PropTypes.shape({
-    id: PropTypes.string
+    current: PropTypes.shape({
+      id: PropTypes.string
+    }),
+    isLoaded: PropTypes.bool.isRequired
   }).isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     notificationsStatus: state.NotificationsReducer.status,
-    tenant: state.TenantReducer.current,
+    tenant: state.TenantReducer,
     visitedStories: state.StorageReducer.visitedStories
   }
 }

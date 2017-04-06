@@ -1,25 +1,35 @@
 import React, { Component, PropTypes } from 'react'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
+import withQuery from './index.gql'
 import { NavigationActions } from '../../actions/index'
 
 class PublisherNotificationContainer extends Component {
-  componentDidMount () {
-    this.handleResult()
+  componentWillReceiveProps (nextProps) {
+    if (this.props.data.loading === nextProps.data.loading) return
+    this.openPublisher(nextProps)
   }
 
   render () {
     return null
   }
 
-  handleResult () {
-    let { model, dispatch } = this.props
-    return dispatch(NavigationActions.selectPublisher(model))
+  openPublisher (props) {
+    const { dispatch, model, data } = props
+    if (data.loading || data.publisher) return
+
+    InteractionManager.runAfterInteractions(() => {
+      return dispatch(NavigationActions.selectPublisher(data.publisher))
+    })
   }
 }
 
 PublisherNotificationContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  model: PropTypes.object.isRequired
+  model: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired
 }
 
-export default connect()(PublisherNotificationContainer)
+const PublisherNotificationContainerWithData = withQuery(PublisherNotificationContainer)
+export default connect()(PublisherNotificationContainerWithData)

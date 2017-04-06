@@ -3,18 +3,16 @@ import { graphql } from 'react-apollo'
 
 const Query = gql`
   query($slug: String!) {
-    link(slug: $slug) {
-      title
-      url
+    publisher(slug: $slug) {
+      name
+      display_name
+      icon_id
       slug
-      image_source_url
-      story { id }
-      publisher { name display_name icon_id slug restrict_content }
     }
   }
 `
 
-export default function (LinkNotificationContainer) {
+export default function (PublisherNotificationContainer) {
   return graphql(Query, {
     options (props) {
       return {
@@ -23,5 +21,5 @@ export default function (LinkNotificationContainer) {
         }
       }
     }
-  })(LinkNotificationContainer)
+  })(PublisherNotificationContainer)
 }

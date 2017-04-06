@@ -1,25 +1,35 @@
 import React, { Component, PropTypes } from 'react'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
+import withQuery from './index.gql'
 import { NavigationActions } from '../../actions/index'
 
 class CategoryNotificationContainer extends Component {
-  componentDidMount () {
-    this.handleResult()
+  componentWillReceiveProps (nextProps) {
+    if (this.props.data.loading === nextProps.data.loading) return
+    this.openCategory(nextProps)
   }
 
   render () {
     return null
   }
 
-  handleResult () {
-    let { model, dispatch } = this.props
-    return dispatch(NavigationActions.selectCategory(model))
+  openCategory (props) {
+    const { dispatch, model, data } = props
+    if (data.loading || !data.category) return
+
+    InteractionManager.runAfterInteractions(() => {
+      return dispatch(NavigationActions.selectCategory(data.category))
+    })
   }
 }
 
 CategoryNotificationContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  model: PropTypes.object.isRequired
+  model: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired
 }
 
-export default connect()(CategoryNotificationContainer)
+const CategoryNotificationContainerWithData = withQuery(CategoryNotificationContainer)
+export default connect()(CategoryNotificationContainerWithData)
