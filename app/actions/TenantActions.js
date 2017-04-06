@@ -86,7 +86,7 @@ function reloadApp (tenant) {
       apolloClient.resetStore()
       dispatch(receiveTenant(tenant))
 
-      dispatch(NotificationsActions.handleTags())
+      dispatch(NotificationsActions.setTenantNotificationStatus(tenant.id, true))
       dispatch(NavigationActions.home())
     })
   }
