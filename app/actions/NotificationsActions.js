@@ -1,7 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import captureError from '../common/utils/captureError'
-import _isEmpty from 'lodash/isEmpty'
 import _isNil from 'lodash/isNil'
 
 import {
@@ -23,7 +22,7 @@ export function requestPermissions () {
 
 export function handleTags () {
   return (dispatch, getState) => {
-    const tenant = getState().StorageReducer.tenant.id
+    const tenant = getState().TenantReducer.current.id
 
     let tags = {
       mttrs_br: 'false',

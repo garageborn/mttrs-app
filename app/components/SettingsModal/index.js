@@ -112,8 +112,7 @@ SettingsModal.propTypes = {
   toggleNotificationStatus: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    isFetching: PropTypes.bool.isRequired
+    id: PropTypes.string.isRequired
   }).isRequired,
   animationType: PropTypes.string.isRequired,
   intl: PropTypes.shape({

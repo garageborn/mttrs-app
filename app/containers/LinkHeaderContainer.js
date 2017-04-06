@@ -4,8 +4,8 @@ import Share from 'react-native-share'
 import url from 'url'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
+import Tenant from '../common/utils/Tenant'
 import { NavigationActions } from '../actions/index'
-import { TENANTS } from '../constants/Tenants'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -17,13 +17,11 @@ class LinkHeaderContainer extends Component {
   share () {
     const { link } = this.props
 
-    let shareUrl = this.buildUrl(link.slug)
-
     let shareOptions = {
       title: link.title,
       message: link.description || link.title,
       subject: link.title, // for email
-      url: shareUrl
+      url: this.shareUrl
     }
 
     return Share.open(shareOptions)
@@ -33,11 +31,10 @@ class LinkHeaderContainer extends Component {
     this.props.dispatch(NavigationActions.back())
   }
 
-  buildUrl (slug) {
-    let tenantId = this.props.tenant.id
-    let tenant = TENANTS.find(tenant => tenantId === tenant.id)
+  get shareUrl () {
+    const { tenant, link } = this.props
     const { host, protocol } = tenant
-    let pathname = `/link/${slug}`
+    let pathname = `/link/${link.slug}`
     let query = { utm_source: 'app', utm_medium: 'share' }
 
     return url.format({ protocol, host, pathname, query })
@@ -74,13 +71,15 @@ LinkHeaderContainer.propTypes = {
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
   tenant: PropTypes.shape({
-    id: PropTypes.string.isRequired
+    current: PropTypes.shape({
+      id: PropTypes.string.isRequired
+    })
   }).isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant
+    tenant: state.TenantReducer.current
   }
 }
 
