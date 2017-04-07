@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { NotificationsActions } from '../../actions/index'
 import NotificationsMenu from '../../components/NotificationsMenu'
@@ -10,28 +11,32 @@ class NotificationsMenuContainer extends Component {
   }
 
   render () {
-    const { notificationsStatus } = this.props
+    const { status } = this.props
     return (
       <NotificationsMenu
         toggleTenantNotification={this.toggleTenantNotification}
-        notificationsStatus={notificationsStatus}
+        notificationsStatus={status}
       />
     )
   }
 
   toggleTenantNotification (tenant, status) {
-    return this.props.dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
+    let { dispatch, permissions } = this.props
+    if (Platform.OS === 'ios' && !permissions) dispatch(NotificationsActions.requestPermissions())
+    return dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
   }
 }
 
 NotificationsMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  notificationsStatus: PropTypes.object.isRequired
+  status: PropTypes.object.isRequired,
+  permissions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    notificationsStatus: state.NotificationsReducer.status
+    permissions: state.NotificationsReducer.permissions,
+    status: state.NotificationsReducer.status
   }
 }
 
