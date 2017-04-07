@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
 import captureError from '../common/utils/captureError'
+import { parse, stringify } from '../common/utils/Parser'
 
 import {
   REQUEST_VISITED_STORIES,
@@ -27,7 +28,7 @@ export function getVisitedStories () {
     dispatch(requestVisitedStories())
     AsyncStorage.getItem('visitedStories', (error, stories) => {
       if (error) return captureError(error)
-      return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
+      return dispatch(receiveVisitedStories(parse(stories) || []))
     })
   }
 }
@@ -37,7 +38,7 @@ export function addVisitedStory (story) {
     if (isVisitedStory(getState, story)) return
 
     let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    AsyncStorage.setItem('visitedStories', JSON.stringify(stories), (error) => {
+    AsyncStorage.setItem('visitedStories', stringify(stories), (error) => {
       if (error) return captureError(error)
       return dispatch(receiveVisitedStories(stories))
     })
@@ -73,7 +74,7 @@ export function closeOnboarding () {
   return dispatch => {
     dispatch(this.showOnboarding(false))
     try {
-      AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+      AsyncStorage.setItem('showOnboarding', stringify(false))
     } catch (error) {
       captureError(error)
     }

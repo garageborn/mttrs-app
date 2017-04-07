@@ -4,6 +4,7 @@ import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import Timeline from '../Timeline'
 import _isEqual from 'lodash/isEqual'
+import { parse } from '../../common/utils/Parser'
 
 class CategoryTimeline extends Component {
   shouldComponentUpdate (nextProps) {
@@ -22,7 +23,7 @@ class CategoryTimeline extends Component {
     let currentRouteOnArray = props.navigationState.routes.find((item) =>
       item.model === props.model
     )
-    return JSON.parse(currentRouteOnArray.key) === props.navigationState.index
+    return parse(currentRouteOnArray.key) === props.navigationState.index
   }
 }
 

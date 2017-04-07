@@ -4,11 +4,6 @@ const { width, height } = Dimensions.get('window')
 const heightOffset = Platform.OS === 'ios' ? 90 : 110
 const widthOffeset = 16
 
-export const thumbTintActive = '#EB5510'
-export const thumbTintColor = '#B6B6B6'
-export const tintColor = '#797979'
-export const onTintColor = '#975333'
-
 const centerXY = {
   flexDirection: 'row',
   alignItems: 'center',

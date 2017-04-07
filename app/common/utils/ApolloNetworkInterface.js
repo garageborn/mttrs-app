@@ -2,6 +2,7 @@ import { HTTPFetchNetworkInterface, createNetworkInterface } from 'apollo-client
 import _mapValues from 'lodash/mapValues'
 import { print } from 'graphql-tag/printer'
 import queryString from 'query-string'
+import { stringify } from './Parser'
 
 function printRequest (request) {
   return _mapValues(request, function (val, key) {
@@ -24,11 +25,11 @@ HTTPFetchNetworkInterface.prototype.fetchFromRemoteEndpoint = function (req) {
 
   if (method === 'POST') {
     uri = this._uri
-    body = JSON.stringify(query)
+    body = stringify(query)
   } else {
     const params = {
       query: query.query.replace(/\r?\n|\r/g, '').replace(/\s+/g, ' '),
-      variables: JSON.stringify(variables)
+      variables: stringify(variables)
     }
 
     uri = `${ this._uri }?${ queryString.stringify(params) }`

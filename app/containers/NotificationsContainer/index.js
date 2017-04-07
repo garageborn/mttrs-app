@@ -32,7 +32,7 @@ class NotificationsContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.handlePermissions(nextProps)
-    this.handleNotificationStatus(nextProps)
+    this.handleNotificationsStatus(nextProps)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -60,11 +60,11 @@ class NotificationsContainer extends Component {
     }
   }
 
-  handleNotificationStatus (nextProps) {
+  handleNotificationsStatus (nextProps) {
     if (!_isEmpty(this.props.notificationsStatus)) return
     if (this.props.tenant === nextProps.tenant) return
     if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
-    return this.props.dispatch(NotificationsActions.getNotificationsStatus())
+    return this.props.dispatch(NotificationsActions.getStatus())
   }
 
   handleOpen (result) {

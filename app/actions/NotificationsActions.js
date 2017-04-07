@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import captureError from '../common/utils/captureError'
+import { parse, stringify } from '../common/utils/Parser'
 import _isNil from 'lodash/isNil'
 
 import {
@@ -9,6 +10,8 @@ import {
   RECEIVE_NOTIFICATIONS_PERMISSIONS
 } from '../constants/ActionTypes'
 
+const notificationsStatus = 'notificationsStatus'
+
 export function requestPermissions () {
   return dispatch => {
     const permissions = {
@@ -16,15 +19,16 @@ export function requestPermissions () {
       badge: true,
       sound: true
     }
-    dispatch(handleTags())
+    dispatch(initTags())
     return OneSignal.requestPermissions(permissions)
   }
 }
 
 export function setPermissions (status) {
   return (dispatch) => {
-    AsyncStorage.setItem('notificationsPermissions', JSON.stringify(status))
-    return dispatch(receiveNotificationsPermissions(status))
+    const allowed = status === 1
+    AsyncStorage.setItem('notificationsPermissions', stringify(allowed))
+    return dispatch(receiveNotificationsPermissions(allowed))
   }
 }
 
@@ -32,13 +36,13 @@ export function checkPermissions () {
   return (dispatch) => {
     OneSignal.checkPermissions((permissions) => {
       let allowed = permissions.alert || permissions.badge || permissions.sound
-      if (allowed) return this.handleTags()
+      if (allowed) return this.initTags()
       dispatch(setPermissions(false))
     })
   }
 }
 
-export function handleTags () {
+export function initTags () {
   return (dispatch, getState) => {
     const tenant = getState().TenantReducer.current.id
 
@@ -48,36 +52,36 @@ export function handleTags () {
     }
     tags[tenant] = 'true'
     OneSignal.sendTags(tags)
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(tags), (error) => {
+    AsyncStorage.setItem(notificationsStatus, stringify(tags), (error) => {
       if (error) return captureError(error)
       return dispatch(receiveNotificationsStatus(tags))
     })
   }
 }
 
-export function getNotificationsStatus () {
+export function getStatus () {
   return (dispatch, getState) => {
     dispatch(requestNotificationsStatus())
-    AsyncStorage.getItem('notificationsStatus', (error, data) => {
+    AsyncStorage.getItem(notificationsStatus, (error, data) => {
       if (error) return captureError(error)
-      if (_isNil(data)) return dispatch(handleTags())
-      return dispatch(receiveNotificationsStatus(JSON.parse(data)))
+      if (_isNil(data)) return dispatch(initTags())
+      return dispatch(receiveNotificationsStatus(parse(data)))
     })
   }
 }
 
 export function setTenantNotificationStatus (tenant, tenantStatus) {
   return (dispatch, getState) => {
-    let notificationsStatus = getState().NotificationsReducer.status
-    let tenantStatusStringified = JSON.stringify(tenantStatus)
-    notificationsStatus = {
-      ...notificationsStatus,
-      [tenant]: tenantStatusStringified
+    let { status } = getState().NotificationsReducer
+    let tenantStatusStringified = stringify(tenantStatus)
+    status = {
+      ...status,
+      [tenant]: tenantStatus
     }
     OneSignal.sendTag(tenant, tenantStatusStringified)
-    AsyncStorage.setItem('notificationsStatus', JSON.stringify(notificationsStatus), (error) => {
+    AsyncStorage.setItem(notificationsStatus, stringify(status), (error) => {
       if (error) return captureError(error)
-      return dispatch(receiveNotificationsStatus(notificationsStatus))
+      return dispatch(receiveNotificationsStatus(status))
     })
   }
 }

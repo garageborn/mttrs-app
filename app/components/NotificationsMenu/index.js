@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import _isEmpty from 'lodash/isEmpty'
+import { parse } from '../../common/utils/Parser'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
 const messages = defineMessages({
@@ -11,7 +12,7 @@ const messages = defineMessages({
   notifications: { id: 'notifications' }
 })
 
-class SettingsModal extends Component {
+class NotificationsMenu extends Component {
   render () {
     const { formatMessage } = this.props.intl
     const notifications = formatMessage(messages.notifications)
@@ -47,7 +48,7 @@ class SettingsModal extends Component {
     let { notificationsStatus } = this.props
     if (_isEmpty(notificationsStatus)) return false
     if (!notificationsStatus[tenantId]) return false
-    return JSON.parse(notificationsStatus[tenantId])
+    return parse(notificationsStatus[tenantId])
   }
 
   thumbTintColor (tenantId) {
@@ -55,7 +56,7 @@ class SettingsModal extends Component {
   }
 }
 
-SettingsModal.propTypes = {
+NotificationsMenu.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
   notificationsStatus: PropTypes.object.isRequired,
   intl: PropTypes.shape({
@@ -63,4 +64,4 @@ SettingsModal.propTypes = {
   }).isRequired
 }
 
-export default injectIntl(SettingsModal)
+export default injectIntl(NotificationsMenu)
