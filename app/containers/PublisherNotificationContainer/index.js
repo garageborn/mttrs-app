@@ -16,7 +16,7 @@ class PublisherNotificationContainer extends Component {
 
   openPublisher (props) {
     const { dispatch, model, data } = props
-    if (data.loading || data.publisher) return
+    if (data.loading || !data.publisher) return
 
     InteractionManager.runAfterInteractions(() => {
       return dispatch(NavigationActions.selectPublisher(data.publisher))
