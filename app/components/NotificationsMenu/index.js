@@ -61,7 +61,7 @@ class NotificationsMenu extends Component {
     let { status, permissions } = this.props
     if (_isEmpty(status)) return false
     if (!status[tenantId]) return false
-    if (!permissions) return false
+    if (Platform.OS === 'ios' && !permissions) return false
     return parse(status[tenantId])
   }
 
