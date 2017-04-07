@@ -11,11 +11,12 @@ class NotificationsMenuContainer extends Component {
   }
 
   render () {
-    const { status } = this.props
+    const { status, permissions } = this.props
     return (
       <NotificationsMenu
         toggleTenantNotification={this.toggleTenantNotification}
-        notificationsStatus={status}
+        permissions={permissions}
+        status={status}
       />
     )
   }

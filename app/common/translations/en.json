@@ -45,5 +45,6 @@
   "today": "Today",
   "webview.openInBrowser": "Open in browser",
   "yesterday": "Yesterday",
-  "notifications": "NOTIFICATIONS"
+  "notifications": "NOTIFICATIONS",
+  "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications"
 }

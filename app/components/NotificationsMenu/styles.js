@@ -10,6 +10,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
+  disclaimerContainer: {
+    marginHorizontal: 20,
+    marginVertical: 10
+  },
+
+  disclaimerText: {
+    fontSize: 12,
+    color: '#FFF'
+  },
+
   title: {
     fontSize: 12,
     color: '#FFF',

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Switch } from 'react-native'
+import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import _isEmpty from 'lodash/isEmpty'
 import { parse } from '../../common/utils/Parser'
@@ -9,7 +9,8 @@ import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from 
 const messages = defineMessages({
   mttrs_br: { id: 'mttrs_br.label' },
   mttrs_us: { id: 'mttrs_us.label' },
-  notifications: { id: 'notifications' }
+  notifications: { id: 'notifications' },
+  enableNotifications: { id: 'enableNotifications' }
 })
 
 class NotificationsMenu extends Component {
@@ -23,6 +24,18 @@ class NotificationsMenu extends Component {
           { this.renderNotificationStatus('mttrs_us') }
           { this.renderNotificationStatus('mttrs_br') }
         </View>
+        { this.renderDisclaimer()}
+      </View>
+    )
+  }
+
+  renderDisclaimer () {
+    const { formatMessage } = this.props.intl
+    if (this.props.permissions) return null
+    // if (Platform.os !== 'ios') return null
+    return (
+      <View style={styles.disclaimerContainer}>
+        <Text style={styles.disclaimerText}>{formatMessage(messages.enableNotifications)}</Text>
       </View>
     )
   }
@@ -45,10 +58,11 @@ class NotificationsMenu extends Component {
   }
 
   isEnabled (tenantId) {
-    let { notificationsStatus } = this.props
-    if (_isEmpty(notificationsStatus)) return false
-    if (!notificationsStatus[tenantId]) return false
-    return parse(notificationsStatus[tenantId])
+    let { status, permissions } = this.props
+    if (_isEmpty(status)) return false
+    if (!status[tenantId]) return false
+    if (!permissions) return false
+    return parse(status[tenantId])
   }
 
   thumbTintColor (tenantId) {
@@ -58,7 +72,8 @@ class NotificationsMenu extends Component {
 
 NotificationsMenu.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
-  notificationsStatus: PropTypes.object.isRequired,
+  status: PropTypes.object.isRequired,
+  permissions: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
