@@ -32,7 +32,7 @@ class NotificationsMenu extends Component {
   renderDisclaimer () {
     const { formatMessage } = this.props.intl
     if (this.props.permissions) return null
-    // if (Platform.os !== 'ios') return null
+    if (Platform.OS !== 'ios') return null
     return (
       <View style={styles.disclaimerContainer}>
         <Text style={styles.disclaimerText}>{formatMessage(messages.enableNotifications)}</Text>
