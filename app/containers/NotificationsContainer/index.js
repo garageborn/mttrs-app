@@ -22,12 +22,10 @@ class NotificationsContainer extends Component {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
     OneSignal.addEventListener('received', (data) => console.log(data))
-    // OneSignal.addEventListener('registered', this.handleRegister)
   }
 
   componentWillUnmount () {
     OneSignal.removeEventListener('opened', this.handleOpen)
-    OneSignal.removeEventListener('registered', this.handleRegister)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -61,8 +59,6 @@ class NotificationsContainer extends Component {
   }
 
   handleNotificationsStatus (nextProps) {
-    if (!_isEmpty(this.props.notificationsStatus)) return
-    if (this.props.tenant === nextProps.tenant) return
     if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
     return this.props.dispatch(NotificationsActions.getStatus())
   }

@@ -36,8 +36,8 @@ export function checkPermissions () {
   return (dispatch) => {
     OneSignal.checkPermissions((permissions) => {
       let allowed = permissions.alert || permissions.badge || permissions.sound
-      if (allowed) return this.initTags()
-      dispatch(setPermissions(false))
+      dispatch(getStatus())
+      dispatch(setPermissions(allowed))
     })
   }
 }
