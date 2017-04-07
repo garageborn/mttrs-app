@@ -44,5 +44,7 @@
   "summary.title": "Editor's summary",
   "today": "Today",
   "webview.openInBrowser": "Open in browser",
-  "yesterday": "Yesterday"
+  "yesterday": "Yesterday",
+  "notifications": "NOTIFICATIONS",
+  "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications"
 }

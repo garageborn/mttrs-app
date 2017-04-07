@@ -1,14 +1,12 @@
 import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _flatten from 'lodash/flatten'
-import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
+import { parse, stringify } from '../common/utils/Parser'
 
 import {
   REQUEST_VISITED_STORIES,
   VISITED_STORIES_RECEIVED,
-  REQUEST_TENANT,
-  TENANT_RECEIVED,
   SHOW_ONBOARDING,
   REQUEST_ONBOARDING
 } from '../constants/ActionTypes'
@@ -30,7 +28,7 @@ export function getVisitedStories () {
     dispatch(requestVisitedStories())
     AsyncStorage.getItem('visitedStories', (error, stories) => {
       if (error) return captureError(error)
-      return dispatch(receiveVisitedStories(JSON.parse(stories) || []))
+      return dispatch(receiveVisitedStories(parse(stories) || []))
     })
   }
 }
@@ -40,7 +38,7 @@ export function addVisitedStory (story) {
     if (isVisitedStory(getState, story)) return
 
     let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    AsyncStorage.setItem('visitedStories', JSON.stringify(stories), (error) => {
+    AsyncStorage.setItem('visitedStories', stringify(stories), (error) => {
       if (error) return captureError(error)
       return dispatch(receiveVisitedStories(stories))
     })
@@ -63,36 +61,6 @@ function isVisitedStory (getState, story) {
   return visitedStories(getState).items.indexOf(story.id) !== -1
 }
 
-export const requestTenant = () => ({
-  type: REQUEST_TENANT
-})
-
-export const receiveTenant = (tenant) => ({
-  type: TENANT_RECEIVED,
-  tenant
-})
-
-export function setCurrentTenant (tenant) {
-  return (dispatch) => {
-    Tenant.current = tenant
-    AsyncStorage.setItem('tenant', tenant, (error) => {
-      if (error) return captureError(error)
-      return dispatch(receiveTenant(tenant))
-    })
-  }
-}
-
-export function getCurrentTenant (locale) {
-  let localeTenant = 'mttrs_us'
-  if (locale === 'pt-BR') localeTenant = 'mttrs_br'
-  return (dispatch) => {
-    dispatch(requestTenant())
-    AsyncStorage.getItem('tenant', (error, tenant) => {
-      dispatch(this.setCurrentTenant(tenant || localeTenant))
-    })
-  }
-}
-
 export const requestOnboarding = () => ({
   type: REQUEST_ONBOARDING
 })
@@ -106,7 +74,7 @@ export function closeOnboarding () {
   return dispatch => {
     dispatch(this.showOnboarding(false))
     try {
-      AsyncStorage.setItem('showOnboarding', JSON.stringify(false))
+      AsyncStorage.setItem('showOnboarding', stringify(false))
     } catch (error) {
       captureError(error)
     }

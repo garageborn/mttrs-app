@@ -30,7 +30,7 @@ class TimelineScene extends Component {
   }
 
   componentDidMount () {
-    return AppState.addEventListener('change', this.handleAppStateChange)
+    AppState.addEventListener('change', this.handleAppStateChange)
   }
 
   componentWillUnmount () {

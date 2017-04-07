@@ -44,5 +44,7 @@
   "summary.title": "Resumo do editor",
   "today": "Hoje",
   "webview.openInBrowser": "Abrir no navegador",
-  "yesterday": "Ontem"
+  "yesterday": "Ontem",
+  "notifications": "NOTIFICAÇÕES",
+  "enableNotifications": "Aparentemente você desabilitou as notificações para o mttrs, para habilitá-las, por favor, entre em Ajustes > Notificações > mttrs > Permitir Notificações"
 }

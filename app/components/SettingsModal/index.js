@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { Modal, View, Text, Image, ScrollView } from 'react-native'
-import Touchable from './../Touchable'
+import { Modal, View, Text, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import { capitalize } from '../../common/utils/formatText'
+import NotificationsMenuContainer from '../../containers/NotificationsMenuContainer'
+import Touchable from './../Touchable'
 import CloseButton from './../CloseButton'
 import styles from './styles'
 
@@ -64,10 +65,11 @@ class SettingsModal extends Component {
       <View style={styles.options}>
         <View style={styles.options}>
           <Text style={styles.optionsSubTitle}>{subTitle.toUpperCase()}</Text>
-          <ScrollView style={styles.optionsList}>
+          <View style={styles.optionsList}>
             { this.renderButton('mttrs_us') }
             { this.renderButton('mttrs_br') }
-          </ScrollView>
+          </View>
+          <NotificationsMenuContainer />
         </View>
         <View style={styles.modalFooter}>
           <Touchable>
@@ -83,8 +85,7 @@ SettingsModal.propTypes = {
   changeTenant: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired,
   tenant: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    isFetching: PropTypes.bool.isRequired
+    id: PropTypes.string.isRequired
   }).isRequired,
   animationType: PropTypes.string.isRequired,
   intl: PropTypes.shape({

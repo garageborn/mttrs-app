@@ -1,24 +1,26 @@
 import React, { Component, PropTypes } from 'react'
-import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsModal from '../../components/SettingsModal'
-import apolloClient from '../../config/apolloClient'
-import { MenuActions, NavigationActions, StorageActions } from '../../actions/index'
+import { TenantActions, NotificationsActions } from '../../actions/index'
 
 class SettingsModalContainer extends Component {
   constructor (props) {
     super(props)
     this.changeTenant = this.changeTenant.bind(this)
+    this.toggleTenantNotification = this.toggleTenantNotification.bind(this)
   }
 
   render () {
-    const { close, tenant, visible } = this.props
+    const { close, tenant, visible, notificationsStatus, notificationsPermissions } = this.props
     return (
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
+        toggleTenantNotification={this.toggleTenantNotification}
         tenant={tenant}
         visible={visible}
+        notificationsStatus={notificationsStatus}
+        notificationsPermissions={notificationsPermissions}
       />
     )
   }
@@ -28,13 +30,12 @@ class SettingsModalContainer extends Component {
     if (tenant.id === tenantId) return close()
 
     close()
-    dispatch(MenuActions.closeMenu())
 
-    InteractionManager.runAfterInteractions(() => {
-      dispatch(StorageActions.setCurrentTenant(tenantId))
-      apolloClient.resetStore()
-      dispatch(NavigationActions.home())
-    })
+    dispatch(TenantActions.setCurrent(tenantId))
+  }
+
+  toggleTenantNotification (tenant, status) {
+    return this.props.dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
   }
 }
 
@@ -44,12 +45,15 @@ SettingsModalContainer.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
-  visible: PropTypes.bool.isRequired
+  notificationsStatus: PropTypes.object.isRequired,
+  notificationsPermissions: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.StorageReducer.tenant
+    tenant: state.TenantReducer.current,
+    notificationsStatus: state.NotificationsReducer.status,
+    notificationsPermissions: state.NotificationsReducer.permissions
   }
 }
 

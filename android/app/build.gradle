@@ -108,11 +108,13 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 140
+        versionCode 150
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "bb1d8cac-7fb9-46c6-ada6-1113f667fa4f",
+                                onesignal_google_project_number: "830416380616"]
     }
     signingConfigs {
       release {
@@ -153,6 +155,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')
     compile project(':react-native-share')

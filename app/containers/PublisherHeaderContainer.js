@@ -36,6 +36,8 @@ class PublisherHeaderContainer extends Component {
 
 PublisherHeaderContainer.propTypes = {
   publisher: PropTypes.shape({
+    display_name: PropTypes.string,
+    icon_id: PropTypes.string,
     name: PropTypes.string.isRequired
   }).isRequired,
   toggleMenu: PropTypes.func.isRequired,
