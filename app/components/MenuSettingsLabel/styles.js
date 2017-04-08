@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   settingsTitle: {
     fontSize: Platform.select({
       ios: 12,
-      android: 8
+      android: 10
     }),
     bottom: 1,
     color: '#F1F1F1'
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   tenant: {
     fontSize: Platform.select({
       ios: 12,
-      android: 8
+      android: 10
     }),
     marginLeft: 16,
     color: '#F1F1F1'
