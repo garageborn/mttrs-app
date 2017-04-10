@@ -7,8 +7,6 @@ module Fastlane
 
           platform = params[:platform]
 
-          p '------------------------foooooooooooooooooooooo'
-
           "#{ platform }_#{ version_number(platform) }_#{ build_number(platform) }"
         end
 
