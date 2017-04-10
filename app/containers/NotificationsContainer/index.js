@@ -21,7 +21,6 @@ class NotificationsContainer extends Component {
   componentWillMount () {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
-    OneSignal.addEventListener('received', (data) => console.log(data))
   }
 
   componentWillUnmount () {
@@ -70,10 +69,6 @@ class NotificationsContainer extends Component {
     this.setTenant(tenant)
     dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
     return this.setState({ opened: true, model, type })
-  }
-
-  handleRegister () {
-    console.log('registered')
   }
 
   handlePermissions (nextProps) {
