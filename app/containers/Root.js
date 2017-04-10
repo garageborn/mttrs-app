@@ -3,7 +3,7 @@ import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import { NavigationContext } from '@exponent/ex-navigation'
 import EventsContainer from './EventsContainer'
-import TenantContainer from './TenantContainer'
+import NavigationContainer from './NavigationContainer'
 import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
 import Router from '../config/Router'
@@ -23,7 +23,7 @@ class Root extends Component {
       <ApolloProvider store={store} client={apolloClient}>
         <IntlProvider>
           <EventsContainer>
-            <TenantContainer navigationContext={navigationContext} />
+            <NavigationContainer navigationContext={navigationContext} />
           </EventsContainer>
         </IntlProvider>
       </ApolloProvider>
