@@ -4,8 +4,9 @@ import Share from 'react-native-share'
 import url from 'url'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
-import Tenant from '../common/utils/Tenant'
 import { NavigationActions } from '../actions/index'
+import captureError from '../common/utils/captureError'
+import { AnalyticsActions } from '../actions/index'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -15,7 +16,7 @@ class LinkHeaderContainer extends Component {
   }
 
   share () {
-    const { link } = this.props
+    const { dispatch, link } = this.props
 
     let shareOptions = {
       title: link.title,
@@ -24,7 +25,11 @@ class LinkHeaderContainer extends Component {
       url: this.shareUrl
     }
 
-    return Share.open(shareOptions)
+    return Share.open(shareOptions).then((info) => {
+      dispatch(AnalyticsActions.trackEvent('link', 'share', { slug: link.slug }))
+    }).catch((error) => {
+      captureError(error)
+    });
   }
 
   close () {
