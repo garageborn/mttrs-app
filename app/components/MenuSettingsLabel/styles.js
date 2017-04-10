@@ -2,11 +2,11 @@ import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
 const settingsHeight = Platform.select({
   ios: 50,
-  android: 70
+  android: 30
 })
 const settingsBottom = Platform.select({
   ios: 10,
-  android: 20
+  android: 32
 })
 export const height = settingsHeight + settingsBottom
 
@@ -27,24 +27,39 @@ const styles = StyleSheet.create({
   },
 
   image: {
+    ...Platform.select({
+      android: {
+        width: 15,
+        height: 15
+      }
+    }),
     marginHorizontal: 10
   },
 
   settingsTitle: {
-    fontSize: 12,
+    fontSize: Platform.select({
+      ios: 12,
+      android: 10
+    }),
     bottom: 1,
     color: '#F1F1F1'
   },
 
   tenant: {
-    fontSize: 12,
+    fontSize: Platform.select({
+      ios: 12,
+      android: 10
+    }),
     marginLeft: 16,
     color: '#F1F1F1'
   },
 
   touchContainer: {
     ...centerXY,
-    padding: 10
+    padding: Platform.select({
+      ios: 10,
+      android: 5
+    })
   }
 })
 
