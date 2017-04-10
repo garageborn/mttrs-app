@@ -19,13 +19,15 @@ const messages = defineMessages({
 class CategoriesTimeline extends Component {
   constructor (props) {
     super(props)
+
     this.renderScene = this.renderScene.bind(this)
     this.handleChangeTab = this.handleChangeTab.bind(this)
+
     this.state = {
       navigationState: {
         index: 0,
         routes: [this.homeRoute]
-      }
+      },
     }
   }
 
@@ -35,9 +37,11 @@ class CategoriesTimeline extends Component {
     }
   }
 
-  shouldComponentUpdate (nextProps) {
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.activeTag !== nextState.activeTag) return true
     if (this.props.data.loading !== nextProps.data.loading) return true
     if (!_isEqual(this.props.params !== nextProps.params)) return true
+    if (this.props.hasTags !== nextProps.hasTags) return true
     return !_isEqual(this.props.data.categories, nextProps.data.categories)
   }
 
@@ -88,7 +92,6 @@ class CategoriesTimeline extends Component {
 
     const willBeHome = index === 0
     const nextRoute = this.state.navigationState.routes[index]
-
     if (willBeHome) {
       this.props.dispatch(NavigationActions.home())
     } else {
@@ -103,7 +106,7 @@ class CategoriesTimeline extends Component {
     if (sceneProps.route.type === 'home') {
       return <HomeTimeline {...props} />
     } else {
-      return <CategoryTimeline {...props} />
+      return <CategoryTimeline {...props} activeTag={this.props.activeTag} />
     }
   }
 
@@ -116,12 +119,17 @@ class CategoriesTimeline extends Component {
     return <ApolloError data={this.props.data} />
   }
 
+  get listViewStyles () {
+    let containerStyles = styles.listViewContainer
+    if (this.props.hasTags) containerStyles = [styles.listViewContainer, styles.listViewActive]
+    return containerStyles
+  }
+
   render () {
     if (this.props.data.error) return this.renderError()
-
     return (
       <TabViewAnimated
-        style={styles.listViewContainer}
+        style={this.listViewStyles}
         navigationState={this.state.navigationState}
         renderScene={this.renderScene}
         onRequestChangeTab={this.handleChangeTab}
@@ -143,6 +151,8 @@ CategoriesTimeline.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   params: PropTypes.object.isRequired,
+  activeTag: PropTypes.string.isRequired,
+  hasTags: PropTypes.any.isRequired
 }
 
 const IntlCategoriesTimeline = injectIntl(CategoriesTimeline)

@@ -3,12 +3,13 @@ import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
-import CategoriesTimeline from '../../containers/CategoriesTimeline'
+import CategoriesTimelineContainer from '../../containers/CategoriesTimelineContainer'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import MenuPanelContainer from '../../containers/MenuPanelContainer'
 import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
+import styles from '../../styles/App'
 import { DARK_COLOR } from '../../constants/Colors'
 
 class TimelineScene extends Component {
@@ -44,7 +45,7 @@ class TimelineScene extends Component {
 
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         <AnalyticsContainer screen={this.analyticsScreen} />
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
@@ -57,7 +58,7 @@ class TimelineScene extends Component {
     if (this.isPublisherSection) {
       return <PublisherTimeline model={this.currentSection.model} />
     } else if (this.isCategoriesSection) {
-      return <CategoriesTimeline params={this.props.route.params} />
+      return <CategoriesTimelineContainer params={this.props.route.params} />
     }
   }
 

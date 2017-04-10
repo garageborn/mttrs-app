@@ -18,9 +18,10 @@ const styles = StyleSheet.create({
   container: {
     ...Platform.select({
       ios: {
+        top: 15,
         bottom: 0,
         paddingBottom: 0,
-        paddingTop: 20
+        // paddingTop: 20
       },
       android: {
         top: 0,

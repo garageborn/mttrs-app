@@ -28,18 +28,13 @@ class CategoryTimeline extends Component {
 }
 
 CategoryTimeline.propTypes = {
-  data: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  model: PropTypes.any,
-  isActiveRoute: PropTypes.bool,
-  uiReducer: PropTypes.object.isRequired
+  data: PropTypes.object
 }
 
 const mapStateToProps = (state, ownProps) => {
   const currentRoute = ownProps.navigator.getCurrentRoute()
   return {
-    isActiveRoute: currentRoute.routeName === 'timeline',
-    uiReducer: state.uiReducer
+    isActiveRoute: currentRoute.routeName === 'timeline'
   }
 }
 
