@@ -6,8 +6,8 @@ module Fastlane
           UI.message 'Persist Next Release'
 
           new_content = File.read(build_file_path).tap do |build_file|
-            build_file[version_name_matcher, 1] = next_version_name
-            build_file[version_code_matcher, 1] = next_version_code
+            build_file[version_name_matcher, 1] = next_version_name.to_s
+            build_file[version_code_matcher, 1] = next_version_code.to_s
             build_file
           end
 
@@ -44,7 +44,7 @@ module Fastlane
         end
 
         def current_release
-          current_release = GetAndroidReleaseAction.run
+          GetAndroidReleaseAction.run
         end
       end
     end
