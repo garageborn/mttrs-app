@@ -20,12 +20,7 @@ class OnboardingContainer extends Component {
     if (onboarding.isFetching || !onboarding.show) return null
 
     return (
-      <Modal
-        animationType={'slide'}
-        transparent
-        visible
-        onRequestClose={this.onOnboardingEnd}
-      >
+      <Modal animationType={'slide'} transparent visible onRequestClose={this.onOnboardingEnd}>
         <Onboarding onEnd={this.onOnboardingEnd} />
       </Modal>
     )
