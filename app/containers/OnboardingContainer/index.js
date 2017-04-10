@@ -45,7 +45,7 @@ OnboardingContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  onboarding: state.StorageReducer.onboarding
+  onboarding: state.StorageReducer.onboarding,
   tenant: state.TenantReducer
 })
 
