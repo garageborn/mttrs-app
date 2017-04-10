@@ -57,6 +57,7 @@ class NotificationsContainer extends Component {
   }
 
   handleNotificationsStatus (nextProps) {
+    if (!nextProps.tenant.isLoaded) return
     if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
     return this.props.dispatch(NotificationsActions.getStatus())
   }
@@ -71,6 +72,7 @@ class NotificationsContainer extends Component {
   }
 
   handlePermissions (nextProps) {
+    if (!nextProps.tenant.isLoaded) return
     if (nextProps.visitedStories.items.length > 3) return
     if (nextProps.visitedStories.items.length === this.props.visitedStories.items.length) return
     if (this.props.visitedStories.items.length < 3) return
