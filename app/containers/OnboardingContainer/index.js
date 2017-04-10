@@ -16,7 +16,7 @@ class OnboardingContainer extends Component {
 
   render () {
     const { tenant, onboarding } = this.props
-    if (tenant.isLoading) return null
+    if (!tenant.isLoaded) return null
     if (onboarding.isFetching || !onboarding.show) return null
 
     return (
