@@ -14,7 +14,6 @@ class NotificationsContainer extends Component {
   constructor () {
     super()
     this.handleOpen = this.handleOpen.bind(this)
-    this.handleRegister = this.handleRegister.bind(this)
     this.state = { opened: false, model: {} }
   }
 
