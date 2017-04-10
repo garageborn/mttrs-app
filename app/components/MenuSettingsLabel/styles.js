@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
 
   touchContainer: {
     ...centerXY,
-    flexDirection: 'row',
     padding: Platform.select({
       ios: 10,
       android: 5
