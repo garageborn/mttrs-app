@@ -19,6 +19,7 @@ const centerXY = {
 const styles = StyleSheet.create({
   settings: {
     ...centerXY,
+    flexWrap: 'wrap',
     height: settingsHeight,
     width,
     position: 'absolute',
@@ -29,29 +30,26 @@ const styles = StyleSheet.create({
   image: {
     ...Platform.select({
       android: {
-        width: 15,
-        height: 15
+        width: 18,
+        height: 18
       }
     }),
     marginHorizontal: 10
   },
 
   settingsTitle: {
-    fontSize: Platform.select({
-      ios: 12,
-      android: 10
-    }),
+    fontSize: 12,
     bottom: 1,
-    color: '#F1F1F1'
+    color: '#F1F1F1',
+    width: 100,
+    textAlign: 'left'
   },
 
   tenant: {
-    fontSize: Platform.select({
-      ios: 12,
-      android: 10
-    }),
-    marginLeft: 16,
-    color: '#F1F1F1'
+    fontSize: 12,
+    color: '#F1F1F1',
+    width: 100,
+    textAlign: 'right'
   },
 
   touchContainer: {
