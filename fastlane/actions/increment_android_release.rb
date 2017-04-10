@@ -29,6 +29,7 @@ module Fastlane
 
         def next_version_name
           version_name = GetAndroidReleaseAction.run[:version_name]
+          version = version_name.split('.').map(&:to_i)
           version[version.size - 1] += 1
           version.join('.')
         end
