@@ -19,7 +19,9 @@ class PublisherTimeline extends Component {
 PublisherTimeline.propTypes = {
   data: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  model: PropTypes.object.isRequired
+  model: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state, ownProps) => {

@@ -1,11 +1,12 @@
-import React, {Component, Children, PropTypes} from 'react'
+import React, { Component, Children, PropTypes } from 'react'
 import { AppState, View } from 'react-native'
 import { connect } from 'react-redux'
 import { AnalyticsActions } from '../actions/index'
 
 class AnalyticsProvider extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
     this.trackScreen = this.trackScreen.bind(this)
     this.trackEvent = this.trackEvent.bind(this)
   }
@@ -61,26 +62,15 @@ class AnalyticsProvider extends Component {
   }
 }
 
-export function injectAnalytics (WrappedComponent) {
-  class InjectAnalytics extends Component {
-    render () {
-      return (
-        <WrappedComponent
-          {...this.props}
-          {...{analytics: this.context.analytics}}
-        />
-      )
-    }
-  }
-
-  InjectAnalytics.contextTypes = {
+export function withAnalytics (WrappedComponent) {
+  WrappedComponent.contextTypes = {
     analytics: PropTypes.shape({
       trackScreen: PropTypes.func.isRequired,
       trackEvent: PropTypes.func.isRequired
     })
   }
 
-  return InjectAnalytics
+  return WrappedComponent
 }
 
 AnalyticsProvider.childContextTypes = {

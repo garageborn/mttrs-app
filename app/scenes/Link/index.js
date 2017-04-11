@@ -1,14 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
-import _result from 'lodash/result'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
 import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
-import { injectAnalytics } from '../../config/AnalyticsProvider'
 
 class LinkScene extends Component {
   static route = Platform.select({
@@ -36,7 +34,6 @@ class LinkScene extends Component {
   }
 
   componentDidMount () {
-    this.props.analytics.trackScreen(this.analyticsScreen)
     AppState.addEventListener('change', this.handleAppStateChange)
     InteractionManager.runAfterInteractions(this.addStoryToLocalStorage)
   }
@@ -77,18 +74,9 @@ class LinkScene extends Component {
       </View>
     )
   }
-
-  get analyticsScreen () {
-    let slug = _result(this.props, 'route.params.link.slug')
-    if (!slug) return
-    return `/link/${ slug }`
-  }
 }
 
 LinkScene.propTypes = {
-  analytics: PropTypes.shape({
-    trackScreen: PropTypes.func.isRequired
-  }).isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
       link: PropTypes.shape({
@@ -104,6 +92,5 @@ LinkScene.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-const LinkSceneWithAnalytics = injectAnalytics(LinkScene)
-const LinkSceneWithRedux = connect()(LinkSceneWithAnalytics)
+const LinkSceneWithRedux = connect()(LinkScene)
 export default withQuery(LinkSceneWithRedux)

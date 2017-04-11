@@ -9,14 +9,11 @@ import MenuPanelContainer from '../../containers/MenuPanelContainer'
 import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
-import { injectAnalytics } from '../../config/AnalyticsProvider'
 
 class TimelineScene extends Component {
   static route = {
     navigationBar: {
-      renderTitle: (route) => {
-        return <TimelineHeaderContainer params={route.params} />
-      },
+      renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
       renderLeft: () => null,
       renderRight: () => null,
       backgroundColor: DARK_COLOR,
@@ -30,7 +27,6 @@ class TimelineScene extends Component {
   }
 
   componentDidMount () {
-    this.props.analytics.trackScreen(this.analyticsScreen)
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 
@@ -85,20 +81,12 @@ class TimelineScene extends Component {
   get isPublisherSection () {
     return this.currentSection.name === 'publisher'
   }
-
-  get analyticsScreen () {
-    if (!this.currentSection.name || this.currentSection.name === 'home') return '/home'
-    return `/${this.currentSection.model.slug}`
-  }
 }
 
 TimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired,
   section: PropTypes.object,
-  analytics: PropTypes.shape({
-    trackScreen: PropTypes.func.isRequired
-  }).isRequired
 }
 
 const mapStateToProps = state => {
@@ -107,5 +95,4 @@ const mapStateToProps = state => {
   }
 }
 
-const TimelineSceneWithAnalytics = injectAnalytics(TimelineScene)
-export default connect(mapStateToProps)(TimelineSceneWithAnalytics)
+export default connect(mapStateToProps)(TimelineScene)
