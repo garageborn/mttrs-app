@@ -23,7 +23,7 @@ class TagsList extends Component {
     const text = intl.formatMessage(messages.default)
 
     return (
-      <ScrollView horizontal shadowOffset={{width: 0, height: 2}} shadowColor={'rgba(0, 0, 0, 1)'} shadowOpacity={0.5} style={styles.container}>
+      <ScrollView horizontal style={this.containerStyles}>
         <Tag active={this.isActive('')} onPress={() => handleTag('')}>
           {text}
         </Tag>
@@ -46,6 +46,12 @@ class TagsList extends Component {
   isActive (slug) {
     return slug === this.props.active
   }
+
+  get containerStyles () {
+    let containerStyles = styles.container
+    if (this.props.menuOpen) containerStyles = [styles.container, styles.containerActive]
+    return containerStyles
+  }
 }
 
 TagsList.propTypes = {
@@ -54,7 +60,8 @@ TagsList.propTypes = {
   active: PropTypes.string.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  menuOpen: PropTypes.bool.isRequired
 }
 
 export default injectIntl(TagsList)

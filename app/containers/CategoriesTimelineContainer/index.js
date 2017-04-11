@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 import CategoriesSwiper from '../CategoriesSwiper'
 import TagsListContainer from '../TagsListContainer'
+import { AnalyticsActions } from '../../actions/index'
 
 class CategoriesTimelineContainer extends Component {
   constructor () {
@@ -47,6 +49,7 @@ class CategoriesTimelineContainer extends Component {
         active={this.state.activeTag}
         handleTag={this.handleTag}
         handleTagCount={this.handleTagCount}
+        menuOpen={this.props.menuOpen}
       />
     )
   }
@@ -58,6 +61,7 @@ class CategoriesTimelineContainer extends Component {
   }
 
   handleTag (tag) {
+    this.props.dispatch(AnalyticsActions.trackScreen(`/${tag}`))
     this.setState({
       activeTag: tag
     })
@@ -65,7 +69,15 @@ class CategoriesTimelineContainer extends Component {
 }
 
 CategoriesTimelineContainer.propTypes = {
-  params: PropTypes.object
+  params: PropTypes.object,
+  dispatch: PropTypes.func.isRequired,
+  menuOpen: PropTypes.bool.menuOpen
 }
 
-export default CategoriesTimelineContainer
+const mapStateToProps = state => {
+  return {
+    menuOpen: state.uiReducer.menu.isOpen
+  }
+}
+
+export default connect(mapStateToProps)(CategoriesTimelineContainer)

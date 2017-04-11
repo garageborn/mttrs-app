@@ -6,15 +6,18 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width,
     backgroundColor: '#F1F1F1',
-    elevation: 2,
     marginTop: Platform.select({
       ios: 20,
       android: 0
     }),
+    elevation: 2,
     padding: 10,
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: 'rgba(0,0,0,0.2)'
+  },
+  containerActive: {
+    elevation: 0
   }
 })
 

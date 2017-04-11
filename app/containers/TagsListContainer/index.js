@@ -8,9 +8,16 @@ class TagsListContainer extends Component {
   }
 
   render () {
-    const { data, active, handleTag } = this.props
+    const { data, active, handleTag, menuOpen } = this.props
     if (data.loading || !data.tags) return null
-    return <TagsList active={active} handleTag={handleTag} tags={data.tags} />
+    return (
+      <TagsList
+        active={active}
+        handleTag={handleTag}
+        tags={data.tags}
+        menuOpen={menuOpen}
+      />
+    )
   }
 
   handleTags (nextProps) {
@@ -27,7 +34,8 @@ TagsListContainer.propTypes = {
   }),
   handleTag: PropTypes.func.isRequired,
   handleTagCount: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired
+  active: PropTypes.string.isRequired,
+  menuOpen: PropTypes.bool.isRequired
 }
 
 export default withQuery(TagsListContainer)
