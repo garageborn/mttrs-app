@@ -27,7 +27,7 @@ class CategoriesTimeline extends Component {
       navigationState: {
         index: 0,
         routes: [this.homeRoute]
-      },
+      }
     }
   }
 

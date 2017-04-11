@@ -20,8 +20,7 @@ const styles = StyleSheet.create({
       ios: {
         top: 15,
         bottom: 0,
-        paddingBottom: 0,
-        // paddingTop: 20
+        paddingBottom: 0
       },
       android: {
         top: 0,
