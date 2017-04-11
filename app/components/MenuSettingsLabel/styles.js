@@ -1,13 +1,16 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
+
 const settingsHeight = Platform.select({
   ios: 50,
-  android: 30
+  android: 35
 })
+
 const settingsBottom = Platform.select({
   ios: 10,
-  android: 32
+  android: 30
 })
+
 export const height = settingsHeight + settingsBottom
 
 const centerXY = {
