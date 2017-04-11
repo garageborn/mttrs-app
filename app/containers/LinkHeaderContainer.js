@@ -6,7 +6,7 @@ import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { NavigationActions } from '../actions/index'
 import captureError from '../common/utils/captureError'
-import { AnalyticsActions } from '../actions/index'
+import { withAnalytics } from '../config/AnalyticsProvider'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -16,7 +16,7 @@ class LinkHeaderContainer extends Component {
   }
 
   share () {
-    const { dispatch, link } = this.props
+    const { link } = this.props
 
     let shareOptions = {
       title: link.title,
@@ -26,7 +26,7 @@ class LinkHeaderContainer extends Component {
     }
 
     return Share.open(shareOptions).then((info) => {
-      dispatch(AnalyticsActions.trackEvent('link', 'share', { slug: link.slug }))
+      this.context.analytics.trackEvent('link', 'share', { slug: link.slug })
     }).catch((error) => {
       captureError(error)
     });
@@ -88,4 +88,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(LinkHeaderContainer)
+const LinkHeaderWithAnalytics = withAnalytics(LinkHeaderContainer)
+export default connect(mapStateToProps)(LinkHeaderWithAnalytics)

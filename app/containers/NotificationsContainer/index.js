@@ -8,7 +8,8 @@ import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
 import HomeNotificationContainer from '../HomeNotificationContainer'
-import { AnalyticsActions, NotificationsActions, TenantActions } from '../../actions/index'
+import { NotificationsActions, TenantActions } from '../../actions/index'
+import { withAnalytics } from '../../config/AnalyticsProvider'
 
 class NotificationsContainer extends Component {
   constructor () {
@@ -63,11 +64,10 @@ class NotificationsContainer extends Component {
   }
 
   handleOpen (result) {
-    const { dispatch } = this.props
     let { model, type, tenant } = result.notification.payload.additionalData
 
     this.setTenant(tenant)
-    dispatch(AnalyticsActions.trackEvent('notification', 'open', { type, model }))
+    this.context.analytics.trackEvent('notification', 'open', { type, model })
     return this.setState({ opened: true, model, type })
   }
 
@@ -106,4 +106,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NotificationsContainer)
+const NotificationContainerWithAnalytics = withAnalytics(NotificationsContainer)
+export default connect(mapStateToProps)(NotificationContainerWithAnalytics)
