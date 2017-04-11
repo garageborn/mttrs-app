@@ -1,13 +1,16 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 const { width } = Dimensions.get('window')
+
 const settingsHeight = Platform.select({
   ios: 50,
-  android: 30
+  android: 35
 })
+
 const settingsBottom = Platform.select({
   ios: 10,
-  android: 32
+  android: 30
 })
+
 export const height = settingsHeight + settingsBottom
 
 const centerXY = {
@@ -40,16 +43,12 @@ const styles = StyleSheet.create({
   settingsTitle: {
     fontSize: 12,
     bottom: 1,
-    color: '#F1F1F1',
-    width: 100,
-    textAlign: 'left'
+    color: '#F1F1F1'
   },
 
   tenant: {
     fontSize: 12,
-    color: '#F1F1F1',
-    width: 100,
-    textAlign: 'right'
+    color: '#F1F1F1'
   },
 
   touchContainer: {
