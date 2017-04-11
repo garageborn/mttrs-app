@@ -24,7 +24,7 @@ class TagsList extends Component {
 
     return (
       <ScrollView horizontal style={this.containerStyles}>
-        <Tag active={this.isActive('')} onPress={() => handleTag('')}>
+        <Tag active={this.isActive()} onPress={() => handleTag()}>
           {text}
         </Tag>
         {this.renderTags()}
@@ -44,7 +44,7 @@ class TagsList extends Component {
   }
 
   isActive (slug) {
-    return slug === this.props.active
+    return slug == this.props.active
   }
 
   get containerStyles () {
@@ -57,7 +57,7 @@ class TagsList extends Component {
 TagsList.propTypes = {
   handleTag: PropTypes.func.isRequired,
   tags: PropTypes.array.isRequired,
-  active: PropTypes.string.isRequired,
+  active: PropTypes.string,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,

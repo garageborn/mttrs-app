@@ -13,7 +13,7 @@ class CategoriesTimelineContainer extends Component {
     this.handleTagCount = this.handleTagCount.bind(this)
 
     this.state = {
-      activeTag: '',
+      activeTag: null,
       hasTags: false
     }
   }
@@ -37,7 +37,7 @@ class CategoriesTimelineContainer extends Component {
 
   handleActiveTag (nextProps) {
     if (this.props.params.section === nextProps.params.section) return
-    this.setState({ activeTag: '' })
+    this.setState({ activeTag: null })
   }
 
   renderTags () {

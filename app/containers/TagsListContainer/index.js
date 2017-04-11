@@ -9,7 +9,7 @@ class TagsListContainer extends Component {
 
   render () {
     const { data, active, handleTag, menuOpen } = this.props
-    if (data.loading || !data.tags) return null
+    if (data.loading || !data.tags || !data.tags.length) return null
     return (
       <TagsList
         active={active}
@@ -34,7 +34,7 @@ TagsListContainer.propTypes = {
   }),
   handleTag: PropTypes.func.isRequired,
   handleTagCount: PropTypes.func.isRequired,
-  active: PropTypes.string.isRequired,
+  active: PropTypes.string,
   menuOpen: PropTypes.bool.isRequired
 }
 

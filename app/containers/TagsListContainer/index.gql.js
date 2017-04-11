@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
 const Query = gql`
-  query($categorySlug:String!) {
+  query($categorySlug: String!) {
     tags(with_stories: true, category_slug:$categorySlug) {
       name
       slug

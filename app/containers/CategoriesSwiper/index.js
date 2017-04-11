@@ -151,7 +151,7 @@ CategoriesTimeline.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   params: PropTypes.object.isRequired,
-  activeTag: PropTypes.string.isRequired,
+  activeTag: PropTypes.string,
   hasTags: PropTypes.any.isRequired
 }
 

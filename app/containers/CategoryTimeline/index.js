@@ -28,7 +28,8 @@ class CategoryTimeline extends Component {
 }
 
 CategoryTimeline.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.object,
+  isActiveRoute: PropTypes.bool
 }
 
 const mapStateToProps = (state, ownProps) => {

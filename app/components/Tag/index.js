@@ -11,7 +11,7 @@ const Tag = ({ onPress, children, active }) => {
     return containerStyles
   }
   return (
-    <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR} >
+    <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
       <View style={getStyle()}>
         <Text style={styles.text}>{children}</Text>
       </View>
@@ -20,7 +20,7 @@ const Tag = ({ onPress, children, active }) => {
 }
 
 Tag.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.any.isRequired,
   onPress: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired
 }
