@@ -71,7 +71,7 @@ class CategoriesTimelineContainer extends Component {
 CategoriesTimelineContainer.propTypes = {
   params: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
-  menuOpen: PropTypes.bool.menuOpen
+  menuOpen: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = state => {
