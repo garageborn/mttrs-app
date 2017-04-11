@@ -1,5 +1,5 @@
 import React, {Component, Children, PropTypes} from 'react'
-import { AppState } from 'react-native'
+import { AppState, View } from 'react-native'
 import { connect } from 'react-redux'
 import { AnalyticsActions } from '../actions/index'
 
