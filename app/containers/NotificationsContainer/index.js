@@ -14,14 +14,12 @@ class NotificationsContainer extends Component {
   constructor () {
     super()
     this.handleOpen = this.handleOpen.bind(this)
-    this.handleRegister = this.handleRegister.bind(this)
     this.state = { opened: false, model: {} }
   }
 
   componentWillMount () {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
-    OneSignal.addEventListener('received', (data) => console.log(data))
   }
 
   componentWillUnmount () {
@@ -59,6 +57,7 @@ class NotificationsContainer extends Component {
   }
 
   handleNotificationsStatus (nextProps) {
+    if (!nextProps.tenant.isLoaded) return
     if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
     return this.props.dispatch(NotificationsActions.getStatus())
   }
@@ -72,11 +71,8 @@ class NotificationsContainer extends Component {
     return this.setState({ opened: true, model, type })
   }
 
-  handleRegister () {
-    console.log('registered')
-  }
-
   handlePermissions (nextProps) {
+    if (!nextProps.tenant.isLoaded) return
     if (nextProps.visitedStories.items.length > 3) return
     if (nextProps.visitedStories.items.length === this.props.visitedStories.items.length) return
     if (this.props.visitedStories.items.length < 3) return
