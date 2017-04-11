@@ -3,7 +3,7 @@ module Fastlane
     class GetAndroidReleaseAction < Action
       BUILD_FILE_PATH = File.expand_path('../../../android/app/build.gradle', __FILE__)
       VERSION_CODE_MATCHER = /versionCode\s+(\d+)/.freeze
-      VERSION_NAME_MATCHER = /versionName\s+"(\d+\.\d+)"/.freeze
+      VERSION_NAME_MATCHER = /versionName\s+"(\d+\.\d+.\d+)"/.freeze
 
       class << self
         def run(_params = {})
@@ -27,7 +27,7 @@ module Fastlane
         end
 
         def build_file
-          @build_file ||= File.read(BUILD_FILE_PATH)
+          File.read(BUILD_FILE_PATH)
         end
       end
     end

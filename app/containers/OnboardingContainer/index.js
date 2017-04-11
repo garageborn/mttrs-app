@@ -15,17 +15,12 @@ class OnboardingContainer extends Component {
   }
 
   render () {
-    const { onboarding } = this.props
-
+    const { tenant, onboarding } = this.props
+    if (!tenant.isLoaded) return null
     if (onboarding.isFetching || !onboarding.show) return null
 
     return (
-      <Modal
-        animationType={'slide'}
-        transparent
-        visible
-        onRequestClose={this.onOnboardingEnd}
-      >
+      <Modal animationType={'slide'} transparent visible onRequestClose={this.onOnboardingEnd}>
         <Onboarding onEnd={this.onOnboardingEnd} />
       </Modal>
     )
@@ -38,11 +33,15 @@ class OnboardingContainer extends Component {
 
 OnboardingContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  onboarding: PropTypes.object.isRequired
+  onboarding: PropTypes.object.isRequired,
+  tenant: PropTypes.shape({
+    isLoaded: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = state => ({
-  onboarding: state.StorageReducer.onboarding
+  onboarding: state.StorageReducer.onboarding,
+  tenant: state.TenantReducer
 })
 
 export default connect(mapStateToProps)(OnboardingContainer)

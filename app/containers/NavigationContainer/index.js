@@ -4,7 +4,7 @@ import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
 import { TenantActions } from '../../actions/index'
 import Router from '../../config/Router'
 
-class TenantContainer extends Component {
+class NavigationContainer extends Component {
   componentWillMount () {
     this.props.dispatch(TenantActions.getCurrent())
   }
@@ -22,7 +22,7 @@ class TenantContainer extends Component {
   }
 }
 
-TenantContainer.propTypes = {
+NavigationContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   navigationContext: PropTypes.object.isRequired,
   tenant: PropTypes.shape({
@@ -34,4 +34,4 @@ const mapStateToProps = state => ({
   tenant: state.TenantReducer
 })
 
-export default connect(mapStateToProps)(TenantContainer)
+export default connect(mapStateToProps)(NavigationContainer)

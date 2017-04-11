@@ -6,6 +6,7 @@ module Fastlane
           UI.message 'Get Release ID'
 
           platform = params[:platform]
+
           "#{ platform }_#{ version_number(platform) }_#{ build_number(platform) }"
         end
 
