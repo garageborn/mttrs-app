@@ -40,16 +40,12 @@ const styles = StyleSheet.create({
   settingsTitle: {
     fontSize: 12,
     bottom: 1,
-    color: '#F1F1F1',
-    width: 100,
-    textAlign: 'left'
+    color: '#F1F1F1'
   },
 
   tenant: {
     fontSize: 12,
-    color: '#F1F1F1',
-    width: 100,
-    textAlign: 'right'
+    color: '#F1F1F1'
   },
 
   touchContainer: {
