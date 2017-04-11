@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
-import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
@@ -14,9 +13,7 @@ import { DARK_COLOR } from '../../constants/Colors'
 class TimelineScene extends Component {
   static route = {
     navigationBar: {
-      renderTitle: (route) => {
-        return <TimelineHeaderContainer params={route.params} />
-      },
+      renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
       renderLeft: () => null,
       renderRight: () => null,
       backgroundColor: DARK_COLOR,
@@ -45,7 +42,6 @@ class TimelineScene extends Component {
   render () {
     return (
       <View>
-        <AnalyticsContainer screen={this.analyticsScreen} />
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryLinks()}
@@ -85,17 +81,12 @@ class TimelineScene extends Component {
   get isPublisherSection () {
     return this.currentSection.name === 'publisher'
   }
-
-  get analyticsScreen () {
-    if (!this.currentSection.name || this.currentSection.name === 'home') return '/home'
-    return `/${this.currentSection.model.slug}`
-  }
 }
 
 TimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired,
-  section: PropTypes.object
+  section: PropTypes.object,
 }
 
 const mapStateToProps = state => {

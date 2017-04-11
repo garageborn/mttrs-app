@@ -22,7 +22,8 @@ export function trackEvent (category, action, optionalValues = {}) {
 
 export function startHeartBeat () {
   return (dispatch) => {
-    dispatch(stopHeartBeat())
+    if (heartBeatInterval) return
+    const trackHeartBeat = () => dispatch(trackEvent('heartbeat', 'beat'))
     heartBeatInterval = setInterval(trackHeartBeat, (heartBeatIntervalSeconds * 1000))
   }
 }
@@ -31,8 +32,4 @@ export function stopHeartBeat () {
   return () => {
     if (heartBeatInterval) clearTimeout(heartBeatInterval)
   }
-}
-
-function trackHeartBeat () {
-  trackEvent('heartbeat', 'beat')
 }
