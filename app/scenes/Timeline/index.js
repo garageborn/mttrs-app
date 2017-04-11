@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, AppState, Platform } from 'react-native'
 import { connect } from 'react-redux'
-import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimeline from '../../containers/CategoriesTimeline'
 import PublisherTimeline from '../../containers/PublisherTimeline'
@@ -10,6 +9,7 @@ import MenuPanelContainer from '../../containers/MenuPanelContainer'
 import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
+import { injectAnalytics } from '../../config/AnalyticsProvider'
 
 class TimelineScene extends Component {
   static route = {
@@ -30,6 +30,7 @@ class TimelineScene extends Component {
   }
 
   componentDidMount () {
+    this.props.analytics.trackScreen(this.analyticsScreen)
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 
@@ -45,7 +46,6 @@ class TimelineScene extends Component {
   render () {
     return (
       <View>
-        <AnalyticsContainer screen={this.analyticsScreen} />
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryLinks()}
@@ -95,7 +95,10 @@ class TimelineScene extends Component {
 TimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired,
-  section: PropTypes.object
+  section: PropTypes.object,
+  analytics: PropTypes.shape({
+    trackScreen: PropTypes.func.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = state => {
@@ -104,4 +107,5 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(TimelineScene)
+const TimelineSceneWithAnalytics = injectAnalytics(TimelineScene)
+export default connect(mapStateToProps)(TimelineSceneWithAnalytics)

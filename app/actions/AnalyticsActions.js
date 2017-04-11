@@ -1,7 +1,7 @@
 import analytics from '../config/Analytics'
 import { InteractionManager } from 'react-native'
 
-const heartBeatIntervalSeconds = 30
+const heartBeatIntervalSeconds = 5
 let heartBeatInterval = null
 
 export function trackScreen (screen) {
@@ -13,16 +13,21 @@ export function trackScreen (screen) {
 }
 
 export function trackEvent (category, action, optionalValues = {}) {
+  console.log('trackEvent', category, action)
   return () => {
+    console.log('trackEvent inside', category, action)
     InteractionManager.runAfterInteractions(() => {
+      console.log('trackEvent after interactions', category, action)
       analytics.trackEvent(category, action, optionalValues)
     })
   }
 }
 
 export function startHeartBeat () {
+  console.log('startHeartBeat')
   return (dispatch) => {
-    dispatch(stopHeartBeat())
+    if (heartBeatInterval) return
+    console.log('create heartBeatInterval')
     heartBeatInterval = setInterval(trackHeartBeat, (heartBeatIntervalSeconds * 1000))
   }
 }
