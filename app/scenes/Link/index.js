@@ -62,13 +62,12 @@ class LinkScene extends Component {
   }
 
   render () {
-    const { url } = this.props.route.params.link
+    const { link } = this.props.route.params
     if (this.state.appState !== 'active') return null
     return (
       <View>
         <StoryWebView
-          url={url}
-          params={this.props.route.params}
+          link={link}
           header={this.renderHeader()}
         />
       </View>
@@ -81,7 +80,8 @@ LinkScene.propTypes = {
     params: PropTypes.shape({
       link: PropTypes.shape({
         slug: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired
+        url: PropTypes.string.isRequired,
+        amp_url: PropTypes.string
       }).isRequired
     }).isRequired
   }).isRequired,
