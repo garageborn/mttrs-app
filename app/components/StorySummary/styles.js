@@ -3,26 +3,6 @@ import { StyleSheet, Platform, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 const headlineOffset = 105
 
-const triangle = {
-  width: 0,
-  height: 0,
-  backgroundColor: 'transparent',
-  borderStyle: 'solid',
-  borderLeftWidth: 7,
-  borderRightWidth: 7,
-  borderLeftColor: 'transparent',
-  borderRightColor: 'transparent'
-}
-
-const expandButtonTriangle = {
-  ...triangle,
-  borderLeftWidth: 5,
-  borderRightWidth: 5,
-  marginTop: 7,
-  marginRight: 3,
-  borderColor: 'black'
-}
-
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10
