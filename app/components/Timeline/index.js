@@ -17,7 +17,7 @@ class Timeline extends Component {
     let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
     let loadingMoreChanged = this.props.loadingMore !== nextProps.loadingMore
     let loadingPullToRefresh = this.props.loadingPullToRefresh !== nextProps.loadingPullToRefresh
-    if (loadingChanged || hasMoreChanged || loadingMoreChanged) return true
+    if (loadingChanged || hasMoreChanged || loadingMoreChanged || loadingPullToRefresh) return true
     return !_isEqual(this.props.data.items, nextProps.data.items)
   }
 
