@@ -14,6 +14,7 @@ const Query = gql`
         main_link {
           title
           url
+          amp_url
           slug
           image_source_url
           publisher { name display_name icon_id slug restrict_content }
