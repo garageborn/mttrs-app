@@ -7,6 +7,7 @@ const Query = gql`
       main_link(publisher_slug: $publisherSlug) {
         title
         url
+        amp_url
         slug
         total_social
         publisher { name display_name slug icon_id restrict_content }
@@ -14,6 +15,7 @@ const Query = gql`
       other_links(publisher_slug: $publisherSlug, popular: true) {
         title
         url
+        amp_url
         slug
         total_social
         publisher { name display_name slug icon_id restrict_content }
