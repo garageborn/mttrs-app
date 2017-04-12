@@ -86,53 +86,6 @@ const styles = StyleSheet.create({
 
   summaryVisited: {
     opacity: 0.5
-  },
-
-  summaryExpanded: {
-    paddingBottom: 20
-  },
-
-  showLessTriangle: {
-    ...expandButtonTriangle,
-    borderBottomWidth: 5
-  },
-
-  showMoreTriangle: {
-    ...expandButtonTriangle,
-    borderTopWidth: 5
-  },
-
-  buttonTextContainer: {
-    flexDirection: 'row',
-    marginVertical: 5,
-    backgroundColor: 'transparent'
-  },
-
-  expandButton: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  expandButtonContainer: {
-    backgroundColor: '#F1F1F1'
-  },
-
-  footer: {
-    position: 'absolute',
-    bottom: -1,
-    left: 0,
-    right: 0,
-    flexGrow: 1
-  },
-
-  expandButtonVisited: {
-    opacity: 0.5
-  },
-
-  gradient: {
-    marginHorizontal: 1,
-    height: 50,
-    backgroundColor: 'transparent'
   }
 })
 
