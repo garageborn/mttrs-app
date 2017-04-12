@@ -3,26 +3,6 @@ import { StyleSheet, Platform, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 const headlineOffset = 105
 
-const triangle = {
-  width: 0,
-  height: 0,
-  backgroundColor: 'transparent',
-  borderStyle: 'solid',
-  borderLeftWidth: 7,
-  borderRightWidth: 7,
-  borderLeftColor: 'transparent',
-  borderRightColor: 'transparent'
-}
-
-const expandButtonTriangle = {
-  ...triangle,
-  borderLeftWidth: 5,
-  borderRightWidth: 5,
-  marginTop: 7,
-  marginRight: 3,
-  borderColor: 'black'
-}
-
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10
@@ -30,7 +10,7 @@ const styles = StyleSheet.create({
 
   box: {
     position: 'relative',
-    marginTop: -2,
+    marginTop: 2,
     padding: 15,
     borderRadius: 3,
     backgroundColor: '#F1F1F1',
@@ -86,53 +66,6 @@ const styles = StyleSheet.create({
 
   summaryVisited: {
     opacity: 0.5
-  },
-
-  summaryExpanded: {
-    paddingBottom: 20
-  },
-
-  showLessTriangle: {
-    ...expandButtonTriangle,
-    borderBottomWidth: 5
-  },
-
-  showMoreTriangle: {
-    ...expandButtonTriangle,
-    borderTopWidth: 5
-  },
-
-  buttonTextContainer: {
-    flexDirection: 'row',
-    marginVertical: 5,
-    backgroundColor: 'transparent'
-  },
-
-  expandButton: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  expandButtonContainer: {
-    backgroundColor: '#F1F1F1'
-  },
-
-  footer: {
-    position: 'absolute',
-    bottom: -1,
-    left: 0,
-    right: 0,
-    flexGrow: 1
-  },
-
-  expandButtonVisited: {
-    opacity: 0.5
-  },
-
-  gradient: {
-    marginHorizontal: 1,
-    height: 50,
-    backgroundColor: 'transparent'
   }
 })
 
