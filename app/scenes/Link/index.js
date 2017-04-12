@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
-import _result from 'lodash/result'
 import withQuery from './index.gql'
-import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
 import { StorageActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
@@ -68,7 +66,6 @@ class LinkScene extends Component {
     if (this.state.appState !== 'active') return null
     return (
       <View>
-        <AnalyticsContainer screen={this.analyticsScreen} />
         <StoryWebView
           url={url}
           params={this.props.route.params}
@@ -76,12 +73,6 @@ class LinkScene extends Component {
         />
       </View>
     )
-  }
-
-  get analyticsScreen () {
-    let slug = _result(this.props, 'route.params.link.slug')
-    if (!slug) return
-    return `/link/${ slug }`
   }
 }
 

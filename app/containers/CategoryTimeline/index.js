@@ -29,6 +29,9 @@ class CategoryTimeline extends Component {
 
 CategoryTimeline.propTypes = {
   data: PropTypes.object,
+  model: PropTypes.shape({
+    slug: PropTypes.string.isRequired
+  }).isRequired,
   isActiveRoute: PropTypes.bool
 }
 
