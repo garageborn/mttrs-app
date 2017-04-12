@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 
   box: {
     position: 'relative',
-    marginTop: -2,
+    marginTop: 2,
     padding: 15,
     borderRadius: 3,
     backgroundColor: '#F1F1F1',
