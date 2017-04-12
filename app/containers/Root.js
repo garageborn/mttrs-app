@@ -22,13 +22,13 @@ class Root extends Component {
 
     return (
       <ApolloProvider store={store} client={apolloClient}>
-        <IntlProvider>
-          <AnalyticsProvider>
+        <AnalyticsProvider>
+          <IntlProvider>
             <EventsContainer>
               <NavigationContainer navigationContext={navigationContext} />
             </EventsContainer>
-          </AnalyticsProvider>
-        </IntlProvider>
+          </IntlProvider>
+        </AnalyticsProvider>
       </ApolloProvider>
     )
   }
