@@ -13,8 +13,8 @@ class StoryWebView extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    const currentUrl = this.props.params.link.url
-    const newUrl = nextProps.params.link.url
+    const currentUrl = this.props.link.url
+    const newUrl = nextProps.link.url
     return currentUrl !== newUrl
   }
 
@@ -34,16 +34,17 @@ class StoryWebView extends Component {
   }
 
   render () {
+    const url = this.props.link.amp_url || this.props.link.url
+
     return (
       <View style={styles.container}>
         {this.props.header}
         <WebView
           contentInset={{top: this.contentInset()}}
           domStorageEnabled
-          mediaPlaybackRequiresUserAction
           ref='webview'
           renderError={this.handleError}
-          source={{uri: this.props.url}}
+          source={{uri: url}}
         />
       </View>
     )
@@ -52,8 +53,10 @@ class StoryWebView extends Component {
 
 StoryWebView.propTypes = {
   header: PropTypes.element,
-  url: PropTypes.string.isRequired,
-  params: PropTypes.object.isRequired
+  link: PropTypes.shape({
+    url: PropTypes.string.isRequired,
+    amp_url: PropTypes.string
+  }).isRequired
 }
 
 export default StoryWebView
