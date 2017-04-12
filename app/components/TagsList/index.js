@@ -23,7 +23,7 @@ class TagsList extends Component {
     const text = intl.formatMessage(messages.default)
 
     return (
-      <ScrollView horizontal style={this.containerStyles}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={this.containerStyles}>
         <Tag active={this.isActive()} onPress={() => handleTag()}>
           {text}
         </Tag>
@@ -36,11 +36,20 @@ class TagsList extends Component {
     const { handleTag, tags } = this.props
     return tags.map((tag, idx) => {
       return (
-        <Tag key={`tag_${idx}`} active={this.isActive(tag.slug)} onPress={() => handleTag(tag.slug)}>
+        <Tag
+          key={`tag_${idx}`}
+          last={this.isLast(idx)}
+          active={this.isActive(tag.slug)}
+          onPress={() => handleTag(tag.slug)}
+        >
           {tag.name}
         </Tag>
       )
     })
+  }
+
+  isLast (idx) {
+    return idx === this.props.tags.length - 1
   }
 
   isActive (slug) {

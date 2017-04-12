@@ -1,6 +1,7 @@
 import React, { Component, PropTypes} from 'react'
 import TagsList from '../../components/TagsList'
 import withQuery from './index.gql'
+import _result from 'lodash/result'
 
 class TagsListContainer extends Component {
   componentWillReceiveProps (nextProps) {
@@ -9,7 +10,7 @@ class TagsListContainer extends Component {
 
   render () {
     const { data, active, handleTag, menuOpen } = this.props
-    if (data.loading || !data.tags || !data.tags.length) return null
+    if (data.loading || !_result(data, 'tags')) return null
     return (
       <TagsList
         active={active}
@@ -23,6 +24,7 @@ class TagsListContainer extends Component {
   handleTags (nextProps) {
     if (nextProps.data.loading) return
     if (!this.props.data.tags && !nextProps.data.tags) return
+    if (!_result(nextProps.data, 'tags')) return
     this.props.handleTagCount(nextProps.data.tags.length)
   }
 }

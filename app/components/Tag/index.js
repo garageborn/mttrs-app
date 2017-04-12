@@ -1,28 +1,35 @@
 import React, { PropTypes } from 'react'
 import { View, Text } from 'react-native'
 import Touchable from '../Touchable'
-import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const Tag = ({ onPress, children, active }) => {
+const Tag = ({ onPress, children, active, last }) => {
   let getStyle = () => {
-    let containerStyles = styles.container
-    if (active) containerStyles = [containerStyles, styles.active]
+    let containerStyles = [styles.container]
+    if (active) containerStyles = [...containerStyles, styles.active]
+    if (last) containerStyles = [...containerStyles, styles.last]
     return containerStyles
   }
   return (
-    <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
-      <View style={getStyle()}>
+    <View style={getStyle()}>
+      <Touchable
+        useForeground
+        style={{borderRadius: 20}}
+        delayPressIn={0}
+        onPress={onPress}
+        underlayColor={'transparent'}
+      >
         <Text style={styles.text}>{children}</Text>
-      </View>
-    </Touchable>
+      </Touchable>
+    </View>
   )
 }
 
 Tag.propTypes = {
   children: PropTypes.any.isRequired,
   onPress: PropTypes.func.isRequired,
-  active: PropTypes.bool.isRequired
+  active: PropTypes.bool.isRequired,
+  last: PropTypes.bool
 }
 
 export default Tag

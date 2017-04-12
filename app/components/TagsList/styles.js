@@ -4,7 +4,7 @@ const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width,
+    width: width,
     backgroundColor: '#F1F1F1',
     marginTop: Platform.select({
       ios: 20,
