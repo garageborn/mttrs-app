@@ -27,7 +27,6 @@ export function requestPermissions () {
 export function setPermissions (status) {
   return (dispatch) => {
     const allowed = status === 1
-    AsyncStorage.setItem('notificationsPermissions', stringify(allowed))
     return dispatch(receiveNotificationsPermissions(allowed))
   }
 }
@@ -52,20 +51,15 @@ export function initTags () {
     }
     tags[tenant] = 'true'
     OneSignal.sendTags(tags)
-    AsyncStorage.setItem(notificationsStatus, stringify(tags), (error) => {
-      if (error) return captureError(error)
-      return dispatch(receiveNotificationsStatus(tags))
-    })
+    dispatch(receiveNotificationsStatus(tags))
   }
 }
 
 export function getStatus () {
   return (dispatch, getState) => {
     dispatch(requestNotificationsStatus())
-    AsyncStorage.getItem(notificationsStatus, (error, data) => {
-      if (error) return captureError(error)
-      if (_isNil(data)) return dispatch(initTags())
-      return dispatch(receiveNotificationsStatus(parse(data)))
+    OneSignal.getTags((tags) => {
+      return dispatch(receiveNotificationsStatus(tags))
     })
   }
 }
@@ -76,13 +70,10 @@ export function setTenantNotificationStatus (tenant, tenantStatus) {
     let tenantStatusStringified = stringify(tenantStatus)
     status = {
       ...status,
-      [tenant]: tenantStatus
+      [tenant]: tenantStatusStringified
     }
     OneSignal.sendTag(tenant, tenantStatusStringified)
-    AsyncStorage.setItem(notificationsStatus, stringify(status), (error) => {
-      if (error) return captureError(error)
-      return dispatch(receiveNotificationsStatus(status))
-    })
+    return dispatch(receiveNotificationsStatus(status))
   }
 }
 
