@@ -42,7 +42,7 @@ class CategoriesTimelineContainer extends Component {
 
   renderTags () {
     let { section } = this.props.params
-    if (!section) return null
+    if (!section || section.name === 'home') return null
     return (
       <TagsListContainer
         categorySlug={section.model.slug}

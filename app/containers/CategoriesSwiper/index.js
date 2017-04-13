@@ -26,8 +26,10 @@ class CategoriesTimeline extends Component {
     this.state = {
       navigationState: {
         index: 0,
-        routes: [this.homeRoute]
-      }
+        routes: [this.homeRoute],
+        hasTags: this.props.hasTags
+      },
+      swiperStyles: null
     }
   }
 
@@ -47,6 +49,7 @@ class CategoriesTimeline extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.addSwipeRoutes(nextProps)
+    this.setSwiperStyles(nextProps)
   }
 
   componentWillUnmount () {
@@ -119,17 +122,17 @@ class CategoriesTimeline extends Component {
     return <ApolloError data={this.props.data} />
   }
 
-  get listViewStyles () {
+  setSwiperStyles (nextProps) {
     let containerStyles = styles.listViewContainer
-    if (this.props.hasTags) containerStyles = [styles.listViewContainer, styles.listViewActive]
-    return containerStyles
+    if (nextProps.hasTags) containerStyles = [styles.listViewContainer, styles.listViewActive]
+    return this.setState({swiperStyles: containerStyles})
   }
 
   render () {
     if (this.props.data.error) return this.renderError()
     return (
       <TabViewAnimated
-        style={this.listViewStyles}
+        style={this.state.swiperStyles}
         navigationState={this.state.navigationState}
         renderScene={this.renderScene}
         onRequestChangeTab={this.handleChangeTab}
