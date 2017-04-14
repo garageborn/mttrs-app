@@ -115,6 +115,7 @@ android {
         }
         manifestPlaceholders = [onesignal_app_id: "bb1d8cac-7fb9-46c6-ada6-1113f667fa4f",
                                 onesignal_google_project_number: "830416380616"]
+        multiDexEnabled true
     }
     signingConfigs {
       release {
@@ -155,6 +156,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbsdk')
+    compile(project(':react-native-fbads')) {
+        exclude group: "com.google.android.gms"
+    }
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')

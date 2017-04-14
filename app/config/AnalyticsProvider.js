@@ -2,7 +2,8 @@ import React, { Component, Children, PropTypes } from 'react'
 import { AppState, View } from 'react-native'
 import { connect } from 'react-redux'
 import { AnalyticsActions } from '../actions/index'
-import { InterstitialAdManager } from 'react-native-fbads';
+import { InterstitialAdManager } from 'react-native-fbads'
+import { AdSettings } from 'react-native-fbads'
 
 
 class AnalyticsProvider extends Component {
@@ -16,10 +17,6 @@ class AnalyticsProvider extends Component {
   componentDidMount () {
     AppState.addEventListener('change', this.handleAppStateChange)
     this.startHeartBeat()
-
-InterstitialAdManager.showAd('1273521846029294_1284630561585089')
-  .then(didClick => {})
-  .catch(error => console.log(error))
   }
 
   componentWillUnmount () {
