@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     marginTop: -1
   },
 
-  shareCount: {
+  text: {
     fontSize: 12,
-    fontWeight: '500',
-    color: '#999'
+    fontWeight: '400',
+    color: '#666766'
   }
 })
 

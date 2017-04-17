@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { View, Text, Image } from 'react-native'
 import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
-import iconMttrs from './assets/icon-mttrs.png'
 import styles from './styles'
 
 class StorySummary extends Component {
@@ -10,7 +9,6 @@ class StorySummary extends Component {
       <View style={styles.container}>
         <View style={styles.box}>
           <View style={this.headlineStyles}>
-            <Image style={styles.icon} source={iconMttrs} />
             <Text style={styles.headline}>{this.props.headline}</Text>
           </View>
           <Text style={this.summaryStyles}>{this.props.summary}</Text>
