@@ -5,22 +5,20 @@ import { parse, stringify } from '../common/utils/Parser'
 import _isEmpty from 'lodash/isEmpty'
 
 import {
+  REQUEST_NOTIFICATIONS_PERMISSIONS,
+  RECEIVE_NOTIFICATIONS_PERMISSIONS,
   REQUEST_NOTIFICATIONS_TAGS,
-  RECEIVE_NOTIFICATIONS_TAGS,
-  RECEIVE_NOTIFICATIONS_PERMISSION
+  RECEIVE_NOTIFICATIONS_TAGS
 } from '../constants/ActionTypes'
-
-export function requestPermissions () {
-  return dispatch => {
-    if (Platform.OS === 'android') return
-    const permissions = { alert: true, badge: true, sound: true }
-    return OneSignal.requestPermissions(permissions)
-  }
-}
 
 export function getPermissions () {
   return dispatch => {
     if (Platform.OS === 'android') return
+
+    if (getState().NotificationsReducer.permissions.isFetching) return
+    if (getState().NotificationsReducer.permissions.isLoaded) return
+
+    dispatch(requestPermissions())
     OneSignal.checkPermissions((permissions) => {
       let enabled = (permissions.alert || permissions.badge || permissions.sound) === 1
       dispatch(receivePermissions(enabled))
@@ -30,8 +28,8 @@ export function getPermissions () {
 
 export function getTags () {
   return (dispatch, getState) => {
-    if (getState().NotificationsReducer.isFetching) return
-    if (getState().NotificationsReducer.isLoaded) return
+    if (getState().NotificationsReducer.tags.isFetching) return
+    if (getState().NotificationsReducer.tags.isLoaded) return
 
     dispatch(requestTags())
     OneSignal.getTags((tags) => {
@@ -44,12 +42,23 @@ export function getTags () {
   }
 }
 
+export function askForPermissions () {
+  return dispatch => {
+    if (Platform.OS === 'android') return
+    if (getState().NotificationsReducer.permissions.enabled) return
+
+    const permissions = { alert: true, badge: true, sound: true }
+    return OneSignal.requestPermissions(permissions)
+  }
+}
+
 export function setTenantValue (tenant, value) {
   return (dispatch, getState) => {
     let stringifiedValue = stringify(value)
     OneSignal.sendTag(tenant, stringifiedValue)
+
     const tags = {
-      ...getState().NotificationsReducer.tags,
+      ...getState().NotificationsReducer.tags.values,
       [tenant]: stringifiedValue
     }
     return dispatch(receiveTags(tags))
@@ -59,9 +68,10 @@ export function setTenantValue (tenant, value) {
 function initTags () {
   return (dispatch, getState) => {
     const tenant = getState().TenantReducer.current.id
-
-    let tags = { mttrs_br: 'false', mttrs_us: 'false' }
-    tags[tenant] = 'true'
+    const tags = {
+      ...getState().NotificationsReducer.tags.values,
+      [tenant]: 'true'
+    }
     OneSignal.sendTags(tags)
     dispatch(receiveTags(tags))
   }
@@ -76,7 +86,11 @@ export const receiveTags = (tags) => ({
   tags
 })
 
-export const receivePermission = (enabled) => ({
-  type: RECEIVE_NOTIFICATIONS_PERMISSION,
+export const requestPermissions = () => ({
+  type: REQUEST_NOTIFICATIONS_PERMISSIONS
+})
+
+export const receivePermissions = (enabled) => ({
+  type: RECEIVE_NOTIFICATIONS_PERMISSIONS,
   enabled
 })

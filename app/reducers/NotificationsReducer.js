@@ -1,34 +1,60 @@
+import { Platform } from 'react-native'
 import {
   REQUEST_NOTIFICATIONS_TAGS,
   RECEIVE_NOTIFICATIONS_TAGS,
-  RECEIVE_NOTIFICATIONS_PERMISSION
+  REQUEST_NOTIFICATIONS_PERMISSIONS,
+  RECEIVE_NOTIFICATIONS_PERMISSIONS
 } from '../constants/ActionTypes'
 
-let defaultState = {
+const permissions = Platform.select({
+  ios: { isFetching: false, isLoaded: false, enabled: false },
+  android: { isFetching: false, isLoaded: true, enabled: true }
+})
+const tags = {
   isFetching: false,
   isLoaded: false,
-  enabled: false,
-  tags: {}
+  values: { mttrs_br: 'false', mttrs_us: 'false' }
 }
+
+let defaultState = { permissions, tags }
 
 export default function (state = defaultState, action) {
   switch (action.type) {
+    case REQUEST_NOTIFICATIONS_PERMISSIONS:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          isFetching: true
+        }
+      }
+    case RECEIVE_NOTIFICATIONS_PERMISSIONS:
+      return {
+        ...state,
+        notifications: {
+          ...state.notifications,
+          isFetching: false,
+          isLoaded: true,
+          enabled: action.enabled
+        }
+      }
     case REQUEST_NOTIFICATIONS_TAGS:
       return {
         ...state,
-        isFetching: true
+        tags: {
+          ...state.tags,
+          isFetching: true
+        }
       }
     case RECEIVE_NOTIFICATIONS_TAGS:
       return {
         ...state,
-        isFetching: false,
-        isLoaded: true,
-        tags: action.tags
-      }
-    case RECEIVE_NOTIFICATIONS_PERMISSION:
-      return {
-        ...state,
-        enabled: action.enabled
+        tags: {
+          ...state.tags,
+          isFetching: false,
+          isLoaded: true,
+          values: action.tags
+        }
       }
     default:
       return state

@@ -67,19 +67,13 @@ class NotificationsContainer extends Component {
   }
 
   handlePermissions (nextProps) {
-    if (nextProps.notifications.enabled) return
     if (!nextProps.tenant.isLoaded) return
-    const currentLength = this.props.visitedStories.items.length
-    const nextLength = nextProps.visitedStories.items.length
-
-    if (nextLength === currentLength) return
-    if (currentLength < 3 && nextLength > 3) return
-    this.props.dispatch(NotificationsActions.requestPermissions())
+    this.props.dispatch(NotificationsActions.getPermissions())
+    this.askForPermissions(nextProps)
   }
 
   handleTags (nextProps) {
     if (!nextProps.tenant.isLoaded) return
-    if (!_isEmpty(nextProps.notifications.tags)) return
     this.props.dispatch(NotificationsActions.getTags())
   }
 
@@ -88,15 +82,20 @@ class NotificationsContainer extends Component {
     const { dispatch } = this.props
     dispatch(TenantActions.setCurrent(id))
   }
+
+  askForPermissions (nextProps) {
+    const currentLength = this.props.visitedStories.items.length
+    const nextLength = nextProps.visitedStories.items.length
+
+    if (nextLength === currentLength) return
+    if (currentLength < 3 && nextLength > 3) return
+    this.props.dispatch(NotificationsActions.askForPermissions())
+  }
 }
 
 NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  notifications: PropTypes.shape({
-    enabled: PropTypes.bool.isRequired,
-    tags: PropTypes.object.isRequired
-  }).isRequired,
   tenant: PropTypes.shape({
     current: PropTypes.shape({
       id: PropTypes.string
@@ -107,7 +106,6 @@ NotificationsContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    notifications: state.NotificationsReducer,
     tenant: state.TenantReducer,
     visitedStories: state.StorageReducer.visitedStories
   }

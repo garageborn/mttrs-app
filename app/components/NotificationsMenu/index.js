@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import _isEmpty from 'lodash/isEmpty'
+import _result from 'lodash/result'
 import { parse } from '../../common/utils/Parser'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
@@ -58,11 +58,8 @@ class NotificationsMenu extends Component {
   }
 
   isEnabled (tenantId) {
-    let { tags, enabled } = this.props
-    if (_isEmpty(tags)) return false
-    if (!tags[tenantId]) return false
-    if (Platform.OS === 'ios' && !enabled) return false
-    return parse(tags[tenantId])
+    let { tags } = this.props
+    return _result(tags, tenantId) === 'true'
   }
 
   thumbTintColor (tenantId) {

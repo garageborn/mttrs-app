@@ -10,32 +10,36 @@ class NotificationsMenuContainer extends Component {
   }
 
   render () {
-    const { tags, enabled } = this.props
+    const { tags, permissions } = this.props
     return (
       <NotificationsMenu
         toggleTenantNotification={this.toggleTenantNotification}
-        enabled={enabled}
-        tags={tags}
+        enabled={permissions.enabled}
+        tags={tags.values}
       />
     )
   }
 
   toggleTenantNotification (tenant, value) {
     let { dispatch, enabled } = this.props
-    if (!enabled) dispatch(NotificationsActions.requestPermissions())
+    if (!enabled) dispatch(NotificationsActions.askForPermissions())
     return dispatch(NotificationsActions.setTenantValue(tenant, value))
   }
 }
 
 NotificationsMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  tags: PropTypes.object.isRequired,
-  enabled: PropTypes.bool.isRequired
+  permissions: PropTypes.shape({
+    enabled: PropTypes.bool.isRequired
+  }),
+  tags: PropTypes.shape({
+    values: PropTypes.object.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    enabled: state.NotificationsReducer.enabled,
+    permissions: state.NotificationsReducer.permissions,
     tags: state.NotificationsReducer.tags
   }
 }
