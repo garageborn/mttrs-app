@@ -10,17 +10,6 @@ import {
   RECEIVE_NOTIFICATIONS_PERMISSION
 } from '../constants/ActionTypes'
 
-export function initTags () {
-  return (dispatch, getState) => {
-    const tenant = getState().TenantReducer.current.id
-
-    let tags = { mttrs_br: 'false', mttrs_us: 'false' }
-    tags[tenant] = 'true'
-    OneSignal.sendTags(tags)
-    dispatch(receiveTags(tags))
-  }
-}
-
 export function requestPermissions () {
   return dispatch => {
     if (Platform.OS === 'android') return
@@ -31,9 +20,10 @@ export function requestPermissions () {
 
 export function getPermissions () {
   return dispatch => {
+    if (Platform.OS === 'android') return
     OneSignal.checkPermissions((permissions) => {
-      let active = (permissions.alert || permissions.badge || permissions.sound) === 1
-      dispatch(receivePermissions(active))
+      let enabled = (permissions.alert || permissions.badge || permissions.sound) === 1
+      dispatch(receivePermissions(enabled))
     })
   }
 }
@@ -45,7 +35,6 @@ export function getTags () {
 
     dispatch(requestTags())
     OneSignal.getTags((tags) => {
-      console.log('getTagsResponse', tags)
       if (_isEmpty(tags)) {
         return dispatch(initTags())
       } else {
@@ -55,15 +44,26 @@ export function getTags () {
   }
 }
 
-export function setTenantNotificationStatus (tenant, tenantStatus) {
+export function setTenantValue (tenant, value) {
   return (dispatch, getState) => {
-    let { tags } = getState().NotificationsReducer
-    tags = {
-      ...tags,
-      [tenant]: stringify(tenantStatus)
+    let stringifiedValue = stringify(value)
+    OneSignal.sendTag(tenant, stringifiedValue)
+    const tags = {
+      ...getState().NotificationsReducer.tags,
+      [tenant]: stringifiedValue
     }
-    OneSignal.sendTags(tags)
     return dispatch(receiveTags(tags))
+  }
+}
+
+function initTags () {
+  return (dispatch, getState) => {
+    const tenant = getState().TenantReducer.current.id
+
+    let tags = { mttrs_br: 'false', mttrs_us: 'false' }
+    tags[tenant] = 'true'
+    OneSignal.sendTags(tags)
+    dispatch(receiveTags(tags))
   }
 }
 

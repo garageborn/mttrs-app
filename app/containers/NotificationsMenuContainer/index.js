@@ -20,10 +20,10 @@ class NotificationsMenuContainer extends Component {
     )
   }
 
-  toggleTenantNotification (tenant, tags) {
+  toggleTenantNotification (tenant, value) {
     let { dispatch, enabled } = this.props
     if (!enabled) dispatch(NotificationsActions.requestPermissions())
-    return dispatch(NotificationsActions.setTenantNotificationStatus(tenant, tags))
+    return dispatch(NotificationsActions.setTenantValue(tenant, value))
   }
 }
 

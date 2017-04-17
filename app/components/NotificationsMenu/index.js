@@ -72,7 +72,7 @@ class NotificationsMenu extends Component {
 
 NotificationsMenu.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
-  status: PropTypes.object.isRequired,
+  tags: PropTypes.object.isRequired,
   enabled: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
