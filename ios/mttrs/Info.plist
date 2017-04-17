@@ -80,5 +80,10 @@
   <string>1273521846029294</string>
   <key>FacebookDisplayName</key>
   <string>Matters</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+      <string>fbauth2</string>
+      <string>fb-messenger-api</string>
+  </array>
 </dict>
 </plist>
