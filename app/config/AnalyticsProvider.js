@@ -2,6 +2,9 @@ import React, { Component, Children, PropTypes } from 'react'
 import { AppState, View } from 'react-native'
 import { connect } from 'react-redux'
 import { AnalyticsActions } from '../actions/index'
+import { InterstitialAdManager } from 'react-native-fbads'
+import { AdSettings } from 'react-native-fbads'
+
 
 class AnalyticsProvider extends Component {
   constructor (props) {

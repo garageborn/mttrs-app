@@ -26,6 +26,8 @@
     "react-intl": "^2.1.5",
     "react-native": "0.42.3",
     "react-native-fabric": "0.4.1",
+    "react-native-fbads": "^4.1.0",
+    "react-native-fbsdk": "^0.5.0",
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-onesignal": "^3.0.3",
@@ -42,6 +44,8 @@
     "eslint-config-standard": "^10.0.0",
     "eslint-config-standard-jsx": "^4.0.1",
     "eslint-plugin-babel": "^4.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-standard": "^3.0.1"
