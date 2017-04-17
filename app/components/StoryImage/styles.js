@@ -9,13 +9,12 @@ const styles = StyleSheet.create({
 
   image: {
     width: 120,
-    height: 90,
-    borderWidth: 2,
-    borderColor: '#F1F1F1'
+    height: 95,
+    borderRadius: 2
   },
 
   visited: {
-    opacity: 0.7
+    opacity: 0.6
   }
 })
 

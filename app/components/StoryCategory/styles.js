@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
 
   visited: {
-    opacity: 0.5
+    opacity: 0.6
   }
 })
 

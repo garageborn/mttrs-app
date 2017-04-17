@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
 
   darkText: {
     fontSize: 14,
-    color: '#666'
+    color: '#666766'
   },
 
   publisher: {

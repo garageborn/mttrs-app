@@ -46,5 +46,6 @@
   "webview.openInBrowser": "Open in browser",
   "yesterday": "Yesterday",
   "notifications": "NOTIFICATIONS",
-  "enableNotifications": "Apparently you have not allowed Matters to send you notifications, to change the permissions please go to Settings > Notifications > Matters > Allow Notifications"
+  "enableNotifications": "Apparently you have not allowed Matters to send you notifications, to change the permissions please go to Settings > Notifications > Matters > Allow Notifications",
+  "shares": "shares"
 }
