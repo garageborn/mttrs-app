@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>157</string>
+	<string>158</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -80,5 +80,10 @@
   <string>1273521846029294</string>
   <key>FacebookDisplayName</key>
   <string>Matters</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+      <string>fbauth2</string>
+      <string>fb-messenger-api</string>
+  </array>
 </dict>
 </plist>
