@@ -1,6 +1,6 @@
 import { StyleSheet, Platform } from 'react-native'
 
-export const height = 45
+export const height = 35
 
 const styles = StyleSheet.create({
   header: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#999999'
   }

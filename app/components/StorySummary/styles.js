@@ -11,11 +11,9 @@ const styles = StyleSheet.create({
   box: {
     position: 'relative',
     marginTop: 2,
-    padding: 15,
-    borderRadius: 3,
-    backgroundColor: '#F1F1F1',
-    borderColor: '#DDD',
-    borderWidth: 1
+    padding: 10,
+    borderRadius: 2,
+    backgroundColor: '#F7F7F8',
   },
 
   headlineContainer: {
@@ -23,49 +21,44 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  icon: {
-    marginRight: 5
-  },
-
   headlineVisited: {
-    opacity: 0.7
+    opacity: 0.6
   },
 
   headline: {
     ...Platform.select({
       ios: {
-        fontSize: 14,
+        fontSize: 13,
         fontWeight: '600'
       },
       android: {
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: '500'
       }
     }),
-    width: width - headlineOffset,
-    color: '#666666',
+    lineHeight: 18,
+    color: '#666766',
     marginTop: 3,
-    marginLeft: 5,
     marginBottom: 5
   },
 
   summary: {
     ...Platform.select({
       ios: {
-        fontSize: 14,
+        fontSize: 13,
         lineHeight: 22
       },
       android: {
-        fontSize: 12,
-        lineHeight: 20
+        fontSize: 13,
+        lineHeight: 22
       }
     }),
-    color: '#666666',
+    color: '#666766',
     marginTop: 3
   },
 
   summaryVisited: {
-    opacity: 0.5
+    opacity: 0.6
   }
 })
 

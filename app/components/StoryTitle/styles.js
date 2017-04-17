@@ -14,13 +14,14 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 14,
+    color: '#2D2D2B',
+    fontSize: 15,
     lineHeight: 18,
     fontWeight: '500'
   },
 
   visited: {
-    opacity: 0.5
+    opacity: 0.6
   }
 })
 
