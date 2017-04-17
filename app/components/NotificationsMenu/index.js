@@ -31,7 +31,7 @@ class NotificationsMenu extends Component {
 
   renderDisclaimer () {
     const { formatMessage } = this.props.intl
-    if (this.props.permissions) return null
+    if (this.props.enabled) return null
     if (Platform.OS !== 'ios') return null
     return (
       <View style={styles.disclaimerContainer}>
@@ -58,11 +58,11 @@ class NotificationsMenu extends Component {
   }
 
   isEnabled (tenantId) {
-    let { status, permissions } = this.props
-    if (_isEmpty(status)) return false
-    if (!status[tenantId]) return false
-    if (Platform.OS === 'ios' && !permissions) return false
-    return parse(status[tenantId])
+    let { tags, enabled } = this.props
+    if (_isEmpty(tags)) return false
+    if (!tags[tenantId]) return false
+    if (Platform.OS === 'ios' && !enabled) return false
+    return parse(tags[tenantId])
   }
 
   thumbTintColor (tenantId) {
@@ -73,7 +73,7 @@ class NotificationsMenu extends Component {
 NotificationsMenu.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
   status: PropTypes.object.isRequired,
-  permissions: PropTypes.bool.isRequired,
+  enabled: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
