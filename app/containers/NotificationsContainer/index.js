@@ -84,12 +84,9 @@ class NotificationsContainer extends Component {
   }
 
   askForPermissions (nextProps) {
-    const currentLength = this.props.visitedStories.items.length
-    const nextLength = nextProps.visitedStories.items.length
-
-    if (nextLength === currentLength) return
-    if (currentLength < 3 && nextLength > 3) return
-    this.props.dispatch(NotificationsActions.askForPermissions())
+    if (nextProps.visitedStories.items.length === 4) {
+      this.props.dispatch(NotificationsActions.askForPermissions())
+    }
   }
 }
 

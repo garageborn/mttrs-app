@@ -12,7 +12,7 @@ import {
 } from '../constants/ActionTypes'
 
 export function getPermissions () {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (Platform.OS === 'android') return
 
     if (getState().NotificationsReducer.permissions.isFetching) return
@@ -43,7 +43,7 @@ export function getTags () {
 }
 
 export function askForPermissions () {
-  return dispatch => {
+  return (dispatch, getState) => {
     if (Platform.OS === 'android') return
     if (getState().NotificationsReducer.permissions.enabled) return
 
