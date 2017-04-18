@@ -1,17 +1,16 @@
-<b>Your time is precious. Just take 15 minutes a day to find out the news that matter.</b> `Mttrs` is the definitive news aggregator that helps you get informed with the top news of the moment.
+<b>Your time is precious. Take 15 minutes a day to read only the news that really matter.</b> Matters is the definitive news aggregator that helps you catch up with the world.
 
-<b><u>FEATURES</b></u>
-• <b>All your favorite sites in one place.</b>
-Quell the intense search for relevant news. Find news from <u>the main sites in one place</u>, presented according to the level of social interaction they receive on the Internet.
+• <b>The news, summarized.</b>
+We'll read it and break it down for you. Find out what's going on in just a few words.
 
-• <b>News summaries</b>
-Quickly find out about the <u>core message of each news through our news summaries.</u>
+• <b>News that really matter.</b>
+We'll scour the web to find what everyone's talking about so you can read what really matters.
 
-• <b>Many sites, the same news.</b>
-<u>Avoid reading the same story more than once</u>. Use news consolidation from different websites talking about the same subject. Everything is grouped to speed up your reading moment. If you prefer to feel free to read the news of your favorite site.
+• <b>Your favorite websites in one place.</b>
+Read the news from several different publishers in a single app. Similar news are grouped together so you don't have to worry about information overload.
 
-• <b>Intelligent news division.</b>
-<u>Browse through the categories</u> and read the topic-focused news that really matter to you.
+• <b>Read about what you care.</b>
+From politics to sports, from gaming to economics, we got you covered!
 
-• <b>Notifications</b>
-Be warned just about the <u>main news of the day</u> without being constantly bothered.o
+• <b>Notifications.</b>
+Follow today's top stories without being constantly bothered.
