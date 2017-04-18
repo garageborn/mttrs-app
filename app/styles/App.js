@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Global'
 const { width, height } = Dimensions.get('window')
 
@@ -21,10 +21,13 @@ const styles = StyleSheet.create({
 
   listViewContainer: {
     position: 'absolute',
-    top: 15,
+    top: Platform.select({
+      ios: 10,
+      android: 0
+    }),
     ...containerStyles
   },
-  listViewActive: {
+  listViewWithTags: {
     top: 55
   }
 })

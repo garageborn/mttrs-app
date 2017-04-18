@@ -4,40 +4,23 @@ import withQuery from './index.gql'
 import _isNil from 'lodash/isNil'
 
 class TagsListContainer extends Component {
-  componentWillReceiveProps (nextProps) {
-    this.handleTags(nextProps)
-  }
-
   render () {
     const { data, active, handleTag, menuOpen } = this.props
-    if (data.loading || _isNil(data.tags)) return null
-    if (!data.tags.length) return null
+    if (_isNil(data.tags) || !data.tags.length) return null
     return (
       <TagsList
         active={active}
         handleTag={handleTag}
-        tags={data.tags}
+        data={data}
         menuOpen={menuOpen}
       />
     )
   }
-
-  handleTags (nextProps) {
-    if (nextProps.data.loading) return
-    if (!this.props.data.tags && !nextProps.data.tags) return
-    if (_isNil(nextProps.data)) return
-    if (!nextProps.data.tags.length) return this.props.handleTagCount(false)
-    this.props.handleTagCount(nextProps.data.tags.length)
-  }
 }
 
 TagsListContainer.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    tags: PropTypes.array
-  }),
+  data: PropTypes.object.isRequired,
   handleTag: PropTypes.func.isRequired,
-  handleTagCount: PropTypes.func.isRequired,
   active: PropTypes.string,
   menuOpen: PropTypes.bool.isRequired
 }

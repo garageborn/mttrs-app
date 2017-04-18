@@ -10,7 +10,6 @@ class CategoriesTimelineContainer extends Component {
     super()
 
     this.handleTag = this.handleTag.bind(this)
-    this.handleTagCount = this.handleTagCount.bind(this)
 
     this.state = {
       activeTag: null,
@@ -27,7 +26,6 @@ class CategoriesTimelineContainer extends Component {
       <View>
         {this.renderTags()}
         <CategoriesSwiper
-          hasTags={this.state.hasTags}
           activeTag={this.state.activeTag}
           params={this.props.params}
         />
@@ -48,16 +46,9 @@ class CategoriesTimelineContainer extends Component {
         categorySlug={section.model.slug}
         active={this.state.activeTag}
         handleTag={this.handleTag}
-        handleTagCount={this.handleTagCount}
         menuOpen={this.props.menuOpen}
       />
     )
-  }
-
-  handleTagCount (hasTags) {
-    this.setState({
-      hasTags
-    })
   }
 
   handleTag (tag) {

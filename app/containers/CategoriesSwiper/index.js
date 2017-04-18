@@ -26,8 +26,7 @@ class CategoriesTimeline extends Component {
     this.state = {
       navigationState: {
         index: 0,
-        routes: [this.homeRoute],
-        hasTags: this.props.hasTags
+        routes: [this.homeRoute]
       },
       swiperStyles: null
     }
@@ -43,13 +42,12 @@ class CategoriesTimeline extends Component {
     if (this.state.activeTag !== nextState.activeTag) return true
     if (this.props.data.loading !== nextProps.data.loading) return true
     if (!_isEqual(this.props.params !== nextProps.params)) return true
-    if (this.props.hasTags !== nextProps.hasTags) return true
     return !_isEqual(this.props.data.categories, nextProps.data.categories)
   }
 
   componentWillReceiveProps (nextProps) {
     this.addSwipeRoutes(nextProps)
-    this.setSwiperStyles(nextProps)
+    // this.setSwiperStyles(nextProps)
   }
 
   componentWillUnmount () {
@@ -122,17 +120,20 @@ class CategoriesTimeline extends Component {
     return <ApolloError data={this.props.data} />
   }
 
-  setSwiperStyles (nextProps) {
+  get swiperStyles () {
+    const category = this.state.navigationState.index - 1
     let containerStyles = styles.listViewContainer
-    if (nextProps.hasTags) containerStyles = [styles.listViewContainer, styles.listViewActive]
-    return this.setState({swiperStyles: containerStyles})
+    if (!this.props.params.section || this.props.data.loading) return containerStyles
+    const home = this.props.params.section.name === 'home'
+    if (!home && this.props.data.categories[category].tags_count) return [styles.listViewContainer, styles.listViewWithTags]
+    return containerStyles
   }
 
   render () {
     if (this.props.data.error) return this.renderError()
     return (
       <TabViewAnimated
-        style={this.state.swiperStyles}
+        style={this.swiperStyles}
         navigationState={this.state.navigationState}
         renderScene={this.renderScene}
         onRequestChangeTab={this.handleChangeTab}
@@ -154,8 +155,7 @@ CategoriesTimeline.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   params: PropTypes.object.isRequired,
-  activeTag: PropTypes.string,
-  hasTags: PropTypes.any.isRequired
+  activeTag: PropTypes.string
 }
 
 const IntlCategoriesTimeline = injectIntl(CategoriesTimeline)

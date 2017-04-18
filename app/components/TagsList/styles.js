@@ -14,10 +14,18 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderColor: 'rgba(0,0,0,0.2)'
+    borderColor: 'rgba(0,0,0,0.2)',
+    height: Platform.select({
+      ios: 50,
+      android: 53
+    })
   },
   containerActive: {
     elevation: 0
+  },
+  loaderContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

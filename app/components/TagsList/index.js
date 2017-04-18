@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, View, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Tag from '../Tag'
 import styles from './styles'
@@ -18,12 +18,21 @@ class TagsList extends Component {
     this.renderTags = this.renderTags.bind(this)
   }
 
-  render () {
-    const { intl, handleTag } = this.props
-    const text = intl.formatMessage(messages.default)
+  componentWillReceiveProps (nextProps) {
+    this.handleScroll(nextProps)
+  }
 
+  render () {
+    const { intl, handleTag, data } = this.props
+    const text = intl.formatMessage(messages.default)
+    if (data.loading) return this.renderLoader()
     return (
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={this.containerStyles}>
+      <ScrollView
+        ref={'scrollView'}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={this.containerStyles}
+      >
         <Tag active={this.isActive()} onPress={() => handleTag()}>
           {text}
         </Tag>
@@ -32,9 +41,17 @@ class TagsList extends Component {
     )
   }
 
+  renderLoader () {
+    return (
+      <View style={[...this.containerStyles, styles.loaderContainer]}>
+        <ActivityIndicator color='#AAA' />
+      </View>
+    )
+  }
+
   renderTags () {
-    const { handleTag, tags } = this.props
-    return tags.map((tag, idx) => {
+    const { handleTag, data } = this.props
+    return data.tags.map((tag, idx) => {
       return (
         <Tag
           key={`tag_${idx}`}
@@ -49,23 +66,31 @@ class TagsList extends Component {
   }
 
   isLast (idx) {
-    return idx === this.props.tags.length - 1
+    return idx === this.props.data.tags.length - 1
   }
 
   isActive (slug) {
     return slug == this.props.active
   }
 
+  handleScroll (nextProps) {
+    if (this.props.data.loading) return
+    if (this.props.active !== nextProps.active) return
+    return this.refs.scrollView.scrollTo({x: 0, y: 0, animated: false})
+  }
+
   get containerStyles () {
-    let containerStyles = styles.container
-    if (this.props.menuOpen) containerStyles = [styles.container, styles.containerActive]
-    return containerStyles
+    if (this.props.menuOpen) return [styles.container, styles.containerActive]
+    return [styles.container]
   }
 }
 
 TagsList.propTypes = {
   handleTag: PropTypes.func.isRequired,
-  tags: PropTypes.array.isRequired,
+  data: PropTypes.shape({
+    tags: PropTypes.array.isRequired,
+    loading: PropTypes.bool.isRequired
+  }).isRequired,
   active: PropTypes.string,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
