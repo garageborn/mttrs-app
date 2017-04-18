@@ -59,6 +59,8 @@ class NotificationsContainer extends Component {
 
   handleNotificationsStatus (nextProps) {
     if (!nextProps.tenant.isLoaded) return
+    if (!_isEmpty(nextProps.notificationStatus)) return
+    if (_isEqual(this.props.notificationsStatus, nextProps.notificationsStatus)) return
     if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
     return this.props.dispatch(NotificationsActions.getStatus())
   }
