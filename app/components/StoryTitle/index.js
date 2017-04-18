@@ -6,7 +6,7 @@ class StoryTitle extends Component {
   render () {
     return (
       <View style={this.styles}>
-        <Text style={styles.title} numberOfLines={3}>{this.props.title}</Text>
+        <Text style={styles.title} numberOfLines={4}>{this.props.title}</Text>
       </View>
     )
   }

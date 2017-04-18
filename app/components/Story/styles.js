@@ -4,10 +4,9 @@ const styles = StyleSheet.create({
   card: {
     position: 'relative',
     zIndex: 2,
-    marginTop: 5,
-    marginBottom: 5,
     padding: 10,
     marginHorizontal: 10,
+    marginVertical: 5,
     backgroundColor: '#FFF',
     borderRadius: 2,
     elevation: 2,

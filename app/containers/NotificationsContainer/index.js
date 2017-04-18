@@ -20,6 +20,7 @@ class NotificationsContainer extends Component {
   componentWillMount () {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
+    OneSignal.addEventListener('ids', (ids) => { console.log('-----ids', ids) })
   }
 
   componentWillUnmount () {
@@ -28,7 +29,7 @@ class NotificationsContainer extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.handlePermissions(nextProps)
-    this.handleNotificationsStatus(nextProps)
+    this.handleTags(nextProps)
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -56,12 +57,6 @@ class NotificationsContainer extends Component {
     }
   }
 
-  handleNotificationsStatus (nextProps) {
-    if (!nextProps.tenant.isLoaded) return
-    if (Platform.OS === 'ios') return this.props.dispatch(NotificationsActions.checkPermissions())
-    return this.props.dispatch(NotificationsActions.getStatus())
-  }
-
   handleOpen (result) {
     let { model, type, tenant } = result.notification.payload.additionalData
 
@@ -72,10 +67,13 @@ class NotificationsContainer extends Component {
 
   handlePermissions (nextProps) {
     if (!nextProps.tenant.isLoaded) return
-    if (nextProps.visitedStories.items.length > 3) return
-    if (nextProps.visitedStories.items.length === this.props.visitedStories.items.length) return
-    if (this.props.visitedStories.items.length < 3) return
-    return this.props.dispatch(NotificationsActions.requestPermissions())
+    this.props.dispatch(NotificationsActions.getPermissions())
+    this.askForPermissions(nextProps)
+  }
+
+  handleTags (nextProps) {
+    if (!nextProps.tenant.isLoaded) return
+    this.props.dispatch(NotificationsActions.getTags())
   }
 
   setTenant (id) {
@@ -83,12 +81,17 @@ class NotificationsContainer extends Component {
     const { dispatch } = this.props
     dispatch(TenantActions.setCurrent(id))
   }
+
+  askForPermissions (nextProps) {
+    if (nextProps.visitedStories.items.length === 4) {
+      this.props.dispatch(NotificationsActions.askForPermissions())
+    }
+  }
 }
 
 NotificationsContainer.propTypes = {
   visitedStories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  notificationsStatus: PropTypes.object.isRequired,
   tenant: PropTypes.shape({
     current: PropTypes.shape({
       id: PropTypes.string
@@ -99,7 +102,6 @@ NotificationsContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    notificationsStatus: state.NotificationsReducer.status,
     tenant: state.TenantReducer,
     visitedStories: state.StorageReducer.visitedStories
   }

@@ -35,7 +35,7 @@
   "publisher.suggestion.success": "Suggested publisher submitted.\nThanks for contributing.",
   "publisher.suggestion.title": "Couldn't find what you were looking for?",
   "publisherListSeparator.todaysNews": "today's news",
-  "restrict.content": "only for subscribers",
+  "restrict.content": "paywall",
   "search.placeholder": "Search for publishers",
   "storyCategory.in": "in",
   "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}",
@@ -47,5 +47,6 @@
   "yesterday": "Yesterday",
   "notifications": "NOTIFICATIONS",
   "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications",
-  "tags.default": "Highlights"
+  "tags.default": "Highlights",
+  "shares": "shares"
 }

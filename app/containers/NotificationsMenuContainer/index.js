@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Platform } from 'react-native'
 import { connect } from 'react-redux'
 import { NotificationsActions } from '../../actions/index'
 import NotificationsMenu from '../../components/NotificationsMenu'
@@ -11,33 +10,37 @@ class NotificationsMenuContainer extends Component {
   }
 
   render () {
-    const { status, permissions } = this.props
+    const { tags, permissions } = this.props
     return (
       <NotificationsMenu
         toggleTenantNotification={this.toggleTenantNotification}
-        permissions={permissions}
-        status={status}
+        enabled={permissions.enabled}
+        tags={tags.values}
       />
     )
   }
 
-  toggleTenantNotification (tenant, status) {
+  toggleTenantNotification (tenant, value) {
     let { dispatch, permissions } = this.props
-    if (Platform.OS === 'ios' && !permissions) dispatch(NotificationsActions.requestPermissions())
-    return dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
+    if (!permissions.enabled) dispatch(NotificationsActions.askForPermissions())
+    return dispatch(NotificationsActions.setTenantValue(tenant, value))
   }
 }
 
 NotificationsMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  status: PropTypes.object.isRequired,
-  permissions: PropTypes.bool.isRequired
+  permissions: PropTypes.shape({
+    enabled: PropTypes.bool.isRequired
+  }),
+  tags: PropTypes.shape({
+    values: PropTypes.object.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
     permissions: state.NotificationsReducer.permissions,
-    status: state.NotificationsReducer.status
+    tags: state.NotificationsReducer.tags
   }
 }
 
