@@ -7,20 +7,16 @@ class SettingsModalContainer extends Component {
   constructor (props) {
     super(props)
     this.changeTenant = this.changeTenant.bind(this)
-    this.toggleTenantNotification = this.toggleTenantNotification.bind(this)
   }
 
   render () {
-    const { close, tenant, visible, notificationsStatus, notificationsPermissions } = this.props
+    const { close, tenant, visible } = this.props
     return (
       <SettingsModal
         close={close}
         changeTenant={this.changeTenant}
-        toggleTenantNotification={this.toggleTenantNotification}
         tenant={tenant}
         visible={visible}
-        notificationsStatus={notificationsStatus}
-        notificationsPermissions={notificationsPermissions}
       />
     )
   }
@@ -33,10 +29,6 @@ class SettingsModalContainer extends Component {
 
     dispatch(TenantActions.setCurrent(tenantId))
   }
-
-  toggleTenantNotification (tenant, status) {
-    return this.props.dispatch(NotificationsActions.setTenantNotificationStatus(tenant, status))
-  }
 }
 
 SettingsModalContainer.propTypes = {
@@ -44,16 +36,12 @@ SettingsModalContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   tenant: PropTypes.shape({
     id: PropTypes.string.isRequired
-  }).isRequired,
-  notificationsStatus: PropTypes.object.isRequired,
-  notificationsPermissions: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 const mapStateToProps = (state) => {
   return {
-    tenant: state.TenantReducer.current,
-    notificationsStatus: state.NotificationsReducer.status,
-    notificationsPermissions: state.NotificationsReducer.permissions
+    tenant: state.TenantReducer.current
   }
 }
 

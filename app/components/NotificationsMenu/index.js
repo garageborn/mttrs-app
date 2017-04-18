@@ -2,7 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import _isEmpty from 'lodash/isEmpty'
+import _result from 'lodash/result'
 import { parse } from '../../common/utils/Parser'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
@@ -31,7 +31,7 @@ class NotificationsMenu extends Component {
 
   renderDisclaimer () {
     const { formatMessage } = this.props.intl
-    if (this.props.permissions) return null
+    if (this.props.enabled) return null
     if (Platform.OS !== 'ios') return null
     return (
       <View style={styles.disclaimerContainer}>
@@ -58,11 +58,8 @@ class NotificationsMenu extends Component {
   }
 
   isEnabled (tenantId) {
-    let { status, permissions } = this.props
-    if (_isEmpty(status)) return false
-    if (!status[tenantId]) return false
-    if (Platform.OS === 'ios' && !permissions) return false
-    return parse(status[tenantId])
+    let { tags } = this.props
+    return _result(tags, tenantId) === 'true'
   }
 
   thumbTintColor (tenantId) {
@@ -72,8 +69,8 @@ class NotificationsMenu extends Component {
 
 NotificationsMenu.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
-  status: PropTypes.object.isRequired,
-  permissions: PropTypes.bool.isRequired,
+  tags: PropTypes.object.isRequired,
+  enabled: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
