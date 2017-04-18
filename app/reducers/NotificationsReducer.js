@@ -23,16 +23,16 @@ export default function (state = defaultState, action) {
     case REQUEST_NOTIFICATIONS_PERMISSIONS:
       return {
         ...state,
-        notifications: {
-          ...state.notifications,
+        permissions: {
+          ...state.permissions,
           isFetching: true
         }
       }
     case RECEIVE_NOTIFICATIONS_PERMISSIONS:
       return {
         ...state,
-        notifications: {
-          ...state.notifications,
+        permissions: {
+          ...state.permissions,
           isFetching: false,
           isLoaded: true,
           enabled: action.enabled

@@ -48,6 +48,7 @@ export function askForPermissions () {
     if (getState().NotificationsReducer.permissions.enabled) return
 
     const permissions = { alert: true, badge: true, sound: true }
+    dispatch(receivePermissions(true))
     return OneSignal.requestPermissions(permissions)
   }
 }
