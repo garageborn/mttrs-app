@@ -18,7 +18,7 @@ class CategoriesTimelineContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    this.handleActiveTag(nextProps)
+    this.resetActiveTag(nextProps)
   }
 
   render () {
@@ -33,7 +33,7 @@ class CategoriesTimelineContainer extends Component {
     )
   }
 
-  handleActiveTag (nextProps) {
+  resetActiveTag (nextProps) {
     if (this.props.params.section === nextProps.params.section) return
     this.setState({ activeTag: null })
   }
@@ -51,11 +51,9 @@ class CategoriesTimelineContainer extends Component {
     )
   }
 
-  handleTag (tag) {
-    this.props.dispatch(AnalyticsActions.trackScreen(`/${tag}`))
-    this.setState({
-      activeTag: tag
-    })
+  handleTag (tag, categorySlug) {
+    this.props.dispatch(AnalyticsActions.trackScreen(`/${categorySlug}/${tag}`))
+    this.setState({ activeTag: tag })
   }
 }
 
