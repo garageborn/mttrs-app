@@ -7,7 +7,6 @@ import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
 
 class Story extends Component {
-
   render () {
     const { openLink, openStoryLinks, story, visited } = this.props
 

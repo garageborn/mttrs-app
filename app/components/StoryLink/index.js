@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
+import TouchablePublisherLogo from '../TouchablePublisherLogo'
 import RestrictContentLabel from '../RestrictContentLabel'
 import PublisherLogo from '../PublisherLogo'
 import SocialCountFormatter from '../../common/utils/SocialCountFormatter'
@@ -40,16 +41,15 @@ class StoryLink extends Component {
   }
 
   render () {
-    const { link, openLink } = this.props
+    const { link, openLink, openPublisher } = this.props
     return (
       <View style={this.rowStyle}>
         <View style={this.rowContainerStyle}>
-          <Touchable
-            style={styles.rowTouch}
-            onPress={e => openLink(link)}
-            underlayColor={WHITE_TRANSPARENT_COLOR}
-          >
-            <View>
+          <View>
+            <Touchable
+              underlayColor={WHITE_TRANSPARENT_COLOR}
+              onPress={() => openPublisher(link.publisher)}
+            >
               <View style={styles.publisher}>
                 <PublisherLogo size={30} source={this.publisherLogo} />
                 <View style={styles.publisherInfo}>
@@ -57,6 +57,12 @@ class StoryLink extends Component {
                 </View>
                 {this.restrictContentLabel}
               </View>
+            </Touchable>
+            <Touchable
+              style={styles.rowTouch}
+              onPress={e => openLink(link)}
+              underlayColor={WHITE_TRANSPARENT_COLOR}
+            >
               <View style={styles.story}>
                 <Text numberOfLines={2} style={styles.storyTitle}>{link.title}</Text>
                 <View style={styles.shares}>
@@ -64,8 +70,8 @@ class StoryLink extends Component {
                   <Text style={styles.shareCount}>{SocialCountFormatter(link.total_social)}</Text>
                 </View>
               </View>
-            </View>
-          </Touchable>
+            </Touchable>
+          </View>
         </View>
       </View>
     )
@@ -78,6 +84,7 @@ StoryLink.propTypes = {
     publisher: PropTypes.object.isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
+  openPublisher: PropTypes.func.isRequired,
   linkType: PropTypes.string.isRequired
 }
 

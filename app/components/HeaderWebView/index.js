@@ -21,9 +21,11 @@ const HeaderWebview = ({ link, publisherLogo, share, close, onPress, publisher }
             onPress={() => onPress(publisher)}
           />
           <View style={styles.publisherInfo}>
-            <Text style={styles.title}>
-              {link.publisher.display_name || link.publisher.name}
-            </Text>
+            <Touchable underlayColor={COLORLESS} onPress={() => onPress(publisher)}>
+              <Text style={styles.title}>
+                {link.publisher.display_name || link.publisher.name}
+              </Text>
+            </Touchable>
             <Text style={styles.storyTitle} numberOfLines={1}>{link.title}</Text>
           </View>
         </View>
