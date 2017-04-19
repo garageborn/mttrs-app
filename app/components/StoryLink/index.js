@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
-import TouchablePublisherLogo from '../TouchablePublisherLogo'
 import RestrictContentLabel from '../RestrictContentLabel'
 import PublisherLogo from '../PublisherLogo'
 import SocialCountFormatter from '../../common/utils/SocialCountFormatter'
