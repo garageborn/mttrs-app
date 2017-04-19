@@ -47,7 +47,6 @@ class CategoriesTimeline extends Component {
 
   componentWillReceiveProps (nextProps) {
     this.addSwipeRoutes(nextProps)
-    // this.setSwiperStyles(nextProps)
   }
 
   componentWillUnmount () {
