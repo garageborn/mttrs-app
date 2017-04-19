@@ -51,8 +51,13 @@ export function selectPublisher (publisher) {
     let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
-
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    const currentRoute = getCurrentRoute(getState)
+    const route = Router.getRoute('timeline', newParams)
+    if (currentRoute.routeName === 'link') {
+      dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    } else {
+      dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
+    }
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
   }
 }
