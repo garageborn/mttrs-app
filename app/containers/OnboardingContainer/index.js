@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Onboarding from '../../components/Onboarding'
 import { StorageActions } from '../../actions/index'
