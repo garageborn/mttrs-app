@@ -31,6 +31,7 @@
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-onesignal": "^3.0.3",
+    "react-native-safari-view": "^2.0.0",
     "react-native-share": "^1.0.20",
     "react-native-tab-view": "0.0.58",
     "react-redux": "^5.0.2",
