@@ -3,7 +3,7 @@ import graphql, { defaultVariables } from '../Timeline/index.gql'
 
 const Query = gql`
   query($cursor: Int, $type: String, $limit: Int!) {
-    timeline(cursor: $cursor, type: $type, limit: $limit) {
+    timeline(cursor: $cursor, type: $type, limit: $limit, with_summary: true) {
       date
       stories {
         id
