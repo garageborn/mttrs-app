@@ -20,7 +20,6 @@ class NotificationsContainer extends Component {
   componentWillMount () {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
-    OneSignal.addEventListener('ids', (ids) => { console.log('-----ids', ids) })
   }
 
   componentWillUnmount () {
