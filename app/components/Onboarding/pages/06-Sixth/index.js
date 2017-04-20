@@ -6,15 +6,15 @@ const image = require('./assets/image.png')
 
 const messages = defineMessages({
   title: {
-    id: 'onboarding.third.title'
+    id: 'onboarding.sixth.title'
   },
 
   description: {
-    id: 'onboarding.third.description'
+    id: 'onboarding.sixth.description'
   }
 })
 
-const Third = ({ intl }) => {
+const Sixth = ({ intl }) => {
   let title = intl.formatMessage(messages.title)
   let description = intl.formatMessage(messages.description)
 
@@ -28,10 +28,10 @@ const Third = ({ intl }) => {
   )
 }
 
-Third.propTypes = {
+Sixth.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-export default injectIntl(Third)
+export default injectIntl(Sixth)

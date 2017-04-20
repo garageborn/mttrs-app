@@ -2,20 +2,20 @@ import React, { PropTypes } from 'react'
 import { injectIntl, defineMessages } from 'react-intl'
 import Page from '../../components/Page'
 import styles from './styles'
-const image = require('./assets/01-welcome.png')
-const icon = require('./assets/mttrs-brand.png')
+const image = require('./assets/image.png')
+const icon = require('./assets/brand.png')
 
 const messages = defineMessages({
   title: {
-    id: 'onboarding.welcome.title'
+    id: 'onboarding.first.title'
   },
 
   description: {
-    id: 'onboarding.welcome.description'
+    id: 'onboarding.first.description'
   }
 })
 
-const Welcome = ({ intl }) => {
+const First = ({ intl }) => {
   let title = intl.formatMessage(messages.title)
   let description = intl.formatMessage(messages.description)
 
@@ -30,10 +30,10 @@ const Welcome = ({ intl }) => {
   )
 }
 
-Welcome.propTypes = {
+First.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-export default injectIntl(Welcome)
+export default injectIntl(First)
