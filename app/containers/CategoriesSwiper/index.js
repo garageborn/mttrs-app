@@ -120,12 +120,16 @@ class CategoriesTimeline extends Component {
   }
 
   get swiperStyles () {
-    const category = this.state.navigationState.index - 1
-    let containerStyles = styles.listViewContainer
-    if (!this.props.params.section || this.props.data.loading) return containerStyles
+    if (!this.props.params.section || this.props.data.loading) return styles.listViewContainer
+    const categoryIndex = this.state.navigationState.index - 1
+    const category = this.props.data.categories[categoryIndex]
+    return this.sectionStyles(category)
+  }
+
+  sectionStyles (category) {
     const home = this.props.params.section.name === 'home'
-    if (!home && this.props.data.categories[category].tags_count) return [styles.listViewContainer, styles.listViewWithTags]
-    return containerStyles
+    if (home || !category || !category.tags_count) return styles.listViewContainer
+    return [styles.listViewContainer, styles.listViewWithTags]
   }
 
   render () {
