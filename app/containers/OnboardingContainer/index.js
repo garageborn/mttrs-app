@@ -17,7 +17,7 @@ class OnboardingContainer extends Component {
   render () {
     const { tenant, onboarding } = this.props
     if (!tenant.isLoaded) return null
-    // if (onboarding.isFetching || !onboarding.show) return null
+    if (onboarding.isFetching || !onboarding.show) return null
 
     return (
       <Modal animationType={'slide'} transparent visible onRequestClose={this.onOnboardingEnd}>
