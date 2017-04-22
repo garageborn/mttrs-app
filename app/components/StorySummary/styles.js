@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       ios: '600',
       android: '500'
     }),
-    fontSize: 13,
+    fontSize: 14,
     lineHeight: 18,
     color: '#666766',
     marginTop: 3,
@@ -38,16 +38,8 @@ const styles = StyleSheet.create({
   },
 
   summary: {
-    ...Platform.select({
-      ios: {
-        fontSize: 13,
-        lineHeight: 22
-      },
-      android: {
-        fontSize: 13,
-        lineHeight: 22
-      }
-    }),
+    fontSize: 14,
+    lineHeight: 22,
     color: '#666766',
     marginTop: 3
   },
