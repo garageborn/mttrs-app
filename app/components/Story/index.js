@@ -40,13 +40,7 @@ class Story extends Component {
     if (!this.hasSummary) return null
 
     const { story, visited } = this.props
-
-    return (
-      <SummaryContainer
-        visited={visited}
-        story={story}
-      />
-    )
+    return <SummaryContainer visited={visited} story={story} />
   }
 
   get mainLink () {
