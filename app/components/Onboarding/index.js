@@ -5,6 +5,7 @@ import Second from './pages/02-Second'
 import Third from './pages/03-Third'
 import Fourth from './pages/04-Fourth'
 import Fifth from './pages/05-Fifth'
+import Sixth from './pages/06-Sixth'
 
 const Onboarding = ({ onEnd }) => (
   <PagesWrapper onEnd={onEnd}>
@@ -13,6 +14,7 @@ const Onboarding = ({ onEnd }) => (
     <Third />
     <Fourth />
     <Fifth />
+    <Sixth />
   </PagesWrapper>
 )
 

@@ -19,13 +19,16 @@ const messages = defineMessages({
 class CategoriesTimeline extends Component {
   constructor (props) {
     super(props)
+
     this.renderScene = this.renderScene.bind(this)
     this.handleChangeTab = this.handleChangeTab.bind(this)
+
     this.state = {
       navigationState: {
         index: 0,
         routes: [this.homeRoute]
-      }
+      },
+      swiperStyles: null
     }
   }
 
@@ -35,7 +38,8 @@ class CategoriesTimeline extends Component {
     }
   }
 
-  shouldComponentUpdate (nextProps) {
+  shouldComponentUpdate (nextProps, nextState) {
+    if (this.state.activeTag !== nextState.activeTag) return true
     if (this.props.data.loading !== nextProps.data.loading) return true
     if (!_isEqual(this.props.params !== nextProps.params)) return true
     return !_isEqual(this.props.data.categories, nextProps.data.categories)
@@ -88,7 +92,6 @@ class CategoriesTimeline extends Component {
 
     const willBeHome = index === 0
     const nextRoute = this.state.navigationState.routes[index]
-
     if (willBeHome) {
       this.props.dispatch(NavigationActions.home())
     } else {
@@ -103,7 +106,7 @@ class CategoriesTimeline extends Component {
     if (sceneProps.route.type === 'home') {
       return <HomeTimeline {...props} />
     } else {
-      return <CategoryTimeline {...props} />
+      return <CategoryTimeline {...props} activeTag={this.props.activeTag} />
     }
   }
 
@@ -116,12 +119,24 @@ class CategoriesTimeline extends Component {
     return <ApolloError data={this.props.data} />
   }
 
+  get swiperStyles () {
+    if (!this.props.params.section || this.props.data.loading) return styles.listViewContainer
+    const categoryIndex = this.state.navigationState.index - 1
+    const category = this.props.data.categories[categoryIndex]
+    return this.sectionStyles(category)
+  }
+
+  sectionStyles (category) {
+    const home = this.props.params.section.name === 'home'
+    if (home || !category || !category.tags_count) return styles.listViewContainer
+    return [styles.listViewContainer, styles.listViewWithTags]
+  }
+
   render () {
     if (this.props.data.error) return this.renderError()
-
     return (
       <TabViewAnimated
-        style={styles.listViewContainer}
+        style={this.swiperStyles}
         navigationState={this.state.navigationState}
         renderScene={this.renderScene}
         onRequestChangeTab={this.handleChangeTab}
@@ -143,6 +158,7 @@ CategoriesTimeline.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   params: PropTypes.object.isRequired,
+  activeTag: PropTypes.string
 }
 
 const IntlCategoriesTimeline = injectIntl(CategoriesTimeline)

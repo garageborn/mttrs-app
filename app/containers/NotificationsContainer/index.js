@@ -3,7 +3,6 @@ import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
-import _isEmpty from 'lodash/isEmpty'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
@@ -21,7 +20,6 @@ class NotificationsContainer extends Component {
   componentWillMount () {
     OneSignal.inFocusDisplaying(2)
     OneSignal.addEventListener('opened', this.handleOpen)
-    OneSignal.addEventListener('ids', (ids) => { console.log('-----ids', ids) })
   }
 
   componentWillUnmount () {

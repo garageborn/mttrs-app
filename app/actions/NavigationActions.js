@@ -1,5 +1,7 @@
-import Router from '../config/Router'
+import { Platform } from 'react-native'
 import { NavigationActions } from '@exponent/ex-navigation'
+import SafariView from 'react-native-safari-view'
+import Router from '../config/Router'
 import _result from 'lodash/result'
 import { AnalyticsActions } from './index'
 
@@ -19,12 +21,10 @@ export function home () {
 
 export function link (story, link) {
   return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    if (!navigation) return null
-
-    const route = Router.getRoute('link', { story: story, link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
-    dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
+    dispatch(Platform.select({
+      ios: iosLink(story, link),
+      android: linkScene(story, link)
+    }))
   }
 }
 
@@ -105,4 +105,25 @@ function getCurrentParams (getState) {
   const currentRoute = getCurrentRoute(getState)
   if (!currentRoute) return
   return currentRoute.params
+}
+
+function iosLink (story, link) {
+  return (dispatch, getState) => {
+    const url = link.amp_url || link.url
+
+    SafariView.isAvailable()
+      .then(SafariView.show({ url }))
+      .catch(error => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+  }
+}
+
+function linkScene (story, link) {
+  return (dispatch, getState) => {
+    const navigation = getNavigation(getState)
+    if (!navigation) return null
+
+    const route = Router.getRoute('link', { story: story, link: link })
+    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
+  }
 }

@@ -2,19 +2,19 @@ import React, { PropTypes } from 'react'
 import { injectIntl, defineMessages } from 'react-intl'
 import Page from '../../components/Page'
 import styles from './styles'
-const image = require('./assets/04-publishers.png')
+const image = require('./assets/image.png')
 
 const messages = defineMessages({
   title: {
-    id: 'onboarding.publishers.title'
+    id: 'onboarding.fourth.title'
   },
 
   description: {
-    id: 'onboarding.publishers.description'
+    id: 'onboarding.fourth.description'
   }
 })
 
-const Highlights = ({ intl }) => {
+const Fourth = ({ intl }) => {
   let title = intl.formatMessage(messages.title)
   let description = intl.formatMessage(messages.description)
 
@@ -28,10 +28,10 @@ const Highlights = ({ intl }) => {
   )
 }
 
-Highlights.propTypes = {
+Fourth.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-export default injectIntl(Highlights)
+export default injectIntl(Fourth)
