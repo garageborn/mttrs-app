@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import React, { PropTypes, Component } from 'react'
 import { View } from 'react-native'
-import StorySummary from '../StorySummary'
+import SummaryContainer from '../../containers/SummaryContainer'
 import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
@@ -39,11 +39,12 @@ class Story extends Component {
   renderSummary () {
     if (!this.hasSummary) return null
 
+    const { story, visited } = this.props
+
     return (
-      <StorySummary
-        visited={this.props.visited}
-        summary={this.props.story.summary}
-        headline={this.props.story.headline}
+      <SummaryContainer
+        visited={visited}
+        story={story}
       />
     )
   }
