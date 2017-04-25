@@ -19,7 +19,7 @@ const PublisherMenuListViewSeparator = ({ intl, section }) => {
       shadowOpacity={1}
     >
       <View style={styles.container}>
-        <Text style={styles.textLeft}>{section.key}</Text>
+        <Text style={styles.textLeft}>{section}</Text>
         <Text style={styles.textRight}>{todaysNews}</Text>
       </View>
     </View>
