@@ -48,8 +48,8 @@ class TimelineList extends Component {
     )
   }
 
-  extractKey (item) {
-    return item.id
+  extractKey (item, index) {
+    return item.id + index
   }
 
   renderRow (section) {
