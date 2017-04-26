@@ -6,7 +6,8 @@ import { injectIntl, defineMessages } from 'react-intl'
 const messages = defineMessages({
   lastWeek: { id: 'lastWeek' },
   lastMonth: { id: 'lastMonth' },
-  recent: { id: 'recent' },
+  today: { id: 'today' },
+  yesterday: { id: 'yesterday' },
   dateFormat: { id: 'dateFormat' }
 })
 
@@ -31,8 +32,8 @@ class ParsedDate extends Component {
         return formatMessage(messages.lastMonth)
       default:
         return moment(locale).unix(date).calendar(null, {
-          sameDay: `[${formatMessage(messages.recent)}]`,
-          lastDay: `[${formatMessage(messages.recent)}]`,
+          sameDay: `[${formatMessage(messages.today)}]`,
+          lastDay: `[${formatMessage(messages.yesterday)}]`,
           lastWeek: formatMessage(messages.dateFormat),
           sameElse: formatMessage(messages.dateFormat)
         })
