@@ -3,6 +3,7 @@ import { SectionList } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
+import TimelineAdContainer from '../../containers/TimelineAdContainer'
 
 class TimelineList extends Component {
   constructor (props) {
@@ -54,14 +55,15 @@ class TimelineList extends Component {
 
   renderRow (section) {
     const story = section.item
-    return (
-      <StoryContainer
-        key={story.id}
-        story={story}
-        timelineRef={this.refs.timeline}
-        collapsable={false}
-      />
-    )
+    // let components = [
+    //   <StoryContainer key={story.id} story={story} collapsable={false} />
+    // ]
+    // if (section.index === 0) components.push(<TimelineAdContainer key={'timelineAd'} />)
+
+    let components = []
+    if (section.index === 0) components.push(<TimelineAdContainer key={'timelineAd'} />)
+    components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
+    return components
   }
 }
 
