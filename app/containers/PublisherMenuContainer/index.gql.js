@@ -9,7 +9,7 @@ query {
     name
     display_name
     slug
-    today_stories_count
+    recent_stories_count
   }
 }
 `

@@ -14,9 +14,7 @@ class Story extends Component {
     if (!story) return null
 
     return (
-      <View
-        collapsable={false}
-      >
+      <View collapsable={false}>
         <View style={styles.card}>
           <StoryMainLink
             visited={visited}
@@ -26,11 +24,7 @@ class Story extends Component {
             story={story}
           />
           {this.renderSummary(story.headline, story.summary)}
-          <StoryMetadata
-            visited={visited}
-            story={story}
-            onPublishersPress={openStoryLinks}
-          />
+          <StoryMetadata visited={visited} story={story} onPublishersPress={openStoryLinks}/>
         </View>
       </View>
     )

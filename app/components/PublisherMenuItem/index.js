@@ -42,16 +42,16 @@ class PublisherMenuItem extends Component {
   }
 
   get count () {
-    let { today_stories_count } = this.props.publisher
-    if (!today_stories_count) return '--'
-    return today_stories_count
+    let { recent_stories_count } = this.props.publisher
+    if (!recent_stories_count) return '--'
+    return recent_stories_count
   }
 }
 
 PublisherMenuItem.propTypes = {
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    today_stories_count: PropTypes.number
+    recent_stories_count: PropTypes.number
   }),
   onPress: PropTypes.func.isRequired
 }

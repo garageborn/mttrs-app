@@ -26,6 +26,8 @@ const infiniteScroll = ({ fetchMore, variables, timeline }) => {
 
   const lastItem = items[items.length - 1]
 
+  console.log('last item', items[items.length - 1])
+
   return fetchMore({
     variables: { ...variables, cursor: lastItem.date },
     updateQuery: (previousResult, { fetchMoreResult }) => {
