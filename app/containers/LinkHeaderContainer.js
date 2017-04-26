@@ -67,7 +67,7 @@ class LinkHeaderContainer extends Component {
         link={link}
         share={this.share}
         close={this.close}
-        publisher={this.props.link.publisher}
+        publisher={link.publisher}
         publisherLogo={this.publisherLogo}
         onPress={this.openPublisher}
       />
