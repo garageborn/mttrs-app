@@ -4,13 +4,13 @@ import styles from './styles'
 import { injectIntl, defineMessages } from 'react-intl'
 
 const messages = defineMessages({
-  recentStories: {
-    id: 'publisherListSeparator.recentStories'
+  todaysNews: {
+    id: 'publisherListSeparator.todaysNews'
   }
 })
 
 const PublisherMenuListViewSeparator = ({ intl, section }) => {
-  const recentStories = intl.formatMessage(messages.recentStories)
+  const todaysNews = intl.formatMessage(messages.todaysNews)
 
   return (
     <View
@@ -20,7 +20,7 @@ const PublisherMenuListViewSeparator = ({ intl, section }) => {
     >
       <View style={styles.container}>
         <Text style={styles.textLeft}>{section}</Text>
-        <Text style={styles.textRight}>{recentStories}</Text>
+        <Text style={styles.textRight}>{todaysNews}</Text>
       </View>
     </View>
   )
