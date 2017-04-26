@@ -21,12 +21,7 @@ class StoryPublishers extends Component {
   render () {
     return (
       <View style={styles.publisher}>
-        <TouchablePublisherLogo
-          source={this.publisherLogo}
-          onPress={() => alert(1)}
-          underlayColor={WHITE_TRANSPARENT_COLOR}
-        />
-        {/* <PublisherLogo source={this.publisherLogo} /> */}
+        <PublisherLogo source={this.publisherLogo} />
         {this.getMainPublisher()}
         {this.getCounter()}
       </View>

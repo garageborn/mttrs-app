@@ -15,7 +15,7 @@ export function home () {
     let sectionParams = Object.assign({}, params.section, { name: 'home', model: {} })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.name}`))
-    return dispatch(handleRoute(newParams))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -37,7 +37,7 @@ export function selectCategory (category) {
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
-    return dispatch(handleRoute(newParams))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -51,7 +51,7 @@ export function selectPublisher (publisher) {
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
-    return dispatch(handleRoute(newParams))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -65,7 +65,7 @@ export function storyLinks (storyLinksParams) {
     let newParams = Object.assign({}, params, { section: sectionParams })
     let linkSlug = _result(storyLinksParams, 'story.main_link.slug')
     if (linkSlug) dispatch(AnalyticsActions.trackScreen(`/link/${linkSlug}/story-links`))
-    return dispatch(handleRoute(newParams))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -76,12 +76,12 @@ export function back () {
   }
 }
 
-function handleRoute (newParams) {
+function handleTimelineRoute (newParams) {
   return (dispatch, getState) => {
     const currentRoute = getCurrentRoute(getState)
     const navigation = getNavigation(getState)
     const route = Router.getRoute('timeline', newParams)
-    if (currentRoute.routeName === 'link') return dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    if (currentRoute.routeName !== 'timeline') return dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
     return dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
