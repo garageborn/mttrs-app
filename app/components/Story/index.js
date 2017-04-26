@@ -7,25 +7,26 @@ import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
 
 class Story extends Component {
-
   render () {
-    const { openLink, openStoryLinks, story, visited } = this.props
+    const { openLink, handlePublishersPress, story, visited } = this.props
 
     if (!story) return null
 
     return (
-      <View collapsable={false}>
-        <View style={styles.card}>
-          <StoryMainLink
-            visited={visited}
-            onPress={openLink}
-            mainLink={this.mainLink}
-            category={story.category}
-            story={story}
-          />
-          {this.renderSummary(story.headline, story.summary)}
-          <StoryMetadata visited={visited} story={story} onPublishersPress={openStoryLinks}/>
-        </View>
+      <View style={styles.card}>
+        <StoryMainLink
+          visited={visited}
+          onPress={openLink}
+          mainLink={this.mainLink}
+          category={story.category}
+          story={story}
+        />
+        {this.renderSummary(story.headline, story.summary)}
+        <StoryMetadata
+          visited={visited}
+          story={story}
+          onPublishersPress={handlePublishersPress}
+        />
       </View>
     )
   }
@@ -68,7 +69,7 @@ Story.propTypes = {
     })
   }).isRequired,
   openLink: PropTypes.func.isRequired,
-  openStoryLinks: PropTypes.func.isRequired,
+  handlePublishersPress: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired
 }
 

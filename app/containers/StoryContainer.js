@@ -7,21 +7,18 @@ class StoryContainer extends Component {
   constructor (props) {
     super(props)
     this.openLink = this.openLink.bind(this)
-    this.openStoryLinks = this.openStoryLinks.bind(this)
+    this.handlePublishersPress = this.handlePublishersPress.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
   }
 
   render () {
-    const { scrollToY, story, timelineRef, visited, scrolled } = this.props
+    const { story, visited } = this.props
     return (
       <Story
         story={story}
         openLink={this.openMainLink}
-        openStoryLinks={this.openStoryLinks}
+        handlePublishersPress={this.handlePublishersPress}
         visited={visited}
-        scrollToY={scrollToY}
-        timelineRef={timelineRef}
-        scrolled={scrolled}
       />
     )
   }
@@ -31,9 +28,10 @@ class StoryContainer extends Component {
     dispatch(NavigationActions.link(this.props.story, link))
   }
 
-  openStoryLinks () {
+  handlePublishersPress () {
     const { dispatch, story } = this.props
-    dispatch(NavigationActions.storyLinks({ story: story, open: true }))
+    if (story.other_links_count) return dispatch(NavigationActions.storyLinks({ story: story, open: true }))
+    return dispatch(NavigationActions.selectPublisher(story.main_link.publisher))
   }
 
   openMainLink () {
@@ -48,9 +46,7 @@ class StoryContainer extends Component {
 StoryContainer.propTypes = {
   story: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  visited: PropTypes.bool,
-  timelineRef: PropTypes.object,
-  scrollToY: PropTypes.func.isRequired
+  visited: PropTypes.bool
 }
 
 let mapStateToProps = (state, ownProps) => {

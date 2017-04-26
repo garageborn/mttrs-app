@@ -1,61 +1,33 @@
 import React, { Component, PropTypes } from 'react'
-import { ListView, Platform } from 'react-native'
+import { SectionList } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
-import { height as sectionHeaderHeight } from '../ListViewHeader/styles'
 
 class TimelineList extends Component {
   constructor (props) {
     super(props)
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-    })
-    this.state = { dataSource: ds, scrolled: false }
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
-    this.scrollToY = this.scrollToY.bind(this)
-    this.setScrolled = this.setScrolled.bind(this)
   }
 
   componentWillReceiveProps (nextProps) {
-    if (_isEqual(this.props.data.items, nextProps.data.items)) return
-
-    this.updateDataSource(nextProps)
+    if (_isEqual(this.props.data.items, nextProps.data.items)) return null
   }
 
-  componentWillMount () {
-    this.updateDataSource(this.props)
+  renderSectionHeader (item) {
+    return <ListViewHeader date={item.section.key} />
   }
 
-  updateDataSource (props) {
-    let { rows, sections } = this.rowsAndSections(props)
-    return this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections(rows, sections)
-    })
-  }
+  sections () {
+    const { items } = this.props.data
 
-  renderSectionHeader (sectionData, date) {
-    return <ListViewHeader date={date} />
-  }
+    if (!items || !items.length) return []
 
-  rowsAndSections (props) {
-    let rows = {}
-    let sections = []
-
-    const { items } = props.data
-
-    if (!items || !items.length) return { rows, sections }
-
-    items.forEach(item => {
+    return items.map(item => {
       const { date, stories } = item
-      if (!stories.length) return
-      sections.push(date)
-      rows[date] = stories
+      return { key: date, data: stories }
     })
-
-    return { rows, sections }
   }
 
   render () {
@@ -63,43 +35,33 @@ class TimelineList extends Component {
     if (!items || !items.length) return null
 
     return (
-      <ListView
-        collapsable={false}
-        dataSource={this.state.dataSource}
+      <SectionList
+        keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
         onEndReachedThreshold={200}
-        pageSize={4}
-        ref={'timeline'}
         refreshControl={this.props.refreshControl()}
         renderFooter={this.props.renderFooter}
-        renderRow={this.renderRow}
+        renderItem={this.renderRow}
         renderSectionHeader={this.renderSectionHeader}
-        onScroll={this.setScrolled}
+        sections={this.sections()}
       />
     )
   }
 
-  setScrolled () {
-    return this.setState({ scrolled: true })
+  extractKey (item, index) {
+    return item.id + index
   }
 
-  renderRow (story) {
+  renderRow (section) {
+    const story = section.item
     return (
       <StoryContainer
         key={story.id}
         story={story}
-        scrollToY={this.scrollToY}
         timelineRef={this.refs.timeline}
         collapsable={false}
-        scrolled={this.state.scrolled}
       />
     )
-  }
-
-  scrollToY (y) {
-    let scrollY = y
-    if (Platform.OS === 'ios') scrollY = y - sectionHeaderHeight
-    return this.refs.timeline.scrollTo({ x: 0, y: scrollY, animated: true })
   }
 }
 

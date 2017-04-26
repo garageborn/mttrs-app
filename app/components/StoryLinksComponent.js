@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ListView } from 'react-native'
+import { View, FlatList } from 'react-native'
 import styles from '../styles/StoryLinks'
 import StoryLink from '../components/StoryLink'
 import LinearGradient from 'react-native-linear-gradient'
@@ -8,7 +8,6 @@ class StoryLinksComponent extends Component {
   constructor (props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)
-    this.dataSource = this.dataSource.bind(this)
   }
 
   render () {
@@ -20,6 +19,7 @@ class StoryLinksComponent extends Component {
             linkType='header'
             link={this.mainLink}
             openLink={this.props.openLink}
+            openPublisher={this.props.openPublisher}
           />
         </View>
         {this.renderListView()}
@@ -34,30 +34,29 @@ class StoryLinksComponent extends Component {
   renderListView () {
     if (!this.otherLinks || !this.otherLinks.length) return
     return (
-      <ListView
+      <FlatList
+        keyExtractor={this.extractKey}
         style={styles.linksList}
-        dataSource={this.dataSource()}
-        renderRow={this.renderRow}
+        data={this.otherLinks}
+        renderItem={this.renderRow}
       />
     )
   }
 
-  dataSource () {
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    })
-    return ds.cloneWithRows(this.otherLinks)
-  }
-
-  renderRow (rowData, sectionID, rowID) {
+  renderRow (data) {
     return (
       <StoryLink
         linkType='list'
-        rowID={rowID}
-        link={rowData}
+        rowID={data.index}
+        link={data.item}
         openLink={this.props.openLink}
+        openPublisher={this.props.openPublisher}
       />
     )
+  }
+
+  extractKey (item, index) {
+    return `storyLink_${index}`
   }
 
   get mainLink () {
@@ -84,7 +83,8 @@ StoryLinksComponent.propTypes = {
     main_link: linkPropsTypes.isRequired,
     other_links: PropTypes.arrayOf(linkPropsTypes).isRequired
   }).isRequired,
-  openLink: PropTypes.func.isRequired
+  openLink: PropTypes.func.isRequired,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default StoryLinksComponent

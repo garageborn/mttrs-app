@@ -14,8 +14,8 @@ export function home () {
     let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'home', model: {} })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.name}`))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -36,9 +36,8 @@ export function selectCategory (category) {
 
     let sectionParams = Object.assign({}, params.section, { name: 'category', model: category })
     let newParams = Object.assign({}, params, { section: sectionParams })
-
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -51,9 +50,8 @@ export function selectPublisher (publisher) {
     let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
     let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
-
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -65,11 +63,9 @@ export function storyLinks (storyLinksParams) {
 
     let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })
     let newParams = Object.assign({}, params, { section: sectionParams })
-
-    dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
-
     let linkSlug = _result(storyLinksParams, 'story.main_link.slug')
     if (linkSlug) dispatch(AnalyticsActions.trackScreen(`/link/${linkSlug}/story-links`))
+    return dispatch(handleTimelineRoute(newParams))
   }
 }
 
@@ -77,6 +73,16 @@ export function back () {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+  }
+}
+
+function handleTimelineRoute (newParams) {
+  return (dispatch, getState) => {
+    const currentRoute = getCurrentRoute(getState)
+    const navigation = getNavigation(getState)
+    const route = Router.getRoute('timeline', newParams)
+    if (currentRoute.routeName !== 'timeline') return dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    return dispatch(NavigationActions.updateCurrentRouteParams(navigation.currentNavigatorUID, newParams))
   }
 }
 

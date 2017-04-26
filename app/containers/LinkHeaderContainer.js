@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import Share from 'react-native-share'
 import url from 'url'
@@ -13,6 +14,7 @@ class LinkHeaderContainer extends Component {
     super(props)
     this.close = this.close.bind(this)
     this.share = this.share.bind(this)
+    this.openPublisher = this.openPublisher.bind(this)
   }
 
   share () {
@@ -29,7 +31,7 @@ class LinkHeaderContainer extends Component {
       this.context.analytics.trackEvent('link', 'share', { slug: link.slug })
     }).catch((error) => {
       captureError(error)
-    });
+    })
   }
 
   close () {
@@ -52,6 +54,12 @@ class LinkHeaderContainer extends Component {
     return { uri }
   }
 
+  openPublisher (publisher) {
+    InteractionManager.runAfterInteractions(() => {
+      this.props.dispatch(NavigationActions.selectPublisher(publisher))
+    })
+  }
+
   render () {
     const { link } = this.props
     return (
@@ -59,7 +67,9 @@ class LinkHeaderContainer extends Component {
         link={link}
         share={this.share}
         close={this.close}
+        publisher={link.publisher}
         publisherLogo={this.publisherLogo}
+        onPress={this.openPublisher}
       />
     )
   }
