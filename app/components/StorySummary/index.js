@@ -1,18 +1,23 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { PropTypes, Component } from 'react'
-import { View, Text, Image } from 'react-native'
-import { DARK_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import { View, Text } from 'react-native'
+import Touchable from '../Touchable'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
 class StorySummary extends Component {
   render () {
+    const { headline, summary } = this.props.story
     return (
       <View style={styles.container}>
-        <View style={styles.box}>
-          <View style={this.headlineStyles}>
-            <Text style={styles.headline}>{this.props.headline}</Text>
+        <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => this.props.onPress()}>
+          <View style={styles.box}>
+            <View style={this.headlineStyles}>
+              <Text style={styles.headline}>{headline}</Text>
+            </View>
+            <Text style={this.summaryStyles}>{summary}</Text>
           </View>
-          <Text style={this.summaryStyles}>{this.props.summary}</Text>
-        </View>
+        </Touchable>
       </View>
     )
   }
@@ -31,9 +36,11 @@ class StorySummary extends Component {
 
 StorySummary.propTypes = {
   visited: PropTypes.bool.isRequired,
-  headline: PropTypes.string.isRequired,
-  summary: PropTypes.string,
-  intl: PropTypes.object
+  onPress: PropTypes.func.isRequired,
+  story: PropTypes.shape({
+    headline: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default StorySummary

@@ -42,7 +42,7 @@ class TimelineScene extends Component {
 
   render () {
     return (
-      <View style={styles.container}>
+      <View>
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryLinks()}

@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     height: Platform.select({
       ios: 160,
-      android: 140
+      android: 130
     }),
     width
   }

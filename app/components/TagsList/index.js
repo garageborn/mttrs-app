@@ -56,8 +56,8 @@ class TagsList extends Component {
         <Tag
           key={`tag_${idx}`}
           last={this.isLast(idx)}
-          active={this.isActive(tag.slug, tag.category.slug)}
-          onPress={() => handleTag(tag.slug)}
+          active={this.isActive(tag.slug)}
+          onPress={() => handleTag(tag.slug, tag.category.slug)}
         >
           {tag.name}
         </Tag>

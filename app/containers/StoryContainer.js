@@ -12,16 +12,13 @@ class StoryContainer extends Component {
   }
 
   render () {
-    const { scrollToY, story, timelineRef, visited, scrolled } = this.props
+    const { story, visited } = this.props
     return (
       <Story
         story={story}
         openLink={this.openMainLink}
         handlePublishersPress={this.handlePublishersPress}
         visited={visited}
-        scrollToY={scrollToY}
-        timelineRef={timelineRef}
-        scrolled={scrolled}
       />
     )
   }
@@ -49,9 +46,7 @@ class StoryContainer extends Component {
 StoryContainer.propTypes = {
   story: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  visited: PropTypes.bool,
-  timelineRef: PropTypes.object,
-  scrollToY: PropTypes.func.isRequired
+  visited: PropTypes.bool
 }
 
 let mapStateToProps = (state, ownProps) => {

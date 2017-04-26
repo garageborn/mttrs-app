@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ListView } from 'react-native'
+import { View, SectionList } from 'react-native'
 import PublisherMenuItem from '../PublisherMenuItem'
 import PublisherMenuListViewSeparator from '../PublisherMenuListViewSeparator'
 import styles from './styles'
@@ -18,49 +18,46 @@ class PublisherMenuListView extends Component {
 
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={this.dataSource()}
-          renderRow={this.renderRow}
+        <SectionList
+          keyExtractor={this.extractKey}
+          sections={this.sections()}
+          renderItem={this.renderRow}
           renderSectionHeader={this.renderSeparator}
         />
       </View>
     )
   }
 
-  renderSeparator (sectionData, section) {
-    return <PublisherMenuListViewSeparator section={section} />
+  extractKey (item, index) {
+    return `publisher_${index}`
+  }
+
+  renderSeparator (sectionData) {
+    return <PublisherMenuListViewSeparator section={sectionData.section.key} />
   }
 
   renderRow (publisher) {
-    return <PublisherMenuItem key={publisher.id} publisher={publisher} onPress={this.props.openPublisher} />
+    return <PublisherMenuItem key={publisher.item.id} publisher={publisher.item} onPress={this.props.openPublisher} />
   }
 
-  dataSource () {
-    let ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2
-    })
-
-    let { rows, sections } = this.rowsAndSections()
-    return ds.cloneWithRowsAndSections(rows, sections)
-  }
-
-  rowsAndSections () {
+  sections () {
     const { publishers } = this.props
 
     let rows = {}
-    let sections = []
+    let letters = []
 
     publishers.map(publisher => {
-      let section = this.getSection(publisher)
-      if (sections.indexOf(section) === -1) {
-        sections.push(section)
-        rows[section] = []
+      let letter = this.getSection(publisher)
+      if (letters.indexOf(letter) === -1) {
+        letters.push(letter)
+        rows[letter] = []
       }
-      rows[section].push(publisher)
+      rows[letter].push(publisher)
     })
 
-    return { rows, sections }
+    return Object.keys(rows).map((key) => {
+      return { 'key': key, 'data': rows[key] }
+    })
   }
 
   getSection (publisher) {
