@@ -2,9 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import RestrictContentLabel from '../RestrictContentLabel'
+import TouchablePublisherLogo from '../TouchablePublisherLogo'
 import PublisherLogo from '../PublisherLogo'
-import styles from './styles'
+import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import styles from './styles'
 
 const messages = defineMessages({
   and: {

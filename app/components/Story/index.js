@@ -8,7 +8,7 @@ import styles from './styles'
 
 class Story extends Component {
   render () {
-    const { openLink, openStoryLinks, story, visited } = this.props
+    const { openLink, handlePublishersPress, story, visited } = this.props
 
     if (!story) return null
 
@@ -25,7 +25,7 @@ class Story extends Component {
         <StoryMetadata
           visited={visited}
           story={story}
-          onPublishersPress={openStoryLinks}
+          onPublishersPress={handlePublishersPress}
         />
       </View>
     )
@@ -69,7 +69,7 @@ Story.propTypes = {
     })
   }).isRequired,
   openLink: PropTypes.func.isRequired,
-  openStoryLinks: PropTypes.func.isRequired,
+  handlePublishersPress: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired
 }
 

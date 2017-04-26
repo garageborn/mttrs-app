@@ -19,6 +19,7 @@ class StoryLinksComponent extends Component {
             linkType='header'
             link={this.mainLink}
             openLink={this.props.openLink}
+            openPublisher={this.props.openPublisher}
           />
         </View>
         {this.renderListView()}
@@ -49,6 +50,7 @@ class StoryLinksComponent extends Component {
         rowID={data.index}
         link={data.item}
         openLink={this.props.openLink}
+        openPublisher={this.props.openPublisher}
       />
     )
   }
@@ -81,7 +83,8 @@ StoryLinksComponent.propTypes = {
     main_link: linkPropsTypes.isRequired,
     other_links: PropTypes.arrayOf(linkPropsTypes).isRequired
   }).isRequired,
-  openLink: PropTypes.func.isRequired
+  openLink: PropTypes.func.isRequired,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default StoryLinksComponent
