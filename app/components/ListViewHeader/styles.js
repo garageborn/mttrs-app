@@ -5,7 +5,7 @@ export const height = 35
 const styles = StyleSheet.create({
   header: {
     height,
-    paddingTop: Platform.OS === 'android' ? 5 : 0,
+    paddingTop: 5,
     backgroundColor: '#F1F1F1',
     alignItems: 'center',
     justifyContent: 'center'
