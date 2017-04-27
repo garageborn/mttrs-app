@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 const { width } = Dimensions.get('window')
 const cardMargins = 40
-const aspectRatio = 1.85
+const aspectRatio = 1.78
 
 const styles = StyleSheet.create({
   container: {
@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
+    marginVertical: 10,
     height: (width - cardMargins) / aspectRatio,
     width: width - cardMargins
   }

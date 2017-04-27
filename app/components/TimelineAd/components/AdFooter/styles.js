@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
     borderColor: '#0B9CFF',
     borderRadius: 5,
     alignSelf: 'center',
-    marginVertical: 5
+    marginTop: 15,
+    marginBottom: 5
   },
   buttonText: {
     color: '#0B9CFF',
