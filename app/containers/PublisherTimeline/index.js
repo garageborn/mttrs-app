@@ -18,19 +18,10 @@ class PublisherTimeline extends Component {
 
 PublisherTimeline.propTypes = {
   data: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
   model: PropTypes.shape({
     slug: PropTypes.string.isRequired
   }).isRequired
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const currentRoute = ownProps.navigator.getCurrentRoute()
-  return {
-    isActiveRoute: currentRoute.routeName === 'timeline'
-  }
-}
-
 const PublisherTimelineWithData = withQuery(PublisherTimeline)
-const PublisherTimelineWithRedux = connect(mapStateToProps)(PublisherTimelineWithData)
-export default withNavigation(PublisherTimelineWithRedux)
+export default withNavigation(PublisherTimelineWithData)

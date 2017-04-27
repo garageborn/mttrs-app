@@ -31,17 +31,8 @@ CategoryTimeline.propTypes = {
   data: PropTypes.object,
   model: PropTypes.shape({
     slug: PropTypes.string.isRequired
-  }).isRequired,
-  isActiveRoute: PropTypes.bool
-}
-
-const mapStateToProps = (state, ownProps) => {
-  const currentRoute = ownProps.navigator.getCurrentRoute()
-  return {
-    isActiveRoute: currentRoute.routeName === 'timeline'
-  }
+  }).isRequired
 }
 
 const CategoryTimelineWithData = withQuery(CategoryTimeline)
-const CategoryWithRedux = connect(mapStateToProps)(CategoryTimelineWithData)
-export default withNavigation(CategoryWithRedux)
+export default withNavigation(CategoryTimelineWithData)
