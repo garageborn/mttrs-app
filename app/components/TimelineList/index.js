@@ -55,14 +55,10 @@ class TimelineList extends Component {
 
   renderRow (section) {
     const story = section.item
-    // let components = [
-    //   <StoryContainer key={story.id} story={story} collapsable={false} />
-    // ]
-    // if (section.index === 0) components.push(<TimelineAdContainer key={'timelineAd'} />)
-
-    let components = []
-    if (section.index === 0) components.push(<TimelineAdContainer key={'timelineAd'} />)
-    components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
+    let components = [
+      <StoryContainer key={story.id} story={story} collapsable={false} />
+    ]
+    if (section.index === 3) components.push(<TimelineAdContainer key={'timelineAd'} />)
     return components
   }
 }
