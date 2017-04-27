@@ -25,10 +25,7 @@ class CategoriesTimelineContainer extends Component {
     return (
       <View>
         {this.renderTags()}
-        <CategoriesSwiper
-          activeTag={this.state.activeTag}
-          params={this.props.params}
-        />
+        <CategoriesSwiper activeTag={this.state.activeTag} params={this.props.params} />
       </View>
     )
   }
