@@ -111,10 +111,11 @@ function getCurrentParams (getState) {
 function iosLink (story, link) {
   return (dispatch, getState) => {
     const url = link.amp_url || link.url
-
-    SafariView.isAvailable()
-      .then(SafariView.show({ url }))
-      .catch(error => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+    setTimeout(() => {
+      SafariView.isAvailable()
+        .then(() => SafariView.show({ url }))
+        .catch(error => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+    }, 500)
   }
 }
 
