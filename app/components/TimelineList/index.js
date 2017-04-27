@@ -4,6 +4,7 @@ import _isEqual from 'lodash/isEqual'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
 import TimelineAdContainer from '../../containers/TimelineAdContainer'
+const addPosition = 4
 
 class TimelineList extends Component {
   constructor (props) {
@@ -55,11 +56,15 @@ class TimelineList extends Component {
 
   renderRow (section) {
     const story = section.item
-    let components = [
-      <StoryContainer key={story.id} story={story} collapsable={false} />
-    ]
-    if (section.index === 3) components.push(<TimelineAdContainer key={'timelineAd'} />)
+
+    let components = []
+    if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
+    components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
     return components
+  }
+
+  hasAd (index) {
+    return index === addPosition - 1
   }
 }
 
