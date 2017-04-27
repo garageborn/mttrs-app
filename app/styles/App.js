@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get('window')
 
 const containerStyles = {
   flexGrow: 1,
-  height: height - headerHeight,
+  height: height,
   width
 }
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   listViewContainer: {
     position: 'absolute',
     top: Platform.select({
-      ios: 10,
+      ios: 5,
       android: 0
     }),
     ...containerStyles
