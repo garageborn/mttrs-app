@@ -10,7 +10,7 @@ class TimelineAdContainer extends Component {
     if (this.__DEV__) AdSettings.addTestDevice(AdSettings.currentDeviceHash)
 
     this.state = {
-      adsManager: new NativeAdsManager('1273521846029294_1297753870272758', 1)
+      adsManager: new NativeAdsManager(TIMELINE_AD_PLACEMENT_ID, 1)
     }
   }
 
