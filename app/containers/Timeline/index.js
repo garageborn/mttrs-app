@@ -37,10 +37,10 @@ class Timeline extends Component {
     )
   }
 
-  onEndReached (info) {
+  onEndReached () {
     const { hasMore, infiniteScroll } = this.props.data
     if (this.state.loadingMore || !hasMore) return
-    console.log('endreached')
+
     this.setState({ loadingMore: true })
     infiniteScroll().then(() => this.setState({ loadingMore: false }))
   }
