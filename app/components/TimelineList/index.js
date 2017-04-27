@@ -28,7 +28,7 @@ class TimelineList extends Component {
 
   render () {
     const { items } = this.props.data
-    if (!items || !items.length) return null
+    if (!items || !items.length || !items[0].stories.length) return null
 
     return (
       <SectionList
