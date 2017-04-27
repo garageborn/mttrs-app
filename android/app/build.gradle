@@ -108,8 +108,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 186
-        versionName "1.0.38"
+        versionCode 187
+        versionName "1.0.39"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
