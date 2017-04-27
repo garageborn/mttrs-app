@@ -1,4 +1,4 @@
-import { Platform, InteractionManager } from 'react-native'
+import { Platform } from 'react-native'
 import { NavigationActions } from '@exponent/ex-navigation'
 import SafariView from 'react-native-safari-view'
 import Router from '../config/Router'
