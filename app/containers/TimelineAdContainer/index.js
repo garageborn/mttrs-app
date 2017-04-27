@@ -7,7 +7,8 @@ import { TIMELINE_AD_PLACEMENT_ID } from '../../constants/Ads'
 class TimelineAdContainer extends Component {
   constructor (props) {
     super(props)
-    if (this.__DEV__) AdSettings.addTestDevice(AdSettings.currentDeviceHash)
+    // if (this.__DEV__) AdSettings.addTestDevice(AdSettings.currentDeviceHash)
+    AdSettings.addTestDevice(AdSettings.currentDeviceHash)
 
     this.state = {
       adsManager: new NativeAdsManager(TIMELINE_AD_PLACEMENT_ID, 1)
