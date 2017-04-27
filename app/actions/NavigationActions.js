@@ -1,4 +1,4 @@
-import { Platform } from 'react-native'
+import { Platform, InteractionManager } from 'react-native'
 import { NavigationActions } from '@exponent/ex-navigation'
 import SafariView from 'react-native-safari-view'
 import Router from '../config/Router'
@@ -111,10 +111,11 @@ function getCurrentParams (getState) {
 function iosLink (story, link) {
   return (dispatch, getState) => {
     const url = link.amp_url || link.url
-
-    SafariView.isAvailable()
-      .then(SafariView.show({ url }))
-      .catch(error => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+    setTimeout(() => {
+      SafariView.isAvailable()
+        .then(() => SafariView.show({ url }))
+        .catch(error => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+    }, 500)
   }
 }
 
