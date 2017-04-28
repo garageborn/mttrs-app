@@ -10,7 +10,7 @@ class PublisherTimeline extends Component {
   render () {
     return (
       <View style={styles.listViewContainer}>
-        <Timeline data={this.props.data} />
+        <Timeline type='publisher' data={this.props.data} />
       </View>
     )
   }

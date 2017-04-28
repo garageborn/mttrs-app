@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import Timeline from '../Timeline'
@@ -16,7 +15,7 @@ class CategoryTimeline extends Component {
   }
 
   render () {
-    return <Timeline data={this.props.data} />
+    return <Timeline type='category' data={this.props.data} />
   }
 
   isActiveTimeline (props) {

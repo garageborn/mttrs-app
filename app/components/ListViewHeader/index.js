@@ -3,9 +3,9 @@ import { View } from 'react-native'
 import ParsedDate from '../ParsedDate'
 import styles from './styles'
 
-const ListViewHeader = ({ date }) => (
+const ListViewHeader = ({ date, type }) => (
   <View style={styles.header}>
-    <ParsedDate style={styles.title} date={date} />
+    <ParsedDate style={styles.title} date={date} type={type} />
   </View>
 )
 

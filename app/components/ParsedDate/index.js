@@ -8,7 +8,8 @@ const messages = defineMessages({
   lastMonth: { id: 'lastMonth' },
   today: { id: 'today' },
   yesterday: { id: 'yesterday' },
-  dateFormat: { id: 'dateFormat' }
+  dateFormat: { id: 'dateFormat' },
+  recent: { id: 'recent' }
 })
 
 class ParsedDate extends Component {
@@ -32,12 +33,21 @@ class ParsedDate extends Component {
         return formatMessage(messages.lastMonth)
       default:
         return moment(locale).unix(date).calendar(null, {
-          sameDay: `[${formatMessage(messages.today)}]`,
-          lastDay: `[${formatMessage(messages.yesterday)}]`,
+          sameDay: `[${formatMessage(this.getMessage('sameDay'))}]`,
+          lastDay: `[${formatMessage(this.getMessage('yesterday'))}]`,
           lastWeek: formatMessage(messages.dateFormat),
           sameElse: formatMessage(messages.dateFormat)
         })
     }
+  }
+
+  getMessage (day) {
+    const daysMessages = {
+      sameDay: messages.today,
+      yesterday: messages.yesterday
+    }
+    if (this.props.type !== 'home') return daysMessages[day]
+    return messages.recent
   }
 }
 
@@ -47,7 +57,8 @@ ParsedDate.propTypes = {
     locale: PropTypes.string.isRequired
   }),
   date: PropTypes.number,
-  style: PropTypes.number
+  style: PropTypes.number,
+  type: PropTypes.string
 }
 
 export default injectIntl(ParsedDate)
