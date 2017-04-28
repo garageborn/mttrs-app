@@ -103,16 +103,12 @@ class CategoriesTimeline extends Component {
     this.subscribeToTabChange(sceneProps.subscribe)
     const props = { model: sceneProps.route.model, navigationState: this.state.navigationState }
 
-    const currentIndex = sceneProps.navigationState.index !== sceneProps.index
-    const nextIndex = sceneProps.navigationState.index + 1 === sceneProps.index
-    const previousIndex = sceneProps.navigationState.index - 1 === sceneProps.index
-
-    if (currentIndex && !nextIndex && !previousIndex) return null
+    const current = sceneProps.navigationState.index === sceneProps.index
 
     if (sceneProps.route.type === 'home') {
-      return <HomeTimeline {...props} />
+      return <HomeTimeline {...props} current={current}/>
     } else {
-      return <CategoryTimeline {...props} activeTag={this.props.activeTag} />
+      return <CategoryTimeline {...props} activeTag={this.props.activeTag} current={current}/>
     }
   }
 

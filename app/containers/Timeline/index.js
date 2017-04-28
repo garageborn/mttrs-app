@@ -53,8 +53,9 @@ class Timeline extends Component {
   }
 
   fillTimeline () {
+    if (!this.props.data || this.props.data.loading) return
     const storiesCount = this.storiesCount
-    if (this.props.data.loading || !storiesCount) return
+    if (!storiesCount) return
     if (storiesCount < minStoriesInTheViewport) this.onEndReached()
   }
 
@@ -77,7 +78,7 @@ Timeline.propTypes = {
     items: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
-  }).isRequired,
+  }),
   dispatch: PropTypes.func.isRequired
 }
 

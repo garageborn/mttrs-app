@@ -13,6 +13,7 @@ class Timeline extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
+    if (!this.props.data || !nextProps.data) return false
     let loadingChanged = this.props.data.loading !== nextProps.data.loading
     let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
     let loadingMoreChanged = this.props.loadingMore !== nextProps.loadingMore
@@ -23,7 +24,7 @@ class Timeline extends Component {
 
   render () {
     const { data, onEndReached } = this.props
-    if (data.loading) return this.renderLoading()
+    if (!data || data.loading) return this.renderLoading()
     if (data.error) return this.renderError()
 
     return (
@@ -80,10 +81,10 @@ class Timeline extends Component {
 
 Timeline.propTypes = {
   data: PropTypes.shape({
-    items: PropTypes.array.isRequired,
+    items: PropTypes.array,
     hasMore: PropTypes.bool,
     loading: PropTypes.bool
-  }).isRequired,
+  }),
   loadingMore: PropTypes.bool.isRequired,
   loadingPullToRefresh: PropTypes.bool.isRequired,
   onEndReached: PropTypes.func.isRequired,

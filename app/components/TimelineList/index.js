@@ -19,19 +19,24 @@ class TimelineList extends Component {
 
     if (!items || !items.length) return []
 
-    return items.map(item => {
+    const sections = items.map(item => {
       const { date, stories } = item
-      if (!stories.length) return
       return { key: date, data: stories }
+    })
+
+    return sections.filter((item) => {
+      return item.data.length
     })
   }
 
   render () {
+    if (!this.props.data) return null
     const { items } = this.props.data
-    if (!items || !items.length || !items[0].stories.length) return null
+    if (!items || !items.length) return null
 
     return (
       <SectionList
+        style={{marginBottom: 20}}
         ListFooterComponent={this.props.renderFooter}
         keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
@@ -44,7 +49,7 @@ class TimelineList extends Component {
   }
 
   extractKey (item, index) {
-    return item.id + index
+    return `story_${index}`
   }
 
   renderRow (section) {

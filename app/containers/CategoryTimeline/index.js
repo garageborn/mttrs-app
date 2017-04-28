@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import Timeline from '../Timeline'
@@ -8,6 +7,7 @@ import { parse } from '../../common/utils/Parser'
 
 class CategoryTimeline extends Component {
   shouldComponentUpdate (nextProps) {
+    if (!nextProps.data) return false
     if (this.isActiveTimeline(nextProps)) return true
     let loadingChanged = this.props.data.loading !== nextProps.data.loading
     let hasMoreChanged = this.props.data.hasMore !== nextProps.data.hasMore
@@ -28,10 +28,7 @@ class CategoryTimeline extends Component {
 }
 
 CategoryTimeline.propTypes = {
-  data: PropTypes.object,
-  model: PropTypes.shape({
-    slug: PropTypes.string.isRequired
-  }).isRequired
+  data: PropTypes.object
 }
 
 const CategoryTimelineWithData = withQuery(CategoryTimeline)

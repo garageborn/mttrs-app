@@ -5,6 +5,7 @@ import Timeline from '../Timeline'
 
 class HomeTimeline extends Component {
   shouldComponentUpdate (nextProps) {
+    if (!this.props.data || !nextProps.data) return false
     if (this.props.data.loading !== nextProps.data.loading) return true
     return this.isActiveTimeline(nextProps)
   }
