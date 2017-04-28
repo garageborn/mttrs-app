@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   listViewWithTags: {
     height: height - headerWithTagsHeight,
-    top: 55
+    top: tagsHeight
   }
 })
 
