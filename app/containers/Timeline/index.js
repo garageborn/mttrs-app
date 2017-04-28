@@ -25,9 +25,10 @@ class Timeline extends Component {
   }
 
   render () {
-    const { data } = this.props
+    const { data, type } = this.props
     return (
       <TimelineComponent
+        type={type}
         data={data}
         loadingMore={this.state.loadingMore}
         loadingPullToRefresh={this.state.loadingPullToRefresh}
@@ -79,7 +80,8 @@ Timeline.propTypes = {
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
   }),
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default connect()(Timeline)

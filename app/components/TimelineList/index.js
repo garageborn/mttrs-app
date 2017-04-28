@@ -13,7 +13,7 @@ class TimelineList extends Component {
   }
 
   renderSectionHeader (item) {
-    return <ListViewHeader date={item.section.key} />
+    return <ListViewHeader type={this.props.type} date={item.section.key} />
   }
 
   sections () {
@@ -70,7 +70,8 @@ TimelineList.propTypes = {
   }).isRequired,
   onEndReached: PropTypes.func.isRequired,
   refreshControl: PropTypes.func.isRequired,
-  renderFooter: PropTypes.func.isRequired
+  renderFooter: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default TimelineList
