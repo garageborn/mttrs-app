@@ -38,7 +38,7 @@
   "publisher.suggestion.title": "Couldn't find what you were looking for?",
   "publisherListSeparator.todaysNews": "today's news",
   "restrict.content": "paywall",
-  "recent": "Recent",
+  "recent": "Recent News",
   "search.placeholder": "Search for publishers",
   "storyCategory.in": "in",
   "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}",
