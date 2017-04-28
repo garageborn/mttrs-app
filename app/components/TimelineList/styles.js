@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: Platform.select({
       android: 0,
-      ios: 10
+      ios: 20
     })
   }
 })
