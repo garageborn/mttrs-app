@@ -1,8 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10
+    marginBottom: Platform.select({
+      android: 0,
+      ios: 10
+    })
   }
 })
 

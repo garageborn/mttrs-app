@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { SectionList } from 'react-native'
+import _result from 'lodash/result'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
+import styles from './styles.js'
 
 class TimelineList extends Component {
   constructor (props) {
@@ -17,16 +19,14 @@ class TimelineList extends Component {
   sections () {
     const { items } = this.props.data
 
-    if (!items || !items.length) return []
+    if (!_result(items, 'length')) return []
 
     const sections = items.map(item => {
       const { date, stories } = item
       return { key: date, data: stories }
     })
 
-    return sections.filter((item) => {
-      return item.data.length
-    })
+    return sections.filter((item) => item.data.length)
   }
 
   render () {
@@ -36,7 +36,7 @@ class TimelineList extends Component {
 
     return (
       <SectionList
-        style={{marginBottom: 20}}
+        style={styles.container}
         ListFooterComponent={this.props.renderFooter}
         keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
