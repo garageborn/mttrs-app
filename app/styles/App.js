@@ -1,10 +1,12 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from './Global'
 const { width, height } = Dimensions.get('window')
+const tagsHeight = 55
+const headerWithTagsHeight = headerHeight + tagsHeight
 
 const containerStyles = {
   flexGrow: 1,
-  height: height,
+  height: height - headerHeight,
   width
 }
 
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
     ...containerStyles
   },
   listViewWithTags: {
-    top: 55
+    height: height - headerWithTagsHeight,
+    top: tagsHeight
   }
 })
 

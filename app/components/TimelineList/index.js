@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { SectionList } from 'react-native'
+import _result from 'lodash/result'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
 import TimelineAdContainer from '../../containers/TimelineAdContainer'
+import styles from './styles.js'
 const addPosition = 4
 
 class TimelineList extends Component {
@@ -13,27 +15,30 @@ class TimelineList extends Component {
   }
 
   renderSectionHeader (item) {
-    return <ListViewHeader date={item.section.key} />
+    return <ListViewHeader type={this.props.type} date={item.section.key} />
   }
 
   sections () {
     const { items } = this.props.data
 
-    if (!items || !items.length) return []
+    if (!_result(items, 'length')) return []
 
-    return items.map(item => {
+    const sections = items.map(item => {
       const { date, stories } = item
-      if (!stories.length) return
       return { key: date, data: stories }
     })
+
+    return sections.filter((item) => item.data.length)
   }
 
   render () {
+    if (!this.props.data) return null
     const { items } = this.props.data
-    if (!items || !items.length || !items[0].stories.length) return null
+    if (!items || !items.length) return null
 
     return (
       <SectionList
+        style={styles.container}
         ListFooterComponent={this.props.renderFooter}
         keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
@@ -46,7 +51,7 @@ class TimelineList extends Component {
   }
 
   extractKey (item, index) {
-    return item.id + index
+    return `story_${index}`
   }
 
   renderRow (section) {
@@ -69,7 +74,8 @@ TimelineList.propTypes = {
   }).isRequired,
   onEndReached: PropTypes.func.isRequired,
   refreshControl: PropTypes.func.isRequired,
-  renderFooter: PropTypes.func.isRequired
+  renderFooter: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired
 }
 
 export default TimelineList

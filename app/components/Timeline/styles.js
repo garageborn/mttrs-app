@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
 
   infiniteScrollLoadingContainer: {
+    height: 50,
     padding: 10,
     marginBottom: 20
   },
