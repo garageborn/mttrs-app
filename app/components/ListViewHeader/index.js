@@ -10,7 +10,8 @@ const ListViewHeader = ({ date, type }) => (
 )
 
 ListViewHeader.propTypes = {
-  date: PropTypes.number.isRequired
+  date: PropTypes.number.isRequired,
+  type: PropTypes.string
 }
 
 export default ListViewHeader
