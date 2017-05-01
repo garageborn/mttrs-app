@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   shares: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 10
   },
 
   shareIcon: {

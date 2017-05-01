@@ -10,12 +10,14 @@ class StoryMetadata extends Component {
   render () {
     const { onPublishersPress, story } = this.props
     return (
-      <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
-        <View style={this.containerStyles}>
-          <StoryPublishers story={story} />
-          <SocialCount totalSocial={story.total_social} />
-        </View>
-      </Touchable>
+      <View style={this.containerStyles}>
+        <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
+          <View>
+            <StoryPublishers story={story} />
+          </View>
+        </Touchable>
+        <SocialCount totalSocial={story.total_social} />
+      </View>
     )
   }
 

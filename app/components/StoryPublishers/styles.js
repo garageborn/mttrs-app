@@ -13,7 +13,8 @@ const styles = StyleSheet.create({
 
   publisher: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 10
   },
 
   publisherLogo: {
