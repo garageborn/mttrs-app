@@ -5,8 +5,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: 8,
-    paddingTop: 5,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#F1F1F1'
   },
