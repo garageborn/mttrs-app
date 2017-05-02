@@ -36,7 +36,6 @@
 		39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F6DF8C2B20440DA6287088 /* libRNShare.a */; };
 		5B20731B74F349C7AD38B0A1 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AD9300BD1B4168AA38206A /* libRCTFBSDK.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		7E3876DA063D44BF8764CF9C /* librn-fbads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0942CC7C546E48559560274D /* librn-fbads.a */; };
 		7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A061B6A41DD0B17B000F7869 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A061B6A21DD0B17B000F7869 /* Fabric.framework */; };
@@ -269,13 +268,6 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
-		AA5D06B41EA0ED8900D0DDCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ADDCECA31D96B7DD00C511E0;
-			remoteInfo = "rn-fbads";
-		};
 		DCAE52F51E1EC1C700ABFD11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */;
@@ -295,7 +287,6 @@
 		00E356EE1AD99517003FC87E /* mttrsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mttrsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* mttrsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mttrsTests.m; sourceTree = "<group>"; };
-		0942CC7C546E48559560274D /* librn-fbads.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "librn-fbads.a"; sourceTree = "<group>"; };
 		1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -310,7 +301,6 @@
 		281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* mttrs-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mttrs-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* mttrs-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mttrs-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = "rn-fbads.xcodeproj"; path = "../node_modules/react-native-fbads/src/ios/rn-fbads.xcodeproj"; sourceTree = "<group>"; };
 		532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
 		74F6DF8C2B20440DA6287088 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
@@ -381,7 +371,6 @@
 				AA34B4101EA5089200FD5D00 /* FBSDKLoginKit.framework in Frameworks */,
 				AA34B40E1EA5089200FD5D00 /* FBAudienceNetwork.framework in Frameworks */,
 				5B20731B74F349C7AD38B0A1 /* libRCTFBSDK.a in Frameworks */,
-				7E3876DA063D44BF8764CF9C /* librn-fbads.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +549,6 @@
 				F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */,
 				58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */,
-				3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */,
 				AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */,
 			);
 			name = Libraries;
@@ -637,14 +625,6 @@
 			isa = PBXGroup;
 			children = (
 				AA23D6F71EA1112C004E640E /* libRCTFBSDK.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AA5D06971EA0ED8800D0DDCF /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA5D06B51EA0ED8900D0DDCF /* librn-fbads.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -840,10 +820,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = AA5D06971EA0ED8800D0DDCF /* Products */;
-					ProjectRef = 3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */;
 				},
 				{
 					ProductGroup = A0B8267A1DB547B2009A234B /* Products */;
@@ -1222,7 +1198,6 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
@@ -1253,7 +1228,6 @@
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
@@ -1297,7 +1271,6 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
@@ -1342,7 +1315,6 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
@@ -1378,7 +1350,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
@@ -1412,7 +1383,6 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
