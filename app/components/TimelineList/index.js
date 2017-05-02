@@ -3,7 +3,9 @@ import { SectionList } from 'react-native'
 import _result from 'lodash/result'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
+import TimelineAdContainer from '../../containers/TimelineAdContainer'
 import styles from './styles.js'
+const addPosition = 4
 
 class TimelineList extends Component {
   constructor (props) {
@@ -54,13 +56,15 @@ class TimelineList extends Component {
 
   renderRow (section) {
     const story = section.item
-    return (
-      <StoryContainer
-        key={story.id}
-        story={story}
-        collapsable={false}
-      />
-    )
+
+    let components = []
+    if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
+    components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
+    return components
+  }
+
+  hasAd (index) {
+    return index === addPosition - 1
   }
 }
 
