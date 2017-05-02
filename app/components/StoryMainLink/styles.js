@@ -5,7 +5,10 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 3
+    marginTop: 3,
+    paddingTop: 10,
+    paddingRight: 10,
+    paddingLeft: 10
   }
 })
 

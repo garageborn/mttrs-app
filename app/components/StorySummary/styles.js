@@ -5,7 +5,7 @@ const headlineOffset = 105
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10
+    margin: 10
   },
 
   box: {
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     padding: 10,
     borderRadius: 2,
-    backgroundColor: '#F7F7F8',
+    backgroundColor: '#F7F7F8'
   },
 
   headlineContainer: {
