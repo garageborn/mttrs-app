@@ -56,16 +56,16 @@ export function selectPublisher (publisher) {
   }
 }
 
-export function storyLinks (storyLinksParams) {
+export function modal (modalParams) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     const params = getCurrentParams(getState)
     if (!navigation) return null
 
-    let sectionParams = Object.assign({}, params.section, { storyLinks: storyLinksParams })
+    let sectionParams = Object.assign({}, params.section, { modal: modalParams })
     let newParams = Object.assign({}, params, { section: sectionParams })
-    let linkSlug = _result(storyLinksParams, 'story.main_link.slug')
-    if (linkSlug) dispatch(AnalyticsActions.trackScreen(`/link/${linkSlug}/story-links`))
+    let linkSlug = _result(modalParams, 'story.main_link.slug')
+    if (linkSlug) dispatch(handleModalAnalytics(linkSlug, modalParams.type))
     return dispatch(handleTimelineRoute(newParams))
   }
 }
@@ -74,6 +74,17 @@ export function back () {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
     dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
+  }
+}
+
+function handleModalAnalytics (linkSlug, type) {
+  const urls = {
+    storyLinks: `/link/${linkSlug}/story-links`,
+    socialCount: `/link/${linkSlug}/social-count`
+  }
+
+  return (dispatch) => {
+    dispatch(AnalyticsActions.trackScreen(urls[type]))
   }
 }
 

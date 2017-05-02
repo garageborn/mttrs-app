@@ -16,7 +16,11 @@ class StoryMetadata extends Component {
             <StoryPublishers story={story} />
           </View>
         </Touchable>
-        <SocialCount totalSocial={story.total_social} />
+        <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
+          <View>
+            <SocialCount totalSocial={story.total_social} />
+          </View>
+        </Touchable>
       </View>
     )
   }
