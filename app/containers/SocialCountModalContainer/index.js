@@ -3,6 +3,7 @@ import { View, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import CloseButton from '../../components/CloseButton'
+import SocialCountModal from '../../components/SocialCountModal'
 import { NavigationActions } from '../../actions/index'
 import styles from '../../styles/StoryLinks'
 
@@ -32,22 +33,29 @@ class SocialCountModalContainer extends Component {
     )
   }
 
-  renderStoryLinks () {
+  renderLoading () {
     return (
       <View style={styles.loading}>
         <ActivityIndicator size='large' color='#FFF' />
       </View>
     )
   }
+
+  renderStoryLinks () {
+    if (this.props.data.loading || !this.props.data.story) return this.renderLoading()
+    return (
+      <SocialCountModal
+        story={this.props.data.story}
+      />
+    )
+  }
 }
 
 SocialCountModalContainer.propTypes = {
   data: PropTypes.shape({
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    story: PropTypes.object
   }),
-  story: PropTypes.shape({
-    id: PropTypes.any.isRequired
-  }).isRequired,
   dispatch: PropTypes.func
 }
 

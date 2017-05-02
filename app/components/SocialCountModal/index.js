@@ -1,21 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
-import styles from '../styles/StoryLinks'
-import StoryLink from '../components/StoryLink'
+import styles from '../../styles/StoryLinks'
+import StoryLinkContainer from '../../containers/StoryLinkContainer'
 
 class SocialCountModal extends Component {
-  constructor (props) {
-    super(props)
-    this.renderRow = this.renderRow.bind(this)
-  }
-
   render () {
     if (!this.mainLink) return
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <StoryLink
-            linkType='header'
+          <StoryLinkContainer
+            type='header'
+            story={this.props.story}
             link={this.mainLink}
           />
         </View>
