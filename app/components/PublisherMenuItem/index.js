@@ -7,6 +7,7 @@ import Touchable from '../Touchable'
 import PublisherLogo from '../PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import { stringify } from '../../common/utils/Parser'
 import styles from './styles'
 
 class PublisherMenuItem extends Component {
@@ -44,7 +45,7 @@ class PublisherMenuItem extends Component {
   get count () {
     let { today_stories_count } = this.props.publisher
     if (!today_stories_count) return '--'
-    return today_stories_count
+    return stringify(today_stories_count)
   }
 }
 
