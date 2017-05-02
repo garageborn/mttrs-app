@@ -1037,13 +1037,6 @@
 			remoteRef = AA23D6F61EA1112C004E640E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA5D06B51EA0ED8900D0DDCF /* librn-fbads.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "librn-fbads.a";
-			remoteRef = AA5D06B41EA0ED8900D0DDCF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DCAE52F61E1EC1C700ABFD11 /* libBVLinearGradient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;

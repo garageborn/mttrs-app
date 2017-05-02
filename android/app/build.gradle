@@ -157,9 +157,6 @@ android {
 
 dependencies {
     compile project(':react-native-fbsdk')
-    compile(project(':react-native-fbads')) {
-        exclude group: "com.google.android.gms"
-    }
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')
