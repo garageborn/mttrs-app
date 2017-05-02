@@ -2,14 +2,13 @@ import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
 const Query = gql`
-  query($id: ID!, $publisherSlug: String) {
+  query($id: ID!) {
     story(id: $id) {
       social_counter {
         facebook
         google_plus
         twitter
         pinterest
-        linkedin
         total
       }
       other_links {
@@ -19,7 +18,7 @@ const Query = gql`
   }
 `
 
-export default function (StoryLinksContainer) {
+export default function (SocialCountModalContainer) {
   return graphql(Query, {
     options (props) {
       return {
@@ -28,5 +27,5 @@ export default function (StoryLinksContainer) {
         }
       }
     }
-  })(StoryLinksContainer)
+  })(SocialCountModalContainer)
 }

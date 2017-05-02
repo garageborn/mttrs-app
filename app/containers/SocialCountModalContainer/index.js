@@ -6,7 +6,7 @@ import CloseButton from '../../components/CloseButton'
 import { NavigationActions } from '../../actions/index'
 import styles from '../../styles/StoryLinks'
 
-class StoryLinksContainer extends Component {
+class SocialCountModalContainer extends Component {
   constructor (props) {
     super(props)
     this.close = this.close.bind(this)
@@ -41,7 +41,7 @@ class StoryLinksContainer extends Component {
   }
 }
 
-StoryLinksContainer.propTypes = {
+SocialCountModalContainer.propTypes = {
   data: PropTypes.shape({
     loading: PropTypes.bool
   }),
@@ -51,5 +51,5 @@ StoryLinksContainer.propTypes = {
   dispatch: PropTypes.func
 }
 
-const StoryLinksContainerWithData = withQuery(StoryLinksContainer)
-export default connect()(StoryLinksContainerWithData)
+const SocialCountModalContainerWithData = withQuery(SocialCountModalContainer)
+export default connect()(SocialCountModalContainerWithData)

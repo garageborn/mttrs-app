@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo'
 const Query = gql`
   query($id: ID!, $publisherSlug: String) {
     story(id: $id) {
+      id
       main_link(publisher_slug: $publisherSlug) {
         title
         url
