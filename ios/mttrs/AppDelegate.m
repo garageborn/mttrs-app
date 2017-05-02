@@ -15,19 +15,20 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "Firebase.h"
 
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [Fabric with:@[[Crashlytics class]]];
+  [FIRApp configure];
 
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                      appId:@"bb1d8cac-7fb9-46c6-ada6-1113f667fa4f"
                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNotification), kOSSettingsKeyAutoPrompt : @false}];
 
-  [[FBSDKApplicationDelegate sharedInstance] application:application
-                           didFinishLaunchingWithOptions:launchOptions];
+  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 
   NSURL *jsCodeLocation;
 

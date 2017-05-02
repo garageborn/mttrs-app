@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 import { Image, Text, View } from 'react-native'
-import { withNativeAd } from 'react-native-fbads'
 import _isEmpty from 'lodash/isEmpty'
 import AdMain from './components/AdMain'
 import AdImage from './components/AdImage'
@@ -36,4 +35,4 @@ TimelineAd.propTypes = {
   })
 }
 
-export default withNativeAd(TimelineAd)
+export default TimelineAd
