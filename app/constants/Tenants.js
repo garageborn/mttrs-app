@@ -1,12 +1,12 @@
 export const TENANTS = [
   {
-    default: true,
     host: 'mttrs.com.br',
     id: 'mttrs_br',
     language: 'pt',
     protocol: 'https'
   },
   {
+    default: true,
     host: 'mtt.rs',
     id: 'mttrs_us',
     language: 'en',
