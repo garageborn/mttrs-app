@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import styles from './styles'
 import StatsTitle from './components/StatsTitle'
+import StatsChart from './components/StatsChart'
 import StoryLinkContainer from '../../containers/StoryLinkContainer'
 
 class SocialCountModal extends Component {
@@ -18,6 +19,7 @@ class SocialCountModal extends Component {
         </View>
         <View style={styles.statsContainer}>
           <StatsTitle linkCount={this.linkCount} totalCount={this.totalCount} />
+          <StatsChart totalCount={this.totalCount} />
         </View>
       </View>
     )
