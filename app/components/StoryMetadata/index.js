@@ -8,7 +8,7 @@ import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 
 class StoryMetadata extends Component {
   render () {
-    const { onPublishersPress, story } = this.props
+    const { onPublishersPress, onSocialCountPress, story } = this.props
     return (
       <View style={this.containerStyles}>
         <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
@@ -16,7 +16,7 @@ class StoryMetadata extends Component {
             <StoryPublishers story={story} />
           </View>
         </Touchable>
-        <Touchable onPress={onPublishersPress} underlayColor={WHITE_COLOR}>
+        <Touchable onPress={onSocialCountPress} underlayColor={WHITE_COLOR}>
           <View>
             <SocialCount totalSocial={story.total_social} />
           </View>
@@ -34,6 +34,7 @@ class StoryMetadata extends Component {
 StoryMetadata.propTypes = {
   visited: PropTypes.bool.isRequired,
   onPublishersPress: PropTypes.func.isRequired,
+  onSocialCountPress: PropTypes.func.isRequired,
   story: PropTypes.object.isRequired
 }
 
