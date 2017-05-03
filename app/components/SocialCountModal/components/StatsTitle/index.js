@@ -16,7 +16,7 @@ const StatsTitle = ({ intl, linkCount, totalCount }) => {
   return (
     <View>
       <Text style={styles.text}>
-        <Text style={styles.textHighlight}>{linkCount}</Text>
+        <Text style={styles.textHighlight}>{linkCount} </Text>
         {versions}
         <Text style={styles.textHighlight}> {total} </Text>
         {times}

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    height: 145,
+    flexGrow: 1,
     alignItems: 'flex-end',
     borderColor: '#DADADA',
     borderBottomWidth: 1
@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
   },
   labelSeparator: {
     flexGrow: 1,
-    borderColor: '#DADADA',
-    borderStyle: 'dashed',
+    borderColor: '#ECEAEA',
+    borderStyle: 'dotted',
     borderWidth: 0.5,
     margin: 3,
     height: 1

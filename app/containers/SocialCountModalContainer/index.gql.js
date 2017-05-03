@@ -15,6 +15,7 @@ const Query = gql`
       social_counter {
         facebook
         google_plus
+        linkedin
         twitter
         pinterest
         total

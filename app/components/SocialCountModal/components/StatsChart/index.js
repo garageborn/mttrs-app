@@ -18,10 +18,7 @@ const bars = [
   { size: 60, color: '#E65A29' },
   { size: 65, color: '#E5542C' },
   { size: 70, color: '#E44F2D' },
-  { size: 75, color: '#E34B2F' },
-  { size: 80, color: '#E24530' },
-  { size: 85, color: '#E14231' },
-  { size: 90, color: '#DF3B33' }
+  { size: 75, color: '#E34B2F' }
 ]
 
 class StatsChart extends Component {
@@ -29,10 +26,10 @@ class StatsChart extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.chart}>
-        {bars.map((bar, idx) => {
-          let active = this.getActive(idx)
-          return <StatsBar key={idx} active={active} height={bar.size} color={bar.color} />
-        })}
+          {bars.map((bar, idx) => {
+            let active = this.getActive(idx)
+            return <StatsBar key={idx} active={active} height={bar.size} color={bar.color} />
+          })}
         </View>
         <View style={styles.labelContainer}>
           <Text style={styles.labelText}>50</Text>

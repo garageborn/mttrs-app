@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   image: {
     position: 'absolute',
-    left: -6
+    height: 18,
+    width: 18
   }
 })
 

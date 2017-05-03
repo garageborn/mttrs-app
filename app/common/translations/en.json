@@ -40,6 +40,7 @@
   "restrict.content": "paywall",
   "recent": "Recent News",
   "search.placeholder": "Search for publishers",
+  "share": "SHARE",
   "statsTitle.versions": "{itemCount, plural, one {version of this story was shared} other {versions of this story were shared}}",
   "storyCategory.in": "in",
   "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}",

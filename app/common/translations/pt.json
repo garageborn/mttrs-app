@@ -40,6 +40,7 @@
   "restrict.content": "paywall",
   "recent": "Mais Recentes",
   "search.placeholder": "Buscar por sites",
+  "share": "COMPARTILHAR",
   "statsTitle.versions": " {itemCount, plural, one {versão dessa notícia foi compartilhada} other {versões dessa notícia foram compartilhadas}}",
   "storyCategory.in": "em",
   "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}",
