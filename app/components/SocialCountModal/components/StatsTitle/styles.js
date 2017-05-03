@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
   },
   textHighlight: {
     color: '#666766',
-    fontSize: 24,
-    paddingHorizontal: 10
+    fontSize: 24
   }
 })
 

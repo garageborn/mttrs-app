@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import styles from './styles'
 import StatsTitle from './components/StatsTitle'
 import StatsChart from './components/StatsChart'
+import StatsSocialWrapper from './components/StatsSocialWrapper'
 import StoryLinkContainer from '../../containers/StoryLinkContainer'
 
 class SocialCountModal extends Component {
@@ -20,9 +21,14 @@ class SocialCountModal extends Component {
         <View style={styles.statsContainer}>
           <StatsTitle linkCount={this.linkCount} totalCount={this.totalCount} />
           <StatsChart totalCount={this.totalCount} />
+          <StatsSocialWrapper socialCounter={this.socialCounter} />
         </View>
       </View>
     )
+  }
+
+  get socialCounter () {
+    return this.props.story.social_counter
   }
 
   get linkCount () {

@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    height: 120,
-    alignItems: 'flex-end'
+    height: 155,
+    alignItems: 'flex-end',
+    borderColor: '#DADADA',
+    borderBottomWidth: 1
   },
   chart: {
     flexDirection: 'row'
