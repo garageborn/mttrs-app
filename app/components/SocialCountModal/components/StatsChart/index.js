@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 import StatsBar from '../StatsBar'
 import styles from './styles'
 
@@ -28,10 +28,17 @@ class StatsChart extends Component {
   render () {
     return (
       <View style={styles.container}>
+        <View style={styles.chart}>
         {bars.map((bar, idx) => {
           let active = this.getActive(idx)
           return <StatsBar key={idx} active={active} height={bar.size} color={bar.color} />
         })}
+        </View>
+        <View style={styles.labelContainer}>
+          <Text style={styles.labelText}>50</Text>
+          <View style={styles.labelSeparator} />
+          <Text style={styles.labelText}>500K</Text>
+        </View>
       </View>
     )
   }
