@@ -2,7 +2,9 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1
+    flexGrow: 1,
+    borderColor: '#DADADA',
+    borderBottomWidth: 1
   },
   firstRow: {
     flexDirection: 'row',

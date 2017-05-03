@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    height: 155,
+    height: 145,
     alignItems: 'flex-end',
     borderColor: '#DADADA',
     borderBottomWidth: 1

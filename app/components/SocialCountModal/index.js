@@ -4,11 +4,15 @@ import styles from './styles'
 import StatsTitle from './components/StatsTitle'
 import StatsChart from './components/StatsChart'
 import StatsSocialWrapper from './components/StatsSocialWrapper'
+import StatsButtonWrapper from './components/StatsButtonWrapper'
 import StoryLinkContainer from '../../containers/StoryLinkContainer'
 
 class SocialCountModal extends Component {
   render () {
     if (!this.mainLink) return
+
+    const { story } = this.props
+
     return (
       <View style={styles.container}>
         <View style={styles.storyLinkContainer}>
@@ -22,6 +26,7 @@ class SocialCountModal extends Component {
           <StatsTitle linkCount={this.linkCount} totalCount={this.totalCount} />
           <StatsChart totalCount={this.totalCount} />
           <StatsSocialWrapper socialCounter={this.socialCounter} />
+          <StatsButtonWrapper story={story} link={this.mainLink} />
         </View>
       </View>
     )
