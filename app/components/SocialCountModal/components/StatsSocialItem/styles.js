@@ -1,10 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
+const { width } = Dimensions.get('window')
+const containerPadding = 20
+const itemCount = 3
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: 100
+    width: (width / itemCount) - containerPadding
   },
   image: {
     marginHorizontal: 8

@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     borderColor: '#DADADA',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    paddingVertical: 10
   },
   firstRow: {
     flexDirection: 'row',

@@ -14,7 +14,7 @@ const StatsTitle = ({ intl, linkCount, totalCount }) => {
   const total = intl.formatNumber(totalCount)
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>
         <Text style={styles.textHighlight}>{linkCount} </Text>
         {versions}
