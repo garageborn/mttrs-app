@@ -11,24 +11,11 @@ class StoryLinksContainer extends Component {
   constructor (props) {
     super(props)
 
-    this.openLink = this.openLink.bind(this)
-    this.openPublisher = this.openPublisher.bind(this)
     this.close = this.close.bind(this)
   }
 
   close () {
-    this.props.dispatch(NavigationActions.storyLinks({ open: false }))
-  }
-
-  openLink (link) {
-    if (!this.props.story) return
-    this.close()
-    this.props.dispatch(NavigationActions.link(this.props.story, link))
-  }
-
-  openPublisher (publisher) {
-    this.close()
-    this.props.dispatch(NavigationActions.selectPublisher(publisher))
+    this.props.dispatch(NavigationActions.modal({ open: false }))
   }
 
   render () {

@@ -10,12 +10,6 @@ class TimelineAd extends Component {
       <View style={styles.container}>
         <AdMobNativeExpress
           adUnitID={ADMOB_TIMELINE_AD_ID}
-          adViewDidReceiveAd={ (e) => console.log('adViewDidReceiveAd', e) }
-          didFailToReceiveAdWithError={ (e) => console.log('didFailToReceiveAdWithError', e) }
-          adViewWillPresentScreen={ (e) => console.log('adViewWillPresentScreen', e) }
-          adViewWillDismissScreen={ (e) => console.log('adViewWillDismissScreen', e) }
-          adViewDidDismissScreen={ (e) => console.log('adViewDidDismissScreen', e) }
-          adViewWillLeaveApplication={ (e) => console.log('adViewWillLeaveApplication', e) }
           bannerWidth={bannerWidth}
           bannerHeight={bannerHeight}
         />

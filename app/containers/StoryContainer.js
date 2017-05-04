@@ -8,6 +8,7 @@ class StoryContainer extends Component {
     super(props)
     this.openLink = this.openLink.bind(this)
     this.handlePublishersPress = this.handlePublishersPress.bind(this)
+    this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
     this.openMainLink = this.openMainLink.bind(this)
   }
 
@@ -18,6 +19,7 @@ class StoryContainer extends Component {
         story={story}
         openLink={this.openMainLink}
         handlePublishersPress={this.handlePublishersPress}
+        handleSocialCountPress={this.handleSocialCountPress}
         visited={visited}
       />
     )
@@ -30,8 +32,13 @@ class StoryContainer extends Component {
 
   handlePublishersPress () {
     const { dispatch, story } = this.props
-    if (story.other_links_count) return dispatch(NavigationActions.storyLinks({ story: story, open: true }))
+    if (story.other_links_count) return dispatch(NavigationActions.modal({ story: story, open: true, type: 'storyLinks' }))
     return dispatch(NavigationActions.selectPublisher(story.main_link.publisher))
+  }
+
+  handleSocialCountPress () {
+    const { dispatch, story } = this.props
+    return dispatch(NavigationActions.modal({ story: story, open: true, type: 'socialCount' }))
   }
 
   openMainLink () {
