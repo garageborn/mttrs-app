@@ -59,7 +59,6 @@ class StatsChart extends Component {
     let activeBar = bars.find ((bar, index) => {
       const minCount = Math.round(higherLimit / bars.length) * index
       const maxCount = Math.round(higherLimit / bars.length) * (index + 1)
-      console.log({ index, totalCount, minCount, maxCount })
       return totalCount >= minCount && totalCount <= maxCount
     })
 
