@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     margin: 1,
     justifyContent: 'flex-end',
-    marginTop: 15
+    marginTop: 20
   },
   bar: {
     borderRadius: 2

@@ -33,9 +33,9 @@ class StatsChart extends Component {
           })}
         </View>
         <View style={styles.labelContainer}>
-          <Text style={styles.labelText}>50</Text>
+          <Text style={styles.labelText}>{KFormat(this.lowerLimit)}</Text>
           <View style={styles.labelSeparator} />
-          <Text style={styles.labelText}>{KFormat(this.limit)}</Text>
+          <Text style={styles.labelText}>{KFormat(this.higherLimit)}</Text>
         </View>
       </View>
     )
@@ -48,13 +48,19 @@ class StatsChart extends Component {
 
   inSegment (idx) {
     const { totalCount } = this.props
-    const limit = this.limit
+    const limit = this.higherLimit
     return totalCount > (Math.round(limit / bars.length) * idx)
   }
 
-  get limit () {
+  get lowerLimit () {
     const { totalCount } = this.props
-    const limit = 500000
+    const limit = 1000
+    return totalCount < limit ? totalCount : limit
+  }
+
+  get higherLimit () {
+    const { totalCount } = this.props
+    const limit = 100000
     return totalCount > limit ? totalCount : limit
   }
 }
