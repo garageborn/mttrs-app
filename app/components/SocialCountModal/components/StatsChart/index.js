@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text } from 'react-native'
+import KFormat from '../../../../common/utils/KFormat'
 import StatsBar from '../StatsBar'
 import styles from './styles'
 
@@ -34,20 +35,27 @@ class StatsChart extends Component {
         <View style={styles.labelContainer}>
           <Text style={styles.labelText}>50</Text>
           <View style={styles.labelSeparator} />
-          <Text style={styles.labelText}>500K</Text>
+          <Text style={styles.labelText}>{KFormat(this.limit)}</Text>
         </View>
       </View>
     )
   }
 
   getActive (idx) {
+    const nextIndex = idx + 1
+    return this.inSegment(idx) && !this.inSegment(nextIndex)
+  }
+
+  inSegment (idx) {
+    const { totalCount } = this.props
+    const limit = this.limit
+    return totalCount > (Math.round(limit / bars.length) * idx)
+  }
+
+  get limit () {
     const { totalCount } = this.props
     const limit = 500000
-    const nextIndex = idx + 1
-    const inSegment = totalCount > (Math.round(limit / bars.length) * idx)
-    const inNextSegment = totalCount > (Math.round(limit / bars.length) * nextIndex)
-
-    return inSegment && !inNextSegment
+    return totalCount > limit ? totalCount : limit
   }
 }
 
