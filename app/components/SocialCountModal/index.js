@@ -16,11 +16,7 @@ class SocialCountModal extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.storyLinkContainer}>
-          <StoryLinkContainer
-            type='header'
-            story={this.props.story}
-            link={this.mainLink}
-          />
+          <StoryLinkContainer type='header' story={this.props.story} link={this.mainLink} />
         </View>
         <View style={styles.statsContainer}>
           <StatsTitle linkCount={this.linkCount} totalCount={this.totalCount} />

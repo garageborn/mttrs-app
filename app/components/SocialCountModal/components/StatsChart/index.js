@@ -21,47 +21,62 @@ const bars = [
   { size: 70, color: '#E44F2D' },
   { size: 75, color: '#E34B2F' }
 ]
+const lowerLimit = 1000
+const higherLimit = 100000
 
 class StatsChart extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      active: this.getActive()
+    }
+  }
+
   render () {
+    console.log('render', this.state.active)
     return (
       <View style={styles.container}>
         <View style={styles.chart}>
           {bars.map((bar, idx) => {
-            let active = this.getActive(idx)
+            let active = this.state.active === idx
             return <StatsBar key={idx} active={active} height={bar.size} color={bar.color} />
           })}
         </View>
         <View style={styles.labelContainer}>
-          <Text style={styles.labelText}>{KFormat(this.lowerLimit)}</Text>
+          <Text style={styles.labelText}>{this.lowerLabel}</Text>
           <View style={styles.labelSeparator} />
-          <Text style={styles.labelText}>{KFormat(this.higherLimit)}</Text>
+          <Text style={styles.labelText}>{this.higherLabel}</Text>
         </View>
       </View>
     )
   }
 
-  getActive (idx) {
-    const nextIndex = idx + 1
-    return this.inSegment(idx) && !this.inSegment(nextIndex)
+  getActive () {
+    const { totalCount } = this.props
+
+    if (totalCount >= higherLimit) return bars.length - 1
+    if (totalCount <= lowerLimit) return 0
+
+    let activeBar = bars.find ((bar, index) => {
+      const minCount = Math.round(higherLimit / bars.length) * index
+      const maxCount = Math.round(higherLimit / bars.length) * (index + 1)
+      console.log({ index, totalCount, minCount, maxCount })
+      return totalCount >= minCount && totalCount <= maxCount
+    })
+
+    return bars.indexOf(activeBar)
   }
 
-  inSegment (idx) {
+  get lowerLabel () {
     const { totalCount } = this.props
-    const limit = this.higherLimit
-    return totalCount > (Math.round(limit / bars.length) * idx)
+    const value = totalCount < lowerLimit ? totalCount : lowerLimit
+    return KFormat(value)
   }
 
-  get lowerLimit () {
+  get higherLabel () {
     const { totalCount } = this.props
-    const limit = 1000
-    return totalCount < limit ? totalCount : limit
-  }
-
-  get higherLimit () {
-    const { totalCount } = this.props
-    const limit = 100000
-    return totalCount > limit ? totalCount : limit
+    const value = totalCount > higherLimit ? totalCount : higherLimit
+    return KFormat(value)
   }
 }
 

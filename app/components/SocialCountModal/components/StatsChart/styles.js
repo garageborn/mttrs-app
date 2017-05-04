@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'flex-end',
     borderColor: '#DADADA',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   chart: {
     flexDirection: 'row'
