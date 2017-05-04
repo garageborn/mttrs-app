@@ -36,7 +36,6 @@
 		39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F6DF8C2B20440DA6287088 /* libRNShare.a */; };
 		5B20731B74F349C7AD38B0A1 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6AD9300BD1B4168AA38206A /* libRCTFBSDK.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		7E3876DA063D44BF8764CF9C /* librn-fbads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0942CC7C546E48559560274D /* librn-fbads.a */; };
 		7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A061B6A41DD0B17B000F7869 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A061B6A21DD0B17B000F7869 /* Fabric.framework */; };
@@ -49,6 +48,13 @@
 		AA34B40F1EA5089200FD5D00 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA34B40A1EA5089200FD5D00 /* FBSDKCoreKit.framework */; };
 		AA34B4101EA5089200FD5D00 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA34B40B1EA5089200FD5D00 /* FBSDKLoginKit.framework */; };
 		AA34B4111EA5089200FD5D00 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA34B40C1EA5089200FD5D00 /* FBSDKShareKit.framework */; };
+		AA8D37121EB925D700C2F8DD /* AdMob in Resources */ = {isa = PBXBuildFile; fileRef = AA8D37101EB925D700C2F8DD /* AdMob */; };
+		AA8D37131EB925D700C2F8DD /* Analytics in Resources */ = {isa = PBXBuildFile; fileRef = AA8D37111EB925D700C2F8DD /* Analytics */; };
+		AA8D37191EB9287300C2F8DD /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37141EB9262C00C2F8DD /* GoogleMobileAds.framework */; };
+		AA8D37281EB92D8B00C2F8DD /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */; };
+		AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37291EB92D9700C2F8DD /* libc++.tbd */; };
+		AABB772C1EB9156300734E88 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB772B1EB9156300734E88 /* libxml2.tbd */; };
+		AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABB774F1EB9171900734E88 /* GoogleService-Info.plist */; };
 		B858216BC972473AB0DC8F07 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
@@ -56,6 +62,7 @@
 		DCAE53191E1EC22400ABFD11 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53181E1EC22400ABFD11 /* libz.tbd */; };
 		DCAE531B1E1EC23200ABFD11 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */; };
 		ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */; };
+		7A6A2C3492484054B6C18E95 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65ADDFC3A77A45769833F7B9 /* libRNAdMobManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,13 +276,6 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
-		AA5D06B41EA0ED8900D0DDCF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = ADDCECA31D96B7DD00C511E0;
-			remoteInfo = "rn-fbads";
-		};
 		DCAE52F51E1EC1C700ABFD11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */;
@@ -295,7 +295,6 @@
 		00E356EE1AD99517003FC87E /* mttrsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mttrsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* mttrsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mttrsTests.m; sourceTree = "<group>"; };
-		0942CC7C546E48559560274D /* librn-fbads.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "librn-fbads.a"; sourceTree = "<group>"; };
 		1148E541C3D84C8A8FC8A755 /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -310,7 +309,6 @@
 		281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* mttrs-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mttrs-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* mttrs-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mttrs-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = "rn-fbads.xcodeproj"; path = "../node_modules/react-native-fbads/src/ios/rn-fbads.xcodeproj"; sourceTree = "<group>"; };
 		532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
 		74F6DF8C2B20440DA6287088 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
@@ -330,6 +328,20 @@
 		AA34B40A1EA5089200FD5D00 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		AA34B40B1EA5089200FD5D00 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		AA34B40C1EA5089200FD5D00 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		AA8D370D1EB91D4900C2F8DD /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = ../../../../Documents/Firebase/Firebase.h; sourceTree = "<group>"; };
+		AA8D37101EB925D700C2F8DD /* AdMob */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AdMob; path = ../../../../Documents/Firebase/AdMob; sourceTree = "<group>"; };
+		AA8D37111EB925D700C2F8DD /* Analytics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Analytics; path = ../../../../Documents/Firebase/Analytics; sourceTree = "<group>"; };
+		AA8D37141EB9262C00C2F8DD /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = ../../../../Documents/Firebase/AdMob/GoogleMobileAds.framework; sourceTree = "<group>"; };
+		AA8D371A1EB9289500C2F8DD /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = ../../../../Documents/Firebase/Analytics/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		AA8D371B1EB9289500C2F8DD /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = ../../../../Documents/Firebase/Analytics/FirebaseCore.framework; sourceTree = "<group>"; };
+		AA8D371C1EB9289500C2F8DD /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = ../../../../Documents/Firebase/Analytics/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		AA8D371D1EB9289500C2F8DD /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = ../../../../Documents/Firebase/Analytics/GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		AA8D37221EB92AD300C2F8DD /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = ../../../../Documents/Firebase/module.modulemap; sourceTree = "<group>"; };
+		AA8D37251EB92B8800C2F8DD /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseDatabase.framework; path = ../../../../Documents/Firebase/Database/FirebaseDatabase.framework; sourceTree = "<group>"; };
+		AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		AA8D37291EB92D9700C2F8DD /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		AABB772B1EB9156300734E88 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		AABB774F1EB9171900734E88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		DCAE53141E1EC20200ABFD11 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -338,6 +350,8 @@
 		E6AD9300BD1B4168AA38206A /* libRCTFBSDK.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTFBSDK.a; sourceTree = "<group>"; };
 		F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
 		FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		44F8494EF07248CC9561121B /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; name = "RNAdMobManager.xcodeproj"; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		65ADDFC3A77A45769833F7B9 /* libRNAdMobManager.a */ = {isa = PBXFileReference; name = "libRNAdMobManager.a"; path = "libRNAdMobManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +367,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */,
+				AA8D37281EB92D8B00C2F8DD /* libicucore.tbd in Frameworks */,
+				AABB772C1EB9156300734E88 /* libxml2.tbd in Frameworks */,
 				DCAE531B1E1EC23200ABFD11 /* libsqlite3.0.tbd in Frameworks */,
 				DCAE53191E1EC22400ABFD11 /* libz.tbd in Frameworks */,
 				DCAE53171E1EC20F00ABFD11 /* SystemConfiguration.framework in Frameworks */,
@@ -375,13 +392,14 @@
 				39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */,
 				050EFC92354146218F93F1C7 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */,
+				AA8D37191EB9287300C2F8DD /* GoogleMobileAds.framework in Frameworks */,
 				AA34B40F1EA5089200FD5D00 /* FBSDKCoreKit.framework in Frameworks */,
 				AA34B40D1EA5089200FD5D00 /* Bolts.framework in Frameworks */,
 				AA34B4111EA5089200FD5D00 /* FBSDKShareKit.framework in Frameworks */,
 				AA34B4101EA5089200FD5D00 /* FBSDKLoginKit.framework in Frameworks */,
 				AA34B40E1EA5089200FD5D00 /* FBAudienceNetwork.framework in Frameworks */,
 				5B20731B74F349C7AD38B0A1 /* libRCTFBSDK.a in Frameworks */,
-				7E3876DA063D44BF8764CF9C /* librn-fbads.a in Frameworks */,
+				7A6A2C3492484054B6C18E95 /* libRNAdMobManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,8 +578,8 @@
 				F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */,
 				58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */,
-				3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */,
 				AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */,
+				44F8494EF07248CC9561121B /* RNAdMobManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -585,6 +603,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* mttrsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				AABB774C1EB916E300734E88 /* Firebase */,
 				AA34B4081EA5089200FD5D00 /* Bolts.framework */,
 				AA34B4091EA5089200FD5D00 /* FBAudienceNetwork.framework */,
 				AA34B40A1EA5089200FD5D00 /* FBSDKCoreKit.framework */,
@@ -641,17 +660,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AA5D06971EA0ED8800D0DDCF /* Products */ = {
+		AABB774C1EB916E300734E88 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				AA5D06B51EA0ED8900D0DDCF /* librn-fbads.a */,
+				AA8D37101EB925D700C2F8DD /* AdMob */,
+				AA8D37111EB925D700C2F8DD /* Analytics */,
+				AA8D370D1EB91D4900C2F8DD /* Firebase.h */,
+				AA8D37221EB92AD300C2F8DD /* module.modulemap */,
+				AABB774F1EB9171900734E88 /* GoogleService-Info.plist */,
 			);
-			name = Products;
+			name = Firebase;
 			sourceTree = "<group>";
 		};
 		DCAE53131E1EC20200ABFD11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA8D37291EB92D9700C2F8DD /* libc++.tbd */,
+				AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */,
+				AA8D37251EB92B8800C2F8DD /* FirebaseDatabase.framework */,
+				AA8D371A1EB9289500C2F8DD /* FirebaseAnalytics.framework */,
+				AA8D371B1EB9289500C2F8DD /* FirebaseCore.framework */,
+				AA8D371C1EB9289500C2F8DD /* FirebaseInstanceID.framework */,
+				AA8D371D1EB9289500C2F8DD /* GoogleToolboxForMac.framework */,
+				AA8D37141EB9262C00C2F8DD /* GoogleMobileAds.framework */,
+				AABB772B1EB9156300734E88 /* libxml2.tbd */,
 				DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */,
 				DCAE53181E1EC22400ABFD11 /* libz.tbd */,
 				DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */,
@@ -840,10 +872,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = AA5D06971EA0ED8800D0DDCF /* Products */;
-					ProjectRef = 3E8A8B1082234FB69CC8C10A /* rn-fbads.xcodeproj */;
 				},
 				{
 					ProductGroup = A0B8267A1DB547B2009A234B /* Products */;
@@ -1061,13 +1089,6 @@
 			remoteRef = AA23D6F61EA1112C004E640E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		AA5D06B51EA0ED8900D0DDCF /* librn-fbads.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "librn-fbads.a";
-			remoteRef = AA5D06B41EA0ED8900D0DDCF /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		DCAE52F61E1EC1C700ABFD11 /* libBVLinearGradient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1090,10 +1111,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A09BA2AA1DBF741000104DE1 /* OpenSans-Regular.ttf in Resources */,
+				AA8D37131EB925D700C2F8DD /* Analytics in Resources */,
+				AA8D37121EB925D700C2F8DD /* AdMob in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				A09BA2A91DBF741000104DE1 /* OpenSans-Light.ttf in Resources */,
 				A09BA2A81DBF741000104DE1 /* OpenSans-Bold.ttf in Resources */,
+				AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1222,14 +1246,15 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1253,14 +1278,15 @@
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1287,6 +1313,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
+					"~/Documents/Firebase",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1297,8 +1324,8 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1332,6 +1359,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"~/Documents/FacebookSDK",
+					"~/Documents/Firebase",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1342,8 +1370,8 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1378,13 +1406,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1412,13 +1441,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbads/src/ios",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1447,6 +1477,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mttrs-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1471,6 +1502,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mttrs-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
