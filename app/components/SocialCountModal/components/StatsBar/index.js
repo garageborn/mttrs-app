@@ -8,7 +8,6 @@ const StatsBar = ({ active, color, height }) => {
   const getHeight = () => ({ height })
 
   const renderActive = () => {
-    console.log('renderActive', active)
     if (!active) return null
     return <StatsActive height={height} />
   }
