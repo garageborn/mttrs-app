@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { AdMobNativeExpress } from 'react-native-admob'
 import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
-import styles from './styles'
+import styles, { bannerWidth, bannerHeight } from './styles'
 
 class TimelineAd extends Component {
   render () {
@@ -16,8 +16,8 @@ class TimelineAd extends Component {
           adViewWillDismissScreen={ (e) => console.log('adViewWillDismissScreen', e) }
           adViewDidDismissScreen={ (e) => console.log('adViewDidDismissScreen', e) }
           adViewWillLeaveApplication={ (e) => console.log('adViewWillLeaveApplication', e) }
-          bannerWidth={styles.bannerWidth}
-          bannerHeight={styles.bannerHeight}
+          bannerWidth={bannerWidth}
+          bannerHeight={bannerHeight}
         />
       </View>
     )

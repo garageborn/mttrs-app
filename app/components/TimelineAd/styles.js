@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
-export const bannerWidth = 100
-export const bannerHeight = 100
+export const bannerWidth = 320
+export const bannerHeight = 300
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
