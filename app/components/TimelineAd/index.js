@@ -1,38 +1,27 @@
-import React, { PropTypes, Component } from 'react'
-import { Image, Text, View } from 'react-native'
-import _isEmpty from 'lodash/isEmpty'
-import AdMain from './components/AdMain'
-import AdImage from './components/AdImage'
-import AdFooter from './components/AdFooter'
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { AdMobNativeExpress } from 'react-native-admob'
+import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
 import styles from './styles'
-import Button from '../Button'
 
 class TimelineAd extends Component {
   render () {
-    const { nativeAd } = this.props
-    if (_isEmpty(nativeAd)) return null
-
-    const { callToActionText, coverImage, description, icon, subtitle, title } = nativeAd
-
     return (
       <View style={styles.container}>
-        <AdMain title={title} subtitle={subtitle} icon={icon} />
-        <AdImage source={coverImage} />
-        <AdFooter description={description} buttonText={callToActionText} />
+        <AdMobNativeExpress
+          adUnitID={ADMOB_TIMELINE_AD_ID}
+          adViewDidReceiveAd={ (e) => console.log('adViewDidReceiveAd', e) }
+          didFailToReceiveAdWithError={ (e) => console.log('didFailToReceiveAdWithError', e) }
+          adViewWillPresentScreen={ (e) => console.log('adViewWillPresentScreen', e) }
+          adViewWillDismissScreen={ (e) => console.log('adViewWillDismissScreen', e) }
+          adViewDidDismissScreen={ (e) => console.log('adViewDidDismissScreen', e) }
+          adViewWillLeaveApplication={ (e) => console.log('adViewWillLeaveApplication', e) }
+          bannerWidth={styles.bannerWidth}
+          bannerHeight={styles.bannerHeight}
+        />
       </View>
     )
   }
-}
-
-TimelineAd.propTypes = {
-  nativeAd: PropTypes.shape({
-    callToActionText: PropTypes.string,
-    coverImage: PropTypes.string,
-    description: PropTypes.string,
-    icon: PropTypes.string,
-    subtitle: PropTypes.string,
-    title: PropTypes.string
-  })
 }
 
 export default TimelineAd

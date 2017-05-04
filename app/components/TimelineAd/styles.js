@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 
+export const bannerWidth = 100
+export const bannerHeight = 100
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
@@ -16,10 +18,6 @@ const styles = StyleSheet.create({
     },
     shadowColor: '#000',
     shadowOpacity: 0.2
-  },
-  button: {
-    marginTop: 16,
-    alignSelf: 'center'
   }
 })
 
