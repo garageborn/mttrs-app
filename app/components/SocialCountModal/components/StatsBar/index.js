@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { Text, View } from 'react-native'
+import React, { PropTypes } from 'react'
+import { View } from 'react-native'
 import StatsActive from '../StatsActive'
 import styles from './styles'
 
@@ -21,6 +21,7 @@ const StatsBar = ({ active, color, height }) => {
 }
 
 StatsBar.propTypes = {
+  active: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   height: PropTypes.number.isRequired
 }

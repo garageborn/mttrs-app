@@ -24,6 +24,9 @@ const StatsButtonWrapper = ({ intl, link, story }) => {
 }
 
 StatsButtonWrapper.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
   link: PropTypes.object.isRequired,
   story: PropTypes.object.isRequired
 }

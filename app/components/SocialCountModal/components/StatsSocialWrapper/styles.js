@@ -3,12 +3,13 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    justifyContent: 'center',
     borderColor: '#DADADA',
     borderBottomWidth: 1
   },
   firstRow: {
     flexDirection: 'row',
-    marginVertical: 10
+    marginBottom: 10
   },
   secondRow: {
     flexDirection: 'row',
