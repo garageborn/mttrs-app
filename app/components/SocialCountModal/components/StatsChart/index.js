@@ -33,7 +33,6 @@ class StatsChart extends Component {
   }
 
   render () {
-    console.log('render', this.state.active)
     return (
       <View style={styles.container}>
         <View style={styles.chart}>
