@@ -2,10 +2,10 @@ import { StyleSheet, Dimensions } from 'react-native'
 let { width } = Dimensions.get('window')
 
 export const bannerWidth = width - 40
-export const bannerHeight = 250
+export const bannerHeight = 320
 const styles = StyleSheet.create({
   container: {
-    height: 240,
+    height: bannerHeight - 10,
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'flex-start',
