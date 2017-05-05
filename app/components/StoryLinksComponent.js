@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, FlatList } from 'react-native'
 import styles from '../styles/StoryLinks'
-import StoryLink from '../components/StoryLink'
+import StoryLinkContainer from '../containers/StoryLinkContainer'
 import LinearGradient from 'react-native-linear-gradient'
 
 class StoryLinksComponent extends Component {
@@ -15,11 +15,10 @@ class StoryLinksComponent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <StoryLink
-            linkType='header'
+          <StoryLinkContainer
+            type='header'
+            story={this.props.story}
             link={this.mainLink}
-            openLink={this.props.openLink}
-            openPublisher={this.props.openPublisher}
           />
         </View>
         {this.renderListView()}
@@ -38,6 +37,7 @@ class StoryLinksComponent extends Component {
         keyExtractor={this.extractKey}
         style={styles.linksList}
         data={this.otherLinks}
+        story={this.props.story}
         renderItem={this.renderRow}
       />
     )
@@ -45,12 +45,11 @@ class StoryLinksComponent extends Component {
 
   renderRow (data) {
     return (
-      <StoryLink
-        linkType='list'
+      <StoryLinkContainer
+        type='list'
+        story={this.props.story}
         rowID={data.index}
         link={data.item}
-        openLink={this.props.openLink}
-        openPublisher={this.props.openPublisher}
       />
     )
   }
@@ -82,9 +81,7 @@ StoryLinksComponent.propTypes = {
   story: PropTypes.shape({
     main_link: linkPropsTypes.isRequired,
     other_links: PropTypes.arrayOf(linkPropsTypes).isRequired
-  }).isRequired,
-  openLink: PropTypes.func.isRequired,
-  openPublisher: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default StoryLinksComponent

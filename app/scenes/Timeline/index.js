@@ -5,6 +5,7 @@ import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimelineContainer from '../../containers/CategoriesTimelineContainer'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
+import SocialCountModalContainer from '../../containers/SocialCountModalContainer'
 import MenuPanelContainer from '../../containers/MenuPanelContainer'
 import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
@@ -45,7 +46,7 @@ class TimelineScene extends Component {
       <View>
         {this.renderTimeline()}
         <MenuPanelContainer params={this.props.route.params} />
-        {this.renderStoryLinks()}
+        {this.renderStoryModal()}
       </View>
     )
   }
@@ -58,15 +59,22 @@ class TimelineScene extends Component {
     }
   }
 
-  renderStoryLinks () {
+  renderStoryModal () {
     const { params } = this.props.route
     let section = params.section || {}
-    let storyLinks = section.storyLinks || {}
+    let modal = section.modal || {}
     let publisherSlug = this.isPublisherSection ? params.section.model.slug : ''
 
-    if (!storyLinks.open) return
+    if (!modal.open) return
 
-    return <StoryLinksContainer story={storyLinks.story} publisherSlug={publisherSlug} />
+    const components = {
+      storyLinks: StoryLinksContainer,
+      socialCount: SocialCountModalContainer
+    }
+
+    const Component = components[modal.type]
+
+    return <Component story={modal.story} publisherSlug={publisherSlug} />
   }
 
   get currentSection () {

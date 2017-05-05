@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "173846740442",
+    "firebase_url": "https://mttrs-46cf1.firebaseio.com",
+    "project_id": "mttrs-46cf1",
+    "storage_bucket": "mttrs-46cf1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173846740442:android:b18aa55033c0e360",
+        "android_client_info": {
+          "package_name": "garageborn.mttrs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173846740442-u6bvgmflvtvoemmn8rn0d2365rblv3ac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "garageborn.mttrs",
+            "certificate_hash": "7fc12bf34f655f1033e9eeeb1e521f8927508f70"
+          }
+        },
+        {
+          "client_id": "173846740442-hp1hhdb0eh6rkg0bv7h6m8jcle6hqnd1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4GTeLPmnGm2UuXWan1E65Y5S_dZfkZ8k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173846740442-hp1hhdb0eh6rkg0bv7h6m8jcle6hqnd1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "173846740442-mivabq8mvqnr59ncg5cq6ascudvc48qt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "garageborn.mttrs",
+                "app_store_id": "1166566093"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

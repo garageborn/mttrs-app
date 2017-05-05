@@ -3,12 +3,13 @@ import React, { PropTypes } from 'react'
 import { View, Image, Text } from 'react-native'
 import Touchable from '../Touchable'
 import TouchablePublisherLogo from '../TouchablePublisherLogo'
+import ShareButtonContainer from '../../containers/ShareButtonContainer'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import iconShare from './assets/icon-share.png'
 import iconClose from './assets/icon-close.png'
 import styles from './styles'
 
-const HeaderWebview = ({ link, publisherLogo, share, close, onPress, publisher }) => {
+const HeaderWebview = ({ link, publisherLogo, close, onPress, publisher }) => {
   return (
     <View style={styles.container} elevation={2}>
       <View style={styles.header}>
@@ -30,11 +31,11 @@ const HeaderWebview = ({ link, publisherLogo, share, close, onPress, publisher }
           </View>
         </View>
         <View style={styles.actions}>
-          <Touchable underlayColor={COLORLESS} onPress={share}>
+          <ShareButtonContainer link={link}>
             <View style={styles.iconHighlight}>
               <Image source={iconShare} />
             </View>
-          </Touchable>
+          </ShareButtonContainer>
           <Touchable underlayColor={COLORLESS} onPress={close}>
             <View style={[styles.iconHighlight, styles.iconCloseHighlight]}>
               <Image source={iconClose} />
@@ -55,7 +56,6 @@ HeaderWebview.propTypes = {
     }).isRequired
   }).isRequired,
   publisherLogo: PropTypes.any.isRequired,
-  share: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
   onPress: PropTypes.func.isRequired,
   publisher: PropTypes.object.isRequired

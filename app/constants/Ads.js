@@ -1,0 +1,1 @@
+export const ADMOB_TIMELINE_AD_ID = 'ca-app-pub-1344834931417489/1634440052'
