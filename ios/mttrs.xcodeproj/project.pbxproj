@@ -46,6 +46,7 @@
 		AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37291EB92D9700C2F8DD /* libc++.tbd */; };
 		AABB772C1EB9156300734E88 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB772B1EB9156300734E88 /* libxml2.tbd */; };
 		AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABB774F1EB9171900734E88 /* GoogleService-Info.plist */; };
+		AADA4BEE1EC0BE4300869145 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA06C67E1EC02F4C002B91C3 /* libRNAdMobManager.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
 		DCAE53171E1EC20F00ABFD11 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */; };
@@ -360,6 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AADA4BEE1EC0BE4300869145 /* libRNAdMobManager.a in Frameworks */,
 				AA46B8F91EC04A9700C7D27E /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */,
 				AA8D37281EB92D8B00C2F8DD /* libicucore.tbd in Frameworks */,
@@ -1342,7 +1344,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 179;
+				CURRENT_PROJECT_VERSION = 181;
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1379,7 +1381,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 179;
+				CURRENT_PROJECT_VERSION = 181;
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
