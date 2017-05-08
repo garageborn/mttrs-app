@@ -74,3 +74,9 @@ tsconfig.json
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+
+# Cocoapods
+
+/ios/Pods/
+/ios/Podfile.lock
