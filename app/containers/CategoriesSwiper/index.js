@@ -16,7 +16,7 @@ const messages = defineMessages({
   topStories: { id: 'header.topStories' }
 })
 
-class CategoriesTimeline extends Component {
+class CategoriesSwiper extends Component {
   constructor (props) {
     super(props)
 
@@ -69,7 +69,7 @@ class CategoriesTimeline extends Component {
   }
 
   getActiveRouteKey (props, routes) {
-    const { section } = props.params
+    const section = _result(props.params, 'section')
     if (!_result(section, 'model')) return this.state.navigationState.index
     const activeRoute = routes.find(route => route.model.slug === section.model.slug)
     return parseInt(activeRoute.key)
@@ -122,9 +122,11 @@ class CategoriesTimeline extends Component {
   }
 
   get swiperStyles () {
-    if (!this.props.params.section || this.props.data.loading) return styles.listViewContainer
+    const { data, params } = this.props
+    const section = _result(params, 'section')
+    if (!section || data.loading) return styles.listViewContainer
     const categoryIndex = this.state.navigationState.index - 1
-    const category = this.props.data.categories[categoryIndex]
+    const category = data.categories[categoryIndex]
     return this.sectionStyles(category)
   }
 
@@ -153,16 +155,16 @@ class CategoriesTimeline extends Component {
   }
 }
 
-CategoriesTimeline.propTypes = {
+CategoriesSwiper.propTypes = {
   data: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  params: PropTypes.object.isRequired,
+  // params: PropTypes.object.isRequired,
   activeTag: PropTypes.string
 }
 
-const IntlCategoriesTimeline = injectIntl(CategoriesTimeline)
-const CategoriesTimelineWithData = withQuery(IntlCategoriesTimeline)
-export default connect()(CategoriesTimelineWithData)
+const IntlCategoriesSwiper = injectIntl(CategoriesSwiper)
+const CategoriesSwiperWithData = withQuery(IntlCategoriesSwiper)
+export default connect()(CategoriesSwiperWithData)
