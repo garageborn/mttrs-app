@@ -36,6 +36,7 @@ class PublisherMenuSuggestion extends Component {
   renderStatus () {
     if (this.props.status === 'success') return <Success />
     if (this.props.status === 'error') return <Error />
+    return this.renderButton()
   }
 
   render () {
@@ -49,9 +50,7 @@ class PublisherMenuSuggestion extends Component {
         <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
         <Text style={styles.publisher}>{publisher}</Text>
-        {this.renderButton()}
         {this.renderStatus()}
-
       </View>
     )
   }
