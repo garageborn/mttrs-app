@@ -16,6 +16,7 @@ class PublisherMenuSuggestionContainer extends Component {
   render () {
     return (
       <PublisherMenuSuggestion
+        query={this.props.query}
         publisher={this.props.publisher}
         sendSuggestion={this.sendSuggestion}
         status={this.state.status}
@@ -32,7 +33,8 @@ class PublisherMenuSuggestionContainer extends Component {
 
 PublisherMenuSuggestionContainer.propTypes = {
   createPublisherSuggestion: PropTypes.func.isRequired,
-  publisher: PropTypes.string.isRequired
+  publisher: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired
 }
 
 export default withMutation(PublisherMenuSuggestionContainer)

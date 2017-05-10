@@ -12,6 +12,10 @@ class TimelineHeaderContainer extends Component {
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
+  componentWillMount() {
+    this.props.dispatch(MenuActions.openMenu())
+  }
+
   render () {
     return (
       <View style={styles.container}>

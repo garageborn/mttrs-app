@@ -5,6 +5,7 @@ import Success from './components/Success'
 import Error from './components/Error'
 import Button from '../Button'
 import icon from './assets/icon.png'
+import buttonStyles from '../Button/styles.js'
 import styles from './styles'
 
 const messages = defineMessages({
@@ -35,15 +36,6 @@ class PublisherMenuSuggestion extends Component {
   renderStatus () {
     if (this.props.status === 'success') return <Success />
     if (this.props.status === 'error') return <Error />
-
-    const { intl } = this.props
-    let label = intl.formatMessage(messages.sendButton)
-
-    return (
-      <Button onPress={this.onButtonPress} skin={styles.button}>
-        <Text style={styles.buttonText}>{label.toUpperCase()}</Text>
-      </Button>
-    )
   }
 
   render () {
@@ -57,14 +49,39 @@ class PublisherMenuSuggestion extends Component {
         <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
         <Text style={styles.publisher}>{publisher}</Text>
+        {this.renderButton()}
         {this.renderStatus()}
+
+      </View>
+    )
+  }
+
+  renderButton () {
+    const { intl } = this.props
+    let label = intl.formatMessage(messages.sendButton)
+
+    if (this.props.query === '') return this.renderInactiveButton(label)
+
+    return (
+      <Button onPress={this.onButtonPress} skin={styles.button}>
+        <Text style={styles.buttonText}>{label.toUpperCase()}</Text>
+      </Button>
+    )
+  }
+
+  renderInactiveButton (label) {
+    return (
+      <View onPress={this.onButtonPress} style={[buttonStyles.button, styles.inactiveButton]}>
+        <Text style={styles.inactiveButtonText}>{label.toUpperCase()}</Text>
       </View>
     )
   }
 
   onButtonPress () {
+    if (this.props.query === '') return null
     return this.props.sendSuggestion()
   }
+
 }
 
 PublisherMenuSuggestion.propTypes = {

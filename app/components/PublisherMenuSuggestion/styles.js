@@ -33,8 +33,7 @@ const styles = StyleSheet.create({
   publisher: {
     fontSize: 24,
     color: '#FFF',
-    marginTop: 10,
-    marginBottom: 35
+    height: 50
   },
 
   loading: {
@@ -42,12 +41,22 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: actionColor
+    backgroundColor: actionColor,
+    marginBottom: 20
   },
 
   buttonText: {
     color: 'black',
     textAlign: 'center'
+  },
+
+  inactiveButton: {
+    backgroundColor: '#999',
+    marginBottom: 20
+  },
+
+  inactiveButtonText: {
+    color: 'gray'
   }
 })
 

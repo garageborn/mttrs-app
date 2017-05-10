@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
       ios: iosHeight,
       android: androidHeight
     })
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 })
 
