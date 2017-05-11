@@ -1,7 +1,5 @@
-/* eslint-disable react/jsx-no-bind */
-
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { Platform, View } from 'react-native'
 import { AdMobNativeExpress } from 'react-native-admob'
 import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
 import captureError from '../../common/utils/captureError'
@@ -10,19 +8,25 @@ import styles, { bannerWidth, bannerHeight } from './styles'
 class TimelineAd extends Component {
   constructor () {
     super()
-    this.handleError = this.handleError.bind(this)
     this.state = { error: false }
+    this.handleError = this.handleError.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.state.error !== nextState.error
   }
 
   render () {
+    console.log('render', this.state.error)
+    if (Platform.OS === 'ios') return null
     if (this.state.error) return null
     return (
       <View style={styles.container}>
         <AdMobNativeExpress
           adUnitID={ADMOB_TIMELINE_AD_ID}
-          bannerWidth={bannerHeight}
-          bannerHeight={bannerWidth}
-          onDidFailToReceiveAdWithError={(event) => this.handleError(event.nativeEvent.error)}
+          bannerWidth={bannerWidth}
+          bannerHeight={bannerHeight}
+          didFailToReceiveAdWithError={this.handleError}
         />
       </View>
     )

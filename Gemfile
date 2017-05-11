@@ -8,7 +8,7 @@ group :development do
   gem 'pronto-flay', '0.9.0', require: false
   gem 'pronto-rubocop', '0.9.0', require: false
 
-  gem 'fastlane', '~>2.28.0'
+  gem 'fastlane', '~>2.29.1'
   gem 'rake', '12.0.0'
   gem 'byebug', '9.0.6'
 end
