@@ -17,7 +17,6 @@ class TimelineAd extends Component {
   }
 
   render () {
-    console.log('render', this.state.error)
     if (Platform.OS === 'ios') return null
     if (this.state.error) return null
     return (
