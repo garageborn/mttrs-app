@@ -1,6 +1,6 @@
 rootProject.name = 'mttrs'
-include ':react-native-admob'
-project(':react-native-admob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-admob/android')
+include ':react-native-revmob'
+project(':react-native-revmob').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-revmob/android')
 include ':react-native-fbsdk'
 project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbsdk/android')
 include ':react-native-onesignal'

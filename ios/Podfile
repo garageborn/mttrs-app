@@ -7,7 +7,6 @@ target 'mttrs' do
 
   # Pods for mttrs
   pod 'Firebase/Core'
-  pod 'Firebase/AdMob'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
