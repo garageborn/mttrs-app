@@ -15,7 +15,6 @@ class TimelineAdContainer extends Component {
   }
 
   render () {
-    console.log('render TimelineAdContainer', this.state.adsManager)
     return <TimelineAd adsManager={this.state.adsManager} />
   }
 }

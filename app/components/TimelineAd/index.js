@@ -11,7 +11,6 @@ import Button from '../Button'
 class TimelineAd extends Component {
   render () {
     const { nativeAd } = this.props
-    console.log('render', this.props)
     if (_isEmpty(nativeAd)) return null
 
     const { callToActionText, coverImage, description, icon, subtitle, title } = nativeAd
