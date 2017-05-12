@@ -7,14 +7,14 @@ target 'mttrs' do
 
   # Pods for mttrs
   pod 'Firebase/Core'
-  pod 'Firebase/AdMob'
   pod 'FBSDKCoreKit'
   pod 'FBSDKShareKit'
   pod 'FBSDKLoginKit'
+  pod 'FBAudienceNetwork'
   pod 'Bolts'
-  pod 'ReactNativeFabric', :path => '../node_modules/react-native-fabric'
-  pod 'React', :path => '../node_modules/react-native'
-  pod "Yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+  pod 'ReactNativeFabric', path: '../node_modules/react-native-fabric'
+  pod 'React', path: '../node_modules/react-native'
+  pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga'
 
   target 'mttrsTests' do
     inherit! :search_paths

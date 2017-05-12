@@ -1,40 +1,39 @@
-import React, { Component } from 'react'
-import { Platform, View } from 'react-native'
-import { AdMobNativeExpress } from 'react-native-admob'
-import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
-import captureError from '../../common/utils/captureError'
-import styles, { bannerWidth, bannerHeight } from './styles'
+import React, { PropTypes, Component } from 'react'
+import { Image, Text, View } from 'react-native'
+import { withNativeAd } from 'react-native-fbads'
+import _isEmpty from 'lodash/isEmpty'
+import AdMain from './components/AdMain'
+import AdImage from './components/AdImage'
+import AdFooter from './components/AdFooter'
+import styles from './styles'
+import Button from '../Button'
 
 class TimelineAd extends Component {
-  constructor () {
-    super()
-    this.state = { error: false }
-    this.handleError = this.handleError.bind(this)
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return this.state.error !== nextState.error
-  }
-
   render () {
-    if (Platform.OS === 'ios') return null
-    if (this.state.error) return null
+    const { nativeAd } = this.props
+    if (_isEmpty(nativeAd)) return null
+
+    const { callToActionText, coverImage, description, icon, subtitle, title } = nativeAd
+
     return (
       <View style={styles.container}>
-        <AdMobNativeExpress
-          adUnitID={ADMOB_TIMELINE_AD_ID}
-          bannerWidth={bannerWidth}
-          bannerHeight={bannerHeight}
-          didFailToReceiveAdWithError={this.handleError}
-        />
+        <AdMain title={title} subtitle={subtitle} icon={icon} />
+        <AdImage source={coverImage} />
+        <AdFooter description={description} buttonText={callToActionText} />
       </View>
     )
   }
-
-  handleError (error) {
-    captureError(error)
-    this.setState({ error: true })
-  }
 }
 
-export default TimelineAd
+TimelineAd.propTypes = {
+  nativeAd: PropTypes.shape({
+    callToActionText: PropTypes.string,
+    coverImage: PropTypes.string,
+    description: PropTypes.string,
+    icon: PropTypes.string,
+    subtitle: PropTypes.string,
+    title: PropTypes.string
+  })
+}
+
+export default withNativeAd(TimelineAd)
