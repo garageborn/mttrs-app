@@ -3,7 +3,7 @@ import { SectionList } from 'react-native'
 import _result from 'lodash/result'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
-import TimelineAdContainer from '../../containers/TimelineAdContainer'
+import TimelineAd from '../TimelineAd'
 import styles from './styles.js'
 const addPosition = 4
 
@@ -58,7 +58,7 @@ class TimelineList extends Component {
     const story = section.item
 
     let components = []
-    if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
+    if (this.hasAd(section.index)) components.push(<TimelineAd key={'timelineAd'} />)
     components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
     return components
   }
