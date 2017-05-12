@@ -1,12 +1,12 @@
 import Timeline from '../scenes/Timeline'
 import Link from '../scenes/Link'
-import { createRouter } from '@exponent/ex-navigation'
+import { StackNavigator } from 'react-navigation'
 
-const routes = {
-  timeline: () => Timeline,
-  link: () => Link
+export const routes = {
+  timeline: { screen: Timeline, params: { name: 'home' } },
+  link: { screen: Link }
 }
 
-const Router = createRouter(() => routes)
+const Router = StackNavigator(routes, { headerMode: 'none' })
 
 export default Router
