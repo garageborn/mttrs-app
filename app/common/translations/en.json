@@ -54,5 +54,6 @@
   "notifications": "NOTIFICATIONS",
   "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications",
   "tags.default": "Highlights",
-  "shares": "shares"
+  "shares": "shares",
+  "sponsored": "SPONSORED"
 }
