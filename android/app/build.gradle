@@ -108,8 +108,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 215
-        versionName "1.0.68"
+        versionCode 214
+        versionName "1.0.67"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -156,15 +156,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-admob')
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')
     compile project(':react-native-share')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-fbsdk')
-    compile(project(':react-native-fbads')) {
-      exclude group: "com.google.android.gms"
-    }
     compile fileTree(dir: "libs", include: ["*.jar"])
     // From node_modules
     compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
