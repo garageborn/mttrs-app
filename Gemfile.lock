@@ -172,7 +172,7 @@ GEM
       jwt (~> 1.5)
       multi_json (~> 1.10)
     slack-notifier (1.5.1)
-    terminal-notifier (1.7.1)
+    terminal-notifier (1.7.2)
     terminal-table (1.7.1)
       unicode-display_width (~> 1.1.1)
     thor (0.19.4)
