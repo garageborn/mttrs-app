@@ -5,7 +5,6 @@ import { NavigationContext } from '@exponent/ex-navigation'
 import EventsContainer from './EventsContainer'
 import NavigationContainer from './NavigationContainer'
 import IntlProvider from '../config/IntlProvider'
-import AnalyticsProvider from '../config/AnalyticsProvider'
 import apolloClient from '../config/apolloClient'
 import Router from '../config/Router'
 require('../config/sentry')
@@ -22,13 +21,11 @@ class Root extends Component {
 
     return (
       <ApolloProvider store={store} client={apolloClient}>
-        <AnalyticsProvider>
-          <IntlProvider>
-            <EventsContainer>
-              <NavigationContainer navigationContext={navigationContext} />
-            </EventsContainer>
-          </IntlProvider>
-        </AnalyticsProvider>
+        <IntlProvider>
+          <EventsContainer>
+            <NavigationContainer navigationContext={navigationContext} />
+          </EventsContainer>
+        </IntlProvider>
       </ApolloProvider>
     )
   }
