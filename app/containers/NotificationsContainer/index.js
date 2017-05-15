@@ -8,13 +8,12 @@ import PublisherNotificationContainer from '../PublisherNotificationContainer'
 import CategoryNotificationContainer from '../CategoryNotificationContainer'
 import HomeNotificationContainer from '../HomeNotificationContainer'
 import { NotificationsActions, TenantActions } from '../../actions/index'
-import { withAnalytics } from '../../config/AnalyticsProvider'
 
 class NotificationsContainer extends Component {
   constructor () {
     super()
     this.handleOpen = this.handleOpen.bind(this)
-    this.state = { opened: false, model: {} }
+    this.state = { opened: false, payload: {} }
   }
 
   componentWillMount () {
@@ -35,33 +34,33 @@ class NotificationsContainer extends Component {
     if (this.props.tenant.isLoaded !== nextProps.tenant.isLoaded) return true
     if (this.state.opened !== nextState.opened) return true
     if (this.state.type !== nextState.type) return true
-    return !_isEqual(this.state.model, nextState.model)
+    return !_isEqual(this.state.payload, nextState.payload)
   }
 
   render () {
     const { tenant } = this.props
-    const { opened, model, type } = this.state
+    const { opened, payload, type } = this.state
 
     if (!tenant.isLoaded || !opened) return null
 
     switch (type) {
       case 'link':
-        return <LinkNotificationContainer model={model} />
+        return <LinkNotificationContainer payload={payload} />
       case 'publisher':
-        return <PublisherNotificationContainer model={model} />
+        return <PublisherNotificationContainer payload={payload} />
       case 'category':
-        return <CategoryNotificationContainer model={model} />
+        return <CategoryNotificationContainer payload={payload} />
       default:
-        return <HomeNotificationContainer />
+        return <HomeNotificationContainer payload={payload} />
     }
   }
 
   handleOpen (result) {
-    let { model, type, tenant } = result.notification.payload.additionalData
+    const { payload } = result.notification
+    const { tenant, type } = payload.additionalData
 
     this.setTenant(tenant)
-    this.context.analytics.trackEvent('notification', 'open', { type, model })
-    return this.setState({ opened: true, model, type })
+    return this.setState({ opened: true, payload, type })
   }
 
   handlePermissions (nextProps) {
@@ -106,5 +105,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const NotificationContainerWithAnalytics = withAnalytics(NotificationsContainer)
-export default connect(mapStateToProps)(NotificationContainerWithAnalytics)
+export default connect(mapStateToProps)(NotificationsContainer)

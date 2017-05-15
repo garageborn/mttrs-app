@@ -14,10 +14,10 @@ const Query = gql`
 export default function (CategoryNotificationContainer) {
   return graphql(Query, {
     options (props) {
+      const { slug } = props.payload.additionalData.model
+
       return {
-        variables: {
-          slug: props.model.slug
-        }
+        variables: { slug }
       }
     }
   })(CategoryNotificationContainer)
