@@ -13,7 +13,6 @@ export function trackScreen (path) {
 export function trackEvent (category, action, optionalValues = {}) {
   return () => {
     InteractionManager.runAfterInteractions(() => {
-      console.log(category, action, optionalValues)
       analytics.trackEvent(category, action, optionalValues)
     })
   }
