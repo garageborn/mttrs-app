@@ -4,9 +4,10 @@ import { InteractionManager } from 'react-native'
 const heartBeatIntervalSeconds = 30
 let heartBeatInterval = null
 
-export function trackScreen (screen) {
-  return () => {
+export function trackScreen (path) {
+  return (dispatch, getState) => {
     InteractionManager.runAfterInteractions(() => {
+      const screen = getScreen(getState(), path)
       analytics.trackScreenView(screen)
     })
   }
@@ -32,4 +33,8 @@ export function stopHeartBeat () {
   return () => {
     if (heartBeatInterval) clearTimeout(heartBeatInterval)
   }
+}
+
+function getScreen (state, path) {
+  return state.TenantReducer.current.id + path
 }
