@@ -39,7 +39,7 @@ class NotificationsContainer extends Component {
 
   render () {
     const { tenant } = this.props
-    const { opened, payload } = this.state
+    const { opened, payload, type } = this.state
 
     if (!tenant.isLoaded || !opened) return null
 
