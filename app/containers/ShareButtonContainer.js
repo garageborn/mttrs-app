@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import url from 'url'
 import Share from 'react-native-share'
 import { COLORLESS } from '../constants/TouchUnderlayColors'
+import { SHARE_LINK } from '../constants/Analytics'
 import captureError from '../common/utils/captureError'
 import Touchable from '../components/Touchable'
+import { AnalyticsActions } from '../actions/index'
 
 class ShareButtonContainer extends Component {
   constructor () {
@@ -21,7 +23,7 @@ class ShareButtonContainer extends Component {
   }
 
   share () {
-    const { link } = this.props
+    const { dispatch, link } = this.props
 
     let shareOptions = {
       title: link.title,
@@ -31,7 +33,7 @@ class ShareButtonContainer extends Component {
     }
 
     return Share.open(shareOptions).then((info) => {
-      this.context.analytics.trackEvent('link', 'share', { slug: link.slug })
+      dispatch(AnalyticsActions.trackEvent(SHARE_LINK, link.slug))
     }).catch((error) => {
       captureError(error)
     })

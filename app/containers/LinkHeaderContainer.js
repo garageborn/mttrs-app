@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import HeaderWebview from '../components/HeaderWebView'
 import * as cloudinary from '../common/utils/Cloudinary'
 import { NavigationActions } from '../actions/index'
-import { withAnalytics } from '../config/AnalyticsProvider'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {
@@ -56,5 +55,4 @@ LinkHeaderContainer.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-const LinkHeaderWithAnalytics = withAnalytics(LinkHeaderContainer)
-export default connect()(LinkHeaderWithAnalytics)
+export default connect()(LinkHeaderContainer)
