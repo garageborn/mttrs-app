@@ -1,10 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { InteractionManager } from 'react-native'
+import { OPEN_NOTIFICATION } from '../../constants/Analytics'
+import { AnalyticsActions, NavigationActions } from '../../actions/index'
 import withQuery from './index.gql'
-import { NavigationActions } from '../../actions/index'
 
 class LinkNotificationContainer extends Component {
+  componentDidMount () {
+    const { dispatch, payload } = this.props
+    const { slug } = payload.additionalData.model
+    dispatch(AnalyticsActions.trackEvent(OPEN_NOTIFICATION, slug))
+  }
+
   componentWillReceiveProps (nextProps) {
     if (this.props.data.loading === nextProps.data.loading) return
     this.openLink(nextProps)
@@ -15,18 +22,22 @@ class LinkNotificationContainer extends Component {
   }
 
   openLink (props) {
-    const { dispatch, model, data } = props
+    const { dispatch, data } = props
     if (data.loading || !data.link) return
 
     InteractionManager.runAfterInteractions(() => {
-      return dispatch(NavigationActions.link(data.link.story, data.link))
+      dispatch(NavigationActions.link(data.link.story, data.link))
     })
   }
 }
 
 LinkNotificationContainer.propTypes = {
-  model: PropTypes.shape({
-    slug: PropTypes.string.isRequired
+  payload: PropTypes.shape({
+    additionalData: PropTypes.shape({
+      model: PropTypes.shape({
+        slug: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
   }).isRequired
 }
 

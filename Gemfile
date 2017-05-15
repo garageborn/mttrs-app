@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 group :development do
   gem 'activesupport', '5.0.2'
-  gem 'pronto', '0.9.1'
+  gem 'pronto', '0.9.3'
   gem 'pronto-brakeman', '0.9.0', require: false
   gem 'pronto-eslint_npm', '0.9.0', require: false
   gem 'pronto-flay', '0.9.0', require: false
