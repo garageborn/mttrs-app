@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { AppState } from 'react-native'
 import { connect } from 'react-redux'
 import TimelineComponent from '../../components/Timeline'
 import { StorageActions } from '../../actions/index'
@@ -10,6 +11,7 @@ class Timeline extends Component {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
     this.onPullToRefresh = this.onPullToRefresh.bind(this)
+    this.handleAppStateChange = this.handleAppStateChange.bind(this)
     this.state = {
       loadingMore: false,
       loadingPullToRefresh: false
@@ -18,10 +20,22 @@ class Timeline extends Component {
 
   componentWillMount () {
     this.props.dispatch(StorageActions.getVisitedStories())
+    AppState.addEventListener('change', this.handleAppStateChange)
+  }
+
+  componentWillUnmount () {
+    AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
   componentDidUpdate () {
     this.fillTimeline()
+  }
+
+  handleAppStateChange (appState) {
+    const active = appState === 'active'
+    const { data } = this.props
+    if (!active || !data) return
+    return this.onPullToRefresh()
   }
 
   render () {
