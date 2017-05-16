@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, WebView, Platform } from 'react-native'
+import { ActivityIndicator, Platform, WebView, View } from 'react-native'
 import WebViewError from '../WebViewError'
 import captureError from '../../common/utils/captureError'
 import styles from './styles'
@@ -10,6 +10,7 @@ class StoryWebView extends Component {
 
     this.handleError = this.handleError.bind(this)
     this.reloadWebView = this.reloadWebView.bind(this)
+    this.renderLoading = this.renderLoading.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -44,8 +45,18 @@ class StoryWebView extends Component {
           domStorageEnabled
           ref='webview'
           renderError={this.handleError}
+          renderLoading={this.renderLoading}
           source={{uri: url}}
+          startInLoadingState
         />
+      </View>
+    )
+  }
+
+  renderLoading () {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size='large' color='#AAA' />
       </View>
     )
   }
