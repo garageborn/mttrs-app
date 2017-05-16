@@ -8,6 +8,9 @@ import styles, { textColor } from './styles'
 const messages = defineMessages({
   searchPlaceholder: {
     id: 'search.placeholder'
+  },
+  suggestionPlaceholder: {
+    id: 'publisher.suggestion.placeholder'
   }
 })
 
@@ -20,6 +23,7 @@ class PublisherSearch extends Component {
 
   clear () {
     this.refs.textInput.clear()
+    this.refs.textInput.blur()
     this.props.handleQuery('')
   }
 
@@ -35,8 +39,8 @@ class PublisherSearch extends Component {
   }
 
   render () {
-    const { intl, handleQuery } = this.props
-    let placeholder = intl.formatMessage(messages.searchPlaceholder)
+    const { handleQuery } = this.props
+
     return (
       <View style={styles.container}>
         <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
@@ -45,7 +49,7 @@ class PublisherSearch extends Component {
             ref='textInput'
             style={styles.searchInput}
             underlineColorAndroid={'transparent'}
-            placeholder={placeholder}
+            placeholder={this.placeholder}
             placeholderTextColor={textColor}
             onChangeText={handleQuery}
             clearButtonMode='while-editing'
@@ -55,6 +59,12 @@ class PublisherSearch extends Component {
       </View>
     )
   }
+
+  get placeholder () {
+    const { intl, suggestion } = this.props
+    if (!suggestion) return intl.formatMessage(messages.searchPlaceholder)
+    return intl.formatMessage(messages.suggestionPlaceholder)
+  }
 }
 
 PublisherSearch.propTypes = {
@@ -62,7 +72,8 @@ PublisherSearch.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   emptyInput: PropTypes.func.isRequired,
-  handleQuery: PropTypes.func.isRequired
+  handleQuery: PropTypes.func.isRequired,
+  suggestion: PropTypes.bool.isRequired
 }
 
 export default injectIntl(PublisherSearch)

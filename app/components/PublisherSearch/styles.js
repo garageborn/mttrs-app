@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: DARK_COLOR,
     height,
     justifyContent: 'center',
-    elevation: 4
+    flexGrow: 6
   },
 
   search: {
