@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import captureError from '../../common/utils/captureError'
 import TimelineComponent from '../../components/Timeline'
 import { StorageActions } from '../../actions/index'
 
@@ -50,7 +51,12 @@ class Timeline extends Component {
     const { pullToRefresh } = this.props.data
     if (this.state.loadingPullToRefresh) return
     this.setState({ loadingPullToRefresh: true })
-    pullToRefresh().then(() => this.setState({ loadingPullToRefresh: false }))
+    pullToRefresh()
+      .then(() => this.setState({ loadingPullToRefresh: false }))
+      .catch((err) => {
+        captureError(err)
+        this.setState({ loadingPullToRefresh: false })
+      })
   }
 
   fillTimeline () {
