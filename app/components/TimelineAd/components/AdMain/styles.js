@@ -1,4 +1,9 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+const { width } = Dimensions.get('window')
+const imageSize = 50
+const imagePadding = 40
+
+const image = imageSize + imagePadding
 
 const styles = StyleSheet.create({
   container: {
@@ -9,12 +14,13 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   image: {
-    height: 50,
-    width: 50
+    height: imageSize,
+    width: imageSize
   },
   title: {
     fontSize: 15,
-    color: 'black'
+    color: 'black',
+    width: width - image
   },
   subtitle: {
     fontSize: 10,

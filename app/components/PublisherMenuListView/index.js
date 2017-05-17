@@ -8,6 +8,7 @@ class PublisherMenuListView extends Component {
   constructor () {
     super()
 
+    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.renderSeparator = this.renderSeparator.bind(this)
   }
@@ -21,6 +22,7 @@ class PublisherMenuListView extends Component {
         <SectionList
           keyExtractor={this.extractKey}
           sections={this.sections()}
+          shouldItemUpdate={this.shouldItemUpdate}
           renderItem={this.renderRow}
           renderSectionHeader={this.renderSeparator}
         />
@@ -58,6 +60,10 @@ class PublisherMenuListView extends Component {
     return Object.keys(rows).map((key) => {
       return { 'key': key, 'data': rows[key] }
     })
+  }
+
+  shouldItemUpdate (props, nextProps) {
+    return props.item.id !== nextProps.item.id
   }
 
   getSection (publisher) {
