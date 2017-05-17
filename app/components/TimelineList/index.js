@@ -10,6 +10,7 @@ const addPosition = 4
 class TimelineList extends Component {
   constructor (props) {
     super(props)
+    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
@@ -39,6 +40,7 @@ class TimelineList extends Component {
     return (
       <SectionList
         style={styles.container}
+        shouldItemUpdate={this.shouldItemUpdate}
         ListFooterComponent={this.props.renderFooter}
         keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
@@ -48,6 +50,10 @@ class TimelineList extends Component {
         sections={this.sections()}
       />
     )
+  }
+
+  shouldItemUpdate (props, nextProps) {
+    return props.item.id !== nextProps.item.id
   }
 
   extractKey (item, index) {
