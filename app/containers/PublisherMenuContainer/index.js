@@ -12,10 +12,7 @@ import { NavigationActions, MenuActions } from '../../actions/index'
 class PublisherMenuContainer extends Component {
   constructor () {
     super()
-
-    this.state = {
-      query: ''
-    }
+    this.state = { query: '' }
 
     this.openPublisher = this.openPublisher.bind(this)
     this.getPublishers = this.getPublishers.bind(this)
@@ -79,12 +76,6 @@ class PublisherMenuContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    StorageReducer: state.StorageReducer
-  }
-}
-
 PublisherMenuContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.shape({
@@ -95,4 +86,4 @@ PublisherMenuContainer.propTypes = {
 }
 
 const PublisherMenuContainerWithData = withQuery(PublisherMenuContainer)
-export default connect(mapStateToProps)(PublisherMenuContainerWithData)
+export default connect()(PublisherMenuContainerWithData)
