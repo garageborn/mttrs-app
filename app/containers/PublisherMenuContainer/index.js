@@ -7,7 +7,7 @@ import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
 import PublisherMenu from '../../components/PublisherMenu'
 import Loader from '../../components/PublisherMenuLoader'
-import { NavigationActions, MenuActions } from '../../actions/index'
+import { NavigationActions } from '../../actions/index'
 
 class PublisherMenuContainer extends Component {
   constructor () {
@@ -69,7 +69,6 @@ class PublisherMenuContainer extends Component {
   }
 
   openPublisher (publisher) {
-    this.props.dispatch(MenuActions.closeMenu())
     InteractionManager.runAfterInteractions(() => {
       this.props.dispatch(NavigationActions.selectPublisher(publisher))
     })

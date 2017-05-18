@@ -10,9 +10,8 @@ export function home () {
     const params = getCurrentParams(getState)
     if (!navigation) return null
 
-    let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'home', model: {} })
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
+    let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.name}`))
     return dispatch(handleTimelineRoute(newParams))
   }
@@ -48,9 +47,8 @@ export function selectPublisher (publisher) {
     const params = getCurrentParams(getState)
     if (!navigation) return null
 
-    let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
+    let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
     return dispatch(handleTimelineRoute(newParams))
   }
