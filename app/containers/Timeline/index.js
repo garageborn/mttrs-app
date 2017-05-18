@@ -20,7 +20,7 @@ class Timeline extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(VisitedStoriesActions.getVisitedStories())
+    this.props.dispatch(VisitedStoriesActions.getStories())
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 

@@ -1,4 +1,4 @@
-import { REQUEST_VISITED_STORIES, VISITED_STORIES_RECEIVED } from '../constants/ActionTypes'
+import { REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED } from '../constants/ActionTypes'
 
 let defaultState = {
   isFetching: false, isLoaded: false, items: []
@@ -6,17 +6,17 @@ let defaultState = {
 
 export default function (state = defaultState, action) {
   switch (action.type) {
-    case REQUEST_VISITED_STORIES:
+    case REQUEST_FAVORITE_PUBLISHERS:
       return {
         ...state,
         isFetching: true,
         isLoaded: false
       }
-    case VISITED_STORIES_RECEIVED:
+    case FAVORITE_PUBLISHERS_RECEIVED:
       return {
         ...state,
         isFetching: false,
-        items: action.visitedStories,
+        items: action.favoritePublishersStories,
         isLoaded: true
       }
     default:

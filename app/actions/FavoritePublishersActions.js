@@ -5,52 +5,52 @@ import captureError from '../common/utils/captureError'
 import { parse, stringify } from '../common/utils/Parser'
 import { REQUEST_FAVORITE_PUBLISHERS, FAVORITE_PUBLISHERS_RECEIVED } from '../constants/ActionTypes'
 
-export const requestFavoritePublishers = () => ({
+export const requestPublishers = () => ({
   type: REQUEST_FAVORITE_PUBLISHERS
 })
 
-export const receiveVisitedStories = (visitedStories) => ({
+export const receivePublishers = (favoritePublishers) => ({
   type: FAVORITE_PUBLISHERS_RECEIVED,
-  visitedStories
+  favoritePublishers
 })
 
 export function getFavoritePublishers () {
   return (dispatch, getState) => {
-    if (isVisitedStoriesLoaded(getState)) return
-    if (isVisitedStoriesFetching(getState)) return
+    if (isLoaded(getState)) return
+    if (isFetching(getState)) return
 
-    dispatch(requestFavoritePublishers())
-    AsyncStorage.getItem('visitedStories', (error, stories) => {
+    dispatch(requestPublishers())
+    AsyncStorage.getItem('favoritePublishers', (error, stories) => {
       if (error) return captureError(error)
-      return dispatch(receiveVisitedStories(parse(stories) || []))
+      return dispatch(receivePublishers(parse(stories) || []))
     })
   }
 }
 
-export function addVisitedStory (story) {
+export function addFavoritePublisher (story) {
   return (dispatch, getState) => {
-    if (isVisitedStory(getState, story)) return
+    if (isFavorite(getState, story)) return
 
-    let stories = _uniq(_flatten([visitedStories(getState).items, story.id]))
-    AsyncStorage.setItem('visitedStories', stringify(stories), (error) => {
+    let stories = _uniq(_flatten([favoritePublishers(getState).items, story.id]))
+    AsyncStorage.setItem('favoritePublishers', stringify(stories), (error) => {
       if (error) return captureError(error)
-      return dispatch(receiveVisitedStories(stories))
+      return dispatch(receivePublishers(stories))
     })
   }
 }
 
 function favoritePublishers (getState) {
-  return getState().StorageReducer.visitedStories
+  return getState().FavoritePublishersReducer
 }
 
-function isVisitedStoriesFetching (getState) {
+function isFetching (getState) {
   return favoritePublishers(getState).isFetching
 }
 
-function isVisitedStoriesLoaded (getState) {
+function isLoaded (getState) {
   return favoritePublishers(getState).isLoaded
 }
 
-function isVisitedStory (getState, story) {
+function isFavorite (getState, story) {
   return favoritePublishers(getState).items.indexOf(story.id) !== -1
 }

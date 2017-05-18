@@ -48,7 +48,7 @@ class LinkScene extends Component {
 
   addStoryToLocalStorage () {
     const { dispatch, story } = this.props
-    dispatch(VisitedStoriesActions.addVisitedStory(story))
+    dispatch(VisitedStoriesActions.addStory(story))
   }
 
   renderHeader () {

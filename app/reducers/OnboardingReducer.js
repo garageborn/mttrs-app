@@ -1,7 +1,4 @@
-import {
-  SHOW_ONBOARDING,
-  REQUEST_ONBOARDING
-} from '../constants/ActionTypes'
+import { SHOW_ONBOARDING, REQUEST_ONBOARDING } from '../constants/ActionTypes'
 
 let defaultState = {
   isFetching: false, show: false
