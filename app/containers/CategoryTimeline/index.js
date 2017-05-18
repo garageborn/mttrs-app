@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import Timeline from '../Timeline'
 import _isEqual from 'lodash/isEqual'
@@ -24,5 +23,4 @@ CategoryTimeline.propTypes = {
   current: PropTypes.bool.isRequired
 }
 
-const CategoryTimelineWithData = withQuery(CategoryTimeline)
-export default withNavigation(CategoryTimelineWithData)
+export default withQuery(CategoryTimeline)

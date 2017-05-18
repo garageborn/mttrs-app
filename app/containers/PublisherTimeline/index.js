@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
-import { connect } from 'react-redux'
-import { withNavigation } from '@exponent/ex-navigation'
 import withQuery from './index.gql'
 import Timeline from '../Timeline'
 import styles from '../../styles/App'
@@ -23,5 +21,4 @@ PublisherTimeline.propTypes = {
   }).isRequired
 }
 
-const PublisherTimelineWithData = withQuery(PublisherTimeline)
-export default withNavigation(PublisherTimelineWithData)
+export default withQuery(PublisherTimeline)
