@@ -1,4 +1,3 @@
-import { Platform } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 import AppNavigator from '../navigators/AppNavigator'
 import _result from 'lodash/result'
@@ -8,13 +7,10 @@ export function home () {
   return (dispatch, getState) => {
     const params = getCurrentParams(getState)
 
-    const menuResult = _result(params, 'menu')
     const sectionResult = _result(params, 'section')
-
-    const menuParams = { ...menuResult, open: false }
     const sectionParams = { ...sectionResult, name: 'home', model: {} }
+    const newParams = Object.assign({}, params, { section: sectionParams })
 
-    const newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.name}`))
     return dispatch(handleTimelineRoute(newParams))
   }
@@ -50,9 +46,8 @@ export function selectPublisher (publisher) {
     const params = getCurrentParams(getState)
     if (!navigation) return null
 
-    let menuParams = Object.assign({}, params.menu, { open: false })
     let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
-    let newParams = Object.assign({}, params, { section: sectionParams, menu: menuParams })
+    let newParams = Object.assign({}, params, { section: sectionParams })
     dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
     return dispatch(handleTimelineRoute(newParams))
   }

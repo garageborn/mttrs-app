@@ -57,7 +57,7 @@ StoryContainer.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
-  let isVisited = state.StorageReducer.visitedStories.items.indexOf(ownProps.story.id) !== -1
+  let isVisited = state.VisitedStoriesReducer.items.indexOf(ownProps.story.id) !== -1
 
   return {
     visited: isVisited

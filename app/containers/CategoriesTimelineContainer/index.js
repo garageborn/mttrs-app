@@ -45,7 +45,6 @@ class CategoriesTimelineContainer extends Component {
         categorySlug={section.model.slug}
         active={this.state.activeTag}
         handleTag={this.handleTag}
-        menuOpen={this.props.menuOpen}
       />
     )
   }
@@ -58,14 +57,7 @@ class CategoriesTimelineContainer extends Component {
 
 CategoriesTimelineContainer.propTypes = {
   params: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  menuOpen: PropTypes.bool.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => {
-  return {
-    menuOpen: state.uiReducer.menu.isOpen
-  }
-}
-
-export default connect(mapStateToProps)(CategoriesTimelineContainer)
+export default connect()(CategoriesTimelineContainer)
