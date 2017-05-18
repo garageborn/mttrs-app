@@ -21,7 +21,6 @@ class Timeline extends Component {
 
   componentWillMount () {
     this.props.dispatch(VisitedStoriesActions.getStories())
-    this.props.dispatch(FavoritePublishersActions.getPublishers())
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 

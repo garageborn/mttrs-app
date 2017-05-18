@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
+import _compact from 'lodash/compact'
 import _flatten from 'lodash/flatten'
 import captureError from '../common/utils/captureError'
 import { parse, stringify } from '../common/utils/Parser'
@@ -24,23 +25,23 @@ export function getPublishers () {
 
     dispatch(requestPublishers())
 
-    AsyncStorage.getItem(key, (error, stories) => {
+    AsyncStorage.getItem(key, (error, favorites) => {
       if (error) return captureError(error)
-      return dispatch(receivePublishers(parse(stories) || []))
+      return dispatch(receivePublishers(parseFromStorage(favorites)))
     })
   }
 }
 
-export function addPublisher (story) {
+export function addPublisher (publisher) {
   return (dispatch, getState) => {
     const key = storageKey(getState)
     if (!key) return
-    if (isFavorite(getState, story)) return
+    if (isFavorite(getState, publisher)) return
 
-    let stories = _uniq(_flatten([favoritePublishers(getState).items, story.id]))
-    AsyncStorage.setItem(key, stringify(stories), (error) => {
+    let favorites = mergeFavorites(getState, publisher.id)
+    AsyncStorage.setItem(key, stringify(favorites), (error) => {
       if (error) return captureError(error)
-      return dispatch(receivePublishers(stories))
+      return dispatch(receivePublishers(favorites))
     })
   }
 }
@@ -48,7 +49,7 @@ export function addPublisher (story) {
 function storageKey (getState) {
   const tenant = getState().TenantReducer.current
   if (!tenant) return
-  return `@${ tenant.id }:favorite_publishers`
+  return `@${tenant.id}:favorite_publishers`
 }
 
 function favoritePublishers (getState) {
@@ -63,6 +64,15 @@ function isLoaded (getState) {
   return favoritePublishers(getState).isLoaded
 }
 
-function isFavorite (getState, story) {
-  return favoritePublishers(getState).items.indexOf(story.id) !== -1
+function isFavorite (getState, publisher) {
+  return favoritePublishers(getState).items.indexOf(publisher.id) !== -1
+}
+
+function parseFromStorage (favorites) {
+  return parse(favorites) || []
+}
+
+function mergeFavorites (getState, publisherId) {
+  let newFavorites = _uniq(_flatten([favoritePublishers(getState).items, publisherId]))
+  return _compact(newFavorites)
 }
