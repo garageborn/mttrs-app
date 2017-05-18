@@ -3,7 +3,7 @@ import { AppState } from 'react-native'
 import { connect } from 'react-redux'
 import captureError from '../../common/utils/captureError'
 import TimelineComponent from '../../components/Timeline'
-import { VisitedStoriesActions } from '../../actions/index'
+import { VisitedStoriesActions, FavoritePublishersActions } from '../../actions/index'
 
 const minStoriesInTheViewport = 4
 
@@ -21,6 +21,7 @@ class Timeline extends Component {
 
   componentWillMount () {
     this.props.dispatch(VisitedStoriesActions.getStories())
+    this.props.dispatch(FavoritePublishersActions.getPublishers())
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 
