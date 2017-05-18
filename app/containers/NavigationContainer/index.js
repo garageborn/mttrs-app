@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 import { TenantActions } from '../../actions/index'
-import MainNavigator from '../../config/MainNavigator'
+import AppNavigator from '../../navigators/AppNavigator'
 
 class NavigationContainer extends Component {
   componentWillMount () {
@@ -14,7 +14,7 @@ class NavigationContainer extends Component {
 
     if (!tenant.isLoaded) return null
 
-    return <MainNavigator navigation={this.getNavigationHelpers()} />
+    return <AppNavigator navigation={this.getNavigationHelpers()} />
   }
 
   getNavigationHelpers () {

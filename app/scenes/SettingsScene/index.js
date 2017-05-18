@@ -1,18 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text } from 'react-native'
 
-class SummariesScene extends Component {
+class SettingsScene extends Component {
   render () {
     return (
       <View>
-        <Text>SummariesScene</Text>
+        <Text>SettingsScene</Text>
       </View>
     )
   }
 }
 
-SummariesScene.propTypes = {
+SettingsScene.propTypes = {
 
 }
 
-export default SummariesScene
+export default SettingsScene
