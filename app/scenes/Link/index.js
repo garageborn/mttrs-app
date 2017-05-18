@@ -9,18 +9,18 @@ import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
 
 class LinkScene extends Component {
-  static route = Platform.select({
-    ios: {
-      navigationBar: {
-        renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
-        renderLeft: () => <View />,
-        renderRight: () => <View />,
-        backgroundColor: DARK_COLOR,
-        height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
-      }
-    },
-    android: null
-  })
+  // static route = Platform.select({
+  //   ios: {
+  //     navigationBar: {
+  //       renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
+  //       renderLeft: () => <View />,
+  //       renderRight: () => <View />,
+  //       backgroundColor: DARK_COLOR,
+  //       height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
+  //     }
+  //   },
+  //   android: null
+  // })
 
   constructor () {
     super()
@@ -52,7 +52,6 @@ class LinkScene extends Component {
   }
 
   renderHeader () {
-    if (Platform.OS === 'ios') return
     const { link } = this.props
     return <LinkHeaderContainer link={link} />
   }

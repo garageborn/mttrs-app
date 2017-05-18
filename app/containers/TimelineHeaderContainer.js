@@ -5,6 +5,7 @@ import { MenuActions } from '../actions/index'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
 import styles from '../styles/TimelineHeaderContainer'
+import _result from 'lodash/result'
 
 class TimelineHeaderContainer extends Component {
   constructor (props) {
@@ -21,10 +22,11 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader () {
-    const { section } = this.props.params
+    const section = _result(this.props.params, 'section')
 
     if (!section) return this.renderHome()
     if (section.name === 'publisher') return this.renderPublisher()
+
     return this.renderCategory()
   }
 
@@ -77,8 +79,11 @@ TimelineHeaderContainer.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps (state) {
-  return { uiReducer: state.uiReducer }
+const mapStateToProps = (state) => {
+  return {
+    uiReducer: state.uiReducer,
+    nav: state.nav
+  }
 }
 
 export default connect(mapStateToProps)(TimelineHeaderContainer)
