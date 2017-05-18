@@ -4,18 +4,18 @@ import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
 import styles from '../../styles/App'
 
-class SummariesTimelineContainer extends Component {
+class FavoritesTimelineContainer extends Component {
   render () {
     return (
       <View style={styles.listViewContainer}>
-        <TimelineContainer type='summaries' data={this.props.data} />
+        <TimelineContainer type='favorites' data={this.props.data} />
       </View>
     )
   }
 }
 
-SummariesTimelineContainer.propTypes = {
+FavoritesTimelineContainer.propTypes = {
   data: PropTypes.object
 }
 
-export default withQuery(SummariesTimelineContainer)
+export default withQuery(FavoritesTimelineContainer)

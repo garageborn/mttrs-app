@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { AppState } from 'react-native'
 import { connect } from 'react-redux'
 import captureError from '../../common/utils/captureError'
-import TimelineComponent from '../../components/Timeline'
-import { VisitedStoriesActions, FavoritePublishersActions } from '../../actions/index'
+import Timeline from '../../components/Timeline'
+import { VisitedStoriesActions } from '../../actions/index'
 
 const minStoriesInTheViewport = 4
 
-class Timeline extends Component {
+class TimelineContainer extends Component {
   constructor (props) {
     super(props)
     this.onEndReached = this.onEndReached.bind(this)
@@ -42,7 +42,7 @@ class Timeline extends Component {
   render () {
     const { data, type } = this.props
     return (
-      <TimelineComponent
+      <Timeline
         type={type}
         data={data}
         loadingMore={this.state.loadingMore}
@@ -92,7 +92,7 @@ class Timeline extends Component {
   }
 }
 
-Timeline.propTypes = {
+TimelineContainer.propTypes = {
   data: PropTypes.shape({
     infiniteScroll: PropTypes.func.isRequired,
     pullToRefresh: PropTypes.func.isRequired,
@@ -104,4 +104,4 @@ Timeline.propTypes = {
   type: PropTypes.string.isRequired
 }
 
-export default connect()(Timeline)
+export default connect()(TimelineContainer)

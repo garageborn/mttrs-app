@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import withQuery from './index.gql'
-import Timeline from '../Timeline'
+import TimelineContainer from '../TimelineContainer'
 import _isEqual from 'lodash/isEqual'
 
 class CategoryTimeline extends Component {
@@ -14,7 +14,7 @@ class CategoryTimeline extends Component {
   }
 
   render () {
-    return <Timeline type='category' data={this.props.data} />
+    return <TimelineContainer type='category' data={this.props.data} />
   }
 }
 

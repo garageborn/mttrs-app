@@ -1,18 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Text } from 'react-native'
+import React, { Component } from 'react'
+import CategoriesSwiper from '../../containers/CategoriesSwiper'
 
 class PopularScene extends Component {
   render () {
-    return (
-      <View>
-        <Text>PopularScene</Text>
-      </View>
-    )
+    return <CategoriesSwiper />
   }
-}
-
-PopularScene.propTypes = {
-
 }
 
 export default PopularScene

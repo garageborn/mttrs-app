@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import graphql, { defaultVariables } from '../Timeline/index.gql'
+import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
   query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $tagSlug: String) {

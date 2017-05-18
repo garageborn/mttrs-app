@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import Timeline from '../Timeline'
+import TimelineContainer from '../TimelineContainer'
 
 class HomeTimeline extends Component {
   shouldComponentUpdate (nextProps) {
@@ -11,7 +11,7 @@ class HomeTimeline extends Component {
   }
 
   render () {
-    return <Timeline type='home' data={this.props.data} />
+    return <TimelineContainer type='home' data={this.props.data} />
   }
 }
 

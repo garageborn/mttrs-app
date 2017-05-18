@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String, $limit: Int!) {
+  query($cursor: Int, $type: String!, $limit: Int!) {
     timeline(cursor: $cursor, type: $type, limit: $limit) {
       date
       stories {
@@ -27,9 +27,13 @@ const Query = gql`
 
 export default function (HomeTimeline) {
   return graphql(Query, {
-    skip: (props) => !props.current,
     options (props) {
-      return { variables: { ...defaultVariables, type: 'highlight' } }
+      return {
+        variables: {
+          ...defaultVariables,
+          type: 'favorites'
+        }
+      }
     }
   })(HomeTimeline)
 }
