@@ -5,7 +5,7 @@ import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import arrow from './assets/arrow.png'
 import styles from './styles'
 
-const Header = ({ title, icon, params, type }) => {
+const Header = ({ title, icon, type }) => {
   return (
     <View>
       <View style={styles.header}>
@@ -24,7 +24,6 @@ const Header = ({ title, icon, params, type }) => {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  params: PropTypes.object,
   icon: PropTypes.any
 }
 

@@ -29,21 +29,11 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderPublisher () {
-    return (
-      <PublisherHeaderContainer
-        publisher={this.props.params.section.model}
-        params={this.props.params}
-      />
-    )
+    return <PublisherHeaderContainer publisher={this.props.params.section.model} />
   }
 
   renderCategory () {
-    return (
-      <CategoryHeaderContainer
-        category={this.props.params.section.model}
-        params={this.props.params}
-      />
-    )
+    return <CategoryHeaderContainer category={this.props.params.section.model} />
   }
 }
 

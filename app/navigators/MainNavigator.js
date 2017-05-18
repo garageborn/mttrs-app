@@ -2,11 +2,10 @@ import React from 'react'
 import PopularScene from '../scenes/PopularScene'
 import SummariesScene from '../scenes/SummariesScene'
 import FavoritesScene from '../scenes/FavoritesScene'
-import TimelineScene from '../scenes/TimelineScene'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 const MainRoutes = {
-  summaries: { screen: TimelineScene },
+  summaries: { screen: SummariesScene },
   popular: { screen: PopularScene },
   favorites: { screen: FavoritesScene }
 }

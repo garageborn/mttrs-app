@@ -1,18 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Text } from 'react-native'
+import React, { Component } from 'react'
+import SummariesTimeline from '../../containers/SummariesTimelineContainer'
 
 class SummariesScene extends Component {
   render () {
-    return (
-      <View>
-        <Text>SummariesScene</Text>
-      </View>
-    )
+    return <SummariesTimeline />
   }
-}
-
-SummariesScene.propTypes = {
-
 }
 
 export default SummariesScene

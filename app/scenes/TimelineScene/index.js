@@ -7,7 +7,7 @@ import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import SocialCountModalContainer from '../../containers/SocialCountModalContainer'
 import _result from 'lodash/result'
 
-class MainScene extends Component {
+class TimelineScene extends Component {
   render () {
     return (
       <View>
@@ -59,12 +59,10 @@ class MainScene extends Component {
   }
 }
 
-MainScene.propTypes = {
+TimelineScene.propTypes = {
   navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.object
-    }).isRequired
+    params: PropTypes.object
   }).isRequired
 }
 
-export default MainScene
+export default TimelineScene
