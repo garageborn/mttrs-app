@@ -1,28 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, AppState, Platform } from 'react-native'
+import { View } from 'react-native'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimelineContainer from '../../containers/CategoriesTimelineContainer'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import SocialCountModalContainer from '../../containers/SocialCountModalContainer'
-import { headerHeight } from '../../styles/Global'
-import styles from '../../styles/App'
-import { DARK_COLOR } from '../../constants/Colors'
+import _result from 'lodash/result'
 
 class TimelineScene extends Component {
-  static route = {
-    navigationBar: {
-      renderTitle: (route) => <TimelineHeaderContainer params={route.params} />,
-      renderLeft: () => null,
-      renderRight: () => null,
-      backgroundColor: DARK_COLOR,
-      height: headerHeight
-    }
-  }
-
   render () {
     return (
       <View>
+        <TimelineHeaderContainer params={this.props.navigation.state.params} />
         {this.renderTimeline()}
         {this.renderStoryModal()}
       </View>
@@ -33,14 +22,14 @@ class TimelineScene extends Component {
     if (this.isPublisherSection) {
       return <PublisherTimeline model={this.currentSection.model} />
     } else if (this.isCategoriesSection) {
-      return <CategoriesTimelineContainer params={this.props.route.params} />
+      return <CategoriesTimelineContainer params={this.props.navigation.state.params} />
     }
   }
 
   renderStoryModal () {
-    const { params } = this.props.route
-    let section = params.section || {}
-    let modal = section.modal || {}
+    const { params } = this.props.navigation.state
+    let section = _result(params, 'section', {})
+    let modal = _result(section, 'modal', {})
     let publisherSlug = this.isPublisherSection ? params.section.model.slug : ''
 
     if (!modal.open) return
@@ -56,8 +45,8 @@ class TimelineScene extends Component {
   }
 
   get currentSection () {
-    const { params } = this.props.route
-    return params.section || {}
+    const { params } = this.props.navigation.state
+    return _result(params, 'section', {})
   }
 
   get isCategoriesSection () {
@@ -71,8 +60,11 @@ class TimelineScene extends Component {
 }
 
 TimelineScene.propTypes = {
-  route: PropTypes.object.isRequired,
-  section: PropTypes.object,
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.object
+    }).isRequired
+  }).isRequired
 }
 
 export default TimelineScene

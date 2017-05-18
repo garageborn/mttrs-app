@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
 import styles from '../styles/TimelineHeaderContainer'
+import _result from 'lodash/result'
 
 class TimelineHeaderContainer extends Component {
   render () {
@@ -14,10 +15,11 @@ class TimelineHeaderContainer extends Component {
   }
 
   renderHeader () {
-    const { section } = this.props.params
+    const section = _result(this.props.params, 'section')
 
     if (!section) return this.renderHome()
     if (section.name === 'publisher') return this.renderPublisher()
+
     return this.renderCategory()
   }
 
