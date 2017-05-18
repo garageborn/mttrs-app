@@ -13,7 +13,7 @@ import styles from '../../styles/App'
 import { DARK_COLOR } from '../../constants/Colors'
 import _result from 'lodash/result'
 
-class MainScene extends Component {
+class TimelineScene extends Component {
   constructor () {
     super()
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
@@ -37,7 +37,7 @@ class MainScene extends Component {
       <View>
         <TimelineHeaderContainer params={this.props.navigation.state.params} />
         {this.renderTimeline()}
-        {/* <MenuPanelContainer params={this.props.navigation.state.params} /> */}
+        <MenuPanelContainer params={this.props.navigation.state.params} />
         {this.renderStoryModal()}
       </View>
     )
@@ -84,7 +84,7 @@ class MainScene extends Component {
   }
 }
 
-MainScene.propTypes = {
+TimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     state: PropTypes.shape({
@@ -97,4 +97,4 @@ const mapStateToProps = state => ({
   uiReducer: state.uiReducer
 })
 
-export default connect(mapStateToProps)(MainScene)
+export default connect(mapStateToProps)(TimelineScene)

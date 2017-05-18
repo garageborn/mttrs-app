@@ -1,6 +1,6 @@
 import { Platform } from 'react-native'
 import { NavigationActions } from 'react-navigation'
-import Router from '../config/Router'
+import MainNavigator from '../config/MainNavigator'
 import _result from 'lodash/result'
 import { AnalyticsActions } from './index'
 
@@ -25,7 +25,7 @@ export function link (story, link) {
     const navigation = getNavigation(getState)
     if (!navigation) return null
 
-    const route = Router.getRoute('link', { story: story, link: link })
+    const route = MainNavigator.getRoute('link', { story: story, link: link })
     dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
     dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
   }
@@ -93,9 +93,8 @@ function handleModalAnalytics (linkSlug, type) {
 function handleTimelineRoute (newParams) {
   return (dispatch, getState) => {
     const currentRoute = getCurrentRoute(getState)
-    const route = Router.router.getActionForPathAndParams('timeline')
-    if (currentRoute.routeName !== 'timeline') return dispatch(NavigationActions.navigate(route))
-    debugger
+    const route = MainNavigator.router.getActionForPathAndParams('timeline')
+    // if (currentRoute.routeName !== 'timeline') return dispatch(NavigationActions.navigate(route))
     return dispatch(NavigationActions.setParams({ params: newParams }))
   }
 }

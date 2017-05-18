@@ -6,7 +6,7 @@ import EventsContainer from './EventsContainer'
 import NavigationContainer from './NavigationContainer'
 import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
-import Router from '../config/Router'
+import MainNavigator from '../config/MainNavigator'
 require('../config/sentry')
 
 class Root extends Component {
@@ -17,7 +17,7 @@ class Root extends Component {
 
   render () {
     const { store } = this.props
-    const navigationContext = new NavigationContext({ router: Router, store: store })
+    const navigationContext = new NavigationContext({ router: MainNavigator, store: store })
 
     return (
       <ApolloProvider store={store} client={apolloClient}>
