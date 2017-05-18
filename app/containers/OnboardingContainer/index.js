@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Modal } from 'react-native'
 import { connect } from 'react-redux'
 import Onboarding from '../../components/Onboarding'
-import { StorageActions } from '../../actions/index'
+import { OnboardingActions } from '../../actions/index'
 
 class OnboardingContainer extends Component {
   constructor () {
@@ -11,7 +11,7 @@ class OnboardingContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(StorageActions.getOnboardingStatus())
+    this.props.dispatch(OnboardingActions.getOnboardingStatus())
   }
 
   render () {
@@ -27,7 +27,7 @@ class OnboardingContainer extends Component {
   }
 
   onOnboardingEnd () {
-    this.props.dispatch(StorageActions.closeOnboarding())
+    this.props.dispatch(OnboardingActions.closeOnboarding())
   }
 }
 
@@ -40,7 +40,7 @@ OnboardingContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  onboarding: state.StorageReducer.onboarding,
+  onboarding: state.OnboardingReducer,
   tenant: state.TenantReducer
 })
 

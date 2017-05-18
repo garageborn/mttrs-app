@@ -1,7 +1,6 @@
-import { AsyncStorage, Platform } from 'react-native'
+import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
-import captureError from '../common/utils/captureError'
-import { parse, stringify } from '../common/utils/Parser'
+import { stringify } from '../common/utils/Parser'
 import _isEmpty from 'lodash/isEmpty'
 
 import {

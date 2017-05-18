@@ -4,12 +4,7 @@ import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
 import { DEVICE_LANGUAGE } from '../constants/Locale'
 import { ASSIGN_TENANT, REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
-import {
-  MenuActions,
-  NavigationActions,
-  NotificationsActions,
-  StorageActions
-} from '../actions/index'
+import { MenuActions, NavigationActions } from '../actions/index'
 
 const tenantKey = 'tenant'
 

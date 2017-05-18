@@ -6,9 +6,7 @@ import { parse, stringify } from '../common/utils/Parser'
 
 import {
   REQUEST_VISITED_STORIES,
-  VISITED_STORIES_RECEIVED,
-  SHOW_ONBOARDING,
-  REQUEST_ONBOARDING
+  VISITED_STORIES_RECEIVED
 } from '../constants/ActionTypes'
 
 export const requestVisitedStories = () => ({
@@ -46,7 +44,7 @@ export function addVisitedStory (story) {
 }
 
 function visitedStories (getState) {
-  return getState().StorageReducer.visitedStories
+  return getState().VisitedStoriesReducer
 }
 
 function isVisitedStoriesFetching (getState) {
@@ -59,39 +57,4 @@ function isVisitedStoriesLoaded (getState) {
 
 function isVisitedStory (getState, story) {
   return visitedStories(getState).items.indexOf(story.id) !== -1
-}
-
-export const requestOnboarding = () => ({
-  type: REQUEST_ONBOARDING
-})
-
-export const showOnboarding = show => ({
-  type: SHOW_ONBOARDING,
-  show
-})
-
-export function closeOnboarding () {
-  return dispatch => {
-    dispatch(this.showOnboarding(false))
-    try {
-      AsyncStorage.setItem('showOnboarding', stringify(false))
-    } catch (error) {
-      captureError(error)
-    }
-  }
-}
-
-export function getOnboardingStatus () {
-  return dispatch => {
-    dispatch(this.requestOnboarding())
-    AsyncStorage.getItem('showOnboarding', (error, data) => {
-      if (error) captureError(error)
-
-      if (data === null) {
-        dispatch(this.showOnboarding(true))
-      } else {
-        dispatch(this.showOnboarding(false))
-      }
-    })
-  }
 }
