@@ -10,21 +10,12 @@ const containerHeight = Platform.select({
   android: height - headerHeight + androidOffset
 })
 
-const container = {
-  flexGrow: 1,
-  backgroundColor: '#F1F1F1',
-  height: containerHeight,
-  width
-}
-
 const styles = StyleSheet.create({
   container: {
-    ...container
-  },
-  loadingContainer: {
-    ...container,
-    justifyContent: 'center',
-    alignItems: 'center'
+    flexGrow: 1,
+    backgroundColor: '#F1F1F1',
+    height: containerHeight,
+    width
   }
 })
 
