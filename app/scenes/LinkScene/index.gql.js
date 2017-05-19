@@ -13,7 +13,7 @@ export default function (Link) {
   return graphql(Mutation, {
     props: ({mutate, ownProps}) => ({
       createLinkAccess: () => {
-        return mutate({ variables: { slug: ownProps.route.params.link.slug } })
+        return mutate({ variables: { slug: ownProps.navigation.state.params.link.slug } })
       }
     })
   })(Link)

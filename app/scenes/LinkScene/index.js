@@ -47,12 +47,13 @@ class LinkScene extends Component {
   }
 
   addStoryToLocalStorage () {
-    const { dispatch, story } = this.props
+    const { dispatch, navigation } = this.props
+    const { story } = navigation.state.params
     dispatch(VisitedStoriesActions.addStory(story))
   }
 
   renderHeader () {
-    const { link } = this.props
+    const { link } = this.props.navigation.state.params
     return <LinkHeaderContainer link={link} />
   }
 
@@ -61,7 +62,7 @@ class LinkScene extends Component {
   }
 
   render () {
-    const { link } = this.props.route.params
+    const { link } = this.props.navigation.state.params
     if (this.state.appState !== 'active') return null
     return (
       <View>
@@ -75,17 +76,16 @@ class LinkScene extends Component {
 }
 
 LinkScene.propTypes = {
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      link: PropTypes.shape({
-        slug: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
-        amp_url: PropTypes.string
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        link: PropTypes.shape({
+          slug: PropTypes.string.isRequired,
+          url: PropTypes.string.isRequired,
+          amp_url: PropTypes.string
+        }).isRequired
       }).isRequired
-    }).isRequired
-  }).isRequired,
-  story: PropTypes.shape({
-    id: PropTypes.any.isRequired
+    })
   }).isRequired,
   createLinkAccess: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired

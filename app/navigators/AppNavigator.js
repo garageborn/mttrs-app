@@ -1,4 +1,5 @@
 import { StackNavigator } from 'react-navigation'
+import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator'
 import MainNavigator from './MainNavigator'
 import PublisherScene from '../scenes/PublisherScene'
 import SettingsScene from '../scenes/SettingsScene'
@@ -11,7 +12,14 @@ const AppRoutes = {
   timeline: { screen: MainNavigator }
 }
 
-const AppNavigatorConfig = { headerMode: 'none', initialRouteName: 'timeline' }
+const AppNavigatorConfig = {
+  direction: 'horizontal',
+  headerMode: 'none',
+  initialRouteName: 'timeline',
+  transitionConfig: () => ({
+    screenInterpolator: CardStackStyleInterpolator.forHorizontal
+  })
+}
 
 const AppNavigator = StackNavigator(AppRoutes, AppNavigatorConfig)
 
