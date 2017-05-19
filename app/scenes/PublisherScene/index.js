@@ -1,18 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text } from 'react-native'
+import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
 
 class PublisherScene extends Component {
   render () {
-    return (
-      <View>
-        <Text>PublisherScene</Text>
-      </View>
-    )
+    const { publisher } = this.props.navigation.state.params
+    return <PublisherTimelineContainer publisher={publisher} />
   }
 }
 
 PublisherScene.propTypes = {
-
+  navigation: PropTypes.shape({
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        publisher: PropTypes.shape({
+          slug: PropTypes.string.isRequired
+        }).isRequired
+      }).isRequired
+    }).isRequired
+  }).isRequired
 }
 
 export default PublisherScene

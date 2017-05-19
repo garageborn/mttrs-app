@@ -31,7 +31,7 @@ export default function (HomeTimeline) {
       return {
         variables: {
           ...defaultVariables,
-          publisherSlug: props.model.slug,
+          publisherSlug: props.publisher.slug,
           type: 'publisher'
         }
       }

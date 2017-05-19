@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import withQuery from './index.gql'
-import Timeline from '../Timeline'
+import TimelineContainer from '../TimelineContainer'
 import styles from '../../styles/App'
 
 class PublisherTimeline extends Component {
   render () {
     return (
       <View style={styles.listViewContainer}>
-        <Timeline type='publisher' data={this.props.data} />
+        <TimelineContainer type='publisher' data={this.props.data} />
       </View>
     )
   }
@@ -16,7 +16,7 @@ class PublisherTimeline extends Component {
 
 PublisherTimeline.propTypes = {
   data: PropTypes.object,
-  model: PropTypes.shape({
+  publisher: PropTypes.shape({
     slug: PropTypes.string.isRequired
   }).isRequired
 }

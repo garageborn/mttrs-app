@@ -40,16 +40,13 @@ export function selectCategory (category) {
   }
 }
 
-export function selectPublisher (publisher) {
+export function publisher (publisher) {
   return (dispatch, getState) => {
     const navigation = getNavigation(getState)
-    const params = getCurrentParams(getState)
     if (!navigation) return null
 
-    let sectionParams = Object.assign({}, params.section, { name: 'publisher', model: publisher })
-    let newParams = Object.assign({}, params, { section: sectionParams })
-    dispatch(AnalyticsActions.trackScreen(`/${sectionParams.model.slug}`))
-    return dispatch(handleTimelineRoute(newParams))
+    dispatch(NavigationActions.navigate({ routeName: 'publisher', params: { publisher } }))
+    dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
   }
 }
 
