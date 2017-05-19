@@ -21,8 +21,8 @@ export function link (story, link) {
     const navigation = getNavigation(getState)
     if (!navigation) return null
 
-    const route = AppNavigator.getRoute('link', { story: story, link: link })
-    dispatch(NavigationActions.push(navigation.currentNavigatorUID, route))
+    const params = { story: story, link: link }
+    dispatch(NavigationActions.navigate({routeName: 'link', params}))
     dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
   }
 }
@@ -68,17 +68,14 @@ export function modal (modalParams) {
 }
 
 export function back () {
-  return (dispatch, getState) => {
-    const navigation = getNavigation(getState)
-    dispatch(NavigationActions.pop(navigation.currentNavigatorUID))
-  }
+  return (dispatch, getState) => dispatch(NavigationActions.back())
 }
 
 function handleModalAnalytics (linkSlug, type) {
   const urls = {
     storyLinks: `/link/${linkSlug}/story-links`,
     socialCount: `/link/${linkSlug}/social-count`
-}
+  }
 
   return (dispatch) => {
     dispatch(AnalyticsActions.trackScreen(urls[type]))
