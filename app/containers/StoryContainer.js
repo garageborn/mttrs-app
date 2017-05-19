@@ -33,7 +33,7 @@ class StoryContainer extends Component {
   handlePublishersPress () {
     const { dispatch, story } = this.props
     if (story.other_links_count) return dispatch(NavigationActions.modal({ story: story, open: true, type: 'storyLinks' }))
-    return dispatch(NavigationActions.selectPublisher(story.main_link.publisher))
+    return dispatch(NavigationActions.publisher(story.main_link.publisher))
   }
 
   handleSocialCountPress () {

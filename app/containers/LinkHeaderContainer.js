@@ -25,7 +25,7 @@ class LinkHeaderContainer extends Component {
 
   openPublisher (publisher) {
     InteractionManager.runAfterInteractions(() => {
-      this.props.dispatch(NavigationActions.selectPublisher(publisher))
+      this.props.dispatch(NavigationActions.publisher(publisher))
     })
   }
 
