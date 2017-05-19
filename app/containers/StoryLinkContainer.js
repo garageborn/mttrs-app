@@ -33,7 +33,7 @@ class StoryLinkContainer extends Component {
   openPublisher (publisher) {
     let { dispatch } = this.props
     dispatch(NavigationActions.modal({ open: false }))
-    dispatch(NavigationActions.selectPublisher(publisher))
+    dispatch(NavigationActions.publisher(publisher))
   }
 }
 
