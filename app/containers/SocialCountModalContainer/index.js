@@ -14,17 +14,12 @@ class SocialCountModalContainer extends Component {
   }
 
   close () {
-    this.props.dispatch(NavigationActions.modal({ open: false }))
+    this.props.dispatch(NavigationActions.closeModal())
   }
 
   render () {
     return (
-      <Modal
-        animationType={'slide'}
-        transparent
-        visible
-        onRequestClose={this.close}
-      >
+      <Modal animationType={'slide'} transparent visible onRequestClose={this.close} >
         <View style={styles.modal}>
           {this.renderStoryLinks()}
           <CloseButton onPress={this.close} />

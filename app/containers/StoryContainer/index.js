@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Story from '../components/Story'
-import { NavigationActions } from '../actions/index'
+import Story from '../../components/Story'
+import { NavigationActions } from '../../actions/index'
+import SocialCountModalContainer from '../SocialCountModalContainer'
 
 class StoryContainer extends Component {
   constructor (props) {
@@ -32,13 +33,14 @@ class StoryContainer extends Component {
 
   handlePublishersPress () {
     const { dispatch, story } = this.props
-    if (story.other_links_count) return dispatch(NavigationActions.modal({ story: story, open: true, type: 'storyLinks' }))
+    if (story.other_links_count) return dispatch(NavigationActions.storyLinks(story))
     return dispatch(NavigationActions.publisher(story.main_link.publisher))
   }
 
   handleSocialCountPress () {
     const { dispatch, story } = this.props
-    return dispatch(NavigationActions.modal({ story: story, open: true, type: 'socialCount' }))
+    const content = <SocialCountModalContainer story={story} />
+    return dispatch(NavigationActions.socialCount(story, content))
   }
 
   openMainLink () {
