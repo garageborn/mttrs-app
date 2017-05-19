@@ -1,8 +1,8 @@
 import React from 'react'
+import { TabNavigator, TabBarBottom } from 'react-navigation'
 import PopularScene from '../scenes/PopularScene'
 import SummariesScene from '../scenes/SummariesScene'
 import FavoritesScene from '../scenes/FavoritesScene'
-import { TabNavigator, TabBarBottom } from 'react-navigation'
 
 const MainRoutes = {
   summaries: { screen: SummariesScene },
@@ -14,7 +14,6 @@ const MainNavigatorConfig = {
   headerMode: 'none',
   initialRouteName: 'summaries',
   tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
-  animationEnabled: true,
   tabBarPosition: 'bottom'
 }
 
