@@ -16,7 +16,8 @@ class TimelineList extends Component {
   }
 
   renderSectionHeader (item) {
-    return <ListViewHeader type={this.props.type} date={item.section.key} />
+    const { renderOptions } = this.props
+    return <ListViewHeader renderOptions={renderOptions} date={item.section.key} />
   }
 
   sections () {
@@ -61,11 +62,19 @@ class TimelineList extends Component {
   }
 
   renderRow (section) {
+    const { renderOptions } = this.props
     const story = section.item
 
     let components = []
     if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
-    components.push(<StoryContainer key={story.id} story={story} collapsable={false} />)
+    components.push(
+      <StoryContainer
+        key={story.id}
+        story={story}
+        collapsable={false}
+        renderOptions={renderOptions}
+      />
+    )
     return components
   }
 
@@ -81,7 +90,10 @@ TimelineList.propTypes = {
   onEndReached: PropTypes.func.isRequired,
   refreshControl: PropTypes.func.isRequired,
   renderFooter: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 export default TimelineList

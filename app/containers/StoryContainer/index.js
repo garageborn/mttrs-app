@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Story from '../../components/Story'
 import { NavigationActions } from '../../actions/index'
 import SocialCountModalContainer from '../SocialCountModalContainer'
+import StoryLinksModalContainer from '../StoryLinksModalContainer'
 
 class StoryContainer extends Component {
   constructor (props) {
@@ -10,7 +11,6 @@ class StoryContainer extends Component {
     this.openLink = this.openLink.bind(this)
     this.handlePublishersPress = this.handlePublishersPress.bind(this)
     this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
-    this.openMainLink = this.openMainLink.bind(this)
   }
 
   render () {
@@ -18,7 +18,7 @@ class StoryContainer extends Component {
     return (
       <Story
         story={story}
-        openLink={this.openMainLink}
+        openLink={this.openLink}
         handlePublishersPress={this.handlePublishersPress}
         handleSocialCountPress={this.handleSocialCountPress}
         visited={visited}
@@ -26,36 +26,36 @@ class StoryContainer extends Component {
     )
   }
 
-  openLink (link) {
-    const { dispatch } = this.props
-    dispatch(NavigationActions.link(this.props.story, link))
+  openLink () {
+    const { dispatch, story } = this.props
+    dispatch(NavigationActions.link(this.props.story, story.main_link))
   }
 
   handlePublishersPress () {
-    const { dispatch, story } = this.props
-    if (story.other_links_count) return dispatch(NavigationActions.storyLinks(story))
-    return dispatch(NavigationActions.publisher(story.main_link.publisher))
+    const { dispatch, renderOptions, story } = this.props
+    if (story.other_links_count) {
+      const content = <StoryLinksModalContainer story={story} renderOptions={renderOptions} />
+      return dispatch(NavigationActions.storyLinks(story, content))
+    } else {
+      return dispatch(NavigationActions.publisher(story.main_link.publisher))
+    }
   }
 
   handleSocialCountPress () {
-    const { dispatch, story } = this.props
-    const content = <SocialCountModalContainer story={story} />
+    const { dispatch, renderOptions, story } = this.props
+    const content = <SocialCountModalContainer story={story} renderOptions={renderOptions} />
     return dispatch(NavigationActions.socialCount(story, content))
-  }
-
-  openMainLink () {
-    this.openLink(this.mainLink)
-  }
-
-  get mainLink () {
-    return this.props.story.main_link
   }
 }
 
 StoryContainer.propTypes = {
   story: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  visited: PropTypes.bool
+  visited: PropTypes.bool,
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 let mapStateToProps = (state, ownProps) => {

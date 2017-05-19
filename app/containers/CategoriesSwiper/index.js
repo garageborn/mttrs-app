@@ -106,9 +106,9 @@ class CategoriesSwiper extends Component {
     const current = sceneProps.navigationState.index === sceneProps.index
 
     if (sceneProps.route.type === 'home') {
-      return <HomeTimeline {...props} current={current}/>
+      return <HomeTimeline {...props} current={current} />
     } else {
-      return <CategoryTimeline {...props} activeTag={this.props.activeTag} current={current}/>
+      return <CategoryTimeline {...props} activeTag={this.props.activeTag} current={current} />
     }
   }
 

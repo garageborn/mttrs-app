@@ -51,7 +51,11 @@ SocialCountModalContainer.propTypes = {
     loading: PropTypes.bool,
     story: PropTypes.object
   }),
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 const SocialCountModalContainerWithData = withQuery(SocialCountModalContainer)

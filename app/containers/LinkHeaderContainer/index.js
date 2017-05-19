@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
-import HeaderWebview from '../components/HeaderWebView'
-import * as cloudinary from '../common/utils/Cloudinary'
-import { NavigationActions } from '../actions/index'
+import HeaderWebview from '../../components/HeaderWebView'
+import * as cloudinary from '../../common/utils/Cloudinary'
+import { NavigationActions } from '../../actions/index'
 
 class LinkHeaderContainer extends Component {
   constructor (props) {

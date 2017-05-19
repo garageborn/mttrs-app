@@ -14,7 +14,7 @@ class CategoryTimeline extends Component {
   }
 
   render () {
-    return <TimelineContainer type='category' data={this.props.data} />
+    return <TimelineContainer data={this.props.data} />
   }
 }
 

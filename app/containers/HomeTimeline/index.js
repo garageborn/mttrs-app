@@ -11,7 +11,7 @@ class HomeTimeline extends Component {
   }
 
   render () {
-    return <TimelineContainer type='home' data={this.props.data} />
+    return <TimelineContainer data={this.props.data} />
   }
 }
 

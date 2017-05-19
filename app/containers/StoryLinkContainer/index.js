@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { NavigationActions } from '../actions/index'
-import StoryLink from '../components/StoryLink'
+import { NavigationActions } from '../../actions/index'
+import StoryLink from '../../components/StoryLink'
 
 class StoryLinkContainer extends Component {
   constructor () {
@@ -26,13 +26,13 @@ class StoryLinkContainer extends Component {
   openLink (link) {
     let { dispatch, story } = this.props
     if (!story) return
-    dispatch(NavigationActions.modal({ open: false }))
+    dispatch(NavigationActions.closeModal())
     dispatch(NavigationActions.link(story, link))
   }
 
   openPublisher (publisher) {
     let { dispatch } = this.props
-    dispatch(NavigationActions.modal({ open: false }))
+    dispatch(NavigationActions.closeModal())
     dispatch(NavigationActions.publisher(publisher))
   }
 }
@@ -44,7 +44,10 @@ StoryLinkContainer.propTypes = {
     publisher: PropTypes.object.isRequired
   }).isRequired,
   story: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 export default connect()(StoryLinkContainer)

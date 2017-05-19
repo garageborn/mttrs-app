@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import url from 'url'
 import Share from 'react-native-share'
-import { COLORLESS } from '../constants/TouchUnderlayColors'
-import { SHARE_LINK } from '../constants/Analytics'
-import captureError from '../common/utils/captureError'
-import Touchable from '../components/Touchable'
-import { AnalyticsActions } from '../actions/index'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
+import { SHARE_LINK } from '../../constants/Analytics'
+import captureError from '../../common/utils/captureError'
+import Touchable from '../../components/Touchable'
+import { AnalyticsActions } from '../../actions/index'
 
 class ShareButtonContainer extends Component {
   constructor () {
