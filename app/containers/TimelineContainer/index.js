@@ -40,10 +40,10 @@ class TimelineContainer extends Component {
   }
 
   render () {
-    const { data, type } = this.props
+    const { data, renderOptions } = this.props
     return (
       <Timeline
-        type={type}
+        renderOptions={renderOptions}
         data={data}
         loadingMore={this.state.loadingMore}
         loadingPullToRefresh={this.state.loadingPullToRefresh}
@@ -100,8 +100,11 @@ TimelineContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
   }),
-  dispatch: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  }),
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(TimelineContainer)

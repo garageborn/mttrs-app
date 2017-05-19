@@ -3,6 +3,7 @@ import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import EventsContainer from './EventsContainer'
 import NavigationContainer from './NavigationContainer'
+import ModalContainer from './ModalContainer'
 import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
 require('../config/sentry')
@@ -20,6 +21,7 @@ class Root extends Component {
       <ApolloProvider store={store} client={apolloClient}>
         <IntlProvider>
           <EventsContainer>
+            <ModalContainer />
             <NavigationContainer />
           </EventsContainer>
         </IntlProvider>

@@ -8,7 +8,7 @@ class FavoritesTimelineContainer extends Component {
   render () {
     return (
       <View style={styles.listViewContainer}>
-        <TimelineContainer type='favorites' data={this.props.data} />
+        <TimelineContainer data={this.props.data} />
       </View>
     )
   }

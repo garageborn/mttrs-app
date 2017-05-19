@@ -6,9 +6,11 @@ import styles from '../../styles/App'
 
 class SummariesTimelineContainer extends Component {
   render () {
+    const renderOptions = { timelineType: 'summaries' }
+
     return (
       <View style={styles.listViewContainer}>
-        <TimelineContainer type='summaries' data={this.props.data} />
+        <TimelineContainer data={this.props.data} renderOptions={renderOptions} />
       </View>
     )
   }

@@ -6,9 +6,12 @@ import styles from '../../styles/App'
 
 class PublisherTimeline extends Component {
   render () {
+    const { data, publisher } = this.props
+    const renderOptions = { timelineType: 'publisher', publisherSlug: publisher.slug }
+
     return (
       <View style={styles.listViewContainer}>
-        <TimelineContainer type='publisher' data={this.props.data} />
+        <TimelineContainer data={data} renderOptions={renderOptions} />
       </View>
     )
   }
