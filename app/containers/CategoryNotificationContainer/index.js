@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import { NavigationActions } from '../../actions/index'
+import { OPEN_NOTIFICATION } from '../../constants/Analytics'
+import { AnalyticsActions, NavigationActions } from '../../actions/index'
 
 class CategoryNotificationContainer extends Component {
   componentDidMount () {
