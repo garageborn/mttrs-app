@@ -19,6 +19,7 @@ class StoryContainer extends Component {
       <Story
         story={story}
         openLink={this.openLink}
+        handleDialogButtonPress={this.handleDialogButtonPress}
         handlePublishersPress={this.handlePublishersPress}
         handleSocialCountPress={this.handleSocialCountPress}
         visited={visited}
@@ -45,6 +46,10 @@ class StoryContainer extends Component {
     const { dispatch, renderOptions, story } = this.props
     const content = <SocialCountModalContainer story={story} renderOptions={renderOptions} />
     return dispatch(NavigationActions.socialCount(story, content))
+  }
+
+  handleDialogButtonPress () {
+    console.log('batata')
   }
 }
 
