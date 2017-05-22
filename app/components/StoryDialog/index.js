@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
 import styles from './styles'
-import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import ShareButtonContainer from '../../containers/ShareButtonContainer'
+import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 
 const messages = defineMessages({
   addFavorite: { id: 'storyDialog.addFavorite' },
@@ -22,46 +22,63 @@ class StoryDialog extends Component {
   }
 
   renderFavoriteAction () {
-    const { handleSharePress, intl, isFavorite } = this.props
-    const addFavorite = intl.formatMessage(messages.addFavorite)
-    const removeFavorite = intl.formatMessage(messages.removeFavorite)
-    const label = isFavorite ? removeFavorite : addFavorite
+    const { publisher } = this.props.story.main_link
 
     return (
-      <Touchable onPress={handleSharePress} underlayColor={WHITE_TRANSPARENT_COLOR} >
-        <View>
-          <Text>{label}</Text>
-          <Text style={styles.publisherName}>{this.publisherName}</Text>
-        </View>
-      </Touchable>
+      <ToggleFavoriteContainer
+        publisher={publisher}
+        addComponent={this.addPublisherComponent()}
+        removeComponent={this.removePublisherComponent()}
+      />
     )
   }
 
   renderShareAction () {
-    const { handleSharePress, intl } = this.props
-    const share = intl.formatMessage(messages.share)
+    const { intl, story } = this.props
 
     return (
-      <Touchable onPress={handleSharePress} underlayColor={WHITE_TRANSPARENT_COLOR} >
-        <Text>{share}</Text>
-      </Touchable>
+      <ShareButtonContainer link={story.main_link}>
+        <Text>{intl.formatMessage(messages.share)}</Text>
+      </ShareButtonContainer>
+    )
+  }
+
+  addPublisherComponent () {
+    const { intl } = this.props
+    return (
+      <View>
+        <Text>{intl.formatMessage(messages.addFavorite)}</Text>
+        <Text style={styles.publisherName}>{this.publisherName}</Text>
+      </View>
+    )
+  }
+
+  removePublisherComponent () {
+    const { intl } = this.props
+    return (
+      <View>
+        <Text>{intl.formatMessage(messages.removeFavorite)}</Text>
+        <Text style={styles.publisherName}>{this.publisherName}</Text>
+      </View>
     )
   }
 
   get publisherName () {
-    const { publisher } = this.props
+    const { publisher } = this.props.story.main_link
     return publisher.display_name || publisher.name
   }
 }
 
 StoryDialog.propTypes = {
-  publisher: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    display_name: PropTypes.string
+  story: PropTypes.shape({
+    main_link: PropTypes.shape({
+      publisher: PropTypes.shape({
+        id: PropTypes.any.isRequired,
+        name: PropTypes.string.isRequired,
+        display_name: PropTypes.string
+      }).isRequired
+    }).isRequired
   }).isRequired,
-  handleFavoritePress: PropTypes.func.isRequired,
-  handleSharePress: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired

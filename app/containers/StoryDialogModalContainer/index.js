@@ -11,8 +11,6 @@ class StoryDialogModalContainer extends Component {
   constructor (props) {
     super(props)
     this.close = this.close.bind(this)
-    this.handleFavoritePress = this.handleFavoritePress.bind(this)
-    this.handleSharePress = this.handleSharePress.bind(this)
   }
 
   close () {
@@ -37,14 +35,7 @@ class StoryDialogModalContainer extends Component {
   renderActions () {
     const { favorites, story } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return (
-      <StoryDialog
-        isFavorite={favorites.isFavorite}
-        publisher={story.main_link.publisher}
-        handleFavoritePress={this.handleFavoritePress}
-        handleSharePress={this.handleSharePress}
-        />
-    )
+    return <StoryDialog story={story} />
   }
 
   renderLoading () {
@@ -54,22 +45,11 @@ class StoryDialogModalContainer extends Component {
       </View>
     )
   }
-
-  handleSharePress () {
-
-  }
-
-  handleFavoritePress () {
-
-  }
 }
 
 StoryDialogModalContainer.propTypes = {
   favorites: PropTypes.shape({
-    isFavorite: PropTypes.bool.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    isLoaded: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired
+    isLoaded: PropTypes.bool.isRequired
   }),
   story: PropTypes.shape({
     main_link: PropTypes.shape({
@@ -84,13 +64,9 @@ StoryDialogModalContainer.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
-  const publisherId = _result(ownProps, 'story.main_link.publisher.id')
-  const isFavorite = state.FavoritePublishersReducer.items.indexOf(publisherId) !== -1
-
   return {
     favorites: {
-      ...state.FavoritePublishersReducer,
-      isFavorite
+      isLoaded: state.FavoritePublishersReducer.isLoaded
     }
   }
 }
