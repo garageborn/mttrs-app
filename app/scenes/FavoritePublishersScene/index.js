@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Text } from 'react-native'
 
-class FavoritePublishers extends Component {
+class FavoritePublishersScene extends Component {
   render () {
+    console.log('render FavoritePublishersScene')
     return (
       <View>
-        <Text>FavoritePublishers</Text>
+        <Text>FavoritePublishersScene</Text>
       </View>
     )
   }
 }
 
-FavoritePublishers.propTypes = {
+FavoritePublishersScene.propTypes = {
 
 }
 
-export default FavoritePublishers
+export default FavoritePublishersScene

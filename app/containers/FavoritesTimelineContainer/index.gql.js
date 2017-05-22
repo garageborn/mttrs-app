@@ -25,7 +25,7 @@ const Query = gql`
   }
 `
 
-export default function (HomeTimeline) {
+export default function (FavoritesTimeline) {
   return graphql(Query, {
     options (props) {
       return {
@@ -35,5 +35,5 @@ export default function (HomeTimeline) {
         }
       }
     }
-  })(HomeTimeline)
+  })(FavoritesTimeline)
 }

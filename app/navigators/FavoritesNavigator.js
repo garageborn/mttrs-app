@@ -2,18 +2,20 @@ import { StackNavigator } from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator'
 import FavoritePublishersScene from '../scenes/FavoritePublishersScene'
 import FavoritesTimelineScene from '../scenes/FavoritesTimelineScene'
-import ManageFavoritesScene from '../scenes/ManageFavoritesScene'
+import AddFavoritesScene from '../scenes/AddFavoritesScene'
+import FavoritesScene from '../scenes/FavoritesScene'
 
 const AppRoutes = {
-  timeline: { screen: FavoritesTimelineScene },
-  publishers: { screen: FavoritePublishersScene },
-  manage: { screen: ManageFavoritesScene }
+  favorites: { screen: FavoritesScene },
+  favoritesTimeline: { screen: FavoritesTimelineScene },
+  favoritePublishers: { screen: FavoritePublishersScene },
+  addFavorites: { screen: AddFavoritesScene }
 }
 
 const AppNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
-  initialRouteName: 'timeline',
+  initialRouteName: 'favorites',
   transitionConfig: () => ({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal
   })

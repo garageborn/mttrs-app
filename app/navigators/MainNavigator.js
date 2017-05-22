@@ -5,14 +5,14 @@ import SummariesScene from '../scenes/SummariesScene'
 import FavoritesNavigator from './FavoritesNavigator'
 
 const MainRoutes = {
-  summaries: { screen: SummariesScene },
-  popular: { screen: PopularScene },
+  // summaries: { screen: SummariesScene },
+  // popular: { screen: PopularScene },
   favorites: { screen: FavoritesNavigator }
 }
 
 const MainNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'favorites',
   tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
   tabBarPosition: 'bottom'
 }
