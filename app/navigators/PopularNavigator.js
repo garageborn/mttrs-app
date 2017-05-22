@@ -1,11 +1,18 @@
 import React from 'react'
 import { TabNavigator, TabBarTop } from 'react-navigation'
-import { View } from 'react-native'
-import HomeTimeline from '../containers/HomeTimeline'
+import PopularTimelineScene from '../scenes/PopularTimelineScene'
 
-const buildRoutes = {
-  home: { screen: HomeTimeline },
-  teste2: { screen: HomeTimeline }
+const buildRoutes = (categories) => {
+  let routes = categories.map((category) => ({
+    [category['name']]: { screen: PopularTimelineScene, params: { slug: category.slug }}
+  }))
+
+  routes = Object.assign(...routes)
+
+  return {
+    home: { screen: PopularTimelineScene },
+    ...routes
+  }
 }
 
 const config = {
@@ -13,10 +20,7 @@ const config = {
   tabBarPosition: 'top'
 }
 
-const buildNavigator = (props) => {
-  const { categories } = props
-  const navigator = TabNavigator(buildRoutes, config)
+export default (categories) => {
+  const navigator = TabNavigator(buildRoutes(categories), config)
   return navigator
 }
-
-export default buildNavigator

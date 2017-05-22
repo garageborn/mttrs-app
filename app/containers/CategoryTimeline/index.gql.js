@@ -27,13 +27,12 @@ const Query = gql`
 
 export default function (HomeTimeline) {
   return graphql(Query, {
-    skip: (props) => !props.current,
     options (props) {
       return {
         variables: {
           ...defaultVariables,
-          tagSlug: props.activeTag,
-          categorySlug: props.model.slug,
+          // tagSlug: props.activeTag,
+          categorySlug: props.slug,
           type: 'category'
         }
       }

@@ -5,7 +5,8 @@ import withQuery from './index.gql'
 class PopularScene extends Component {
   render () {
     if (this.props.data.loading) return null
-    return <PopularNavigator categories={this.props.data.categories} />
+    const Navigator = PopularNavigator(this.props.data.categories)
+    return <Navigator />
   }
 }
 

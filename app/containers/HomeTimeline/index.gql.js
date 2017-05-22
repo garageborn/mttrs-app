@@ -27,7 +27,6 @@ const Query = gql`
 
 export default function (HomeTimeline) {
   return graphql(Query, {
-    skip: (props) => !props.current,
     options (props) {
       return { variables: { ...defaultVariables, type: 'home' } }
     }
