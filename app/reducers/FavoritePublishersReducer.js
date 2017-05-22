@@ -20,7 +20,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
-        items: action.favoritePublishersStories,
+        items: action.favoritePublishers,
         isLoaded: true
       }
     case TENANT_RECEIVED:

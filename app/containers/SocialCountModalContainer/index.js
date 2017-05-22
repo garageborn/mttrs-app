@@ -5,7 +5,7 @@ import withQuery from './index.gql'
 import CloseButton from '../../components/CloseButton'
 import SocialCountModal from '../../components/SocialCountModal'
 import { NavigationActions } from '../../actions/index'
-import styles from '../../styles/StoryLinks'
+import styles from '../../styles/Modal'
 
 class SocialCountModalContainer extends Component {
   constructor (props) {
