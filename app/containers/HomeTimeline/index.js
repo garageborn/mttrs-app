@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
 
@@ -21,4 +20,4 @@ HomeTimeline.propTypes = {
 }
 
 const HomeTimelineWithData = withQuery(HomeTimeline)
-export default connect()(HomeTimelineWithData)
+export default HomeTimelineWithData
