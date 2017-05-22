@@ -50,6 +50,16 @@ export function socialCount (story, content) {
   }
 }
 
+export function storyDialog (story, content) {
+  return (dispatch, getState) => {
+    dispatch(UIActions.openModal(content))
+
+    let linkSlug = _result(story, 'main_link.slug')
+    const analyticsUrl = `/link/${linkSlug}/dialog`
+    if (linkSlug) dispatch(AnalyticsActions.trackScreen(analyticsUrl))
+  }
+}
+
 export function closeModal () {
   return (dispatch, getState) => dispatch(UIActions.closeModal())
 }

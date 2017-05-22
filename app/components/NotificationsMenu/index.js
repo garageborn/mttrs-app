@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import _result from 'lodash/result'
-import { parse } from '../../common/utils/Parser'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
 const messages = defineMessages({
