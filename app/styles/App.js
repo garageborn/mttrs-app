@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     }),
     ...containerStyles
   },
+
   listViewWithTags: {
     height: height - headerWithTagsHeight,
     top: tagsHeight

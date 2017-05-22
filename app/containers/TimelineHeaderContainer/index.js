@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
+import _result from 'lodash/result'
 import CategoryHeaderContainer from './CategoryHeaderContainer'
 import PublisherHeaderContainer from './PublisherHeaderContainer'
-import styles from '../styles/TimelineHeaderContainer'
-import _result from 'lodash/result'
+import styles from './styles'
 
 class TimelineHeaderContainer extends Component {
   render () {

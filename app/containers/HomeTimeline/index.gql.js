@@ -17,7 +17,7 @@ const Query = gql`
           amp_url
           slug
           image_source_url
-          publisher { name display_name icon_id slug restrict_content }
+          publisher { id name display_name icon_id slug restrict_content }
         }
         other_links_count
       }

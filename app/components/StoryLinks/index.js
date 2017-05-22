@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { View, FlatList } from 'react-native'
-import styles from '../styles/StoryLinks'
-import StoryLinkContainer from '../containers/StoryLinkContainer'
+import styles from './styles'
+import StoryLinkContainer from '../../containers/StoryLinkContainer'
 import LinearGradient from 'react-native-linear-gradient'
 
-class StoryLinksComponent extends Component {
+class StoryLinks extends Component {
   constructor (props) {
     super(props)
 
@@ -17,11 +17,7 @@ class StoryLinksComponent extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <StoryLinkContainer
-            type='header'
-            story={this.props.story}
-            link={this.mainLink}
-          />
+          <StoryLinkContainer type='header' story={this.props.story} link={this.mainLink} />
         </View>
         {this.renderListView()}
         <LinearGradient
@@ -84,11 +80,11 @@ const linkPropsTypes = PropTypes.shape({
   }).isRequired
 })
 
-StoryLinksComponent.propTypes = {
+StoryLinks.propTypes = {
   story: PropTypes.shape({
     main_link: linkPropsTypes.isRequired,
     other_links: PropTypes.arrayOf(linkPropsTypes).isRequired
   }).isRequired
 }
 
-export default StoryLinksComponent
+export default StoryLinks

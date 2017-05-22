@@ -4,11 +4,13 @@ import Story from '../../components/Story'
 import { NavigationActions } from '../../actions/index'
 import SocialCountModalContainer from '../SocialCountModalContainer'
 import StoryLinksModalContainer from '../StoryLinksModalContainer'
+import StoryDialogModalContainer from '../StoryDialogModalContainer'
 
 class StoryContainer extends Component {
   constructor (props) {
     super(props)
     this.openLink = this.openLink.bind(this)
+    this.handleDialogButtonPress = this.handleDialogButtonPress.bind(this)
     this.handlePublishersPress = this.handlePublishersPress.bind(this)
     this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
   }
@@ -49,7 +51,9 @@ class StoryContainer extends Component {
   }
 
   handleDialogButtonPress () {
-    console.log('batata')
+    const { dispatch, story } = this.props
+    const content = <StoryDialogModalContainer story={story} />
+    return dispatch(NavigationActions.storyDialog(story, content))
   }
 }
 
