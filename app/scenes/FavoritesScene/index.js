@@ -9,14 +9,17 @@ class FavoritesScene extends Component {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.isLoaded !== nextProps.isLoaded
+  }
+
   render () {
     const { isLoaded, exists } = this.props
     if (!isLoaded) return null
-    console.log('exists', exists)
 
-    return <AddFavoritesScene />
+      console.log({exists})
 
-    // return exists ? <FavoritesTimelineScene /> : <AddFavoritesScene />
+    return exists ? <FavoritesTimelineScene /> : <AddFavoritesScene />
   }
 }
 
@@ -26,6 +29,7 @@ FavoritesScene.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
+  console.log(state.FavoritePublishersReducer.items)
   return {
     isLoaded: state.FavoritePublishersReducer.isLoaded,
     exists: state.FavoritePublishersReducer.items.length > 0

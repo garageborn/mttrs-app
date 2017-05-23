@@ -3,7 +3,6 @@ import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContai
 
 class FavoritesTimelineScene extends Component {
   render () {
-    console.log('render FavoritesTimelineScene')
     return <FavoritesTimelineContainer />
   }
 }

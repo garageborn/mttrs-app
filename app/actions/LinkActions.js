@@ -15,8 +15,6 @@ export function share (link) {
       url: shareUrl
     }
 
-    console.log(shareOptions)
-
     return Share.open(shareOptions).then((info) => {
       dispatch(AnalyticsActions.trackEvent(SHARE_LINK, link.slug))
     }).catch((error) => {

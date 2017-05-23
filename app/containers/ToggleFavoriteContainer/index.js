@@ -15,8 +15,6 @@ class ToggleFavoriteContainer extends Component {
     const { isFavorite, addComponent, removeComponent } = this.props
     const component = isFavorite ? removeComponent : addComponent
 
-    console.log('render', { isFavorite })
-
     return (
       <Touchable underlayColor={COLORLESS} onPress={this.toggle}>
         {component}

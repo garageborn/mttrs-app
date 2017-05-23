@@ -22,11 +22,11 @@ class AddFavoritesHeading extends Component {
   }
 
   renderButton () {
-    const { intl, isComplete, openFavorites } = this.props
+    const { intl, isComplete, openFavoritesTimeline } = this.props
     const style = isComplete ? styles.activeButton : styles.button
 
     return (
-      <Touchable onPress={openFavorites}>
+      <Touchable onPress={openFavoritesTimeline}>
         <Text style={style}>{intl.formatMessage(messages.button)}</Text>
       </Touchable>
     )
@@ -34,7 +34,7 @@ class AddFavoritesHeading extends Component {
 }
 
 AddFavoritesHeading.propTypes = {
-  openFavorites: PropTypes.func.isRequired,
+  openFavoritesTimeline: PropTypes.func.isRequired,
   isComplete: PropTypes.bool.isRequired
 }
 

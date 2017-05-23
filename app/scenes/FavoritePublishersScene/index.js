@@ -3,7 +3,6 @@ import { View, Text } from 'react-native'
 
 class FavoritePublishersScene extends Component {
   render () {
-    console.log('render FavoritePublishersScene')
     return (
       <View>
         <Text>FavoritePublishersScene</Text>

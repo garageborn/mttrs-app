@@ -3,11 +3,13 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
+import AddFavoritesList from '../../components/AddFavoritesList'
+import { NavigationActions } from '../../actions/index'
 
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
-    this.openFavorites = this.openFavorites.bind(this)
+    this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
   }
 
   render () {
@@ -15,7 +17,10 @@ class AddFavoritesContainer extends Component {
 
     return (
       <View>
-        <AddFavoritesHeading openFavorites={this.openFavorites} isComplete={favorites.exists} />
+        <AddFavoritesHeading
+          openFavoritesTimeline={this.openFavoritesTimeline}
+          isComplete={favorites.exists}
+          />
         {this.renderPublisherList()}
       </View>
     )
@@ -24,7 +29,7 @@ class AddFavoritesContainer extends Component {
   renderPublisherList () {
     const { loading, publishers } = this.props.data
     if (loading) return this.renderLoading()
-
+    return <AddFavoritesList publishers={publishers} />
   }
 
   renderLoading () {
@@ -35,8 +40,9 @@ class AddFavoritesContainer extends Component {
     )
   }
 
-  openFavorites () {
-    console.log('openFavorites')
+  openFavoritesTimeline () {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.favoritesTimeline())
   }
 }
 
