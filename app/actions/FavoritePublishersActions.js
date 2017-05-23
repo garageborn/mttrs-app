@@ -2,6 +2,8 @@ import { AsyncStorage } from 'react-native'
 import _uniq from 'lodash/uniq'
 import _compact from 'lodash/compact'
 import _flatten from 'lodash/flatten'
+import _parseInt from 'lodash/parseInt'
+import _map from 'lodash/map'
 import captureError from '../common/utils/captureError'
 import { parse, stringify } from '../common/utils/Parser'
 import { FAVORITE_PUBLISHERS_RECEIVED, REQUEST_FAVORITE_PUBLISHERS } from '../constants/ActionTypes'
@@ -70,6 +72,10 @@ function favoritePublishers (getState) {
   return getState().FavoritePublishersReducer
 }
 
+function items (getState) {
+  return compact(favoritePublishers(getState).items)
+}
+
 function isFetching (getState) {
   return favoritePublishers(getState).isFetching
 }
@@ -79,19 +85,24 @@ function isLoaded (getState) {
 }
 
 function isFavorite (getState, publisher) {
-  return favoritePublishers(getState).items.indexOf(publisher.id) !== -1
+  const publisherId = _parseInt(publisher.id)
+  return items(getState).indexOf(publisherId) !== -1
 }
 
 function parseFromStorage (favorites) {
-  return parse(favorites) || []
+  return compact(parse(favorites))
+}
+
+function compact (favorites = []) {
+  return _uniq(_compact(_map(_flatten(favorites), _parseInt)))
 }
 
 function addFavorite (getState, publisherId) {
-  let newFavorites = _flatten([favoritePublishers(getState).items, publisherId])
-  return _uniq(_compact(newFavorites))
+  return compact([favoritePublishers(getState).items, publisherId])
 }
 
-function removeFavorite (getState, publisherId) {
-  let newFavorites = favoritePublishers(getState).items.filter(id => id !== publisherId)
-  return _uniq(_compact(newFavorites))
+function removeFavorite (getState, id) {
+  const publisherId = _parseInt(id)
+  let newFavorites = items(getState).filter(id => id !== publisherId)
+  return compact(newFavorites)
 }

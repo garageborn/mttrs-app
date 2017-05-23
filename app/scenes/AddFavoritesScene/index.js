@@ -7,8 +7,4 @@ class AddFavoritesScene extends Component {
   }
 }
 
-AddFavoritesScene.propTypes = {
-
-}
-
 export default AddFavoritesScene
