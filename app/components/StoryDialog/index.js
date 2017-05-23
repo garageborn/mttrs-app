@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import styles from './styles'
+import DialogButton from '../DialogButton'
 import ShareButtonContainer from '../../containers/ShareButtonContainer'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
+import styles from './styles'
+
+const activeFavoriteIcon = require('./assets/favoriteActive.png')
+const inactiveFavoriteIcon = require('./assets/favoriteInactive.png')
+const shareIcon = require('./assets/share.png')
 
 const messages = defineMessages({
   addFavorite: { id: 'storyDialog.addFavorite' },
@@ -38,7 +43,9 @@ class StoryDialog extends Component {
 
     return (
       <ShareButtonContainer link={story.main_link}>
-        <Text>{intl.formatMessage(messages.share)}</Text>
+        <View>
+          <DialogButton icon={shareIcon} messages={[intl.formatMessage(messages.share)]} />
+        </View>
       </ShareButtonContainer>
     )
   }
@@ -47,8 +54,10 @@ class StoryDialog extends Component {
     const { intl } = this.props
     return (
       <View>
-        <Text>{intl.formatMessage(messages.addFavorite)}</Text>
-        <Text style={styles.publisherName}>{this.publisherName}</Text>
+        <DialogButton
+          icon={inactiveFavoriteIcon}
+          messages={[intl.formatMessage(messages.addFavorite), this.publisherName]}
+        />
       </View>
     )
   }
@@ -57,8 +66,10 @@ class StoryDialog extends Component {
     const { intl } = this.props
     return (
       <View>
-        <Text>{intl.formatMessage(messages.removeFavorite)}</Text>
-        <Text style={styles.publisherName}>{this.publisherName}</Text>
+        <DialogButton
+          icon={activeFavoriteIcon}
+          messages={[intl.formatMessage(messages.removeFavorite), this.publisherName]}
+        />
       </View>
     )
   }
