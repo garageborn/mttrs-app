@@ -29,7 +29,7 @@ class Story extends Component {
         onPress={openLink}
         story={story}
         openDialog={handleDialogButtonPress}
-        />
+      />
     )
   }
 

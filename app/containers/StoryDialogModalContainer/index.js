@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
 import CloseButton from '../../components/CloseButton'
+import Dialog from '../../components/Dialog'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
 import styles from '../../styles/Modal'
@@ -23,10 +24,10 @@ class StoryDialogModalContainer extends Component {
   render () {
     return (
       <Modal animationType={'slide'} transparent visible onRequestClose={this.close}>
-        <View style={styles.modal}>
-          { this.renderActions() }
+        <Dialog closeDialog={this.close} >
+          {this.renderActions()}
           <CloseButton onPress={this.close} />
-        </View>
+        </Dialog>
       </Modal>
     )
   }
