@@ -6,6 +6,8 @@
   "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications",
   "error.buttonText": "Reload",
   "error.text": "Oops! Something went wrong.",
+  "favoritePublishers.button": "Done",
+  "favoritePublishers.heading": "A - Z",
   "footer.feedback": "Do you have a feedback? Let us know!",
   "header.categories": "Categories",
   "header.countries": "Countries",

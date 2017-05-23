@@ -5,14 +5,14 @@ import FavoritesTimelineScene from '../scenes/FavoritesTimelineScene'
 import AddFavoritesScene from '../scenes/AddFavoritesScene'
 import FavoritesScene from '../scenes/FavoritesScene'
 
-const AppRoutes = {
+const FavoritesRoutes = {
   favorites: { screen: FavoritesScene },
   favoritesTimeline: { screen: FavoritesTimelineScene },
   favoritePublishers: { screen: FavoritePublishersScene },
   addFavorites: { screen: AddFavoritesScene }
 }
 
-const AppNavigatorConfig = {
+const FavoritesNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
   initialRouteName: 'favorites',
@@ -21,4 +21,4 @@ const AppNavigatorConfig = {
   })
 }
 
-export default StackNavigator(AppRoutes, AppNavigatorConfig)
+export default StackNavigator(FavoritesRoutes, FavoritesNavigatorConfig)

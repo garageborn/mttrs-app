@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import _result from 'lodash/result'
+import _parseInt from 'lodash/parseInt'
 import { FavoritePublishersActions } from '../../actions'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
 import Touchable from '../../components/Touchable'
@@ -42,7 +43,7 @@ ToggleFavoriteContainer.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
-  const publisherId = _result(ownProps, 'publisher.id')
+  const publisherId = _parseInt(_result(ownProps, 'publisher.id'))
   const isFavorite = state.FavoritePublishersReducer.items.indexOf(publisherId) !== -1
 
   return { isFavorite }
