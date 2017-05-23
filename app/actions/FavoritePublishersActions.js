@@ -95,3 +95,5 @@ function removeFavorite (getState, publisherId) {
   let newFavorites = favoritePublishers(getState).items.filter(id => id !== publisherId)
   return _uniq(_compact(newFavorites))
 }
+
+AsyncStorage.clear()
