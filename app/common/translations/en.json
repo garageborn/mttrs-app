@@ -1,4 +1,6 @@
 {
+  "addFavorites.button": "Done",
+  "addFavorites.heading": "Choose your favorite sites for personalized reading",
   "and": "and",
   "dateFormat": "MMMM D",
   "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications",

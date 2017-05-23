@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Modal, ActivityIndicator } from 'react-native'
 import { connect } from 'react-redux'
-import _result from 'lodash/result'
 import CloseButton from '../../components/CloseButton'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'

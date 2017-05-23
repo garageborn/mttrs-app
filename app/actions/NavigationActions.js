@@ -2,36 +2,80 @@ import { NavigationActions } from 'react-navigation'
 import _result from 'lodash/result'
 import { AnalyticsActions, UIActions } from './index'
 
+// AppNavigator
 export function home () {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'summaries' }))
     dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
   }
 }
 
 export function link (story, link) {
-  return (dispatch, getState) => {
+  return dispatch => {
     const params = { story: story, link: link }
     dispatch(NavigationActions.navigate({ routeName: 'link', params }))
     dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
   }
 }
 
+export function publisher (publisher) {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({ routeName: 'publisher', params: { publisher } }))
+    dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
+  }
+}
+
+export function back () {
+  return dispatch => dispatch(NavigationActions.back())
+}
+
+// MainNavigator
 export function selectCategory (category) {
   return (dispatch, getState) => {
     // TODO
   }
 }
 
-export function publisher (publisher) {
-  return (dispatch, getState) => {
-    dispatch(NavigationActions.navigate({ routeName: 'publisher', params: { publisher } }))
-    dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
+// FavoritesNavigator
+export function favoritesTimeline () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({
+      routeName: 'favorites',
+      action: NavigationActions.navigate({
+        routeName: 'favoritesTimeline'
+      })
+    }))
+    dispatch(AnalyticsActions.trackScreen('/favorites'))
   }
 }
 
+export function favoritePublishers () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({
+      routeName: 'favorites',
+      action: NavigationActions.navigate({
+        routeName: 'favoritePublishers'
+      })
+    }))
+    dispatch(AnalyticsActions.trackScreen('/favorites/publishers'))
+  }
+}
+
+export function addFavorites () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({
+      routeName: 'favorites',
+      action: NavigationActions.navigate({
+        routeName: 'addFavorites'
+      })
+    }))
+    dispatch(AnalyticsActions.trackScreen('/favorites/add'))
+  }
+}
+
+// Modals
 export function storyLinks (story, content) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(UIActions.openModal(content))
 
     let linkSlug = _result(story, 'main_link.slug')
@@ -41,7 +85,7 @@ export function storyLinks (story, content) {
 }
 
 export function socialCount (story, content) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(UIActions.openModal(content))
 
     let linkSlug = _result(story, 'main_link.slug')
@@ -51,7 +95,7 @@ export function socialCount (story, content) {
 }
 
 export function storyDialog (story, content) {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(UIActions.openModal(content))
 
     let linkSlug = _result(story, 'main_link.slug')
@@ -61,9 +105,5 @@ export function storyDialog (story, content) {
 }
 
 export function closeModal () {
-  return (dispatch, getState) => dispatch(UIActions.closeModal())
-}
-
-export function back () {
-  return (dispatch, getState) => dispatch(NavigationActions.back())
+  return dispatch => dispatch(UIActions.closeModal())
 }
