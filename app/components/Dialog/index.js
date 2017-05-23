@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import Touchable from '../Touchable'
 import styles from './styles'
 
-const Dialog = ({ closeDialog, children }) => {
+const Dialog = ({ children, closeDialog }) => {
   return (
     <Touchable underlayColor={'transparent'} style={styles.overlay} onPress={closeDialog}>
       <View style={styles.container}>
@@ -14,8 +14,7 @@ const Dialog = ({ closeDialog, children }) => {
 }
 
 Dialog.propTypes = {
-  closeDialog: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
+  closeDialog: PropTypes.func.isRequired
 }
 
 export default Dialog
