@@ -6,7 +6,9 @@ import _parseInt from 'lodash/parseInt'
 import _map from 'lodash/map'
 import captureError from '../common/utils/captureError'
 import { parse, stringify } from '../common/utils/Parser'
+import { AnalyticsActions } from './index'
 import { FAVORITE_PUBLISHERS_RECEIVED, REQUEST_FAVORITE_PUBLISHERS } from '../constants/ActionTypes'
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../constants/Analytics'
 
 export const requestPublishers = () => ({
   type: REQUEST_FAVORITE_PUBLISHERS
@@ -43,6 +45,7 @@ export function addPublisher (publisher) {
     let favorites = addFavorite(getState, publisher.id)
     AsyncStorage.setItem(key, stringify(favorites), (error) => {
       if (error) return captureError(error)
+      dispatch(AnalyticsActions.trackEvent(ADD_FAVORITE, publisher.slug))
       return dispatch(receivePublishers(favorites))
     })
   }
@@ -57,6 +60,7 @@ export function removePublisher (publisher) {
     let favorites = removeFavorite(getState, publisher.id)
     AsyncStorage.setItem(key, stringify(favorites), (error) => {
       if (error) return captureError(error)
+      dispatch(AnalyticsActions.trackEvent(REMOVE_FAVORITE, publisher.slug))
       return dispatch(receivePublishers(favorites))
     })
   }
