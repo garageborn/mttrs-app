@@ -22,11 +22,11 @@ const styles = StyleSheet.create({
   },
 
   listViewContainer: {
-    position: 'absolute',
-    top: Platform.select({
-      ios: 5,
-      android: 0
-    }),
+    // position: 'absolute',
+    // top: Platform.select({
+    //   ios: 5,
+    //   android: 0
+    // }),
     ...containerStyles
   },
 

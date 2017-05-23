@@ -1,9 +1,9 @@
 import { AsyncStorage } from 'react-native'
-import _uniq from 'lodash/uniq'
 import _compact from 'lodash/compact'
 import _flatten from 'lodash/flatten'
-import _parseInt from 'lodash/parseInt'
 import _map from 'lodash/map'
+import _parseInt from 'lodash/parseInt'
+import _uniq from 'lodash/uniq'
 import captureError from '../common/utils/captureError'
 import { parse, stringify } from '../common/utils/Parser'
 import { AnalyticsActions } from './index'
@@ -77,7 +77,7 @@ function favoritePublishers (getState) {
 }
 
 function items (getState) {
-  return compact(favoritePublishers(getState).items)
+  return prepare(favoritePublishers(getState).items)
 }
 
 function isFetching (getState) {
@@ -94,19 +94,19 @@ function isFavorite (getState, publisher) {
 }
 
 function parseFromStorage (favorites) {
-  return compact(parse(favorites))
+  return prepare(parse(favorites))
 }
 
-function compact (favorites = []) {
-  return _uniq(_compact(_map(_flatten(favorites), _parseInt)))
+function prepare (favorites = []) {
+  return (_uniq(_compact(_map(_flatten(favorites), _parseInt)))).sort()
 }
 
 function addFavorite (getState, publisherId) {
-  return compact([favoritePublishers(getState).items, publisherId])
+  return prepare([favoritePublishers(getState).items, publisherId])
 }
 
 function removeFavorite (getState, id) {
   const publisherId = _parseInt(id)
   let newFavorites = items(getState).filter(id => id !== publisherId)
-  return compact(newFavorites)
+  return prepare(newFavorites)
 }

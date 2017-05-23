@@ -6,16 +6,16 @@ import AddFavoritesScene from '../scenes/AddFavoritesScene'
 import FavoritesScene from '../scenes/FavoritesScene'
 
 const FavoritesRoutes = {
-  favorites: { screen: FavoritesScene },
+  // favorites: { screen: FavoritesScene },
   favoritesTimeline: { screen: FavoritesTimelineScene },
-  favoritePublishers: { screen: FavoritePublishersScene },
-  addFavorites: { screen: AddFavoritesScene }
+  // favoritePublishers: { screen: FavoritePublishersScene },
+  // addFavorites: { screen: AddFavoritesScene }
 }
 
 const FavoritesNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
-  initialRouteName: 'favorites',
+  initialRouteName: 'favoritesTimeline',
   transitionConfig: () => ({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal
   })

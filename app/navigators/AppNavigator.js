@@ -6,9 +6,9 @@ import SettingsScene from '../scenes/SettingsScene'
 import LinkScene from '../scenes/LinkScene'
 
 const AppRoutes = {
-  publisher: { screen: PublisherScene },
-  link: { screen: LinkScene },
-  settings: { screen: SettingsScene },
+  // publisher: { screen: PublisherScene },
+  // link: { screen: LinkScene },
+  // settings: { screen: SettingsScene },
   timeline: { screen: MainNavigator }
 }
 
