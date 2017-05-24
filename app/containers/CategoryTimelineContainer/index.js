@@ -10,6 +10,7 @@ class CategoryTimelineContainer extends Component {
 
 CategoryTimelineContainer.propTypes = {
   categorySlug: PropTypes.string.isRequired,
+  activeTag: PropTypes.string,
   data: PropTypes.object
 }
 
