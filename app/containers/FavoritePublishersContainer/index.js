@@ -31,7 +31,7 @@ class FavoritePublishersContainer extends Component {
   renderPublisherList () {
     const { favorites } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return <FavoritePublishersListContainer publishersIds={favorites.items} />
+    return <FavoritePublishersListContainer publisherIds={favorites.items} />
   }
 
   renderLoading () {

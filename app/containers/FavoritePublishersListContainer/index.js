@@ -29,8 +29,23 @@ FavoritePublishersListContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }).isRequired,
-  publishersIds: PropTypes.array.isRequired
+  favorites: PropTypes.shape({
+    isLoaded: PropTypes.bool.isRequired,
+    items: PropTypes.array.isRequired,
+    selected: PropTypes.any
+  }).isRequired,
+  publisherIds: PropTypes.array.isRequired
+}
+
+let mapStateToProps = (state) => {
+  return {
+    favorites: {
+      isLoaded: state.FavoritePublishersReducer.isLoaded,
+      items: state.FavoritePublishersReducer.items,
+      selected: state.FavoritesReducer.publisherId
+    }
+  }
 }
 
 const FavoritePublishersListContainerWithData = withQuery(FavoritePublishersListContainer)
-export default connect()(FavoritePublishersListContainerWithData)
+export default connect(mapStateToProps)(FavoritePublishersListContainerWithData)

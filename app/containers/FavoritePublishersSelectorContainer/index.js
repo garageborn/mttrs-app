@@ -1,20 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
+import _result from 'lodash/result'
 import withQuery from './index.gql'
-import TimelineContainer from '../TimelineContainer'
-import styles from '../../styles/App'
+import FavoritePublishersSelector from '../../components/FavoritePublishersSelector'
 
-class FavoritesTimelineContainer extends Component {
+class FavoritePublishersSelectorContainer extends Component {
   render () {
     const { data, favoritePublishers } = this.props
-    if (!favoritePublishers.isLoaded) return this.renderLoading()
+    const loading = _result(data, 'loading')
+    const publishers = _result(data, 'publishers')
+    if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
+    console.log('renderPublishers', publishers)
 
-    return (
-      <View style={styles.listViewContainer}>
-        <TimelineContainer data={data} />
-      </View>
-    )
+    return <FavoritePublishersSelector publishers={publishers} />
   }
 
   renderLoading () {
@@ -26,9 +25,10 @@ class FavoritesTimelineContainer extends Component {
   }
 }
 
-FavoritesTimelineContainer.propTypes = {
+FavoritePublishersSelectorContainer.propTypes = {
   data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    publishers: PropTypes.any
   }),
   favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
@@ -48,5 +48,5 @@ let mapStateToProps = (state) => {
   }
 }
 
-const FavoritesTimelineContainerWithData = withQuery(FavoritesTimelineContainer)
-export default connect(mapStateToProps)(FavoritesTimelineContainerWithData)
+const FavoritePublishersSelectorContainerWithData = withQuery(FavoritePublishersSelectorContainer)
+export default connect(mapStateToProps)(FavoritePublishersSelectorContainerWithData)
