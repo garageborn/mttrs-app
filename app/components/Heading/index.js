@@ -11,6 +11,7 @@ const Heading = ({ children, size, style }) => {
 }
 
 Heading.propTypes = {
+  children: PropTypes.any,
   size: PropTypes.string.isRequired,
   style: PropTypes.number
 }
