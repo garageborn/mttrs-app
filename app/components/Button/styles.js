@@ -2,12 +2,21 @@ import { StyleSheet } from 'react-native'
 
 const orange = '#FF5607'
 
+const shadow = {
+  elevation: 2,
+  shadowOffset: {
+    width: 2,
+    height: 2
+  },
+  shadowColor: '#000',
+  shadowOpacity: 0.25
+}
+
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 5,
-    paddingHorizontal: 20,
-    borderRadius: 2,
-    elevation: 2
+    paddingVertical: 9,
+    paddingHorizontal: 14,
+    borderRadius: 2
   },
 
   transparent: {
@@ -18,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#0B9CFF',
-    borderRadius: 5,
+    borderRadius: 5
   },
 
   timelineAdText: {
@@ -34,23 +43,32 @@ const styles = StyleSheet.create({
   },
 
   danger: {
+    ...shadow,
     backgroundColor: orange
   },
 
+  dangerText: {
+    color: '#FFFFFF'
+  },
+
   inactive: {
-    backgroundColor: '#999'
+    backgroundColor: '#DCDCDC'
   },
 
   inactiveText: {
-    color: 'gray'
-  },
-
-  regular: {
-    width: 130
+    color: '#c3c3c3'
   },
 
   regularText: {
     fontSize: 15
+  },
+
+  small: {
+    paddingHorizontal: 10
+  },
+
+  smallText: {
+    fontSize: 14
   },
 
   largeText: {

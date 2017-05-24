@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
+import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
 import { NavigationActions } from '../../actions/index'
 
@@ -16,13 +17,16 @@ class AddFavoritesContainer extends Component {
     const { favorites } = this.props
 
     return (
-      <View>
+      <ScrollView>
         <AddFavoritesHeading
           openFavoritesTimeline={this.openFavoritesTimeline}
           isComplete={favorites.exists}
-          />
+        />
         {this.renderPublisherList()}
-      </View>
+        <AddFavoritesFooter
+          onPress={this.openFavoritesTimeline}
+        />
+      </ScrollView>
     )
   }
 
@@ -51,6 +55,7 @@ AddFavoritesContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
   favorites: PropTypes.shape({
     exists: PropTypes.bool.isRequired
   }).isRequired
