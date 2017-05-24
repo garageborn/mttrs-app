@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $tagSlug: String) {
-    timeline(cursor: $cursor, type: $type, limit: $limit, category_slug: $categorySlug, tag_slug: $tagSlug) {
+  query($cursor: Int, $type: String, $limit: Int!) {
+    timeline(cursor: $cursor, type: $type, limit: $limit) {
       date
       stories {
         id
@@ -25,17 +25,10 @@ const Query = gql`
   }
 `
 
-export default function (HomeTimeline) {
+export default function (PopularTimeline) {
   return graphql(Query, {
     options (props) {
-      return {
-        variables: {
-          ...defaultVariables,
-          // tagSlug: props.activeTag,
-          categorySlug: props.slug,
-          type: 'category'
-        }
-      }
+      return { variables: { ...defaultVariables, type: 'popular' } }
     }
-  })(HomeTimeline)
+  })(PopularTimeline)
 }

@@ -1,15 +1,8 @@
-import { StyleSheet, Platform } from 'react-native'
-import { mainComponentHeight as iosHeight } from '../MenuIOS/styles'
-import { mainComponentHeight as androidHeight } from '../MenuAndroid/styles'
-import { height as publisherSearchHeight } from '../PublisherSearch/styles'
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    height: Platform.select({
-      ios: iosHeight - publisherSearchHeight,
-      android: androidHeight - publisherSearchHeight
-    })
+    marginHorizontal: 10
   },
   list: {
     padding: 10

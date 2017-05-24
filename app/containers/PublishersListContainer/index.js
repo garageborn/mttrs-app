@@ -9,7 +9,7 @@ import PublisherMenu from '../../components/PublisherMenu'
 import Loader from '../../components/PublisherMenuLoader'
 import { NavigationActions } from '../../actions/index'
 
-class PublisherMenuContainer extends Component {
+class PublishersListContainer extends Component {
   constructor () {
     super()
     this.state = { query: '' }
@@ -75,7 +75,7 @@ class PublisherMenuContainer extends Component {
   }
 }
 
-PublisherMenuContainer.propTypes = {
+PublishersListContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.shape({
     publishers: PropTypes.array,
@@ -84,5 +84,5 @@ PublisherMenuContainer.propTypes = {
   })
 }
 
-const PublisherMenuContainerWithData = withQuery(PublisherMenuContainer)
-export default connect()(PublisherMenuContainerWithData)
+const PublishersListContainerWithData = withQuery(PublishersListContainer)
+export default connect()(PublishersListContainerWithData)

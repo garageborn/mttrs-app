@@ -1,26 +1,41 @@
-import React from 'react'
-import { TabNavigator, TabBarTop } from 'react-navigation'
+import { TabNavigator } from 'react-navigation'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
+import CategoryTimelineScene from '../scenes/CategoryTimelineScene'
+import PublishersScene from '../scenes/PublishersScene'
 
 const buildRoutes = (categories) => {
-  let routes = categories.map((category) => ({
-    [category['name']]: { screen: PopularTimelineScene, params: { slug: category.slug }}
-  }))
-
-  routes = Object.assign(...routes)
+  let categoryRoutes = {}
+  categories.forEach((category) => {
+    categoryRoutes[category.slug] = {
+      screen: CategoryTimelineScene,
+      navigationOptions: {
+        tabBarLabel: category.name
+      }
+    }
+  })
 
   return {
     home: { screen: PopularTimelineScene },
-    ...routes
+    ...categoryRoutes,
+    publishers: { screen: PublishersScene }
   }
 }
 
 const config = {
+  ...TabNavigator.Presets.AndroidTopTabs,
   headerMode: 'none',
-  tabBarPosition: 'top'
+  tabBarPosition: 'top',
+  lazy: true,
+  swipeEnabled: true,
+  animationEnabled: true,
+  tabBarOptions: {
+    scrollEnabled: true,
+    tabStyle: {
+      width: 100
+    }
+  }
 }
 
 export default (categories) => {
-  const navigator = TabNavigator(buildRoutes(categories), config)
-  return navigator
+  return TabNavigator(buildRoutes(categories), config)
 }

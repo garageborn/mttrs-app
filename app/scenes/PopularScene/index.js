@@ -12,7 +12,8 @@ class PopularScene extends Component {
 
 PopularScene.propTypes = {
   data: PropTypes.shape({
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    categories: PropTypes.array
   }).isRequired
 }
 
