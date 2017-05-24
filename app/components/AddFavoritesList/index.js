@@ -18,6 +18,7 @@ class AddFavoritesList extends Component {
         keyExtractor={this.extractKey}
         renderItem={this.renderRow}
         shouldItemUpdate={this.shouldItemUpdate}
+        numColumns={4}
       />
     )
   }
