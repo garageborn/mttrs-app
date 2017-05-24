@@ -5,7 +5,6 @@ import Success from './components/Success'
 import Error from './components/Error'
 import Button from '../Button'
 import icon from './assets/icon.png'
-import buttonStyles from '../Button/styles.js'
 import styles from './styles'
 
 const messages = defineMessages({
@@ -36,7 +35,7 @@ class PublisherMenuSuggestion extends Component {
   renderStatus () {
     if (this.props.status === 'success') return <Success />
     if (this.props.status === 'error') return <Error />
-    return this.renderButton()
+    return <View style={styles.buttonContainer}>{this.renderButton()}</View>
   }
 
   render () {
@@ -62,25 +61,23 @@ class PublisherMenuSuggestion extends Component {
     if (this.props.query === '') return this.renderInactiveButton(label)
 
     return (
-      <Button onPress={this.onButtonPress} skin={styles.button}>
-        <Text style={styles.buttonText}>{label.toUpperCase()}</Text>
-      </Button>
+      <Button
+        background='action'
+        content={label.toUpperCase()}
+        onPress={this.onButtonPress}
+        size='regular'
+      />
     )
   }
 
   renderInactiveButton (label) {
-    return (
-      <View onPress={this.onButtonPress} style={[buttonStyles.button, styles.inactiveButton]}>
-        <Text style={styles.inactiveButtonText}>{label.toUpperCase()}</Text>
-      </View>
-    )
+    return <Button background='inactive' content={label.toUpperCase()} size='regular' />
   }
 
   onButtonPress () {
     if (this.props.query === '') return null
     return this.props.sendSuggestion()
   }
-
 }
 
 PublisherMenuSuggestion.propTypes = {
