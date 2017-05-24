@@ -156,6 +156,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbads')
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')

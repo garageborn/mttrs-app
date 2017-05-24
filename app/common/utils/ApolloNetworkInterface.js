@@ -1,6 +1,6 @@
 import { HTTPFetchNetworkInterface, createNetworkInterface } from 'apollo-client'
 import _mapValues from 'lodash/mapValues'
-import { print } from 'graphql-tag/printer'
+import { print } from 'graphql/language/printer'
 import queryString from 'query-string'
 import { stringify } from './Parser'
 
