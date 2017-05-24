@@ -20,7 +20,7 @@
     "query-string": "^4.3.4",
     "raven": "^2.0.0",
     "raven-js": "^3.14.1",
-    "react": "^16.0.0-alpha.12",
+    "react": "16.0.0-alpha.6",
     "react-apollo": "^1.2.0",
     "react-intl": "^2.3.0",
     "react-native": "0.44.0",

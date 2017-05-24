@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -48,6 +49,7 @@
 		AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37291EB92D9700C2F8DD /* libc++.tbd */; };
 		AABB772C1EB9156300734E88 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB772B1EB9156300734E88 /* libxml2.tbd */; };
 		AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABB774F1EB9171900734E88 /* GoogleService-Info.plist */; };
+		D1688AD589954BECA827AE4B /* librn-fbads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F4C4C78AB44B689033A544 /* librn-fbads.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
 		DCAE53171E1EC20F00ABFD11 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */; };
@@ -55,7 +57,6 @@
 		DCAE531B1E1EC23200ABFD11 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */; };
 		ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */; };
 		F65EA51A99F8F1F0DCA54F83 /* libPods-mttrs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC1C56D3B77A300A28166BD /* libPods-mttrs.a */; };
-		D1688AD589954BECA827AE4B /* librn-fbads.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F4C4C78AB44B689033A544 /* librn-fbads.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +270,13 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+		AAE49D1B1ED5FE7B004C9B21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D963007DFAF144E1AB653CAA /* rn-fbads.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = ADDCECA31D96B7DD00C511E0;
+			remoteInfo = "rn-fbads";
+		};
 		DCAE52F51E1EC1C700ABFD11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */;
@@ -323,6 +331,7 @@
 		AA8D37221EB92AD300C2F8DD /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = ../../../../Documents/Firebase/module.modulemap; sourceTree = "<group>"; };
 		AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AA8D37291EB92D9700C2F8DD /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		AAAA90421ED602030031BD65 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = Pods/FBAudienceNetwork/FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		AABB772B1EB9156300734E88 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		AABB774F1EB9171900734E88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AAF870731EC04284003049DB /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "../../../Library/Developer/Xcode/DerivedData/mttrs-cynejcfxwpjatjafilzbskmrjamj/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
@@ -337,15 +346,15 @@
 		AC8118B6A0FCA031C9F8DD56 /* Pods-mttrsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mttrsTests/Pods-mttrsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BFC1C56D3B77A300A28166BD /* libPods-mttrs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
+		D1F4C4C78AB44B689033A544 /* librn-fbads.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "librn-fbads.a"; sourceTree = "<group>"; };
 		D4AB1C1013BF3B6BB08C5AFF /* libPods-mttrsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D963007DFAF144E1AB653CAA /* rn-fbads.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = "rn-fbads.xcodeproj"; path = "../node_modules/react-native-fbads/src/ios/rn-fbads.xcodeproj"; sourceTree = "<group>"; };
 		DCAE53141E1EC20200ABFD11 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DCAE53181E1EC22400ABFD11 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SMXCrashlytics.xcodeproj; path = "../node_modules/react-native-fabric/ios/SMXCrashlytics.xcodeproj"; sourceTree = "<group>"; };
 		FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
-		D963007DFAF144E1AB653CAA /* rn-fbads.xcodeproj */ = {isa = PBXFileReference; name = "rn-fbads.xcodeproj"; path = "../node_modules/react-native-fbads/src/ios/rn-fbads.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		D1F4C4C78AB44B689033A544 /* librn-fbads.a */ = {isa = PBXFileReference; name = "librn-fbads.a"; path = "librn-fbads.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,9 +662,18 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
+		AAE49CFD1ED5FE7B004C9B21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAE49D1C1ED5FE7B004C9B21 /* librn-fbads.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DCAE53131E1EC20200ABFD11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAAA90421ED602030031BD65 /* FBAudienceNetwork.framework */,
 				AA3D29331EC0C44E0098C3C5 /* libFBSDKCoreKit.a */,
 				AA3D29341EC0C44E0098C3C5 /* libFBSDKLoginKit.a */,
 				AA3D29351EC0C44E0098C3C5 /* libFBSDKShareKit.a */,
@@ -881,6 +899,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = AAE49CFD1ED5FE7B004C9B21 /* Products */;
+					ProjectRef = D963007DFAF144E1AB653CAA /* rn-fbads.xcodeproj */;
+				},
+				{
 					ProductGroup = A0B8267A1DB547B2009A234B /* Products */;
 					ProjectRef = CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */;
 				},
@@ -1094,6 +1116,13 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = AA23D6F61EA1112C004E640E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAE49D1C1ED5FE7B004C9B21 /* librn-fbads.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "librn-fbads.a";
+			remoteRef = AAE49D1B1ED5FE7B004C9B21 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DCAE52F61E1EC1C700ABFD11 /* libBVLinearGradient.a */ = {
@@ -1413,6 +1442,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/FBAudienceNetwork",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1454,6 +1484,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/FBAudienceNetwork",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
