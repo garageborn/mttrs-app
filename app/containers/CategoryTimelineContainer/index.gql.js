@@ -28,11 +28,12 @@ const Query = gql`
 export default function (CategoryTimelineContainer) {
   return graphql(Query, {
     options (props) {
-      const { categorySlug } = props
+      const { categorySlug, activeTag } = props
+
       return {
         variables: {
           ...defaultVariables,
-          // tagSlug: props.activeTag,
+          tagSlug: activeTag,
           categorySlug,
           type: 'category'
         }

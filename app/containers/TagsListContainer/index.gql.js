@@ -6,9 +6,6 @@ const Query = gql`
     tags(with_recent_stories: true, ordered: true, category_slug: $categorySlug) {
       name
       slug
-      category {
-        slug
-      }
     }
   }
 `

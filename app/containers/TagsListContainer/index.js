@@ -1,7 +1,7 @@
 import React, { Component, PropTypes} from 'react'
 import TagsList from '../../components/TagsList'
 import withQuery from './index.gql'
-import _result from 'lodash/isNil'
+import _result from 'lodash/result'
 
 class TagsListContainer extends Component {
   render () {
@@ -12,9 +12,10 @@ class TagsListContainer extends Component {
 }
 
 TagsListContainer.propTypes = {
+  active: PropTypes.string,
+  categorySlug: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
-  handleTag: PropTypes.func.isRequired,
-  active: PropTypes.string
+  handleTag: PropTypes.func.isRequired
 }
 
 export default withQuery(TagsListContainer)

@@ -14,7 +14,6 @@ const messages = defineMessages({
 class TagsList extends Component {
   constructor () {
     super()
-
     this.renderTags = this.renderTags.bind(this)
   }
 
@@ -23,29 +22,29 @@ class TagsList extends Component {
   }
 
   render () {
-    const { intl, handleTag, data } = this.props
-    const text = intl.formatMessage(messages.default)
+    const { data } = this.props
     if (data.loading) return this.renderLoader()
+
     return (
       <ScrollView
         ref={'scrollView'}
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={this.containerStyles}
+        style={styles.container}
       >
-        <Tag active={this.isActive()} onPress={() => handleTag()}>
-          {text}
-        </Tag>
+        {this.renderDefaultTag()}
         {this.renderTags()}
       </ScrollView>
     )
   }
 
-  renderLoader () {
+  renderDefaultTag () {
+    const { intl, handleTag } = this.props
+
     return (
-      <View style={[...this.containerStyles, styles.loaderContainer]}>
-        <ActivityIndicator color='#AAA' />
-      </View>
+      <Tag active={this.isActive()} onPress={() => handleTag()}>
+        {intl.formatMessage(messages.default)}
+      </Tag>
     )
   }
 
@@ -57,7 +56,7 @@ class TagsList extends Component {
           key={`tag_${idx}`}
           last={this.isLast(idx)}
           active={this.isActive(tag.slug)}
-          onPress={() => handleTag(tag.slug, tag.category.slug)}
+          onPress={() => handleTag(tag.slug)}
         >
           {tag.name}
         </Tag>
@@ -65,37 +64,39 @@ class TagsList extends Component {
     })
   }
 
+  renderLoader () {
+    return (
+      <View style={[styles.container, styles.loaderContainer]}>
+        <ActivityIndicator color='#AAA' />
+      </View>
+    )
+  }
+
   isLast (idx) {
     return idx === this.props.data.tags.length - 1
   }
 
   isActive (slug) {
-    return slug == this.props.active
+    return slug === this.props.active
   }
 
   handleScroll (nextProps) {
     if (this.props.data.loading) return
     if (this.props.active !== nextProps.active) return
-    return this.refs.scrollView.scrollTo({x: 0, y: 0, animated: false})
-  }
-
-  get containerStyles () {
-    if (this.props.menuOpen) return [styles.container, styles.containerActive]
-    return [styles.container]
+    // return this.refs.scrollView.scrollTo({x: 0, y: 0, animated: false})
   }
 }
 
 TagsList.propTypes = {
-  handleTag: PropTypes.func.isRequired,
+  active: PropTypes.string,
   data: PropTypes.shape({
     tags: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired
   }).isRequired,
-  active: PropTypes.string,
+  handleTag: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  menuOpen: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 export default injectIntl(TagsList)

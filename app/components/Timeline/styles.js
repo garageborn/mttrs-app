@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get('window')
 
 const containerStyles = {
   flexGrow: 1,
-  height: height - headerHeight,
+  // height: height - headerHeight,
   width
 }
 
@@ -17,16 +17,16 @@ const styles = StyleSheet.create({
 
   container: {
     ...Platform.select({
-      ios: {
-        top: 15,
-        bottom: 0,
-        paddingBottom: 0
-      },
-      android: {
-        top: 0,
-        bottom: 0,
-        paddingBottom: 25
-      }
+      // ios: {
+      //   top: 15,
+      //   bottom: 0,
+      //   paddingBottom: 0
+      // },
+      // android: {
+      //   top: 0,
+      //   bottom: 0,
+      //   paddingBottom: 25
+      // }
     }),
     flexGrow: 1,
     backgroundColor: '#F1F1F1'
