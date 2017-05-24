@@ -41,6 +41,7 @@ class FavoriteCategoriesDialogContainer extends Component {
     const loading = _result(data, 'loading')
     const categories = _result(data, 'categories')
     if (!favorites.isLoaded || loading) return this.renderLoading()
+    if (!categories) return
     return categories.map((category) => this.renderCategory(category))
   }
 
@@ -83,7 +84,6 @@ FavoriteCategoriesDialogContainer.propTypes = {
 }
 
 let mapStateToProps = (state) => {
-  console.log('mapStateToProps', state.FavoritesReducer)
   return {
     favorites: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,

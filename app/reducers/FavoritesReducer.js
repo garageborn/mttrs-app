@@ -16,7 +16,7 @@ export default function (state = defaultState, action) {
     case SELECT_FAVORITE_CATEGORY:
       return {
         ...state,
-        categoryId: action.categoryId,
+        categoryId: action.categoryId
       }
     case TENANT_RECEIVED:
       return {

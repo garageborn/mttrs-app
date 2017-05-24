@@ -12,15 +12,15 @@ query($publishersIds: [Int]) {
   }
 }
 `
-export default function (FavoritePublishers) {
+export default function (FavoritePublishersSelector) {
   return graphql(Query, {
     skip: (props) => {
       return !props.favorites.isLoaded
     },
     options (props) {
-      const { selected, items } = props.favorites
-      const publishersIds = selected ? [selected] : items
-      return { variables: { publishersIds } }
+      return {
+        variables: { publishersIds: props.favorites.items }
+      }
     }
-  })(FavoritePublishers)
+  })(FavoritePublishersSelector)
 }
