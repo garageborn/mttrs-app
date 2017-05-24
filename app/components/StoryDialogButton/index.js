@@ -1,19 +1,17 @@
-import React, { PropTypes, Component } from 'react'
-import { Text } from 'react-native'
+import React, { PropTypes } from 'react'
+import { View, Image } from 'react-native'
 import Touchable from '../Touchable'
-import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
+import styles from './styles'
 
-class StoryDialogButton extends Component {
-  render () {
-    const { onPress } = this.props
+const image = require('./assets/image.png')
 
-    return (
-      <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
-        <Text>OpenDialog</Text>
-      </Touchable>
-    )
-  }
-}
+const StoryDialogButton = ({ onPress }) => (
+  <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={'transparent'} >
+    <View style={styles.container}>
+      <Image source={image} />
+    </View>
+  </Touchable>
+)
 
 StoryDialogButton.propTypes = {
   onPress: PropTypes.func.isRequired

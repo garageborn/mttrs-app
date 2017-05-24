@@ -1,12 +1,15 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  activeButton: {
-    color: 'red'
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 15
   },
-
-  button: {
-    color: 'grey'
+  headingContainer: {
+    width: width * 0.70
   }
 })
 

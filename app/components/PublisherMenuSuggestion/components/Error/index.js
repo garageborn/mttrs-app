@@ -23,9 +23,7 @@ const Error = ({ intl }) => {
       <View style={styles.textContainer}>
         <Text style={styles.text}>{error}</Text>
       </View>
-      <Button skin={styles.button}>
-        <Text style={styles.buttonText}>{label.toUpperCase()}</Text>
-      </Button>
+      <Button background='danger' content={label.toUpperCase()} size='regular' />
     </View>
   )
 }

@@ -6,9 +6,9 @@ import styles from './styles.js'
 const AdFooter = ({ buttonText, description }) => (
   <View style={styles.container}>
     <Text style={styles.text}>{description}</Text>
-    <Button onPress={() => {}} skin={styles.button}>
-      <Text style={styles.buttonText}>{buttonText}</Text>
-    </Button>
+    <View style={styles.buttonContainer}>
+      <Button onPress={() => {}} background='timelineAd' content={buttonText} size='regular' />
+    </View>
   </View>
 )
 

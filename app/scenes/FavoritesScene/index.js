@@ -17,8 +17,6 @@ class FavoritesScene extends Component {
     const { isLoaded, exists } = this.props
     if (!isLoaded) return null
 
-      console.log({exists})
-
     return exists ? <FavoritesTimelineScene /> : <AddFavoritesScene />
   }
 }
@@ -29,7 +27,6 @@ FavoritesScene.propTypes = {
 }
 
 let mapStateToProps = (state, ownProps) => {
-  console.log(state.FavoritePublishersReducer.items)
   return {
     isLoaded: state.FavoritePublishersReducer.isLoaded,
     exists: state.FavoritePublishersReducer.items.length > 0
