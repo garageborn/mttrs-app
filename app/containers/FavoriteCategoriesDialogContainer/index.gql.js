@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import _compact from 'lodash/compact'
+import prepareArrayParam from '../../common/utils/ArrayParam'
 
 const Query = gql`
 query($publisherIds: [Int]) {
@@ -23,7 +23,7 @@ export default function (FavoriteCategoriesDialog) {
       const publisherIds = selectedPublisher ? [selectedPublisher] : favoritePublishers
       return {
         variables: {
-          publisherIds: _compact(publisherIds)
+          publisherIds: prepareArrayParam(publisherIds, null)
         }
       }
     }
