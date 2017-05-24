@@ -25,18 +25,18 @@ const Query = gql`
   }
 `
 
-export default function (HomeTimeline) {
+export default function (CategoryTimelineContainer) {
   return graphql(Query, {
-    skip: (props) => !props.current,
     options (props) {
+      const { categorySlug } = props
       return {
         variables: {
           ...defaultVariables,
-          tagSlug: props.activeTag,
-          categorySlug: props.model.slug,
+          // tagSlug: props.activeTag,
+          categorySlug,
           type: 'category'
         }
       }
     }
-  })(HomeTimeline)
+  })(CategoryTimelineContainer)
 }

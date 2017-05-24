@@ -25,11 +25,10 @@ const Query = gql`
   }
 `
 
-export default function (HomeTimeline) {
+export default function (PopularTimeline) {
   return graphql(Query, {
-    skip: (props) => !props.current,
     options (props) {
       return { variables: { ...defaultVariables, type: 'popular' } }
     }
-  })(HomeTimeline)
+  })(PopularTimeline)
 }

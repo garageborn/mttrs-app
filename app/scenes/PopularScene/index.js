@@ -1,10 +1,20 @@
-import React, { Component } from 'react'
-import CategoriesSwiper from '../../containers/CategoriesSwiper'
+import React, { Component, PropTypes } from 'react'
+import PopularNavigator from '../../navigators/PopularNavigator'
+import withQuery from './index.gql'
 
 class PopularScene extends Component {
   render () {
-    return <CategoriesSwiper />
+    if (this.props.data.loading) return null
+    const Navigator = PopularNavigator(this.props.data.categories)
+    return <Navigator />
   }
 }
 
-export default PopularScene
+PopularScene.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool,
+    categories: PropTypes.array
+  }).isRequired
+}
+
+export default withQuery(PopularScene)
