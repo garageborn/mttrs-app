@@ -37,10 +37,10 @@ class FavoriteCategoriesDialogContainer extends Component {
   }
 
   renderCategories () {
-    const { data, favorites } = this.props
+    const { data, favoritePublishers } = this.props
     const loading = _result(data, 'loading')
     const categories = _result(data, 'categories')
-    if (!favorites.isLoaded || loading) return this.renderLoading()
+    if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
     if (!categories) return
     return categories.map((category) => this.renderCategory(category))
   }
@@ -73,10 +73,12 @@ FavoriteCategoriesDialogContainer.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  favorites: PropTypes.shape({
+  favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired,
-    selected: PropTypes.any
+    items: PropTypes.array.isRequired
+  }).isRequired,
+  favorites: PropTypes.shape({
+    publisherId: PropTypes.any
   }).isRequired,
   data: PropTypes.shape({
     categories: PropTypes.array
@@ -85,10 +87,12 @@ FavoriteCategoriesDialogContainer.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    favorites: {
+    favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
-      items: state.FavoritePublishersReducer.items,
-      selected: state.FavoritesReducer.publisherId
+      items: state.FavoritePublishersReducer.items
+    },
+    favorites: {
+      publisherId: state.FavoritesReducer.publisherId
     }
   }
 }

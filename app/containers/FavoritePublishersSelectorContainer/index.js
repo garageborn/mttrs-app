@@ -7,10 +7,11 @@ import FavoritePublishersSelector from '../../components/FavoritePublishersSelec
 
 class FavoritePublishersSelectorContainer extends Component {
   render () {
-    const { data, favorites } = this.props
+    const { data, favoritePublishers } = this.props
     const loading = _result(data, 'loading')
     const publishers = _result(data, 'publishers')
-    if (!favorites.isLoaded || loading) return this.renderLoading()
+    if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
+    console.log('renderPublishers', publishers)
 
     return <FavoritePublishersSelector publishers={publishers} />
   }
@@ -29,7 +30,7 @@ FavoritePublishersSelectorContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }),
-  favorites: PropTypes.shape({
+  favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired
@@ -37,9 +38,12 @@ FavoritePublishersSelectorContainer.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    favorites: {
+    favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
+    },
+    favorites: {
+      categoryId: state.FavoritesReducer.categoryId
     }
   }
 }

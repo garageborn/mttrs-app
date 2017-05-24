@@ -1,9 +1,10 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import _compact from 'lodash/compact'
 
 const Query = gql`
-query($publishersIds: [Int]) {
-  publishers(with_stories: true, order_by_name: true, with_ids: $publishersIds) {
+query($publisherIds: [Int], $categoryIds: [Int]) {
+  publishers(with_stories: true, order_by_name: true, with_ids: $publisherIds, category_ids: $categoryIds) {
     display_name
     icon_id
     id
@@ -12,15 +13,16 @@ query($publishersIds: [Int]) {
   }
 }
 `
+
 export default function (FavoritePublishersSelector) {
   return graphql(Query, {
     skip: (props) => {
-      return !props.favorites.isLoaded
+      return !props.favoritePublishers.isLoaded
     },
     options (props) {
-      return {
-        variables: { publishersIds: props.favorites.items }
-      }
+      const publisherIds = _compact(props.favoritePublishers.items)
+      const categoryIds = _compact([props.favorites.categoryId])
+      return { variables: { publisherIds, categoryIds } }
     }
   })(FavoritePublishersSelector)
 }

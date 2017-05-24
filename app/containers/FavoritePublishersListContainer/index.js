@@ -34,7 +34,7 @@ FavoritePublishersListContainer.propTypes = {
     items: PropTypes.array.isRequired,
     selected: PropTypes.any
   }).isRequired,
-  publishersIds: PropTypes.array.isRequired
+  publisherIds: PropTypes.array.isRequired
 }
 
 let mapStateToProps = (state) => {

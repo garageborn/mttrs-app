@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
+import _compact from 'lodash/compact'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!) {
-    timeline(cursor: $cursor, type: $type, limit: $limit) {
+  query($cursor: Int, $type: String!, $limit: Int!, $publisherIds: [Int], $categoryIds: [Int]) {
+    timeline(cursor: $cursor, type: $type, limit: $limit, publisher_ids: $publisherIds, category_ids: $categoryIds) {
       date
       stories {
         id
@@ -11,7 +12,7 @@ const Query = gql`
         headline
         summary
         category { name color slug }
-        main_link {
+        main_link(publisher_ids: $publisherIds) {
           title
           url
           amp_url
@@ -27,11 +28,26 @@ const Query = gql`
 
 export default function (FavoritesTimeline) {
   return graphql(Query, {
+    skip: (props) => {
+      return !props.favoritePublishers.isLoaded
+    },
     options (props) {
+      const publisherIds = _compact(props.favoritePublishers.items)
+      const categoryIds = _compact([props.favorites.categoryId])
+
+      console.log({
+        ...defaultVariables,
+        type: 'favorites',
+        publisherIds,
+        categoryIds
+      })
+
       return {
         variables: {
           ...defaultVariables,
-          type: 'favorites'
+          type: 'favorites',
+          publisherIds,
+          categoryIds
         }
       }
     }

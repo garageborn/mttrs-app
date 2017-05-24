@@ -1,9 +1,10 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import _compact from 'lodash/compact'
 
 const Query = gql`
-query($publishersIds: [Int]) {
-  categories(with_stories: true, ordered: true, publisher_ids: $publishersIds) {
+query($publisherIds: [Int]) {
+  categories(with_stories: true, ordered: true, publisher_ids: $publisherIds) {
     color
     id
     name
@@ -14,12 +15,17 @@ query($publishersIds: [Int]) {
 export default function (FavoriteCategoriesDialog) {
   return graphql(Query, {
     skip: (props) => {
-      return !props.favorites.isLoaded
+      return !props.favoritePublishers.isLoaded
     },
     options (props) {
-      const { selected, items } = props.favorites
-      const publishersIds = selected ? [selected] : items
-      return { variables: { publishersIds } }
+      const favoritePublishers = props.favoritePublishers.items
+      const selectedPublisher = props.favorites.publisherId
+      const publisherIds = selectedPublisher ? [selectedPublisher] : favoritePublishers
+      return {
+        variables: {
+          publisherIds: _compact(publisherIds)
+        }
+      }
     }
   })(FavoriteCategoriesDialog)
 }

@@ -31,7 +31,7 @@ export default function (SummariesTimeline) {
       return {
         variables: {
           ...defaultVariables,
-          type: 'home'
+          type: 'summaries'
         }
       }
     }
