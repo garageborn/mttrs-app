@@ -23,9 +23,7 @@ class AddFavoritesContainer extends Component {
           isComplete={favorites.exists}
         />
         {this.renderPublisherList()}
-        <AddFavoritesFooter
-          onPress={this.openFavoritesTimeline}
-        />
+        <AddFavoritesFooter onPress={this.openFavoritesTimeline} />
       </ScrollView>
     )
   }
