@@ -1,10 +1,7 @@
 import { AsyncStorage } from 'react-native'
-import _compact from 'lodash/compact'
-import _flatten from 'lodash/flatten'
-import _map from 'lodash/map'
-import _parseInt from 'lodash/parseInt'
-import _uniq from 'lodash/uniq'
 import captureError from '../common/utils/captureError'
+import _parseInt from 'lodash/parseInt'
+import prepareArrayParam from '../common/utils/ArrayParam'
 import { parse, stringify } from '../common/utils/Parser'
 import { AnalyticsActions } from './index'
 import { FAVORITE_PUBLISHERS_RECEIVED, REQUEST_FAVORITE_PUBLISHERS } from '../constants/ActionTypes'
@@ -98,7 +95,7 @@ function parseFromStorage (favorites) {
 }
 
 function prepare (favorites = []) {
-  return (_uniq(_compact(_map(_flatten(favorites), _parseInt)))).sort()
+  return prepareArrayParam(favorites, [])
 }
 
 function addFavorite (getState, publisherId) {

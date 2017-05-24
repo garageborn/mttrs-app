@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
-import _compact from 'lodash/compact'
+import prepareArrayParam from '../../common/utils/ArrayParam'
 
 const Query = gql`
   query($cursor: Int, $type: String!, $limit: Int!, $publisherIds: [Int], $categoryIds: [Int]) {
@@ -32,15 +32,8 @@ export default function (FavoritesTimeline) {
       return !props.favoritePublishers.isLoaded
     },
     options (props) {
-      const publisherIds = _compact(props.favoritePublishers.items)
-      const categoryIds = _compact([props.favorites.categoryId])
-
-      console.log({
-        ...defaultVariables,
-        type: 'favorites',
-        publisherIds,
-        categoryIds
-      })
+      const publisherIds = prepareArrayParam(props.favoritePublishers.items, null)
+      const categoryIds = prepareArrayParam([props.favorites.categoryId], null)
 
       return {
         variables: {

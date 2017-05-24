@@ -11,7 +11,6 @@ class FavoritePublishersSelectorContainer extends Component {
     const loading = _result(data, 'loading')
     const publishers = _result(data, 'publishers')
     if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
-    console.log('renderPublishers', publishers)
 
     return <FavoritePublishersSelector publishers={publishers} />
   }
