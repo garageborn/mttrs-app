@@ -7,15 +7,12 @@ import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
 import PublisherMenu from '../../components/PublisherMenu'
 import Loader from '../../components/PublisherMenuLoader'
-import { NavigationActions, MenuActions } from '../../actions/index'
+import { NavigationActions } from '../../actions/index'
 
 class PublisherMenuContainer extends Component {
   constructor () {
     super()
-
-    this.state = {
-      query: ''
-    }
+    this.state = { query: '' }
 
     this.openPublisher = this.openPublisher.bind(this)
     this.getPublishers = this.getPublishers.bind(this)
@@ -72,16 +69,9 @@ class PublisherMenuContainer extends Component {
   }
 
   openPublisher (publisher) {
-    this.props.dispatch(MenuActions.closeMenu())
     InteractionManager.runAfterInteractions(() => {
-      this.props.dispatch(NavigationActions.selectPublisher(publisher))
+      this.props.dispatch(NavigationActions.publisher(publisher))
     })
-  }
-}
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    StorageReducer: state.StorageReducer
   }
 }
 
@@ -95,4 +85,4 @@ PublisherMenuContainer.propTypes = {
 }
 
 const PublisherMenuContainerWithData = withQuery(PublisherMenuContainer)
-export default connect(mapStateToProps)(PublisherMenuContainerWithData)
+export default connect()(PublisherMenuContainerWithData)

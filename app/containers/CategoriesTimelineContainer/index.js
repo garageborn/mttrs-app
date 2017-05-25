@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import CategoriesSwiper from '../CategoriesSwiper'
 import TagsListContainer from '../TagsListContainer'
 import { AnalyticsActions } from '../../actions/index'
+import _result from 'lodash/result'
 
 class CategoriesTimelineContainer extends Component {
   constructor () {
@@ -31,19 +32,19 @@ class CategoriesTimelineContainer extends Component {
   }
 
   resetActiveTag (nextProps) {
+    if (!_result(this.props.params, 'section')) return
     if (this.props.params.section === nextProps.params.section) return
     this.setState({ activeTag: null })
   }
 
   renderTags () {
-    let { section } = this.props.params
+    const section = _result(this.props.navigation, 'state.params.section')
     if (!section || section.name === 'home') return null
     return (
       <TagsListContainer
         categorySlug={section.model.slug}
         active={this.state.activeTag}
         handleTag={this.handleTag}
-        menuOpen={this.props.menuOpen}
       />
     )
   }
@@ -56,14 +57,7 @@ class CategoriesTimelineContainer extends Component {
 
 CategoriesTimelineContainer.propTypes = {
   params: PropTypes.object,
-  dispatch: PropTypes.func.isRequired,
-  menuOpen: PropTypes.bool.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
-const mapStateToProps = state => {
-  return {
-    menuOpen: state.uiReducer.menu.isOpen
-  }
-}
-
-export default connect(mapStateToProps)(CategoriesTimelineContainer)
+export default connect()(CategoriesTimelineContainer)

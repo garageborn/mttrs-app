@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import _result from 'lodash/result'
 
 const Query = gql`
   query($id: ID!, $publisherSlug: String) {
@@ -30,10 +31,11 @@ const Query = gql`
 export default function (SocialCountModalContainer) {
   return graphql(Query, {
     options (props) {
+      const { story, renderOptions } = props
       return {
         variables: {
-          id: props.story.id,
-          publisherSlug: props.publisherSlug
+          id: story.id,
+          publisherSlug: _result(renderOptions, 'publisherSlug')
         }
       }
     }
