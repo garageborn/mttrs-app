@@ -5,7 +5,7 @@ import RateAppSettings from '../../components/RateAppSettings'
 
 const storeLink = Platform.select({
   ios: {
-    native: 'itms://itunes.apple.com/app/matters-news-summaries/id1166566093',
+    native: 'itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=1166566093',
     external: 'https://itunes.apple.com/app/matters-news-summaries/id1166566093'
   },
   android: {
@@ -25,7 +25,6 @@ class RateAppSettingsContainer extends Component {
   }
 
   rateApp () {
-    console.log('StoreReview.isAvailable', StoreReview.isAvailable)
     if (StoreReview.isAvailable) return StoreReview.requestReview()
     this.openNative()
   }
