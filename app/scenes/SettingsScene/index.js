@@ -1,18 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { View, Text } from 'react-native'
+import React, { Component } from 'react'
+import SettingsContainer from '../../containers/SettingsContainer'
 
 class SettingsScene extends Component {
   render () {
-    return (
-      <View>
-        <Text>SettingsScene</Text>
-      </View>
-    )
+    return <SettingsContainer />
   }
-}
-
-SettingsScene.propTypes = {
-
 }
 
 export default SettingsScene
