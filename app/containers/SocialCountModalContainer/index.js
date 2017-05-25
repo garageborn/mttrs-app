@@ -5,7 +5,7 @@ import withQuery from './index.gql'
 import CloseButton from '../../components/CloseButton'
 import SocialCountModal from '../../components/SocialCountModal'
 import { NavigationActions } from '../../actions/index'
-import styles from '../../styles/StoryLinks'
+import styles from '../../styles/Modal'
 
 class SocialCountModalContainer extends Component {
   constructor (props) {
@@ -14,17 +14,12 @@ class SocialCountModalContainer extends Component {
   }
 
   close () {
-    this.props.dispatch(NavigationActions.modal({ open: false }))
+    this.props.dispatch(NavigationActions.closeModal())
   }
 
   render () {
     return (
-      <Modal
-        animationType={'slide'}
-        transparent
-        visible
-        onRequestClose={this.close}
-      >
+      <Modal animationType={'slide'} transparent visible onRequestClose={this.close} >
         <View style={styles.modal}>
           {this.renderStoryLinks()}
           <CloseButton onPress={this.close} />
@@ -56,7 +51,11 @@ SocialCountModalContainer.propTypes = {
     loading: PropTypes.bool,
     story: PropTypes.object
   }),
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 const SocialCountModalContainerWithData = withQuery(SocialCountModalContainer)

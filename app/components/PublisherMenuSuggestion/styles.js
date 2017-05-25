@@ -40,23 +40,8 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
 
-  button: {
-    backgroundColor: actionColor,
+  buttonContainer: {
     marginBottom: 20
-  },
-
-  buttonText: {
-    color: 'black',
-    textAlign: 'center'
-  },
-
-  inactiveButton: {
-    backgroundColor: '#999',
-    marginBottom: 20
-  },
-
-  inactiveButtonText: {
-    color: 'gray'
   }
 })
 

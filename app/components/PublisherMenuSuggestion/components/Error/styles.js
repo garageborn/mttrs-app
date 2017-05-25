@@ -14,16 +14,6 @@ const styles = StyleSheet.create({
   text: {
     ...feedbackMessage,
     color: dangerColor
-  },
-
-  button: {
-    backgroundColor: dangerColor,
-    width: 130
-  },
-
-  buttonText: {
-    color: '#FFF',
-    textAlign: 'center'
   }
 })
 

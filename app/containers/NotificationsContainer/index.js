@@ -101,7 +101,7 @@ NotificationsContainer.propTypes = {
 const mapStateToProps = (state) => {
   return {
     tenant: state.TenantReducer,
-    visitedStories: state.StorageReducer.visitedStories
+    visitedStories: state.VisitedStoriesReducer
   }
 }
 

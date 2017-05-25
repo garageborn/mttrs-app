@@ -40,17 +40,6 @@ const styles = StyleSheet.create({
     color: '#999999'
   },
 
-  buttonContainer: {
-    marginTop: 16,
-    alignSelf: 'center'
-  },
-
-  buttonText: {
-    color: '#FF5607',
-    fontSize: 24,
-    fontWeight: '500'
-  },
-
   icon: {
     alignSelf: 'center',
     marginBottom: 16

@@ -1,21 +1,32 @@
 import React, { PropTypes } from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import Touchable from '../Touchable'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const Button = (props) => {
+const Button = ({ background, content, onPress, size }) => {
+  const containerStyles = () => {
+    return [styles.container, styles[background], styles[size]]
+  }
+  const textStyles = () => {
+    const textColor = `${background}Text`
+    const textSize = `${size}Text`
+    return [styles.text, styles[textColor], styles[textSize]]
+  }
   return (
-    <Touchable onPress={props.onPress} underlayColor={WHITE_TRANSPARENT_COLOR} >
-      <View style={[styles.button, props.skin]}>{props.children}</View>
+    <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR} >
+      <View style={containerStyles()}>
+        <Text style={textStyles()}>{content}</Text>
+      </View>
     </Touchable>
   )
 }
 
 Button.propTypes = {
-  children: PropTypes.any,
+  background: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  skin: PropTypes.number.isRequired
+  size: PropTypes.string.isRequired
 }
 
 export default Button

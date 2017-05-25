@@ -9,29 +9,28 @@ import styles from './styles'
 class PublisherMenu extends Component {
   constructor () {
     super()
-
     this.handleSuggestionTrigger = this.handleSuggestionTrigger.bind(this)
-
-    this.state = {
-      suggestion: false
-    }
+    this.state = { suggestion: false }
   }
 
   render () {
+    const { emptyInput, handleQuery } = this.props
+    const { suggestion } = this.state
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <PublisherSearch
-            handleQuery={this.props.handleQuery}
-            emptyInput={this.props.emptyInput}
-            suggestion={this.state.suggestion}
+            handleQuery={handleQuery}
+            emptyInput={emptyInput}
+            suggestion={suggestion}
           />
           <PublisherMenuSuggestionTrigger
             handlePress={this.handleSuggestionTrigger}
-            active={this.state.suggestion}
+            active={suggestion}
           />
         </View>
-        {this.renderView()}
+        {this.renderListView()}
       </View>
     )
   }
@@ -41,22 +40,18 @@ class PublisherMenu extends Component {
   }
 
   renderSuggestionView () {
-    return (
-      <PublisherMenuSuggestionContainer
-        query={this.props.query}
-        publisher={this.props.query}
-      />
-    )
+    const { query } = this.props
+    return <PublisherMenuSuggestionContainer query={query} publisher={query} />
   }
 
-  renderView () {
-    const { publishers } = this.props
+  renderListView () {
+    const { openPublisher, publishers } = this.props
     if (!publishers.length || this.state.suggestion) return this.renderSuggestionView()
     return (
       <PublisherMenuListView
         hasPublishers={this.hasPublishers}
         publishers={publishers}
-        openPublisher={this.props.openPublisher}
+        openPublisher={openPublisher}
       />
     )
   }

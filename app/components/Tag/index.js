@@ -10,6 +10,7 @@ const Tag = ({ onPress, children, active, last }) => {
     if (last) containerStyles = [...containerStyles, styles.last]
     return containerStyles
   }
+
   return (
     <View style={getStyle()}>
       <Touchable
