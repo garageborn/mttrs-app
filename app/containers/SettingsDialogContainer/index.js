@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import SettingsDialog from '../../components/SettingsDialog'
+import Tenant from '../../common/utils/Tenant'
+import { NavigationActions, TenantActions } from '../../actions/index'
 
 class SettingsDialogContainer extends Component {
   constructor () {
@@ -15,18 +17,26 @@ class SettingsDialogContainer extends Component {
 
     return (
       <SettingsDialog
+        tenant={this.alternativeTenant}
         openSettings={this.openSettings}
         setTenant={this.setTenant}
         />
     )
   }
 
-  openSettings () {
-    console.log('opensettings')
+  get alternativeTenant () {
+    const { tenant } = this.props
+    return Tenant.except(tenant.current.id)[0]
   }
 
-  setTenant (tenant) {
-    console.log('setTenant')
+  openSettings () {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.settings())
+  }
+
+  setTenant (tenantId) {
+    const { dispatch } = this.props
+    dispatch(TenantActions.setCurrent(tenantId))
   }
 }
 
