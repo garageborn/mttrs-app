@@ -3,8 +3,14 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import FavoritePublishersList from '../../components/FavoritePublishersList'
+import { NavigationActions } from '../../actions/index'
 
 class FavoritePublishersListContainer extends Component {
+  constructor () {
+    super()
+    this.openPublisher = this.openPublisher.bind(this)
+  }
+
   shouldComponentUpdate (nextProps) {
     return this.props.data.loading !== nextProps.data.loading
   }
@@ -12,7 +18,7 @@ class FavoritePublishersListContainer extends Component {
   render () {
     const { loading, publishers } = this.props.data
     if (loading) return this.renderLoading()
-    return <FavoritePublishersList publishers={publishers} />
+    return <FavoritePublishersList publishers={publishers} openPublisher={this.openPublisher} />
   }
 
   renderLoading () {
@@ -22,6 +28,11 @@ class FavoritePublishersListContainer extends Component {
       </View>
     )
   }
+
+  openPublisher (publisher) {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.publisher(publisher))
+  }
 }
 
 FavoritePublishersListContainer.propTypes = {
@@ -29,23 +40,8 @@ FavoritePublishersListContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }).isRequired,
-  favorites: PropTypes.shape({
-    isLoaded: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired,
-    selected: PropTypes.any
-  }).isRequired,
   publisherIds: PropTypes.array.isRequired
 }
 
-let mapStateToProps = (state) => {
-  return {
-    favorites: {
-      isLoaded: state.FavoritePublishersReducer.isLoaded,
-      items: state.FavoritePublishersReducer.items,
-      selected: state.FavoritesReducer.publisherId
-    }
-  }
-}
-
 const FavoritePublishersListContainerWithData = withQuery(FavoritePublishersListContainer)
-export default connect(mapStateToProps)(FavoritePublishersListContainerWithData)
+export default connect()(FavoritePublishersListContainerWithData)

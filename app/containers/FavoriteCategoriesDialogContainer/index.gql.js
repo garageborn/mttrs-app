@@ -18,13 +18,9 @@ export default function (FavoriteCategoriesDialog) {
       return !props.favoritePublishers.isLoaded
     },
     options (props) {
-      const favoritePublishers = props.favoritePublishers.items
-      const selectedPublisher = props.favorites.publisherId
-      const publisherIds = selectedPublisher ? [selectedPublisher] : favoritePublishers
+      const publisherIds = prepareArrayParam(props.favoritePublishers.items, null)
       return {
-        variables: {
-          publisherIds: prepareArrayParam(publisherIds, null)
-        }
+        variables: { publisherIds }
       }
     }
   })(FavoriteCategoriesDialog)

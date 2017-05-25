@@ -16,7 +16,7 @@ class FavoritePublishersContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return this.props.favorites.isLoaded !== nextProps.favorites.isLoaded
+    return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
   }
 
   render () {
@@ -29,9 +29,9 @@ class FavoritePublishersContainer extends Component {
   }
 
   renderPublisherList () {
-    const { favorites } = this.props
-    if (!favorites.isLoaded) return this.renderLoading()
-    return <FavoritePublishersListContainer publisherIds={favorites.items} />
+    const { favoritePublishers } = this.props
+    if (!favoritePublishers.isLoaded) return this.renderLoading()
+    return <FavoritePublishersListContainer publisherIds={favoritePublishers.items} />
   }
 
   renderLoading () {
@@ -43,8 +43,8 @@ class FavoritePublishersContainer extends Component {
   }
 
   handleComplete () {
-    const { dispatch, favorites } = this.props
-    if (favorites.items.length) {
+    const { dispatch, favoritePublishers } = this.props
+    if (favoritePublishers.items.length) {
       dispatch(NavigationActions.favoritesTimeline())
     } else {
       dispatch(NavigationActions.addFavorites())
@@ -53,7 +53,7 @@ class FavoritePublishersContainer extends Component {
 }
 
 FavoritePublishersContainer.propTypes = {
-  favorites: PropTypes.shape({
+  favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired
@@ -61,7 +61,7 @@ FavoritePublishersContainer.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    favorites: {
+    favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
     }

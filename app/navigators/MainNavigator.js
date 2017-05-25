@@ -13,7 +13,8 @@ const MainRoutes = {
 }
 
 const MainNavigatorConfig = {
-  initialRouteName: 'summaries',
+  headerMode: 'none',
+  initialRouteName: 'favorites',
   tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
   tabBarPosition: 'bottom',
   lazy: true

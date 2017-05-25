@@ -27,7 +27,9 @@ class FavoritePublishersList extends Component {
   }
 
   renderRow (data) {
-    return <FavoritePublishersItem rowID={data.index} publisher={data.item} />
+    const { index, item } = data
+    const { openPublisher } = this.props
+    return <FavoritePublishersItem rowID={index} publisher={item} onPress={openPublisher} />
   }
 
   shouldItemUpdate (props, nextProps) {
@@ -36,7 +38,8 @@ class FavoritePublishersList extends Component {
 }
 
 FavoritePublishersList.propTypes = {
-  publishers: PropTypes.array.isRequired
+  publishers: PropTypes.array.isRequired,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default FavoritePublishersList

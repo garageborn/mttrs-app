@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { FlatList } from 'react-native'
-import FavoritePublisherSelectorContainer from '../../containers/FavoritePublisherSelectorContainer'
+import FavoritePublisherSelector from '../FavoritePublisherSelector'
 
 class FavoritePublishersSelector extends Component {
   constructor (props) {
@@ -29,7 +29,15 @@ class FavoritePublishersSelector extends Component {
   }
 
   renderRow (data) {
-    return <FavoritePublisherSelectorContainer rowID={data.index} publisher={data.item} />
+    const { index, item } = data
+    const { openPublisher } = this.props
+    return (
+      <FavoritePublisherSelector
+        rowID={index}
+        publisher={item}
+        onPress={openPublisher}
+        />
+    )
   }
 
   shouldItemUpdate (props, nextProps) {
@@ -38,7 +46,8 @@ class FavoritePublishersSelector extends Component {
 }
 
 FavoritePublishersSelector.propTypes = {
-  publishers: PropTypes.array
+  publishers: PropTypes.array,
+  openPublisher: PropTypes.func.isRequired
 }
 
 export default FavoritePublishersSelector
