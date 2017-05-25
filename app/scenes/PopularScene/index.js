@@ -17,4 +17,10 @@ PopularScene.propTypes = {
   }).isRequired
 }
 
+PopularScene.navigationOptions = props => {
+  return {
+    headerMode: 'none'
+  }
+}
+
 export default withQuery(PopularScene)

@@ -8,11 +8,13 @@ const Button = ({ background, content, onPress, size }) => {
   const containerStyles = () => {
     return [styles.container, styles[background], styles[size]]
   }
+
   const textStyles = () => {
     const textColor = `${background}Text`
     const textSize = `${size}Text`
     return [styles.text, styles[textColor], styles[textSize]]
   }
+
   return (
     <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR} >
       <View style={containerStyles()}>
@@ -24,7 +26,7 @@ const Button = ({ background, content, onPress, size }) => {
 
 Button.propTypes = {
   background: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.any.isRequired,
   onPress: PropTypes.func.isRequired,
   size: PropTypes.string.isRequired
 }
