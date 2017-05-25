@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { SectionList } from 'react-native'
+import { SectionList, View } from 'react-native'
 import _result from 'lodash/result'
 import StoryContainer from '../../containers/StoryContainer'
 import ListViewHeader from '../ListViewHeader'
@@ -16,6 +16,7 @@ class TimelineList extends Component {
   }
 
   renderSectionHeader (item) {
+    return null
     const { renderOptions } = this.props
     return <ListViewHeader renderOptions={renderOptions} date={item.section.key} />
   }
@@ -64,9 +65,10 @@ class TimelineList extends Component {
   renderRow (section) {
     const { renderOptions } = this.props
     const story = section.item
+    console.log(story)
 
     let components = []
-    if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
+    // if (this.hasAd(section.index)) components.push(<TimelineAdContainer key={'timelineAd'} />)
     components.push(
       <StoryContainer
         key={story.id}
