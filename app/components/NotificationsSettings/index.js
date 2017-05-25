@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
@@ -6,13 +5,13 @@ import _result from 'lodash/result'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
 
 const messages = defineMessages({
-  mttrs_br: { id: 'mttrs_br.label' },
-  mttrs_us: { id: 'mttrs_us.label' },
-  notifications: { id: 'notifications' },
+  mttrs_br: { id: 'notifications.mttrs_br' },
+  mttrs_us: { id: 'notifications.mttrs_us' },
+  notifications: { id: 'notifications.label' },
   enableNotifications: { id: 'enableNotifications' }
 })
 
-class NotificationsMenu extends Component {
+class NotificationsSettings extends Component {
   render () {
     const { formatMessage } = this.props.intl
     const notifications = formatMessage(messages.notifications)
@@ -23,7 +22,7 @@ class NotificationsMenu extends Component {
           { this.renderNotificationStatus('mttrs_us') }
           { this.renderNotificationStatus('mttrs_br') }
         </View>
-        { this.renderDisclaimer()}
+        { this.renderDisclaimer() }
       </View>
     )
   }
@@ -66,7 +65,7 @@ class NotificationsMenu extends Component {
   }
 }
 
-NotificationsMenu.propTypes = {
+NotificationsSettings.propTypes = {
   toggleTenantNotification: PropTypes.func.isRequired,
   tags: PropTypes.object.isRequired,
   enabled: PropTypes.bool.isRequired,
@@ -75,4 +74,4 @@ NotificationsMenu.propTypes = {
   }).isRequired
 }
 
-export default injectIntl(NotificationsMenu)
+export default injectIntl(NotificationsSettings)
