@@ -5,9 +5,7 @@ import SummariesScene from '../scenes/SummariesScene'
 import FavoritesNavigator from './FavoritesNavigator'
 
 const MainRoutes = {
-  summaries: {
-    screen: SummariesScene
-  },
+  summaries: { screen: SummariesScene },
   popular: { screen: PopularScene },
   favorites: { screen: FavoritesNavigator }
 }

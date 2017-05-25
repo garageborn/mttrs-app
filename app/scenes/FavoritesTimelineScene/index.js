@@ -39,6 +39,7 @@ class FavoritesTimelineScene extends Component {
 }
 
 FavoritesTimelineScene.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   isLoaded: PropTypes.bool.isRequired,
   exists: PropTypes.bool.isRequired
 }
@@ -52,7 +53,7 @@ let mapStateToProps = (state, ownProps) => {
 
 FavoritesTimelineScene.navigationOptions = props => {
   return {
-    headerTitle: <HeaderTitleContainer {...props} />,
+    headerTitle: <HeaderTitleContainer type='favorites' {...props} />,
     headerRight: <HeaderRight />,
     ...headerStyles
   }

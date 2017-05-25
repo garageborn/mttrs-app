@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { NotificationsActions } from '../../actions/index'
-import NotificationsMenu from '../../components/NotificationsMenu'
+import NotificationsSettings from '../../components/NotificationsSettings'
 
-class NotificationsMenuContainer extends Component {
+class NotificationsSettingsContainer extends Component {
   constructor (props) {
     super(props)
     this.toggleTenantNotification = this.toggleTenantNotification.bind(this)
@@ -12,7 +12,7 @@ class NotificationsMenuContainer extends Component {
   render () {
     const { tags, permissions } = this.props
     return (
-      <NotificationsMenu
+      <NotificationsSettings
         toggleTenantNotification={this.toggleTenantNotification}
         enabled={permissions.enabled}
         tags={tags.values}
@@ -27,7 +27,7 @@ class NotificationsMenuContainer extends Component {
   }
 }
 
-NotificationsMenuContainer.propTypes = {
+NotificationsSettingsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   permissions: PropTypes.shape({
     enabled: PropTypes.bool.isRequired
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(NotificationsMenuContainer)
+export default connect(mapStateToProps)(NotificationsSettingsContainer)
