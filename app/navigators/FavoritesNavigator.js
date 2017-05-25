@@ -14,9 +14,9 @@ const FavoritesNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
   initialRouteName: 'favoritesTimeline',
-  // transitionConfig: () => ({
-  //   screenInterpolator: CardStackStyleInterpolator.forHorizontal
-  // })
+  transitionConfig: () => ({
+    screenInterpolator: CardStackStyleInterpolator.forHorizontal
+  })
 }
 
 export default StackNavigator(FavoritesRoutes, FavoritesNavigatorConfig)
