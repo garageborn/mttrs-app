@@ -9,7 +9,7 @@ class SummariesTimelineContainer extends Component {
     const renderOptions = { timelineType: 'summaries' }
 
     return (
-      <View style={styles.listViewContainer}>
+      <View>
         <TimelineContainer data={this.props.data} renderOptions={renderOptions} />
       </View>
     )

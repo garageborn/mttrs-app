@@ -6,6 +6,9 @@ import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContai
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
 import { FavoritePublishersActions } from '../../actions/index'
+import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
+import HeaderRight from '../../components/HeaderRight'
+import headerStyles from '../../styles/Header'
 
 class FavoritesTimelineScene extends Component {
   componentWillMount () {
@@ -44,6 +47,14 @@ let mapStateToProps = (state, ownProps) => {
   return {
     isLoaded: state.FavoritePublishersReducer.isLoaded,
     exists: state.FavoritePublishersReducer.items.length > 0
+  }
+}
+
+FavoritesTimelineScene.navigationOptions = props => {
+  return {
+    headerTitle: <HeaderTitleContainer {...props} />,
+    headerRight: <HeaderRight />,
+    ...headerStyles
   }
 }
 

@@ -14,7 +14,6 @@ const AppRoutes = {
 
 const AppNavigatorConfig = {
   direction: 'horizontal',
-  headerMode: 'none',
   initialRouteName: 'timeline',
   transitionConfig: () => ({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal
