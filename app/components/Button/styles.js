@@ -82,6 +82,10 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '500',
     textAlign: 'center'
+  },
+
+  icon: {
+    backgroundColor: 'red'
   }
 })
 

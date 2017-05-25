@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { FavoritePublishersActions } from '../../actions/index'
 import FavoritesTimelineScene from '../FavoritesTimelineScene'
 import AddFavoritesScene from '../AddFavoritesScene'
+import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
+import HeaderRight from '../../components/HeaderRight'
+import headerStyles from '../../styles/Header'
 
 class FavoritesScene extends Component {
   componentWillMount () {
@@ -32,5 +35,14 @@ let mapStateToProps = (state, ownProps) => {
     exists: state.FavoritePublishersReducer.items.length > 0
   }
 }
+
+FavoritesScene.navigationOptions = props => {
+  return {
+    headerTitle: <HeaderTitleContainer {...props} />,
+    headerRight: <HeaderRight />,
+    ...headerStyles
+  }
+}
+
 
 export default connect(mapStateToProps)(FavoritesScene)

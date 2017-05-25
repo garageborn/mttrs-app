@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
+import { injectIntl } from 'react-intl'
 import { TenantActions } from '../../actions/index'
 import AppNavigator from '../../navigators/AppNavigator'
 
@@ -10,11 +11,16 @@ class NavigationContainer extends Component {
   }
 
   render () {
-    const { tenant } = this.props
+    const { tenant, intl } = this.props
 
     if (!tenant.isLoaded) return null
 
-    return <AppNavigator navigation={this.getNavigationHelpers()} />
+    return (
+      <AppNavigator
+        screenProps={{ intl }}
+        navigation={this.getNavigationHelpers()}
+      />
+    )
   }
 
   getNavigationHelpers () {
@@ -37,4 +43,6 @@ const mapStateToProps = state => ({
   nav: state.nav
 })
 
-export default connect(mapStateToProps)(NavigationContainer)
+const NavigationContainerWithData = connect(mapStateToProps)(NavigationContainer)
+
+export default injectIntl(NavigationContainerWithData)
