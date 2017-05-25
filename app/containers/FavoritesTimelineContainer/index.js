@@ -43,7 +43,7 @@ let mapStateToProps = (state) => {
       items: state.FavoritePublishersReducer.items
     },
     favorites: {
-      categoryId: state.FavoritesReducer.categoryId
+      category: state.FavoritesReducer.category
     }
   }
 }

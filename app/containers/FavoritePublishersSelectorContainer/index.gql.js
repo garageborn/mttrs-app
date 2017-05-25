@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import _result from 'lodash/result'
 import prepareArrayParam from '../../common/utils/ArrayParam'
 
 const Query = gql`
@@ -21,7 +22,7 @@ export default function (FavoritePublishersSelector) {
     },
     options (props) {
       const publisherIds = prepareArrayParam(props.favoritePublishers.items, null)
-      const categoryIds = prepareArrayParam([props.favorites.categoryId], null)
+      const categoryIds = prepareArrayParam([_result(props, 'favorites.category.id')], null)
       return { variables: { publisherIds, categoryIds } }
     }
   })(FavoritePublishersSelector)
