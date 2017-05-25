@@ -4,15 +4,21 @@ import { connect } from 'react-redux'
 import _result from 'lodash/result'
 import withQuery from './index.gql'
 import FavoritePublishersSelector from '../../components/FavoritePublishersSelector'
+import { NavigationActions } from '../../actions/index'
 
 class FavoritePublishersSelectorContainer extends Component {
+  constructor () {
+    super()
+    this.openPublisher = this.openPublisher.bind(this)
+  }
+
   render () {
     const { data, favoritePublishers } = this.props
     const loading = _result(data, 'loading')
     const publishers = _result(data, 'publishers')
     if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
 
-    return <FavoritePublishersSelector publishers={publishers} />
+    return <FavoritePublishersSelector publishers={publishers} openPublisher={this.openPublisher} />
   }
 
   renderLoading () {
@@ -21,6 +27,11 @@ class FavoritePublishersSelectorContainer extends Component {
         <ActivityIndicator size='large' color='#AAA' />
       </View>
     )
+  }
+
+  openPublisher (publisher) {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.publisher(publisher))
   }
 }
 
@@ -42,7 +53,7 @@ let mapStateToProps = (state) => {
       items: state.FavoritePublishersReducer.items
     },
     favorites: {
-      categoryId: state.FavoritesReducer.categoryId
+      category: state.FavoritesReducer.category
     }
   }
 }

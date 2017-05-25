@@ -77,9 +77,6 @@ FavoriteCategoriesDialogContainer.propTypes = {
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired,
-  favorites: PropTypes.shape({
-    publisherId: PropTypes.any
-  }).isRequired,
   data: PropTypes.shape({
     categories: PropTypes.array
   })
@@ -90,9 +87,6 @@ let mapStateToProps = (state) => {
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
-    },
-    favorites: {
-      publisherId: state.FavoritesReducer.publisherId
     }
   }
 }

@@ -1,27 +1,16 @@
+import { SELECT_FAVORITE_CATEGORY } from '../constants/ActionTypes'
 import _result from 'lodash/result'
-import _parseInt from 'lodash/parseInt'
-import { SELECT_FAVORITE_PUBLISHER, SELECT_FAVORITE_CATEGORY } from '../constants/ActionTypes'
+import { AnalyticsActions } from './index'
 
-const selectFavoritePublisher = (publisherId) => ({
-  type: SELECT_FAVORITE_PUBLISHER,
-  publisherId
-})
-
-const selectFavoriteCategory = (categoryId) => ({
+const selectFavoriteCategory = (category) => ({
   type: SELECT_FAVORITE_CATEGORY,
-  categoryId
+  category
 })
-
-export function selectPublisher (publisher) {
-  return (dispatch) => {
-    const publisherId = _parseInt(_result(publisher, 'id'))
-    return dispatch(selectFavoritePublisher(publisherId))
-  }
-}
 
 export function selectCategory (category) {
   return (dispatch) => {
-    const categoryId = _parseInt(_result(category, 'id'))
-    return dispatch(selectFavoriteCategory(categoryId))
+    const categorySlug = _result(category, 'slug')
+    dispatch(AnalyticsActions.trackScreen(`/favorites/${categorySlug}`))
+    return dispatch(selectFavoriteCategory(category))
   }
 }
