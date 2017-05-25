@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import graphql, { defaultVariables } from '../Timeline/index.gql'
+import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
   query($cursor: Int, $type: String, $limit: Int!) {
@@ -17,7 +17,7 @@ const Query = gql`
           amp_url
           slug
           image_source_url
-          publisher { name display_name icon_id slug restrict_content }
+          publisher { id name display_name icon_id slug restrict_content }
         }
         other_links_count
       }

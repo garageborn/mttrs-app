@@ -23,14 +23,14 @@ class Timeline extends Component {
   }
 
   render () {
-    const { data, onEndReached, type } = this.props
+    const { data, onEndReached, renderOptions } = this.props
     if (!data || data.loading) return this.renderLoading()
     if (data.error) return this.renderError()
 
     return (
       <View style={styles.container}>
         <TimelineList
-          type={type}
+          renderOptions={renderOptions}
           data={data}
           onEndReached={onEndReached}
           renderFooter={this.renderFooter}
@@ -90,7 +90,10 @@ Timeline.propTypes = {
   loadingPullToRefresh: PropTypes.bool.isRequired,
   onEndReached: PropTypes.func.isRequired,
   onPullToRefresh: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired
+  renderOptions: PropTypes.shape({
+    timelineType: PropTypes.string,
+    publisherSlug: PropTypes.string
+  })
 }
 
 export default Timeline

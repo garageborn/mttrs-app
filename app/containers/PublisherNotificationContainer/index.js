@@ -26,7 +26,7 @@ class PublisherNotificationContainer extends Component {
     if (data.loading || !data.publisher) return
 
     InteractionManager.runAfterInteractions(() => {
-      return dispatch(NavigationActions.selectPublisher(data.publisher))
+      return dispatch(NavigationActions.publisher(data.publisher))
     })
   }
 }
