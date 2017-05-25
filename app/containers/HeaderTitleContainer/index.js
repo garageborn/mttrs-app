@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import _result from 'lodash/result'
 import HeaderTitle from '../../components/HeaderTitle'
 
 class HeaderTitleContainer extends Component {
@@ -8,15 +9,15 @@ class HeaderTitleContainer extends Component {
   }
 
   get title () {
-    const { categoryId, screenProps } = this.props
-    if (!categoryId) return screenProps.intl.formatMessage({id: 'header.favorites'})
-    return categoryId
+    const { category, screenProps } = this.props
+    if (!_result(category, 'name')) return screenProps.intl.formatMessage({id: 'header.favorites'})
+    return category.name
   }
 }
 
 const mapStateToProps = state => {
   return {
-    categoryId: state.FavoritesReducer.categoryId
+    category: state.FavoritesReducer.category
   }
 }
 
