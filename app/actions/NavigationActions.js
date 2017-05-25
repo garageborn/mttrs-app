@@ -25,6 +25,13 @@ export function publisher (publisher) {
   }
 }
 
+export function settings () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({ routeName: 'settings' }))
+    dispatch(AnalyticsActions.trackScreen(`/settings`))
+  }
+}
+
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
 }

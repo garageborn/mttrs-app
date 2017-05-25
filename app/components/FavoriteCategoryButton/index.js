@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Text } from 'react-native'
+import { View } from 'react-native'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
 
@@ -10,8 +10,9 @@ class FavoriteCategoryButton extends Component {
     const { category, onPress } = this.props
     return (
       <Touchable onPress={() => onPress(category)}>
-        { /*<DialogButton icon={shareIcon} messages={[category.name]} /> */ }
-        <Text>{category.name}</Text>
+        <View>
+          <DialogButton icon={shareIcon} messages={[category.name]} />
+        </View>
       </Touchable>
     )
   }
