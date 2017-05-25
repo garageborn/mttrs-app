@@ -3,6 +3,8 @@
   "addFavorites.heading": "Choose your favorite sites for personalized reading",
   "and": "and",
   "dateFormat": "MMMM D",
+  "emptyFavoritesTimeline.button": "CHOOSE",
+  "emptyFavoritesTimeline.heading": "Choose your favorite sites for personalized reading",
   "enableNotifications": "Apparently you have not allowed mttrs to send you notifications, to change the permissions please go to Settings > Notifications > mttrs > Allow Notifications",
   "error.buttonText": "Reload",
   "error.text": "Oops! Something went wrong.",

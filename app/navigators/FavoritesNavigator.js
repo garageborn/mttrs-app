@@ -3,10 +3,8 @@ import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyl
 import FavoritePublishersScene from '../scenes/FavoritePublishersScene'
 import FavoritesTimelineScene from '../scenes/FavoritesTimelineScene'
 import AddFavoritesScene from '../scenes/AddFavoritesScene'
-import FavoritesScene from '../scenes/FavoritesScene'
 
 const FavoritesRoutes = {
-  favorites: { screen: FavoritesScene },
   favoritesTimeline: { screen: FavoritesTimelineScene },
   favoritePublishers: { screen: FavoritePublishersScene },
   addFavorites: { screen: AddFavoritesScene }
@@ -15,7 +13,7 @@ const FavoritesRoutes = {
 const FavoritesNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
-  initialRouteName: 'favorites',
+  initialRouteName: 'favoritesTimeline',
   transitionConfig: () => ({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal
   })
