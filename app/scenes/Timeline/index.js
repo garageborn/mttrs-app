@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { View, AppState, Platform } from 'react-native'
-import { connect } from 'react-redux'
 import TimelineHeaderContainer from '../../containers/TimelineHeaderContainer'
 import CategoriesTimelineContainer from '../../containers/CategoriesTimelineContainer'
 import PublisherTimeline from '../../containers/PublisherTimeline'
 import StoryLinksContainer from '../../containers/StoryLinksContainer'
 import SocialCountModalContainer from '../../containers/SocialCountModalContainer'
-import MenuPanelContainer from '../../containers/MenuPanelContainer'
-import { MenuActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import styles from '../../styles/App'
 import { DARK_COLOR } from '../../constants/Colors'
@@ -23,29 +20,10 @@ class TimelineScene extends Component {
     }
   }
 
-  constructor () {
-    super()
-    this.handleAppStateChange = this.handleAppStateChange.bind(this)
-  }
-
-  componentDidMount () {
-    AppState.addEventListener('change', this.handleAppStateChange)
-  }
-
-  componentWillUnmount () {
-    AppState.removeEventListener('change', this.handleAppStateChange)
-  }
-
-  handleAppStateChange (appState) {
-    if (appState === 'active') return
-    return this.props.dispatch(MenuActions.closeMenu())
-  }
-
   render () {
     return (
       <View>
         {this.renderTimeline()}
-        <MenuPanelContainer params={this.props.route.params} />
         {this.renderStoryModal()}
       </View>
     )
@@ -93,15 +71,8 @@ class TimelineScene extends Component {
 }
 
 TimelineScene.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   route: PropTypes.object.isRequired,
   section: PropTypes.object,
 }
 
-const mapStateToProps = state => {
-  return {
-    uiReducer: state.uiReducer
-  }
-}
-
-export default connect(mapStateToProps)(TimelineScene)
+export default TimelineScene

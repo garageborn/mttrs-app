@@ -3,7 +3,7 @@ import { InteractionManager, View, Platform, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
-import { StorageActions } from '../../actions/index'
+import { VisitedStoriesActions } from '../../actions/index'
 import { headerHeight } from '../../styles/Global'
 import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
@@ -48,7 +48,7 @@ class LinkScene extends Component {
 
   addStoryToLocalStorage () {
     const { dispatch, story } = this.props
-    dispatch(StorageActions.addVisitedStory(story))
+    dispatch(VisitedStoriesActions.addStory(story))
   }
 
   renderHeader () {

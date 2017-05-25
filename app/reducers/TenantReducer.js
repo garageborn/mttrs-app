@@ -1,5 +1,4 @@
 import { ASSIGN_TENANT, TENANT_RECEIVED, REQUEST_TENANT } from '../constants/ActionTypes'
-import Tenant from '../common/utils/Tenant'
 
 let defaultState = {
   isFetching: false, isLoaded: false, isAssigning: false, current: {}
