@@ -1,40 +1,32 @@
 import React, { PropTypes, Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import PublisherLogo from '../PublisherLogo'
 import Touchable from '../Touchable'
 
 class FavoritePublisherSelector extends Component {
+  constructor () {
+    super()
+    this.onPress = this.onPress.bind(this)
+  }
+
   render () {
-    const { onPress } = this.props
+    const { publisher } = this.props
+    if (!publisher.icon_id) return null
+    const uri = cloudinary.id(publisher.icon_id, { secure: true })
 
     return (
-      <Touchable onPress={onPress}>
-        {this.renderPublisherLogo()}
+      <Touchable onPress={this.onPress}>
+        <View>
+          <PublisherLogo size={30} source={{ uri }} />
+        </View>
       </Touchable>
     )
   }
 
-  renderPublisherLogo () {
-    const { selected } = this.props
-
-    if (selected) {
-      return (
-        <View>
-          {this.renderLogo()}
-          <Text>selected</Text>
-        </View>
-      )
-    } else {
-      return <View>{this.renderLogo()}</View>
-    }
-  }
-
-  renderLogo () {
-    const { publisher } = this.props
-    if (!publisher.icon_id) return null
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
-    return <PublisherLogo size={30} source={{ uri }} />
+  onPress () {
+    const { publisher, onPress } = this.props
+    onPress(publisher)
   }
 }
 
@@ -43,8 +35,7 @@ FavoritePublisherSelector.propTypes = {
   publisher: PropTypes.shape({
     id: PropTypes.any.isRequired,
     icon_id: PropTypes.string
-  }).isRequired,
-  selected: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 export default FavoritePublisherSelector

@@ -3,36 +3,41 @@ import { View, Text } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import PublisherLogo from '../PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import Touchable from '../../components/Touchable'
+import { COLORLESS } from '../../constants/TouchUnderlayColors'
 
 class FavoritePublishersItem extends Component {
+  constructor (props) {
+    super(props)
+    this.onPress = this.onPress.bind(this)
+  }
+
   render () {
     const { publisher } = this.props
 
     return (
-      <ToggleFavoriteContainer
-        publisher={publisher}
-        addComponent={this.addPublisherComponent()}
-        removeComponent={this.removePublisherComponent()}
-      />
+      <View>
+        <Touchable underlayColor={COLORLESS} onPress={this.onPress}>
+          <View>
+            {this.renderIcon()}
+            <Text>{this.publisherName}</Text>
+          </View>
+        </Touchable>
+        <ToggleFavoriteContainer
+          publisher={publisher}
+          addComponent={this.addPublisherComponent()}
+          removeComponent={this.removePublisherComponent()}
+        />
+      </View>
     )
   }
 
   addPublisherComponent () {
-    return (
-      <View>
-        {this.renderIcon()}
-        <Text>{this.publisherName} Add</Text>
-      </View>
-    )
+    return <Text>Add</Text>
   }
 
   removePublisherComponent () {
-    return (
-      <View>
-        {this.renderIcon()}
-        <Text>{this.publisherName} Remove</Text>
-      </View>
-    )
+    return <Text>Remove</Text>
   }
 
   renderIcon () {
@@ -40,6 +45,11 @@ class FavoritePublishersItem extends Component {
     if (!publisher.icon_id) return
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return <PublisherLogo size={30} source={{ uri }} />
+  }
+
+  onPress () {
+    const { publisher, onPress } = this.props
+    onPress(publisher)
   }
 
   get publisherName () {
@@ -54,7 +64,8 @@ FavoritePublishersItem.propTypes = {
     name: PropTypes.string.isRequired,
     display_name: PropTypes.string,
     icon_id: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  onPress: PropTypes.func.isRequired
 }
 
 export default FavoritePublishersItem
