@@ -4,7 +4,8 @@ import HeaderButton from '../HeaderButton'
 
 class HeaderFilterButton extends Component {
   render () {
-    return <HeaderButton content={this.content} />
+    const { onPress } = this.props
+    return <HeaderButton content={this.content} onPress={onPress} />
   }
 
   get content () {
@@ -13,7 +14,7 @@ class HeaderFilterButton extends Component {
 }
 
 HeaderFilterButton.propTypes = {
-  onPress: PropTypes.func
+  onPress: PropTypes.func.isRequired
 }
 
 export default HeaderFilterButton

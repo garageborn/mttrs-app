@@ -13,7 +13,7 @@ const HeaderButton = ({ content, onPress }) => (
 
 HeaderButton.propTypes = {
   content: PropTypes.element.isRequired,
-  onPress: PropTypes.func
+  onPress: PropTypes.func.isRequired
 }
 
 export default HeaderButton
