@@ -14,11 +14,8 @@ query($publisherIds: [Int]) {
 `
 export default function (FavoriteCategoriesDialog) {
   return graphql(Query, {
-    skip: (props) => {
-      return !props.favoritePublishers.isLoaded
-    },
     options (props) {
-      const publisherIds = prepareArrayParam(props.favoritePublishers.items, null)
+      const publisherIds = prepareArrayParam(props.publisherIds, null)
       return {
         variables: { publisherIds }
       }

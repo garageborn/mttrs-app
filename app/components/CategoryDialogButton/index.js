@@ -5,7 +5,7 @@ import Touchable from '../Touchable'
 
 const shareIcon = require('../StoryDialog/assets/share.png')
 
-class FavoriteCategoryButton extends Component {
+class CategoryDialogButton extends Component {
   render () {
     const { category, onPress } = this.props
     return (
@@ -18,7 +18,7 @@ class FavoriteCategoryButton extends Component {
   }
 }
 
-FavoriteCategoryButton.propTypes = {
+CategoryDialogButton.propTypes = {
   category: PropTypes.shape({
     name: PropTypes.string.isRequired,
     color: PropTypes.string
@@ -26,4 +26,4 @@ FavoriteCategoryButton.propTypes = {
   onPress: PropTypes.func.isRequired
 }
 
-export default FavoriteCategoryButton
+export default CategoryDialogButton

@@ -1,12 +1,17 @@
 import React, { PropTypes } from 'react'
+import { View } from 'react-native'
 import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
-import PublisherHeaderTitle from '../../components/PublisherHeaderTitle'
+import PublisherCategoriesDialogContainer from '../../containers/PublisherCategoriesDialogContainer'
+import PublisherHeaderTitle from '../../containers/PublisherHeaderTitle'
 import PublisherHeaderRight from '../../components/PublisherHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
 
 const PublisherScene = ({navigation}) => (
-  <PublisherTimelineContainer publisher={navigation.state.params.publisher} />
+  <View>
+    <PublisherCategoriesDialogContainer publisher={navigation.state.params.publisher} />
+    <PublisherTimelineContainer publisher={navigation.state.params.publisher} />
+  </View>
 )
 
 PublisherScene.propTypes = {

@@ -42,9 +42,7 @@ let mapStateToProps = (state) => {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
     },
-    favorites: {
-      category: state.FavoritesReducer.category
-    }
+    selectedCategory: state.FavoritesReducer.selectedCategory
   }
 }
 

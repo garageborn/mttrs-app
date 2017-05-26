@@ -1,17 +1,28 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
 
 class CategoryTimelineContainer extends Component {
   render () {
-    return <TimelineContainer data={this.props.data} />
+    const { data } = this.props
+    return <TimelineContainer data={data} />
   }
 }
 
 CategoryTimelineContainer.propTypes = {
-  categorySlug: PropTypes.string.isRequired,
-  activeTag: PropTypes.string,
-  data: PropTypes.object
+  category: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    slug: PropTypes.string.isRequired
+  }).isRequired,
+  data: PropTypes.object.isRequired
 }
 
-export default withQuery(CategoryTimelineContainer)
+let mapStateToProps = (state, ownProps) => {
+  return {
+    selectedTag: state.CategoriesReducer.selectedTags[ownProps.category.id]
+  }
+}
+
+const CategoryTimelineContainerWithData = withQuery(CategoryTimelineContainer)
+export default connect(mapStateToProps)(CategoryTimelineContainerWithData)
