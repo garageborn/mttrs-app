@@ -29,14 +29,14 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - React (0.44.1):
-    - React/Core (= 0.44.1)
-  - React/Core (0.44.1):
+  - React (0.44.2):
+    - React/Core (= 0.44.2)
+  - React/Core (0.44.2):
     - React/cxxreact
-    - Yoga (= 0.44.1.React)
-  - React/cxxreact (0.44.1):
+    - Yoga (= 0.44.2.React)
+  - React/cxxreact (0.44.2):
     - React/jschelpers
-  - React/jschelpers (0.44.1)
+  - React/jschelpers (0.44.2)
   - ReactNativeFabric (0.4.1):
     - Crashlytics
     - Fabric
@@ -44,7 +44,7 @@ PODS:
   - ReactNativeFBAds (4.2.0):
     - FBAudienceNetwork
     - React
-  - Yoga (0.44.1.React)
+  - Yoga (0.44.2.React)
 
 DEPENDENCIES:
   - Bolts
@@ -81,10 +81,10 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  React: 7337248755fd106e94ba137750560b5e2e9be945
+  React: 68b26ea7726bf0731e954db0187fd8b749ec2863
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
   ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
-  Yoga: 06175e1f75c5c9e0983c8e618419da2332894c72
+  Yoga: 735d941f871ac6c4853334c164c424e013a79a17
 
 PODFILE CHECKSUM: 94d9e1f04c9442b08d9746866246e1dc1b584041
 
