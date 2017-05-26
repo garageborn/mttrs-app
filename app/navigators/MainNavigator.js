@@ -19,7 +19,8 @@ const MainRoutes = {
     screen: PopularScene,
     navigationOptions: {
       tabBarLabel: <PopularTabBar />,
-      tabBarIcon: PopularTabBarIcon
+      tabBarIcon: PopularTabBarIcon,
+      header: null
     }
   },
   favorites: { screen: FavoritesNavigator,

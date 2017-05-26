@@ -49,7 +49,6 @@ class SettingsDialogContainer extends Component {
   }
 
   close () {
-    console.log('close')
     const { dispatch } = this.props
     dispatch(NavigationActions.closeModal())
   }
