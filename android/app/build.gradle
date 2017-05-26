@@ -66,6 +66,7 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-sentry/sentry.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -108,8 +109,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 238
-        versionName "1.0.91"
+        versionCode 239
+        versionName "1.0.92"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -156,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sentry')
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')
