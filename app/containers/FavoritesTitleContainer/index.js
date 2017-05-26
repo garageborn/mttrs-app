@@ -8,7 +8,7 @@ class FavoritesTitleContainer extends Component {
     return <HeaderTitle title={this.title} />
   }
 
-  get favoritesTitle () {
+  get title () {
     const { category, screenProps } = this.props
     if (!_result(category, 'name')) return screenProps.intl.formatMessage({id: 'header.favorites'})
     return category.name

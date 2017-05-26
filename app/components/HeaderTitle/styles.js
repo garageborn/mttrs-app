@@ -15,8 +15,20 @@ const styles = StyleSheet.create({
     ...containerStyles,
     alignSelf: 'flex-start'
   },
+  titleContainer: {
+    flexDirection: 'column'
+  },
   text: {
     marginHorizontal: 5
+  },
+  titleWithSubtitle: {
+    fontSize: 12,
+    color: '#FFF',
+    opacity: 0.8
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#FFF'
   }
 })
 

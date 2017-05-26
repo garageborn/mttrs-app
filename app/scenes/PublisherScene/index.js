@@ -1,16 +1,13 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
 import PublisherHeaderTitle from '../../components/PublisherHeaderTitle'
-import HeaderRight from '../../components/HeaderRight'
+import PublisherHeaderRight from '../../components/PublisherHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
 
-class PublisherScene extends Component {
-  render () {
-    const { publisher } = this.props.navigation.state.params
-    return <PublisherTimelineContainer publisher={publisher} />
-  }
-}
+const PublisherScene = ({navigation}) => (
+  <PublisherTimelineContainer publisher={navigation.state.params.publisher} />
+)
 
 PublisherScene.propTypes = {
   navigation: PropTypes.shape({
@@ -27,7 +24,7 @@ PublisherScene.propTypes = {
 PublisherScene.navigationOptions = props => {
   return {
     headerTitle: <PublisherHeaderTitle {...props} />,
-    headerRight: <HeaderRight />,
+    headerRight: <PublisherHeaderRight />,
     headerLeft: <HeaderLeft {...props} />,
     ...headerStyles
   }

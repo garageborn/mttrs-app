@@ -3,18 +3,29 @@ import { Text, View } from 'react-native'
 import headerStyles from '../../styles/Header'
 import styles from './styles'
 
-const HeaderTitle = ({ logo, title }) => {
+const HeaderTitle = ({ logo, subtitle, title }) => {
+  const renderTitle = () => {
+    if (!subtitle) return <Text style={[headerStyles.headerTitleStyle, styles.text]}>{title}</Text>
+    return (
+      <View>
+        <Text style={[styles.text, styles.titleWithSubtitle]}>{title}</Text>
+        <Text style={[headerStyles.headerTitleStyle, styles.text]} numberOfLines={1}>{subtitle}</Text>
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       {logo}
-      <Text style={[headerStyles.headerTitleStyle, styles.text]}>{title}</Text>
+      {renderTitle()}
     </View>
   )
 }
 
 HeaderTitle.propTypes = {
-  logo: PropTypes.string,
-  title: PropTypes.string.isRequired
+  logo: PropTypes.element,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string
 }
 
 export default HeaderTitle
