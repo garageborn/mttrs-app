@@ -5,6 +5,7 @@ const Query = gql`
 query {
   categories(with_stories: true, ordered: true) {
     id
+    color
     name
     slug
     tags_count(with_recent_stories: true)

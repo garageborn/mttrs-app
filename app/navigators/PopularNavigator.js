@@ -1,4 +1,4 @@
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, TabBarTop } from 'react-navigation'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
 import CategoryTimelineScene from '../scenes/CategoryTimelineScene'
 import PublishersScene from '../scenes/PublishersScene'
@@ -31,7 +31,16 @@ const config = {
   tabBarOptions: {
     scrollEnabled: true,
     tabStyle: {
-      width: 100
+      marginTop: 10,
+      width: 150,
+      height: 40
+    },
+    indicatorStyle: {
+      height: 3,
+      backgroundColor: 'white'
+    },
+    style: {
+      backgroundColor: '#2D2D2D'
     }
   }
 }
