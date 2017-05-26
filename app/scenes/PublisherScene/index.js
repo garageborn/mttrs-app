@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
+import PublisherCategoriesDialogContainer from '../../containers/PublisherCategoriesDialogContainer'
 import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
 import HeaderRight from '../../components/HeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
@@ -8,7 +10,12 @@ import headerStyles from '../../styles/Header'
 class PublisherScene extends Component {
   render () {
     const { publisher } = this.props.navigation.state.params
-    return <PublisherTimelineContainer publisher={publisher} />
+    return (
+      <View>
+        <PublisherCategoriesDialogContainer publisher={publisher} />
+        <PublisherTimelineContainer publisher={publisher} />
+      </View>
+    )
   }
 }
 
