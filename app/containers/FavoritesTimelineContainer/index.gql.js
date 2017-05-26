@@ -34,7 +34,7 @@ export default function (FavoritesTimeline) {
     },
     options (props) {
       const publisherIds = prepareArrayParam([props.favoritePublishers.items], null)
-      const categoryIds = prepareArrayParam([_result(props, 'favorites.category.id')], null)
+      const categoryIds = prepareArrayParam([_result(props, 'selectedCategory.id')], null)
 
       return {
         variables: {

@@ -14,9 +14,9 @@ class HeaderTitleContainer extends Component {
   }
 
   get favoritesTitle () {
-    const { category, screenProps } = this.props
-    if (!_result(category, 'name')) return screenProps.intl.formatMessage({id: 'header.favorites'})
-    return category.name
+    const { selectedCategory, screenProps } = this.props
+    if (!_result(selectedCategory, 'name')) return screenProps.intl.formatMessage({id: 'header.favorites'})
+    return selectedCategory.name
   }
 
   get publishersTitle () {
@@ -27,13 +27,13 @@ class HeaderTitleContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    category: state.FavoritesReducer.category
+    selectedCategory: state.FavoritesReducer.selectedCategory
   }
 }
 
 HeaderTitleContainer.propTypes = {
   type: PropTypes.string.isRequired,
-  category: PropTypes.object,
+  selectedCategory: PropTypes.object,
   screenProps: PropTypes.object,
   navigation: PropTypes.shape({
     state: PropTypes.shape({

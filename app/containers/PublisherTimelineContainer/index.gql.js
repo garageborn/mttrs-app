@@ -1,9 +1,10 @@
 import gql from 'graphql-tag'
+import _result from 'lodash/result'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!, $publisherSlug: String) {
-    timeline(cursor: $cursor, type: $type, limit: $limit, publisher_slug: $publisherSlug) {
+  query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $publisherSlug: String) {
+    timeline(cursor: $cursor, type: $type, limit: $limit, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
       date
       stories {
         id
@@ -28,10 +29,13 @@ const Query = gql`
 export default function (PublisherTimeline) {
   return graphql(Query, {
     options (props) {
+      const publisherSlug = props.publisher.slug
+      const categorySlug = _result(props, 'selectedCategory.slug')
       return {
         variables: {
           ...defaultVariables,
-          publisherSlug: props.publisher.slug,
+          categorySlug,
+          publisherSlug,
           type: 'publisher'
         }
       }

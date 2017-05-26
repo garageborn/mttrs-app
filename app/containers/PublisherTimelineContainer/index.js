@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
 import styles from '../../styles/App'
@@ -18,10 +19,18 @@ class PublisherTimeline extends Component {
 }
 
 PublisherTimeline.propTypes = {
+  selectedCategory: PropTypes.object,
   data: PropTypes.object,
   publisher: PropTypes.shape({
     slug: PropTypes.string.isRequired
   }).isRequired
 }
 
-export default withQuery(PublisherTimeline)
+let mapStateToProps = (state) => {
+  return {
+    selectedCategory: state.PublishersReducer.selectedCategory
+  }
+}
+
+const PublisherTimelineWithQuery = withQuery(PublisherTimeline)
+export default connect(mapStateToProps)(PublisherTimelineWithQuery)
