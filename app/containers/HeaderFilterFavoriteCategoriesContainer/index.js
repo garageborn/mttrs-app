@@ -4,7 +4,7 @@ import FavoriteCategoriesDialogContainer from '../../containers/FavoriteCategori
 import HeaderFilterButton from '../../components/HeaderFilterButton'
 import { NavigationActions } from '../../actions/index'
 
-class HeaderFilterFavoritesContainer extends Component {
+class HeaderFilterFavoriteCategoriesContainer extends Component {
   constructor () {
     super()
     this.openFavoriteCategoriesDialog = this.openFavoriteCategoriesDialog.bind(this)
@@ -21,8 +21,8 @@ class HeaderFilterFavoritesContainer extends Component {
   }
 }
 
-HeaderFilterFavoritesContainer.propTypes = {
+HeaderFilterFavoriteCategoriesContainer.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect()(HeaderFilterFavoritesContainer)
+export default connect()(HeaderFilterFavoriteCategoriesContainer)
