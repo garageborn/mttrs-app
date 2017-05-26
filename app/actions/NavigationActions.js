@@ -111,6 +111,15 @@ export function storyDialog (story, content) {
   }
 }
 
+export function settingsDialog (content) {
+  return dispatch => {
+    dispatch(UIActions.openModal(content))
+
+    const analyticsUrl = '/settings'
+    dispatch(AnalyticsActions.trackScreen(analyticsUrl))
+  }
+}
+
 export function closeModal () {
   return dispatch => dispatch(UIActions.closeModal())
 }

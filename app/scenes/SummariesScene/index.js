@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import SettingsDialogContainer from '../../containers/SettingsDialogContainer'
 import SummariesTimelineContainer from '../../containers/SummariesTimelineContainer'
-import HeaderSettingsButton from '../../components/HeaderSettingsButton'
+import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import headerStyles from '../../styles/Header'
 
 const SummariesScene = () => (
@@ -15,7 +15,7 @@ const SummariesScene = () => (
 SummariesScene.navigationOptions = props => {
   return {
     headerTitle: props.screenProps.intl.formatMessage({id: 'header.summaries'}),
-    headerRight: <HeaderSettingsButton />,
+    headerRight: <HeaderSettingsContainer />,
     ...headerStyles
   }
 }
