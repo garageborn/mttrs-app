@@ -6,7 +6,7 @@ import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContai
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
 import { FavoritePublishersActions } from '../../actions/index'
-import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
+import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import HeaderRight from '../../components/HeaderRight'
 import headerStyles from '../../styles/Header'
 
@@ -53,7 +53,7 @@ let mapStateToProps = (state, ownProps) => {
 
 FavoritesTimelineScene.navigationOptions = props => {
   return {
-    headerTitle: <HeaderTitleContainer type='favorites' {...props} />,
+    headerTitle: <FavoritesTitleContainer type='favorites' {...props} />,
     headerRight: <HeaderRight />,
     ...headerStyles
   }

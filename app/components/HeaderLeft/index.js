@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import HeaderButton from '../HeaderButton'
 
 const HeaderLeft = ({ navigation }) => (
-  <HeaderButton type='back' onPress={() => this.props.navigation.goBack()} />
+  <HeaderButton type='back' onPress={() => navigation.goBack()} />
 )
 
 HeaderLeft.propTypes = {

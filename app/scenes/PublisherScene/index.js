@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
-import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
+import PublisherHeaderTitle from '../../components/PublisherHeaderTitle'
 import HeaderRight from '../../components/HeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
@@ -26,7 +26,7 @@ PublisherScene.propTypes = {
 
 PublisherScene.navigationOptions = props => {
   return {
-    headerTitle: <HeaderTitleContainer type='publisher' {...props} />,
+    headerTitle: <PublisherHeaderTitle {...props} />,
     headerRight: <HeaderRight />,
     headerLeft: <HeaderLeft {...props} />,
     ...headerStyles
