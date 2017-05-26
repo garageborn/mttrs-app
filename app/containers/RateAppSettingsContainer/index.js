@@ -9,7 +9,7 @@ const storeLink = Platform.select({
     external: 'https://itunes.apple.com/app/matters-news-summaries/id1166566093'
   },
   android: {
-    native: 'market://details?id=garageborn.mttr.rs',
+    native: 'market://details?id=garageborn.mttrs',
     external: 'https://play.google.com/store/apps/details?id=garageborn.mttrs'
   }
 })
