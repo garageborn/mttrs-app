@@ -24,7 +24,7 @@ PublisherScene.propTypes = {
 PublisherScene.navigationOptions = props => {
   return {
     headerTitle: <PublisherHeaderTitle {...props} />,
-    headerRight: <PublisherHeaderRight />,
+    headerRight: <PublisherHeaderRight {...props} />,
     headerLeft: <HeaderLeft {...props} />,
     ...headerStyles
   }

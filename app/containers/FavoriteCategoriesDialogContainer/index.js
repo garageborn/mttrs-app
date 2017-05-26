@@ -8,6 +8,7 @@ import styles from '../../styles/Modal'
 class FavoriteCategoriesDialogContainer extends Component {
   constructor () {
     super()
+    this.close = this.close.bind(this)
     this.selectCategory = this.selectCategory.bind(this)
   }
 
@@ -30,8 +31,13 @@ class FavoriteCategoriesDialogContainer extends Component {
 
   selectCategory (category) {
     const { dispatch } = this.props
-    dispatch(NavigationActions.closeModal())
+    this.close()
     dispatch(FavoritesActions.selectCategory(category))
+  }
+
+  close () {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.closeModal())
   }
 }
 

@@ -15,14 +15,17 @@ class HeaderFilterPublisherCategoriesContainer extends Component {
   }
 
   openPublisherCategoriesDialog () {
-    const { dispatch } = this.props
-    const content = <PublisherCategoriesDialogContainer />
-    dispatch(NavigationActions.favoriteCategoriesDialog(content))
+    const { publisher, dispatch } = this.props
+    const content = <PublisherCategoriesDialogContainer publisher={publisher} />
+    dispatch(NavigationActions.publisherCategoriesDialog(publisher, content))
   }
 }
 
 HeaderFilterPublisherCategoriesContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  publisher: PropTypes.shape({
+    id: PropTypes.any.isRequired
+  }).isRequired
 }
 
 export default connect()(HeaderFilterPublisherCategoriesContainer)
