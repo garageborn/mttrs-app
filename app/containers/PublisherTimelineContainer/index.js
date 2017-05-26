@@ -19,7 +19,7 @@ class PublisherTimeline extends Component {
 }
 
 PublisherTimeline.propTypes = {
-  category: PropTypes.object,
+  selectedCategory: PropTypes.object,
   data: PropTypes.object,
   publisher: PropTypes.shape({
     slug: PropTypes.string.isRequired
@@ -28,7 +28,7 @@ PublisherTimeline.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
-    category: state.PublishersReducer.category
+    selectedCategory: state.PublishersReducer.selectedCategory
   }
 }
 

@@ -30,7 +30,7 @@ export default function (PublisherTimeline) {
   return graphql(Query, {
     options (props) {
       const publisherSlug = props.publisher.slug
-      const categorySlug = _result(props, 'category.slug')
+      const categorySlug = _result(props, 'selectedCategory.slug')
       return {
         variables: {
           ...defaultVariables,

@@ -16,7 +16,6 @@ class PublisherCategoriesDialogContainer extends Component {
 
   selectCategory (category) {
     const { dispatch, publisher } = this.props
-    console.log('selectCategory', category)
     dispatch(PublishersActions.selectCategory(publisher, category))
   }
 }

@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { ScrollView, View, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import _result from 'lodash/result'
 import Tag from '../Tag'
 import styles from './styles'
 
@@ -17,21 +17,12 @@ class TagsList extends Component {
     this.renderTags = this.renderTags.bind(this)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.handleScroll(nextProps)
-  }
-
   render () {
     const { data } = this.props
     if (data.loading) return this.renderLoader()
 
     return (
-      <ScrollView
-        ref={'scrollView'}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.container}
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.container}>
         {this.renderDefaultTag()}
         {this.renderTags()}
       </ScrollView>
@@ -39,24 +30,23 @@ class TagsList extends Component {
   }
 
   renderDefaultTag () {
-    const { intl, handleTag } = this.props
-
+    const { intl, selectTag } = this.props
     return (
-      <Tag active={this.isActive()} onPress={() => handleTag()}>
+      <Tag active={this.isSelected()} onPress={() => selectTag()}>
         {intl.formatMessage(messages.default)}
       </Tag>
     )
   }
 
   renderTags () {
-    const { handleTag, data } = this.props
+    const { selectTag, data } = this.props
     return data.tags.map((tag, idx) => {
       return (
         <Tag
           key={`tag_${idx}`}
           last={this.isLast(idx)}
-          active={this.isActive(tag.slug)}
-          onPress={() => handleTag(tag.slug)}
+          active={this.isSelected(tag)}
+          onPress={() => selectTag(tag)}
         >
           {tag.name}
         </Tag>
@@ -76,24 +66,20 @@ class TagsList extends Component {
     return idx === this.props.data.tags.length - 1
   }
 
-  isActive (slug) {
-    return slug === this.props.active
-  }
-
-  handleScroll (nextProps) {
-    if (this.props.data.loading) return
-    if (this.props.active !== nextProps.active) return
-    // return this.refs.scrollView.scrollTo({x: 0, y: 0, animated: false})
+  isSelected (tag) {
+    return _result(tag, 'id') === _result(this.props, 'active.id')
   }
 }
 
 TagsList.propTypes = {
-  active: PropTypes.string,
+  active: PropTypes.shape({
+    id: PropTypes.any
+  }),
   data: PropTypes.shape({
     tags: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired
   }).isRequired,
-  handleTag: PropTypes.func.isRequired,
+  selectTag: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired

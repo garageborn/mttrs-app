@@ -1,13 +1,13 @@
 import { SELECT_PUBLISHER_CATEGORY, TENANT_RECEIVED } from '../constants/ActionTypes'
 
-let defaultState = { category: null }
+let defaultState = { selectedCategory: null }
 
 export default function (state = defaultState, action) {
   switch (action.type) {
     case SELECT_PUBLISHER_CATEGORY:
       return {
         ...state,
-        category: action.category
+        selectedCategory: action.category
       }
     case TENANT_RECEIVED:
       return {

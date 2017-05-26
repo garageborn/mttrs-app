@@ -13,7 +13,7 @@ const FavoritesRoutes = {
 const FavoritesNavigatorConfig = {
   direction: 'horizontal',
   headerMode: 'none',
-  initialRouteName: 'favoritePublishers',
+  initialRouteName: 'favoritesTimeline',
   transitionConfig: () => ({
     screenInterpolator: CardStackStyleInterpolator.forHorizontal
   })

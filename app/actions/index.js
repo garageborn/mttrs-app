@@ -1,4 +1,5 @@
 export * as AnalyticsActions from './AnalyticsActions'
+export * as CategoriesActions from './CategoriesActions'
 export * as FavoritePublishersActions from './FavoritePublishersActions'
 export * as FavoritesActions from './FavoritesActions'
 export * as LinkActions from './LinkActions'

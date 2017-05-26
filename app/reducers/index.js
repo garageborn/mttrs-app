@@ -1,6 +1,7 @@
 import apolloClient from '../config/apolloClient'
 
 export const apollo = apolloClient.reducer()
+export {default as CategoriesReducer} from './CategoriesReducer'
 export {default as FavoritePublishersReducer} from './FavoritePublishersReducer'
 export {default as FavoritesReducer} from './FavoritesReducer'
 export {default as NotificationsReducer} from './NotificationsReducer'

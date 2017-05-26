@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
+import _result from 'lodash/result'
 
 const Query = gql`
   query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $tagSlug: String) {
@@ -28,12 +29,13 @@ const Query = gql`
 export default function (CategoryTimelineContainer) {
   return graphql(Query, {
     options (props) {
-      const { categorySlug, activeTag } = props
+      const categorySlug = _result(props, 'category.slug')
+      const tagSlug = _result(props, 'selectedTag.slug')
 
       return {
         variables: {
           ...defaultVariables,
-          tagSlug: activeTag,
+          tagSlug,
           categorySlug,
           type: 'category'
         }
