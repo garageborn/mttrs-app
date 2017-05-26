@@ -8,12 +8,12 @@ PODS:
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - FBAudienceNetwork (4.22.1)
-  - FBSDKCoreKit (4.22.1):
+  - FBAudienceNetwork (4.23.0)
+  - FBSDKCoreKit (4.23.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.22.1):
+  - FBSDKLoginKit (4.23.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.22.1):
+  - FBSDKShareKit (4.23.0):
     - FBSDKCoreKit
   - Firebase/Core (4.0.0):
     - FirebaseAnalytics (= 4.0.0)
@@ -29,14 +29,14 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - React (0.44.0):
-    - React/Core (= 0.44.0)
-  - React/Core (0.44.0):
+  - React (0.44.1):
+    - React/Core (= 0.44.1)
+  - React/Core (0.44.1):
     - React/cxxreact
-    - Yoga (= 0.44.0.React)
-  - React/cxxreact (0.44.0):
+    - Yoga (= 0.44.1.React)
+  - React/cxxreact (0.44.1):
     - React/jschelpers
-  - React/jschelpers (0.44.0)
+  - React/jschelpers (0.44.1)
   - ReactNativeFabric (0.4.1):
     - Crashlytics
     - Fabric
@@ -44,7 +44,7 @@ PODS:
   - ReactNativeFBAds (4.2.0):
     - FBAudienceNetwork
     - React
-  - Yoga (0.44.0.React)
+  - Yoga (0.44.1.React)
 
 DEPENDENCIES:
   - Bolts
@@ -72,19 +72,19 @@ SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBAudienceNetwork: 21431de39d94b4e8f415277b2a650c6def6df26e
-  FBSDKCoreKit: 9c2daf0162214d6d2e21cf8208a9c6c2a2e42b9c
-  FBSDKLoginKit: 00cf28916b9f0169763a3d61985d745b579fe304
-  FBSDKShareKit: 1cbd0fdc2bb3277dd3522512855dcf1f4088f734
+  FBAudienceNetwork: 20a0e3d20e377dbb6708365e4c6d0711bf08ca97
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  React: d2077cc20245ccdc8bfe1fdc002f2003318ae8d8
+  React: 7337248755fd106e94ba137750560b5e2e9be945
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
   ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
-  Yoga: a92a5d8e128905bf9f29c82f870192a6e873dd98
+  Yoga: 06175e1f75c5c9e0983c8e618419da2332894c72
 
 PODFILE CHECKSUM: 94d9e1f04c9442b08d9746866246e1dc1b584041
 

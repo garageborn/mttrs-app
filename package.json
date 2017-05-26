@@ -23,7 +23,7 @@
     "react": "16.0.0-alpha.6",
     "react-apollo": "^1.2.0",
     "react-intl": "^2.3.0",
-    "react-native": "0.44.0",
+    "react-native": "0.44.1",
     "react-native-fabric": "0.4.1",
     "react-native-fbads": "^4.2.0",
     "react-native-fbsdk": "^0.6.0",
