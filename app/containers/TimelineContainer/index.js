@@ -58,7 +58,10 @@ class TimelineContainer extends Component {
     if (this.state.loadingMore || !hasMore) return
 
     this.setState({ loadingMore: true })
-    infiniteScroll().then(() => this.setState({ loadingMore: false }))
+    infiniteScroll()
+      .promise
+      .then(() => this.setState({ loadingMore: false }))
+      .catch((error) => captureError(error))
   }
 
   onPullToRefresh () {
@@ -66,9 +69,10 @@ class TimelineContainer extends Component {
     if (this.state.loadingPullToRefresh) return
     this.setState({ loadingPullToRefresh: true })
     pullToRefresh()
+      .promise
       .then(() => this.setState({ loadingPullToRefresh: false }))
-      .catch((err) => {
-        captureError(err)
+      .catch((error) => {
+        captureError(error)
         this.setState({ loadingPullToRefresh: false })
       })
   }
