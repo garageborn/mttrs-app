@@ -129,6 +129,16 @@ export function favoriteCategoriesDialog (content) {
   }
 }
 
+export function publisherCategoriesDialog (publisher, content) {
+  return dispatch => {
+    dispatch(UIActions.openModal(content))
+
+    let publisherSlug = _result(publisher, 'slug')
+    const analyticsUrl = `/${publisherSlug}/categories`
+    if (publisherSlug) dispatch(AnalyticsActions.trackScreen(analyticsUrl))
+  }
+}
+
 export function closeModal () {
   return dispatch => dispatch(UIActions.closeModal())
 }

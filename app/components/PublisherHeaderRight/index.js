@@ -1,15 +1,15 @@
 import React from 'react'
 import { View } from 'react-native'
-import HeaderSettingsButton from '../HeaderSettingsButton'
+import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import HeaderFavoriteButton from '../HeaderFavoriteButton'
-import HeaderFilterButton from '../HeaderFilterButton'
+import HeaderFilterPublisherCategoriesContainer from '../../containers/HeaderFilterPublisherCategoriesContainer'
 import styles from './styles'
 
 const PublisherHeaderRight = () => (
   <View style={styles.container}>
-    <HeaderFilterButton />
+    <HeaderFilterPublisherCategoriesContainer />
     <HeaderFavoriteButton />
-    <HeaderSettingsButton />
+    <HeaderSettingsContainer />
   </View>
 )
 
