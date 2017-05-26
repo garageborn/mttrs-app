@@ -1,32 +1,19 @@
-import React, { Component, PropTypes } from 'react'
-import { Image, View } from 'react-native'
+import React, { PropTypes } from 'react'
+import { View } from 'react-native'
 import Touchable from '../Touchable'
 import styles from './styles'
 
-class HeaderButton extends Component {
-  render () {
-    return (
-      <Touchable onPress={this.props.onPress} >
-        <View style={styles.container}>
-          <Image source={this.image} />
-        </View>
-      </Touchable>
-    )
-  }
-
-  get image () {
-    const types = {
-      settings: require('./assets/settings.png'),
-      back: require('./assets/back.png')
-    }
-
-    return types[this.props.type]
-  }
-}
+const HeaderButton = ({ content, onPress }) => (
+  <Touchable onPress={onPress} >
+    <View style={styles.container}>
+      {content}
+    </View>
+  </Touchable>
+)
 
 HeaderButton.propTypes = {
-  type: PropTypes.string.isRequired,
-  onPress: PropTypes.func.isRequired
+  content: PropTypes.element.isRequired,
+  onPress: PropTypes.func
 }
 
 export default HeaderButton

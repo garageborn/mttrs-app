@@ -1,23 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import PublisherTimelineContainer from '../../containers/PublisherTimelineContainer'
 import PublisherCategoriesDialogContainer from '../../containers/PublisherCategoriesDialogContainer'
-import HeaderTitleContainer from '../../containers/HeaderTitleContainer'
-import HeaderRight from '../../components/HeaderRight'
+import PublisherHeaderTitle from '../../containers/PublisherHeaderTitle'
+import PublisherHeaderRight from '../../components/PublisherHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
 
-class PublisherScene extends Component {
-  render () {
-    const { publisher } = this.props.navigation.state.params
-    return (
-      <View>
-        <PublisherCategoriesDialogContainer publisher={publisher} />
-        <PublisherTimelineContainer publisher={publisher} />
-      </View>
-    )
-  }
-}
+const PublisherScene = ({navigation}) => (
+  <View>
+    <PublisherCategoriesDialogContainer publisher={navigation.state.params.publisher} />
+    <PublisherTimelineContainer publisher={navigation.state.params.publisher} />
+  </View>
+)
 
 PublisherScene.propTypes = {
   navigation: PropTypes.shape({
@@ -33,8 +28,8 @@ PublisherScene.propTypes = {
 
 PublisherScene.navigationOptions = props => {
   return {
-    headerTitle: <HeaderTitleContainer type='publisher' {...props} />,
-    headerRight: <HeaderRight />,
+    headerTitle: <PublisherHeaderTitle {...props} />,
+    headerRight: <PublisherHeaderRight />,
     headerLeft: <HeaderLeft {...props} />,
     ...headerStyles
   }

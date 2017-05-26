@@ -1,27 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import { InteractionManager, View, Platform, AppState } from 'react-native'
+import { InteractionManager, View, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import LinkHeaderContainer from '../../containers/LinkHeaderContainer'
 import { VisitedStoriesActions } from '../../actions/index'
-import { headerHeight } from '../../styles/Global'
-import { DARK_COLOR } from '../../constants/Colors'
 import StoryWebView from '../../components/StoryWebView'
+import LinkHeaderTitle from '../../components/LinkHeaderTitle'
+import HeaderShareButton from '../../components/HeaderShareButton'
+import HeaderLeft from '../../components/HeaderLeft'
+import headerStyles from '../../styles/Header'
 
 class LinkScene extends Component {
-  // static route = Platform.select({
-  //   ios: {
-  //     navigationBar: {
-  //       renderTitle: (route) => <LinkHeaderContainer link={route.params.link} />,
-  //       renderLeft: () => <View />,
-  //       renderRight: () => <View />,
-  //       backgroundColor: DARK_COLOR,
-  //       height: headerHeight + 20 // On Link exclusively, we need to pass this value in order to be aligned
-  //     }
-  //   },
-  //   android: null
-  // })
-
   constructor () {
     super()
     this.state = { appState: AppState.currentState }
@@ -52,11 +40,6 @@ class LinkScene extends Component {
     dispatch(VisitedStoriesActions.addStory(story))
   }
 
-  renderHeader () {
-    const { link } = this.props.navigation.state.params
-    return <LinkHeaderContainer link={link} />
-  }
-
   createAccess () {
     this.props.createLinkAccess()
   }
@@ -68,7 +51,6 @@ class LinkScene extends Component {
       <View>
         <StoryWebView
           link={link}
-          header={this.renderHeader()}
         />
       </View>
     )
@@ -89,6 +71,15 @@ LinkScene.propTypes = {
   }).isRequired,
   createLinkAccess: PropTypes.func.isRequired,
   dispatch: PropTypes.func.isRequired
+}
+
+LinkScene.navigationOptions = props => {
+  return {
+    headerTitle: <LinkHeaderTitle {...props} />,
+    headerRight: <HeaderShareButton link={props.navigation.state.params.link} />,
+    headerLeft: <HeaderLeft {...props} />,
+    ...headerStyles
+  }
 }
 
 const LinkSceneWithRedux = connect()(LinkScene)

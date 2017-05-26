@@ -1,42 +1,31 @@
 import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
-import PublisherLogo from '../PublisherLogo'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import headerStyles from '../../styles/Header'
 import styles from './styles'
 
-const HeaderTitle = (props) => {
-  const renderIcon = () => {
-    if (props.type !== 'publisher') return null
-    let { publisher } = props.navigation.state.params
-    if (!publisher.icon_id) return
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
-    return <PublisherLogo size={22} source={{ uri }} />
-  }
-
-  const containerStyles = () => {
-    if (props.type === 'publisher') return styles.publisherContainer
-    return styles.container
+const HeaderTitle = ({ logo, subtitle, title }) => {
+  const renderTitle = () => {
+    if (!subtitle) return <Text style={[headerStyles.headerTitleStyle, styles.text]}>{title}</Text>
+    return (
+      <View>
+        <Text style={[styles.text, styles.titleWithSubtitle]}>{title}</Text>
+        <Text style={[headerStyles.headerTitleStyle, styles.text]} numberOfLines={1}>{subtitle}</Text>
+      </View>
+    )
   }
 
   return (
-    <View style={containerStyles()}>
-      {renderIcon()}
-      <Text style={[headerStyles.headerTitleStyle, styles.text]}>{props.title}</Text>
+    <View style={styles.container}>
+      {logo}
+      {renderTitle()}
     </View>
   )
 }
 
 HeaderTitle.propTypes = {
-  type: PropTypes.string.isRequired,
+  logo: PropTypes.element,
   title: PropTypes.string.isRequired,
-  navigation: PropTypes.shape({
-    state: PropTypes.shape({
-      params: PropTypes.shape({
-        publisher: PropTypes.object.isRequired
-      }).isRequired
-    }).isRequired
-  }).isRequired
+  subtitle: PropTypes.string
 }
 
 export default HeaderTitle

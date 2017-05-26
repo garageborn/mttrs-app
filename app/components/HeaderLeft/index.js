@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { PropTypes } from 'react'
-import HeaderButton from '../HeaderButton'
+import HeaderBackButton from '../HeaderBackButton'
 
 const HeaderLeft = ({ navigation }) => (
-  <HeaderButton type='back' onPress={() => this.props.navigation.goBack()} />
+  <HeaderBackButton onPress={() => navigation.goBack()} />
 )
 
 HeaderLeft.propTypes = {
