@@ -14,10 +14,6 @@ platform :ios do
     gym(scheme: 'mttrs', workspace: './ios/mttrs.xcworkspace')
     pilot(skip_waiting_for_build_processing: true)
   end
-
-  after_all do |_lane|
-    sentry_release
-  end
 end
 
 platform :android do
@@ -28,9 +24,5 @@ platform :android do
     gradle(task: 'clean', project_dir: 'android/') # Clean the Gradle project
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/') # Build the Release APK
     supply(track: 'alpha', apk: 'android/app/build/outputs/apk/app-release.apk') # Upload the APK to the Play Store (alpha)
-  end
-
-  after_all do |_lane|
-    sentry_release
   end
 end
