@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
+import { Modal, View } from 'react-native'
 import { connect } from 'react-redux'
 import SettingsDialog from '../../components/SettingsDialog'
 import Tenant from '../../common/utils/Tenant'
 import { NavigationActions, TenantActions } from '../../actions/index'
+import styles from '../../styles/Modal'
 
 class SettingsDialogContainer extends Component {
   constructor () {
@@ -18,8 +19,14 @@ class SettingsDialogContainer extends Component {
     if (!tenant.isLoaded) return null
 
     return (
-      <Modal animationType={'none'} transparent visible onRequestClose={this.close}>
-
+      <Modal transparent visible onRequestClose={this.close}>
+        <View style={styles.modal}>
+          <SettingsDialog
+            tenant={this.alternativeTenant}
+            openSettings={this.openSettings}
+            setTenant={this.setTenant}
+            />
+        </View>
       </Modal>
     )
   }
@@ -31,11 +38,13 @@ class SettingsDialogContainer extends Component {
 
   openSettings () {
     const { dispatch } = this.props
+    this.close()
     dispatch(NavigationActions.settings())
   }
 
   setTenant (tenantId) {
     const { dispatch } = this.props
+    this.close()
     dispatch(TenantActions.setCurrent(tenantId))
   }
 

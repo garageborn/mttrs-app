@@ -1,13 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import HeaderSettingsButton from '../HeaderSettingsButton'
-import HeaderFilterButton from '../HeaderFilterButton'
+import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
+import HeaderFilterFavoritesContainer from '../../containers/HeaderFilterFavoritesContainer'
 import styles from './styles'
 
 const FavoritesHeaderRight = () => (
   <View style={styles.container}>
-    <HeaderFilterButton />
-    <HeaderSettingsButton />
+    <HeaderFilterFavoritesContainer />
+    <HeaderSettingsContainer />
   </View>
 )
 

@@ -1,18 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
-import styles from '../../styles/App'
 
 class SummariesTimelineContainer extends Component {
   render () {
     const renderOptions = { timelineType: 'summaries' }
-
-    return (
-      <View>
-        <TimelineContainer data={this.props.data} renderOptions={renderOptions} />
-      </View>
-    )
+    return <TimelineContainer data={this.props.data} renderOptions={renderOptions} />
   }
 }
 

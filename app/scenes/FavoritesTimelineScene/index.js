@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
-import FavoriteCategoriesDialogContainer from '../../containers/FavoriteCategoriesDialogContainer'
 import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
@@ -22,7 +21,6 @@ class FavoritesTimelineScene extends Component {
 
     return (
       <View>
-        <FavoriteCategoriesDialogContainer />
         <FavoritePublishersSelectorContainer />
         <FavoritesTimelineContainer />
       </View>

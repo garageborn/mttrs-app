@@ -120,6 +120,15 @@ export function settingsDialog (content) {
   }
 }
 
+export function favoriteCategoriesDialog (content) {
+  return dispatch => {
+    dispatch(UIActions.openModal(content))
+
+    const analyticsUrl = '/favorites/categories'
+    dispatch(AnalyticsActions.trackScreen(analyticsUrl))
+  }
+}
+
 export function closeModal () {
   return dispatch => dispatch(UIActions.closeModal())
 }

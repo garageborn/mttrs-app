@@ -15,16 +15,14 @@ class HeaderSettingsContainer extends Component {
   }
 
   openSettingsDialog () {
-    console.log('openSettingsDialog')
-    // const { dispatch } = this.props
-    // const content = <SettingsDialogContainer />
-    // dispatch(NavigationActions.settingsDialog(content))
+    const { dispatch } = this.props
+    const content = <SettingsDialogContainer />
+    dispatch(NavigationActions.settingsDialog(content))
   }
 }
 
-// HeaderSettingsContainer.propTypes = {
-//   dispatch: PropTypes.func.isRequired
-// }
+HeaderSettingsContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired
+}
 
-export default HeaderSettingsContainer
-// export default connect()(HeaderSettingsContainer)
+export default connect()(HeaderSettingsContainer)
