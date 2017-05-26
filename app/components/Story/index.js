@@ -8,27 +8,28 @@ import styles from './styles'
 
 class Story extends Component {
   render () {
-    const { openLink, handlePublishersPress, handleSocialCountPress, story, visited } = this.props
-
+    const { story } = this.props
     if (!story) return null
 
     return (
       <View style={styles.card}>
-        <StoryMainLink
-          visited={visited}
-          onPress={openLink}
-          mainLink={this.mainLink}
-          category={story.category}
-          story={story}
-        />
-        {this.renderSummary(story.headline, story.summary)}
-        <StoryMetadata
-          visited={visited}
-          story={story}
-          onSocialCountPress={handleSocialCountPress}
-          onPublishersPress={handlePublishersPress}
-        />
+        {this.renderMainLink()}
+        {this.renderSummary()}
+        {this.renderMetadata()}
       </View>
+    )
+  }
+
+  renderMainLink () {
+    const { handleDialogButtonPress, openLink, story, visited } = this.props
+
+    return (
+      <StoryMainLink
+        visited={visited}
+        onPress={openLink}
+        story={story}
+        openDialog={handleDialogButtonPress}
+      />
     )
   }
 
@@ -39,8 +40,17 @@ class Story extends Component {
     return <SummaryContainer visited={visited} story={story} />
   }
 
-  get mainLink () {
-    return this.props.story.main_link
+  renderMetadata () {
+    const { handlePublishersPress, handleSocialCountPress, story, visited } = this.props
+
+    return (
+      <StoryMetadata
+        visited={visited}
+        story={story}
+        onSocialCountPress={handleSocialCountPress}
+        onPublishersPress={handlePublishersPress}
+      />
+    )
   }
 
   get hasSummary () {
@@ -70,6 +80,7 @@ Story.propTypes = {
     })
   }).isRequired,
   openLink: PropTypes.func.isRequired,
+  handleDialogButtonPress: PropTypes.func.isRequired,
   handlePublishersPress: PropTypes.func.isRequired,
   handleSocialCountPress: PropTypes.func.isRequired,
   visited: PropTypes.bool.isRequired

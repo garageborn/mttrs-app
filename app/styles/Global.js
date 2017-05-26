@@ -1,2 +1,2 @@
-export const headerHeight = 55
+export const headerHeight = 85
 export const iphoneWidthSmall = 320

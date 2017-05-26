@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { NavigationProvider, StackNavigation } from '@exponent/ex-navigation'
+import { addNavigationHelpers } from 'react-navigation'
+import { injectIntl } from 'react-intl'
 import { TenantActions } from '../../actions/index'
-import Router from '../../config/Router'
+import AppNavigator from '../../navigators/AppNavigator'
 
 class NavigationContainer extends Component {
   componentWillMount () {
@@ -10,28 +11,38 @@ class NavigationContainer extends Component {
   }
 
   render () {
-    const { tenant, navigationContext } = this.props
+    const { tenant, intl } = this.props
 
     if (!tenant.isLoaded) return null
 
     return (
-      <NavigationProvider context={navigationContext}>
-        <StackNavigation initialRoute={Router.getRoute('timeline')} />
-      </NavigationProvider>
+      <AppNavigator
+        screenProps={{ intl }}
+        navigation={this.getNavigationHelpers()}
+      />
     )
+  }
+
+  getNavigationHelpers () {
+    return addNavigationHelpers({
+      dispatch: this.props.dispatch,
+      state: this.props.nav
+    })
   }
 }
 
 NavigationContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  navigationContext: PropTypes.object.isRequired,
   tenant: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired
   }).isRequired
 }
 
 const mapStateToProps = state => ({
-  tenant: state.TenantReducer
+  tenant: state.TenantReducer,
+  nav: state.nav
 })
 
-export default connect(mapStateToProps)(NavigationContainer)
+const NavigationContainerWithData = connect(mapStateToProps)(NavigationContainer)
+
+export default injectIntl(NavigationContainerWithData)

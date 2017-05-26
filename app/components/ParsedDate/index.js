@@ -46,8 +46,8 @@ class ParsedDate extends Component {
       sameDay: messages.today,
       yesterday: messages.yesterday
     }
-    if (this.props.type !== 'home') return daysMessages[day]
-    return messages.recent
+    if (this.props.type === 'home') return messages.recent
+    return daysMessages[day]
   }
 }
 

@@ -16,19 +16,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    ...Platform.select({
-      ios: {
-        top: 15,
-        bottom: 0,
-        paddingBottom: 0
-      },
-      android: {
-        top: 0,
-        bottom: 0,
-        paddingBottom: 25
-      }
-    }),
-    flexGrow: 1,
+    ...containerStyles,
     backgroundColor: '#F1F1F1'
   },
 

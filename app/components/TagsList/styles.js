@@ -3,7 +3,6 @@ const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
     width: width,
     backgroundColor: '#F1F1F1',
     marginTop: Platform.select({
@@ -19,9 +18,6 @@ const styles = StyleSheet.create({
       ios: 50,
       android: 53
     })
-  },
-  containerActive: {
-    elevation: 0
   },
   loaderContainer: {
     justifyContent: 'center',

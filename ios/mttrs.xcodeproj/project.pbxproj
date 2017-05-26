@@ -34,28 +34,26 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* mttrsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mttrsTests.m */; };
 		39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F6DF8C2B20440DA6287088 /* libRNShare.a */; };
-		69D2D744D6CEB75A67CB26D2 /* libPods-mttrsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4AB1C1013BF3B6BB08C5AFF /* libPods-mttrsTests.a */; };
+		3F3DBDD34AF84E27BC7A7CE3 /* libRNStoreReview.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA472BD4602B4DE8B0BFB2E8 /* libRNStoreReview.a */; };
 		7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A09BA2A81DBF741000104DE1 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A51DBF741000104DE1 /* OpenSans-Bold.ttf */; };
 		A09BA2A91DBF741000104DE1 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */; };
 		A09BA2AA1DBF741000104DE1 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */; };
-		AA3D29021EC0C39A0098C3C5 /* libBolts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3D29011EC0C39A0098C3C5 /* libBolts.a */; };
-		AA3D29361EC0C44E0098C3C5 /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3D29331EC0C44E0098C3C5 /* libFBSDKCoreKit.a */; };
-		AA3D29371EC0C44E0098C3C5 /* libFBSDKLoginKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3D29341EC0C44E0098C3C5 /* libFBSDKLoginKit.a */; };
-		AA3D29381EC0C44E0098C3C5 /* libFBSDKShareKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3D29351EC0C44E0098C3C5 /* libFBSDKShareKit.a */; };
+		A9C24CA5C43623C89C7269AA /* libPods-mttrsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 096D18187A7EA9F5F94C5E10 /* libPods-mttrsTests.a */; };
 		AA46B8F91EC04A9700C7D27E /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED925E01E1FB24E005222BA /* libRCTGoogleAnalyticsBridge.a */; };
 		AA8D37281EB92D8B00C2F8DD /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */; };
 		AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AA8D37291EB92D9700C2F8DD /* libc++.tbd */; };
 		AABB772C1EB9156300734E88 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = AABB772B1EB9156300734E88 /* libxml2.tbd */; };
 		AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABB774F1EB9171900734E88 /* GoogleService-Info.plist */; };
+		AAF608671ED6DB8F00803789 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF608491ED6DAC800803789 /* libRCTAnimation.a */; };
+		CE9765570E449FB853D4D198 /* libPods-mttrs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7EFE5B4EF4364591E2535A6 /* libPods-mttrs.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
 		DCAE53171E1EC20F00ABFD11 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */; };
 		DCAE53191E1EC22400ABFD11 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53181E1EC22400ABFD11 /* libz.tbd */; };
 		DCAE531B1E1EC23200ABFD11 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */; };
 		ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBE59A7C4A024B63BC576559 /* libBVLinearGradient.a */; };
-		F65EA51A99F8F1F0DCA54F83 /* libPods-mttrs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFC1C56D3B77A300A28166BD /* libPods-mttrs.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +267,27 @@
 			remoteGlobalIDString = 9350E0F11CE3B0920041D815;
 			remoteInfo = RCTFBSDK;
 		};
+		AACBB3FB1ED84D6C00FC8C24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9562300BE27A486281CEC4EF /* RNStoreReview.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNStoreReview;
+		};
+		AAF608481ED6DAC800803789 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTAnimation;
+		};
+		AAF6084A1ED6DAC800803789 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
+			remoteInfo = "RCTAnimation-tvOS";
+		};
 		DCAE52F51E1EC1C700ABFD11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */;
@@ -289,6 +308,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* mttrsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mttrsTests.m; sourceTree = "<group>"; };
 		05369204D235550F902A1B5A /* Pods-mttrsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mttrsTests/Pods-mttrsTests.release.xcconfig"; sourceTree = "<group>"; };
+		096D18187A7EA9F5F94C5E10 /* libPods-mttrsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* mttrs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mttrs.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -309,35 +329,24 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		8305BD51FCFA70A8E79350C6 /* Pods-mttrs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mttrs/Pods-mttrs.debug.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9562300BE27A486281CEC4EF /* RNStoreReview.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNStoreReview.xcodeproj; path = "../node_modules/react-native-store-review/ios/RNStoreReview.xcodeproj"; sourceTree = "<group>"; };
 		9D3C5D51422D0D7969FA4879 /* Pods-mttrs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrs.release.xcconfig"; path = "Pods/Target Support Files/Pods-mttrs/Pods-mttrs.release.xcconfig"; sourceTree = "<group>"; };
 		A09BA2A51DBF741000104DE1 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A09BA2A61DBF741000104DE1 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		A09BA2A71DBF741000104DE1 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		AA137E811E81B4360048C068 /* mttrs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = mttrs.entitlements; path = mttrs/mttrs.entitlements; sourceTree = "<group>"; };
 		AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
-		AA3D29011EC0C39A0098C3C5 /* libBolts.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBolts.a; path = "Pods/../build/Release-iphoneos/Bolts/libBolts.a"; sourceTree = "<group>"; };
-		AA3D29331EC0C44E0098C3C5 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
-		AA3D29341EC0C44E0098C3C5 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
-		AA3D29351EC0C44E0098C3C5 /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
 		AA8D370D1EB91D4900C2F8DD /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = ../../../../Documents/Firebase/Firebase.h; sourceTree = "<group>"; };
 		AA8D37221EB92AD300C2F8DD /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = ../../../../Documents/Firebase/module.modulemap; sourceTree = "<group>"; };
 		AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		AA8D37291EB92D9700C2F8DD /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		AABB772B1EB9156300734E88 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		AABB774F1EB9171900734E88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AAF870731EC04284003049DB /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKCoreKit.a; path = "../../../Library/Developer/Xcode/DerivedData/mttrs-cynejcfxwpjatjafilzbskmrjamj/Build/Products/Debug-iphonesimulator/FBSDKCoreKit/libFBSDKCoreKit.a"; sourceTree = "<group>"; };
-		AAF870931EC0428C003049DB /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKLoginKit.a; path = "../../../Library/Developer/Xcode/DerivedData/mttrs-cynejcfxwpjatjafilzbskmrjamj/Build/Products/Debug-iphonesimulator/FBSDKLoginKit/libFBSDKLoginKit.a"; sourceTree = "<group>"; };
-		AAF870951EC04290003049DB /* libFBSDKShareKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFBSDKShareKit.a; path = "../../../Library/Developer/Xcode/DerivedData/mttrs-cynejcfxwpjatjafilzbskmrjamj/Build/Products/Debug-iphonesimulator/FBSDKShareKit/libFBSDKShareKit.a"; sourceTree = "<group>"; };
-		AAFBA74E1EBCE60F00E02892 /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
-		AAFBA76D1EBCE61A00E02892 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		AAFBA76E1EBCE61A00E02892 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
-		AAFBA76F1EBCE61A00E02892 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
-		AAFBA7701EBCE61A00E02892 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
-		AAFBA7751EBCE62D00E02892 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AC8118B6A0FCA031C9F8DD56 /* Pods-mttrsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mttrsTests/Pods-mttrsTests.debug.xcconfig"; sourceTree = "<group>"; };
-		BFC1C56D3B77A300A28166BD /* libPods-mttrs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA472BD4602B4DE8B0BFB2E8 /* libRNStoreReview.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNStoreReview.a; sourceTree = "<group>"; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
-		D4AB1C1013BF3B6BB08C5AFF /* libPods-mttrsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D7EFE5B4EF4364591E2535A6 /* libPods-mttrs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCAE53141E1EC20200ABFD11 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DCAE53181E1EC22400ABFD11 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -352,7 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-				69D2D744D6CEB75A67CB26D2 /* libPods-mttrsTests.a in Frameworks */,
+				A9C24CA5C43623C89C7269AA /* libPods-mttrsTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,10 +369,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA3D29361EC0C44E0098C3C5 /* libFBSDKCoreKit.a in Frameworks */,
-				AA3D29371EC0C44E0098C3C5 /* libFBSDKLoginKit.a in Frameworks */,
-				AA3D29381EC0C44E0098C3C5 /* libFBSDKShareKit.a in Frameworks */,
-				AA3D29021EC0C39A0098C3C5 /* libBolts.a in Frameworks */,
+				AAF608671ED6DB8F00803789 /* libRCTAnimation.a in Frameworks */,
 				AA46B8F91EC04A9700C7D27E /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				AA8D372A1EB92D9700C2F8DD /* libc++.tbd in Frameworks */,
 				AA8D37281EB92D8B00C2F8DD /* libicucore.tbd in Frameworks */,
@@ -385,7 +391,8 @@
 				ECF4E9C412F64D0085B0EC85 /* libBVLinearGradient.a in Frameworks */,
 				39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */,
 				7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */,
-				F65EA51A99F8F1F0DCA54F83 /* libPods-mttrs.a in Frameworks */,
+				CE9765570E449FB853D4D198 /* libPods-mttrs.a in Frameworks */,
+				3F3DBDD34AF84E27BC7A7CE3 /* libRNStoreReview.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,12 +566,14 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */,
 				75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */,
 				CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */,
 				F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */,
 				58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */,
-				AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */
+				AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */,
+				9562300BE27A486281CEC4EF /* RNStoreReview.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -649,31 +658,35 @@
 			name = Firebase;
 			sourceTree = "<group>";
 		};
+		AACBB3DA1ED84D6C00FC8C24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AACBB3FC1ED84D6C00FC8C24 /* libRNStoreReview.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAF608421ED6DAC800803789 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAF608491ED6DAC800803789 /* libRCTAnimation.a */,
+				AAF6084B1ED6DAC800803789 /* libRCTAnimation.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DCAE53131E1EC20200ABFD11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AA3D29331EC0C44E0098C3C5 /* libFBSDKCoreKit.a */,
-				AA3D29341EC0C44E0098C3C5 /* libFBSDKLoginKit.a */,
-				AA3D29351EC0C44E0098C3C5 /* libFBSDKShareKit.a */,
-				AA3D29011EC0C39A0098C3C5 /* libBolts.a */,
-				AAF870951EC04290003049DB /* libFBSDKShareKit.a */,
-				AAF870931EC0428C003049DB /* libFBSDKLoginKit.a */,
-				AAF870731EC04284003049DB /* libFBSDKCoreKit.a */,
 				AA8D37291EB92D9700C2F8DD /* libc++.tbd */,
 				AA8D37271EB92D8B00C2F8DD /* libicucore.tbd */,
-				AAFBA74E1EBCE60F00E02892 /* FirebaseDatabase.framework */,
-				AAFBA76D1EBCE61A00E02892 /* FirebaseAnalytics.framework */,
-				AAFBA76E1EBCE61A00E02892 /* FirebaseCore.framework */,
-				AAFBA76F1EBCE61A00E02892 /* FirebaseInstanceID.framework */,
-				AAFBA7701EBCE61A00E02892 /* GoogleToolboxForMac.framework */,
-				AAFBA7751EBCE62D00E02892 /* GoogleMobileAds.framework */,
 				AABB772B1EB9156300734E88 /* libxml2.tbd */,
 				DCAE531A1E1EC23200ABFD11 /* libsqlite3.0.tbd */,
 				DCAE53181E1EC22400ABFD11 /* libz.tbd */,
 				DCAE53161E1EC20F00ABFD11 /* SystemConfiguration.framework */,
 				DCAE53141E1EC20200ABFD11 /* CoreData.framework */,
-				BFC1C56D3B77A300A28166BD /* libPods-mttrs.a */,
-				D4AB1C1013BF3B6BB08C5AFF /* libPods-mttrsTests.a */,
+				D7EFE5B4EF4364591E2535A6 /* libPods-mttrs.a */,
+				096D18187A7EA9F5F94C5E10 /* libPods-mttrsTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -829,6 +842,10 @@
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
 				},
 				{
+					ProductGroup = AAF608421ED6DAC800803789 /* Products */;
+					ProjectRef = AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */;
+				},
+				{
 					ProductGroup = AA23D6F11EA1112C004E640E /* Products */;
 					ProjectRef = AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */;
 				},
@@ -879,6 +896,10 @@
 				{
 					ProductGroup = A0B8267A1DB547B2009A234B /* Products */;
 					ProjectRef = CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */;
+				},
+				{
+					ProductGroup = AACBB3DA1ED84D6C00FC8C24 /* Products */;
+					ProjectRef = 9562300BE27A486281CEC4EF /* RNStoreReview.xcodeproj */;
 				},
 				{
 					ProductGroup = A0548D891DD1023900B0D856 /* Products */;
@@ -1090,6 +1111,27 @@
 			fileType = archive.ar;
 			path = libRCTFBSDK.a;
 			remoteRef = AA23D6F61EA1112C004E640E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AACBB3FC1ED84D6C00FC8C24 /* libRNStoreReview.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNStoreReview.a;
+			remoteRef = AACBB3FB1ED84D6C00FC8C24 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAF608491ED6DAC800803789 /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = AAF608481ED6DAC800803789 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AAF6084B1ED6DAC800803789 /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = AAF6084A1ED6DAC800803789 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		DCAE52F61E1EC1C700ABFD11 /* libBVLinearGradient.a */ = {
@@ -1330,7 +1372,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 197;
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1339,12 +1381,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1366,17 +1410,19 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 196;
+				CURRENT_PROJECT_VERSION = 197;
 				DEVELOPMENT_TEAM = Z3VCDU6D6T;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1397,6 +1443,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mttrs/mttrs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1439,6 +1486,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mttrs/mttrs.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1487,12 +1535,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**"
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1521,12 +1571,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**"
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1557,6 +1609,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mttrs-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1581,6 +1634,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.mttrs-tvOSTests";
