@@ -9,28 +9,26 @@ const messages = defineMessages({
   }
 })
 
-const PublisherMenuListViewSeparator = ({ intl, section }) => {
+const PublisherSelectorSectionHeader = ({ intl, section }) => {
   const todaysNews = intl.formatMessage(messages.todaysNews)
 
   return (
-    <View
-      shadowOffset={{width: 1, height: 2}}
-      shadowColor={'rgba(0, 0, 0, .1)'}
-      shadowOpacity={1}
-    >
+    <View>
       <View style={styles.container}>
-        <Text style={styles.textLeft}>{section}</Text>
+        <View style={styles.textLeftContainer}>
+          <Text style={styles.textLeft}>{section}</Text>
+        </View>
         <Text style={styles.textRight}>{todaysNews}</Text>
       </View>
     </View>
   )
 }
 
-PublisherMenuListViewSeparator.propTypes = {
+PublisherSelectorSectionHeader.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   section: PropTypes.string.isRequired
 }
 
-export default injectIntl(PublisherMenuListViewSeparator)
+export default injectIntl(PublisherSelectorSectionHeader)

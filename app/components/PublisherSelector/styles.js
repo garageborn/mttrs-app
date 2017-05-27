@@ -2,11 +2,13 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#F7F7F8',
+    justifyContent: 'center'
+  },
+  header: {
+    marginTop: 80, /*REMOVE*/
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 22,
-    height: 50
+    justifyContent: 'space-around'
   }
 })
 

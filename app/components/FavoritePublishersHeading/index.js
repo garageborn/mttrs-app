@@ -1,31 +1,47 @@
 import React, { PropTypes, Component } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
+import Heading from '../Heading'
+import Button from '../Button'
 import styles from './styles'
 
 const messages = defineMessages({
   heading: { id: 'favoritePublishers.heading' },
-  button: { id: 'favoritePublishers.button' }
+  buttonActive: { id: 'favoritePublishers.button' }
 })
 
 class FavoritesPublishersHeading extends Component {
   render () {
-    const { handleComplete, intl } = this.props
+    const { intl } = this.props
 
     return (
-      <View>
-        <Text>{intl.formatMessage(messages.heading)}</Text>
-        <Touchable onPress={handleComplete}>
-          <Text style={styles.button}>{intl.formatMessage(messages.button)}</Text>
-        </Touchable>
+      <View style={styles.container}>
+        <Heading size='regular'>
+          {intl.formatMessage(messages.heading)}
+        </Heading>
+        {this.renderButton()}
       </View>
+    )
+  }
+
+  renderButton () {
+    const { intl, handleComplete } = this.props
+    return (
+      <Button
+        background='transparent'
+        content={intl.formatMessage(messages.buttonActive)}
+        onPress={handleComplete}
+        size='small'
+      />
     )
   }
 }
 
 FavoritesPublishersHeading.propTypes = {
-  handleComplete: PropTypes.func.isRequired
+  handleComplete: PropTypes.func.isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default injectIntl(FavoritesPublishersHeading)

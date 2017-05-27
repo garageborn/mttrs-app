@@ -7,17 +7,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingLeft: 15,
-    marginTop: 8,
-    paddingTop: 8,
+    paddingTop: 4,
     marginBottom: 3,
-    paddingBottom: 3
+    paddingBottom: 3,
+    backgroundColor: '#F7F7F8'
+  },
+
+  textLeftContainer: {
+    width: 30,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   textLeft: {
+    color: '#999999',
+    fontSize: 18,
     marginLeft: 14,
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18
+    textAlign: 'center'
   },
 
   textRight: {
