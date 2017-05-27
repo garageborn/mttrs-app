@@ -5,6 +5,7 @@ import _result from 'lodash/result'
 const Query = gql`
   query($categorySlug: String!) {
     tags(with_recent_stories: true, ordered: true, category_slug: $categorySlug) {
+      id
       name
       slug
     }
