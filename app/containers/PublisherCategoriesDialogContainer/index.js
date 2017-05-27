@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal, View } from 'react-native'
+import { Modal } from 'react-native'
 import { connect } from 'react-redux'
 import CategoriesDialogContainer from '../CategoriesDialogContainer'
+import Dialog from '../../components/Dialog'
 import { NavigationActions, PublishersActions } from '../../actions/index'
-import styles from '../../styles/Modal'
 
 class PublisherCategoriesDialogContainer extends Component {
   constructor () {
@@ -16,9 +16,9 @@ class PublisherCategoriesDialogContainer extends Component {
     const { publisher } = this.props
     return (
       <Modal transparent visible onRequestClose={this.close}>
-        <View style={styles.modal}>
+        <Dialog closeDialog={this.close} >
           <CategoriesDialogContainer publisherIds={[publisher.id]} onPress={this.selectCategory} />
-        </View>
+        </Dialog>
       </Modal>
     )
   }

@@ -1,6 +1,5 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native'
-const { width, height } = Dimensions.get('window')
-const heightOffset = Platform.OS === 'ios' ? 100 : 110
+import { StyleSheet, Dimensions } from 'react-native'
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
