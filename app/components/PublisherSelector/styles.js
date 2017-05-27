@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   header: {
+    marginTop: 80, /*REMOVE*/
     flexDirection: 'row',
     justifyContent: 'space-around'
   }
