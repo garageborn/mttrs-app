@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import _isEqual from 'lodash/isEqual'
-import Touchable from '../Touchable'
 
 class ScrollableTabBar extends Component {
   constructor () {
