@@ -23,7 +23,8 @@ const MainRoutes = {
       header: null
     }
   },
-  favorites: { screen: FavoritesNavigator,
+  favorites: {
+    screen: FavoritesNavigator,
     navigationOptions: {
       tabBarLabel: <FavoritesTabBar />,
       tabBarIcon: FavoritesTabBarIcon

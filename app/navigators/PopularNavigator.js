@@ -1,4 +1,5 @@
 import { TabNavigator } from 'react-navigation'
+import PopularTabBarNavigator from '../components/PopularTabBarNavigator'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
 import CategoryTimelineScene from '../scenes/CategoryTimelineScene'
 import PublishersScene from '../scenes/PublishersScene'
@@ -23,14 +24,12 @@ const buildRoutes = (categories) => {
 
 const config = {
   ...TabNavigator.Presets.AndroidTopTabs,
+  tabBarComponent: PopularTabBarNavigator,
   headerMode: 'none',
   tabBarPosition: 'top',
   lazy: true,
   swipeEnabled: true,
-  animationEnabled: true,
-  tabBarOptions: {
-    scrollEnabled: true
-  }
+  animationEnabled: true
 }
 
 export default (categories) => {
