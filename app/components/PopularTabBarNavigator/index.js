@@ -9,6 +9,10 @@ class PopularTabBarNavigator extends Component {
     this.renderTab = this.renderTab.bind(this)
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.navigationState.index !== nextProps.navigationState.index
+  }
+
   render () {
     const { navigationState, subscribe } = this.props
 

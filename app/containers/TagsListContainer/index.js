@@ -14,6 +14,7 @@ class TagsListContainer extends Component {
   render () {
     const { data, selectedTag } = this.props
     if (!_result(data, 'tags.length')) return null
+      return null
     return <TagsList selectedTag={selectedTag} selectTag={this.selectTag} data={data} />
   }
 

@@ -9,12 +9,15 @@ class ScrollableTabBar extends Component {
     this.setScrollViewRef = this.setScrollViewRef.bind(this)
     this.scrollToIndex = this.scrollToIndex.bind(this)
     this.scrollToPosition = this.scrollToPosition.bind(this)
+    this.handleBeginDrag = this.handleBeginDrag.bind(this)
+    this.handleEndDrag = this.handleEndDrag.bind(this)
 
     this.state = {
       tabsLayout: [],
       tabBarWidth: 0
     }
 
+    this.isManualScroll = false
     this.indicatorAnimated = {
       x: new Animated.Value(0),
       width: new Animated.Value(0)
@@ -22,20 +25,23 @@ class ScrollableTabBar extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+    console.log('componentWillReceiveProps', this.props.index, nextProps.index)
     if (this.props.index !== nextProps.index) this.scrollToIndex(nextProps.index)
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    // const indexChanged = this.props.index !== nextProps.index
-    // const tabsLayoutChanged = this.state.tabsLayout.length !== nextState.tabsLayout.length
-    // console.log(tabsLayoutChanged)
-    // return indexChanged || tabsLayoutChanged
-    return this.props.index !== nextProps.index
-  }
+  // shouldComponentUpdate (nextProps, nextState) {
+  //   // const indexChanged = this.props.index !== nextProps.index
+  //   // const tabsLayoutChanged = this.state.tabsLayout.length !== nextState.tabsLayout.length
+  //   // console.log(tabsLayoutChanged)
+  //   // return indexChanged || tabsLayoutChanged
+  //   return this.props.index !== nextProps.index
+  // }
 
   componentDidMount () {
     const { index, subscribe } = this.props
     if (subscribe) this.positionListener = subscribe('position', this.scrollToPosition)
+    console.log('componentDidMount', index)
+
     this.scrollToIndex(index)
   }
 
@@ -43,9 +49,9 @@ class ScrollableTabBar extends Component {
     if (this.positionListener) this.positionListener.remove()
   }
 
-  componentDidUpdate () {
-    global.requestAnimationFrame(() => this.scrollToIndex(this.props.index))
-  }
+  // componentDidUpdate () {
+  //   global.requestAnimationFrame(() => this.scrollToIndex(this.props.index))
+  // }
 
   render () {
     return (
@@ -59,6 +65,10 @@ class ScrollableTabBar extends Component {
         overScrollMode='never'
         ref={this.setScrollViewRef}
         onLayout={(event) => this.updateTabBarWidth(event.nativeEvent.layout)}
+        onScrollBeginDrag={this.handleBeginDrag}
+        onScrollEndDrag={this.handleEndDrag}
+        onMomentumScrollBegin={(e) => console.log('MomentumScrollBegin') }
+        onMomentumScrollEnd={(e) => console.log('MomentumScrollEnd') }
       >
         {this.renderTabs()}
         {this.renderIndicator()}
@@ -94,6 +104,8 @@ class ScrollableTabBar extends Component {
   }
 
   scrollToPosition (position) {
+    // if (!this.isManualScroll) return
+    console.log('scrollToPosition (position)', position)
     if (!this.scrollView) return
     const currentPositionIndex = Math.floor(position)
     const nextPositionIndex = Math.ceil(position)
@@ -109,10 +121,11 @@ class ScrollableTabBar extends Component {
   }
 
   scrollToIndex (index) {
-    if (!this.scrollView) return
-    const position = this.getPositionFor(index)
-    this.scrollView.scrollTo({ x: position, animated: true })
-    this.moveIndicatorToIndex(index)
+    console.log('scrollToIndex (index)', index)
+    // if (!this.scrollView) return
+    // const position = this.getPositionFor(index)
+    // this.scrollView.scrollTo({ x: position, animated: true })
+    // this.moveIndicatorToIndex(index)
   }
 
   moveIndicatorToPosition (position) {
@@ -124,23 +137,16 @@ class ScrollableTabBar extends Component {
     const scrollDifference = nextTabLayout.x - currentTabLayout.x
     const finalPosition = Math.round(currentTabLayout.x + scrollDifference * percentageScrolled)
     this.indicatorAnimated.x.setValue(finalPosition)
+    this.indicatorAnimated.width.setValue(nextTabLayout.width) // TODO
   }
 
   moveIndicatorToIndex (index) {
     const tabLayout = this.state.tabsLayout[index]
-      console.log({index, tabLayout})
     if (!tabLayout) return
+    const animationProps = { tension: 300, friction: 35 }
     Animated.parallel([
-      Animated.spring(this.indicatorAnimated.x, {
-        toValue: tabLayout.x,
-        tension: 300,
-        friction: 35
-      }),
-      Animated.spring(this.indicatorAnimated.width, {
-        toValue: tabLayout.width,
-        tension: 300,
-        friction: 35
-      })
+      Animated.spring(this.indicatorAnimated.x, { toValue: tabLayout.x, ...animationProps }),
+      Animated.spring(this.indicatorAnimated.width, { toValue: tabLayout.width, ...animationProps })
     ]).start()
   }
 
@@ -179,6 +185,14 @@ class ScrollableTabBar extends Component {
     const scrollWidth = this.state.tabsLayout.reduce((sum, item) => sum + item.width, 0)
     const maxPosition = scrollWidth - this.state.tabBarWidth
     return Math.max(Math.min(value, maxPosition), 0)
+  }
+
+  handleBeginDrag () {
+    this.isManualScroll = true
+  }
+
+  handleEndDrag () {
+    this.isManualScroll = true
   }
 }
 
