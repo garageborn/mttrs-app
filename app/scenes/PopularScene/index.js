@@ -19,7 +19,7 @@ PopularScene.propTypes = {
 
 PopularScene.navigationOptions = props => {
   return {
-    headerMode: 'none'
+    header: null
   }
 }
 

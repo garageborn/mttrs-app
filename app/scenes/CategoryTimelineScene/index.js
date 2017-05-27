@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import withQuery from './index.gql'
 import CategoryTimelineContainer from '../../containers/CategoryTimelineContainer'
 import TagsListContainer from '../../containers/TagsListContainer'
+import CategoriesTabBarLabel from '../../components/CategoriesTabBarLabel'
 
 class CategoryTimelineScene extends Component {
   render () {
@@ -17,5 +18,9 @@ class CategoryTimelineScene extends Component {
     )
   }
 }
+
+CategoryTimelineScene.navigationOptions = (props) => ({
+})
+
 
 export default withQuery(CategoryTimelineScene)
