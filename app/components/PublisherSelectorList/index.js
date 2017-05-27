@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, SectionList } from 'react-native'
-import PublisherMenuItem from '../PublisherMenuItem'
-import PublisherMenuListViewSeparator from '../PublisherMenuListViewSeparator'
+import PublisherSelectorListItem from '../PublisherSelectorListItem'
+import PublisherSelectorSectionHeader from '../PublisherSelectorSectionHeader'
 import styles from './styles'
 
 class PublisherMenuListView extends Component {
@@ -10,7 +10,7 @@ class PublisherMenuListView extends Component {
 
     this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
-    this.renderSeparator = this.renderSeparator.bind(this)
+    this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
 
   render () {
@@ -24,7 +24,7 @@ class PublisherMenuListView extends Component {
           sections={this.sections()}
           shouldItemUpdate={this.shouldItemUpdate}
           renderItem={this.renderRow}
-          renderSectionHeader={this.renderSeparator}
+          renderSectionHeader={this.renderSectionHeader}
         />
       </View>
     )
@@ -34,12 +34,12 @@ class PublisherMenuListView extends Component {
     return `publisher_${index}`
   }
 
-  renderSeparator (sectionData) {
-    return <PublisherMenuListViewSeparator section={sectionData.section.key} />
+  renderSectionHeader (sectionData) {
+    return <PublisherSelectorSectionHeader section={sectionData.section.key} />
   }
 
   renderRow (publisher) {
-    return <PublisherMenuItem key={publisher.item.id} publisher={publisher.item} onPress={this.props.openPublisher} />
+    return <PublisherSelectorListItem key={publisher.item.id} publisher={publisher.item} onPress={this.props.openPublisher} />
   }
 
   sections () {
