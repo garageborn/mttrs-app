@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'rgba(153, 153, 153, .20)',
+    height: 60,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: 'white'
   },

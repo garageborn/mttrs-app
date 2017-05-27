@@ -1,18 +1,25 @@
 import { StyleSheet, Platform } from 'react-native'
 
+const leftContainer = {
+  alignItems: 'center',
+  flexDirection: 'row'
+}
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(153, 153, 153, .20)',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    height: 60,
     paddingHorizontal: 20
   },
 
   leftContainer: {
-    alignItems: 'center',
-    flexDirection: 'row'
+    ...leftContainer
+  },
+
+  leftContainerInactive: {
+    ...leftContainer,
+    opacity: 0.3
   },
 
   rightContainer: {

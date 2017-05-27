@@ -1,50 +1,59 @@
 import React, { PropTypes, Component } from 'react'
-import { View, Text } from 'react-native'
+import { Image, View } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
-import PublisherLogo from '../PublisherLogo'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import Touchable from '../../components/Touchable'
+import PublisherListItem from '../../components/PublisherListItem'
 import { COLORLESS } from '../../constants/TouchUnderlayColors'
+import styles from './styles'
+const activeImage = require('./assets/active.png')
+const inactiveImage = require('./assets/inactive.png')
 
 class FavoritePublishersItem extends Component {
   constructor (props) {
     super(props)
     this.onPress = this.onPress.bind(this)
+    this.handleFavoriteState = this.handleFavoriteState.bind(this)
+
+    this.state = {
+      active: true
+    }
   }
 
   render () {
     const { publisher } = this.props
 
     return (
-      <View>
-        <Touchable underlayColor={COLORLESS} onPress={this.onPress}>
-          <View>
-            {this.renderIcon()}
-            <Text>{this.publisherName}</Text>
-          </View>
-        </Touchable>
-        <ToggleFavoriteContainer
-          publisher={publisher}
-          addComponent={this.addPublisherComponent()}
-          removeComponent={this.removePublisherComponent()}
-        />
-      </View>
+      <Touchable underlayColor={COLORLESS} onPress={this.onPress}>
+        <View style={styles.container}>
+          <PublisherListItem active={this.state.active} publisher={publisher} rightContent={this.rightContent} />
+        </View>
+      </Touchable>
     )
   }
 
-  addPublisherComponent () {
-    return <Text>Add</Text>
+  get rightContent () {
+    return (
+      <ToggleFavoriteContainer
+        publisher={this.props.publisher}
+        handleFavoriteState={this.handleFavoriteState}
+        addComponent={this.addComponent}
+        removeComponent={this.removeComponent}
+      />
+    )
   }
 
-  removePublisherComponent () {
-    return <Text>Remove</Text>
+  get addComponent () {
+    return <Image source={inactiveImage} />
   }
 
-  renderIcon () {
-    let { publisher } = this.props
-    if (!publisher.icon_id) return
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
-    return <PublisherLogo size={30} source={{ uri }} />
+  get removeComponent () {
+    return <Image source={activeImage} />
+  }
+
+  handleFavoriteState (isFavorite) {
+    this.setState({
+      active: isFavorite
+    })
   }
 
   onPress () {

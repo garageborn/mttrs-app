@@ -9,11 +9,11 @@ import styles from './styles'
 
 class PublisherListItem extends Component {
   render () {
-    let { publisher, onPress, rightContent } = this.props
+    let { publisher, rightContent } = this.props
 
     return (
       <View style={styles.container}>
-        <View style={styles.leftContainer}>
+        <View style={this.leftContainerStyles}>
           {this.icon}
           <Text style={styles.name}>
             {publisher.display_name || publisher.name}
@@ -26,6 +26,11 @@ class PublisherListItem extends Component {
     )
   }
 
+  get leftContainerStyles () {
+    if (!this.props.active) return styles.leftContainerInactive
+    return styles.leftContainer
+  }
+
   get icon () {
     let { publisher } = this.props
     if (!publisher.icon_id) return
@@ -35,11 +40,12 @@ class PublisherListItem extends Component {
 }
 
 PublisherListItem.propTypes = {
+  active: PropTypes.bool.isRequired,
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired,
     today_stories_count: PropTypes.number
   }),
-  onPress: PropTypes.func.isRequired
+  rightContent: PropTypes.element.isRequired
 }
 
 export default PublisherListItem

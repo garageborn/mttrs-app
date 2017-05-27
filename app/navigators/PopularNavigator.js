@@ -15,8 +15,8 @@ const buildRoutes = (categories) => {
   })
 
   return {
-    // home: { screen: PopularTimelineScene },
-    // ...categoryRoutes,
+    home: { screen: PopularTimelineScene },
+    ...categoryRoutes,
     publishers: { screen: PublishersScene }
   }
 }
@@ -29,11 +29,7 @@ const config = {
   swipeEnabled: true,
   animationEnabled: true,
   tabBarOptions: {
-    scrollEnabled: true,
-    tabStyle: {
-      width: 100,
-      height: 0
-    }
+    scrollEnabled: true
   }
 }
 

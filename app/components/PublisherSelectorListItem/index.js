@@ -20,7 +20,7 @@ class PublisherSelectorListItem extends Component {
         underlayColor={WHITE_TRANSPARENT_COLOR}
       >
         <View style={styles.container}>
-          <PublisherListItem publisher={publisher} rightContent={this.rightContent} />
+          <PublisherListItem active publisher={publisher} rightContent={this.rightContent} />
         </View>
       </Touchable>
     )
