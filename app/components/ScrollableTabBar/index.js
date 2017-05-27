@@ -54,7 +54,6 @@ class ScrollableTabBar extends Component {
         <View
           key={`tab_${index}`}
           ref={(el) => this.setTabRef(index, el)}
-          style={{backgroundColor: 'gray', marginTop: 50}}
           onLayout={(event) => this.updateTabLayout(index, event.nativeEvent.layout)}
         >
           {renderTab(tab, index)}
