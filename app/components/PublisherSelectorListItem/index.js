@@ -2,15 +2,14 @@
 /* eslint-disable react/jsx-no-bind  */
 
 import React, { PropTypes, Component } from 'react'
-import { View, Text } from 'react-native'
+import { Text, View } from 'react-native'
 import Touchable from '../Touchable'
-import PublisherLogo from '../PublisherLogo'
-import * as cloudinary from '../../common/utils/Cloudinary'
+import PublisherListItem from '../PublisherListItem'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { stringify } from '../../common/utils/Parser'
 import styles from './styles'
 
-class PublisherMenuItem extends Component {
+class PublisherSelectorListItem extends Component {
   render () {
     let { publisher, onPress } = this.props
 
@@ -21,25 +20,14 @@ class PublisherMenuItem extends Component {
         underlayColor={WHITE_TRANSPARENT_COLOR}
       >
         <View style={styles.container}>
-          <View style={styles.leftContainer}>
-            {this.icon}
-            <Text style={styles.name}>
-              {publisher.display_name || publisher.name}
-            </Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Text style={styles.count}>{this.count}</Text>
-          </View>
+          <PublisherListItem active publisher={publisher} rightContent={this.rightContent} />
         </View>
       </Touchable>
     )
   }
 
-  get icon () {
-    let { publisher } = this.props
-    if (!publisher.icon_id) return
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
-    return <PublisherLogo size={30} source={{ uri }} />
+  get rightContent () {
+    return <Text style={styles.count}>{this.count}</Text>
   }
 
   get count () {
@@ -49,7 +37,7 @@ class PublisherMenuItem extends Component {
   }
 }
 
-PublisherMenuItem.propTypes = {
+PublisherSelectorListItem.propTypes = {
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired,
     today_stories_count: PropTypes.number
@@ -57,4 +45,4 @@ PublisherMenuItem.propTypes = {
   onPress: PropTypes.func.isRequired
 }
 
-export default PublisherMenuItem
+export default PublisherSelectorListItem

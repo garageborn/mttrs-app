@@ -16,8 +16,8 @@ const buildRoutes = (categories) => {
   })
 
   return {
-    home: { screen: PopularTimelineScene },
-    ...categoryRoutes,
+    // home: { screen: PopularTimelineScene },
+    // ...categoryRoutes,
     publishers: { screen: PublishersScene }
   }
 }

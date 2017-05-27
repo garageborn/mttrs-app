@@ -5,11 +5,11 @@ import _isNull from 'lodash/isNull'
 import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
-import PublisherMenu from '../../components/PublisherMenu'
+import PublisherSelector from '../../components/PublisherSelector'
 import Loader from '../../components/PublisherMenuLoader'
 import { NavigationActions } from '../../actions/index'
 
-class PublishersListContainer extends Component {
+class PublisherSelectorContainer extends Component {
   constructor () {
     super()
     this.state = { query: '' }
@@ -50,7 +50,7 @@ class PublishersListContainer extends Component {
     if (error) return this.renderError()
 
     return (
-      <PublisherMenu
+      <PublisherSelector
         query={this.state.query}
         emptyInput={this.emptyInput}
         publishers={this.getPublishers(this.state.query)}
@@ -75,7 +75,7 @@ class PublishersListContainer extends Component {
   }
 }
 
-PublishersListContainer.propTypes = {
+PublisherSelectorContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.shape({
     publishers: PropTypes.array,
@@ -84,5 +84,5 @@ PublishersListContainer.propTypes = {
   })
 }
 
-const PublishersListContainerWithData = withQuery(PublishersListContainer)
-export default connect()(PublishersListContainerWithData)
+const PublisherSelectorContainerWithData = withQuery(PublisherSelectorContainer)
+export default connect()(PublisherSelectorContainerWithData)

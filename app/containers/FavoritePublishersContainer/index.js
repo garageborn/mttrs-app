@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
-import FavoritePublishersHeading from '../../components/FavoritePublishersHeading'
+import FavoritePublishersManager from '../../components/FavoritePublishersManager'
 import FavoritePublishersListContainer from '../FavoritePublishersListContainer'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
 
@@ -9,6 +9,7 @@ class FavoritePublishersContainer extends Component {
   constructor () {
     super()
     this.handleComplete = this.handleComplete.bind(this)
+    this.handleButtonPress = this.handleButtonPress.bind(this)
   }
 
   componentWillMount () {
@@ -21,10 +22,11 @@ class FavoritePublishersContainer extends Component {
 
   render () {
     return (
-      <View>
-        <FavoritePublishersHeading handleComplete={this.handleComplete} />
-        {this.renderPublisherList()}
-      </View>
+      <FavoritePublishersManager
+        handleButtonPress={this.handleButtonPress}
+        handleComplete={this.handleComplete}
+        renderPublisherList={this.renderPublisherList()}
+      />
     )
   }
 
@@ -42,6 +44,10 @@ class FavoritePublishersContainer extends Component {
     )
   }
 
+  handleButtonPress () {
+    this.props.dispatch(NavigationActions.addFavorites())
+  }
+
   handleComplete () {
     const { dispatch, favoritePublishers } = this.props
     if (favoritePublishers.items.length) {
@@ -53,6 +59,7 @@ class FavoritePublishersContainer extends Component {
 }
 
 FavoritePublishersContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired

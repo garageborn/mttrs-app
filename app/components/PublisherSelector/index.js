@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
-import PublisherMenuListView from '../PublisherMenuListView'
+import PublisherSelectorList from '../PublisherSelectorList'
 import PublisherMenuSuggestionTrigger from '../PublisherMenuSuggestionTrigger'
 import PublisherMenuSuggestionContainer from '../../containers/PublisherMenuSuggestionContainer'
 import styles from './styles'
 
-class PublisherMenu extends Component {
+class PublisherSelector extends Component {
   constructor () {
     super()
     this.handleSuggestionTrigger = this.handleSuggestionTrigger.bind(this)
@@ -48,7 +48,7 @@ class PublisherMenu extends Component {
     const { openPublisher, publishers } = this.props
     if (!publishers.length || this.state.suggestion) return this.renderSuggestionView()
     return (
-      <PublisherMenuListView
+      <PublisherSelectorList
         hasPublishers={this.hasPublishers}
         publishers={publishers}
         openPublisher={openPublisher}
@@ -57,7 +57,7 @@ class PublisherMenu extends Component {
   }
 }
 
-PublisherMenu.propTypes = {
+PublisherSelector.propTypes = {
   query: PropTypes.string.isRequired,
   publishers: PropTypes.array.isRequired,
   openPublisher: PropTypes.func.isRequired,
@@ -65,4 +65,4 @@ PublisherMenu.propTypes = {
   handleQuery: PropTypes.func.isRequired
 }
 
-export default PublisherMenu
+export default PublisherSelector
