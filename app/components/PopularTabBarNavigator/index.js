@@ -1,0 +1,123 @@
+import React, { Component } from 'react'
+import { ScrollView, Text, View } from 'react-native'
+import _isEqual from 'lodash/isEqual'
+import Touchable from '../Touchable'
+
+class PopularTabBarNavigator extends Component {
+  constructor () {
+    super()
+    this.setScrollViewRef = this.setScrollViewRef.bind(this)
+    this.scrollTo = this.scrollTo.bind(this)
+    this.adjustScroll = this.adjustScroll.bind(this)
+    this.state = { tabsLayout: [], tabBarWidth: 0 }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const nextIndex = nextProps.navigationState.index
+    if (this.props.navigationState.index !== nextIndex) this.scrollTo(nextIndex)
+  }
+
+  componentDidMount () {
+    const { subscribe } = this.props
+    this.positionListener = subscribe('position', this.adjustScroll)
+  }
+
+  componentWillUnmount () {
+    this.positionListener.remove()
+  }
+
+  render () {
+    console.log('render')
+    return (
+      <ScrollView
+        horizontal
+        bounces={false}
+        alwaysBounceHorizontal={false}
+        scrollsToTop={false}
+        showsHorizontalScrollIndicator={false}
+        automaticallyAdjustContentInsets={false}
+        overScrollMode='never'
+        ref={this.setScrollViewRef}
+        onLayout={(event) => this.updateTabBarWidth(event.nativeEvent.layout)}
+      >
+        {this.renderTabs()}
+      </ScrollView>
+    )
+  }
+
+  renderTabs () {
+    const { jumpToIndex, navigationState } = this.props
+    return navigationState.routes.map((route, index) => {
+      return (
+        <View
+          key={route.key}
+          ref={(el) => this.setTabRef(index, el)}
+          style={{backgroundColor: 'gray', marginTop: 50}}
+          onLayout={(event) => this.updateTabLayout(index, event.nativeEvent.layout)}
+        >
+          <Touchable onPress={() => jumpToIndex(index)} >
+            <Text style={{padding: 20}}>{route.key}</Text>
+          </Touchable>
+        </View>
+      )
+    })
+  }
+
+  adjustScroll (position) {
+    if (!this.scrollView) return
+    const currentPositionIndex = Math.floor(position)
+    const nextPositionIndex = Math.ceil(position)
+    const currentPosition = this.getPositionFor(currentPositionIndex)
+    const nextPosition = this.getPositionFor(nextPositionIndex)
+    const percentageScrolled = position - currentPositionIndex
+    const scrollDifference = nextPosition - currentPosition
+    const finalPosition = this.normalizeScrollValue(
+      Math.round(currentPosition + scrollDifference * percentageScrolled)
+    )
+    this.scrollView.scrollTo({ x: finalPosition, animated: false })
+  }
+
+  scrollTo (index) {
+    if (!this.scrollView) return
+    const position = this.getPositionFor(index)
+    this.scrollView.scrollTo({ x: position, animated: true })
+  }
+
+  setScrollViewRef (el) {
+    this.scrollView = el
+  }
+
+  setTabRef (index, el) {
+    if (!el) return
+    if (!this.tabsRef) this.tabsRef = []
+    this.tabsRef[index] = el
+  }
+
+  updateTabLayout (index, { x, width }) {
+    let tabsLayout = [...this.state.tabsLayout]
+    const layout = {x, width}
+    if (_isEqual(tabsLayout[index], layout)) return
+    tabsLayout[index] = layout
+    this.setState({ ...this.state, tabsLayout })
+  }
+
+  updateTabBarWidth ({ width }) {
+    if (this.state.tabBarWidth === width) return
+    this.setState({ ...this.state, tabBarWidth: width })
+  }
+
+  getPositionFor (index) {
+    const tabLayout = this.state.tabsLayout[index]
+    const tabCenter = tabLayout.x + tabLayout.width / 2
+    const scrollCenter = this.state.tabBarWidth / 2
+    return this.normalizeScrollValue(tabCenter - scrollCenter)
+  }
+
+  normalizeScrollValue (value) {
+    const scrollWidth = this.state.tabsLayout.reduce((sum, item) => sum + item.width, 0)
+    const maxPosition = scrollWidth - this.state.tabBarWidth
+    return Math.max(Math.min(value, maxPosition), 0)
+  }
+}
+
+export default PopularTabBarNavigator
