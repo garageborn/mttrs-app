@@ -18,6 +18,7 @@ class PopularTabBarNavigator extends Component {
         tabs={navigationState.routes}
         subscribe={subscribe}
         renderTab={this.renderTab}
+        renderOptions={{ renderIndicator: true }}
       />
     )
   }
