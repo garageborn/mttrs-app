@@ -71,8 +71,12 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
 
+  large: {
+
+  },
+
   largeText: {
-    fontSize: 24
+    fontSize: 20
   },
 
   transparentText: {

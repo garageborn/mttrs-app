@@ -12,6 +12,12 @@ class ToggleFavoriteContainer extends Component {
     this.toggle = this.toggle.bind(this)
   }
 
+  componentWillReceiveProps (nextProps) {
+    const { handleFavoriteState } = this.props
+    if (!handleFavoriteState) return
+    if (this.props.isFavorite !== nextProps.isFavorite) handleFavoriteState(nextProps.isFavorite)
+  }
+
   render () {
     const { isFavorite, addComponent, removeComponent } = this.props
     const component = isFavorite ? removeComponent : addComponent
@@ -35,6 +41,8 @@ class ToggleFavoriteContainer extends Component {
 
 ToggleFavoriteContainer.propTypes = {
   addComponent: PropTypes.element.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  handleFavoriteState: PropTypes.func,
   removeComponent: PropTypes.element.isRequired,
   isFavorite: PropTypes.bool.isRequired,
   publisher: PropTypes.shape({

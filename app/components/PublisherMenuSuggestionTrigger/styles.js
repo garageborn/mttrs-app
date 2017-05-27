@@ -3,10 +3,9 @@ import { StyleSheet, Platform } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    flexGrow: 1,
     borderColor: '#999999',
     height: 34,
-    width: 10,
+    width: 45,
     marginTop: 8,
     marginRight: 12,
     borderRadius: 3,

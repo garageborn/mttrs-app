@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import _result from 'lodash/result'
+import ScrollableTabBar from '../ScrollableTabBar'
 import Tag from '../Tag'
 import styles from './styles'
 
@@ -14,18 +15,20 @@ const messages = defineMessages({
 class TagsList extends Component {
   constructor () {
     super()
-    this.renderTags = this.renderTags.bind(this)
+    this.renderTag = this.renderTag.bind(this)
   }
 
   render () {
     const { data } = this.props
     if (data.loading) return this.renderLoader()
+    const tags = [{ id: null }, ...data.tags]
 
     return (
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.container}>
-        {this.renderDefaultTag()}
-        {this.renderTags()}
-      </ScrollView>
+      <ScrollableTabBar
+        index={this.selectedIndex}
+        tabs={tags}
+        renderTab={this.renderTag}
+      />
     )
   }
 
@@ -38,20 +41,20 @@ class TagsList extends Component {
     )
   }
 
-  renderTags () {
-    const { selectTag, data } = this.props
-    return data.tags.map((tag, idx) => {
-      return (
-        <Tag
-          key={`tag_${idx}`}
-          last={this.isLast(idx)}
-          active={this.isSelected(tag)}
-          onPress={() => selectTag(tag)}
-        >
-          {tag.name}
-        </Tag>
-      )
-    })
+  renderTag (tag, index) {
+    const { selectTag } = this.props
+
+    if (!tag.id) return this.renderDefaultTag()
+
+    return (
+      <Tag
+        last={this.isLast(index)}
+        active={this.isSelected(tag)}
+        onPress={() => selectTag(tag)}
+      >
+        {tag.name}
+      </Tag>
+    )
   }
 
   renderLoader () {
@@ -67,12 +70,18 @@ class TagsList extends Component {
   }
 
   isSelected (tag) {
-    return _result(tag, 'id') === _result(this.props, 'active.id')
+    return _result(tag, 'id') === _result(this.props, 'selectedTag.id')
+  }
+
+  get selectedIndex () {
+    const { data, selectedTag } = this.props
+    if (!selectedTag) return 0
+    return data.tags.indexOf(selectedTag) + 1
   }
 }
 
 TagsList.propTypes = {
-  active: PropTypes.shape({
+  selectedTag: PropTypes.shape({
     id: PropTypes.any
   }),
   data: PropTypes.shape({

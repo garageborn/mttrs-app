@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import { Modal, View } from 'react-native'
 import { connect } from 'react-redux'
 import CategoriesDialogContainer from '../CategoriesDialogContainer'
+import Dialog from '../../components/Dialog'
 import { FavoritesActions, FavoritePublishersActions, NavigationActions } from '../../actions/index'
-import styles from '../../styles/Modal'
 
 class FavoriteCategoriesDialogContainer extends Component {
   constructor () {
     super()
+    this.close = this.close.bind(this)
     this.selectCategory = this.selectCategory.bind(this)
   }
 
@@ -21,17 +22,22 @@ class FavoriteCategoriesDialogContainer extends Component {
 
     return (
       <Modal transparent visible onRequestClose={this.close}>
-        <View style={styles.modal}>
+        <Dialog closeDialog={this.close} >
           <CategoriesDialogContainer publisherIds={items} onPress={this.selectCategory} />
-        </View>
+        </Dialog>
       </Modal>
     )
   }
 
   selectCategory (category) {
     const { dispatch } = this.props
-    dispatch(NavigationActions.closeModal())
+    this.close()
     dispatch(FavoritesActions.selectCategory(category))
+  }
+
+  close () {
+    const { dispatch } = this.props
+    dispatch(NavigationActions.closeModal())
   }
 }
 

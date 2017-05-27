@@ -1,12 +1,10 @@
 import { StyleSheet, Platform } from 'react-native'
-import { DARK_COLOR } from '../../constants/Colors'
 export const height = 50
-export const textColor = '#DADADA'
+export const textColor = '#999999'
 
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    backgroundColor: DARK_COLOR,
     height,
     justifyContent: 'center',
     flexGrow: 6
@@ -14,10 +12,9 @@ const styles = StyleSheet.create({
 
   search: {
     position: 'relative',
-    backgroundColor: '#787877',
+    backgroundColor: '#E5E5E5',
     marginHorizontal: 10,
-    borderRadius: 2,
-    elevation: 2
+    borderRadius: 2
   },
 
   icon: {
@@ -36,13 +33,9 @@ const styles = StyleSheet.create({
 
   searchInput: {
     position: 'relative',
-    backgroundColor: '#787877',
     color: textColor,
     fontSize: 14,
-    fontWeight: Platform.select({
-      ios: '600',
-      android: '400'
-    }),
+    fontWeight: '400',
     height: 35,
     borderRadius: 2,
     padding: 5,

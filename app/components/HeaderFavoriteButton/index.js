@@ -1,19 +1,44 @@
 import React, { Component, PropTypes } from 'react'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import HeaderButton from '../HeaderButton'
+import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 
 class HeaderFavoriteButton extends Component {
   render () {
-    return <HeaderButton onPress={this.props.onPress} content={this.content} />
+    const { publisher } = this.props
+
+    return (
+      <ToggleFavoriteContainer
+        publisher={publisher}
+        addComponent={this.addComponent}
+        removeComponent={this.removeComponent}
+      />
+    )
   }
 
-  get content () {
-    return <Image source={require('./assets/inactive.png')} />
+  get addComponent () {
+    const content = <Image source={require('./assets/inactive.png')} />
+    return (
+      <View>
+        <HeaderButton content={content} />
+      </View>
+    )
+  }
+
+  get removeComponent () {
+    const content = <Image source={require('./assets/active.png')} />
+    return (
+      <View>
+        <HeaderButton content={content} />
+      </View>
+    )
   }
 }
 
 HeaderFavoriteButton.propTypes = {
-  onPress: PropTypes.func
+  publisher: PropTypes.shape({
+    id: PropTypes.any.isRequired
+  }).isRequired
 }
 
 export default HeaderFavoriteButton

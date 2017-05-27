@@ -1,9 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 import FavoritePublishersContainer from '../../containers/FavoritePublishersContainer'
+import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
+import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
+import headerStyles from '../../styles/Header'
 
-class FavoritePublishersScene extends Component {
-  render () {
-    return <FavoritePublishersContainer />
+const FavoritePublishersScene = () => (
+  <FavoritePublishersContainer />
+)
+
+FavoritePublishersScene.navigationOptions = props => {
+  return {
+    headerTitle: <FavoritesTitleContainer {...props} />,
+    headerRight: <FavoritesHeaderRight />,
+    ...headerStyles
   }
 }
 

@@ -18,7 +18,12 @@ class FavoritePublishersListContainer extends Component {
   render () {
     const { loading, publishers } = this.props.data
     if (loading) return this.renderLoading()
-    return <FavoritePublishersList publishers={publishers} openPublisher={this.openPublisher} />
+    return (
+      <FavoritePublishersList
+        publishers={publishers}
+        openPublisher={this.openPublisher}
+      />
+    )
   }
 
   renderLoading () {
@@ -40,7 +45,7 @@ FavoritePublishersListContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }).isRequired,
-  publisherIds: PropTypes.array.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 const FavoritePublishersListContainerWithData = withQuery(FavoritePublishersListContainer)
