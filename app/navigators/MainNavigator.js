@@ -23,7 +23,8 @@ const MainRoutes = {
       header: null
     }
   },
-  favorites: { screen: FavoritesNavigator,
+  favorites: {
+    screen: FavoritesNavigator,
     navigationOptions: {
       tabBarLabel: <FavoritesTabBar />,
       tabBarIcon: FavoritesTabBarIcon
@@ -33,7 +34,7 @@ const MainRoutes = {
 
 const MainNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'popular',
   tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
   tabBarPosition: 'bottom',
   lazy: true
