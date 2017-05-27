@@ -16,9 +16,7 @@ const buildRoutes = (categories) => {
   })
 
   return {
-    home: {
-      screen: PopularTimelineScene
-    },
+    home: { screen: PopularTimelineScene },
     ...categoryRoutes,
     publishers: { screen: PublishersScene }
   }
@@ -31,13 +29,7 @@ const config = {
   tabBarPosition: 'top',
   lazy: true,
   swipeEnabled: true,
-  animationEnabled: true,
-  tabBarOptions: {
-    scrollEnabled: true,
-    tabStyle: {
-      width: undefined
-    }
-  }
+  animationEnabled: true
 }
 
 export default (categories) => {
