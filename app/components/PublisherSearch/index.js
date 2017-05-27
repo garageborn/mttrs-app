@@ -43,7 +43,7 @@ class PublisherSearch extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.search} shadowOffset={{width: 1, height: 2}} shadowColor={'rgba(0, 0, 0, .1)'} shadowOpacity={1.0}>
+        <View style={styles.search}>
           <Image style={styles.icon} source={icon} />
           <TextInput
             ref='textInput'

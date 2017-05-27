@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import PublishersListContainer from '../../containers/PublishersListContainer'
+import PublisherSelectorContainer from '../../containers/PublisherSelectorContainer'
 
 class PublishersScene extends Component {
   render () {
-    return <PublishersListContainer />
+    return <PublisherSelectorContainer />
   }
 }
 
