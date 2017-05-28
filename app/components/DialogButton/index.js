@@ -11,7 +11,7 @@ class DialogButton extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.iconContainer}>
-          <Image source={this.props.icon} />
+          {this.props.icon}
         </View>
         <View style={styles.textContainer}>
           {this.renderMessages()}
@@ -33,7 +33,7 @@ class DialogButton extends Component {
 }
 
 DialogButton.propTypes = {
-  icon: PropTypes.number.isRequired,
+  icon: PropTypes.element.isRequired,
   messages: PropTypes.array.isRequired
 }
 
