@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native'
 
 const containerStyles = {
-  paddingVertical: 15,
-  paddingHorizontal: 20
+  paddingVertical: 10,
+  paddingHorizontal: 8
 }
 
 const textStyles = {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   activeContainer: {
     ...containerStyles,
-    borderBottomWidth: 4,
+    borderBottomWidth: 2,
     borderColor: '#FFF'
   },
   text: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
   activeText: {
-    fontWeight: '600'
+    fontWeight: '700'
   }
 })
 
