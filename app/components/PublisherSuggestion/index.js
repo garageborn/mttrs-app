@@ -21,7 +21,7 @@ const messages = defineMessages({
   }
 })
 
-class PublisherMenuSuggestion extends Component {
+class PublisherSuggestion extends Component {
   constructor () {
     super()
 
@@ -62,7 +62,7 @@ class PublisherMenuSuggestion extends Component {
 
     return (
       <Button
-        background='action'
+        background='danger'
         content={label.toUpperCase()}
         onPress={this.onButtonPress}
         size='regular'
@@ -80,7 +80,7 @@ class PublisherMenuSuggestion extends Component {
   }
 }
 
-PublisherMenuSuggestion.propTypes = {
+PublisherSuggestion.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
@@ -89,4 +89,4 @@ PublisherMenuSuggestion.propTypes = {
   status: PropTypes.string.isRequired
 }
 
-export default injectIntl(PublisherMenuSuggestion)
+export default injectIntl(PublisherSuggestion)

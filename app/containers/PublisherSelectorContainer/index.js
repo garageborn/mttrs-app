@@ -6,7 +6,7 @@ import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
 import PublisherSelector from '../../components/PublisherSelector'
-import Loader from '../../components/PublisherMenuLoader'
+import Loader from '../../components/PublisherSelectorLoader'
 import { NavigationActions } from '../../actions/index'
 
 class PublisherSelectorContainer extends Component {
