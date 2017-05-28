@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
-import Touchable from '../Touchable'
-import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import Button from '../Button'
 
 const messages = defineMessages({
   button: { id: 'emptyFavoritesTimeline.button' },
@@ -16,9 +15,12 @@ class EmptyFavoritesTimeline extends Component {
     return (
       <View>
         <Text>{intl.formatMessage(messages.heading)}</Text>
-        <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR} >
-          <Text>{intl.formatMessage(messages.button)}</Text>
-        </Touchable>
+        <Button
+          background='danger'
+          content={intl.formatMessage(messages.button)}
+          onPress={onPress}
+          size='regular'
+        />
       </View>
     )
   }
