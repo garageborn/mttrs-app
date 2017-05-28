@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { AppState } from 'react-native'
 import { connect } from 'react-redux'
+import _throttle from 'lodash/throttle'
 import captureError from '../../common/utils/captureError'
 import Timeline from '../../components/Timeline'
 import { VisitedStoriesActions } from '../../actions/index'
@@ -10,9 +11,10 @@ const minStoriesInTheViewport = 4
 class TimelineContainer extends Component {
   constructor (props) {
     super(props)
-    this.onEndReached = this.onEndReached.bind(this)
-    this.onPullToRefresh = this.onPullToRefresh.bind(this)
+    this.onEndReached = _throttle(this.onEndReached.bind(this), 3000)
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
+    this.onPullToRefresh = this.onPullToRefresh.bind(this)
+
     this.state = {
       loadingMore: false,
       loadingPullToRefresh: false
@@ -26,6 +28,8 @@ class TimelineContainer extends Component {
 
   componentWillUnmount () {
     AppState.removeEventListener('change', this.handleAppStateChange)
+    this.onEndReached.cancel()
+    if (this.infiniteScroll) this.infiniteScroll.cancel()
   }
 
   componentDidUpdate () {
@@ -55,13 +59,20 @@ class TimelineContainer extends Component {
 
   onEndReached () {
     const { hasMore, infiniteScroll } = this.props.data
-    if (this.state.loadingMore || !hasMore) return
+    if (this.isLoadingMore || !hasMore) return
 
-    this.setState({ loadingMore: true })
-    infiniteScroll()
+    this.isLoadingMore = true
+
+    this.infiniteScroll = infiniteScroll()
+    this.infiniteScroll
       .promise
-      .then(() => this.setState({ loadingMore: false }))
-      .catch((error) => captureError(error))
+      .then(() => {
+        this.isLoadingMore = false
+      })
+      .catch((error) => {
+        this.isLoadingMore = false
+        captureError(error)
+      })
   }
 
   onPullToRefresh () {
@@ -93,6 +104,16 @@ class TimelineContainer extends Component {
       if (item && item.stories && item.stories.length) length = item.stories.length
       return sum + length
     }, 0)
+  }
+
+  set isLoadingMore (value) {
+    if (this._isLoadingMore === value) return
+    this._isLoadingMore = value
+    this.setState({ ...this.state, loadingMore: value })
+  }
+
+  get isLoadingMore () {
+    return this._isLoadingMore || false
   }
 }
 

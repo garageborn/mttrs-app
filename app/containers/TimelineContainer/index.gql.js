@@ -34,11 +34,11 @@ const infiniteScroll = ({ fetchMore, variables, timeline }) => {
     fetchMore({
       variables: { ...variables, cursor: lastItem.date },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult.data) return previousResult
+        if (!fetchMoreResult.timeline) return previousResult
 
         const previousTimeline = timelineToItems(previousResult.timeline)
-        const nextTimeline = fetchMoreResult.data.timeline
-        return { timeline: previousTimeline.concat(nextTimeline) }
+        const nextTimeline = [fetchMoreResult.timeline]
+        return { timeline: [...previousTimeline, ...nextTimeline] }
       }
     }).then(resolve).catch(reject)
   })
