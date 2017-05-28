@@ -109,8 +109,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 244
-        versionName "1.0.97"
+        versionCode 245
+        versionName "1.0.98"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -170,8 +170,8 @@ dependencies {
     }
     compile fileTree(dir: "libs", include: ["*.jar"])
     // From node_modules
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
-        transitive = true;
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+      transitive = true;
     }
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.facebook.react:react-native:+'

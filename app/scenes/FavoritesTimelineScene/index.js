@@ -26,8 +26,6 @@ class FavoritesTimelineScene extends Component {
     if (!isLoaded) return this.renderLoading()
     if (!items.length) return <EmptyFavoritesTimelineContainer />
 
-      return <EmptyFavoritesTimelineContainer />
-
     return (
       <View>
         <FavoritePublishersSelectorContainer publisherIds={items} />
