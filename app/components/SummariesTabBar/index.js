@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, Image } from 'react-native'
+import { Text, Image, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import styles from './styles'
 
 const messages = defineMessages({
   label: { id: 'tabBar.summaries' }
@@ -11,7 +12,9 @@ class SummariesTabBar extends Component {
     const { intl } = this.props
 
     return (
-      <Text>{intl.formatMessage(messages.label)}</Text>
+      <View style={styles.container}>
+        <Text style={styles.text}>{intl.formatMessage(messages.label)}</Text>
+      </View>
     )
   }
 }

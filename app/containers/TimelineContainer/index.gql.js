@@ -1,41 +1,48 @@
 import { graphql } from 'react-apollo'
 import _uniqBy from 'lodash/uniqBy'
 import _isArray from 'lodash/isArray'
+import makeCancelable from '../../common/utils/makeCancelable'
 
 export const defaultVariables = { limit: 16 }
 
 const pullToRefresh = ({ fetchMore, variables }) => {
-  return fetchMore({
-    variables: { ...variables, cursor: null },
-    updateQuery: (previousResult, { fetchMoreResult }) => {
-      if (!fetchMoreResult.data) return previousResult
+  const promise = new Promise((resolve, reject) => {
+    fetchMore({
+      variables: { ...variables, cursor: null },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return previousResult
 
-      const newTimeline = fetchMoreResult.data.timeline
-      if (!newTimeline) return previousResult
+        const newTimeline = fetchMoreResult.timeline
+        if (!newTimeline) return previousResult
 
-      let timeline = [newTimeline].concat(previousResult.timeline)
-      timeline = _uniqBy(timeline, item => item.date)
-      return Object.assign({}, previousResult, { timeline: [...timeline] })
-    }
+        let timeline = [newTimeline].concat(previousResult.timeline)
+        timeline = _uniqBy(timeline, item => item.date)
+        return { timeline: [...timeline] }
+      }
+    }).then(resolve).catch(reject)
   })
+  return makeCancelable(promise)
 }
 
 const infiniteScroll = ({ fetchMore, variables, timeline }) => {
-  const items = timelineToItems(timeline)
-  if (!hasMore(items)) return
+  const promise = new Promise((resolve, reject) => {
+    const items = timelineToItems(timeline)
+    if (!hasMore(items)) return resolve()
 
-  const lastItem = items[items.length - 1]
+    const lastItem = items[items.length - 1]
 
-  return fetchMore({
-    variables: { ...variables, cursor: lastItem.date },
-    updateQuery: (previousResult, { fetchMoreResult }) => {
-      if (!fetchMoreResult.data) return previousResult
+    fetchMore({
+      variables: { ...variables, cursor: lastItem.date },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        if (!fetchMoreResult.timeline) return previousResult
 
-      const previousTimeline = timelineToItems(previousResult.timeline)
-      const nextTimeline = fetchMoreResult.data.timeline
-      return { timeline: previousTimeline.concat(nextTimeline) }
-    }
+        const previousTimeline = timelineToItems(previousResult.timeline)
+        const nextTimeline = [fetchMoreResult.timeline]
+        return { timeline: [...previousTimeline, ...nextTimeline] }
+      }
+    }).then(resolve).catch(reject)
   })
+  return makeCancelable(promise)
 }
 
 const hasMore = (items) => {

@@ -4,19 +4,12 @@ import AddFavoritesPublisherActiveLabel from '../AddFavoritesPublisherActiveLabe
 import styles from './styles'
 
 const AddFavoritesPublisher = ({ active, icon, name }) => {
-  const containerStyles = () => {
-    if (active) return [styles.container, styles.active]
-    return styles.container
-  }
-
-  const renderActiveLabel = () => {
-    return <AddFavoritesPublisherActiveLabel active={active} />
-  }
+  const iconStyle = active ? styles.activeIcon : styles.inactiveIcon
 
   return (
-    <View style={containerStyles()}>
-      {renderActiveLabel()}
-      {icon}
+    <View style={styles.container}>
+      <AddFavoritesPublisherActiveLabel active={active} />
+      <View style={iconStyle}>{icon}</View>
       <Text style={styles.text}>{name}</Text>
     </View>
   )
