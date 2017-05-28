@@ -31,6 +31,7 @@ class ScrollableTabBar extends Component {
   render () {
     return (
       <ScrollView
+        style={this.props.style}
         horizontal
         bounces={false}
         alwaysBounceHorizontal={false}
@@ -47,7 +48,8 @@ class ScrollableTabBar extends Component {
   }
 
   renderTabs () {
-    const { renderTab, tabs } = this.props
+    const { renderTab, tabs, index } = this.props
+    const activeIndex = index
     return tabs.map((tab, index) => {
       return (
         <View
@@ -55,7 +57,7 @@ class ScrollableTabBar extends Component {
           ref={(el) => this.setTabRef(index, el)}
           onLayout={(event) => this.updateTabLayout(index, event.nativeEvent.layout)}
         >
-          {renderTab(tab, index)}
+          {renderTab(tab, index, activeIndex)}
         </View>
       )
     })
@@ -119,6 +121,7 @@ class ScrollableTabBar extends Component {
 }
 
 ScrollableTabBar.propTypes = {
+  styles: PropTypes.number,
   index: PropTypes.number.isRequired,
   tabs: PropTypes.array.isRequired,
   renderTab: PropTypes.func.isRequired,
