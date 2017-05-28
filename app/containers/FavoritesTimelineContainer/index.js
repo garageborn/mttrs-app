@@ -1,47 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import TimelineContainer from '../TimelineContainer'
-import styles from '../../styles/App'
 
 class FavoritesTimelineContainer extends Component {
   render () {
-    const { data, favoritePublishers } = this.props
-    if (!favoritePublishers.isLoaded) return this.renderLoading()
-
-    return (
-      <View style={styles.listViewContainer}>
-        <TimelineContainer data={data} />
-      </View>
-    )
-  }
-
-  renderLoading () {
-    return (
-      <View>
-        <ActivityIndicator size='large' color='#AAA' />
-      </View>
-    )
+    const { data } = this.props
+    return <TimelineContainer data={data} />
   }
 }
 
 FavoritesTimelineContainer.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired
-  }),
-  favoritePublishers: PropTypes.shape({
-    isLoaded: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired
-  }).isRequired
+  data: PropTypes.any.isRequired,
+  publisherIds: PropTypes.array.isRequired,
+  selectedCategory: PropTypes.any
 }
 
 let mapStateToProps = (state) => {
   return {
-    favoritePublishers: {
-      isLoaded: state.FavoritePublishersReducer.isLoaded,
-      items: state.FavoritePublishersReducer.items
-    },
     selectedCategory: state.FavoritesReducer.selectedCategory
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
@@ -14,15 +15,21 @@ class FavoritesTimelineScene extends Component {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
+  shouldComponentUpdate (nextProps) {
+    const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
+    return isLoadedChanged || itemsChanged
+  }
+
   render () {
-    const { isLoaded, exists } = this.props
+    const { isLoaded, items } = this.props.favoritePublishers
     if (!isLoaded) return this.renderLoading()
-    if (!exists) return <EmptyFavoritesTimelineContainer />
+    if (!items.length) return <EmptyFavoritesTimelineContainer />
 
     return (
       <View>
-        <FavoritePublishersSelectorContainer />
-        <FavoritesTimelineContainer />
+        <FavoritePublishersSelectorContainer publisherIds={items} />
+        <FavoritesTimelineContainer publisherIds={items} />
       </View>
     )
   }
@@ -38,14 +45,18 @@ class FavoritesTimelineScene extends Component {
 
 FavoritesTimelineScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  isLoaded: PropTypes.bool.isRequired,
-  exists: PropTypes.bool.isRequired
+  favoritePublishers: PropTypes.shape({
+    isLoaded: PropTypes.bool.isRequired,
+    items: PropTypes.array.isRequired
+  }).isRequired
 }
 
 let mapStateToProps = (state, ownProps) => {
   return {
-    isLoaded: state.FavoritePublishersReducer.isLoaded,
-    exists: state.FavoritePublishersReducer.items.length > 0
+    favoritePublishers: {
+      isLoaded: state.FavoritePublishersReducer.isLoaded,
+      items: state.FavoritePublishersReducer.items
+    }
   }
 }
 
