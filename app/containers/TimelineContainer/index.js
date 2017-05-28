@@ -12,8 +12,8 @@ class TimelineContainer extends Component {
   constructor (props) {
     super(props)
     this.onEndReached = _throttle(this.onEndReached.bind(this), 3000)
+    this.onPullToRefresh = _throttle(this.onPullToRefresh.bind(this), 3000)
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
-    this.onPullToRefresh = this.onPullToRefresh.bind(this)
 
     this.state = {
       loadingMore: false,
@@ -29,7 +29,9 @@ class TimelineContainer extends Component {
   componentWillUnmount () {
     AppState.removeEventListener('change', this.handleAppStateChange)
     this.onEndReached.cancel()
+    this.onPullToRefresh.cancel()
     if (this.infiniteScroll) this.infiniteScroll.cancel()
+    if (this.pullToRefresh) this.pullToRefresh.cancel()
   }
 
   componentDidUpdate () {
@@ -77,14 +79,19 @@ class TimelineContainer extends Component {
 
   onPullToRefresh () {
     const { pullToRefresh } = this.props.data
-    if (this.state.loadingPullToRefresh) return
-    this.setState({ loadingPullToRefresh: true })
-    pullToRefresh()
+    if (this.isLoadingPullToRefresh) return
+
+    this.isLoadingPullToRefresh = true
+
+    this.pullToRefresh = pullToRefresh()
+    this.pullToRefresh
       .promise
-      .then(() => this.setState({ loadingPullToRefresh: false }))
+      .then(() => {
+        this.isLoadingPullToRefresh = false
+      })
       .catch((error) => {
+        this.isLoadingPullToRefresh = false
         captureError(error)
-        this.setState({ loadingPullToRefresh: false })
       })
   }
 
@@ -114,6 +121,16 @@ class TimelineContainer extends Component {
 
   get isLoadingMore () {
     return this._isLoadingMore || false
+  }
+
+  set isLoadingPullToRefresh (value) {
+    if (this._isLoadingPullToRefresh === value) return
+    this._isLoadingPullToRefresh = value
+    this.setState({ ...this.state, loadingPullToRefresh: value })
+  }
+
+  get isLoadingPullToRefresh () {
+    return this._isLoadingPullToRefresh || false
   }
 }
 

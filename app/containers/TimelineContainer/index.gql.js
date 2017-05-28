@@ -10,14 +10,14 @@ const pullToRefresh = ({ fetchMore, variables }) => {
     fetchMore({
       variables: { ...variables, cursor: null },
       updateQuery: (previousResult, { fetchMoreResult }) => {
-        if (!fetchMoreResult.data) return previousResult
+        if (!fetchMoreResult) return previousResult
 
-        const newTimeline = fetchMoreResult.data.timeline
+        const newTimeline = fetchMoreResult.timeline
         if (!newTimeline) return previousResult
 
         let timeline = [newTimeline].concat(previousResult.timeline)
         timeline = _uniqBy(timeline, item => item.date)
-        return Object.assign({}, previousResult, { timeline: [...timeline] })
+        return { timeline: [...timeline] }
       }
     }).then(resolve).catch(reject)
   })
