@@ -1,10 +1,14 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2D2D2B',
-    height: 64,
-    paddingTop: 22
+    height: Platform.select({
+      ios: 64
+    }),
+    paddingTop: Platform.select({
+      ios: 22
+    })
   }
 
 })
