@@ -4,11 +4,12 @@ const { height, width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     height,
+    width
+  },
+  centered: {
     position: 'absolute',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(45, 45, 43, .80)',
-    width
+    alignItems: 'center'
   },
   overlay: {
     height,

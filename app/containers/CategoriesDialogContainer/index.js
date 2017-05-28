@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import withQuery from './index.gql'
 import CategoryDialogButton from '../../components/CategoryDialogButton'
+import CategoriesDialog from '../../components/CategoriesDialog'
 
 const messages = defineMessages({
   allCategories: { id: 'categoriesDialog.allCategories' }
@@ -11,10 +12,10 @@ const messages = defineMessages({
 class CategoriesDialogContainer extends Component {
   render () {
     return (
-      <View>
+      <CategoriesDialog type={this.props.type}>
         {this.renderAllCategories()}
         {this.renderCategories()}
-      </View>
+      </CategoriesDialog>
     )
   }
 
@@ -50,7 +51,8 @@ CategoriesDialogContainer.propTypes = {
   }).isRequired,
   data: PropTypes.shape({
     categories: PropTypes.array
-  })
+  }),
+  type: PropTypes.string.isRequired
 }
 
 const IntlCategoriesDialogContainer = injectIntl(CategoriesDialogContainer)

@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
-
-const shareIcon = require('../StoryDialog/assets/share.png')
+import styles from './styles'
 
 class CategoryDialogButton extends Component {
   render () {
@@ -11,9 +10,16 @@ class CategoryDialogButton extends Component {
     return (
       <Touchable onPress={() => onPress(category)}>
         <View>
-          <DialogButton icon={shareIcon} messages={[category.name]} />
+          <DialogButton icon={this.icon} messages={[category.name]} />
         </View>
       </Touchable>
+    )
+  }
+
+  get icon () {
+    const backgroundColor = this.props.category.color ? this.props.category.color : '#E5E5E5'
+    return (
+      <View style={[styles.icon, { backgroundColor: backgroundColor }]} />
     )
   }
 }

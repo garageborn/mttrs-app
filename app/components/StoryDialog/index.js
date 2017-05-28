@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DialogButton from '../DialogButton'
 import ShareButtonContainer from '../../containers/ShareButtonContainer'
@@ -44,7 +44,7 @@ class StoryDialog extends Component {
     return (
       <ShareButtonContainer link={story.main_link}>
         <View>
-          <DialogButton icon={shareIcon} messages={[intl.formatMessage(messages.share)]} />
+          <DialogButton icon={this.shareIcon} messages={[intl.formatMessage(messages.share)]} />
         </View>
       </ShareButtonContainer>
     )
@@ -55,7 +55,7 @@ class StoryDialog extends Component {
     return (
       <View>
         <DialogButton
-          icon={inactiveFavoriteIcon}
+          icon={this.inactiveFavoriteIcon}
           messages={[intl.formatMessage(messages.addFavorite), this.publisherName]}
         />
       </View>
@@ -67,11 +67,23 @@ class StoryDialog extends Component {
     return (
       <View>
         <DialogButton
-          icon={activeFavoriteIcon}
+          icon={this.activeFavoriteIcon}
           messages={[intl.formatMessage(messages.removeFavorite), this.publisherName]}
         />
       </View>
     )
+  }
+
+  get shareIcon () {
+    return <Image source={shareIcon} />
+  }
+
+  get activeFavoriteIcon () {
+    return <Image source={activeFavoriteIcon} />
+  }
+
+  get inactiveFavoriteIcon () {
+    return <Image source={inactiveFavoriteIcon} />
   }
 
   get publisherName () {
