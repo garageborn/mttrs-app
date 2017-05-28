@@ -9,10 +9,12 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     height: itemSize,
     width: itemSize,
-    alignItems: 'center',
-    opacity: 0.3
+    alignItems: 'center'
   },
-  active: {
+  inactiveIcon: {
+    opacity: 0.5
+  },
+  activeIcon: {
     opacity: 1
   },
   text: {
