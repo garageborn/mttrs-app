@@ -2,10 +2,10 @@ import React from 'react'
 import { View, ActivityIndicator } from 'react-native'
 import styles from './styles'
 
-const PublisherMenuLoader = () => (
+const PublisherSelectorLoader = () => (
   <View style={styles.container}>
     <ActivityIndicator size='large' color='#AAA' />
   </View>
 )
 
-export default PublisherMenuLoader
+export default PublisherSelectorLoader

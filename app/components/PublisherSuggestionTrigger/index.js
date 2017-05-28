@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { View, Text, TouchableHighlight } from 'react-native'
 import styles from './styles.js'
 
-const PublisherMenuSuggestionTrigger = ({ active, handlePress }) => {
+const PublisherSuggestionTrigger = ({ active, handlePress }) => {
   const getStyles = () => {
     if (active) return [styles.container, styles.active]
     return styles.container
@@ -16,8 +16,9 @@ const PublisherMenuSuggestionTrigger = ({ active, handlePress }) => {
   )
 }
 
-PublisherMenuSuggestionTrigger.propTypes = {
+PublisherSuggestionTrigger.propTypes = {
+  active: PropTypes.bool.isRequired,
   handlePress: PropTypes.func
 }
 
-export default PublisherMenuSuggestionTrigger
+export default PublisherSuggestionTrigger

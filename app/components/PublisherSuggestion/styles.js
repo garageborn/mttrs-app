@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+const { height } = Dimensions.get('window')
 
-export const actionColor = '#23E2D4'
+export const actionColor = '#0B9CFF'
 export const dangerColor = '#FF5607'
 export const feedbackMessage = {
   fontSize: 13,
@@ -10,19 +11,20 @@ export const feedbackMessage = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    justifyContent: 'flex-start',
     alignItems: 'center'
   },
 
   title: {
     fontSize: 18,
-    color: '#F1F1F1',
+    color: '#666766',
     marginTop: 30
   },
 
   subTitle: {
     fontSize: 15,
-    color: '#999',
+    color: '#CBCBCB',
     marginVertical: 10
   },
 
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
 
   publisher: {
     fontSize: 24,
-    color: '#FFF',
+    color: '#666766',
     height: 50
   },
 

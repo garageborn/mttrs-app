@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { KeyboardAvoidingView, View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherSelectorList from '../PublisherSelectorList'
-import PublisherMenuSuggestionTrigger from '../PublisherMenuSuggestionTrigger'
-import PublisherMenuSuggestionContainer from '../../containers/PublisherMenuSuggestionContainer'
+import PublisherSuggestionTrigger from '../PublisherSuggestionTrigger'
+import PublisherSuggestionContainer from '../../containers/PublisherSuggestionContainer'
 import styles from './styles'
 
 class PublisherSelector extends Component {
@@ -25,7 +25,7 @@ class PublisherSelector extends Component {
             emptyInput={emptyInput}
             suggestion={suggestion}
           />
-          <PublisherMenuSuggestionTrigger
+          <PublisherSuggestionTrigger
             handlePress={this.handleSuggestionTrigger}
             active={suggestion}
           />
@@ -41,7 +41,7 @@ class PublisherSelector extends Component {
 
   renderSuggestionView () {
     const { query } = this.props
-    return <PublisherMenuSuggestionContainer query={query} publisher={query} />
+    return <PublisherSuggestionContainer query={query} publisher={query} />
   }
 
   renderListView () {
