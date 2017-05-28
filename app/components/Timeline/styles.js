@@ -1,8 +1,10 @@
 import { StyleSheet, Dimensions } from 'react-native'
-const { width } = Dimensions.get('window')
+import { headerHeight } from '../../styles/Global'
+const { width, height } = Dimensions.get('window')
 
 const containerStyles = {
   flexGrow: 1,
+  height: height - headerHeight,
   width
 }
 
