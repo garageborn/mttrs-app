@@ -25,7 +25,6 @@ const buildRoutes = (categories) => {
 const config = {
   ...TabNavigator.Presets.AndroidTopTabs,
   tabBarComponent: PopularTabBarNavigator,
-  initialRouteName: 'publishers',
   headerMode: 'none',
   tabBarPosition: 'top',
   lazy: true,
