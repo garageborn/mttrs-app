@@ -35,6 +35,7 @@ const MainRoutes = {
 const MainNavigatorConfig = {
   headerMode: 'none',
   initialRouteName: 'summaries',
+  swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
   tabBarPosition: 'bottom',
   lazy: true
