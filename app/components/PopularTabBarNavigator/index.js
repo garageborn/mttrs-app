@@ -12,6 +12,10 @@ class PopularTabBarNavigator extends Component {
     this.renderTab = this.renderTab.bind(this)
   }
 
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.navigationState.index !== nextProps.navigationState.index
+  }
+
   render () {
     const { navigationState, subscribe } = this.props
     return (
@@ -21,6 +25,7 @@ class PopularTabBarNavigator extends Component {
         tabs={navigationState.routes}
         subscribe={subscribe}
         renderTab={this.renderTab}
+        renderOptions={{ renderIndicator: true, indicatorStyle: styles.indicatorStyle }}
       />
     )
   }
@@ -31,10 +36,7 @@ class PopularTabBarNavigator extends Component {
     return (
       <Touchable underlayColor={'rgba(0,0,0,.1)'} onPress={() => jumpToIndex(index)} >
         <View style={{paddingVertical: 1}}>
-          <PopularTab
-            active={active}
-            content={this.tabContent(tab, index)}
-          />
+          <PopularTab active={active} content={this.tabContent(tab, index)} />
         </View>
       </Touchable>
     )
@@ -43,8 +45,11 @@ class PopularTabBarNavigator extends Component {
   tabContent (tab, index) {
     const { categories, navigationState, intl } = this.props
     if (index === 0) return { name: intl.formatMessage({id: 'header.topStories'}), color: '#FFF' }
-    if (index === navigationState.routes.length - 1) return { name: intl.formatMessage({id: 'header.publishers'}), color: '#999' }
-    return categories.find((category) => category.slug === tab.routeName)
+    if (index === navigationState.routes.length - 1) {
+      return { name: intl.formatMessage({id: 'header.publishers'}), color: '#999' }
+    } else {
+      return categories.find((category) => category.slug === tab.routeName)
+    }
   }
 }
 

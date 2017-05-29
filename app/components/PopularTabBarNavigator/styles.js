@@ -9,8 +9,12 @@ const styles = StyleSheet.create({
     paddingTop: Platform.select({
       ios: 22
     })
-  }
+  },
 
+  indicatorStyle: {
+    backgroundColor: '#FFF',
+    height: 2
+  }
 })
 
 export default styles

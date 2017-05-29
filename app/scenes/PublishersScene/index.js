@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PublisherSelectorContainer from '../../containers/PublisherSelectorContainer'
 
-class PublishersScene extends Component {
-  render () {
-    return <PublisherSelectorContainer />
-  }
-}
+const PublishersScene = () => (
+  <PublisherSelectorContainer />
+)
 
 export default PublishersScene
