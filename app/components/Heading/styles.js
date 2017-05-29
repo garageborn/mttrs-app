@@ -1,30 +1,28 @@
 import { StyleSheet } from 'react-native'
 
-const text = {
-  color: '#999999'
-}
-
 const styles = StyleSheet.create({
   container: {
     padding: 20
   },
 
+  bold: {
+    fontWeight: '500'
+  },
+
+  small: {
+    fontSize: 14
+  },
+
   regular: {
-    ...text,
-    fontSize: 14,
-    lineHeight: 2
+    fontSize: 16
   },
 
   large: {
-    ...text,
-    fontSize: 18,
-    lineHeight: 2
+    fontSize: 18
   },
 
   huge: {
-    ...text,
-    fontSize: 24,
-    lineHeight: 2
+    fontSize: 24
   }
 
 })

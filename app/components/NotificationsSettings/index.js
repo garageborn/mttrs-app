@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { View, Text, Switch, Platform } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import _result from 'lodash/result'
-import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor } from './styles'
+import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor, smallTextColor } from './styles'
+import Heading from '../Heading'
 
 const messages = defineMessages({
   mttrs_br: { id: 'notifications.mttrs_br' },
@@ -17,8 +18,10 @@ class NotificationsSettings extends Component {
     const notifications = formatMessage(messages.notifications)
     return (
       <View>
-        <Text style={styles.title}>{notifications}</Text>
-        <View>
+        <View style={styles.headingContainer}>
+          <Heading size='regular' bold color={'#2D2D2B'}>{notifications}</Heading>
+        </View>
+        <View style={styles.itemsContainer}>
           { this.renderNotificationStatus('mttrs_us') }
           { this.renderNotificationStatus('mttrs_br') }
         </View>
@@ -33,7 +36,7 @@ class NotificationsSettings extends Component {
     if (Platform.OS !== 'ios') return null
     return (
       <View style={styles.disclaimerContainer}>
-        <Text style={styles.disclaimerText}>{formatMessage(messages.enableNotifications)}</Text>
+        <Heading size='small' color={smallTextColor}>{formatMessage(messages.enableNotifications)}</Heading>
       </View>
     )
   }

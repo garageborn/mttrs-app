@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Platform, Text, View } from 'react-native'
+import { Platform, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
+import Heading from '../Heading'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
+import styles, { regularTextColor, smallTextColor } from './styles'
 
 const messages = defineMessages({
   description: { id: 'rateApp.description' },
@@ -22,9 +24,9 @@ class RateAppSettings extends Component {
 
     return (
       <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
-        <View>
-          <Text>{label}</Text>
-          <Text>{description}</Text>
+        <View style={styles.container}>
+          <Heading size='regular' color={regularTextColor}>{label}</Heading>
+          <Heading size='small' color={smallTextColor}>{description}</Heading>
         </View>
       </Touchable>
     )

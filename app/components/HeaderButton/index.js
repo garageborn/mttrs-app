@@ -6,7 +6,7 @@ import styles from './styles'
 const HeaderButton = ({ content, onPress }) => {
   if (!onPress) return <View style={styles.container}>{content}</View>
   return (
-    <Touchable onPress={onPress} >
+    <Touchable onPress={onPress} underlayColor={'rgba(0,0,0,.10)'}>
       <View style={styles.container}>
         {content}
       </View>
