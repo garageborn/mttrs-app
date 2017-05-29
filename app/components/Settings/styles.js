@@ -1,8 +1,6 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-// import { DARK_COLOR } from '../../constants/Colors'
 const { width, height } = Dimensions.get('window')
 const heightOffset = Platform.OS === 'ios' ? 90 : 110
-// const widthOffeset = 16
 
 export const smallTextColor = '#999999'
 
