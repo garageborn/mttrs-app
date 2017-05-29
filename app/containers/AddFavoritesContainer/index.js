@@ -1,16 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
-import { NavigationActions } from '../../actions/index'
+import { isCurrentRoute } from '../../navigators/AppNavigator'
 
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
     this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
+    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
+
+    const existsChanged = this.props.favoritePublishers.exists !== nextProps.favoritePublishers.exists
+    const loadingChanged = this.props.data.loading !== nextProps.data.loading
+    const publishersChanged = !_isEqual(this.props.data.publishers, nextProps.data.publishers)
+    return existsChanged || loadingChanged || publishersChanged
   }
 
   render () {
@@ -57,6 +68,7 @@ AddFavoritesContainer.propTypes = {
   favoritePublishers: PropTypes.shape({
     exists: PropTypes.bool.isRequired
   }).isRequired,
+  isCurrentRoute: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired
@@ -64,6 +76,7 @@ AddFavoritesContainer.propTypes = {
 
 let mapStateToProps = (state) => {
   return {
+    isCurrentRoute: isCurrentRoute(state.nav, 'addFavorites'),
     favoritePublishers: {
       exists: state.FavoritePublishersReducer.items.length > 0
     }

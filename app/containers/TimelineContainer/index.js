@@ -73,7 +73,7 @@ class TimelineContainer extends Component {
       })
       .catch((error) => {
         this.isLoadingMore = false
-        captureError(error)
+        if (!error.canceled) captureError(error)
       })
   }
 
@@ -91,7 +91,7 @@ class TimelineContainer extends Component {
       })
       .catch((error) => {
         this.isLoadingPullToRefresh = false
-        captureError(error)
+        if (!error.canceled) captureError(error)
       })
   }
 
@@ -116,6 +116,7 @@ class TimelineContainer extends Component {
   set isLoadingMore (value) {
     if (this._isLoadingMore === value) return
     this._isLoadingMore = value
+    if (this.infiniteScroll && this.infiniteScroll.canceled) return
     this.setState({ ...this.state, loadingMore: value })
   }
 
@@ -126,6 +127,7 @@ class TimelineContainer extends Component {
   set isLoadingPullToRefresh (value) {
     if (this._isLoadingPullToRefresh === value) return
     this._isLoadingPullToRefresh = value
+    if (this.pullToRefresh && this.pullToRefresh.canceled) return
     this.setState({ ...this.state, loadingPullToRefresh: value })
   }
 
