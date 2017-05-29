@@ -83,7 +83,7 @@ class ScrollableTabBar extends Component {
     const style = {
       position: 'absolute',
       left: 0,
-      bottom: 0,
+      bottom: 1,
       backgroundColor: 'white',
       height: 10,
       width: this.indicatorAnimated.width,

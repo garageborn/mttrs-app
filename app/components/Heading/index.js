@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import styles from './styles'
 
-const Heading = ({ children, bold, color, size, style }) => {
+const Heading = ({ bold, children, color, size, textStyle, style }) => {
   const headingStyles = () => {
-    let stylesItems = [styles[size]]
+    let stylesItems = [styles[size], textStyle]
     if (bold) stylesItems = [...stylesItems, styles.bold]
     if (color) stylesItems = [...stylesItems, { color: color }]
     return stylesItems
