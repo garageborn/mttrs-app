@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal, View } from 'react-native'
+import { Modal } from 'react-native'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import CategoriesDialogContainer from '../CategoriesDialogContainer'
 import Dialog from '../../components/Dialog'
 import { FavoritesActions, FavoritePublishersActions, NavigationActions } from '../../actions/index'
@@ -14,6 +15,12 @@ class FavoriteCategoriesDialogContainer extends Component {
 
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
+  }
+
+  shouldComponentUpdate (nextProps) {
+    const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
+    return isLoadedChanged || itemsChanged
   }
 
   render () {

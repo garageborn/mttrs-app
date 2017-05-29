@@ -18,8 +18,8 @@ class FavoritePublishersContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
-    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
+    if (!nextProps.isCurrentRoute) return false
+    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
   }
 

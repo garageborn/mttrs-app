@@ -4,7 +4,7 @@ import styles from './styles'
 
 const PopularTab = ({ active, content }) => {
   const textStyles = () => {
-    if (active) return [styles.activeText, {color: content.color}]
+    if (active) return [styles.text, {color: content.color}]
     return styles.text
   }
   return (

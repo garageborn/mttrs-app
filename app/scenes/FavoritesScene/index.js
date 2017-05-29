@@ -17,8 +17,8 @@ class FavoritesScene extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
-    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
+    if (!nextProps.isCurrentRoute) return false
+    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
     const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
     return isLoadedChanged || itemsChanged

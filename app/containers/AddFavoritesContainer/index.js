@@ -15,9 +15,8 @@ class AddFavoritesContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
-    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
-
+    if (!nextProps.isCurrentRoute) return false
+    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     const existsChanged = this.props.favoritePublishers.exists !== nextProps.favoritePublishers.exists
     const loadingChanged = this.props.data.loading !== nextProps.data.loading
     const publishersChanged = !_isEqual(this.props.data.publishers, nextProps.data.publishers)

@@ -8,9 +8,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     color: '#FFF'
-  },
-  activeText: {
-    fontWeight: '700'
   }
 })
 
