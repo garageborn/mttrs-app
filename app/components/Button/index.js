@@ -4,15 +4,19 @@ import Touchable from '../Touchable'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const Button = ({ background, content, onPress, size }) => {
+const Button = ({ background, content, inactive, onPress, size }) => {
   const containerStyles = () => {
-    return [styles.container, styles[background], styles[size]]
+    const stylesArray = [styles.container, styles[background], styles[size]]
+    if (inactive) return [...stylesArray, styles.inactive]
+    return stylesArray
   }
 
   const textStyles = () => {
     const textColor = `${background}Text`
     const textSize = `${size}Text`
-    return [styles.text, styles[textColor], styles[textSize]]
+    const stylesArray = [styles.text, styles[textColor], styles[textSize]]
+    if (inactive) return [...stylesArray, styles.inactiveText]
+    return stylesArray
   }
 
   return (
@@ -27,6 +31,7 @@ const Button = ({ background, content, onPress, size }) => {
 Button.propTypes = {
   background: PropTypes.string.isRequired,
   content: PropTypes.any.isRequired,
+  inactive: PropTypes.bool,
   onPress: PropTypes.func.isRequired,
   size: PropTypes.string.isRequired
 }

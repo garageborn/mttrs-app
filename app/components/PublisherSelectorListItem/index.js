@@ -1,7 +1,7 @@
 /* eslint-disable camelcase  */
 /* eslint-disable react/jsx-no-bind  */
 
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, PureComponent } from 'react'
 import { Text, View } from 'react-native'
 import Touchable from '../Touchable'
 import PublisherListItem from '../PublisherListItem'
@@ -9,7 +9,7 @@ import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { stringify } from '../../common/utils/Parser'
 import styles from './styles'
 
-class PublisherSelectorListItem extends Component {
+class PublisherSelectorListItem extends PureComponent {
   render () {
     let { publisher, onPress } = this.props
 

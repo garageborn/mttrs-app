@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { KeyboardAvoidingView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherSelectorList from '../PublisherSelectorList'
 import PublisherSuggestionTrigger from '../PublisherSuggestionTrigger'
@@ -30,7 +30,10 @@ class PublisherSelector extends Component {
             active={suggestion}
           />
         </View>
-        {this.renderListView()}
+        <ScrollView style={styles.contentContainer}>
+          {this.renderListView()}
+          {this.renderSuggestionView()}
+        </ScrollView>
       </View>
     )
   }
@@ -40,13 +43,14 @@ class PublisherSelector extends Component {
   }
 
   renderSuggestionView () {
-    const { query } = this.props
+    const { query, publishers } = this.props
+    if (publishers.length && !this.state.suggestion) return null
     return <PublisherSuggestionContainer query={query} publisher={query} />
   }
 
   renderListView () {
-    const { openPublisher, publishers } = this.props
-    if (!publishers.length || this.state.suggestion) return this.renderSuggestionView()
+    const { openPublisher, publishers, query } = this.props
+    if (this.state.suggestion && !query.length) return null
     return (
       <PublisherSelectorList
         hasPublishers={this.hasPublishers}

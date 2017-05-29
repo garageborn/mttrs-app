@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
   },
 
   inactive: {
-    backgroundColor: '#DCDCDC'
+    opacity: 0.5
   },
 
   inactiveText: {
-    color: '#c3c3c3'
+    opacity: 0.8
   },
 
   regularText: {

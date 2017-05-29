@@ -71,7 +71,7 @@ class PublisherSuggestion extends Component {
   }
 
   renderInactiveButton (label) {
-    return <Button background='inactive' content={label.toUpperCase()} size='regular' />
+    return <Button background='danger' inactive content={label.toUpperCase()} size='regular' />
   }
 
   onButtonPress () {
