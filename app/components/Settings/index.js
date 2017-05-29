@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DeviceInfo from 'react-native-device-info'
 import NotificationsSettingsContainer from '../../containers/NotificationsSettingsContainer'
+import Heading from '../Heading'
 import RateAppSettingsContainer from '../../containers/RateAppSettingsContainer'
-import styles from './styles'
+import styles, { smallTextColor } from './styles'
 
 const appVersion = DeviceInfo.getReadableVersion()
 const messages = defineMessages({
@@ -17,12 +18,10 @@ class Settings extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.options}>
-          <View style={styles.options}>
-            <NotificationsSettingsContainer />
-            <RateAppSettingsContainer />
-            <Text>{intl.formatMessage(messages.version)} {appVersion}</Text>
-          </View>
+        <NotificationsSettingsContainer />
+        <RateAppSettingsContainer />
+        <View style={styles.footerContainer}>
+          <Heading size='small' color={smallTextColor} >{intl.formatMessage(messages.version)} {appVersion}</Heading>
         </View>
       </View>
     )

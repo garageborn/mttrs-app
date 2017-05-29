@@ -16,7 +16,7 @@ class FavoritesPublishersHeading extends Component {
 
     return (
       <View style={styles.container}>
-        <Heading size='regular'>
+        <Heading color='#999' size='regular'>
           {intl.formatMessage(messages.heading)}
         </Heading>
         {this.renderButton()}

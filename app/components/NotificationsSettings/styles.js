@@ -1,9 +1,13 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 export const thumbTintActive = '#EB5510'
 export const thumbTintColor = '#B6B6B6'
-export const tintColor = '#797979'
-export const onTintColor = '#975333'
+export const tintColor = Platform.select({
+  android: '#797979',
+  ios: '#DDD'
+})
+export const smallTextColor = '#999'
+export const onTintColor = 'rgba(255, 86, 7, .5)'
 
 const styles = StyleSheet.create({
   options: {
@@ -11,7 +15,7 @@ const styles = StyleSheet.create({
   },
 
   disclaimerContainer: {
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     marginVertical: 10
   },
 
@@ -20,27 +24,27 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
 
-  title: {
-    fontSize: 12,
-    color: '#FFF',
-    marginHorizontal: 20,
-    marginVertical: 10
+  headingContainer: {
+    marginVertical: 10,
+    marginHorizontal: 16
+  },
+
+  itemsContainer: {
+    marginBottom: 10
   },
 
   item: {
-    backgroundColor: '#434341',
+    backgroundColor: '#F7F7F8',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
-    borderBottomColor: '#2D2D2B',
-    borderBottomWidth: StyleSheet.hairlineWidth
+    paddingHorizontal: 16,
+    paddingVertical: 10
   },
 
   itemTitle: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: 'white'
+    fontSize: 16,
+    color: '#666766'
   }
 })
 
