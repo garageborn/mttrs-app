@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
-import _result from 'lodash/result'
 import withQuery from './index.gql'
 import FavoritePublishersSelector from '../../components/FavoritePublishersSelector'
 import { NavigationActions } from '../../actions/index'
@@ -13,20 +11,9 @@ class FavoritePublishersSelectorContainer extends Component {
   }
 
   render () {
-    const { data, favoritePublishers } = this.props
-    const loading = _result(data, 'loading')
-    const publishers = _result(data, 'publishers')
-    if (!favoritePublishers.isLoaded || loading) return this.renderLoading()
-
+    const { loading, publishers } = this.props.data
+    if (loading || !publishers) return null
     return <FavoritePublishersSelector publishers={publishers} openPublisher={this.openPublisher} />
-  }
-
-  renderLoading () {
-    return (
-      <View>
-        <ActivityIndicator size='large' color='#AAA' />
-      </View>
-    )
   }
 
   openPublisher (publisher) {
@@ -40,18 +27,12 @@ FavoritePublishersSelectorContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     publishers: PropTypes.any
   }),
-  favoritePublishers: PropTypes.shape({
-    isLoaded: PropTypes.bool.isRequired,
-    items: PropTypes.array.isRequired
-  }).isRequired
+  publisherIds: PropTypes.array.isRequired,
+  selectedCategory: PropTypes.any
 }
 
 let mapStateToProps = (state) => {
   return {
-    favoritePublishers: {
-      isLoaded: state.FavoritePublishersReducer.isLoaded,
-      items: state.FavoritePublishersReducer.items
-    },
     selectedCategory: state.FavoritesReducer.selectedCategory
   }
 }

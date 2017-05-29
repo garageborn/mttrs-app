@@ -1,17 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import DeviceInfo from 'react-native-device-info'
 import NotificationsSettingsContainer from '../../containers/NotificationsSettingsContainer'
 import RateAppSettingsContainer from '../../containers/RateAppSettingsContainer'
 import styles from './styles'
 
+const appVersion = DeviceInfo.getReadableVersion()
 const messages = defineMessages({
   version: { id: 'settings.version' }
 })
 
 class Settings extends Component {
   render () {
-    const { appVersion, intl } = this.props
+    const { intl } = this.props
 
     return (
       <View style={styles.container}>
@@ -28,7 +30,6 @@ class Settings extends Component {
 }
 
 Settings.propTypes = {
-  appVersion: PropTypes.string.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired

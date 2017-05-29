@@ -17,11 +17,8 @@ query($publisherIds: [Int], $categoryIds: [Int]) {
 
 export default function (FavoritePublishersSelector) {
   return graphql(Query, {
-    skip: (props) => {
-      return !props.favoritePublishers.isLoaded
-    },
     options (props) {
-      const publisherIds = prepareArrayParam(props.favoritePublishers.items, null)
+      const publisherIds = prepareArrayParam(props.publisherIds, null)
       const categoryIds = prepareArrayParam([_result(props, 'selectedCategory.id')], null)
       return { variables: { publisherIds, categoryIds } }
     }

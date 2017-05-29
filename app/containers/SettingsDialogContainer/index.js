@@ -20,12 +20,12 @@ class SettingsDialogContainer extends Component {
 
     return (
       <Modal transparent visible onRequestClose={this.close}>
-        <Dialog closeDialog={this.close} >
+        <Dialog coordinates={{top: 10, right: 10}} closeDialog={this.close}>
           <SettingsDialog
             tenant={this.alternativeTenant}
             openSettings={this.openSettings}
             setTenant={this.setTenant}
-            />
+          />
         </Dialog>
       </Modal>
     )

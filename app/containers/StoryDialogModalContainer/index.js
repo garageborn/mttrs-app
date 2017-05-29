@@ -24,7 +24,7 @@ class StoryDialogModalContainer extends Component {
   render () {
     return (
       <Modal animationType={'slide'} transparent visible onRequestClose={this.close}>
-        <Dialog closeDialog={this.close} >
+        <Dialog underlayColor={'rgba(45, 45, 43, .6)'} closeDialog={this.close} >
           {this.renderActions()}
           <CloseButton onPress={this.close} />
         </Dialog>

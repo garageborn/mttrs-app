@@ -4,45 +4,35 @@ import _result from 'lodash/result'
 import _isEqual from 'lodash/isEqual'
 
 class ScrollableTabBar extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.setScrollViewRef = this.setScrollViewRef.bind(this)
     this.scrollToIndex = this.scrollToIndex.bind(this)
     this.scrollToPosition = this.scrollToPosition.bind(this)
-    this.handleBeginDrag = this.handleBeginDrag.bind(this)
-    this.handleEndDrag = this.handleEndDrag.bind(this)
 
-    this.state = {
-      tabsLayout: [],
-      tabBarWidth: 0
-    }
-
-    this.isManualScroll = false
+    this.tabsLayout = []
+    this.tabBarWidth = 0
+    this.currentIndex = props.index
+    this.currentDraggingPosition = this.getPositionFor(props.index)
     this.indicatorAnimated = {
-      x: new Animated.Value(0),
+      x: new Animated.Value(this.currentDraggingPosition),
       width: new Animated.Value(0)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log('componentWillReceiveProps', this.props.index, nextProps.index)
-    if (this.props.index !== nextProps.index) this.scrollToIndex(nextProps.index)
+    if (this.props.index !== nextProps.index) {
+      this.scrollToIndex(nextProps.index)
+    }
   }
 
-  // shouldComponentUpdate (nextProps, nextState) {
-  //   // const indexChanged = this.props.index !== nextProps.index
-  //   // const tabsLayoutChanged = this.state.tabsLayout.length !== nextState.tabsLayout.length
-  //   // console.log(tabsLayoutChanged)
-  //   // return indexChanged || tabsLayoutChanged
-  //   return this.props.index !== nextProps.index
-  // }
+  shouldComponentUpdate (nextProps, nextState) {
+    return false
+  }
 
   componentDidMount () {
-    const { index, subscribe } = this.props
+    const { subscribe } = this.props
     if (subscribe) this.positionListener = subscribe('position', this.scrollToPosition)
-    console.log('componentDidMount', index)
-
-    this.scrollToIndex(index)
   }
 
   componentWillUnmount () {
@@ -56,6 +46,7 @@ class ScrollableTabBar extends Component {
   render () {
     return (
       <ScrollView
+        style={this.props.style}
         horizontal
         bounces={false}
         alwaysBounceHorizontal={false}
@@ -64,11 +55,8 @@ class ScrollableTabBar extends Component {
         automaticallyAdjustContentInsets={false}
         overScrollMode='never'
         ref={this.setScrollViewRef}
+        scrollEventThrottle={16}
         onLayout={(event) => this.updateTabBarWidth(event.nativeEvent.layout)}
-        onScrollBeginDrag={this.handleBeginDrag}
-        onScrollEndDrag={this.handleEndDrag}
-        onMomentumScrollBegin={(e) => console.log('MomentumScrollBegin') }
-        onMomentumScrollEnd={(e) => console.log('MomentumScrollEnd') }
       >
         {this.renderTabs()}
         {this.renderIndicator()}
@@ -77,7 +65,8 @@ class ScrollableTabBar extends Component {
   }
 
   renderTabs () {
-    const { renderTab, tabs } = this.props
+    const { renderTab, tabs, index } = this.props
+    const activeIndex = index
     return tabs.map((tab, index) => {
       return (
         <View
@@ -85,7 +74,7 @@ class ScrollableTabBar extends Component {
           ref={(el) => this.setTabRef(index, el)}
           onLayout={(event) => this.updateTabLayout(index, event.nativeEvent.layout)}
         >
-          {renderTab(tab, index)}
+          {renderTab(tab, index, activeIndex)}
         </View>
       )
     })
@@ -94,25 +83,34 @@ class ScrollableTabBar extends Component {
   renderIndicator () {
     if (!_result(this.props, 'renderOptions.renderIndicator')) return null
 
-    const style = { position: 'absolute', left: 0, right: 0, bottom: 0, backgroundColor: 'red', height: 10 }
+    const style = {
+      position: 'absolute',
+      left: 0,
+      bottom: 0,
+      backgroundColor: 'red',
+      height: 10,
+      width: this.indicatorAnimated.width,
+      transform: [{ translateX: this.indicatorAnimated.x }]
+    }
 
-    return (
-      <Animated.View
-        style={[style, { width: this.indicatorAnimated.width, left: this.indicatorAnimated.x }]}
-      />
-    )
+    return <Animated.View style={style} />
   }
 
   scrollToPosition (position) {
-    // if (!this.isManualScroll) return
-    console.log('scrollToPosition (position)', position)
     if (!this.scrollView) return
-    const currentPositionIndex = Math.floor(position)
-    const nextPositionIndex = Math.ceil(position)
+
+    this.setDraggingPosition(position)
+    const currentPositionIndex = this.getCurrentPositionIndex(position)
+    const nextPositionIndex = this.getNextPositionIndex(position)
+
+    if (this.currentIndex === nextPositionIndex) return
+    if (Math.abs(this.currentIndex - position) >= 1) return
+
     const currentPosition = this.getPositionFor(currentPositionIndex)
     const nextPosition = this.getPositionFor(nextPositionIndex)
     const percentageScrolled = position - currentPositionIndex
-    const scrollDifference = nextPosition - currentPosition
+    const scrollDifference = this.getScrollDifferente(currentPosition, nextPosition)
+
     const finalPosition = this.normalizeScrollValue(
       Math.round(currentPosition + scrollDifference * percentageScrolled)
     )
@@ -121,33 +119,39 @@ class ScrollableTabBar extends Component {
   }
 
   scrollToIndex (index) {
-    console.log('scrollToIndex (index)', index)
-    // if (!this.scrollView) return
-    // const position = this.getPositionFor(index)
-    // this.scrollView.scrollTo({ x: position, animated: true })
-    // this.moveIndicatorToIndex(index)
+    this.currentIndex = index
+    if (!this.scrollView) return
+    const position = this.getPositionFor(index)
+    this.scrollView.scrollTo({ x: position, animated: true })
+    this.moveIndicatorToIndex(index)
   }
 
   moveIndicatorToPosition (position) {
-    const currentPositionIndex = Math.floor(position)
-    const nextPositionIndex = Math.ceil(position)
-    const currentTabLayout = this.state.tabsLayout[currentPositionIndex]
-    const nextTabLayout = this.state.tabsLayout[nextPositionIndex]
+    const currentPositionIndex = this.getCurrentPositionIndex(position)
+    const nextPositionIndex = this.getNextPositionIndex(position)
+    const currentTabLayout = this.tabsLayout[currentPositionIndex]
+    const nextTabLayout = this.tabsLayout[nextPositionIndex]
     const percentageScrolled = position - currentPositionIndex
-    const scrollDifference = nextTabLayout.x - currentTabLayout.x
+    const scrollDifference = this.getScrollDifferente(currentTabLayout.x, nextTabLayout.x)
+    const widthDifference = this.getScrollDifferente(currentTabLayout.width, nextTabLayout.width)
+
     const finalPosition = Math.round(currentTabLayout.x + scrollDifference * percentageScrolled)
+    let finalWidth
+    if (currentTabLayout.width > nextTabLayout.width) {
+      finalWidth = currentTabLayout.width - widthDifference * Math.abs(percentageScrolled)
+    } else {
+      finalWidth = currentTabLayout.width + widthDifference * Math.abs(percentageScrolled)
+    }
+
     this.indicatorAnimated.x.setValue(finalPosition)
-    this.indicatorAnimated.width.setValue(nextTabLayout.width) // TODO
+    this.indicatorAnimated.width.setValue(finalWidth)
   }
 
   moveIndicatorToIndex (index) {
-    const tabLayout = this.state.tabsLayout[index]
+    const tabLayout = this.tabsLayout[index]
     if (!tabLayout) return
-    const animationProps = { tension: 300, friction: 35 }
-    Animated.parallel([
-      Animated.spring(this.indicatorAnimated.x, { toValue: tabLayout.x, ...animationProps }),
-      Animated.spring(this.indicatorAnimated.width, { toValue: tabLayout.width, ...animationProps })
-    ]).start()
+    this.indicatorAnimated.x.setValue(tabLayout.x)
+    this.indicatorAnimated.width.setValue(tabLayout.width)
   }
 
   setScrollViewRef (el) {
@@ -161,42 +165,50 @@ class ScrollableTabBar extends Component {
   }
 
   updateTabLayout (index, { x, width }) {
-    const tabsLayout = [...this.state.tabsLayout]
     const layout = { x, width }
-    if (_isEqual(tabsLayout[index], layout)) return
-    tabsLayout[index] = layout
-    this.setState({ ...this.state, tabsLayout })
+    if (_isEqual(this.tabsLayout[index], layout)) return
+    this.tabsLayout[index] = layout
+    if (this.tabsLayout.length === this.props.tabs.length) this.scrollToIndex(this.props.index)
   }
 
   updateTabBarWidth ({ width }) {
-    if (this.state.tabBarWidth === width) return
-    this.setState({ ...this.state, tabBarWidth: width })
+    this.tabBarWidth = width
   }
 
   getPositionFor (index) {
-    const tabLayout = this.state.tabsLayout[index]
-    if (!tabLayout) return
+    const tabLayout = this.tabsLayout[index]
+    if (!tabLayout || !this.tabBarWidth) return 0
     const tabCenter = tabLayout.x + tabLayout.width / 2
-    const scrollCenter = this.state.tabBarWidth / 2
+    const scrollCenter = this.tabBarWidth / 2
     return this.normalizeScrollValue(tabCenter - scrollCenter)
   }
 
   normalizeScrollValue (value) {
-    const scrollWidth = this.state.tabsLayout.reduce((sum, item) => sum + item.width, 0)
-    const maxPosition = scrollWidth - this.state.tabBarWidth
+    const scrollWidth = this.tabsLayout.reduce((sum, item) => sum + item.width, 0)
+    const maxPosition = Math.max(scrollWidth - this.tabBarWidth, 0)
     return Math.max(Math.min(value, maxPosition), 0)
   }
 
-  handleBeginDrag () {
-    this.isManualScroll = true
+  setDraggingPosition (position) {
+    this.draggingDirection = this.currentPosition < position ? 'left' : 'right'
+    this.currentPosition = position
   }
 
-  handleEndDrag () {
-    this.isManualScroll = true
+  getCurrentPositionIndex (position) {
+    return this.draggingDirection === 'left' ? Math.floor(position) : Math.ceil(position)
+  }
+
+  getNextPositionIndex (position) {
+    return this.draggingDirection === 'left' ? Math.ceil(position) : Math.floor(position)
+  }
+
+  getScrollDifferente (currentPosition, nextPosition) {
+    return Math.max(nextPosition, currentPosition) - Math.min(nextPosition, currentPosition)
   }
 }
 
 ScrollableTabBar.propTypes = {
+  styles: PropTypes.number,
   index: PropTypes.number.isRequired,
   tabs: PropTypes.array.isRequired,
   renderTab: PropTypes.func.isRequired,

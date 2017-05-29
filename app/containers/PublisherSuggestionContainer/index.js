@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import withMutation from './index.gql'
-import PublisherMenuSuggestion from '../../components/PublisherMenuSuggestion'
+import PublisherSuggestion from '../../components/PublisherSuggestion'
 
-class PublisherMenuSuggestionContainer extends Component {
+class PublisherSuggestionContainer extends Component {
   constructor () {
     super()
 
@@ -15,7 +15,7 @@ class PublisherMenuSuggestionContainer extends Component {
 
   render () {
     return (
-      <PublisherMenuSuggestion
+      <PublisherSuggestion
         query={this.props.query}
         publisher={this.props.publisher}
         sendSuggestion={this.sendSuggestion}
@@ -31,10 +31,10 @@ class PublisherMenuSuggestionContainer extends Component {
   }
 }
 
-PublisherMenuSuggestionContainer.propTypes = {
+PublisherSuggestionContainer.propTypes = {
   createPublisherSuggestion: PropTypes.func.isRequired,
   publisher: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired
 }
 
-export default withMutation(PublisherMenuSuggestionContainer)
+export default withMutation(PublisherSuggestionContainer)

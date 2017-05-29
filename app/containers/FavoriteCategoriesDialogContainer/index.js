@@ -23,7 +23,7 @@ class FavoriteCategoriesDialogContainer extends Component {
     return (
       <Modal transparent visible onRequestClose={this.close}>
         <Dialog closeDialog={this.close} >
-          <CategoriesDialogContainer publisherIds={items} onPress={this.selectCategory} />
+          <CategoriesDialogContainer type='favorite' publisherIds={items} onPress={this.selectCategory} />
         </Dialog>
       </Modal>
     )

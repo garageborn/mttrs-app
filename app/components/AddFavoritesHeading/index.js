@@ -30,11 +30,11 @@ class AddFavoritesHeading extends Component {
 
   renderButton () {
     const { intl, isComplete, openFavoritesTimeline } = this.props
-    const style = isComplete ? 'transparent' : 'inactive'
 
     return (
       <Button
-        background={style}
+        background={'transparent'}
+        inactive={!isComplete}
         content={intl.formatMessage(messages.button)}
         onPress={openFavoritesTimeline}
         size='small'

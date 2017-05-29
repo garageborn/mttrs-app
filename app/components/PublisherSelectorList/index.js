@@ -4,7 +4,7 @@ import PublisherSelectorListItem from '../PublisherSelectorListItem'
 import PublisherSelectorSectionHeader from '../PublisherSelectorSectionHeader'
 import styles from './styles'
 
-class PublisherMenuListView extends Component {
+class PublisherSelectorList extends Component {
   constructor () {
     super()
 
@@ -15,7 +15,7 @@ class PublisherMenuListView extends Component {
 
   render () {
     let { publishers } = this.props
-    if (!publishers || !publishers.length) return
+    if (!publishers || !publishers.length) return null
 
     return (
       <View style={styles.container}>
@@ -71,9 +71,9 @@ class PublisherMenuListView extends Component {
   }
 }
 
-PublisherMenuListView.propTypes = {
+PublisherSelectorList.propTypes = {
   publishers: PropTypes.array.isRequired,
   openPublisher: PropTypes.func.isRequired
 }
 
-export default PublisherMenuListView
+export default PublisherSelectorList

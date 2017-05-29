@@ -17,7 +17,7 @@ class PublisherCategoriesDialogContainer extends Component {
     return (
       <Modal transparent visible onRequestClose={this.close}>
         <Dialog closeDialog={this.close} >
-          <CategoriesDialogContainer publisherIds={[publisher.id]} onPress={this.selectCategory} />
+          <CategoriesDialogContainer type='publisher' publisherIds={[publisher.id]} onPress={this.selectCategory} />
         </Dialog>
       </Modal>
     )

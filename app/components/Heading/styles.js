@@ -11,7 +11,20 @@ const styles = StyleSheet.create({
 
   regular: {
     ...text,
-    fontSize: 14
+    fontSize: 14,
+    lineHeight: 2
+  },
+
+  large: {
+    ...text,
+    fontSize: 18,
+    lineHeight: 2
+  },
+
+  huge: {
+    ...text,
+    fontSize: 24,
+    lineHeight: 2
   }
 
 })

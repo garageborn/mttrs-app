@@ -10,7 +10,7 @@ const buildRoutes = (categories) => {
     categoryRoutes[category.slug] = {
       screen: CategoryTimelineScene,
       navigationOptions: {
-        tabBarLabel: category.name
+        tabBarLabel: category
       }
     }
   })
@@ -22,16 +22,21 @@ const buildRoutes = (categories) => {
   }
 }
 
-const config = {
-  ...TabNavigator.Presets.AndroidTopTabs,
-  tabBarComponent: PopularTabBarNavigator,
-  headerMode: 'none',
-  tabBarPosition: 'top',
-  lazy: true,
-  swipeEnabled: true,
-  animationEnabled: true
+const config = (categories) => {
+  return {
+    ...TabNavigator.Presets.AndroidTopTabs,
+    tabBarOptions: {
+      categories: categories
+    },
+    tabBarComponent: PopularTabBarNavigator,
+    headerMode: 'none',
+    tabBarPosition: 'top',
+    lazy: true,
+    swipeEnabled: true,
+    animationEnabled: true
+  }
 }
 
 export default (categories) => {
-  return TabNavigator(buildRoutes(categories), config)
+  return TabNavigator(buildRoutes(categories), config(categories))
 }

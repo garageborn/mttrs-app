@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
+import styles from './styles'
 
 const shareIcon = require('../StoryDialog/assets/share.png')
 const messages = defineMessages({
@@ -14,7 +15,7 @@ const messages = defineMessages({
 class SettingsDialog extends Component {
   render () {
     return (
-      <View>
+      <View style={styles.container}>
         {this.renderSettingsButton()}
         {this.renderTenantButton()}
       </View>
@@ -29,7 +30,7 @@ class SettingsDialog extends Component {
     return (
       <Touchable onPress={() => setTenant(tenantId)}>
         <View>
-          <DialogButton icon={shareIcon} messages={[label]} />
+          <DialogButton icon={this.shareIcon} messages={[label]} />
         </View>
       </Touchable>
     )
@@ -43,10 +44,14 @@ class SettingsDialog extends Component {
     return (
       <Touchable onPress={openSettings}>
         <View>
-          <DialogButton icon={shareIcon} messages={[label]} />
+          <DialogButton icon={this.shareIcon} messages={[label]} />
         </View>
       </Touchable>
     )
+  }
+
+  get shareIcon () {
+    return <Image source={shareIcon} />
   }
 }
 

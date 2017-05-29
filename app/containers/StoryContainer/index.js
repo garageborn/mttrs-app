@@ -15,6 +15,10 @@ class StoryContainer extends Component {
     this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return this.props.visited !== nextProps.visited
+  }
+
   render () {
     const { story, visited } = this.props
     return (

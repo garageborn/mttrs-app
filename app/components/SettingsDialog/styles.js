@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native'
+import dialogStyles from '../../styles/Dialog'
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    marginHorizontal: 10
+    ...dialogStyles,
+    top: 10,
+    right: 10
   }
 })
 

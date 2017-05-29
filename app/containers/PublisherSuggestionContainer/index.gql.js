@@ -10,12 +10,12 @@ const Mutation = gql`
 
 `
 
-export default function (PublisherMenuSuggestionContainer) {
+export default function (PublisherSuggestionContainer) {
   return graphql(Mutation, {
     props: ({mutate}) => ({
       createPublisherSuggestion: (publisherName) => {
         return mutate({ variables: { name: publisherName } })
       }
     })
-  })(PublisherMenuSuggestionContainer)
+  })(PublisherSuggestionContainer)
 }
