@@ -11,17 +11,20 @@ import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
 import headerStyles from '../../styles/Header'
 
 class FavoritesTimelineScene extends Component {
+  constructor () {
+    super()
+    console.log('FavoritesTimelineScene.constructor')
+  }
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
   shouldComponentUpdate (nextProps) {
-    const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
-    const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
-    return isLoadedChanged || itemsChanged
+    return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
   }
 
   render () {
+    console.log('FavoritesTimelineScene.render')
     const { isLoaded, items } = this.props.favoritePublishers
     if (!isLoaded) return this.renderLoading()
     if (!items.length) return <EmptyFavoritesTimelineContainer />
