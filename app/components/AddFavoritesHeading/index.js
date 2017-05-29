@@ -17,7 +17,7 @@ class AddFavoritesHeading extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.headingContainer}>
-          <Heading size='regular'>
+          <Heading color='#999' size='regular'>
             {intl.formatMessage(messages.heading)}
           </Heading>
         </View>
