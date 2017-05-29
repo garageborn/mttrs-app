@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native'
-const { width, height } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 const heightOffset = Platform.OS === 'ios' ? 90 : 110
 
 export const smallTextColor = '#999999'
