@@ -14,10 +14,12 @@ class FavoritePublishersList extends Component {
 
     return (
       <FlatList
+        style={{flexGrow: 1, flex: 1}}
         data={publishers}
         keyExtractor={this.extractKey}
         renderItem={this.renderRow}
         shouldItemUpdate={this.shouldItemUpdate}
+        removeClippedSubviews={false}
       />
     )
   }

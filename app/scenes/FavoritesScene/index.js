@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
+import { isCurrentRoute } from '../../navigators/AppNavigator'
 import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
@@ -10,21 +11,20 @@ import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
 import headerStyles from '../../styles/Header'
 
-class FavoritesTimelineScene extends Component {
-  constructor () {
-    super()
-    console.log('FavoritesTimelineScene.constructor')
-  }
+class FavoritesScene extends Component {
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
   shouldComponentUpdate (nextProps) {
-    return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
+    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
+    const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
+    return isLoadedChanged || itemsChanged
   }
 
   render () {
-    console.log('FavoritesTimelineScene.render')
     const { isLoaded, items } = this.props.favoritePublishers
     if (!isLoaded) return this.renderLoading()
     if (!items.length) return <EmptyFavoritesTimelineContainer />
@@ -46,7 +46,7 @@ class FavoritesTimelineScene extends Component {
   }
 }
 
-FavoritesTimelineScene.propTypes = {
+FavoritesScene.propTypes = {
   dispatch: PropTypes.func.isRequired,
   favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
@@ -56,6 +56,7 @@ FavoritesTimelineScene.propTypes = {
 
 let mapStateToProps = (state, ownProps) => {
   return {
+    isCurrentRoute: isCurrentRoute(state.nav, 'favorites'),
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
@@ -63,7 +64,7 @@ let mapStateToProps = (state, ownProps) => {
   }
 }
 
-FavoritesTimelineScene.navigationOptions = props => {
+FavoritesScene.navigationOptions = props => {
   return {
     headerTitle: <FavoritesTitleContainer {...props} />,
     headerRight: <FavoritesHeaderRight />,
@@ -71,4 +72,4 @@ FavoritesTimelineScene.navigationOptions = props => {
   }
 }
 
-export default connect(mapStateToProps)(FavoritesTimelineScene)
+export default connect(mapStateToProps)(FavoritesScene)

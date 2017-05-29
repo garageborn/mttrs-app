@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import AddFavoritesContainer from '../../containers/AddFavoritesContainer'
 import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
 
-const AddFavoritesScene = () => (
-  <AddFavoritesContainer />
+const AddFavoritesScene = ({navigation}) => (
+  <AddFavoritesContainer navigation={navigation} />
 )
 
 AddFavoritesScene.navigationOptions = props => {
@@ -16,6 +16,12 @@ AddFavoritesScene.navigationOptions = props => {
     headerRight: <HeaderSettingsContainer />,
     ...headerStyles
   }
+}
+
+AddFavoritesScene.propTypes = {
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired
+  }).isRequired
 }
 
 export default AddFavoritesScene

@@ -21,9 +21,11 @@ class FavoritePublishersSelector extends Component {
           <FlatList
             data={publishers}
             horizontal
+            showsHorizontalScrollIndicator={false}
             keyExtractor={this.extractKey}
             renderItem={this.renderRow}
             shouldItemUpdate={this.shouldItemUpdate}
+            removeClippedSubviews={false}
           />
         </View>
         <View style={styles.buttonContainer}>
@@ -40,13 +42,7 @@ class FavoritePublishersSelector extends Component {
   renderRow (data) {
     const { index, item } = data
     const { openPublisher } = this.props
-    return (
-      <FavoritePublisherSelector
-        rowID={index}
-        publisher={item}
-        onPress={openPublisher}
-      />
-    )
+    return <FavoritePublisherSelector rowID={index} publisher={item} onPress={openPublisher} />
   }
 
   shouldItemUpdate (props, nextProps) {

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import FavoritePublishersManager from '../../components/FavoritePublishersManager'
 import FavoritePublishersListContainer from '../FavoritePublishersListContainer'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
+import { isCurrentRoute } from '../../navigators/AppNavigator'
 
 class FavoritePublishersContainer extends Component {
   constructor () {
@@ -16,7 +17,9 @@ class FavoritePublishersContainer extends Component {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
+  shouldComponentUpdate (nextProps) {
+    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
+    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
     return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
   }
 
@@ -25,8 +28,9 @@ class FavoritePublishersContainer extends Component {
       <FavoritePublishersManager
         handleButtonPress={this.handleButtonPress}
         handleComplete={this.handleComplete}
-        renderPublisherList={this.renderPublisherList()}
-      />
+      >
+        {this.renderPublisherList()}
+      </FavoritePublishersManager>
     )
   }
 
@@ -49,12 +53,8 @@ class FavoritePublishersContainer extends Component {
   }
 
   handleComplete () {
-    const { dispatch, favoritePublishers } = this.props
-    if (favoritePublishers.items.length) {
-      dispatch(NavigationActions.favoritesTimeline())
-    } else {
-      dispatch(NavigationActions.addFavorites())
-    }
+    const { navigation } = this.props
+    navigation.goBack()
   }
 }
 
@@ -63,11 +63,16 @@ FavoritePublishersContainer.propTypes = {
   favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
+  }).isRequired,
+  isCurrentRoute: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired
   }).isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
+    isCurrentRoute: isCurrentRoute(state.nav, 'favoritePublishers'),
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items

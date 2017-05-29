@@ -18,12 +18,7 @@ class FavoritePublishersListContainer extends Component {
   render () {
     const { loading, publishers } = this.props.data
     if (loading) return this.renderLoading()
-    return (
-      <FavoritePublishersList
-        publishers={publishers}
-        openPublisher={this.openPublisher}
-      />
-    )
+    return <FavoritePublishersList publishers={publishers} openPublisher={this.openPublisher} />
   }
 
   renderLoading () {

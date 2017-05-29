@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
-import { NavigationActions } from '../../actions/index'
+import { isCurrentRoute } from '../../navigators/AppNavigator'
 
 class AddFavoritesContainer extends Component {
   constructor () {
@@ -13,14 +14,24 @@ class AddFavoritesContainer extends Component {
     this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    const isCurrentRouteChanged = this.props.isCurrentRoute !== nextProps.isCurrentRoute
+    if (isCurrentRouteChanged) return nextProps.isCurrentRoute
+
+    const existsChanged = this.props.favoritePublishers.exists !== nextProps.favoritePublishers.exists
+    const loadingChanged = this.props.data.loading !== nextProps.data.loading
+    const publishersChanged = !_isEqual(this.props.data.publishers, nextProps.data.publishers)
+    return existsChanged || loadingChanged || publishersChanged
+  }
+
   render () {
-    const { favorites } = this.props
+    const { favoritePublishers } = this.props
 
     return (
       <ScrollView>
         <AddFavoritesHeading
           openFavoritesTimeline={this.openFavoritesTimeline}
-          isComplete={favorites.exists}
+          isComplete={favoritePublishers.exists}
         />
         {this.renderPublisherList()}
         <AddFavoritesFooter onPress={this.openFavoritesTimeline} />
@@ -43,8 +54,8 @@ class AddFavoritesContainer extends Component {
   }
 
   openFavoritesTimeline () {
-    const { dispatch } = this.props
-    dispatch(NavigationActions.favoritesTimeline())
+    const { navigation } = this.props
+    navigation.goBack()
   }
 }
 
@@ -54,14 +65,19 @@ AddFavoritesContainer.propTypes = {
     publishers: PropTypes.any
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  favorites: PropTypes.shape({
+  favoritePublishers: PropTypes.shape({
     exists: PropTypes.bool.isRequired
+  }).isRequired,
+  isCurrentRoute: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired
   }).isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
-    favorites: {
+    isCurrentRoute: isCurrentRoute(state.nav, 'addFavorites'),
+    favoritePublishers: {
       exists: state.FavoritePublishersReducer.items.length > 0
     }
   }

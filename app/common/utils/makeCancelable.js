@@ -1,20 +1,19 @@
 const makeCancelable = (promise) => {
-  let hasCanceled_ = false
+  let hasCanceled = false
 
   const wrappedPromise = new Promise((resolve, reject) => {
     promise.then((val) =>
-      hasCanceled_ ? reject({isCanceled: true}) : resolve(val)
+      hasCanceled ? reject({canceled: true}) : resolve(val)
     )
     promise.catch((error) =>
-      hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+      hasCanceled ? reject({canceled: true}) : reject(error)
     )
   })
 
   return {
     promise: wrappedPromise,
-    cancel () {
-      hasCanceled_ = true
-    }
+    cancel () { hasCanceled = true },
+    get canceled () { return hasCanceled }
   }
 }
 

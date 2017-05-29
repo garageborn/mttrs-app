@@ -1,20 +1,20 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import FavoritePublishersHeading from '../FavoritePublishersHeading'
 import FavoritePublishersManagerButton from '../FavoritePublishersManagerButton'
 import styles from './styles'
 
-const FavoritePublishersManager = ({ handleButtonPress, handleComplete, renderPublisherList}) => (
+const FavoritePublishersManager = ({handleButtonPress, handleComplete, children}) => (
   <View style={styles.container}>
     <FavoritePublishersHeading handleComplete={handleComplete} />
-      {renderPublisherList}
+    {children}
     <FavoritePublishersManagerButton onPress={handleButtonPress} />
   </View>
 )
 
 FavoritePublishersManager.propTypes = {
   handleButtonPress: PropTypes.func.isRequired,
-  renderPublisherList: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
   handleComplete: PropTypes.func.isRequired
 }
 

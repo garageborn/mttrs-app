@@ -32,6 +32,20 @@ export function settings () {
   }
 }
 
+export function favoritePublishers () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'favoritePublishers'}))
+    dispatch(AnalyticsActions.trackScreen('/favorites/publishers'))
+  }
+}
+
+export function addFavorites () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'addFavorites'}))
+    dispatch(AnalyticsActions.trackScreen('/favorites/add'))
+  }
+}
+
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
 }
@@ -40,43 +54,6 @@ export function back () {
 export function selectCategory (category) {
   return (dispatch, getState) => {
     // TODO
-  }
-}
-
-// FavoritesNavigator
-export function favoritesTimeline () {
-  return dispatch => {
-    dispatch(NavigationActions.navigate({
-      routeName: 'favorites',
-      action: NavigationActions.navigate({
-        routeName: 'favoritesTimeline'
-      })
-    }))
-    dispatch(AnalyticsActions.trackScreen('/favorites'))
-  }
-}
-
-export function favoritePublishers () {
-  return dispatch => {
-    dispatch(NavigationActions.navigate({
-      routeName: 'favorites',
-      action: NavigationActions.navigate({
-        routeName: 'favoritePublishers'
-      })
-    }))
-    dispatch(AnalyticsActions.trackScreen('/favorites/publishers'))
-  }
-}
-
-export function addFavorites () {
-  return dispatch => {
-    dispatch(NavigationActions.navigate({
-      routeName: 'favorites',
-      action: NavigationActions.navigate({
-        routeName: 'addFavorites'
-      })
-    }))
-    dispatch(AnalyticsActions.trackScreen('/favorites/add'))
   }
 }
 
