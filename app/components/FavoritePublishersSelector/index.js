@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import FavoritePublisherSelector from '../FavoritePublisherSelector'
+import FavoritePublishersNavigationButtonContainer from '../../containers/FavoritePublishersNavigationButtonContainer'
+import styles from './styles'
 
 class FavoritePublishersSelector extends Component {
   constructor (props) {
@@ -14,13 +16,20 @@ class FavoritePublishersSelector extends Component {
     if (!publishers) return null
 
     return (
-      <FlatList
-        data={publishers}
-        horizontal
-        keyExtractor={this.extractKey}
-        renderItem={this.renderRow}
-        shouldItemUpdate={this.shouldItemUpdate}
-      />
+      <View style={styles.container}>
+        <View style={styles.listContainer}>
+          <FlatList
+            data={publishers}
+            horizontal
+            keyExtractor={this.extractKey}
+            renderItem={this.renderRow}
+            shouldItemUpdate={this.shouldItemUpdate}
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <FavoritePublishersNavigationButtonContainer />
+        </View>
+      </View>
     )
   }
 
@@ -36,7 +45,7 @@ class FavoritePublishersSelector extends Component {
         rowID={index}
         publisher={item}
         onPress={openPublisher}
-        />
+      />
     )
   }
 

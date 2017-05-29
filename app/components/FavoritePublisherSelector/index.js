@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import PublisherLogo from '../PublisherLogo'
 import Touchable from '../Touchable'
+import styles from './styles'
 
 class FavoritePublisherSelector extends Component {
   constructor () {
@@ -16,8 +17,8 @@ class FavoritePublisherSelector extends Component {
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
 
     return (
-      <Touchable onPress={this.onPress}>
-        <View>
+      <Touchable onPress={this.onPress} underlayColor={'rgba(0,0,0,.1)'}>
+        <View style={styles.container}>
           <PublisherLogo size={30} source={{ uri }} />
         </View>
       </Touchable>
