@@ -13,6 +13,7 @@ class FavoritePublishersSelector extends Component {
 
   render () {
     const { publishers } = this.props
+    console.log('FavoritePublishersSelector.render', publishers)
     if (!publishers) return null
 
     return (
@@ -20,7 +21,6 @@ class FavoritePublishersSelector extends Component {
         <View style={styles.listContainer}>
           <FlatList
             data={publishers}
-            horizontal
             keyExtractor={this.extractKey}
             renderItem={this.renderRow}
             shouldItemUpdate={this.shouldItemUpdate}
@@ -40,13 +40,7 @@ class FavoritePublishersSelector extends Component {
   renderRow (data) {
     const { index, item } = data
     const { openPublisher } = this.props
-    return (
-      <FavoritePublisherSelector
-        rowID={index}
-        publisher={item}
-        onPress={openPublisher}
-      />
-    )
+    return <FavoritePublisherSelector rowID={index} publisher={item} onPress={openPublisher} />
   }
 
   shouldItemUpdate (props, nextProps) {

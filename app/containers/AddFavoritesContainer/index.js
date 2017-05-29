@@ -14,13 +14,13 @@ class AddFavoritesContainer extends Component {
   }
 
   render () {
-    const { favorites } = this.props
+    const { favoritePublishers } = this.props
 
     return (
       <ScrollView>
         <AddFavoritesHeading
           openFavoritesTimeline={this.openFavoritesTimeline}
-          isComplete={favorites.exists}
+          isComplete={favoritePublishers.exists}
         />
         {this.renderPublisherList()}
         <AddFavoritesFooter onPress={this.openFavoritesTimeline} />
@@ -43,8 +43,8 @@ class AddFavoritesContainer extends Component {
   }
 
   openFavoritesTimeline () {
-    const { dispatch } = this.props
-    dispatch(NavigationActions.favoritesTimeline())
+    const { navigation } = this.props
+    navigation.goBack()
   }
 }
 
@@ -54,14 +54,17 @@ AddFavoritesContainer.propTypes = {
     publishers: PropTypes.any
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
-  favorites: PropTypes.shape({
+  favoritePublishers: PropTypes.shape({
     exists: PropTypes.bool.isRequired
+  }).isRequired,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired
   }).isRequired
 }
 
 let mapStateToProps = (state) => {
   return {
-    favorites: {
+    favoritePublishers: {
       exists: state.FavoritePublishersReducer.items.length > 0
     }
   }

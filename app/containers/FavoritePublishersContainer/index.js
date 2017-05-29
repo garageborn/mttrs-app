@@ -49,12 +49,8 @@ class FavoritePublishersContainer extends Component {
   }
 
   handleComplete () {
-    const { dispatch, favoritePublishers } = this.props
-    if (favoritePublishers.items.length) {
-      dispatch(NavigationActions.favoritesTimeline())
-    } else {
-      dispatch(NavigationActions.addFavorites())
-    }
+    const { navigation } = this.props
+    navigation.goBack()
   }
 }
 
@@ -63,6 +59,9 @@ FavoritePublishersContainer.propTypes = {
   favoritePublishers: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
+  }).isRequired,
+  navigation: PropTypes.shape({
+    goBack: PropTypes.func.isRequired
   }).isRequired
 }
 

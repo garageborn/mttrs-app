@@ -20,7 +20,9 @@ class FavoritesTimelineScene extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
+    const itemsChanged = !_isEqual(this.props.items, nextProps.items)
+    return isLoadedChanged || itemsChanged
   }
 
   render () {
