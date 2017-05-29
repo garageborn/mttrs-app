@@ -3,7 +3,6 @@ import { BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 import { injectIntl } from 'react-intl'
-import _isEqual from 'lodash/isEqual'
 import { NavigationActions, TenantActions } from '../../actions/index'
 import AppNavigator from '../../navigators/AppNavigator'
 
@@ -23,10 +22,6 @@ class NavigationContainer extends Component {
 
   componentWillMount () {
     this.props.dispatch(TenantActions.getCurrent())
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return !_isEqual(this.props.tenant, nextProps.tenant)
   }
 
   render () {

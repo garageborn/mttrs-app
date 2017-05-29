@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PopularTimelineContainer from '../../containers/PopularTimelineContainer'
 
-class PopularTimelineScene extends Component {
-  render () {
-    return <PopularTimelineContainer />
-  }
-}
+const PopularTimelineScene = () => (
+  <PopularTimelineContainer />
+)
 
 export default PopularTimelineScene

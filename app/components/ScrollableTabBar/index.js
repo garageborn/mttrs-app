@@ -27,7 +27,7 @@ class ScrollableTabBar extends Component {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    return false
+    return this.props.index !== nextProps.index
   }
 
   componentDidMount () {
@@ -38,10 +38,6 @@ class ScrollableTabBar extends Component {
   componentWillUnmount () {
     if (this.positionListener) this.positionListener.remove()
   }
-
-  // componentDidUpdate () {
-  //   global.requestAnimationFrame(() => this.scrollToIndex(this.props.index))
-  // }
 
   render () {
     return (
@@ -83,17 +79,18 @@ class ScrollableTabBar extends Component {
   renderIndicator () {
     if (!_result(this.props, 'renderOptions.renderIndicator')) return null
 
+    const indicatorStyle = _result(this.props, 'renderOptions.indicatorStyle') || {}
     const style = {
       position: 'absolute',
       left: 0,
       bottom: 0,
-      backgroundColor: 'red',
+      backgroundColor: 'white',
       height: 10,
       width: this.indicatorAnimated.width,
       transform: [{ translateX: this.indicatorAnimated.x }]
     }
 
-    return <Animated.View style={style} />
+    return <Animated.View style={[style, indicatorStyle]} />
   }
 
   scrollToPosition (position) {
@@ -214,7 +211,8 @@ ScrollableTabBar.propTypes = {
   renderTab: PropTypes.func.isRequired,
   subscribe: PropTypes.func,
   renderOptions: PropTypes.shape({
-    renderIndicator: PropTypes.bool
+    renderIndicator: PropTypes.bool,
+    indicatorStyle: PropTypes.number
   })
 }
 

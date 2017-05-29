@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Settings from '../../components/Settings'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
 
-class SettingsScene extends Component {
-  render () {
-    return <Settings />
-  }
-}
+const SettingsScene = () => (
+  <Settings />
+)
 
 SettingsScene.navigationOptions = props => {
   return {
