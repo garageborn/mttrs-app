@@ -1,16 +1,28 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
+import captureError from '../../common/utils/captureError'
 import Error from '../Error'
 
-const ApolloError = ({ skinType, data }) => {
-  let refetchData = () => {
-    return data.refetch({
-      notifyOnNetworkStatusChange: true
-    })
+class ApolloError extends Component {
+  constructor () {
+    super()
+    this.refetchData = this.refetchData.bind(this)
   }
 
-  return (
-    <Error skinType={skinType} onPressReload={refetchData} />
-  )
+  componentDidMount () {
+    const { data } = this.props
+    if (!data.error) return
+    captureError(data.error)
+  }
+
+  render () {
+    const { skinType } = this.props
+    return <Error skinType={skinType} onPressReload={this.refetchData} />
+  }
+
+  refetchData () {
+    const { data } = this.props
+    return data.refetch({ notifyOnNetworkStatusChange: true })
+  }
 }
 
 ApolloError.propTypes = {

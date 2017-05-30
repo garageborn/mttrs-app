@@ -12,6 +12,7 @@ const Query = gql`
         summary
         category { id name color slug }
         main_link {
+          id
           title
           url
           amp_url

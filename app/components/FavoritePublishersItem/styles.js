@@ -2,7 +2,11 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    height: 46
+    paddingVertical: 2
+  },
+
+  rightContent: {
+    padding: 10
   }
 })
 
