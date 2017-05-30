@@ -18,8 +18,8 @@ class SettingsDialog extends Component {
   render () {
     return (
       <View style={styles.container}>
-        {this.renderSettingsButton()}
         {this.renderTenantButton()}
+        {this.renderSettingsButton()}
       </View>
     )
   }

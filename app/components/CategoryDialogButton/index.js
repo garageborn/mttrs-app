@@ -9,7 +9,7 @@ class CategoryDialogButton extends Component {
   render () {
     const { category, onPress } = this.props
     return (
-      <Touchable onPress={() => onPress(category)}>
+      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={() => onPress(category)}>
         <View>
           <DialogButton icon={this.icon} messages={[category.name]} />
         </View>

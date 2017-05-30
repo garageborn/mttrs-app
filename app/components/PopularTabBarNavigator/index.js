@@ -44,7 +44,7 @@ class PopularTabBarNavigator extends Component {
 
   tabContent (tab, index) {
     const { categories, navigationState, intl } = this.props
-    if (index === 0) return { name: intl.formatMessage({id: 'header.topStories'}), color: '#FFF' }
+    if (index === 0) return { name: intl.formatMessage({id: 'header.topStories'}), color: '#FF5607' }
     if (index === navigationState.routes.length - 1) {
       return { name: intl.formatMessage({id: 'header.publishers'}), color: '#999' }
     } else {
