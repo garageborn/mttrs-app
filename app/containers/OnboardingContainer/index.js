@@ -12,16 +12,18 @@ class OnboardingContainer extends Component {
   }
 
   componentWillMount () {
+    this.props.dispatch(OnboardingActions.getOnboardingStatus())
+  }
+
+  componentWillUnmount () {
     this.resetStatusBar()
   }
 
   componentDidUpdate () {
-    console.log('componentDidUpdate', this.shouldDisplay)
     if (this.shouldDisplay) this.changeStatusBar()
   }
 
   render () {
-    console.log('render', this.shouldDisplay)
     if (!this.shouldDisplay) return null
 
     return (
@@ -32,6 +34,7 @@ class OnboardingContainer extends Component {
   }
 
   onOnboardingEnd () {
+    this.resetStatusBar()
     this.props.dispatch(OnboardingActions.closeOnboarding())
   }
 
@@ -45,7 +48,6 @@ class OnboardingContainer extends Component {
 
   get shouldDisplay () {
     const { tenant, onboarding } = this.props
-    console.log(tenant.isLoaded, onboarding)
     if (!tenant.isLoaded) return false
     if (onboarding.isFetching || !onboarding.show) return false
     return true
