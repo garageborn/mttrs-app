@@ -6,12 +6,13 @@ import NavigationContainer from './NavigationContainer'
 import ModalContainer from './ModalContainer'
 import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
+import { STATUS_BAR_COLOR } from '../constants/Colors'
 require('../config/sentry')
 
 class Root extends Component {
   constructor () {
     super()
-    if (Platform.OS === 'ios') StatusBar.setBarStyle('light-content')
+    if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
   }
 
   render () {

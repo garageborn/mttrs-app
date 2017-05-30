@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Onboarding from '../../components/Onboarding'
 import { OnboardingActions } from '../../actions/index'
+import { STATUS_BAR_COLOR } from '../../constants/Colors'
 
 class OnboardingContainer extends Component {
   constructor () {
@@ -11,13 +12,17 @@ class OnboardingContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(OnboardingActions.getOnboardingStatus())
+    this.resetStatusBar()
+  }
+
+  componentDidUpdate () {
+    console.log('componentDidUpdate', this.shouldDisplay)
+    if (this.shouldDisplay) this.changeStatusBar()
   }
 
   render () {
-    const { tenant, onboarding } = this.props
-    if (!tenant.isLoaded) return null
-    if (onboarding.isFetching || !onboarding.show) return null
+    console.log('render', this.shouldDisplay)
+    if (!this.shouldDisplay) return null
 
     return (
       <Modal animationType={'slide'} transparent visible onRequestClose={this.onOnboardingEnd}>
@@ -28,6 +33,22 @@ class OnboardingContainer extends Component {
 
   onOnboardingEnd () {
     this.props.dispatch(OnboardingActions.closeOnboarding())
+  }
+
+  changeStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('default')
+  }
+
+  resetStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
+  }
+
+  get shouldDisplay () {
+    const { tenant, onboarding } = this.props
+    console.log(tenant.isLoaded, onboarding)
+    if (!tenant.isLoaded) return false
+    if (onboarding.isFetching || !onboarding.show) return false
+    return true
   }
 }
 
