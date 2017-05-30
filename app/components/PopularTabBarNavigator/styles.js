@@ -1,8 +1,11 @@
 import { StyleSheet, Platform } from 'react-native'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#2D2D2B',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: DARK_COLOR,
     height: Platform.select({
       ios: 64
     }),

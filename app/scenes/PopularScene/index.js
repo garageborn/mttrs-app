@@ -20,7 +20,7 @@ class PopularScene extends Component {
   renderLoading () {
     return (
       <View>
-        <ActivityIndicator size='large' color='#AAA' />
+        <ActivityIndicator size='small' color='#AAA' />
       </View>
     )
   }

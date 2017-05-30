@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   textFocused: {
-    color: '#2D2D2B',
+    color: DARK_COLOR,
     fontSize: 14,
     textAlign: 'center'
   }
