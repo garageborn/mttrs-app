@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import PopularScene from '../scenes/PopularScene'
@@ -6,19 +7,20 @@ import FavoritesScene from '../scenes/FavoritesScene'
 import PopularTabBar, { PopularTabBarIcon } from '../components/PopularTabBar'
 import SummariesTabBar, { SummariesTabBarIcon } from '../components/SummariesTabBar'
 import FavoritesTabBar, { FavoritesTabBarIcon } from '../components/FavoritesTabBar'
+import styles from '../styles/TabBarBottom'
 
 const MainRoutes = {
   summaries: {
     screen: SummariesScene,
     navigationOptions: {
-      tabBarLabel: <SummariesTabBar />,
+      tabBarLabel: ({ focused }) => <SummariesTabBar focused={focused} />,
       tabBarIcon: SummariesTabBarIcon
     }
   },
   popular: {
     screen: PopularScene,
     navigationOptions: {
-      tabBarLabel: <PopularTabBar />,
+      tabBarLabel: ({ focused }) => <PopularTabBar focused={focused} />,
       tabBarIcon: PopularTabBarIcon,
       header: null
     }
@@ -26,7 +28,7 @@ const MainRoutes = {
   favorites: {
     screen: FavoritesScene,
     navigationOptions: {
-      tabBarLabel: <FavoritesTabBar />,
+      tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />,
       tabBarIcon: FavoritesTabBarIcon
     }
   }
@@ -36,7 +38,7 @@ const MainNavigatorConfig = {
   headerMode: 'none',
   initialRouteName: 'summaries',
   swipeEnabled: false,
-  tabBarComponent: ({ ...props }) => <TabBarBottom {...props} />,
+  tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
   lazy: true
 }

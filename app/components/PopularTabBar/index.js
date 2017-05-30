@@ -1,29 +1,33 @@
-import React, { Component } from 'react'
-import { Text, Image, View } from 'react-native'
-import { injectIntl, defineMessages } from 'react-intl'
-import styles from './styles'
-
-const messages = defineMessages({
-  label: { id: 'tabBar.popular' }
-})
+import React, { Component, PropTypes } from 'react'
+import { Image } from 'react-native'
+import { injectIntl } from 'react-intl'
+import BottomTabItem from '../BottomTabItem'
 
 class PopularTabBar extends Component {
   render () {
-    const { intl } = this.props
-
+    const { focused, intl } = this.props
     return (
-      <View style={styles.container}>
-        <Text style={styles.text}>{intl.formatMessage(messages.label)}</Text>
-      </View>
+      <BottomTabItem
+        active={focused}
+        icon={this.icon}
+        message={intl.formatMessage({ id: 'tabBar.popular' })}
+      />
     )
+  }
+
+  get icon () {
+    if (this.props.focused) {
+      return <Image source={require('./assets/active.png')} />
+    } else {
+      return <Image source={require('./assets/inactive.png')} />
+    }
   }
 }
 
-export const PopularTabBarIcon = ({focused}) => {
-  if (focused) {
-    return <Image source={require('./assets/active.png')} />
-  } else {
-    return <Image source={require('./assets/inactive.png')} />
-  }
+PopularTabBar.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
+  focused: PropTypes.bool.isRequired
 }
 export default injectIntl(PopularTabBar)
