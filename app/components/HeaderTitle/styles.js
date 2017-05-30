@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 const { width } = Dimensions.get('window')
-const headerButtonWidth = 40
+const headerButtonsWidth = 100
 
 const containerStyles = {
   flexGrow: 1,
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 12,
     color: '#FFF',
-    width: width - headerButtonWidth
+    width: width - headerButtonsWidth
   }
 })
 

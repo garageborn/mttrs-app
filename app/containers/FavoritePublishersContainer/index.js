@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import FavoritePublishersManager from '../../components/FavoritePublishersManager'
 import FavoritePublishersListContainer from '../FavoritePublishersListContainer'
+import FavoritePublishersManagerButton from '../../components/FavoritePublishersManagerButton'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
 import { isCurrentRoute } from '../../navigators/AppNavigator'
 
@@ -26,10 +27,10 @@ class FavoritePublishersContainer extends Component {
   render () {
     return (
       <FavoritePublishersManager
-        handleButtonPress={this.handleButtonPress}
         handleComplete={this.handleComplete}
       >
         {this.renderPublisherList()}
+        <FavoritePublishersManagerButton onPress={this.handleButtonPress} />
       </FavoritePublishersManager>
     )
   }
