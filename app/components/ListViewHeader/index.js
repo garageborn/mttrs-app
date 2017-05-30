@@ -5,7 +5,7 @@ import ParsedDate from '../ParsedDate'
 import styles from './styles'
 
 const ListViewHeader = ({ date, renderOptions }) => {
-  const type = _result(renderOptions, 'type')
+  const type = _result(renderOptions, 'timelineType')
 
   return (
     <View style={styles.header}>
@@ -17,7 +17,7 @@ const ListViewHeader = ({ date, renderOptions }) => {
 ListViewHeader.propTypes = {
   date: PropTypes.number.isRequired,
   renderOptions: PropTypes.shape({
-    type: PropTypes.string
+    timelineType: PropTypes.string
   })
 }
 
