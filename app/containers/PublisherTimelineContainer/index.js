@@ -1,14 +1,21 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
+import CategoryColor from '../../components/CategoryColor'
 import TimelineContainer from '../TimelineContainer'
 
 class PublisherTimeline extends Component {
   render () {
-    const { data, publisher } = this.props
+    const { data, publisher, selectedCategory } = this.props
     const renderOptions = { timelineType: 'publisher', publisherSlug: publisher.slug }
 
-    return <TimelineContainer data={data} renderOptions={renderOptions} />
+    return (
+      <View>
+        <CategoryColor category={selectedCategory} />
+        <TimelineContainer data={data} renderOptions={renderOptions} />
+      </View>
+    )
   }
 }
 
