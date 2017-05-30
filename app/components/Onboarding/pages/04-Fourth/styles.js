@@ -2,13 +2,13 @@ import { Platform, Dimensions } from 'react-native'
 import { iphoneWidthSmall } from '../../../../styles/Global'
 
 const { width } = Dimensions.get('window')
-const iOSTop = width === iphoneWidthSmall ? 40 : 80
+const iOSTop = width === iphoneWidthSmall ? 20 : 40
 
 const styles = {
   image: {
     marginTop: Platform.select({
       ios: iOSTop,
-      android: 50
+      android: 20
     })
   }
 }
