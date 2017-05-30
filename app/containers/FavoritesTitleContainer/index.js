@@ -17,7 +17,7 @@ class FavoritesTitleContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    category: state.FavoritesReducer.category
+    category: state.FavoritesReducer.selectedCategory
   }
 }
 

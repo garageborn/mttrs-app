@@ -3,6 +3,7 @@ import { View } from 'react-native'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
 import styles from './styles'
+import { DEFAULT_CATEGORY_COLOR } from '../../constants/Colors'
 
 class CategoryDialogButton extends Component {
   render () {
@@ -17,7 +18,7 @@ class CategoryDialogButton extends Component {
   }
 
   get icon () {
-    const backgroundColor = this.props.category.color ? this.props.category.color : '#E5E5E5'
+    const backgroundColor = this.props.category.color || DEFAULT_CATEGORY_COLOR
     return (
       <View style={[styles.icon, { backgroundColor: backgroundColor }]} />
     )

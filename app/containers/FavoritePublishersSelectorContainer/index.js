@@ -11,9 +11,15 @@ class FavoritePublishersSelectorContainer extends Component {
   }
 
   render () {
-    const { loading, publishers } = this.props.data
-    if (loading || !publishers) return null
-    return <FavoritePublishersSelector publishers={publishers} openPublisher={this.openPublisher} />
+    const { data, selectedCategory } = this.props
+    if (data.loading || !data.publishers) return null
+    return (
+      <FavoritePublishersSelector
+        publishers={data.publishers}
+        openPublisher={this.openPublisher}
+        selectedCategory={selectedCategory}
+      />
+    )
   }
 
   openPublisher (publisher) {
