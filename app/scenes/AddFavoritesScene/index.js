@@ -19,9 +19,7 @@ AddFavoritesScene.navigationOptions = props => {
 }
 
 AddFavoritesScene.propTypes = {
-  navigation: PropTypes.shape({
-    goBack: PropTypes.func.isRequired
-  }).isRequired
+  navigation: PropTypes.object.isRequired
 }
 
 export default AddFavoritesScene
