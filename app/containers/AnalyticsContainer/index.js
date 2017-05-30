@@ -13,7 +13,6 @@ class AnalyticsContainer extends Component {
 
   trackAnalyticsScreen () {
     const { dispatch, screenName } = this.props
-    console.log('trackAnalyticsScreen', screenName)
     dispatch(AnalyticsActions.trackScreen(screenName))
   }
 }
@@ -24,4 +23,10 @@ AnalyticsContainer.propTypes = {
   screenName: PropTypes.string.isRequired
 }
 
-export default connect()(AnalyticsContainer)
+const mapStateToProps = (state, ownProps) => {
+  console.log(state.RouterReducer.current.routeName)
+  return {
+  }
+}
+
+export default connect(mapStateToProps)(AnalyticsContainer)

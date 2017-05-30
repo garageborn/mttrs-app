@@ -1,10 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
+import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
-import PopularNavigator from '../../navigators/PopularNavigator'
 import withQuery from './index.gql'
+import PopularNavigator from '../../navigators/PopularNavigator'
+import { RoutesTrackingActions } from '../../actions/index'
 
 class PopularScene extends Component {
+  constructor () {
+    super()
+    this.onNavigationStateChange = this.onNavigationStateChange.bind(this)
+  }
+
   shouldComponentUpdate (nextProps) {
     const loadingChanged = this.props.data.loading !== nextProps.data.loading
     const categoriesChanged = !_isEqual(this.props.data.categories, nextProps.data.categories)
@@ -14,7 +21,7 @@ class PopularScene extends Component {
   render () {
     if (this.props.data.loading) return this.renderLoading()
     const Navigator = PopularNavigator(this.props.data.categories)
-    return <Navigator />
+    return <Navigator onNavigationStateChange={this.onNavigationStateChange} />
   }
 
   renderLoading () {
@@ -24,13 +31,21 @@ class PopularScene extends Component {
       </View>
     )
   }
+
+  onNavigationStateChange (prevState, currentState) {
+    const { dispatch } = this.props
+    const currentRoute = prevState.routes[prevState.index]
+    const nextRoute = currentState.routes[currentState.index]
+    if (!_isEqual(currentRoute, nextRoute)) dispatch(RoutesTrackingActions.track(nextRoute))
+  }
 }
 
 PopularScene.propTypes = {
   data: PropTypes.shape({
     loading: PropTypes.bool,
     categories: PropTypes.array
-  }).isRequired
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 PopularScene.navigationOptions = props => {
@@ -39,4 +54,5 @@ PopularScene.navigationOptions = props => {
   }
 }
 
-export default withQuery(PopularScene)
+const PopularSceneWithData = withQuery(PopularScene)
+export default connect()(PopularSceneWithData)
