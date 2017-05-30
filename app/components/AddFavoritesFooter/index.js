@@ -8,11 +8,12 @@ const messages = defineMessages({
   button: { id: 'addFavorites.button' }
 })
 
-const AddFavoritesFooter = ({ intl, onPress }) => (
+const AddFavoritesFooter = ({ intl, isComplete, onPress }) => (
   <View style={styles.container}>
     <Button
       background='danger'
       content={intl.formatMessage(messages.button)}
+      inactive={!isComplete}
       onPress={onPress}
       size='regular'
     />
@@ -23,6 +24,7 @@ AddFavoritesFooter.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
+  isComplete: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired
 }
 

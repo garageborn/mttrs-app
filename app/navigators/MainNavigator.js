@@ -4,9 +4,9 @@ import { TabNavigator, TabBarBottom } from 'react-navigation'
 import PopularScene from '../scenes/PopularScene'
 import SummariesScene from '../scenes/SummariesScene'
 import FavoritesScene from '../scenes/FavoritesScene'
-import PopularTabBar, { PopularTabBarIcon } from '../components/PopularTabBar'
-import SummariesTabBar, { SummariesTabBarIcon } from '../components/SummariesTabBar'
-import FavoritesTabBar, { FavoritesTabBarIcon } from '../components/FavoritesTabBar'
+import PopularTabBar from '../components/PopularTabBar'
+import SummariesTabBar from '../components/SummariesTabBar'
+import FavoritesTabBar from '../components/FavoritesTabBar'
 import styles from '../styles/TabBarBottom'
 
 const MainRoutes = {
