@@ -45,13 +45,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNDeviceInfo(),
-            new RNSentryPackage(MainApplication.this),
+          new RNSentryPackage(MainApplication.this),
+          new FabricPackage(),
+          new RNDeviceInfo(),
           new ReactNativeOneSignalPackage(),
           new GoogleAnalyticsBridgePackage(),
           new RNSharePackage(),
           new LinearGradientPackage(),
-          new FabricPackage(),
           new FBSDKPackage(mCallbackManager),
           new FBAdsPackage()
       );
