@@ -26,9 +26,7 @@ class FavoritePublishersContainer extends Component {
 
   render () {
     return (
-      <FavoritePublishersManager
-        handleComplete={this.handleComplete}
-      >
+      <FavoritePublishersManager handleComplete={this.handleComplete} >
         {this.renderPublisherList()}
         <FavoritePublishersManagerButton onPress={this.handleButtonPress} />
       </FavoritePublishersManager>
