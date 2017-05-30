@@ -12,7 +12,7 @@ const Query = gql`
         amp_url
         slug
         total_social
-        publisher { name display_name slug icon_id restrict_content }
+        publisher { id name display_name slug icon_id restrict_content }
       }
       other_links(publisher_slug: $publisherSlug, popular: true) {
         title
@@ -20,7 +20,7 @@ const Query = gql`
         amp_url
         slug
         total_social
-        publisher { name display_name slug icon_id restrict_content }
+        publisher { id name display_name slug icon_id restrict_content }
       }
     }
   }

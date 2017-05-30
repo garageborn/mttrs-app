@@ -9,7 +9,7 @@ const Query = gql`
       slug
       image_source_url
       story { id }
-      publisher { name display_name icon_id slug restrict_content }
+      publisher { id name display_name icon_id slug restrict_content }
     }
   }
 `
