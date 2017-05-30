@@ -7,7 +7,6 @@ const Tag = ({ onPress, children, active, first }) => {
   let getStyle = () => {
     let containerStyles = [styles.container]
     if (active) containerStyles = [...containerStyles, styles.active]
-    console.log(first)
     if (first) containerStyles = [...containerStyles, styles.first]
     return containerStyles
   }
