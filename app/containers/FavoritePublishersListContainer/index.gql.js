@@ -5,9 +5,9 @@ import prepareArrayParam from '../../common/utils/ArrayParam'
 const Query = gql`
 query($publisherIds: [Int]) {
   publishers(with_stories: true, order_by_name: true, with_ids: $publisherIds) {
+    id
     display_name
     icon_id
-    id
     name
     slug
   }

@@ -4,6 +4,7 @@ import { graphql } from 'react-apollo'
 const Query = gql`
   query($slug: String!) {
     publisher(slug: $slug) {
+      id
       name
       display_name
       icon_id

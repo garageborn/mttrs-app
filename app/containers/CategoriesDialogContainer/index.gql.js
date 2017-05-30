@@ -5,8 +5,8 @@ import prepareArrayParam from '../../common/utils/ArrayParam'
 const Query = gql`
 query($publisherIds: [Int]) {
   categories(with_stories: true, ordered: true, publisher_ids: $publisherIds) {
-    color
     id
+    color
     name
     slug
   }

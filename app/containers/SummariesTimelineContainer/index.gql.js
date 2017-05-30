@@ -10,8 +10,9 @@ const Query = gql`
         total_social
         headline
         summary
-        category { name color slug }
+        category { id name color slug }
         main_link {
+          id
           title
           url
           amp_url

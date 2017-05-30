@@ -8,7 +8,6 @@ query {
     color
     name
     slug
-    tags_count(with_recent_stories: true)
   }
 }
 `

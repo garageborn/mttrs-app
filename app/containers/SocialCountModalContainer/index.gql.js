@@ -5,7 +5,9 @@ import _result from 'lodash/result'
 const Query = gql`
   query($id: ID!, $publisherSlug: String) {
     story(id: $id) {
+      id
       main_link(publisher_slug: $publisherSlug) {
+        id
         title
         url
         amp_url
@@ -21,9 +23,7 @@ const Query = gql`
         pinterest
         total
       }
-      other_links {
-        total_social
-      }
+      other_links { id total_social }
     }
   }
 `

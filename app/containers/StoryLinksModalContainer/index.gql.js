@@ -7,6 +7,7 @@ const Query = gql`
     story(id: $id) {
       id
       main_link(publisher_slug: $publisherSlug) {
+        id
         title
         url
         amp_url
@@ -15,6 +16,7 @@ const Query = gql`
         publisher { id name display_name slug icon_id restrict_content }
       }
       other_links(publisher_slug: $publisherSlug, popular: true) {
+        id
         title
         url
         amp_url
