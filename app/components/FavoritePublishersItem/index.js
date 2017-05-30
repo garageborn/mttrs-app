@@ -43,11 +43,19 @@ class FavoritePublishersItem extends Component {
   }
 
   get addComponent () {
-    return <Image source={inactiveImage} />
+    return (
+      <View style={styles.rightContent}>
+        <Image source={inactiveImage} />
+      </View>
+    )
   }
 
   get removeComponent () {
-    return <Image source={activeImage} />
+    return (
+      <View style={styles.rightContent}>
+        <Image source={activeImage} />
+      </View>
+    )
   }
 
   handleFavoriteState (isFavorite) {
