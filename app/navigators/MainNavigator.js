@@ -13,23 +13,20 @@ const MainRoutes = {
   summaries: {
     screen: SummariesScene,
     navigationOptions: {
-      tabBarLabel: ({ focused }) => <SummariesTabBar focused={focused} />,
-      tabBarIcon: SummariesTabBarIcon
+      tabBarLabel: ({ focused }) => <SummariesTabBar focused={focused} />
     }
   },
   popular: {
     screen: PopularScene,
     navigationOptions: {
       tabBarLabel: ({ focused }) => <PopularTabBar focused={focused} />,
-      tabBarIcon: PopularTabBarIcon,
       header: null
     }
   },
   favorites: {
     screen: FavoritesScene,
     navigationOptions: {
-      tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />,
-      tabBarIcon: FavoritesTabBarIcon
+      tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />
     }
   }
 }

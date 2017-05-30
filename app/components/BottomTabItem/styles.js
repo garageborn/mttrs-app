@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    padding: 5
+    padding: 6
   },
   icon: {
-    marginBottom: 2
+    marginBottom: 5
   },
   text: {
     fontSize: 12,
