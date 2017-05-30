@@ -3,11 +3,12 @@ import { View, Text } from 'react-native'
 import Touchable from '../Touchable'
 import styles from './styles'
 
-const Tag = ({ onPress, children, active, last }) => {
+const Tag = ({ onPress, children, active, first }) => {
   let getStyle = () => {
     let containerStyles = [styles.container]
     if (active) containerStyles = [...containerStyles, styles.active]
-    if (last) containerStyles = [...containerStyles, styles.last]
+    console.log(first)
+    if (first) containerStyles = [...containerStyles, styles.first]
     return containerStyles
   }
 
@@ -30,7 +31,7 @@ Tag.propTypes = {
   children: PropTypes.any.isRequired,
   onPress: PropTypes.func.isRequired,
   active: PropTypes.bool.isRequired,
-  last: PropTypes.bool
+  first: PropTypes.bool
 }
 
 export default Tag

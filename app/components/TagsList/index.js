@@ -35,7 +35,7 @@ class TagsList extends Component {
   renderDefaultTag () {
     const { intl, selectTag } = this.props
     return (
-      <Tag active={this.isSelected()} onPress={() => selectTag()}>
+      <Tag active={this.isSelected()} first onPress={() => selectTag()}>
         {intl.formatMessage(messages.default)}
       </Tag>
     )
@@ -48,7 +48,6 @@ class TagsList extends Component {
 
     return (
       <Tag
-        last={this.isLast(index)}
         active={this.isSelected(tag)}
         onPress={() => selectTag(tag)}
       >
@@ -63,10 +62,6 @@ class TagsList extends Component {
         <ActivityIndicator color='#AAA' />
       </View>
     )
-  }
-
-  isLast (idx) {
-    return idx === this.props.data.tags.length - 1
   }
 
   isSelected (tag) {
