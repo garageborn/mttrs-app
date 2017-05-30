@@ -31,7 +31,7 @@ TagsListContainer.propTypes = {
   data: PropTypes.object.isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     selectedTag: state.CategoriesReducer.selectedTags[ownProps.category.id]
   }

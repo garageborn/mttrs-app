@@ -16,7 +16,7 @@ ModalContainer.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     modal: state.UIReducer.modal
   }

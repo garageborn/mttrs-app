@@ -55,7 +55,7 @@ FavoriteCategoriesDialogContainer.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,

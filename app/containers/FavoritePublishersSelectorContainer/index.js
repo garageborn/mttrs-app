@@ -37,7 +37,7 @@ FavoritePublishersSelectorContainer.propTypes = {
   selectedCategory: PropTypes.any
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     selectedCategory: state.FavoritesReducer.selectedCategory
   }

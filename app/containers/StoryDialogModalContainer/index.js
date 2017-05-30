@@ -63,7 +63,7 @@ StoryDialogModalContainer.propTypes = {
   dispatch: PropTypes.func
 }
 
-let mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     favorites: {
       isLoaded: state.FavoritePublishersReducer.isLoaded

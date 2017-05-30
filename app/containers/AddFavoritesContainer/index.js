@@ -76,7 +76,7 @@ AddFavoritesContainer.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     isCurrentRoute: isCurrentRoute(state.nav, 'addFavorites'),
     favoritePublishers: {
