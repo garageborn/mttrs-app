@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 import { injectIntl } from 'react-intl'
 import ScrollableTabBar from '../ScrollableTabBar'
+import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import PopularTab from '../PopularTab'
 import Touchable from '../Touchable'
 import styles from './styles'
@@ -18,15 +19,18 @@ class PopularTabBarNavigator extends Component {
 
   render () {
     const { navigationState, subscribe } = this.props
+
     return (
-      <ScrollableTabBar
-        style={styles.container}
-        index={navigationState.index}
-        tabs={navigationState.routes}
-        subscribe={subscribe}
-        renderTab={this.renderTab}
-        renderOptions={{ renderIndicator: true, indicatorStyle: styles.indicatorStyle }}
-      />
+      <View style={styles.container}>
+        <ScrollableTabBar
+          index={navigationState.index}
+          tabs={navigationState.routes}
+          subscribe={subscribe}
+          renderTab={this.renderTab}
+          renderOptions={{ renderIndicator: true, indicatorStyle: styles.indicatorStyle }}
+        />
+        <HeaderSettingsContainer />
+      </View>
     )
   }
 

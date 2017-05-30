@@ -1,4 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native'
+import { DARK_COLOR } from '../../constants/Colors'
+
 const { width } = Dimensions.get('window')
 
 let imageSize = 120
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#2D2D2B',
+    color: DARK_COLOR,
     fontSize: 15,
     lineHeight: 18,
     fontWeight: '500'

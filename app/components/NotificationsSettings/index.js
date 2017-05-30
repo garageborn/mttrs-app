@@ -4,6 +4,7 @@ import { injectIntl, defineMessages } from 'react-intl'
 import _result from 'lodash/result'
 import styles, { thumbTintColor, thumbTintActive, tintColor, onTintColor, smallTextColor } from './styles'
 import Heading from '../Heading'
+import { DARK_COLOR } from '../../constants/Colors'
 
 const messages = defineMessages({
   mttrs_br: { id: 'notifications.mttrs_br' },
@@ -19,7 +20,7 @@ class NotificationsSettings extends Component {
     return (
       <View>
         <View style={styles.headingContainer}>
-          <Heading size='regular' bold color={'#2D2D2B'}>{notifications}</Heading>
+          <Heading size='regular' bold color={DARK_COLOR}>{notifications}</Heading>
         </View>
         <View style={styles.itemsContainer}>
           { this.renderNotificationStatus('mttrs_us') }

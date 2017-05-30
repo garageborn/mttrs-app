@@ -1,3 +1,5 @@
+import { DARK_COLOR } from '../constants/Colors'
+
 export default {
   headerTitleStyle: {
     color: 'white',
@@ -10,6 +12,6 @@ export default {
     color: 'white'
   },
   headerStyle: {
-    backgroundColor: '#2D2D2B'
+    backgroundColor: DARK_COLOR
   }
 }
