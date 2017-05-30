@@ -46,8 +46,10 @@ class Timeline extends Component {
 
   renderLoading () {
     return (
-      <View style={styles.loading}>
-        {this.renderActivityIndicator()}
+      <View style={styles.container}>
+        <View style={styles.loading}>
+          {this.renderActivityIndicator()}
+        </View>
       </View>
     )
   }

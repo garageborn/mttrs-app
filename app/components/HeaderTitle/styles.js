@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+const { width } = Dimensions.get('window')
+const headerButtonWidth = 40
 
 const containerStyles = {
   flexGrow: 1,
@@ -11,24 +13,30 @@ const styles = StyleSheet.create({
   container: {
     ...containerStyles
   },
+
   publisherContainer: {
     ...containerStyles,
     alignSelf: 'flex-start'
   },
+
   titleContainer: {
     flexDirection: 'column'
   },
+
   text: {
     marginHorizontal: 5
   },
+
   titleWithSubtitle: {
     fontSize: 12,
     color: '#FFF',
     opacity: 0.8
   },
+
   subtitle: {
-    fontSize: 14,
-    color: '#FFF'
+    fontSize: 12,
+    color: '#FFF',
+    width: width - headerButtonWidth
   }
 })
 

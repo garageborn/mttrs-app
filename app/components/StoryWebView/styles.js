@@ -3,7 +3,7 @@ import { headerHeight } from '../../styles/Global'
 const { width, height } = Dimensions.get('window')
 
 const iOSOffset = 20
-const androidOffset = 31
+const androidOffset = 3
 
 const containerHeight = Platform.select({
   ios: height - headerHeight - iOSOffset,

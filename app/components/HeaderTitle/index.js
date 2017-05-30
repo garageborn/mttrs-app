@@ -9,7 +9,7 @@ const HeaderTitle = ({ logo, subtitle, title }) => {
     return (
       <View>
         <Text style={[styles.text, styles.titleWithSubtitle]}>{title}</Text>
-        <Text style={[headerStyles.headerTitleStyle, styles.text]} numberOfLines={1}>{subtitle}</Text>
+        <Text style={[styles.text, styles.subtitle]} numberOfLines={1}>{subtitle}</Text>
       </View>
     )
   }
