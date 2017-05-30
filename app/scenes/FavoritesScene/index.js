@@ -54,7 +54,7 @@ FavoritesScene.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     isCurrentRoute: isCurrentRoute(state.nav, 'favorites'),
     favoritePublishers: {

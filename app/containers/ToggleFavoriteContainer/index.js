@@ -50,7 +50,7 @@ ToggleFavoriteContainer.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, ownProps) => {
   const publisherId = _parseInt(_result(ownProps, 'publisher.id'))
   const isFavorite = state.FavoritePublishersReducer.items.indexOf(publisherId) !== -1
 

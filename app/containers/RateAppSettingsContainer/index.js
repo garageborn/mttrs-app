@@ -25,6 +25,7 @@ class RateAppSettingsContainer extends Component {
   }
 
   rateApp () {
+    console.log('StoreReview.isAvailable', StoreReview.isAvailable)
     if (StoreReview.isAvailable) return StoreReview.requestReview()
     this.openNative()
   }

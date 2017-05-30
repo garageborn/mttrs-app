@@ -27,7 +27,7 @@ PublisherTimeline.propTypes = {
   }).isRequired
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return {
     selectedCategory: state.PublishersReducer.selectedCategory
   }

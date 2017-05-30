@@ -1,10 +1,13 @@
 import React from 'react'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import SummariesTimelineContainer from '../../containers/SummariesTimelineContainer'
 import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import headerStyles from '../../styles/Header'
 
 const SummariesScene = () => (
-  <SummariesTimelineContainer />
+  <AnalyticsContainer screenName={'/summaries'}>
+    <SummariesTimelineContainer />
+  </AnalyticsContainer>
 )
 
 SummariesScene.navigationOptions = props => {
