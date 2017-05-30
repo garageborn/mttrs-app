@@ -33,13 +33,7 @@ class CategoriesDialogContainer extends Component {
 
   renderCategory (category) {
     const { onPress } = this.props
-    return (
-      <CategoryDialogButton
-        category={category}
-        onPress={onPress}
-        key={category.id}
-      />
-    )
+    return <CategoryDialogButton category={category} onPress={onPress} key={category.id} />
   }
 }
 

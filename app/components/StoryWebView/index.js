@@ -28,9 +28,7 @@ class StoryWebView extends Component {
 
   handleError (e) {
     captureError(e)
-    return (
-      <WebViewError onPressReload={this.reloadWebView} />
-    )
+    return <WebViewError onPressReload={this.reloadWebView} />
   }
 
   render () {
