@@ -3,10 +3,10 @@ import _result from 'lodash/result'
 import { AnalyticsActions, UIActions } from './index'
 
 // AppNavigator
-export function home () {
+export function summaries () {
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'summaries' }))
-    dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
+    dispatch(AnalyticsActions.trackScreen('/summaries'))
   }
 }
 
@@ -21,7 +21,7 @@ export function link (story, link) {
 export function publisher (publisher) {
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'publisher', params: { publisher } }))
-    dispatch(AnalyticsActions.trackScreen(`/${publisher.slug}`))
+    dispatch(AnalyticsActions.trackScreen(`/publishers/${publisher.slug}`))
   }
 }
 
