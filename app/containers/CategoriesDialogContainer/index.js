@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import withQuery from './index.gql'
 import CategoryDialogButton from '../../components/CategoryDialogButton'
@@ -27,13 +27,22 @@ class CategoriesDialogContainer extends Component {
 
   renderCategories () {
     const { categories, loading } = this.props.data
-    if (loading || !categories) return null
+    if (loading) return this.renderLoading()
+    if (!categories) return null
     return categories.map((category) => this.renderCategory(category))
   }
 
   renderCategory (category) {
     const { onPress } = this.props
     return <CategoryDialogButton category={category} onPress={onPress} key={category.id} />
+  }
+
+  renderLoading () {
+    return (
+      <View>
+        <ActivityIndicator size='small' color='#AAA' />
+      </View>
+    )
   }
 }
 
