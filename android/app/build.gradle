@@ -109,8 +109,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 259
-        versionName "2.0.1"
+        versionCode 260
+        versionName "2.0.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -157,7 +157,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-fbads')
     compile project(':react-native-device-info')
     compile project(':react-native-sentry')
     compile project(':react-native-onesignal')
