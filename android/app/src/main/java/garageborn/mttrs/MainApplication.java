@@ -3,6 +3,7 @@ package garageborn.mttrs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.callstack.react.fbads.FBAdsPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -45,6 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FBAdsPackage(),
           new RNSentryPackage(MainApplication.this),
           new FabricPackage(),
           new RNDeviceInfo(),

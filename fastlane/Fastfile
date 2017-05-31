@@ -9,7 +9,7 @@ platform :ios do
     # changelog = ask('Type Changelog message:') if answer == 'Yes'
 
     match(type: 'appstore') # more information: https://codesigning.guide
-    increment_build_number(xcodeproj: './ios/mttrs.xcodeproj')
+    # increment_build_number(xcodeproj: './ios/mttrs.xcodeproj')
     gym(scheme: 'mttrs', workspace: './ios/mttrs.xcworkspace')
     pilot(skip_waiting_for_build_processing: true)
   end

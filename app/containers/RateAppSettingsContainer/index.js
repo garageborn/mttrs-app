@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Linking, Platform } from 'react-native'
-import * as StoreReview from 'react-native-store-review'
 import RateAppSettings from '../../components/RateAppSettings'
 
 const storeLink = Platform.select({
@@ -25,7 +24,6 @@ class RateAppSettingsContainer extends Component {
   }
 
   rateApp () {
-    if (StoreReview.isAvailable) return StoreReview.requestReview()
     this.openNative()
   }
 

@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fbads')
     compile project(':react-native-device-info')
     compile project(':react-native-sentry')
     compile project(':react-native-onesignal')
