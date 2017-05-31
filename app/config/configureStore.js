@@ -11,13 +11,13 @@ const navReducer = (state, action) => {
 }
 
 const popularNavReducer = (state, action) => {
-  return PopularNavigator.router.getStateForAction(action, state)
+  return PopularNavigator.getStateForAction(action, state)
 }
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(apolloClient.middleware()),
-  applyMiddleware(routesTrackingMiddleware)
+  // applyMiddleware(routesTrackingMiddleware)
 )(createStore)
 
 const rootReducer = combineReducers({

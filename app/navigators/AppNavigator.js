@@ -27,9 +27,10 @@ const AppNavigatorConfig = {
 const AppNavigator = StackNavigator(AppRoutes, AppNavigatorConfig)
 
 export const isCurrentRoute = (nav, routeName) => {
-  const currentRoute = nav.routes[nav.index]
-  if (currentRoute.routeName === 'timeline') return isCurrentTimelineRoute(nav, routeName)
-  return currentRoute.routeName === routeName
+  // const currentRoute = nav.routes[nav.index]
+  // if (currentRoute.routeName === 'timeline') return isCurrentTimelineRoute(nav, routeName)
+  // return currentRoute.routeName === routeName
+  return false
 }
 
 export default AppNavigator

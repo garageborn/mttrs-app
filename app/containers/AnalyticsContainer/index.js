@@ -31,7 +31,7 @@ AnalyticsContainer.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps.scene, state.RouterReducer.current.routeName)
+  console.log(ownProps.scene, state.popularNav)
   return {
     isCurrentRoute: ownProps.scene === state.RouterReducer.current.routeName
   }

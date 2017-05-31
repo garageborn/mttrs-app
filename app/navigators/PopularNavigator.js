@@ -8,7 +8,6 @@ let instance
 
 class PopularNavigator {
   constructor () {
-    console.log('constructor', this)
     if (!instance) instance = this
     this.routes = {
       home: { screen: PopularTimelineScene },
@@ -20,6 +19,7 @@ class PopularNavigator {
   }
 
   setCategories (categories) {
+    console.log('---------------------setCategories', categories)
     this._component = null
     this.categories = categories
     this.routes = this.buildRoutes()
@@ -58,12 +58,17 @@ class PopularNavigator {
   }
 
   get component () {
-    if (!this._component) this._component = TabNavigator(this.routes, this.config)
+    if (!this._component) {
+      console.log('    buildNewComponent', { routesLength: Object.keys(this.routes).length})
+
+      this._component = TabNavigator(Object.assign({}, this.routes), Object.assign({}, this.config))
+    }
     return this._component
   }
 
-  get router () {
-    return this.component.router
+  getStateForAction (action, state) {
+    console.log('getStateForAction', this.categories.length, this.component.router.getStateForAction(action, state))
+    return this.component.router.getStateForAction(action, state)
   }
 }
 

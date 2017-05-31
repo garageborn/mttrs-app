@@ -33,7 +33,7 @@ const TimelineRoutes = {
 
 const TimelineNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'popular',
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
@@ -43,9 +43,10 @@ const TimelineNavigatorConfig = {
 const TimelineNavigator = TabNavigator(TimelineRoutes, TimelineNavigatorConfig)
 
 export const isCurrentRoute = (nav, routeName) => {
-  const currentRoute = nav.routes[nav.index]
-  if (currentRoute.routeName !== 'timeline') return false
-  return currentRoute.routes[currentRoute.index].routeName === routeName
+  // const currentRoute = nav.routes[nav.index]
+  // if (currentRoute.routeName !== 'timeline') return false
+  // return currentRoute.routes[currentRoute.index].routeName === routeName
+  return false
 }
 
 export default TimelineNavigator

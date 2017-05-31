@@ -16,7 +16,6 @@ const routesTracking = ({ getState, dispatch }) => next => (action) => {
   const currentRoute = findRoute(getState().nav)
   const result = next(action)
   const nextRoute = findRoute(getState().nav)
-  console.log('    routesTracking', nextRoute, getState().nav)
   if (nextRoute !== currentRoute) dispatch(RoutesTrackingActions.track(nextRoute))
 
   return result

@@ -7,8 +7,6 @@ let defaultState = {
   previous: {}
 }
 
-console.log('--------', TimelineNavigator)
-
 export default function (state = defaultState, action) {
   switch (action.type) {
     case TRACK_ROUTE:
