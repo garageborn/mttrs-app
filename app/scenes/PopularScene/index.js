@@ -13,11 +13,11 @@ class PopularScene extends Component {
   //   this.onNavigationStateChange = this.onNavigationStateChange.bind(this)
   // }
 
-  shouldComponentUpdate (nextProps) {
-    const loadingChanged = this.props.data.loading !== nextProps.data.loading
-    const categoriesChanged = !_isEqual(this.props.data.categories, nextProps.data.categories)
-    return loadingChanged || categoriesChanged
-  }
+  // shouldComponentUpdate (nextProps) {
+  //   const loadingChanged = this.props.data.loading !== nextProps.data.loading
+  //   const categoriesChanged = !_isEqual(this.props.data.categories, nextProps.data.categories)
+  //   return loadingChanged || categoriesChanged
+  // }
 
   render () {
     const { categories, loading } = this.props.data

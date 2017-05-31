@@ -1,4 +1,5 @@
-import { TabNavigator } from 'react-navigation'
+import { NavigationActions, TabNavigator } from 'react-navigation'
+import _isEqual from 'lodash/isEqual'
 import PopularTabBarNavigator from '../components/PopularTabBarNavigator'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
 import CategoryTimelineScene from '../scenes/CategoryTimelineScene'
@@ -19,6 +20,7 @@ class PopularNavigator {
   }
 
   setCategories (categories) {
+    if (_isEqual(this.categories, categories)) return
     console.log('---------------------setCategories', categories)
     this._component = null
     this.categories = categories
@@ -61,14 +63,19 @@ class PopularNavigator {
     if (!this._component) {
       console.log('    buildNewComponent', { routesLength: Object.keys(this.routes).length})
 
-      this._component = TabNavigator(Object.assign({}, this.routes), Object.assign({}, this.config))
+      this._component = TabNavigator(this.routes, this.config)
     }
     return this._component
   }
 
   getStateForAction (action, state) {
-    console.log('getStateForAction', this.categories.length, this.component.router.getStateForAction(action, state))
-    return this.component.router.getStateForAction(action, state)
+    const stateForAction = this.component.router.getStateForAction(action, state)
+    console.log('getStateForAction', Object.keys(this.routes).length, stateForAction.routes.length, stateForAction)
+    if (Object.keys(this.routes).length !== stateForAction.routes.length) {
+      return this.component.router.getStateForAction(NavigationActions.init())
+    } else {
+      return stateForAction
+    }
   }
 }
 
