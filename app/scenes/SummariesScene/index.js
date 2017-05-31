@@ -5,7 +5,7 @@ import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import headerStyles from '../../styles/Header'
 
 const SummariesScene = () => (
-  <AnalyticsContainer screenName={'/summaries'}>
+  <AnalyticsContainer scene={'summaries'} screenName={'/summaries'}>
     <SummariesTimelineContainer />
   </AnalyticsContainer>
 )

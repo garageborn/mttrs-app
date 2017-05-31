@@ -33,6 +33,7 @@ class PopularScene extends Component {
   }
 
   onNavigationStateChange (prevState, currentState) {
+    console.log('onNavigationStateChange', currentState)
     const { dispatch } = this.props
     const currentRoute = prevState.routes[prevState.index]
     const nextRoute = currentState.routes[currentState.index]

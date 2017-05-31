@@ -3,7 +3,7 @@ import PopularTimelineContainer from '../../containers/PopularTimelineContainer'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
 const PopularTimelineScene = ({ navigation }) => (
-  <AnalyticsContainer screenName={'/popular'} >
+  <AnalyticsContainer scene={'home'} screenName={'/popular'}>
     <PopularTimelineContainer />
   </AnalyticsContainer>
 )
