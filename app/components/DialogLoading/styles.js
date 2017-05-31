@@ -2,9 +2,11 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    height: 50,
+    paddingLeft: 10,
+    paddingRight: 20,
     alignItems: 'center',
-    width: 62
+    justifyContent: 'center'
   }
 })
 

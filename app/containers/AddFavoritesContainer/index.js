@@ -3,6 +3,7 @@ import { ActivityIndicator, ScrollView, View } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
+import AddFavoritesLoading from '../../components/AddFavoritesLoading'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
@@ -49,9 +50,7 @@ class AddFavoritesContainer extends Component {
 
   renderLoading () {
     return (
-      <View>
-        <ActivityIndicator size='large' color='#AAA' />
-      </View>
+      <AddFavoritesLoading />
     )
   }
 
