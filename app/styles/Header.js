@@ -2,9 +2,6 @@ import { Platform } from 'react-native'
 import { DARK_COLOR } from '../constants/Colors'
 
 export default {
-  headerHeight: {
-
-  },
   headerTitleStyle: {
     color: 'white',
     fontWeight: '400',
