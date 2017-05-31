@@ -6,6 +6,7 @@ const itemSize = width / columnsNumber
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
+    padding: 5,
     flexGrow: 1,
     height: itemSize,
     width: itemSize,

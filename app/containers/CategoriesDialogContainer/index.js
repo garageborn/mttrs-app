@@ -4,6 +4,7 @@ import { injectIntl, defineMessages } from 'react-intl'
 import withQuery from './index.gql'
 import CategoryDialogButton from '../../components/CategoryDialogButton'
 import CategoriesDialog from '../../components/CategoriesDialog'
+import DialogLoading from '../../components/DialogLoading'
 
 const messages = defineMessages({
   allCategories: { id: 'categoriesDialog.allCategories' }
@@ -39,9 +40,7 @@ class CategoriesDialogContainer extends Component {
 
   renderLoading () {
     return (
-      <View>
-        <ActivityIndicator size='small' color='#AAA' />
-      </View>
+      <DialogLoading />
     )
   }
 }

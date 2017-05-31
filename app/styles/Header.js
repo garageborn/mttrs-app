@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import { DARK_COLOR } from '../constants/Colors'
 
 export default {
@@ -12,6 +13,10 @@ export default {
     color: 'white'
   },
   headerStyle: {
-    backgroundColor: DARK_COLOR
+    backgroundColor: DARK_COLOR,
+    height: Platform.select({
+      ios: 63,
+      android: 60
+    })
   }
 }

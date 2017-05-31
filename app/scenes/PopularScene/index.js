@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
 import _isEqual from 'lodash/isEqual'
 import PopularNavigator from '../../navigators/PopularNavigator'
+import PopularSceneLoading from '../../components/PopularSceneLoading'
 import withQuery from './index.gql'
 
 class PopularScene extends Component {
@@ -19,9 +19,7 @@ class PopularScene extends Component {
 
   renderLoading () {
     return (
-      <View>
-        <ActivityIndicator size='small' color='#AAA' />
-      </View>
+      <PopularSceneLoading />
     )
   }
 }
