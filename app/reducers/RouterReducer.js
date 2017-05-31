@@ -1,6 +1,13 @@
 import { TRACK_ROUTE } from '../constants/ActionTypes'
 import _isEqual from 'lodash/isEqual'
-let defaultState = { current: {}, previous: {} }
+import TimelineNavigator from '../navigators/TimelineNavigator'
+
+let defaultState = {
+  current: {},
+  previous: {}
+}
+
+console.log('--------', TimelineNavigator)
 
 export default function (state = defaultState, action) {
   switch (action.type) {

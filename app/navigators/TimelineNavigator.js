@@ -9,7 +9,7 @@ import SummariesTabBar from '../components/SummariesTabBar'
 import FavoritesTabBar from '../components/FavoritesTabBar'
 import styles from '../styles/TabBarBottom'
 
-const MainRoutes = {
+const TimelineRoutes = {
   summaries: {
     screen: SummariesScene,
     navigationOptions: {
@@ -31,7 +31,7 @@ const MainRoutes = {
   }
 }
 
-const MainNavigatorConfig = {
+const TimelineNavigatorConfig = {
   headerMode: 'none',
   initialRouteName: 'summaries',
   swipeEnabled: false,
@@ -40,7 +40,7 @@ const MainNavigatorConfig = {
   lazy: true
 }
 
-const MainNavigator = TabNavigator(MainRoutes, MainNavigatorConfig)
+const TimelineNavigator = TabNavigator(TimelineRoutes, TimelineNavigatorConfig)
 
 export const isCurrentRoute = (nav, routeName) => {
   const currentRoute = nav.routes[nav.index]
@@ -48,4 +48,4 @@ export const isCurrentRoute = (nav, routeName) => {
   return currentRoute.routes[currentRoute.index].routeName === routeName
 }
 
-export default MainNavigator
+export default TimelineNavigator
