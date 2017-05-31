@@ -7,7 +7,7 @@ import Heading from '../Heading'
 import RateAppSettingsContainer from '../../containers/RateAppSettingsContainer'
 import styles, { smallTextColor } from './styles'
 
-const appVersion = DeviceInfo.getReadableVersion()
+const appVersion = DeviceInfo.getVersion()
 const messages = defineMessages({
   version: { id: 'settings.version' }
 })
