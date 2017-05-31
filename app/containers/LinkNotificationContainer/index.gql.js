@@ -4,12 +4,13 @@ import { graphql } from 'react-apollo'
 const Query = gql`
   query($slug: String!) {
     link(slug: $slug) {
+      id
       title
       url
       slug
       image_source_url
       story { id }
-      publisher { name display_name icon_id slug restrict_content }
+      publisher { id name display_name icon_id slug restrict_content }
     }
   }
 `

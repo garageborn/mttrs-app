@@ -1,21 +1,10 @@
-import { Platform, StyleSheet } from 'react-native'
-
-export const activeHeight = 9
-export const inactiveHeight = 3
-
-const activeFlexGrow = Platform.select({
-  ios: 1.075,
-  android: 1
-})
+import { StyleSheet } from 'react-native'
+import { DEFAULT_CATEGORY_COLOR } from '../../constants/Colors'
 
 const styles = StyleSheet.create({
-  inactive: {
-    flexGrow: 1,
-    height: inactiveHeight
-  },
-
-  active: {
-    flexGrow: activeFlexGrow
+  container: {
+    borderBottomWidth: 2,
+    borderBottomColor: DEFAULT_CATEGORY_COLOR
   }
 })
 

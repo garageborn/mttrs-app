@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOpacity: 0.2
   },
-  button: {
+  buttonContainer: {
     marginTop: 16,
     alignSelf: 'center'
   }

@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Onboarding from '../../components/Onboarding'
-import { StorageActions } from '../../actions/index'
+import { OnboardingActions } from '../../actions/index'
+import { STATUS_BAR_COLOR } from '../../constants/Colors'
 
 class OnboardingContainer extends Component {
   constructor () {
@@ -11,13 +12,19 @@ class OnboardingContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(StorageActions.getOnboardingStatus())
+    this.props.dispatch(OnboardingActions.getOnboardingStatus())
+  }
+
+  componentWillUnmount () {
+    this.resetStatusBar()
+  }
+
+  componentDidUpdate () {
+    if (this.shouldDisplay) this.changeStatusBar()
   }
 
   render () {
-    const { tenant, onboarding } = this.props
-    if (!tenant.isLoaded) return null
-    if (onboarding.isFetching || !onboarding.show) return null
+    if (!this.shouldDisplay) return null
 
     return (
       <Modal animationType={'slide'} transparent visible onRequestClose={this.onOnboardingEnd}>
@@ -27,7 +34,23 @@ class OnboardingContainer extends Component {
   }
 
   onOnboardingEnd () {
-    this.props.dispatch(StorageActions.closeOnboarding())
+    this.resetStatusBar()
+    this.props.dispatch(OnboardingActions.closeOnboarding())
+  }
+
+  changeStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('default')
+  }
+
+  resetStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
+  }
+
+  get shouldDisplay () {
+    const { tenant, onboarding } = this.props
+    if (!tenant.isLoaded) return false
+    if (onboarding.isFetching || !onboarding.show) return false
+    return true
   }
 }
 
@@ -40,7 +63,7 @@ OnboardingContainer.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  onboarding: state.StorageReducer.onboarding,
+  onboarding: state.OnboardingReducer,
   tenant: state.TenantReducer
 })
 

@@ -3,6 +3,8 @@ package garageborn.mttrs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import io.sentry.RNSentryPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -43,11 +45,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+          new RNSentryPackage(MainApplication.this),
+          new FabricPackage(),
+          new RNDeviceInfo(),
           new ReactNativeOneSignalPackage(),
           new GoogleAnalyticsBridgePackage(),
           new RNSharePackage(),
           new LinearGradientPackage(),
-          new FabricPackage(),
           new FBSDKPackage(mCallbackManager),
           new FBAdsPackage()
       );

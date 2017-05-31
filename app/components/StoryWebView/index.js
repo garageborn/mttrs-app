@@ -28,9 +28,7 @@ class StoryWebView extends Component {
 
   handleError (e) {
     captureError(e)
-    return (
-      <WebViewError onPressReload={this.reloadWebView} />
-    )
+    return <WebViewError onPressReload={this.reloadWebView} />
   }
 
   render () {
@@ -38,7 +36,6 @@ class StoryWebView extends Component {
 
     return (
       <View style={styles.container}>
-        {this.props.header}
         <WebView
           contentInset={{top: this.contentInset()}}
           domStorageEnabled
@@ -52,7 +49,6 @@ class StoryWebView extends Component {
 }
 
 StoryWebView.propTypes = {
-  header: PropTypes.element,
   link: PropTypes.shape({
     url: PropTypes.string.isRequired,
     amp_url: PropTypes.string

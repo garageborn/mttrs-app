@@ -1,7 +1,8 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View, ActivityIndicator } from 'react-native'
+import { View, ActivityIndicator } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import _result from 'lodash/result'
+import ScrollableTabBar from '../ScrollableTabBar'
 import Tag from '../Tag'
 import styles from './styles'
 
@@ -14,88 +15,79 @@ const messages = defineMessages({
 class TagsList extends Component {
   constructor () {
     super()
-
-    this.renderTags = this.renderTags.bind(this)
-  }
-
-  componentWillReceiveProps (nextProps) {
-    this.handleScroll(nextProps)
+    this.renderTag = this.renderTag.bind(this)
   }
 
   render () {
-    const { intl, handleTag, data } = this.props
-    const text = intl.formatMessage(messages.default)
+    const { data } = this.props
     if (data.loading) return this.renderLoader()
+    const tags = [{ id: null }, ...data.tags]
+
     return (
-      <ScrollView
-        ref={'scrollView'}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={this.containerStyles}
+      <ScrollableTabBar
+        style={styles.container}
+        index={this.selectedIndex}
+        tabs={tags}
+        renderTab={this.renderTag}
+      />
+    )
+  }
+
+  renderDefaultTag () {
+    const { intl, selectTag } = this.props
+    return (
+      <Tag active={this.isSelected()} first onPress={() => selectTag()}>
+        {intl.formatMessage(messages.default)}
+      </Tag>
+    )
+  }
+
+  renderTag (tag, index) {
+    const { selectTag } = this.props
+
+    if (!tag.id) return this.renderDefaultTag()
+
+    return (
+      <Tag
+        active={this.isSelected(tag)}
+        onPress={() => selectTag(tag)}
       >
-        <Tag active={this.isActive()} onPress={() => handleTag()}>
-          {text}
-        </Tag>
-        {this.renderTags()}
-      </ScrollView>
+        {tag.name}
+      </Tag>
     )
   }
 
   renderLoader () {
     return (
-      <View style={[...this.containerStyles, styles.loaderContainer]}>
+      <View style={[styles.container, styles.loaderContainer]}>
         <ActivityIndicator color='#AAA' />
       </View>
     )
   }
 
-  renderTags () {
-    const { handleTag, data } = this.props
-    return data.tags.map((tag, idx) => {
-      return (
-        <Tag
-          key={`tag_${idx}`}
-          last={this.isLast(idx)}
-          active={this.isActive(tag.slug)}
-          onPress={() => handleTag(tag.slug, tag.category.slug)}
-        >
-          {tag.name}
-        </Tag>
-      )
-    })
+  isSelected (tag) {
+    return _result(tag, 'id') === _result(this.props, 'selectedTag.id')
   }
 
-  isLast (idx) {
-    return idx === this.props.data.tags.length - 1
-  }
-
-  isActive (slug) {
-    return slug == this.props.active
-  }
-
-  handleScroll (nextProps) {
-    if (this.props.data.loading) return
-    if (this.props.active !== nextProps.active) return
-    return this.refs.scrollView.scrollTo({x: 0, y: 0, animated: false})
-  }
-
-  get containerStyles () {
-    if (this.props.menuOpen) return [styles.container, styles.containerActive]
-    return [styles.container]
+  get selectedIndex () {
+    const { data, selectedTag } = this.props
+    if (!selectedTag) return 0
+    return data.tags.indexOf(selectedTag) + 1
   }
 }
 
 TagsList.propTypes = {
-  handleTag: PropTypes.func.isRequired,
+  selectedTag: PropTypes.shape({
+    id: PropTypes.any
+  }),
   data: PropTypes.shape({
     tags: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired
   }).isRequired,
-  active: PropTypes.string,
+  selectTag: PropTypes.func.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  menuOpen: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 export default injectIntl(TagsList)

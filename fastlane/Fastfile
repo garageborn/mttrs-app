@@ -9,28 +9,18 @@ platform :ios do
     # changelog = ask('Type Changelog message:') if answer == 'Yes'
 
     match(type: 'appstore') # more information: https://codesigning.guide
-    increment_build_number(xcodeproj: './ios/mttrs.xcodeproj')
-    persist_next_release
+    # increment_build_number(xcodeproj: './ios/mttrs.xcodeproj')
     gym(scheme: 'mttrs', workspace: './ios/mttrs.xcworkspace')
     pilot(skip_waiting_for_build_processing: true)
-  end
-
-  after_all do |_lane|
-    sentry_release
   end
 end
 
 platform :android do
   desc 'Submit a new Alpha Build to Play Store'
   lane :alpha do
-    increment_android_release
-    persist_next_release
+    # increment_android_release
     gradle(task: 'clean', project_dir: 'android/') # Clean the Gradle project
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/') # Build the Release APK
     supply(track: 'alpha', apk: 'android/app/build/outputs/apk/app-release.apk') # Upload the APK to the Play Store (alpha)
-  end
-
-  after_all do |_lane|
-    sentry_release
   end
 end

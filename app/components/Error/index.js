@@ -38,9 +38,9 @@ const Error = ({ intl, skinType, onPressReload }) => {
           source={skin[skinType].icon}
         />
         <Text style={[skin[skinType].textColor, styles.text]}>{text}</Text>
-        <Button skin={styles.buttonContainer} onPress={onPressReload}>
-          <Text style={styles.buttonText}>{buttonText}</Text>
-        </Button>
+        <View style={styles.buttonContainer}>
+          <Button background='transparent' content={buttonText} onPress={onPressReload} size='large' />
+        </View>
       </View>
     </View>
   )

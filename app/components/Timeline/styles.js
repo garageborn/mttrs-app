@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { headerHeight } from '../../styles/Global'
 const { width, height } = Dimensions.get('window')
 
@@ -16,20 +16,8 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    ...Platform.select({
-      ios: {
-        top: 15,
-        bottom: 0,
-        paddingBottom: 0
-      },
-      android: {
-        top: 0,
-        bottom: 0,
-        paddingBottom: 25
-      }
-    }),
-    flexGrow: 1,
-    backgroundColor: '#F1F1F1'
+    ...containerStyles,
+    backgroundColor: '#F7F7F8'
   },
 
   infiniteScrollLoadingContainer: {

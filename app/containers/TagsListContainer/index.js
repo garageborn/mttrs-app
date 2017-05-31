@@ -1,28 +1,41 @@
 import React, { Component, PropTypes} from 'react'
+import { connect } from 'react-redux'
+import _result from 'lodash/result'
 import TagsList from '../../components/TagsList'
 import withQuery from './index.gql'
-import _isNil from 'lodash/isNil'
+import { CategoriesActions } from '../../actions/index'
 
 class TagsListContainer extends Component {
+  constructor () {
+    super()
+    this.selectTag = this.selectTag.bind(this)
+  }
+
   render () {
-    const { data, active, handleTag, menuOpen } = this.props
-    if (_isNil(data.tags) || !data.tags.length) return null
-    return (
-      <TagsList
-        active={active}
-        handleTag={handleTag}
-        data={data}
-        menuOpen={menuOpen}
-      />
-    )
+    const { data, selectedTag } = this.props
+    if (!_result(data, 'tags.length')) return null
+    return <TagsList selectedTag={selectedTag} selectTag={this.selectTag} data={data} />
+  }
+
+  selectTag (tag) {
+    const { category, dispatch } = this.props
+    dispatch(CategoriesActions.selectTag(category, tag))
   }
 }
 
 TagsListContainer.propTypes = {
-  data: PropTypes.object.isRequired,
-  handleTag: PropTypes.func.isRequired,
-  active: PropTypes.string,
-  menuOpen: PropTypes.bool.isRequired
+  category: PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    slug: PropTypes.string.isRequired
+  }).isRequired,
+  data: PropTypes.object.isRequired
 }
 
-export default withQuery(TagsListContainer)
+const mapStateToProps = (state, ownProps) => {
+  return {
+    selectedTag: state.CategoriesReducer.selectedTags[ownProps.category.id]
+  }
+}
+
+const TagsListContainerWithData = withQuery(TagsListContainer)
+export default connect(mapStateToProps)(TagsListContainerWithData)

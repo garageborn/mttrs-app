@@ -2,19 +2,21 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
 import apolloClient from './apolloClient'
 import thunkMiddleware from 'redux-thunk'
 import * as reducers from '../reducers/index'
-import { createNavigationEnabledStore } from '@exponent/ex-navigation'
+import AppNavigator from '../navigators/AppNavigator'
 
-const createStoreWithNavigation = createNavigationEnabledStore({
-  createStore,
-  navigationStateKey: 'navigation'
-})
+const navReducer = (state, action) => {
+  return AppNavigator.router.getStateForAction(action, state)
+}
 
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(apolloClient.middleware())
-)(createStoreWithNavigation)
+)(createStore)
 
-const rootReducer = combineReducers(reducers)
+const rootReducer = combineReducers({
+  nav: navReducer,
+  ...reducers
+})
 
 export default function configureStore (initialState) {
   return createStoreWithMiddleware(rootReducer, initialState)
