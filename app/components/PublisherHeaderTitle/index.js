@@ -21,7 +21,7 @@ class PublisherHeaderTitle extends Component {
 
   get title () {
     const { publisher } = this.props.navigation.state.params
-    return publisher.name
+    return publisher.display_name || publisher.name
   }
 
   get iconId () {

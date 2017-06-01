@@ -9,6 +9,9 @@ Vasculhamos a internet para encontrar as notícias mais compartilhadas nas redes
 • <b>Seus sites favoritos no mesmo app.</b>
 Os principais sites do Brasil e do mundo reunidos em uma só app, agrupados e categorizados para agilizar sua leitura.
 
+• <b>A mesma notícia, diferentes pontos de vista.</b>
+Agrupamos as notícias de um mesmo assunto, de forma que você possa encontrar e escolher aquela que mais gosta.
+
 • <b>Leia sobre o que te interessa.</b>
 De política à esportes, de economia à tecnologia, você encontra no Matters.
 
