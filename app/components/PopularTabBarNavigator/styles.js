@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   },
 
   indicatorStyle: {
-    // backgroundColor: '#FFF',
     height: 2
   }
 })
