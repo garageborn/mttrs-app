@@ -53,6 +53,11 @@ class ScrollableTabBar extends Component {
         overScrollMode='never'
         ref={this.setScrollViewRef}
         scrollEventThrottle={16}
+        onScrollBeginDrag={() => console.log(handleBeginDrag) }
+        onScrollEndDrag={() => console.log(handleEndDrag) }
+        onMomentumScrollBegin={() => console.log('_handleMomentumScrollBegin')}
+        onMomentumScrollEnd={() => console.log('_handleMomentumScrollEnd')}
+        onScroll={() => console.log('_handleScroll') }
         onLayout={(event) => this.updateTabBarWidth(event.nativeEvent.layout)}
       >
         {this.renderTabs()}
