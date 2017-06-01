@@ -12,7 +12,8 @@ class ScrollableTabBar extends Component {
 
     this.tabsLayout = []
     this.tabBarWidth = 0
-    this.currentIndex = props.index
+    this.previousIndex = null
+    this.currentIndex = null
     this.currentDraggingPosition = this.getPositionFor(props.index)
     this.indicatorAnimated = {
       x: new Animated.Value(this.currentDraggingPosition),
@@ -53,11 +54,6 @@ class ScrollableTabBar extends Component {
         overScrollMode='never'
         ref={this.setScrollViewRef}
         scrollEventThrottle={16}
-        onScrollBeginDrag={() => console.log(handleBeginDrag) }
-        onScrollEndDrag={() => console.log(handleEndDrag) }
-        onMomentumScrollBegin={() => console.log('_handleMomentumScrollBegin')}
-        onMomentumScrollEnd={() => console.log('_handleMomentumScrollEnd')}
-        onScroll={() => console.log('_handleScroll') }
         onLayout={(event) => this.updateTabBarWidth(event.nativeEvent.layout)}
       >
         {this.renderTabs()}
@@ -114,7 +110,8 @@ class ScrollableTabBar extends Component {
     const currentPositionIndex = this.getCurrentPositionIndex(position)
     const nextPositionIndex = this.getNextPositionIndex(position)
 
-    if (this.currentIndex === nextPositionIndex) return
+    if (this.currentIndex === position) return this.scrollToIndex(position)
+    if (Math.abs(this.currentIndex - this.previousIndex) > 1) return
     if (Math.abs(this.currentIndex - position) >= 1) return
 
     const currentPosition = this.getPositionFor(currentPositionIndex)
@@ -130,8 +127,12 @@ class ScrollableTabBar extends Component {
   }
 
   scrollToIndex (index) {
+    if (this.currentIndex === index) return
+
+    this.previousIndex = this.currentIndex
     this.currentIndex = index
     if (!this.scrollView) return
+
     const position = this.getPositionFor(index)
     this.scrollView.scrollTo({ x: position, animated: true })
     this.moveIndicatorToIndex(index)
