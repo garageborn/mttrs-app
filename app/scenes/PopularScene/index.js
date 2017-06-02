@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
-import { addNavigationHelpers } from 'react-navigation'
 import _isEqual from 'lodash/isEqual'
 import PopularSceneLoading from '../../components/PopularSceneLoading'
 import withQuery from './index.gql'

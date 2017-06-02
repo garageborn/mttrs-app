@@ -15,22 +15,19 @@ let defaultState = {
 
 const initRoute = (state, action) => {
   if (!_isEmpty(state.current)) return { ...state }
-  return {
-    ...state,
-    current: { ...action.route }
-  }
+  return trackRoute(state, action)
 }
 
 const trackRoute = (state, action) => {
-  console.info('    # trackRoute', action.route)
   if (_isEqual(state.current, action.route)) return { ...state }
-  if (action.route.key === 'popular') {
+  if (isPopularRoute(action.route)) {
     return {
       ...state,
       previous: { ...state.current },
       current: { ...state.popular.current }
     }
   }
+
   return {
     ...state,
     previous: { ...state.current },
@@ -40,17 +37,10 @@ const trackRoute = (state, action) => {
 
 const initPopularRoute = (state, action) => {
   if (!_isEmpty(state.popular.current)) return { ...state }
-  return {
-    ...state,
-    popular: {
-      ...state.popular,
-      current: { ...action.route }
-    }
-  }
+  return trackPopularRoute(state, action)
 }
 
 const trackPopularRoute = (state, action) => {
-  console.log('    # trackPopularRoute', action.route)
   if (_isEqual(state.popular.current, action.route)) return { ...state }
   return {
     ...state,
@@ -64,13 +54,15 @@ const trackPopularRoute = (state, action) => {
   }
 }
 
+const isPopularRoute = (route) => {
+  return route.key === 'popular'
+}
+
 export default function (state = defaultState, action) {
   switch (action.type) {
     case INIT_ROUTE:
-      console.log('-----------INIT_ROUTE')
       return initRoute(state, action)
     case INIT_POPULAR_ROUTE:
-      console.log('-----------INIT_POPULAR_ROUTE')
       return initPopularRoute(state, action)
     case TRACK_ROUTE:
       return trackRoute(state, action)

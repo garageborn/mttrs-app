@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
 import { isCurrentRoute } from '../../navigators/AppNavigator'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
@@ -25,15 +26,10 @@ class FavoritesScene extends Component {
   }
 
   render () {
-    const { isLoaded, items } = this.props.favoritePublishers
-    if (!isLoaded) return this.renderLoading()
-    if (!items.length) return <EmptyFavoritesTimelineContainer />
-
     return (
-      <View>
-        <FavoritePublishersSelectorContainer publisherIds={items} />
-        <FavoritesTimelineContainer publisherIds={items} />
-      </View>
+      <AnalyticsContainer scene={'favorites'} screenName={'/favorites'}>
+        {this.renderFavorites()}
+      </AnalyticsContainer>
     )
   }
 
@@ -41,6 +37,18 @@ class FavoritesScene extends Component {
     return (
       <View>
         <ActivityIndicator size='large' color='#AAA' />
+      </View>
+    )
+  }
+
+  renderFavorites () {
+    const { isLoaded, items } = this.props.favoritePublishers
+    if (!isLoaded) return this.renderLoading()
+    if (!items.length) return <EmptyFavoritesTimelineContainer />
+    return (
+      <View>
+        <FavoritePublishersSelectorContainer publisherIds={items} />
+        <FavoritesTimelineContainer publisherIds={items} />
       </View>
     )
   }

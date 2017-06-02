@@ -18,7 +18,7 @@ class CategoryTimelineScene extends Component {
     if (loading) return null
 
     return (
-      <AnalyticsContainer scene={category.slug} screenName={`/category/${category.slug}`}>
+      <AnalyticsContainer scene={category.slug} screenName={`/popular/${category.slug}`}>
         <View>
           <TagsListContainer category={category} />
           <CategoryTimelineContainer category={category} />
