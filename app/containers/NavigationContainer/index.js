@@ -3,7 +3,7 @@ import { BackHandler } from 'react-native'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 import { injectIntl } from 'react-intl'
-import { NavigationActions, TenantActions } from '../../actions/index'
+import { NavigationActions, RoutesTrackingActions, TenantActions } from '../../actions/index'
 import AppNavigator from '../../navigators/AppNavigator'
 
 class NavigationContainer extends Component {
@@ -24,17 +24,16 @@ class NavigationContainer extends Component {
     this.props.dispatch(TenantActions.getCurrent())
   }
 
+  componentDidUpdate () {
+    const { dispatch } = this.props
+    dispatch(RoutesTrackingActions.init())
+  }
+
   render () {
     const { tenant, intl } = this.props
-
     if (!tenant.isLoaded) return null
 
-    return (
-      <AppNavigator
-        screenProps={{ intl }}
-        navigation={this.getNavigationHelpers()}
-      />
-    )
+    return <AppNavigator screenProps={{ intl }} navigation={this.getNavigationHelpers()} />
   }
 
   getNavigationHelpers () {
@@ -65,5 +64,4 @@ const mapStateToProps = state => ({
 })
 
 const NavigationContainerWithData = connect(mapStateToProps)(NavigationContainer)
-
 export default injectIntl(NavigationContainerWithData)
