@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, ScrollView, View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
@@ -7,7 +7,6 @@ import AddFavoritesLoading from '../../components/AddFavoritesLoading'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
-import { isCurrentRoute } from '../../navigators/AppNavigator'
 
 class AddFavoritesContainer extends Component {
   constructor () {
@@ -77,7 +76,7 @@ AddFavoritesContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isCurrentRoute: isCurrentRoute(state.nav, 'addFavorites'),
+    isCurrentRoute: state.RouterReducer.current.routeName === 'addFavorites',
     favoritePublishers: {
       exists: state.FavoritePublishersReducer.items.length > 0
     }
