@@ -10,22 +10,20 @@ let instance
 class PopularNavigator {
   constructor () {
     if (!instance) instance = this
-    this.routes = {
-      home: { screen: PopularTimelineScene },
-      publishers: { screen: PublishersScene }
-    }
+    this.routes = null
     this.config = {}
     this.categories = []
+    this.initialRoute = null
     return instance
   }
 
   setCategories (categories) {
     if (_isEqual(this.categories, categories)) return
-    console.log('---------------------setCategories', categories)
     this._component = null
     this.categories = categories
     this.routes = this.buildRoutes()
     this.config = this.buildConfig()
+    this.initialRoute = this.buildInitialRoute()
   }
 
   buildRoutes () {
@@ -59,23 +57,16 @@ class PopularNavigator {
     }
   }
 
-  get component () {
-    if (!this._component) {
-      console.log('    buildNewComponent', { routesLength: Object.keys(this.routes).length})
-
-      this._component = TabNavigator(this.routes, this.config)
-    }
-    return this._component
+  buildInitialRoute () {
+    if (!this.component) return
+    const initialState = this.component.router.getStateForAction(NavigationActions.INIT)
+    return initialState.routes[initialState.index]
   }
 
-  getStateForAction (action, state) {
-    const stateForAction = this.component.router.getStateForAction(action, state)
-    console.log('getStateForAction', Object.keys(this.routes).length, stateForAction.routes.length, stateForAction)
-    if (Object.keys(this.routes).length !== stateForAction.routes.length) {
-      return this.component.router.getStateForAction(NavigationActions.init())
-    } else {
-      return stateForAction
-    }
+  get component () {
+    if (!this.categories) return null
+    if (!this._component) this._component = TabNavigator(this.routes, this.config)
+    return this._component
   }
 }
 

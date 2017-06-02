@@ -9,10 +9,10 @@ import PopularNavigator from '../../navigators/PopularNavigator'
 import { RoutesTrackingActions } from '../../actions/index'
 
 class PopularScene extends Component {
-  // constructor () {
-  //   super()
-  //   this.onNavigationStateChange = this.onNavigationStateChange.bind(this)
-  // }
+  constructor () {
+    super()
+    this.onNavigationStateChange = this.onNavigationStateChange.bind(this)
+  }
 
   // shouldComponentUpdate (nextProps) {
   //   const loadingChanged = this.props.data.loading !== nextProps.data.loading
@@ -20,32 +20,29 @@ class PopularScene extends Component {
   //   return loadingChanged || categoriesChanged
   // }
 
+  componentDidUpdate () {
+    const { dispatch } = this.props
+    if (!PopularNavigator.initialRoute) return
+    dispatch(RoutesTrackingActions.initPopular(PopularNavigator.initialRoute))
+  }
+
   render () {
     const { categories, loading } = this.props.data
     if (loading) return this.renderLoading()
     PopularNavigator.setCategories(categories)
-    return <PopularNavigator.component navigation={this.getNavigationHelpers()} />
+    return <PopularNavigator.component onNavigationStateChange={this.onNavigationStateChange} />
   }
 
   renderLoading () {
-    return (
-      <PopularSceneLoading />
-    )
+    return <PopularSceneLoading />
   }
 
-  getNavigationHelpers () {
-    return addNavigationHelpers({
-      dispatch: this.props.dispatch,
-      state: this.props.popularNav
-    })
+  onNavigationStateChange (prevState, currentState) {
+    const { dispatch } = this.props
+    const currentRoute = prevState.routes[prevState.index]
+    const nextRoute = currentState.routes[currentState.index]
+    if (!_isEqual(currentRoute, nextRoute)) dispatch(RoutesTrackingActions.trackPopular(nextRoute))
   }
-
-  // onNavigationStateChange (prevState, currentState) {
-  //   const { dispatch } = this.props
-  //   const currentRoute = prevState.routes[prevState.index]
-  //   const nextRoute = currentState.routes[currentState.index]
-  //   if (!_isEqual(currentRoute, nextRoute)) dispatch(RoutesTrackingActions.track(nextRoute))
-  // }
 }
 
 PopularScene.propTypes = {

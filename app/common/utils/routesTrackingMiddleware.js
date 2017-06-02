@@ -4,7 +4,7 @@ import _isInteger from 'lodash/isInteger'
 
 const actions = [NavigationActions.INIT, NavigationActions.NAVIGATE, NavigationActions.BACK]
 
-const findRoute = (nav) => {
+export const findRoute = (nav) => {
   const route = nav.routes[nav.index]
   if (_isInteger(route.index)) return findRoute(route)
   return route
