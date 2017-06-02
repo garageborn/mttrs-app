@@ -7,16 +7,15 @@ import AddFavoritesLoading from '../../components/AddFavoritesLoading'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
-
+import updateCurrentScene from '../../common/utils/updateCurrentScene'
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
+    updateCurrentScene(this, 'addFavorites')
     this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
-    if (!nextProps.isCurrentRoute) return false
-    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     const existsChanged = this.props.favoritePublishers.exists !== nextProps.favoritePublishers.exists
     const loadingChanged = this.props.data.loading !== nextProps.data.loading
     const publishersChanged = !_isEqual(this.props.data.publishers, nextProps.data.publishers)
@@ -68,7 +67,6 @@ AddFavoritesContainer.propTypes = {
   favoritePublishers: PropTypes.shape({
     exists: PropTypes.bool.isRequired
   }).isRequired,
-  isCurrentRoute: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired
@@ -76,7 +74,6 @@ AddFavoritesContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isCurrentRoute: state.RouterReducer.current.routeName === 'addFavorites',
     favoritePublishers: {
       exists: state.FavoritePublishersReducer.items.length > 0
     }
