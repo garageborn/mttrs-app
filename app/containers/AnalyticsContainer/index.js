@@ -18,7 +18,6 @@ class AnalyticsContainer extends Component {
 
   trackAnalyticsScreen () {
     const { dispatch, screenName } = this.props
-    console.info('trackAnalyticsScreen', screenName)
     dispatch(AnalyticsActions.trackScreen(screenName))
   }
 
@@ -38,7 +37,6 @@ AnalyticsContainer.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  // console.log('mapStateToProps', ownProps.scene, state.RouterReducer.current.routeName)
   return {
     isCurrentRoute: ownProps.scene === state.RouterReducer.current.routeName
   }
