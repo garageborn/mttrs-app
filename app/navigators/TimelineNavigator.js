@@ -9,7 +9,7 @@ import SummariesTabBar from '../components/SummariesTabBar'
 import FavoritesTabBar from '../components/FavoritesTabBar'
 import styles from '../styles/TabBarBottom'
 
-const MainRoutes = {
+const TimelineRoutes = {
   summaries: {
     screen: SummariesScene,
     navigationOptions: {
@@ -31,21 +31,22 @@ const MainRoutes = {
   }
 }
 
-const MainNavigatorConfig = {
+const TimelineNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'popular',
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
   lazy: true
 }
 
-const MainNavigator = TabNavigator(MainRoutes, MainNavigatorConfig)
+const TimelineNavigator = TabNavigator(TimelineRoutes, TimelineNavigatorConfig)
 
 export const isCurrentRoute = (nav, routeName) => {
-  const currentRoute = nav.routes[nav.index]
-  if (currentRoute.routeName !== 'timeline') return false
-  return currentRoute.routes[currentRoute.index].routeName === routeName
+  // const currentRoute = nav.routes[nav.index]
+  // if (currentRoute.routeName !== 'timeline') return false
+  // return currentRoute.routes[currentRoute.index].routeName === routeName
+  return false
 }
 
-export default MainNavigator
+export default TimelineNavigator
