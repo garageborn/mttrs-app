@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   favorite: {
     ...dialogStyles,
     top: 10,
-    right: 30
+    right: 70
   }
 })
 

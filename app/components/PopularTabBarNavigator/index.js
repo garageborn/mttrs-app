@@ -6,6 +6,10 @@ import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import PopularTab from '../PopularTab'
 import Touchable from '../Touchable'
 import styles from './styles'
+import hexRgb from 'hex-rgb'
+
+const topStoriesColor = '#FF5607'
+const publishersColor = '#999'
 
 class PopularTabBarNavigator extends Component {
   constructor () {
@@ -19,7 +23,11 @@ class PopularTabBarNavigator extends Component {
 
   render () {
     const { navigationState, subscribe } = this.props
-
+    const renderOptions = {
+      renderIndicator: true,
+      indicatorStyle: styles.indicatorStyle,
+      indicatorColors: this.indicatorColors
+    }
     return (
       <View style={styles.container}>
         <ScrollableTabBar
@@ -27,20 +35,19 @@ class PopularTabBarNavigator extends Component {
           tabs={navigationState.routes}
           subscribe={subscribe}
           renderTab={this.renderTab}
-          renderOptions={{ renderIndicator: true, indicatorStyle: styles.indicatorStyle }}
+          renderOptions={renderOptions}
         />
         <HeaderSettingsContainer />
       </View>
     )
   }
 
-  renderTab (tab, index, activeIndex) {
+  renderTab (tab, index) {
     const { jumpToIndex } = this.props
-    const active = index === activeIndex
     return (
       <Touchable underlayColor={'rgba(0,0,0,.1)'} onPress={() => jumpToIndex(index)} >
         <View style={{paddingVertical: 1}}>
-          <PopularTab active={active} content={this.tabContent(tab, index)} />
+          <PopularTab content={this.tabContent(tab, index)} />
         </View>
       </Touchable>
     )
@@ -48,12 +55,27 @@ class PopularTabBarNavigator extends Component {
 
   tabContent (tab, index) {
     const { categories, navigationState, intl } = this.props
-    if (index === 0) return { name: intl.formatMessage({id: 'header.topStories'}), color: '#FF5607' }
-    if (index === navigationState.routes.length - 1) {
-      return { name: intl.formatMessage({id: 'header.publishers'}), color: '#999' }
+    if (index === 0) {
+      return { name: intl.formatMessage({id: 'header.topStories'}), color: topStoriesColor }
+    } else if (index === navigationState.routes.length - 1) {
+      return { name: intl.formatMessage({id: 'header.publishers'}), color: publishersColor }
     } else {
       return categories.find((category) => category.slug === tab.routeName)
     }
+  }
+
+  get indicatorColors () {
+    const { categories } = this.props
+    return [
+      this.convertColor(topStoriesColor),
+      ...categories.map((category) => this.convertColor(category.color)),
+      this.convertColor(publishersColor)
+    ]
+  }
+
+  convertColor (color) {
+    const rgb = hexRgb(color)
+    return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`
   }
 }
 

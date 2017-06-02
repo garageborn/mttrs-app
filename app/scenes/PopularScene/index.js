@@ -3,6 +3,7 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import { addNavigationHelpers } from 'react-navigation'
 import _isEqual from 'lodash/isEqual'
+import PopularSceneLoading from '../../components/PopularSceneLoading'
 import withQuery from './index.gql'
 import PopularNavigator from '../../navigators/PopularNavigator'
 import { RoutesTrackingActions } from '../../actions/index'
@@ -28,9 +29,7 @@ class PopularScene extends Component {
 
   renderLoading () {
     return (
-      <View>
-        <ActivityIndicator size='small' color='#AAA' />
-      </View>
+      <PopularSceneLoading />
     )
   }
 

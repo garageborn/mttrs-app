@@ -1,16 +1,15 @@
 import React from 'react'
-import { View } from 'react-native'
+import HeaderRight from '../HeaderRight'
 import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import HeaderFilterFavoriteCategoriesContainer from '../../containers/HeaderFilterFavoriteCategoriesContainer'
 import HeaderAddFavoritesButtonContainer from '../../containers/HeaderAddFavoritesButtonContainer'
-import styles from './styles'
 
 const FavoritesHeaderRight = () => (
-  <View style={styles.container}>
+  <HeaderRight>
     <HeaderFilterFavoriteCategoriesContainer />
     <HeaderAddFavoritesButtonContainer />
     <HeaderSettingsContainer />
-  </View>
+  </HeaderRight>
 )
 
 export default FavoritesHeaderRight

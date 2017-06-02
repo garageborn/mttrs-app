@@ -12,11 +12,13 @@ class ScrollableTabBar extends Component {
 
     this.tabsLayout = []
     this.tabBarWidth = 0
-    this.currentIndex = props.index
+    this.previousIndex = null
+    this.currentIndex = null
     this.currentDraggingPosition = this.getPositionFor(props.index)
     this.indicatorAnimated = {
       x: new Animated.Value(this.currentDraggingPosition),
-      width: new Animated.Value(0)
+      width: new Animated.Value(0),
+      color: new Animated.Value(0)
     }
   }
 
@@ -80,14 +82,22 @@ class ScrollableTabBar extends Component {
     if (!_result(this.props, 'renderOptions.renderIndicator')) return null
 
     const indicatorStyle = _result(this.props, 'renderOptions.indicatorStyle') || {}
+    const indicatorColors = _result(this.props, 'renderOptions.indicatorColors')
+
     const style = {
       position: 'absolute',
       left: 0,
       bottom: 1,
-      backgroundColor: 'white',
       height: 10,
       width: this.indicatorAnimated.width,
       transform: [{ translateX: this.indicatorAnimated.x }]
+    }
+
+    if (indicatorColors) {
+      style.backgroundColor = this.indicatorAnimated.color.interpolate({
+        inputRange: indicatorColors.map((color, index) => index),
+        outputRange: indicatorColors
+      })
     }
 
     return <Animated.View style={[style, indicatorStyle]} />
@@ -100,7 +110,8 @@ class ScrollableTabBar extends Component {
     const currentPositionIndex = this.getCurrentPositionIndex(position)
     const nextPositionIndex = this.getNextPositionIndex(position)
 
-    if (this.currentIndex === nextPositionIndex) return
+    if (this.currentIndex === position) return this.scrollToIndex(position)
+    if (Math.abs(this.currentIndex - this.previousIndex) > 1) return
     if (Math.abs(this.currentIndex - position) >= 1) return
 
     const currentPosition = this.getPositionFor(currentPositionIndex)
@@ -116,8 +127,12 @@ class ScrollableTabBar extends Component {
   }
 
   scrollToIndex (index) {
+    if (this.currentIndex === index) return
+
+    this.previousIndex = this.currentIndex
     this.currentIndex = index
     if (!this.scrollView) return
+
     const position = this.getPositionFor(index)
     this.scrollView.scrollTo({ x: position, animated: true })
     this.moveIndicatorToIndex(index)
@@ -142,13 +157,16 @@ class ScrollableTabBar extends Component {
 
     this.indicatorAnimated.x.setValue(finalPosition)
     this.indicatorAnimated.width.setValue(finalWidth)
+    this.indicatorAnimated.color.setValue(position)
   }
 
   moveIndicatorToIndex (index) {
     const tabLayout = this.tabsLayout[index]
     if (!tabLayout) return
+
     this.indicatorAnimated.x.setValue(tabLayout.x)
     this.indicatorAnimated.width.setValue(tabLayout.width)
+    this.indicatorAnimated.color.setValue(index)
   }
 
   setScrollViewRef (el) {
