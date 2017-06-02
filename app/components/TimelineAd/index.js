@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import { withNativeAd } from 'react-native-fbads'
 import _isEmpty from 'lodash/isEmpty'
