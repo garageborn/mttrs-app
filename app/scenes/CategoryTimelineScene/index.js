@@ -20,7 +20,6 @@ class CategoryTimelineScene extends Component {
   }
 
   render () {
-    console.log('      CategoryTimelineScene.render', this.props.navigation.state.routeName)
     const { category, loading } = this.props.data
     if (loading) return null
 

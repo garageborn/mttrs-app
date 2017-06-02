@@ -33,46 +33,24 @@ class UpdateCurrentScene {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    const shouldUpdate = this.originalShouldComponentUpdate(nextProps, nextState) || false
-
-    const batata = () => {
-      if (this.isCurrentRoute && this.pendingUpdate) {
-        this.pendingUpdate = false
-        return true
-      }
-
-      if (!shouldUpdate) return false
-
-      if (this.isCurrentRoute) {
-        this.pendingUpdate = false
-        return true
-      } else {
-        this.pendingUpdate = true
-        return false
-      }
+    if (this.isCurrentRoute && this.pendingUpdate) {
+      this.pendingUpdate = false
+      return true
     }
 
-    const bla = batata()
+    const shouldUpdate = this.originalShouldComponentUpdate(nextProps, nextState) || false
+    if (!shouldUpdate) return false
 
-    console.log(`shouldComponentUpdate ${this.scene}`, {
-      currentRoute: this.currentRoute.routeName,
-      isCurrent: this.isCurrentRoute,
-      pendingUpdate: this.pendingUpdate,
-      shouldUpdate,
-      batata: bla
-    })
-
-    return bla
-
+    if (this.isCurrentRoute) {
+      this.pendingUpdate = false
+      return true
+    } else {
+      this.pendingUpdate = true
+      return false
+    }
   }
 
   storeListener () {
-    console.log(`storeListener ${this.scene}`, {
-      currentRoute: this.currentRoute.routeName,
-      isCurrent: this.isCurrentRoute,
-      pendingUpdate: this.pendingUpdate
-    })
-
     if (!this.isCurrentRoute || !this.pendingUpdate) return
     this.pendingUpdate = false
     this.component.forceUpdate()

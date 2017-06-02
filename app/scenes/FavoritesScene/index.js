@@ -29,7 +29,6 @@ class FavoritesScene extends Component {
   }
 
   render () {
-    console.log('FavoritesScene.render')
     return (
       <AnalyticsContainer scene={'favorites'} screenName={'/favorites'}>
         {this.renderFavorites()}
