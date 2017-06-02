@@ -42,11 +42,4 @@ const TimelineNavigatorConfig = {
 
 const TimelineNavigator = TabNavigator(TimelineRoutes, TimelineNavigatorConfig)
 
-export const isCurrentRoute = (nav, routeName) => {
-  // const currentRoute = nav.routes[nav.index]
-  // if (currentRoute.routeName !== 'timeline') return false
-  // return currentRoute.routes[currentRoute.index].routeName === routeName
-  return false
-}
-
 export default TimelineNavigator

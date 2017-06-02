@@ -1,6 +1,6 @@
 import { StackNavigator } from 'react-navigation'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator'
-import TimelineNavigator, { isCurrentRoute as isCurrentTimelineRoute} from './TimelineNavigator'
+import TimelineNavigator from './TimelineNavigator'
 import PublisherScene from '../scenes/PublisherScene'
 import SettingsScene from '../scenes/SettingsScene'
 import LinkScene from '../scenes/LinkScene'
@@ -25,12 +25,5 @@ const AppNavigatorConfig = {
 }
 
 const AppNavigator = StackNavigator(AppRoutes, AppNavigatorConfig)
-
-export const isCurrentRoute = (nav, routeName) => {
-  // const currentRoute = nav.routes[nav.index]
-  // if (currentRoute.routeName === 'timeline') return isCurrentTimelineRoute(nav, routeName)
-  // return currentRoute.routeName === routeName
-  return false
-}
 
 export default AppNavigator

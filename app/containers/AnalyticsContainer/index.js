@@ -9,9 +9,7 @@ class AnalyticsContainer extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (!nextProps.isCurrentRoute) return
-    if (this.props.isCurrentRoute === nextProps.isCurrentRoute) return
-    this.trackAnalyticsScreen()
+    if (this.becameActive(nextProps)) this.trackAnalyticsScreen()
   }
 
   render () {
@@ -22,6 +20,12 @@ class AnalyticsContainer extends Component {
     const { dispatch, screenName } = this.props
     console.info('trackAnalyticsScreen', screenName)
     dispatch(AnalyticsActions.trackScreen(screenName))
+  }
+
+  becameActive (nextProps) {
+    if (!nextProps.isCurrentRoute) return false
+    if (this.props.isCurrentRoute === nextProps.isCurrentRoute) return false
+    return true
   }
 }
 

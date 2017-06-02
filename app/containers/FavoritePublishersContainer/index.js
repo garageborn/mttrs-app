@@ -5,7 +5,6 @@ import FavoritePublishersManager from '../../components/FavoritePublishersManage
 import FavoritePublishersListContainer from '../FavoritePublishersListContainer'
 import FavoritePublishersManagerButton from '../../components/FavoritePublishersManagerButton'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
-import { isCurrentRoute } from '../../navigators/AppNavigator'
 
 class FavoritePublishersContainer extends Component {
   constructor () {
@@ -71,7 +70,7 @@ FavoritePublishersContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isCurrentRoute: isCurrentRoute(state.nav, 'favoritePublishers'),
+    isCurrentRoute: state.RouterReducer.current.routeName === 'favoritePublishers',
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items

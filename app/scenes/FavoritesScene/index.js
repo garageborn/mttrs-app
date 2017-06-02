@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
-import { isCurrentRoute } from '../../navigators/AppNavigator'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
 import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
@@ -64,7 +63,7 @@ FavoritesScene.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isCurrentRoute: isCurrentRoute(state.nav, 'favorites'),
+    isCurrentRoute: state.RouterReducer.current.routeName === 'favorites',
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
