@@ -1,21 +1,15 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import styles from './styles'
 
-class StoryTitle extends Component {
-  render () {
-    return (
-      <View style={this.styles}>
-        <Text style={styles.title} numberOfLines={4}>{this.props.title}</Text>
-      </View>
-    )
-  }
+const StoryTitle = ({ visited, title }) => {
+  const containerStyle = visited ? [styles.container, styles.visited] : styles.container
 
-  get styles () {
-    if (!this.props.visited) return styles.container
-
-    return [styles.container, styles.visited]
-  }
+  return (
+    <View style={containerStyle}>
+      <Text style={styles.title} numberOfLines={4}>{title}</Text>
+    </View>
+  )
 }
 
 StoryTitle.propTypes = {

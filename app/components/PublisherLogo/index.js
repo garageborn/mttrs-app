@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { View, Image } from 'react-native'
 import styles from './styles'
 
-class PublisherLogo extends Component {
+class PublisherLogo extends PureComponent {
   get logoContainerStyles () {
     const { skin, size } = this.props
     let offset = 2
