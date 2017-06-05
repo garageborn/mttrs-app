@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import _isEqual from 'lodash/isEqual'
-import withQuery from './index.gql'
-import AddFavoritesLoading from '../../components/AddFavoritesLoading'
 import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
-import AddFavoritesList from '../../components/AddFavoritesList'
+import AddFavoritesListContainer from '../AddFavoritesListContainer'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class AddFavoritesContainer extends Component {
@@ -17,38 +14,20 @@ class AddFavoritesContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    const existsChanged = this.props.favoritePublishers.exists !== nextProps.favoritePublishers.exists
-    const loadingChanged = this.props.data.loading !== nextProps.data.loading
-    const publishersChanged = !_isEqual(this.props.data.publishers, nextProps.data.publishers)
-    return existsChanged || loadingChanged || publishersChanged
+    return this.props.favoritePublishers.isComplete !== nextProps.favoritePublishers.isComplete
   }
 
   render () {
-    const { favoritePublishers } = this.props
+    const { isComplete } = this.props.favoritePublishers
+    const onPress = this.openFavoritesTimeline
 
     return (
       <ScrollView>
-        <AddFavoritesHeading
-          openFavoritesTimeline={this.openFavoritesTimeline}
-          isComplete={favoritePublishers.exists}
-        />
-        {this.renderPublisherList()}
-        <AddFavoritesFooter
-          onPress={this.openFavoritesTimeline}
-          isComplete={favoritePublishers.exists}
-        />
+        <AddFavoritesHeading openFavoritesTimeline={onPress} isComplete={isComplete} />
+        <AddFavoritesListContainer />
+        <AddFavoritesFooter onPress={onPress} isComplete={isComplete} />
       </ScrollView>
     )
-  }
-
-  renderPublisherList () {
-    const { loading, publishers } = this.props.data
-    if (loading) return this.renderLoading()
-    return <AddFavoritesList publishers={publishers} />
-  }
-
-  renderLoading () {
-    return <AddFavoritesLoading />
   }
 
   openFavoritesTimeline () {
@@ -58,13 +37,9 @@ class AddFavoritesContainer extends Component {
 }
 
 AddFavoritesContainer.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    publishers: PropTypes.any
-  }).isRequired,
   dispatch: PropTypes.func.isRequired,
   favoritePublishers: PropTypes.shape({
-    exists: PropTypes.bool.isRequired
+    isComplete: PropTypes.bool.isRequired
   }).isRequired,
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired
@@ -74,10 +49,9 @@ AddFavoritesContainer.propTypes = {
 const mapStateToProps = (state) => {
   return {
     favoritePublishers: {
-      exists: state.FavoritePublishersReducer.items.length > 0
+      isComplete: state.FavoritePublishersReducer.items.length > 0
     }
   }
 }
 
-const AddFavoritesContainerWithData = withQuery(AddFavoritesContainer)
-export default connect(mapStateToProps)(AddFavoritesContainerWithData)
+export default connect(mapStateToProps)(AddFavoritesContainer)

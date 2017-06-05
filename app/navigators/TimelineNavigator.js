@@ -33,7 +33,7 @@ const TimelineRoutes = {
 
 const TimelineNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'favorites',
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
