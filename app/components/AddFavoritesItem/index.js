@@ -7,7 +7,7 @@ import * as cloudinary from '../../common/utils/Cloudinary'
 
 const AddFavoritesItem = ({publisher}) => {
   const renderIcon = () => {
-    if (!publisher.icon_id) return
+    if (!publisher.icon_id) return null
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return <PublisherLogo size={50} source={{ uri }} />
   }

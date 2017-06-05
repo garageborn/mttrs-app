@@ -6,7 +6,6 @@ import AddFavoritesItem from '../AddFavoritesItem'
 class AddFavoritesList extends Component {
   constructor (props) {
     super(props)
-    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
   }
 
@@ -22,7 +21,6 @@ class AddFavoritesList extends Component {
         data={publishers}
         keyExtractor={this.extractKey}
         renderItem={this.renderRow}
-        shouldItemUpdate={this.shouldItemUpdate}
         numColumns={4}
       />
     )
@@ -34,10 +32,6 @@ class AddFavoritesList extends Component {
 
   renderRow (data) {
     return <AddFavoritesItem rowID={data.index} publisher={data.item} />
-  }
-
-  shouldItemUpdate (props, nextProps) {
-    return props.item.id !== nextProps.item.id
   }
 }
 
