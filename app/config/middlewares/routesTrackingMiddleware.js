@@ -11,7 +11,15 @@ export const findRoute = (nav) => {
 }
 
 const routesTracking = ({ getState, dispatch }) => next => (action) => {
-  if (actions.indexOf(action.type) === -1) return next(action)
+  console.log(action.type)
+  if (actions.indexOf(action.type) === -1) {
+    try {
+      return next(action)
+    }catch (error) {
+      console.log('-----------------action', action)
+      console.log(error)
+    }
+  }
 
   const currentRoute = findRoute(getState().nav)
   const result = next(action)

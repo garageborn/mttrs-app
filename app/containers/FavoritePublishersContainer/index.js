@@ -10,9 +10,9 @@ import updateCurrentScene from '../../common/utils/updateCurrentScene'
 class FavoritePublishersContainer extends Component {
   constructor () {
     super()
-    updateCurrentScene(this, 'favoritePublishers')
     this.handleComplete = this.handleComplete.bind(this)
     this.handleButtonPress = this.handleButtonPress.bind(this)
+    updateCurrentScene(this, 'favoritePublishers')
   }
 
   componentWillMount () {

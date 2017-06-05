@@ -10,7 +10,7 @@ class UpdateCurrentScene {
     this.storeListener = this.storeListener.bind(this)
 
     if (!this.component.componentWillMount) this.component.componentWillMount = _noop
-    if (!this.component.shouldComponentUpdate) this.component.shouldComponentUpdate = _noop
+    if (!this.component.shouldComponentUpdate) this.component.shouldComponentUpdate = () => true
     if (!this.component.componentWillUnmount) this.component.componentWillUnmount = _noop
 
     this.originalComponentWillMount = this.component.componentWillMount.bind(this.component)
@@ -33,7 +33,6 @@ class UpdateCurrentScene {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    console.log(this.scene, this.isCurrentRoute)
     if (this.isCurrentRoute && this.pendingUpdate) {
       this.pendingUpdate = false
       return true

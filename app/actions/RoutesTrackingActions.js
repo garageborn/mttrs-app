@@ -13,7 +13,7 @@ const trackPopularRoute = (route) => ({
   route
 })
 
-const routeChanged = (route) => ({
+const routeChanged = () => ({
   type: ROUTE_CHANGED
 })
 
@@ -47,6 +47,7 @@ export function track (route) {
 export function trackPopular (route) {
   return (dispatch, getState) => {
     const router = getRouter(getState)
+    console.log('trackPopular', route)
     if (_isEqual(router.popular.current, route)) return
     dispatch(trackPopularRoute(route))
     dispatch(routeChanged())

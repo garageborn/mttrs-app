@@ -4,11 +4,13 @@ import _result from 'lodash/result'
 import TagsList from '../../components/TagsList'
 import withQuery from './index.gql'
 import { CategoriesActions } from '../../actions/index'
+import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class TagsListContainer extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.selectTag = this.selectTag.bind(this)
+    updateCurrentScene(this, props.category.slug)
   }
 
   render () {

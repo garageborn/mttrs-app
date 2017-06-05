@@ -42,8 +42,10 @@ const isPopularRoute = (route) => {
 export default function (state = defaultState, action) {
   switch (action.type) {
     case TRACK_ROUTE:
+      console.log('case TRACK_ROUTE')
       return trackRoute(state, action)
     case TRACK_POPULAR_ROUTE:
+      console.log('case TRACK_POPULAR_ROUTE')
       return trackPopularRoute(state, action)
     case TENANT_RECEIVED:
       return {

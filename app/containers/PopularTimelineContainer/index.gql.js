@@ -29,6 +29,7 @@ const Query = gql`
 export default function (PopularTimeline) {
   return graphql(Query, {
     options (props) {
+      console.log('home', 'query options')
       return { variables: { ...defaultVariables, type: 'popular' } }
     }
   })(PopularTimeline)
