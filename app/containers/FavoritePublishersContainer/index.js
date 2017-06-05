@@ -5,10 +5,12 @@ import FavoritePublishersManager from '../../components/FavoritePublishersManage
 import FavoritePublishersListContainer from '../FavoritePublishersListContainer'
 import FavoritePublishersManagerButton from '../../components/FavoritePublishersManagerButton'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
+import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class FavoritePublishersContainer extends Component {
   constructor () {
     super()
+    updateCurrentScene(this, 'favoritePublishers')
     this.handleComplete = this.handleComplete.bind(this)
     this.handleButtonPress = this.handleButtonPress.bind(this)
   }
@@ -18,8 +20,6 @@ class FavoritePublishersContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    if (!nextProps.isCurrentRoute) return false
-    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     return this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
   }
 
@@ -62,7 +62,6 @@ FavoritePublishersContainer.propTypes = {
     isLoaded: PropTypes.bool.isRequired,
     items: PropTypes.array.isRequired
   }).isRequired,
-  isCurrentRoute: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired
@@ -70,7 +69,6 @@ FavoritePublishersContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isCurrentRoute: state.RouterReducer.current.routeName === 'favoritePublishers',
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
