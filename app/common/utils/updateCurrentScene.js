@@ -33,6 +33,7 @@ class UpdateCurrentScene {
   }
 
   shouldComponentUpdate (nextProps, nextState) {
+    console.log(this.scene, this.isCurrentRoute)
     if (this.isCurrentRoute && this.pendingUpdate) {
       this.pendingUpdate = false
       return true

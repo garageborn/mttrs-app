@@ -23,7 +23,7 @@ export function init () {
     if (!_isEmpty(router.current)) return
 
     const route = findRoute(getNav(getState))
-    dispatch(trackRoute(route))
+    dispatch(track(route))
   }
 }
 
@@ -31,7 +31,7 @@ export function initPopular (route) {
   return (dispatch, getState) => {
     const router = getRouter(getState)
     if (!_isEmpty(router.popular.current)) return
-    dispatch(trackPopularRoute(route))
+    dispatch(trackPopular(route))
   }
 }
 
@@ -40,6 +40,7 @@ export function track (route) {
     const router = getRouter(getState)
     if (_isEqual(router.current, route)) return
     dispatch(trackRoute(route))
+    dispatch(routeChanged())
   }
 }
 
@@ -48,6 +49,7 @@ export function trackPopular (route) {
     const router = getRouter(getState)
     if (_isEqual(router.popular.current, route)) return
     dispatch(trackPopularRoute(route))
+    dispatch(routeChanged())
   }
 }
 
