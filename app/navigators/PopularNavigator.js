@@ -2,7 +2,7 @@ import { NavigationActions, TabNavigator } from 'react-navigation'
 import _isEqual from 'lodash/isEqual'
 import PopularTabBarNavigator from '../components/PopularTabBarNavigator'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
-import CategoryTimelineScene from '../scenes/CategoryTimelineScene'
+import { buildCategoryTimelineScene } from '../scenes/CategoryTimelineScene'
 import PublishersScene from '../scenes/PublishersScene'
 
 let instance
@@ -30,7 +30,7 @@ class PopularNavigator {
     let categoryRoutes = {}
     this.categories.forEach((category) => {
       categoryRoutes[category.slug] = {
-        screen: CategoryTimelineScene,
+        screen: buildCategoryTimelineScene(category),
         navigationOptions: {
           tabBarLabel: category
         }

@@ -11,8 +11,8 @@ import updateCurrentScene from '../../common/utils/updateCurrentScene'
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
-    updateCurrentScene(this, 'addFavorites')
     this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
+    updateCurrentScene(this, 'addFavorites')
   }
 
   shouldComponentUpdate (nextProps) {
