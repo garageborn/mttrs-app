@@ -7,6 +7,10 @@ import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
 
 class Story extends Component {
+  shouldComponentUpdate (nextProps) {
+    return this.props.visited !== nextProps.visited
+  }
+
   render () {
     const { story } = this.props
     if (!story) return null

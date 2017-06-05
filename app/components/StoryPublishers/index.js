@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import RestrictContentLabel from '../RestrictContentLabel'
-import TouchablePublisherLogo from '../TouchablePublisherLogo'
 import PublisherLogo from '../PublisherLogo'
-import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
@@ -17,7 +15,7 @@ const messages = defineMessages({
   }
 })
 
-class StoryPublishers extends Component {
+class StoryPublishers extends PureComponent {
   render () {
     return (
       <View style={styles.publisher}>

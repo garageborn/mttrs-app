@@ -8,15 +8,13 @@ const loading = require('../../assets/mttrs-loading.gif')
 const staticLoading = require('../../assets/mttrs-loading-static.png')
 
 class StoryImage extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.handleImageLoad = this.handleImageLoad.bind(this)
     this.handleImageError = this.handleImageError.bind(this)
-    this.state = { status: 'loading' }
-  }
-
-  componentWillMount () {
-    if (!this.props.source) this.setState({ status: 'error' })
+    this.state = {
+      status: props.source ? 'loading' : 'error'
+    }
   }
 
   shouldComponentUpdate (nextProps, nextState) {
