@@ -14,9 +14,7 @@ class FavoritePublishersItem extends Component {
     this.onPress = this.onPress.bind(this)
     this.handleFavoriteState = this.handleFavoriteState.bind(this)
 
-    this.state = {
-      active: true
-    }
+    this.state = { active: true }
   }
 
   render () {

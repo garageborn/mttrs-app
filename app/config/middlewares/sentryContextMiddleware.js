@@ -3,8 +3,8 @@ import Sentry from '../Sentry'
 
 const getContext = (state, action) => {
   return {
-    screen: _result(state, 'RouterReducer.current.routeName'),
-    previousScreen: _result(state, 'RouterReducer.previous.routeName'),
+    scene: _result(state, 'RouterReducer.current.routeName'),
+    previousScene: _result(state, 'RouterReducer.previous.routeName'),
     tenant: _result(state, 'TenantReducer.current.id'),
     action: _result(action, 'type')
   }

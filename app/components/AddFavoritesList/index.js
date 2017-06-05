@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { FlatList } from 'react-native'
+import _isEqual from 'lodash/isEqual'
 import AddFavoritesItem from '../AddFavoritesItem'
 
 class AddFavoritesList extends Component {
@@ -7,6 +8,10 @@ class AddFavoritesList extends Component {
     super(props)
     this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
+  }
+
+  shouldComponentUpdate (nextProps) {
+    return !_isEqual(this.props.publishers, nextProps.publishers)
   }
 
   render () {

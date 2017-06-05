@@ -18,6 +18,10 @@ class ToggleFavoriteContainer extends Component {
     if (this.props.isFavorite !== nextProps.isFavorite) handleFavoriteState(nextProps.isFavorite)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return this.props.isFavorite !== nextProps.isFavorite
+  }
+
   render () {
     const { isFavorite, addComponent, removeComponent } = this.props
     const component = isFavorite ? removeComponent : addComponent

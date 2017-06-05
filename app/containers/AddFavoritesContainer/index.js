@@ -8,6 +8,7 @@ import AddFavoritesHeading from '../../components/AddFavoritesHeading'
 import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesList from '../../components/AddFavoritesList'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'
+
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
@@ -47,9 +48,7 @@ class AddFavoritesContainer extends Component {
   }
 
   renderLoading () {
-    return (
-      <AddFavoritesLoading />
-    )
+    return <AddFavoritesLoading />
   }
 
   openFavoritesTimeline () {
