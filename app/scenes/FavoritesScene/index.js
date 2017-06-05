@@ -10,15 +10,19 @@ import { FavoritePublishersActions } from '../../actions/index'
 import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
 import headerStyles from '../../styles/Header'
+import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class FavoritesScene extends Component {
+  constructor () {
+    super()
+    updateCurrentScene(this, 'favorites')
+  }
+
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
   }
 
   shouldComponentUpdate (nextProps) {
-    if (!nextProps.isCurrentRoute) return false
-    if (!this.props.isCurrentRoute && nextProps.isCurrentRoute) return true
     const isLoadedChanged = this.props.favoritePublishers.isLoaded !== nextProps.favoritePublishers.isLoaded
     const itemsChanged = !_isEqual(this.props.favoritePublishers.items, nextProps.favoritePublishers.items)
     return isLoadedChanged || itemsChanged
@@ -63,7 +67,6 @@ FavoritesScene.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isCurrentRoute: state.RouterReducer.current.routeName === 'favorites',
     favoritePublishers: {
       isLoaded: state.FavoritePublishersReducer.isLoaded,
       items: state.FavoritePublishersReducer.items
