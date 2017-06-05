@@ -11,7 +11,7 @@ class ApolloError extends Component {
   componentDidMount () {
     const { data } = this.props
     if (!data.error) return
-    captureError(data.error)
+    captureError(data)
   }
 
   render () {
