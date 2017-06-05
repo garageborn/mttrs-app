@@ -28,7 +28,7 @@ class Timeline extends Component {
     if (data.error) return this.renderError()
 
     return (
-      <View style={styles.container}>
+      <View style={this.containerStyles}>
         <TimelineList
           renderOptions={renderOptions}
           data={data}
@@ -38,6 +38,11 @@ class Timeline extends Component {
         />
       </View>
     )
+  }
+
+  get containerStyles () {
+    debugger
+    return this.props.type === 'favorites' ? styles.favoriteTimelineContainer  : styles.container
   }
 
   renderError () {
@@ -95,7 +100,8 @@ Timeline.propTypes = {
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
-  })
+  }),
+  type: PropTypes.string
 }
 
 export default Timeline

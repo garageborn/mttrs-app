@@ -16,7 +16,7 @@ class TimelineContainer extends Component {
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
 
     this.state = {
-      loadingMore: false,
+      loadingMore: true,
       loadingPullToRefresh: false
     }
   }
@@ -46,9 +46,10 @@ class TimelineContainer extends Component {
   }
 
   render () {
-    const { data, renderOptions } = this.props
+    const { data, renderOptions, type } = this.props
     return (
       <Timeline
+        type={type}
         renderOptions={renderOptions}
         data={data}
         loadingMore={this.state.loadingMore}
@@ -61,6 +62,7 @@ class TimelineContainer extends Component {
 
   onEndReached () {
     const { hasMore, infiniteScroll } = this.props.data
+    return null
     if (this.isLoadingMore || !hasMore) return
 
     this.isLoadingMore = true
@@ -144,11 +146,12 @@ TimelineContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
   }),
+  dispatch: PropTypes.func.isRequired,
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
   }),
-  dispatch: PropTypes.func.isRequired
+  type: PropTypes.string
 }
 
 export default connect()(TimelineContainer)
