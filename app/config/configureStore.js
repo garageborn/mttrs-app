@@ -3,7 +3,7 @@ import apolloClient from './apolloClient'
 import thunkMiddleware from 'redux-thunk'
 import * as reducers from '../reducers/index'
 import AppNavigator from '../navigators/AppNavigator'
-import routesTrackingMiddleware from '../common/utils/routesTrackingMiddleware'
+import routesTrackingMiddleware from './middlewares/routesTrackingMiddleware'
 
 const navReducer = (state, action) => {
   return AppNavigator.router.getStateForAction(action, state)
