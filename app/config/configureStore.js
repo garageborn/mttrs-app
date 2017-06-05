@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import * as reducers from '../reducers/index'
 import AppNavigator from '../navigators/AppNavigator'
 import routesTrackingMiddleware from './middlewares/routesTrackingMiddleware'
+import sentryContextMiddleware from './middlewares/sentryContextMiddleware'
 
 const navReducer = (state, action) => {
   return AppNavigator.router.getStateForAction(action, state)
@@ -12,7 +13,8 @@ const navReducer = (state, action) => {
 const createStoreWithMiddleware = compose(
   applyMiddleware(thunkMiddleware),
   applyMiddleware(apolloClient.middleware()),
-  applyMiddleware(routesTrackingMiddleware)
+  applyMiddleware(routesTrackingMiddleware),
+  applyMiddleware(sentryContextMiddleware)
 )(createStore)
 
 const rootReducer = combineReducers({

@@ -1,24 +1,19 @@
-import { NavigationActions } from 'react-navigation'
-import { RoutesTrackingActions } from '../../actions/index'
-import _isInteger from 'lodash/isInteger'
+import _result from 'lodash/result'
+import Sentry from '../Sentry'
 
-const actions = [NavigationActions.INIT, NavigationActions.NAVIGATE, NavigationActions.BACK]
-
-export const findRoute = (nav) => {
-  const route = nav.routes[nav.index]
-  if (_isInteger(route.index)) return findRoute(route)
-  return route
+const getContext = (state, action) => {
+  return {
+    screen: _result(state, 'RouterReducer.current.routeName'),
+    previousScreen: _result(state, 'RouterReducer.previous.routeName'),
+    tenant: _result(state, 'TenantReducer.current.id'),
+    action: _result(action, 'type')
+  }
 }
 
-const routesTracking = ({ getState, dispatch }) => next => (action) => {
-  if (actions.indexOf(action.type) === -1) return next(action)
-
-  const currentRoute = findRoute(getState().nav)
+const sentryContext = ({ getState, dispatch }) => next => (action) => {
   const result = next(action)
-  const nextRoute = findRoute(getState().nav)
-  if (nextRoute !== currentRoute) dispatch(RoutesTrackingActions.track(nextRoute))
-
+  if (!__DEV__) Sentry.setExtraContext(getContext(getState(), action))
   return result
 }
 
-export default routesTracking
+export default sentryContext
