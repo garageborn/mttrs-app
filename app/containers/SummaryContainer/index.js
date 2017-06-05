@@ -9,11 +9,13 @@ class SummaryContainer extends Component {
     this.handleSummaryPress = this.handleSummaryPress.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return this.props.visited !== nextProps.visited
+  }
+
   render () {
     const { story, visited } = this.props
-    return (
-      <StorySummary onPress={this.handleSummaryPress} story={story} visited={visited} />
-    )
+    return <StorySummary onPress={this.handleSummaryPress} story={story} visited={visited} />
   }
 
   handleSummaryPress () {

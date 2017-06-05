@@ -4,6 +4,7 @@ import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
 import CategoryTimelineContainer from '../../containers/CategoryTimelineContainer'
 import TagsListContainer from '../../containers/TagsListContainer'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
 class CategoryTimelineScene extends Component {
   shouldComponentUpdate (nextProps) {
@@ -17,10 +18,12 @@ class CategoryTimelineScene extends Component {
     if (loading) return null
 
     return (
-      <View>
-        <TagsListContainer category={category} />
-        <CategoryTimelineContainer category={category} />
-      </View>
+      <AnalyticsContainer scene={category.slug} screenName={`/popular/${category.slug}`}>
+        <View>
+          <TagsListContainer category={category} />
+          <CategoryTimelineContainer category={category} />
+        </View>
+      </AnalyticsContainer>
     )
   }
 }

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image } from 'react-native'
 import styles from '../../styles'
 
@@ -16,15 +16,13 @@ const placeholders = [
   fifthPlaceholder, fifthPlaceholder
 ]
 
-class Placeholder extends Component {
-  render () {
-    return <Image style={styles.image} resizeMode='cover' source={this.getPlaceholder()} />
-  }
-
-  getPlaceholder () {
-    const lastDigit = this.props.story.id % 10
+const Placeholder = ({ story }) => {
+  const getPlaceholder = () => {
+    const lastDigit = story.id % 10
     return placeholders[lastDigit]
   }
+
+  return <Image style={styles.image} resizeMode='cover' source={getPlaceholder()} />
 }
 
 Placeholder.propTypes = {

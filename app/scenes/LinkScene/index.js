@@ -8,6 +8,7 @@ import LinkHeaderTitle from '../../components/LinkHeaderTitle'
 import HeaderShareButton from '../../components/HeaderShareButton'
 import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import headerStyles from '../../styles/Header'
 
 class LinkScene extends Component {
@@ -49,10 +50,12 @@ class LinkScene extends Component {
     const { link, story } = this.props.navigation.state.params
     if (this.state.appState !== 'active') return null
     return (
-      <View>
-        <CategoryColor category={story.category} />
-        <StoryWebView link={link} />
-      </View>
+      <AnalyticsContainer scene={'link'} screenName={`/link/${link.slug}`}>
+        <View>
+          <CategoryColor category={story.category} />
+          <StoryWebView link={link} />
+        </View>
+      </AnalyticsContainer>
     )
   }
 }

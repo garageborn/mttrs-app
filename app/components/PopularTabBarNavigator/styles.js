@@ -1,5 +1,6 @@
-import { StyleSheet, Platform } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import { DARK_COLOR } from '../../constants/Colors'
+const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
@@ -15,7 +16,8 @@ const styles = StyleSheet.create({
   },
 
   indicatorStyle: {
-    height: 2
+    height: 3,
+    borderRadius: width / 2
   }
 })
 

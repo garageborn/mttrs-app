@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import Touchable from '../Touchable'
 import StoryImage from '../StoryImage'
@@ -8,32 +8,26 @@ import StoryDialogButton from '../StoryDialogButton'
 import { WHITE_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-class StoryMainLink extends Component {
-  render () {
-    const { onPress, openDialog, story, visited } = this.props
-    return (
-      <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
-        <View style={styles.content}>
-          <StoryImage visited={visited} source={this.mainLink.image_source_url} story={story} />
-          <View>
-            <StoryTitle visited={visited} title={this.mainLink.title} />
-            {this.renderStoryCategory()}
-          </View>
-          <StoryDialogButton onPress={openDialog} />
+const StoryMainLink = ({ onPress, openDialog, story, visited }) => {
+  const mainLink = story.main_link
+
+  const renderStoryCategory = () => {
+    if (!story.category) return
+    return <StoryCategory visited={visited} category={story.category} />
+  }
+
+  return (
+    <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
+      <View style={styles.content}>
+        <StoryImage visited={visited} source={mainLink.image_source_url} story={story} />
+        <View>
+          <StoryTitle visited={visited} title={mainLink.title} />
+          {renderStoryCategory()}
         </View>
-      </Touchable>
-    )
-  }
-
-  renderStoryCategory () {
-    const { category } = this.props.story
-    if (!category) return
-    return <StoryCategory visited={this.props.visited} category={category} />
-  }
-
-  get mainLink () {
-    return this.props.story.main_link
-  }
+        <StoryDialogButton onPress={openDialog} />
+      </View>
+    </Touchable>
+  )
 }
 
 StoryMainLink.propTypes = {

@@ -4,9 +4,12 @@ import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
 const AddFavoritesScene = ({navigation}) => (
-  <AddFavoritesContainer navigation={navigation} />
+  <AnalyticsContainer scene={'addFavorites'} screenName={'/favorites/add'}>
+    <AddFavoritesContainer navigation={navigation} />
+  </AnalyticsContainer>
 )
 
 AddFavoritesScene.navigationOptions = props => {

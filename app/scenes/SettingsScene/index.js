@@ -2,9 +2,12 @@ import React from 'react'
 import Settings from '../../components/Settings'
 import HeaderLeft from '../../components/HeaderLeft'
 import headerStyles from '../../styles/Header'
+import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
 const SettingsScene = () => (
-  <Settings />
+  <AnalyticsContainer scene={'settings'} screenName={'/settings'}>
+    <Settings />
+  </AnalyticsContainer>
 )
 
 SettingsScene.navigationOptions = props => {

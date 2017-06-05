@@ -6,7 +6,7 @@
     "postinstall": "rm -f node_modules/intl/.babelrc"
   },
   "dependencies": {
-    "apollo-client": "^1.3.0",
+    "apollo-client": "^1.4.0",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",
     "babel-loader": "^7.0.0",
@@ -20,7 +20,7 @@
     "moment-timezone": "^0.5.13",
     "query-string": "^4.3.4",
     "react": "16.0.0-alpha.6",
-    "react-apollo": "^1.2.0",
+    "react-apollo": "^1.4.1",
     "react-intl": "^2.3.0",
     "react-native": "0.44.2",
     "react-native-device-info": "^0.10.2",
@@ -30,7 +30,7 @@
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-onesignal": "^3.0.4",
-    "react-native-sentry": "^0.11.1",
+    "react-native-sentry": "^0.11.6",
     "react-native-share": "^1.0.20",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.2",
@@ -45,7 +45,7 @@
     "eslint-config-standard-jsx": "^4.0.1",
     "eslint-plugin-babel": "^4.1.0",
     "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-node": "^5.0.0",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.0.1",
     "eslint-plugin-standard": "^3.0.1"

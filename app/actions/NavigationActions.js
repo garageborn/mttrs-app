@@ -14,47 +14,35 @@ export function link (story, link) {
   return dispatch => {
     const params = { story: story, link: link }
     dispatch(NavigationActions.navigate({ routeName: 'link', params }))
-    dispatch(AnalyticsActions.trackScreen(`/link/${link.slug}`))
   }
 }
 
 export function publisher (publisher) {
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'publisher', params: { publisher } }))
-    dispatch(AnalyticsActions.trackScreen(`/publishers/${publisher.slug}`))
   }
 }
 
 export function settings () {
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'settings' }))
-    dispatch(AnalyticsActions.trackScreen(`/settings`))
   }
 }
 
 export function favoritePublishers () {
   return dispatch => {
     dispatch(NavigationActions.navigate({routeName: 'favoritePublishers'}))
-    dispatch(AnalyticsActions.trackScreen('/favorites/publishers'))
   }
 }
 
 export function addFavorites () {
   return dispatch => {
     dispatch(NavigationActions.navigate({routeName: 'addFavorites'}))
-    dispatch(AnalyticsActions.trackScreen('/favorites/add'))
   }
 }
 
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
-}
-
-// MainNavigator
-export function selectCategory (category) {
-  return (dispatch, getState) => {
-    // TODO
-  }
 }
 
 // Modals
@@ -91,18 +79,13 @@ export function storyDialog (story, content) {
 export function settingsDialog (content) {
   return dispatch => {
     dispatch(UIActions.openModal(content))
-
-    const analyticsUrl = '/settings'
-    dispatch(AnalyticsActions.trackScreen(analyticsUrl))
   }
 }
 
 export function favoriteCategoriesDialog (content) {
   return dispatch => {
     dispatch(UIActions.openModal(content))
-
-    const analyticsUrl = '/favorites/categories'
-    dispatch(AnalyticsActions.trackScreen(analyticsUrl))
+    dispatch(AnalyticsActions.trackScreen('/favorites/categories'))
   }
 }
 
