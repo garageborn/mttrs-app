@@ -16,7 +16,7 @@ export default {
     backgroundColor: DARK_COLOR,
     height: Platform.select({
       ios: 63,
-      android: 65
+      android: 50
     })
   }
 }

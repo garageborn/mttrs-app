@@ -61,7 +61,6 @@ class TimelineContainer extends Component {
 
   onEndReached () {
     const { hasMore, infiniteScroll } = this.props.data
-    return null
     if (this.isLoadingMore || !hasMore) return
 
     this.isLoadingMore = true

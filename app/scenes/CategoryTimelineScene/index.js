@@ -6,7 +6,7 @@ import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
 const CategoryTimelineScene = ({category}) => (
   <AnalyticsContainer scene={category.slug} screenName={`/popular/${category.slug}`}>
-    <View>
+    <View style={{flexGrow: 1}}>
       <TagsListContainer category={category} />
       <CategoryTimelineContainer category={category} />
     </View>
