@@ -91,8 +91,7 @@ Timeline.propTypes = {
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
-  }),
-  type: PropTypes.string
+  })
 }
 
 export default Timeline
