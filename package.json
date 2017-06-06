@@ -32,6 +32,7 @@
     "react-native-onesignal": "^3.0.4",
     "react-native-sentry": "^0.11.8",
     "react-native-share": "^1.0.20",
+    "react-native-splash-screen": "^2.1.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",

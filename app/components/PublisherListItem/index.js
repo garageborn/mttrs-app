@@ -11,7 +11,7 @@ const PublisherListItem = ({ active, publisher, rightContent }) => {
 
   const getIcon = () => {
     if (!publisher.icon_id) return
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
+    const uri = cloudinary.id(publisher.icon_id)
     return <PublisherLogo size={30} source={{ uri }} />
   }
 
