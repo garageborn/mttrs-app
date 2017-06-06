@@ -1,23 +1,27 @@
 import React, { PropTypes } from 'react'
-import { View } from 'react-native'
+import { Text, View } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import PublisherLogo from '../PublisherLogo'
-import AddFavoritesPublisher from '../AddFavoritesPublisher'
+import AddFavoritesPublisherActiveLabel from '../AddFavoritesPublisherActiveLabel'
 import * as cloudinary from '../../common/utils/Cloudinary'
+import styles from './styles'
 
 const AddFavoritesItem = ({publisher}) => {
   const renderIcon = () => {
     if (!publisher.icon_id) return null
     const uri = cloudinary.id(publisher.icon_id)
-    console.log(uri)
     return <PublisherLogo size={50} source={{ uri }} />
   }
 
   const publisherComponent = (active) => {
     const publisherName = publisher.display_name || publisher.name
+    const iconStyle = active ? styles.activeIcon : styles.inactiveIcon
+
     return (
-      <View>
-        <AddFavoritesPublisher active={active} icon={renderIcon()} name={publisherName} />
+      <View style={styles.container}>
+        <AddFavoritesPublisherActiveLabel active={active} />
+        <View style={iconStyle}>{renderIcon()}</View>
+        <Text style={styles.text}>{publisherName}</Text>
       </View>
     )
   }
