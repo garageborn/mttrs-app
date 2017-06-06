@@ -3,5 +3,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/launch_screen">
+    android:background="#F1F1F1">
+   <ImageView
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+      android:scaleType="centerInside"
+      android:src="@drawable/launch_screen"
+      />
 </LinearLayout>
