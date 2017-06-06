@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
-import AddFavoritesHeading from '../../components/AddFavoritesHeading'
-import AddFavoritesFooter from '../../components/AddFavoritesFooter'
 import AddFavoritesListContainer from '../AddFavoritesListContainer'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
@@ -22,11 +20,7 @@ class AddFavoritesContainer extends Component {
     const onPress = this.openFavoritesTimeline
 
     return (
-      <ScrollView>
-        <AddFavoritesHeading openFavoritesTimeline={onPress} isComplete={isComplete} />
-        <AddFavoritesListContainer />
-        <AddFavoritesFooter onPress={onPress} isComplete={isComplete} />
-      </ScrollView>
+      <AddFavoritesListContainer openFavoritesTimeline={onPress} isComplete={isComplete} />
     )
   }
 
