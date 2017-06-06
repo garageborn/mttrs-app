@@ -932,9 +932,13 @@ base64-js@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
 
-base64-js@1.1.2, base64-js@^1.1.2:
+base64-js@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.1.2.tgz#d6400cac1c4c660976d90d07a04351d89395f5e8"
+
+base64-js@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
 base64-url@1.2.1:
   version "1.2.1"
@@ -2809,8 +2813,8 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1:
     js-tokens "^3.0.0"
 
 lru-cache@^4.0.1:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.0.2.tgz#1d17679c069cda5d040991a09dbc2c0db377e55e"
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.0.tgz#59be49a683b8d986a939f1ca60fdb6989f4b2046"
   dependencies:
     pseudomap "^1.0.1"
     yallist "^2.0.0"
@@ -3424,8 +3428,8 @@ react-deep-force-update@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
 react-devtools-core@^2.0.8:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-2.3.0.tgz#412b73bcb33cca758d82af2f1ba7178bce57b51d"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/react-devtools-core/-/react-devtools-core-2.3.1.tgz#dc83aba85735effe5e1dc386a1614cb5e8d0047d"
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
@@ -3496,9 +3500,9 @@ react-native-onesignal@^3.0.4:
   dependencies:
     invariant "^2.2.2"
 
-react-native-sentry@^0.11.8:
+react-native-sentry@getsentry/react-native-sentry:
   version "0.11.8"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.11.8.tgz#fcf05778ac60b874f694b88423ba68c631eb6715"
+  resolved "https://codeload.github.com/getsentry/react-native-sentry/tar.gz/e9f658f5081f0123daaea4d3e3268af3604fb1c8"
   dependencies:
     chalk "^1.1.1"
     glob "7.1.1"
@@ -3510,6 +3514,10 @@ react-native-sentry@^0.11.8:
 react-native-share@^1.0.20:
   version "1.0.20"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-1.0.20.tgz#38ba820a4ddfc5afe1dec0e1456ced11f14352bc"
+
+react-native-splash-screen@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-2.1.0.tgz#4e0a5e4e8c32974fe7a3cdb4d9a226d06d9daf4f"
 
 react-native-tab-view@^0.0.65:
   version "0.0.65"
@@ -3684,14 +3692,14 @@ read-pkg@^2.0.0:
     path-type "^2.0.0"
 
 readable-stream@^2.0.2, readable-stream@^2.0.6, readable-stream@^2.1.4, readable-stream@^2.1.5, readable-stream@^2.2.2:
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.10.tgz#effe72bb7c884c0dd335e2379d526196d9d011ee"
+  version "2.2.11"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.11.tgz#0796b31f8d7688007ff0b93a8088d34aa17c0f72"
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.1"
     isarray "~1.0.0"
     process-nextick-args "~1.0.6"
-    safe-buffer "^5.0.1"
+    safe-buffer "~5.0.1"
     string_decoder "~1.0.0"
     util-deprecate "~1.0.1"
 
@@ -4167,10 +4175,10 @@ string_decoder@~0.10.x:
   resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
 
 string_decoder@~1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.1.tgz#62e200f039955a6810d8df0a33ffc0f013662d98"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/string_decoder/-/string_decoder-1.0.2.tgz#b29e1f4e1125fa97a10382b8a533737b7491e179"
   dependencies:
-    safe-buffer "^5.0.1"
+    safe-buffer "~5.0.1"
 
 stringstream@~0.0.4:
   version "0.0.5"
