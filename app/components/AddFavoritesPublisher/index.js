@@ -7,7 +7,7 @@ const AddFavoritesPublisher = ({ active, icon, name }) => {
   const iconStyle = active ? styles.activeIcon : styles.inactiveIcon
 
   return (
-    <View style={styles.container} renderToHardwareTextureAndroid>
+    <View style={styles.container}>
       <AddFavoritesPublisherActiveLabel active={active} />
       <View style={iconStyle}>{icon}</View>
       <Text style={styles.text}>{name}</Text>
