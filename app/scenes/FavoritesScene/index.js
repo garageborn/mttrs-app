@@ -3,12 +3,11 @@ import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
-import FavoritesTimelineContainer from '../../containers/FavoritesTimelineContainer'
-import FavoritePublishersSelectorContainer from '../../containers/FavoritePublishersSelectorContainer'
 import EmptyFavoritesTimelineContainer from '../../containers/EmptyFavoritesTimelineContainer'
 import { FavoritePublishersActions } from '../../actions/index'
 import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
+import Favorites from '../../components/Favorites'
 import headerStyles from '../../styles/Header'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
@@ -49,10 +48,7 @@ class FavoritesScene extends Component {
     if (!isLoaded) return this.renderLoading()
     if (!items.length) return <EmptyFavoritesTimelineContainer />
     return (
-      <View>
-        <FavoritePublishersSelectorContainer publisherIds={items} />
-        <FavoritesTimelineContainer publisherIds={items} />
-      </View>
+      <Favorites publishersIds={items} />
     )
   }
 }

@@ -46,10 +46,9 @@ class TimelineContainer extends Component {
   }
 
   render () {
-    const { data, renderOptions, type } = this.props
+    const { data, renderOptions } = this.props
     return (
       <Timeline
-        type={type}
         renderOptions={renderOptions}
         data={data}
         loadingMore={this.state.loadingMore}

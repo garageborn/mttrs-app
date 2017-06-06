@@ -6,7 +6,7 @@ import TimelineContainer from '../TimelineContainer'
 class FavoritesTimelineContainer extends Component {
   render () {
     const { data } = this.props
-    return <TimelineContainer type='favorites' data={data} />
+    return <TimelineContainer data={data} />
   }
 }
 

@@ -1,40 +1,8 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native'
-import headerStyles from '../../styles/Header'
-import tabBarBottomStyles from '../../styles/TabBarBottom'
-import { height as favoritePublisherSelectorHeight } from '../FavoritePublisherSelector/styles'
-
-const { width, height } = Dimensions.get('window')
-const statusBarSize = Platform.select({
-  ios: 0,
-  android: 25
-})
-
-const containerStyles = {
-  flexGrow: 1,
-  height: height - headerStyles.headerStyle.height - tabBarBottomStyles.height - statusBarSize,
-  width
-}
-
-console.log(favoritePublisherSelectorHeight)
-
-debugger
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  loading: {
-    ...containerStyles,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  container: {
-    ...containerStyles,
-    backgroundColor: '#F7F7F8'
-  },
-
-  favoriteTimelineContainer: {
-    flexGrow: containerStyles.flexGrow,
-    height: containerStyles.height - favoritePublisherSelectorHeight,
-    width: containerStyles.width
+  loadingContainer: {
+    flexGrow: 1
   },
 
   infiniteScrollLoadingContainer: {

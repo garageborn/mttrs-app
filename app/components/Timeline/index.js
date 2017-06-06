@@ -28,21 +28,14 @@ class Timeline extends Component {
     if (data.error) return this.renderError()
 
     return (
-      <View style={this.containerStyles}>
-        <TimelineList
-          renderOptions={renderOptions}
-          data={data}
-          onEndReached={onEndReached}
-          renderFooter={this.renderFooter}
-          refreshControl={this.refreshControl}
-        />
-      </View>
+      <TimelineList
+        renderOptions={renderOptions}
+        data={data}
+        onEndReached={onEndReached}
+        renderFooter={this.renderFooter}
+        refreshControl={this.refreshControl}
+      />
     )
-  }
-
-  get containerStyles () {
-    debugger
-    return this.props.type === 'favorites' ? styles.favoriteTimelineContainer  : styles.container
   }
 
   renderError () {
@@ -51,10 +44,8 @@ class Timeline extends Component {
 
   renderLoading () {
     return (
-      <View style={styles.container}>
-        <View style={styles.loading}>
-          {this.renderActivityIndicator()}
-        </View>
+      <View style={styles.loadingContainer}>
+        {this.renderActivityIndicator()}
       </View>
     )
   }
