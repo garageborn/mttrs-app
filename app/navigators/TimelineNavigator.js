@@ -37,7 +37,8 @@ const TimelineNavigatorConfig = {
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
-  lazy: true
+  lazy: true,
+  animationEnabled: false
 }
 
 const TimelineNavigator = TabNavigator(TimelineRoutes, TimelineNavigatorConfig)
