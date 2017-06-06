@@ -2,7 +2,9 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   loadingContainer: {
-    flexGrow: 1
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   infiniteScrollLoadingContainer: {

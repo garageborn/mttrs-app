@@ -13,7 +13,7 @@ class AddFavoritesListContainer extends Component {
 
   render () {
     const { loading, publishers } = this.props.data
-    if (loading) return this.renderLoading()
+    return this.renderLoading()
     return <AddFavoritesList publishers={publishers} />
   }
 
