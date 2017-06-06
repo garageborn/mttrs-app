@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { ActivityIndicator, View } from 'react-native'
 import { connect } from 'react-redux'
+import _isEqual from 'lodash/isEqual'
 import withQuery from './index.gql'
 import FavoritePublishersList from '../../components/FavoritePublishersList'
 import { NavigationActions } from '../../actions/index'
@@ -12,7 +13,9 @@ class FavoritePublishersListContainer extends Component {
   }
 
   shouldComponentUpdate (nextProps) {
-    return this.props.data.loading !== nextProps.data.loading
+    const loadingChanged = this.props.data.loading !== nextProps.data.loading
+    const publishersChanged = !_isEqual(this.props.publishers, nextProps.publishers)
+    return loadingChanged || publishersChanged
   }
 
   render () {

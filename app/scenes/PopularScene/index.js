@@ -52,14 +52,11 @@ PopularScene.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  tenant: state.TenantReducer,
-  popularNav: state.popularNav
+  batata: state.RouterReducer.current
 })
 
 PopularScene.navigationOptions = props => {
-  return {
-    headerMode: 'none'
-  }
+  return { headerMode: 'none' }
 }
 
 const PopularSceneWithData = withQuery(PopularScene)

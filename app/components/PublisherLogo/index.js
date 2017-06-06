@@ -1,32 +1,22 @@
-import React, { PureComponent, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View, Image } from 'react-native'
 import styles from './styles'
 
-class PublisherLogo extends PureComponent {
-  get logoContainerStyles () {
-    const { skin, size } = this.props
+const PublisherLogo = ({skin, size, source}) => {
+  const logoContainerStyles = () => {
     let offset = 2
-    let styleArr = [styles.logoContainer, this.getSize(size + offset)]
-
-    if (skin === 'dark') {
-      styleArr.push(styles.darkLogoContainerSkin)
-    }
-
+    let styleArr = [styles.logoContainer, getSize(size + offset)]
+    if (skin === 'dark') styleArr.push(styles.darkLogoContainerSkin)
     return styleArr
   }
 
-  get logoStyles () {
-    const { skin, size } = this.props
-    let styleArr = [styles.logo, this.getSize(size)]
-
-    if (skin === 'dark') {
-      styleArr.push(styles.darkLogoSkin)
-    }
-
+  const logoStyles = () => {
+    let styleArr = [styles.logo, getSize(size)]
+    if (skin === 'dark') styleArr.push(styles.darkLogoSkin)
     return styleArr
   }
 
-  getSize (size) {
+  const getSize = (size) => {
     return {
       width: size,
       height: size,
@@ -34,15 +24,11 @@ class PublisherLogo extends PureComponent {
     }
   }
 
-  render () {
-    const { source } = this.props
-
-    return (
-      <View style={this.logoContainerStyles}>
-        <Image style={this.logoStyles} source={source} />
-      </View>
-    )
-  }
+  return (
+    <View style={logoContainerStyles()}>
+      <Image style={logoStyles()} source={source} />
+    </View>
+  )
 }
 
 PublisherLogo.propTypes = {

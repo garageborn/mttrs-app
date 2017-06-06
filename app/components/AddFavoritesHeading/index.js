@@ -11,6 +11,10 @@ const messages = defineMessages({
 })
 
 class AddFavoritesHeading extends Component {
+  shouldComponentUpdate (nextProps) {
+    return this.props.isComplete !== nextProps.isComplete
+  }
+
   render () {
     const { intl } = this.props
 

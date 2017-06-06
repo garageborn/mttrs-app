@@ -932,13 +932,9 @@ base64-js@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
 
-base64-js@1.1.2:
+base64-js@1.1.2, base64-js@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.1.2.tgz#d6400cac1c4c660976d90d07a04351d89395f5e8"
-
-base64-js@^1.1.2:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
 base64-url@1.2.1:
   version "1.2.1"
@@ -3500,9 +3496,9 @@ react-native-onesignal@^3.0.4:
   dependencies:
     invariant "^2.2.2"
 
-react-native-sentry@^0.11.6:
-  version "0.11.6"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.11.6.tgz#41e34694a1cb0a45978fe6301f09e7f3274645e7"
+react-native-sentry@^0.11.8:
+  version "0.11.8"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.11.8.tgz#fcf05778ac60b874f694b88423ba68c631eb6715"
   dependencies:
     chalk "^1.1.1"
     glob "7.1.1"
@@ -3521,9 +3517,9 @@ react-native-tab-view@^0.0.65:
   dependencies:
     prop-types "^15.5.8"
 
-react-native@0.44.2:
-  version "0.44.2"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.44.2.tgz#c8dfb747b88e6276a991980c57c50b860a98cf0e"
+react-native@0.44.3:
+  version "0.44.3"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.44.3.tgz#04550e1cdfc619a712f3f5969d68cd7c2dc4c073"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"

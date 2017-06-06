@@ -4,8 +4,14 @@ import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import CategoryColor from '../../components/CategoryColor'
 import TimelineContainer from '../TimelineContainer'
+import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class PublisherTimeline extends Component {
+  constructor () {
+    super()
+    updateCurrentScene(this, 'publisher')
+  }
+
   render () {
     const { data, publisher, selectedCategory } = this.props
     const renderOptions = { timelineType: 'publisher', publisherSlug: publisher.slug }

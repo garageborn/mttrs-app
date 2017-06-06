@@ -37,7 +37,14 @@ const trackRoute = (state, action) => {
 
 const initPopularRoute = (state, action) => {
   if (!_isEmpty(state.popular.current)) return { ...state }
-  return trackPopularRoute(state, action)
+  if (_isEmpty(state.current)) return trackPopularRoute(state, action)
+  return {
+    ...state,
+    popular: {
+      ...state.popular,
+      current: { ...action.route }
+    }
+  }
 }
 
 const trackPopularRoute = (state, action) => {

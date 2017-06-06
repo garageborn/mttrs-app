@@ -4,7 +4,7 @@ import {
   TRACK_ROUTE,
   TRACK_POPULAR_ROUTE
 } from '../constants/ActionTypes'
-import { findRoute } from '../common/utils/routesTrackingMiddleware'
+import { findRoute } from '../config/middlewares/routesTrackingMiddleware'
 
 export const initRoute = (route) => ({
   type: INIT_ROUTE,

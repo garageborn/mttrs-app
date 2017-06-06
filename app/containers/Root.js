@@ -7,7 +7,7 @@ import ModalContainer from './ModalContainer'
 import IntlProvider from '../config/IntlProvider'
 import apolloClient from '../config/apolloClient'
 import { STATUS_BAR_COLOR } from '../constants/Colors'
-require('../config/sentry')
+require('../config/Sentry')
 
 class Root extends Component {
   constructor () {

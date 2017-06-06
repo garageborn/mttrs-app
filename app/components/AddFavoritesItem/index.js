@@ -1,42 +1,33 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import PublisherLogo from '../PublisherLogo'
 import AddFavoritesPublisher from '../AddFavoritesPublisher'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
-class AddFavoritesItem extends Component {
-  render () {
-    const { publisher } = this.props
-
-    return (
-      <ToggleFavoriteContainer
-        publisher={publisher}
-        addComponent={this.publisherComponent(false)}
-        removeComponent={this.publisherComponent(true)}
-      />
-    )
-  }
-
-  publisherComponent (active) {
-    return (
-      <View>
-        <AddFavoritesPublisher active={active} icon={this.renderIcon()} name={this.publisherName} />
-      </View>
-    )
-  }
-
-  renderIcon () {
-    let { publisher } = this.props
-    if (!publisher.icon_id) return
+const AddFavoritesItem = ({publisher}) => {
+  const renderIcon = () => {
+    if (!publisher.icon_id) return null
     const uri = cloudinary.id(publisher.icon_id, { secure: true })
     return <PublisherLogo size={50} source={{ uri }} />
   }
 
-  get publisherName () {
-    const { publisher } = this.props
-    return publisher.display_name || publisher.name
+  const publisherComponent = (active) => {
+    const publisherName = publisher.display_name || publisher.name
+    return (
+      <View>
+        <AddFavoritesPublisher active={active} icon={renderIcon()} name={publisherName} />
+      </View>
+    )
   }
+
+  return (
+    <ToggleFavoriteContainer
+      publisher={publisher}
+      addComponent={publisherComponent(false)}
+      removeComponent={publisherComponent(true)}
+    />
+  )
 }
 
 AddFavoritesItem.propTypes = {
