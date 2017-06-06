@@ -14,7 +14,7 @@ class FavoritePublisherSelector extends Component {
   render () {
     const { publisher } = this.props
     if (!publisher.icon_id) return null
-    const uri = cloudinary.id(publisher.icon_id, { secure: true })
+    const uri = cloudinary.id(publisher.icon_id)
 
     return (
       <Touchable onPress={this.onPress} underlayColor={'rgba(0,0,0,.1)'}>

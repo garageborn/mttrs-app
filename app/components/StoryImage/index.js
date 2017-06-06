@@ -58,9 +58,7 @@ class StoryImage extends Component {
   getImage () {
     let options = {
       crop: 'fit',
-      dpr: PixelRatio.get(),
       height: 95,
-      secure: true,
       type: 'fetch',
       width: 120
     }
