@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
+import SplashScreen from 'react-native-splash-screen'
+
 import EventsContainer from './EventsContainer'
 import NavigationContainer from './NavigationContainer'
 import ModalContainer from './ModalContainer'
@@ -13,6 +15,10 @@ class Root extends Component {
   constructor () {
     super()
     if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
+  }
+
+  componentDidMount () {
+    SplashScreen.hide()
   }
 
   render () {

@@ -36,7 +36,7 @@ class LinkHeaderTitle extends Component {
 
   get logoURI () {
     if (!this.iconId) return null
-    return cloudinary.id(this.iconId, { secure: true })
+    return cloudinary.id(this.iconId)
   }
 }
 
