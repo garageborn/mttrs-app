@@ -16,7 +16,7 @@ class TimelineContainer extends Component {
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
 
     this.state = {
-      loadingMore: false,
+      loadingMore: true,
       loadingPullToRefresh: false
     }
   }
@@ -144,11 +144,12 @@ TimelineContainer.propTypes = {
     loading: PropTypes.bool.isRequired,
     hasMore: PropTypes.bool
   }),
+  dispatch: PropTypes.func.isRequired,
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
   }),
-  dispatch: PropTypes.func.isRequired
+  type: PropTypes.string
 }
 
 export default connect()(TimelineContainer)

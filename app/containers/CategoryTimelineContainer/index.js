@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import TimelineContainer from '../TimelineContainer'
+import CategoryTimeline from '../../components/CategoryTimeline'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class CategoryTimelineContainer extends Component {
@@ -12,7 +12,7 @@ class CategoryTimelineContainer extends Component {
 
   render () {
     const { data } = this.props
-    return <TimelineContainer data={data} />
+    return <CategoryTimeline data={data} />
   }
 }
 

@@ -28,15 +28,13 @@ class Timeline extends Component {
     if (data.error) return this.renderError()
 
     return (
-      <View style={styles.container}>
-        <TimelineList
-          renderOptions={renderOptions}
-          data={data}
-          onEndReached={onEndReached}
-          renderFooter={this.renderFooter}
-          refreshControl={this.refreshControl}
-        />
-      </View>
+      <TimelineList
+        renderOptions={renderOptions}
+        data={data}
+        onEndReached={onEndReached}
+        renderFooter={this.renderFooter}
+        refreshControl={this.refreshControl}
+      />
     )
   }
 
@@ -46,10 +44,8 @@ class Timeline extends Component {
 
   renderLoading () {
     return (
-      <View style={styles.container}>
-        <View style={styles.loading}>
-          {this.renderActivityIndicator()}
-        </View>
+      <View style={styles.loadingContainer}>
+        {this.renderActivityIndicator()}
       </View>
     )
   }
@@ -95,7 +91,8 @@ Timeline.propTypes = {
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
-  })
+  }),
+  type: PropTypes.string
 }
 
 export default Timeline

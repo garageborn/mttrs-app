@@ -27,7 +27,6 @@ class FavoritePublishersSelector extends Component {
             renderItem={this.renderRow}
             shouldItemUpdate={this.shouldItemUpdate}
             removeClippedSubviews={false}
-            style={styles.listContainer}
           />
           <FavoritePublishersNavigationButtonContainer style={styles.buttonContainer} />
         </View>

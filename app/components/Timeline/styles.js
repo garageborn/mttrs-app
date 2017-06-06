@@ -1,23 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native'
-import { headerHeight } from '../../styles/Global'
-const { width, height } = Dimensions.get('window')
-
-const containerStyles = {
-  flexGrow: 1,
-  height: height - headerHeight,
-  width
-}
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  loading: {
-    ...containerStyles,
+  loadingContainer: {
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-
-  container: {
-    ...containerStyles,
-    backgroundColor: '#F7F7F8'
   },
 
   infiniteScrollLoadingContainer: {

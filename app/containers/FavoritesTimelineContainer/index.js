@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import TimelineContainer from '../TimelineContainer'
+import FavoritesTimeline from '../../components/FavoritesTimeline'
 
 class FavoritesTimelineContainer extends Component {
   render () {
     const { data } = this.props
-    return <TimelineContainer data={data} />
+    return <FavoritesTimeline data={data} />
   }
 }
 
