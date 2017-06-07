@@ -1,4 +1,3 @@
-# Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
 
 target 'mttrs' do
@@ -6,21 +5,19 @@ target 'mttrs' do
   # use_frameworks!
 
   # Pods for mttrs
-  pod 'Firebase/Core'
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKShareKit'
-  pod 'FBSDKLoginKit'
-  pod 'FBAudienceNetwork'
   pod 'Bolts'
-  pod 'ReactNativeFabric', path: '../node_modules/react-native-fabric'
+  pod 'FBAudienceNetwork'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
+  pod 'Firebase/Core'
   pod 'React', path: '../node_modules/react-native'
+  pod 'ReactNativeFBAds', path: '../node_modules/react-native-fbads'
+  pod 'ReactNativeFabric', path: '../node_modules/react-native-fabric'
   pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga'
-  pod 'ReactNativeFBAds', :path => '../node_modules/react-native-fbads'
-  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
+  pod 'Sentry/KSCrash'
 
   target 'mttrsTests' do
     inherit! :search_paths
-    # Pods for testing
   end
-
 end
