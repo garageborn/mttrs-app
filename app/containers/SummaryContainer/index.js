@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import _debounce from 'lodash/debounce'
 import { NavigationActions } from '../../actions/index'
 import StorySummary from '../../components/StorySummary'
 
 class SummaryContainer extends Component {
   constructor () {
     super()
-    this.handleSummaryPress = this.handleSummaryPress.bind(this)
+    this.openLink = _debounce(this.openLink.bind(this), 100)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -15,10 +16,10 @@ class SummaryContainer extends Component {
 
   render () {
     const { story, visited } = this.props
-    return <StorySummary onPress={this.handleSummaryPress} story={story} visited={visited} />
+    return <StorySummary onPress={this.openLink} story={story} visited={visited} />
   }
 
-  handleSummaryPress () {
+  openLink () {
     const { story, dispatch } = this.props
     return dispatch(NavigationActions.link(story, story.main_link))
   }

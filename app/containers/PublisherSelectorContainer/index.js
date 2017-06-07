@@ -14,7 +14,7 @@ class PublisherSelectorContainer extends Component {
     super()
     this.state = { query: '' }
 
-    this.openPublisher = this.openPublisher.bind(this)
+    this.openPublisher = _debounce(this.openPublisher.bind(this), 100)
     this.getPublishers = this.getPublishers.bind(this)
     this.handleQuery = _debounce(this.handleQuery.bind(this), 300)
     this.emptyInput = this.emptyInput.bind(this)
