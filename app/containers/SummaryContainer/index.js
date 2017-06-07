@@ -6,7 +6,7 @@ import StorySummary from '../../components/StorySummary'
 class SummaryContainer extends Component {
   constructor () {
     super()
-    this.handleSummaryPress = this.handleSummaryPress.bind(this)
+    this.openLink = this.openLink.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -15,10 +15,10 @@ class SummaryContainer extends Component {
 
   render () {
     const { story, visited } = this.props
-    return <StorySummary onPress={this.handleSummaryPress} story={story} visited={visited} />
+    return <StorySummary onPress={this.openLink} story={story} visited={visited} />
   }
 
-  handleSummaryPress () {
+  openLink () {
     const { story, dispatch } = this.props
     return dispatch(NavigationActions.link(story, story.main_link))
   }
