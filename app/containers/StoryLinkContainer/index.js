@@ -1,15 +1,14 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import _debounce from 'lodash/debounce'
 import { NavigationActions } from '../../actions/index'
 import StoryLink from '../../components/StoryLink'
 
 class StoryLinkContainer extends Component {
   constructor () {
     super()
-    this.openLink = _debounce(this.openLink.bind(this), 100)
-    this.openPublisher = _debounce(this.openPublisher.bind(this), 100)
+    this.openLink = this.openLink.bind(this)
+    this.openPublisher = this.openPublisher.bind(this)
   }
 
   render () {

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import FavoritePublishersSelector from '../../components/FavoritePublishersSelector'
 import { NavigationActions } from '../../actions/index'
@@ -8,7 +7,7 @@ import { NavigationActions } from '../../actions/index'
 class FavoritePublishersSelectorContainer extends Component {
   constructor () {
     super()
-    this.openPublisher = _debounce(this.openPublisher.bind(this), 100)
+    this.openPublisher = this.openPublisher.bind(this)
   }
 
   render () {

@@ -11,8 +11,8 @@ const minStoriesInTheViewport = 4
 class TimelineContainer extends Component {
   constructor (props) {
     super(props)
-    this.onEndReached = _throttle(this.onEndReached.bind(this), 3000)
-    this.onPullToRefresh = _throttle(this.onPullToRefresh.bind(this), 3000)
+    this.onEndReached = _throttle(this.onEndReached.bind(this), 3000, { trailing: false })
+    this.onPullToRefresh = _throttle(this.onPullToRefresh.bind(this), 3000, { trailing: false })
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
 
     this.state = {

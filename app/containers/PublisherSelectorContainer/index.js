@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import _isNull from 'lodash/isNull'
-import _debounce from 'lodash/debounce'
 import withQuery from './index.gql'
 import ApolloError from '../../components/ApolloError'
 import PublisherSelector from '../../components/PublisherSelector'
@@ -14,9 +13,9 @@ class PublisherSelectorContainer extends Component {
     super()
     this.state = { query: '' }
 
-    this.openPublisher = _debounce(this.openPublisher.bind(this), 100)
+    this.openPublisher = this.openPublisher.bind(this)
     this.getPublishers = this.getPublishers.bind(this)
-    this.handleQuery = _debounce(this.handleQuery.bind(this), 300)
+    this.handleQuery = this.handleQuery.bind(this)
     this.emptyInput = this.emptyInput.bind(this)
   }
 

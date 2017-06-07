@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import _debounce from 'lodash/debounce'
 import Story from '../../components/Story'
 import { NavigationActions } from '../../actions/index'
 import SocialCountModalContainer from '../SocialCountModalContainer'
@@ -10,9 +9,9 @@ import StoryDialogModalContainer from '../StoryDialogModalContainer'
 class StoryContainer extends Component {
   constructor (props) {
     super(props)
-    this.openLink = _debounce(this.openLink.bind(this), 100)
+    this.openLink = this.openLink.bind(this)
     this.handleDialogButtonPress = this.handleDialogButtonPress.bind(this)
-    this.handlePublishersPress = _debounce(this.handlePublishersPress.bind(this), 100)
+    this.handlePublishersPress = this.handlePublishersPress.bind(this)
     this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
   }
 
