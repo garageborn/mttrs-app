@@ -24,6 +24,8 @@ class PublisherSelectorList extends Component {
           sections={this.sections()}
           shouldItemUpdate={this.shouldItemUpdate}
           renderItem={this.renderRow}
+          ItemSeparatorComponent={() => null}
+          SectionSeparatorComponent={() => null}
           renderSectionHeader={this.renderSectionHeader}
         />
       </View>
