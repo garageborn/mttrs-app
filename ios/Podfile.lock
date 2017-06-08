@@ -31,6 +31,8 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
   - React (0.45.0):
     - React/Core (= 0.45.0)
+  - react-native-splash-screen (2.1.0):
+    - React
   - React/BatchedBridge (0.45.0):
     - React/Core
     - React/cxxreact_legacy
@@ -49,12 +51,13 @@ PODS:
   - Yoga (0.45.0.React)
 
 DEPENDENCIES:
-  - Bolts
-  - FBAudienceNetwork
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
-  - Firebase/Core
+  - Bolts (= 1.8.4)
+  - FBAudienceNetwork (= 4.23.0)
+  - FBSDKCoreKit (= 4.23.0)
+  - FBSDKLoginKit (= 4.23.0)
+  - FBSDKShareKit (= 4.23.0)
+  - Firebase/Core (= 4.0.0)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
   - ReactNativeFBAds (from `../node_modules/react-native-fbads`)
@@ -63,6 +66,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native"
+  react-native-splash-screen:
+    :path: "../node_modules/react-native-splash-screen"
   ReactNativeFabric:
     :path: "../node_modules/react-native-fabric"
   ReactNativeFBAds:
@@ -84,10 +89,11 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   React: '079987d4da21f41f2e7cb7fb8138dd8182c72361'
+  react-native-splash-screen: 4b3b6080654d361ff15689d60cf6e61b82061ccf
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
   ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
   Yoga: ce6d240407bac1a2740784a53b8091ca6d376dc5
 
-PODFILE CHECKSUM: 78763337fbab7a4bf44c06c9351922a3bd48be98
+PODFILE CHECKSUM: 0f40fb18aae6f27da4a7c153f6e3473e3139c051
 
 COCOAPODS: 1.2.1
