@@ -92,9 +92,9 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
-apollo-client@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.4.0.tgz#cc46875add8cc9006dce222f480157358956835b"
+apollo-client@^1.4.0, apollo-client@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.4.1.tgz#6a39d86f95361993ff83c746e0e64939e36dd65e"
   dependencies:
     graphql "^0.10.0"
     graphql-anywhere "^3.0.1"
@@ -932,9 +932,13 @@ base64-js@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
 
-base64-js@1.1.2, base64-js@^1.1.2:
+base64-js@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.1.2.tgz#d6400cac1c4c660976d90d07a04351d89395f5e8"
+
+base64-js@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
 base64-url@1.2.1:
   version "1.2.1"
@@ -2509,12 +2513,6 @@ jest-haste-map@^20.0.4:
     sane "~1.6.0"
     worker-farm "^1.3.1"
 
-jodid25519@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/jodid25519/-/jodid25519-1.0.2.tgz#06d4912255093419477d425633606e0e90782967"
-  dependencies:
-    jsbn "~0.1.0"
-
 joi@^6.6.1:
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/joi/-/joi-6.10.1.tgz#4d50c318079122000fe5f16af1ff8e1917b77e06"
@@ -3498,15 +3496,15 @@ react-native-onesignal@^3.0.4:
   dependencies:
     invariant "^2.2.2"
 
-react-native-sentry@^0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.12.1.tgz#beb60ee783fa123859d0a4b72835bd26826de324"
+react-native-sentry@^0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.12.6.tgz#ad878a99d44265a26663792dbcad1e8cb7cc7864"
   dependencies:
     chalk "^1.1.1"
     glob "7.1.1"
     inquirer "3.0.6"
     raven-js "^3.15.0"
-    sentry-cli-binary "^1.12.0"
+    sentry-cli-binary "^1.13.3"
     xcode "0.9.3"
 
 react-native-share@^1.0.20:
@@ -3934,7 +3932,11 @@ rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-safe-buffer@^5.0.1, safe-buffer@~5.0.1:
+safe-buffer@^5.0.1:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.0.tgz#fe4c8460397f9eaaaa58e73be46273408a45e223"
+
+safe-buffer@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.0.1.tgz#d263ca54696cd8a306b5ca6551e92de57918fbe7"
 
@@ -3986,9 +3988,9 @@ send@0.13.2:
     range-parser "~1.0.3"
     statuses "~1.2.1"
 
-sentry-cli-binary@^1.12.0:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/sentry-cli-binary/-/sentry-cli-binary-1.13.1.tgz#df010aa2151bf7fe1bca1cb0ff47ba321194f2ae"
+sentry-cli-binary@^1.13.3:
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/sentry-cli-binary/-/sentry-cli-binary-1.13.3.tgz#4c651ea509be7e27b421c5dcd4d113844901c579"
   dependencies:
     progress "2.0.0"
 
@@ -4113,8 +4115,8 @@ sprintf-js@~1.0.2:
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
 sshpk@^1.7.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.13.0.tgz#ff2a3e4fd04497555fed97b39a0fd82fafb3a33c"
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/sshpk/-/sshpk-1.13.1.tgz#512df6da6287144316dc4c18fe1cf1d940739be3"
   dependencies:
     asn1 "~0.2.3"
     assert-plus "^1.0.0"
@@ -4123,7 +4125,6 @@ sshpk@^1.7.0:
   optionalDependencies:
     bcrypt-pbkdf "^1.0.0"
     ecc-jsbn "~0.1.1"
-    jodid25519 "^1.0.0"
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 

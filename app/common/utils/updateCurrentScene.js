@@ -6,7 +6,7 @@ class UpdateCurrentScene {
   constructor (component, scene) {
     this.component = component
     this.scene = scene
-    this.pendingUpdate = false
+    this.pendingUpdate = true
     this.storeListener = this.storeListener.bind(this)
 
     if (!this.component.componentWillMount) this.component.componentWillMount = _noop
