@@ -1520,6 +1520,7 @@
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1564,6 +1565,7 @@
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios\n\n",
 				);
 				INFOPLIST_FILE = mttrs/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
