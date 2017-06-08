@@ -26,7 +26,7 @@ class PopularScene extends Component {
 
   render () {
     const { categories, loading } = this.props.data
-    if (loading) return this.renderLoading()
+    if (loading || !categories) return this.renderLoading()
     PopularNavigator.setCategories(categories)
     return <PopularNavigator.component onNavigationStateChange={this.onNavigationStateChange} />
   }
