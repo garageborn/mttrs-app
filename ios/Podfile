@@ -16,7 +16,6 @@ target 'mttrs' do
   pod 'React', path: '../node_modules/react-native'
   pod 'Yoga', path: '../node_modules/react-native/ReactCommon/yoga'
   pod 'ReactNativeFBAds', :path => '../node_modules/react-native-fbads'
-  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
 
   target 'mttrsTests' do
     inherit! :search_paths
