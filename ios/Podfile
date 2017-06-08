@@ -15,7 +15,8 @@ target 'mttrs' do
   pod 'FBAudienceNetwork', '4.23.0'
   pod 'Bolts', '1.8.4'
   pod 'ReactNativeFabric', path: '../node_modules/react-native-fabric'
-  pod 'ReactNativeFBAds', :path => '../node_modules/react-native-fbads'
+  pod 'ReactNativeFBAds', path: '../node_modules/react-native-fbads'
+  pod 'react-native-splash-screen', path: '../node_modules/react-native-splash-screen'
 
   target 'mttrsTests' do
     inherit! :search_paths
