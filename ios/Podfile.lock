@@ -49,12 +49,12 @@ PODS:
   - Yoga (0.45.0.React)
 
 DEPENDENCIES:
-  - Bolts
-  - FBAudienceNetwork
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
-  - Firebase/Core
+  - Bolts (= 1.8.4)
+  - FBAudienceNetwork (= 4.23.0)
+  - FBSDKCoreKit (= 4.23.0)
+  - FBSDKLoginKit (= 4.23.0)
+  - FBSDKShareKit (= 4.23.0)
+  - Firebase/Core (= 4.0.0)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
   - ReactNativeFBAds (from `../node_modules/react-native-fbads`)
@@ -88,6 +88,6 @@ SPEC CHECKSUMS:
   ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
   Yoga: ce6d240407bac1a2740784a53b8091ca6d376dc5
 
-PODFILE CHECKSUM: 78763337fbab7a4bf44c06c9351922a3bd48be98
+PODFILE CHECKSUM: 3ca63558ee47c43bca25e3aecf6a6e0bef9394ab
 
 COCOAPODS: 1.2.1
