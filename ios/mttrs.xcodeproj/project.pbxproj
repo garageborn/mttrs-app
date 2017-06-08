@@ -34,6 +34,7 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* mttrsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mttrsTests.m */; };
+		37284C7F85B74D4E99E9858A /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB3919A37894C049527C05A /* libSplashScreen.a */; };
 		39992BDE3A5344B380EE624B /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F6DF8C2B20440DA6287088 /* libRNShare.a */; };
 		7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -282,6 +283,13 @@
 			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
 			remoteInfo = "double-conversion";
 		};
+		AA991C851EE995910029AA86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6296476B19A4AEAA8320A87 /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
+		};
 		AAA031D61EDB52CE0072EAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */;
@@ -344,6 +352,7 @@
 		281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* mttrs-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mttrs-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* mttrs-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mttrs-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DB3919A37894C049527C05A /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
 		6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
@@ -368,6 +377,7 @@
 		AAEEF6E71EE98B0600998EDB /* libreact-native-splash-screen.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libreact-native-splash-screen.a"; path = "Pods/../build/Debug-iphoneos/react-native-splash-screen/libreact-native-splash-screen.a"; sourceTree = "<group>"; };
 		AAF608411ED6DAC800803789 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AC8118B6A0FCA031C9F8DD56 /* Pods-mttrsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mttrsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mttrsTests/Pods-mttrsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B6296476B19A4AEAA8320A87 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		CB86F6571D5B4E2FBCAA9945 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		D7EFE5B4EF4364591E2535A6 /* libPods-mttrs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mttrs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCAE53141E1EC20200ABFD11 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -602,6 +612,7 @@
 				AA2191A858B342CD8422C136 /* RCTFBSDK.xcodeproj */,
 				9562300BE27A486281CEC4EF /* RNStoreReview.xcodeproj */,
 				6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */,
+				B6296476B19A4AEAA8320A87 /* SplashScreen.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -672,6 +683,14 @@
 			isa = PBXGroup;
 			children = (
 				AA23D6F71EA1112C004E640E /* libRCTFBSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA991C601EE995910029AA86 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA991C861EE995910029AA86 /* libSplashScreen.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -946,6 +965,10 @@
 					ProductGroup = A0548D891DD1023900B0D856 /* Products */;
 					ProjectRef = F82B6E4EABA74FFDB0752DBB /* SMXCrashlytics.xcodeproj */;
 				},
+				{
+					ProductGroup = AA991C601EE995910029AA86 /* Products */;
+					ProjectRef = B6296476B19A4AEAA8320A87 /* SplashScreen.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1166,6 +1189,13 @@
 			fileType = archive.ar;
 			path = "libdouble-conversion.a";
 			remoteRef = AA4CB4D11EE985C100CA6A5F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AA991C861EE995910029AA86 /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = AA991C851EE995910029AA86 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		AAA031D71EDB52CE0072EAD2 /* libRNDeviceInfo.a */ = {
@@ -1445,6 +1475,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1476,6 +1507,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1601,6 +1633,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1635,6 +1668,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 					"$(SRCROOT)/../node_modules/react-native-store-review/ios",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

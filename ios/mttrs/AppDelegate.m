@@ -17,6 +17,8 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+#import "SplashScreen.h"
+
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
 
@@ -45,7 +47,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [SplashScreen show];  // here
+  [SplashScreen show];
   return YES;
 }
 
