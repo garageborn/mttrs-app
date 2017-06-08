@@ -73,7 +73,6 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-sentry/sentry.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -166,7 +165,6 @@ android {
 dependencies {
     compile project(':react-native-splash-screen')
     compile project(':react-native-device-info')
-    compile project(':react-native-sentry')
     compile project(':react-native-onesignal')
     compile project(':react-native-google-analytics-bridge')
     compile project(':react-native-fabric')
