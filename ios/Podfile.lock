@@ -29,6 +29,69 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
+  - KSCrash (1.15.8):
+    - KSCrash/Installations (= 1.15.8)
+  - KSCrash/Installations (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting
+  - KSCrash/Recording (1.15.8):
+    - KSCrash/Recording/Tools (= 1.15.8)
+  - KSCrash/Recording/Tools (1.15.8)
+  - KSCrash/Reporting (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters (= 1.15.8)
+    - KSCrash/Reporting/MessageUI (= 1.15.8)
+    - KSCrash/Reporting/Sinks (= 1.15.8)
+    - KSCrash/Reporting/Tools (= 1.15.8)
+  - KSCrash/Reporting/Filters (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Alert (= 1.15.8)
+    - KSCrash/Reporting/Filters/AppleFmt (= 1.15.8)
+    - KSCrash/Reporting/Filters/Base (= 1.15.8)
+    - KSCrash/Reporting/Filters/Basic (= 1.15.8)
+    - KSCrash/Reporting/Filters/GZip (= 1.15.8)
+    - KSCrash/Reporting/Filters/JSON (= 1.15.8)
+    - KSCrash/Reporting/Filters/Sets (= 1.15.8)
+    - KSCrash/Reporting/Filters/Stringify (= 1.15.8)
+    - KSCrash/Reporting/Filters/Tools (= 1.15.8)
+  - KSCrash/Reporting/Filters/Alert (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/AppleFmt (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Base (1.15.8):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Filters/Basic (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/GZip (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/JSON (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Sets (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/AppleFmt
+    - KSCrash/Reporting/Filters/Base
+    - KSCrash/Reporting/Filters/Basic
+    - KSCrash/Reporting/Filters/GZip
+    - KSCrash/Reporting/Filters/JSON
+    - KSCrash/Reporting/Filters/Stringify
+  - KSCrash/Reporting/Filters/Stringify (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Tools (1.15.8):
+    - KSCrash/Recording
+  - KSCrash/Reporting/MessageUI (1.15.8):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Sinks (1.15.8):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters
+    - KSCrash/Reporting/Tools
+  - KSCrash/Reporting/Tools (1.15.8):
+    - KSCrash/Recording
   - React (0.45.0):
     - React/Core (= 0.45.0)
   - react-native-splash-screen (2.1.0):
@@ -48,6 +111,15 @@ PODS:
   - ReactNativeFBAds (4.2.0):
     - FBAudienceNetwork
     - React
+  - Sentry (3.0.7):
+    - Sentry/Core (= 3.0.7)
+  - Sentry/Core (3.0.7)
+  - Sentry/KSCrash (3.0.7):
+    - KSCrash (~> 1.15.8)
+  - SentryReactNative (0.12.8):
+    - React
+    - Sentry (~> 3.0.7)
+    - Sentry/KSCrash (~> 3.0.7)
   - Yoga (0.45.0.React)
 
 DEPENDENCIES:
@@ -61,6 +133,8 @@ DEPENDENCIES:
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
   - ReactNativeFBAds (from `../node_modules/react-native-fbads`)
+  - Sentry (= 3.0.7)
+  - SentryReactNative (from `../node_modules/react-native-sentry`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -72,6 +146,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fabric"
   ReactNativeFBAds:
     :path: "../node_modules/react-native-fbads"
+  SentryReactNative:
+    :path: "../node_modules/react-native-sentry"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -88,12 +164,15 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  KSCrash: 4acb0f9cdb0b1ce7155c608dc175d91d750a8c3a
   React: '079987d4da21f41f2e7cb7fb8138dd8182c72361'
   react-native-splash-screen: 4b3b6080654d361ff15689d60cf6e61b82061ccf
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
   ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
+  Sentry: f411a49e30a90882932173057bb33cc1f4af7837
+  SentryReactNative: bfd785d67712534e707727b8549769addb483ce5
   Yoga: ce6d240407bac1a2740784a53b8091ca6d376dc5
 
-PODFILE CHECKSUM: 0f40fb18aae6f27da4a7c153f6e3473e3139c051
+PODFILE CHECKSUM: 950acd3ad339c9d632e9153b296f564b67cc0ee4
 
 COCOAPODS: 1.2.1
