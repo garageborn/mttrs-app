@@ -3,7 +3,11 @@ import { Text, View } from 'react-native'
 import headerStyles from '../../styles/Header'
 import styles from './styles'
 
-const HeaderTitle = ({ logo, subtitle, title }) => {
+const HeaderTitle = ({ leftButton, logo, subtitle, title }) => {
+  const containerStyles = () => {
+    if (leftButton) return styles.containerWithLeftButton
+    return styles.container
+  }
   const renderTitle = () => {
     if (!subtitle) return <Text style={[headerStyles.headerTitleStyle, styles.text]}>{title}</Text>
     return (
@@ -14,15 +18,21 @@ const HeaderTitle = ({ logo, subtitle, title }) => {
     )
   }
 
+  const renderLogo = () => {
+    if (!logo) return null
+    return logo
+  }
+
   return (
-    <View style={styles.container}>
-      {logo}
+    <View style={containerStyles()}>
+      {renderLogo()}
       {renderTitle()}
     </View>
   )
 }
 
 HeaderTitle.propTypes = {
+  leftButton: PropTypes.bool,
   logo: PropTypes.element,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string

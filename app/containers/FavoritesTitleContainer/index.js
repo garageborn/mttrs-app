@@ -5,7 +5,7 @@ import HeaderTitle from '../../components/HeaderTitle'
 
 class FavoritesTitleContainer extends Component {
   render () {
-    return <HeaderTitle title={this.title} />
+    return <HeaderTitle {...this.props} title={this.title} />
   }
 
   get title () {

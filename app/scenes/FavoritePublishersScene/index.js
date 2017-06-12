@@ -15,7 +15,7 @@ const FavoritePublishersScene = ({navigation}) => (
 FavoritePublishersScene.navigationOptions = props => {
   return {
     headerLeft: <HeaderLeft {...props} />,
-    headerTitle: <FavoritesTitleContainer {...props} />,
+    headerTitle: <FavoritesTitleContainer leftButton {...props} />,
     headerRight: <FavoritePublishersHeaderRight />,
     ...headerStyles
   }
