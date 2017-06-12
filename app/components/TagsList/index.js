@@ -26,6 +26,7 @@ class TagsList extends Component {
     return (
       <ScrollableTabBar
         style={styles.container}
+        containerStyle={styles.containerStyle}
         index={this.selectedIndex}
         tabs={tags}
         renderTab={this.renderTag}
