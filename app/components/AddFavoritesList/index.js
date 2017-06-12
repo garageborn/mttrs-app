@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { PropTypes, Component } from 'react'
 import { FlatList } from 'react-native'
 import _isEqual from 'lodash/isEqual'
@@ -10,7 +11,6 @@ class AddFavoritesList extends Component {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
-    this.renderHeader = this.renderHeader.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -22,10 +22,12 @@ class AddFavoritesList extends Component {
   render () {
     const { publishers } = this.props
 
+    console.log(this.props.isComplete)
+
     return (
       <FlatList
         ListFooterComponent={this.renderFooter}
-        ListHeaderComponent={this.renderHeader}
+        ListHeaderComponent={this.renderHeader.bind(this)} // https://github.com/facebook/react-native/issues/13602#issuecomment-300608431
         data={publishers}
         keyExtractor={this.extractKey}
         renderItem={this.renderRow}
