@@ -4,7 +4,8 @@ const { height, width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     height,
-    width
+    width,
+    zIndex: 1
   },
   centered: {
     position: 'absolute',

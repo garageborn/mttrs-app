@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 8,
     borderRadius: 4,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    zIndex: 1
   },
 
   storyLinkContainer: {
