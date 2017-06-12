@@ -1,6 +1,7 @@
 import React from 'react'
 import Settings from '../../components/Settings'
 import HeaderLeft from '../../components/HeaderLeft'
+import HeaderTitle from '../../components/HeaderTitle'
 import headerStyles from '../../styles/Header'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
@@ -13,7 +14,7 @@ const SettingsScene = () => (
 SettingsScene.navigationOptions = props => {
   return {
     headerLeft: <HeaderLeft {...props} />,
-    headerTitle: props.screenProps.intl.formatMessage({id: 'header.settings'}),
+    headerTitle: <HeaderTitle leftButton title={props.screenProps.intl.formatMessage({id: 'header.settings'})} />,
     ...headerStyles
   }
 }

@@ -1,12 +1,17 @@
-import { Dimensions, StyleSheet } from 'react-native'
-const { width } = Dimensions.get('window')
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 const headerButtonsWidth = 120
+const { width } = Dimensions.get('window')
+const containerWidthBase = 1.25
 
 const containerStyles = {
   flexGrow: 1,
-  flexDirection: 'row',
   alignItems: 'center',
-  justifyContent: 'space-between'
+  flexDirection: 'row',
+  marginLeft: Platform.select({
+    android: 3,
+    ios: 10
+  }),
+  width
 }
 
 const styles = StyleSheet.create({
@@ -14,9 +19,9 @@ const styles = StyleSheet.create({
     ...containerStyles
   },
 
-  publisherContainer: {
+  containerWithLeftButton: {
     ...containerStyles,
-    alignSelf: 'flex-start'
+    width: width / containerWidthBase
   },
 
   titleContainer: {

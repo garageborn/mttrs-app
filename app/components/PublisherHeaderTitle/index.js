@@ -1,17 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import HeaderTitle from '../../components/HeaderTitle'
 import PublisherLogo from '../PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
-import styles from './styles'
 
 class PublisherHeaderTitle extends Component {
   render () {
-    return (
-      <View style={styles.container}>
-        <HeaderTitle logo={this.logo()} title={this.title} />
-      </View>
-    )
+    return <HeaderTitle leftButton logo={this.logo()} title={this.title} />
   }
 
   logo () {
