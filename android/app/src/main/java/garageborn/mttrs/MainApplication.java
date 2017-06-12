@@ -6,15 +6,12 @@ import com.facebook.react.ReactApplication;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-import io.callstack.react.fbads.FBAdsPackage;
-import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
 import cl.json.RNSharePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -53,9 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativeOneSignalPackage(),
           new GoogleAnalyticsBridgePackage(),
           new RNSharePackage(),
-          new LinearGradientPackage(),
-          new FBSDKPackage(mCallbackManager),
-          new FBAdsPackage()
+          new LinearGradientPackage()
       );
     }
   };
@@ -63,11 +58,5 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
-  }
-
-  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
-
-  protected static CallbackManager getCallbackManager() {
-    return mCallbackManager;
   }
 }

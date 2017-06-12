@@ -1,20 +1,7 @@
 PODS:
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - FBAudienceNetwork (4.23.0)
-  - FBSDKCoreKit (4.23.0):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.23.0):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.23.0):
-    - FBSDKCoreKit
   - Firebase/Core (4.0.0):
     - FirebaseAnalytics (= 4.0.0)
     - FirebaseCore (= 4.0.0)
@@ -108,9 +95,6 @@ PODS:
     - Crashlytics
     - Fabric
     - React
-  - ReactNativeFBAds (4.2.0):
-    - FBAudienceNetwork
-    - React
   - Sentry (3.0.7):
     - Sentry/Core (= 3.0.7)
   - Sentry/Core (3.0.7)
@@ -123,16 +107,10 @@ PODS:
   - Yoga (0.45.1.React)
 
 DEPENDENCIES:
-  - Bolts (= 1.8.4)
-  - FBAudienceNetwork (= 4.23.0)
-  - FBSDKCoreKit (= 4.23.0)
-  - FBSDKLoginKit (= 4.23.0)
-  - FBSDKShareKit (= 4.23.0)
   - Firebase/Core (= 4.0.0)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
-  - ReactNativeFBAds (from `../node_modules/react-native-fbads`)
   - Sentry (= 3.0.7)
   - SentryReactNative (from `../node_modules/react-native-sentry`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -144,21 +122,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-splash-screen"
   ReactNativeFabric:
     :path: "../node_modules/react-native-fabric"
-  ReactNativeFBAds:
-    :path: "../node_modules/react-native-fbads"
   SentryReactNative:
     :path: "../node_modules/react-native-sentry"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FBAudienceNetwork: 20a0e3d20e377dbb6708365e4c6d0711bf08ca97
-  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
-  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
-  FBSDKShareKit: 65751c3b9937ab9d594e6c37611ecc115ceeb448
   Firebase: 284eea779b73fdff309791817da7c68bff8dd572
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
@@ -168,11 +139,10 @@ SPEC CHECKSUMS:
   React: 0c9191a8b0c843d7004f950ac6b5f6cba9d125c7
   react-native-splash-screen: 4b3b6080654d361ff15689d60cf6e61b82061ccf
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
-  ReactNativeFBAds: ce298fe4c45fd2fab512f9e8ed298b208d8d420e
   Sentry: f411a49e30a90882932173057bb33cc1f4af7837
   SentryReactNative: fdad31ab05a9f66414c6940ce53a1cd6df235a64
   Yoga: 89c8738d42a0b46a113acb4e574336d61cba2985
 
-PODFILE CHECKSUM: 950acd3ad339c9d632e9153b296f564b67cc0ee4
+PODFILE CHECKSUM: 1ac2460233aa0c4f1216a17803a81232f4a7fa2c
 
 COCOAPODS: 1.2.1
