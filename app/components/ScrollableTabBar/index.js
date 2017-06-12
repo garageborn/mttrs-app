@@ -45,6 +45,7 @@ class ScrollableTabBar extends Component {
     return (
       <ScrollView
         style={this.props.style}
+        contentContainerStyle={this.props.containerStyle}
         horizontal
         bounces={false}
         alwaysBounceHorizontal={false}

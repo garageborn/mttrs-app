@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
 import { connect } from 'react-redux'
 import AddFavoritesListContainer from '../AddFavoritesListContainer'
 import updateCurrentScene from '../../common/utils/updateCurrentScene'

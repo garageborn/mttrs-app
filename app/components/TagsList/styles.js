@@ -3,12 +3,15 @@ const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F1F1F1',
+    maxHeight: 40,
     width,
-    flexDirection: 'row',
+    flexDirection: 'row'
+  },
+  containerStyle: {
+    backgroundColor: '#F1F1F1',
     borderBottomWidth: 1,
-    borderColor: 'rgba(0,0,0,0.2)'
+    borderColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center'
   },
   loaderContainer: {
     justifyContent: 'center',
