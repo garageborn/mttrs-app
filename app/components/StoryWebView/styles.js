@@ -2,8 +2,8 @@ import { StyleSheet, Dimensions, Platform } from 'react-native'
 import { headerHeight } from '../../styles/Global'
 const { width, height } = Dimensions.get('window')
 
-const iOSOffset = 20
-const androidOffset = 3
+const iOSOffset = -20
+const androidOffset = 9
 
 const containerHeight = Platform.select({
   ios: height - headerHeight - iOSOffset,
