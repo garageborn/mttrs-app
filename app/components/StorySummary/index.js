@@ -5,36 +5,20 @@ import Touchable from '../Touchable'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
-const StorySummary = ({ onPress, story, visited }) => {
-  const { headline, summary } = story
-
-  const summaryStyles = () => {
-    let summaryStyles = [styles.summary]
-    if (visited) summaryStyles = [...summaryStyles, styles.summaryVisited]
-    return summaryStyles
-  }
-
-  const headlineStyles = () => {
-    if (!visited) return styles.headlineContainer
-    return [styles.headlineContainer, styles.headlineVisited]
-  }
-
-  return (
-    <View style={styles.container}>
-      <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress()}>
-        <View style={styles.box}>
-          <View style={headlineStyles()}>
-            <Text style={styles.headline}>{headline}</Text>
-          </View>
-          <Text style={summaryStyles()}>{summary}</Text>
+const StorySummary = ({ onPress, story }) => (
+  <View style={styles.container}>
+    <Touchable underlayColor={WHITE_TRANSPARENT_COLOR} onPress={e => onPress()}>
+      <View style={styles.box}>
+        <View style={styles.headlineContainer}>
+          <Text style={styles.headline}>{story.headline}</Text>
         </View>
-      </Touchable>
-    </View>
-  )
-}
+        <Text style={styles.summary}>{story.summary}</Text>
+      </View>
+    </Touchable>
+  </View>
+)
 
 StorySummary.propTypes = {
-  visited: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired,
   story: PropTypes.shape({
     headline: PropTypes.string.isRequired,

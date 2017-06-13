@@ -15,12 +15,8 @@ class StoryContainer extends Component {
     this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
   }
 
-  shouldComponentUpdate (nextProps) {
-    return this.props.visited !== nextProps.visited
-  }
-
   render () {
-    const { story, visited } = this.props
+    const { story } = this.props
     return (
       <Story
         story={story}
@@ -28,7 +24,6 @@ class StoryContainer extends Component {
         handleDialogButtonPress={this.handleDialogButtonPress}
         handlePublishersPress={this.handlePublishersPress}
         handleSocialCountPress={this.handleSocialCountPress}
-        visited={visited}
       />
     )
   }
@@ -64,19 +59,10 @@ class StoryContainer extends Component {
 StoryContainer.propTypes = {
   story: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  visited: PropTypes.bool,
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
   })
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let isVisited = state.VisitedStoriesReducer.items.indexOf(ownProps.story.id) !== -1
-
-  return {
-    visited: isVisited
-  }
-}
-
-export default connect(mapStateToProps)(StoryContainer)
+export default connect()(StoryContainer)

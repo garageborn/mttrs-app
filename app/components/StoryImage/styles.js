@@ -11,10 +11,6 @@ const styles = StyleSheet.create({
     width: 120,
     height: 95,
     borderRadius: 2
-  },
-
-  visited: {
-    opacity: 0.6
   }
 })
 

@@ -6,26 +6,24 @@ import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
 
-const Story = ({ handleDialogButtonPress, handlePublishersPress, handleSocialCountPress, openLink, story, visited }) => {
+const Story = ({ handleDialogButtonPress, handlePublishersPress, handleSocialCountPress, openLink, story }) => {
   const renderSummary = () => {
     const { headline, summary } = story
     if (!headline || !headline.length > 0) return null
     if (!summary || !summary.length > 0) return null
-    return <SummaryContainer visited={visited} story={story} />
+    return <SummaryContainer story={story} />
   }
 
   if (!story) return null
   return (
     <View style={styles.card}>
       <StoryMainLink
-        visited={visited}
         onPress={openLink}
         story={story}
         openDialog={handleDialogButtonPress}
       />
       {renderSummary()}
       <StoryMetadata
-        visited={visited}
         story={story}
         onSocialCountPress={handleSocialCountPress}
         onPublishersPress={handlePublishersPress}
@@ -55,8 +53,7 @@ Story.propTypes = {
   openLink: PropTypes.func.isRequired,
   handleDialogButtonPress: PropTypes.func.isRequired,
   handlePublishersPress: PropTypes.func.isRequired,
-  handleSocialCountPress: PropTypes.func.isRequired,
-  visited: PropTypes.bool.isRequired
+  handleSocialCountPress: PropTypes.func.isRequired
 }
 
 export default Story

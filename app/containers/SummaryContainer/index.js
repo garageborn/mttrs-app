@@ -1,35 +1,21 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { NavigationActions } from '../../actions/index'
 import StorySummary from '../../components/StorySummary'
 
-class SummaryContainer extends Component {
-  constructor () {
-    super()
-    this.openLink = this.openLink.bind(this)
-  }
-
-  shouldComponentUpdate (nextProps) {
-    return this.props.visited !== nextProps.visited
-  }
-
-  render () {
-    const { story, visited } = this.props
-    return <StorySummary onPress={this.openLink} story={story} visited={visited} />
-  }
-
-  openLink () {
-    const { story, dispatch } = this.props
+const SummaryContainer = ({ story, dispatch }) => {
+  const openLink = () => {
     return dispatch(NavigationActions.link(story, story.main_link))
   }
+
+  return <StorySummary onPress={openLink} story={story} />
 }
 
 SummaryContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   story: PropTypes.shape({
     main_link: PropTypes.object.isRequired
-  }).isRequired,
-  visited: PropTypes.bool.isRequired
+  }).isRequired
 }
 
 export default connect()(SummaryContainer)

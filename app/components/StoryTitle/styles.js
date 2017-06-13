@@ -20,10 +20,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 18,
     fontWeight: '500'
-  },
-
-  visited: {
-    opacity: 0.6
   }
 })
 
