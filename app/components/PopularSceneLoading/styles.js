@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native'
+import headerStyles from '../../styles/Header'
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 10
+    ...headerStyles.headerStyle,
+    paddingTop: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 

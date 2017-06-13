@@ -1,21 +1,19 @@
-import { Dimensions, Platform, StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { DARK_COLOR } from '../../constants/Colors'
+import headerStyles from '../../styles/Header'
 const { width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
+    ...headerStyles.headerStyle,
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: DARK_COLOR,
-    height: Platform.select({
-      ios: 64
-    }),
-    paddingTop: Platform.select({
-      ios: 22
-    })
+    alignItems: 'flex-end',
+    backgroundColor: DARK_COLOR
   },
 
   indicatorStyle: {
+    position: 'absolute',
+    bottom: 1,
     height: 3,
     borderRadius: width / 2
   }
