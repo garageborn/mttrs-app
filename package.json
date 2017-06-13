@@ -29,7 +29,7 @@
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-onesignal": "^3.0.4",
-    "react-native-sentry": "^0.12.9",
+    "react-native-sentry": "^0.12.10",
     "react-native-share": "^1.0.20",
     "react-native-splash-screen": "^2.1.0",
     "react-navigation": "^1.0.0-beta.11",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
+    "eslint": "^4.0.0",
     "eslint-config-standard": "^10.0.0",
     "eslint-config-standard-jsx": "^4.0.1",
     "eslint-plugin-babel": "^4.1.0",
