@@ -1,8 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native'
 
-const { width } = Dimensions.get('window')
-const headlineOffset = 105
-
 const styles = StyleSheet.create({
   container: {
     margin: 10
@@ -19,10 +16,6 @@ const styles = StyleSheet.create({
   headlineContainer: {
     flexDirection: 'row',
     alignItems: 'center'
-  },
-
-  headlineVisited: {
-    opacity: 0.6
   },
 
   headline: {
@@ -42,10 +35,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     color: '#666766',
     marginTop: 3
-  },
-
-  summaryVisited: {
-    opacity: 0.6
   }
 })
 
