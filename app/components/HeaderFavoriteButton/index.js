@@ -1,22 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import HeaderButton from '../HeaderButton'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 
-class HeaderFavoriteButton extends Component {
-  render () {
-    const { publisher } = this.props
-
-    return (
-      <ToggleFavoriteContainer
-        publisher={publisher}
-        addComponent={this.addComponent}
-        removeComponent={this.removeComponent}
-      />
-    )
-  }
-
-  get addComponent () {
+const HeaderFavoriteButton = ({ publisher }) => {
+  const addComponent = () => {
     const content = <Image source={require('./assets/inactive.png')} />
     return (
       <View>
@@ -25,7 +13,7 @@ class HeaderFavoriteButton extends Component {
     )
   }
 
-  get removeComponent () {
+  const removeComponent = () => {
     const content = <Image source={require('./assets/active.png')} />
     return (
       <View>
@@ -33,6 +21,14 @@ class HeaderFavoriteButton extends Component {
       </View>
     )
   }
+
+  return (
+    <ToggleFavoriteContainer
+      publisher={publisher}
+      addComponent={addComponent()}
+      removeComponent={removeComponent()}
+    />
+  )
 }
 
 HeaderFavoriteButton.propTypes = {

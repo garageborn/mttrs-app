@@ -6,63 +6,32 @@ import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
 
-class Story extends Component {
-  shouldComponentUpdate (nextProps) {
-    return this.props.visited !== nextProps.visited
+const Story = ({ handleDialogButtonPress, handlePublishersPress, handleSocialCountPress, openLink, story, visited }) => {
+  const renderSummary = () => {
+    const { headline, summary } = story
+    if (!headline || !headline.length > 0) return null
+    if (!summary || !summary.length > 0) return null
+    return <SummaryContainer visited={visited} story={story} />
   }
 
-  render () {
-    const { story } = this.props
-    if (!story) return null
-
-    return (
-      <View style={styles.card}>
-        {this.renderMainLink()}
-        {this.renderSummary()}
-        {this.renderMetadata()}
-      </View>
-    )
-  }
-
-  renderMainLink () {
-    const { handleDialogButtonPress, openLink, story, visited } = this.props
-
-    return (
+  if (!story) return null
+  return (
+    <View style={styles.card}>
       <StoryMainLink
         visited={visited}
         onPress={openLink}
         story={story}
         openDialog={handleDialogButtonPress}
       />
-    )
-  }
-
-  renderSummary () {
-    if (!this.hasSummary) return null
-
-    const { story, visited } = this.props
-    return <SummaryContainer visited={visited} story={story} />
-  }
-
-  renderMetadata () {
-    const { handlePublishersPress, handleSocialCountPress, story, visited } = this.props
-
-    return (
+      {renderSummary()}
       <StoryMetadata
         visited={visited}
         story={story}
         onSocialCountPress={handleSocialCountPress}
         onPublishersPress={handlePublishersPress}
       />
-    )
-  }
-
-  get hasSummary () {
-    const { headline, summary } = this.props.story
-    const hasHeadline = headline && headline.length > 0
-    const hasSummary = summary && summary.length > 0
-    return hasHeadline && hasSummary
-  }
+    </View>
+  )
 }
 
 Story.propTypes = {

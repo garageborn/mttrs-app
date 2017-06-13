@@ -16,80 +16,61 @@ const messages = defineMessages({
   share: { id: 'storyDialog.share' }
 })
 
-class StoryDialog extends Component {
-  render () {
-    return (
-      <View style={styles.container}>
-        {this.renderFavoriteAction()}
-        {this.renderShareAction()}
-      </View>
-    )
-  }
+const StoryDialog = ({ intl, story }) => {
+  const { publisher } = story.main_link
+  const publisherName = publisher.display_name || publisher.name
 
-  renderFavoriteAction () {
-    const { publisher } = this.props.story.main_link
-
+  const renderFavoriteAction = () => {
     return (
       <ToggleFavoriteContainer
         publisher={publisher}
-        addComponent={this.addPublisherComponent()}
-        removeComponent={this.removePublisherComponent()}
+        addComponent={addPublisherComponent()}
+        removeComponent={removePublisherComponent()}
       />
     )
   }
 
-  renderShareAction () {
-    const { intl, story } = this.props
-
+  const renderShareAction = () => {
+    const icon = <Image source={shareIcon} />
     return (
       <ShareButtonContainer link={story.main_link}>
         <View>
-          <DialogButton icon={this.shareIcon} messages={[intl.formatMessage(messages.share)]} />
+          <DialogButton icon={icon} messages={[intl.formatMessage(messages.share)]} />
         </View>
       </ShareButtonContainer>
     )
   }
 
-  addPublisherComponent () {
-    const { intl } = this.props
+  const addPublisherComponent = () => {
+    const icon = <Image source={inactiveFavoriteIcon} />
     return (
       <View>
         <DialogButton
-          icon={this.inactiveFavoriteIcon}
-          messages={[intl.formatMessage(messages.addFavorite), this.publisherName]}
+          icon={icon}
+          messages={[intl.formatMessage(messages.addFavorite), publisherName]}
         />
       </View>
     )
   }
 
-  removePublisherComponent () {
-    const { intl } = this.props
+  const removePublisherComponent = () => {
+    const icon = <Image source={activeFavoriteIcon} />
     return (
       <View>
         <DialogButton
-          icon={this.activeFavoriteIcon}
-          messages={[intl.formatMessage(messages.removeFavorite), this.publisherName]}
+          icon={icon}
+          messages={[intl.formatMessage(messages.removeFavorite), publisherName]}
         />
       </View>
     )
   }
 
-  get shareIcon () {
-    return <Image source={shareIcon} />
-  }
-
-  get activeFavoriteIcon () {
-    return <Image source={activeFavoriteIcon} />
-  }
-
-  get inactiveFavoriteIcon () {
-    return <Image source={inactiveFavoriteIcon} />
-  }
-
-  get publisherName () {
-    const { publisher } = this.props.story.main_link
-    return publisher.display_name || publisher.name
-  }
+  return (
+    <View style={styles.container}>
+      {renderFavoriteAction()}
+      {renderShareAction()}
+    </View>
+  )
 }
 
 StoryDialog.propTypes = {

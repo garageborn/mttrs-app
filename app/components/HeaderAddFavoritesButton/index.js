@@ -1,16 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image } from 'react-native'
 import HeaderButton from '../HeaderButton'
 
-class HeaderAddFavoritesButton extends Component {
-  render () {
-    const { onPress } = this.props
-    return <HeaderButton content={this.content} onPress={onPress} />
-  }
-
-  get content () {
-    return <Image source={require('./assets/image.png')} />
-  }
+const HeaderAddFavoritesButton = ({ onPress }) => {
+  const content = <Image source={require('./assets/image.png')} />
+  return <HeaderButton content={content} onPress={onPress} />
 }
 
 HeaderAddFavoritesButton.propTypes = {

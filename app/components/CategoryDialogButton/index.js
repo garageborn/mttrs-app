@@ -1,28 +1,21 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
 import styles from './styles'
 import { DEFAULT_CATEGORY_COLOR } from '../../constants/Colors'
 
-class CategoryDialogButton extends Component {
-  render () {
-    const { category, onPress } = this.props
-    return (
-      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={() => onPress(category)}>
-        <View>
-          <DialogButton icon={this.icon} messages={[category.name]} />
-        </View>
-      </Touchable>
-    )
-  }
+const CategoryDialogButton = ({ category, onPress }) => {
+  const backgroundColor = category.color || DEFAULT_CATEGORY_COLOR
+  const icon = <View style={[styles.icon, { backgroundColor: backgroundColor }]} />
 
-  get icon () {
-    const backgroundColor = this.props.category.color || DEFAULT_CATEGORY_COLOR
-    return (
-      <View style={[styles.icon, { backgroundColor: backgroundColor }]} />
-    )
-  }
+  return (
+    <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={() => onPress(category)}>
+      <View>
+        <DialogButton icon={icon} messages={[category.name]} />
+      </View>
+    </Touchable>
+  )
 }
 
 CategoryDialogButton.propTypes = {

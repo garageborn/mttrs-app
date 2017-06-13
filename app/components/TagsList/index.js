@@ -47,12 +47,8 @@ class TagsList extends Component {
     const { selectTag } = this.props
 
     if (!tag.id) return this.renderDefaultTag()
-
     return (
-      <Tag
-        active={this.isSelected(tag)}
-        onPress={() => selectTag(tag)}
-      >
+      <Tag active={this.isSelected(tag)} onPress={() => selectTag(tag)}>
         {tag.name}
       </Tag>
     )

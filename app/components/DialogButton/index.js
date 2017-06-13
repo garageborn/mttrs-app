@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import styles from './styles'
 
 class DialogButton extends Component {

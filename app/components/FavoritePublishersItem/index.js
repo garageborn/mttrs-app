@@ -13,8 +13,11 @@ class FavoritePublishersItem extends Component {
     super(props)
     this.onPress = this.onPress.bind(this)
     this.handleFavoriteState = this.handleFavoriteState.bind(this)
-
     this.state = { active: true }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.state.active !== nextState.active
   }
 
   render () {
@@ -57,9 +60,7 @@ class FavoritePublishersItem extends Component {
   }
 
   handleFavoriteState (isFavorite) {
-    this.setState({
-      active: isFavorite
-    })
+    this.setState({ active: isFavorite })
   }
 
   onPress () {

@@ -1,23 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import ShareButtonContainer from '../../containers/ShareButtonContainer'
 import styles from '../HeaderButton/styles'
 
-class HeaderShareButton extends Component {
-  render () {
-    return (
-      <ShareButtonContainer link={this.props.link}>
-        <View style={styles.container}>
-          {this.content}
-        </View>
-      </ShareButtonContainer>
-    )
-  }
-
-  get content () {
-    return <Image source={require('./assets/image.png')} />
-  }
-}
+const HeaderShareButton = ({ link }) => (
+  <ShareButtonContainer link={link}>
+    <View style={styles.container}>
+      <Image source={require('./assets/image.png')} />
+    </View>
+  </ShareButtonContainer>
+)
 
 HeaderShareButton.propTypes = {
   link: PropTypes.object.isRequired

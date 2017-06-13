@@ -8,23 +8,14 @@ import icon from './assets/icon.png'
 import styles from './styles'
 
 const messages = defineMessages({
-  title: {
-    id: 'publisher.suggestion.title'
-  },
-
-  subTitle: {
-    id: 'publisher.suggestion.subTitle'
-  },
-
-  sendButton: {
-    id: 'publisher.suggestion.sendButton'
-  }
+  title: { id: 'publisher.suggestion.title' },
+  subTitle: { id: 'publisher.suggestion.subTitle' },
+  sendButton: { id: 'publisher.suggestion.sendButton' }
 })
 
 class PublisherSuggestion extends Component {
   constructor () {
     super()
-
     this.onButtonPress = this.onButtonPress.bind(this)
   }
 

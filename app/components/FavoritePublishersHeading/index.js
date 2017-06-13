@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Heading from '../Heading'
@@ -10,31 +10,20 @@ const messages = defineMessages({
   buttonActive: { id: 'favoritePublishers.button' }
 })
 
-class FavoritesPublishersHeading extends Component {
-  render () {
-    const { intl } = this.props
-
-    return (
-      <View style={styles.container}>
-        <Heading color='#999' size='regular'>
-          {intl.formatMessage(messages.heading)}
-        </Heading>
-        {this.renderButton()}
-      </View>
-    )
-  }
-
-  renderButton () {
-    const { intl, handleComplete } = this.props
-    return (
+const FavoritesPublishersHeading = ({ handleComplete, intl }) => {
+  return (
+    <View style={styles.container}>
+      <Heading color='#999' size='regular'>
+        {intl.formatMessage(messages.heading)}
+      </Heading>
       <Button
         background='transparent'
         content={intl.formatMessage(messages.buttonActive)}
         onPress={handleComplete}
         size='small'
       />
-    )
-  }
+    </View>
+  )
 }
 
 FavoritesPublishersHeading.propTypes = {
