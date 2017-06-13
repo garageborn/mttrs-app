@@ -1,10 +1,17 @@
 import { StyleSheet, Dimensions } from 'react-native'
+let { width } = Dimensions.get('window')
+
+export const bannerWidth = width - 40
+export const bannerHeight = 132
 
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     zIndex: 2,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
     marginHorizontal: 10,
     marginVertical: 5,
     backgroundColor: '#FFF',
@@ -13,13 +20,7 @@ const styles = StyleSheet.create({
     shadowOffset: {
       width: 3,
       height: 2
-    },
-    shadowColor: '#000',
-    shadowOpacity: 0.2
-  },
-  buttonContainer: {
-    marginTop: 16,
-    alignSelf: 'center'
+    }
   }
 })
 

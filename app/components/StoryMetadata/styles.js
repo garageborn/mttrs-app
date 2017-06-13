@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
     borderTopColor: '#F1F1F1'
   },
 
-  visited: {
-    opacity: 0.6
-  },
-
   shares: {
     flexDirection: 'row',
     alignItems: 'center'

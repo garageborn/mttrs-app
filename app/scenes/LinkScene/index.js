@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { InteractionManager, View, AppState } from 'react-native'
+import { View, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
-import { VisitedStoriesActions } from '../../actions/index'
 import StoryWebView from '../../components/StoryWebView'
 import LinkHeaderTitle from '../../components/LinkHeaderTitle'
 import HeaderShareButton from '../../components/HeaderShareButton'
@@ -10,13 +9,13 @@ import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 import headerStyles from '../../styles/Header'
+import { NotificationsActions } from '../../actions/index'
 
 class LinkScene extends Component {
   constructor () {
     super()
     this.state = { appState: AppState.currentState }
     this.handleAppStateChange = this.handleAppStateChange.bind(this)
-    this.addStoryToLocalStorage = this.addStoryToLocalStorage.bind(this)
   }
 
   componentWillMount () {
@@ -25,7 +24,7 @@ class LinkScene extends Component {
 
   componentDidMount () {
     AppState.addEventListener('change', this.handleAppStateChange)
-    InteractionManager.runAfterInteractions(this.addStoryToLocalStorage)
+    this.props.dispatch(NotificationsActions.askForPermissions())
   }
 
   componentWillUnmount () {
@@ -34,12 +33,6 @@ class LinkScene extends Component {
 
   handleAppStateChange (appState) {
     this.setState({ appState })
-  }
-
-  addStoryToLocalStorage () {
-    const { dispatch, navigation } = this.props
-    const { story } = navigation.state.params
-    dispatch(VisitedStoriesActions.addStory(story))
   }
 
   createAccess () {

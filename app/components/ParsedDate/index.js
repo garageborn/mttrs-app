@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react'
+import React, { PropTypes } from 'react'
 import { Text } from 'react-native'
 import moment from '../../common/utils/Moment'
 import { injectIntl, defineMessages } from 'react-intl'
@@ -12,19 +12,9 @@ const messages = defineMessages({
   recent: { id: 'recent' }
 })
 
-class ParsedDate extends Component {
-  shouldComponentUpdate (nextProps) {
-    return this.props.date !== nextProps.date
-  }
-
-  render () {
-    let text = this.parsedDate.toUpperCase()
-    return <Text style={this.props.style}>{text}</Text>
-  }
-
-  get parsedDate () {
-    let { date } = this.props
-    let { formatMessage, locale } = this.props.intl
+const ParsedDate = ({ date, intl, style, type }) => {
+  const parsedDate = () => {
+    let { formatMessage, locale } = intl
 
     switch (date) {
       case 'last_week':
@@ -33,22 +23,22 @@ class ParsedDate extends Component {
         return formatMessage(messages.lastMonth)
       default:
         return moment(locale).unix(date).calendar(null, {
-          sameDay: `[${formatMessage(this.getMessage('sameDay'))}]`,
-          lastDay: `[${formatMessage(this.getMessage('yesterday'))}]`,
+          sameDay: `[${formatMessage(getMessage('sameDay'))}]`,
+          lastDay: `[${formatMessage(getMessage('yesterday'))}]`,
           lastWeek: formatMessage(messages.dateFormat),
           sameElse: formatMessage(messages.dateFormat)
         })
     }
   }
 
-  getMessage (day) {
-    const daysMessages = {
-      sameDay: messages.today,
-      yesterday: messages.yesterday
-    }
-    if (this.props.type === 'summaries') return messages.recent
+  const getMessage = (day) => {
+    const daysMessages = { sameDay: messages.today, yesterday: messages.yesterday }
+    if (type === 'summaries') return messages.recent
     return daysMessages[day]
   }
+
+  let text = parsedDate().toUpperCase()
+  return <Text style={style}>{text}</Text>
 }
 
 ParsedDate.propTypes = {

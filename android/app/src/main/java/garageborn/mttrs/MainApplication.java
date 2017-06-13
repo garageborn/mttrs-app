@@ -3,6 +3,7 @@ package garageborn.mttrs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
@@ -48,7 +49,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ReactNativeOneSignalPackage(),
           new GoogleAnalyticsBridgePackage(),
           new RNSharePackage(),
-          new LinearGradientPackage()
+          new LinearGradientPackage(),
+          new RNAdMobPackage()
       );
     }
   };

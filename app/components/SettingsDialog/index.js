@@ -7,58 +7,46 @@ import styles from './styles'
 
 const tenantIcon = require('./assets/tenant.png')
 const settingsIcon = require('./assets/settings.png')
-
 const messages = defineMessages({
   mttrs_br: { id: 'settingsDialog.mttrs_br' },
   mttrs_us: { id: 'settingsDialog.mttrs_us' },
   settings: { id: 'settingsDialog.settings' }
 })
 
-class SettingsDialog extends Component {
-  render () {
-    return (
-      <View style={styles.container}>
-        {this.renderTenantButton()}
-        {this.renderSettingsButton()}
-      </View>
-    )
-  }
-
-  renderTenantButton () {
-    const { intl, setTenant, tenant } = this.props
+const SettingsDialog = ({ intl, openSettings, setTenant, tenant }) => {
+  const renderTenantButton = () => {
     const tenantId = tenant.id
     const label = intl.formatMessage(messages[tenantId])
+    const icon = <Image source={tenantIcon} />
 
     return (
       <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={() => setTenant(tenantId)}>
         <View>
-          <DialogButton icon={this.tenantIcon} messages={[label]} />
+          <DialogButton icon={icon} messages={[label]} />
         </View>
       </Touchable>
     )
   }
 
-  renderSettingsButton () {
-    const { openSettings } = this.props
-    const { formatMessage } = this.props.intl
-    const label = formatMessage(messages.settings)
+  const renderSettingsButton = () => {
+    const label = intl.formatMessage(messages.settings)
+    const icon = <Image source={settingsIcon} />
 
     return (
       <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={openSettings}>
         <View>
-          <DialogButton icon={this.settingsIcon} messages={[label]} />
+          <DialogButton icon={icon} messages={[label]} />
         </View>
       </Touchable>
     )
   }
 
-  get settingsIcon () {
-    return <Image source={settingsIcon} />
-  }
-
-  get tenantIcon () {
-    return <Image source={tenantIcon} />
-  }
+  return (
+    <View style={styles.container}>
+      {renderTenantButton()}
+      {renderSettingsButton()}
+    </View>
+  )
 }
 
 SettingsDialog.propTypes = {

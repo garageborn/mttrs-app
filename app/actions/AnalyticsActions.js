@@ -11,13 +11,18 @@ export function trackScreen (path) {
 }
 
 export function trackEvent (category, action, optionalValues = {}) {
-  return () => {
+  return (dispatch, getState) => {
     InteractionManager.runAfterInteractions(() => {
-      analytics.trackEvent(category, action, optionalValues)
+      const event = getEvent(getState(), category)
+      analytics.trackEvent(event, action, optionalValues)
     })
   }
 }
 
 function getScreen (state, path) {
   return state.TenantReducer.current.id + path
+}
+
+function getEvent (state, category) {
+  return `${state.TenantReducer.current.id}/${category}`
 }

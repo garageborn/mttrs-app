@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { Platform } from 'react-native'
 import OneSignal from 'react-native-onesignal'
 import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
@@ -66,7 +65,6 @@ class NotificationsContainer extends Component {
   handlePermissions (nextProps) {
     if (!nextProps.tenant.isLoaded) return
     this.props.dispatch(NotificationsActions.getPermissions())
-    this.askForPermissions(nextProps)
   }
 
   handleTags (nextProps) {
@@ -76,19 +74,11 @@ class NotificationsContainer extends Component {
 
   setTenant (id) {
     if (this.props.tenant.current.id === id) return
-    const { dispatch } = this.props
-    dispatch(TenantActions.setCurrent(id))
-  }
-
-  askForPermissions (nextProps) {
-    if (nextProps.visitedStories.items.length === 4) {
-      this.props.dispatch(NotificationsActions.askForPermissions())
-    }
+    this.props.dispatch(TenantActions.setCurrent(id))
   }
 }
 
 NotificationsContainer.propTypes = {
-  visitedStories: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   tenant: PropTypes.shape({
     current: PropTypes.shape({
@@ -99,10 +89,7 @@ NotificationsContainer.propTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    tenant: state.TenantReducer,
-    visitedStories: state.VisitedStoriesReducer
-  }
+  return { tenant: state.TenantReducer }
 }
 
 export default connect(mapStateToProps)(NotificationsContainer)

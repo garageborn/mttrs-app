@@ -27,9 +27,7 @@ const higherLimit = 100000
 class StatsChart extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      active: this.getActive()
-    }
+    this.state = { active: this.getActive() }
   }
 
   render () {
@@ -56,7 +54,7 @@ class StatsChart extends Component {
     if (totalCount >= higherLimit) return bars.length - 1
     if (totalCount <= lowerLimit) return 0
 
-    let activeBar = bars.find ((bar, index) => {
+    let activeBar = bars.find((bar, index) => {
       const minCount = Math.round(higherLimit / bars.length) * index
       const maxCount = Math.round(higherLimit / bars.length) * (index + 1)
       return totalCount >= minCount && totalCount <= maxCount

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import _throttle from 'lodash/throttle'
 import captureError from '../../common/utils/captureError'
 import Timeline from '../../components/Timeline'
-import { VisitedStoriesActions } from '../../actions/index'
 
 const minStoriesInTheViewport = 4
 
@@ -22,7 +21,6 @@ class TimelineContainer extends Component {
   }
 
   componentWillMount () {
-    this.props.dispatch(VisitedStoriesActions.getStories())
     AppState.addEventListener('change', this.handleAppStateChange)
   }
 

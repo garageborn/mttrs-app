@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { ActivityIndicator, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import withQuery from './index.gql'
 import CategoryDialogButton from '../../components/CategoryDialogButton'

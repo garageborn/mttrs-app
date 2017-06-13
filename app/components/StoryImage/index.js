@@ -41,18 +41,13 @@ class StoryImage extends Component {
     if (this.state.status === 'error') return <Placeholder story={this.props.story} />
     return (
       <Image
-        style={this.styles}
+        style={styles.image}
         onLoad={this.handleImageLoad}
         onError={this.handleImageError}
         resizeMode='cover'
         source={this.getSource()}
       />
     )
-  }
-
-  get styles () {
-    if (!this.props.visited) return styles.image
-    return [styles.image, styles.visited]
   }
 
   getImage () {
@@ -73,7 +68,6 @@ class StoryImage extends Component {
 }
 
 StoryImage.propTypes = {
-  visited: PropTypes.bool.isRequired,
   source: PropTypes.string,
   story: PropTypes.shape({
     id: PropTypes.any.isRequired
