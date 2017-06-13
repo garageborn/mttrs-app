@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Platform, View } from 'react-native'
 import { AdMobNativeExpress } from 'react-native-admob'
 import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
-import captureError from '../../common/utils/captureError'
 import styles, { bannerWidth, bannerHeight } from './styles'
 
 class TimelineAd extends Component {
@@ -27,14 +26,12 @@ class TimelineAd extends Component {
           bannerWidth={bannerWidth}
           bannerHeight={bannerHeight}
           didFailToReceiveAdWithError={this.handleError}
-          testDeviceID={'EMULATOR'}
           />
       </View>
     )
   }
 
-  handleError (error) {
-    captureError(error)
+  handleError () {
     this.setState({ error: true })
   }
 }
