@@ -13,7 +13,6 @@ PODS:
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (2.0.0):
     - FirebaseCore (~> 4.0)
-  - GoogleMobileAds (7.8.0)
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
@@ -56,7 +55,6 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Core (= 4.0.0)
-  - GoogleMobileAds (= 7.8)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
@@ -83,7 +81,6 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
-  GoogleMobileAds: c79931d6eef16b1e4c35d331cf23c47e0dd490d2
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   KSCrash: d3e2bfd20728b8772a796809bbc5bf7ed040fa94
   React: 0c9191a8b0c843d7004f950ac6b5f6cba9d125c7
@@ -93,6 +90,6 @@ SPEC CHECKSUMS:
   SentryReactNative: 348fc737f400c030a13d44fa664b470d0e07efae
   Yoga: 89c8738d42a0b46a113acb4e574336d61cba2985
 
-PODFILE CHECKSUM: 3889871c28db1c5759fea6d9d743dd6cc2b2bd66
+PODFILE CHECKSUM: b2c8e193a8212b388caf447ee0b87dc42aae12a5
 
 COCOAPODS: 1.2.1

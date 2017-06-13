@@ -49,7 +49,6 @@
 		AABB77501EB9171900734E88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AABB774F1EB9171900734E88 /* GoogleService-Info.plist */; };
 		AAEEF6E81EE98B0600998EDB /* libreact-native-splash-screen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAEEF6E71EE98B0600998EDB /* libreact-native-splash-screen.a */; };
 		AAF608671ED6DB8F00803789 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF608491ED6DAC800803789 /* libRCTAnimation.a */; };
-		B841AC092A7547E4B94CAA98 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690F3EC1700A4F42BD1FEF62 /* libRNAdMobManager.a */; };
 		CE9765570E449FB853D4D198 /* libPods-mttrs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7EFE5B4EF4364591E2535A6 /* libPods-mttrs.a */; };
 		DC885A501E4C8A1700253B23 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		DCAE53151E1EC20200ABFD11 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCAE53141E1EC20200ABFD11 /* CoreData.framework */; };
@@ -291,13 +290,6 @@
 			remoteGlobalIDString = 3D7682761D8E76B80014119E;
 			remoteInfo = SplashScreen;
 		};
-		AA9AF6361EF05F2F00198B33 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2937845A755F4CAFAA8C8180 /* RNAdMobManager.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A96DA7741C146D7200FC639B;
-			remoteInfo = RNAdMobManager;
-		};
 		AAA031D61EDB52CE0072EAD2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */;
@@ -358,13 +350,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = mttrs/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		281DE5D5977E4CD89001C27C /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
-		2937845A755F4CAFAA8C8180 /* RNAdMobManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAdMobManager.xcodeproj; path = "../node_modules/react-native-admob/ios/RNAdMobManager.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* mttrs-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "mttrs-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* mttrs-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mttrs-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DBA63F494D645E0AC93C5BC /* RNSentry.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		532AF4DDCB88495ABAE7545E /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		58AC841605F44075B3E3AF1A /* RCTGoogleAnalyticsBridge.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTGoogleAnalyticsBridge.xcodeproj; path = "../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/RCTGoogleAnalyticsBridge.xcodeproj"; sourceTree = "<group>"; };
-		690F3EC1700A4F42BD1FEF62 /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAdMobManager.a; sourceTree = "<group>"; };
 		6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		74F6DF8C2B20440DA6287088 /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 		75D4B2B317D7470A8FCB2830 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
@@ -439,7 +429,6 @@
 				7EF39558381C47D6A639E48A /* libRCTOneSignal.a in Frameworks */,
 				0D67DB9E3C6845108AC0819E /* libRNDeviceInfo.a in Frameworks */,
 				CE9765570E449FB853D4D198 /* libPods-mttrs.a in Frameworks */,
-				B841AC092A7547E4B94CAA98 /* libRNAdMobManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,7 +614,6 @@
 				6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */,
 				B6296476B19A4AEAA8320A87 /* SplashScreen.xcodeproj */,
 				3DBA63F494D645E0AC93C5BC /* RNSentry.xcodeproj */,
-				2937845A755F4CAFAA8C8180 /* RNAdMobManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -704,14 +692,6 @@
 			isa = PBXGroup;
 			children = (
 				AA991C861EE995910029AA86 /* libSplashScreen.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		AA9AF6151EF05F2F00198B33 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA9AF6371EF05F2F00198B33 /* libRNAdMobManager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -969,10 +949,6 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = AA9AF6151EF05F2F00198B33 /* Products */;
-					ProjectRef = 2937845A755F4CAFAA8C8180 /* RNAdMobManager.xcodeproj */;
-				},
-				{
 					ProductGroup = AAA031B61EDB52CE0072EAD2 /* Products */;
 					ProjectRef = 6E0CD9143E3D4BE098DE7B46 /* RNDeviceInfo.xcodeproj */;
 				},
@@ -1223,13 +1199,6 @@
 			fileType = archive.ar;
 			path = libSplashScreen.a;
 			remoteRef = AA991C851EE995910029AA86 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		AA9AF6371EF05F2F00198B33 /* libRNAdMobManager.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNAdMobManager.a;
-			remoteRef = AA9AF6361EF05F2F00198B33 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		AAA031D71EDB52CE0072EAD2 /* libRNDeviceInfo.a */ = {
@@ -1524,7 +1493,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1560,7 +1528,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = mttrsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -1688,7 +1655,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1727,7 +1693,6 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 					"$(SRCROOT)/../node_modules/react-native-sentry/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-admob/ios",
 				);
 				INFOPLIST_FILE = "mttrs-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

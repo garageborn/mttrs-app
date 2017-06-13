@@ -21,8 +21,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-#import "SplashScreen.h"
-
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
 
