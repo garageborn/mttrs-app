@@ -7,15 +7,12 @@ import styles from './styles'
 class StoryWebView extends Component {
   constructor () {
     super()
-
     this.handleError = this.handleError.bind(this)
     this.reloadWebView = this.reloadWebView.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
-    const currentUrl = this.props.link.url
-    const newUrl = nextProps.link.url
-    return currentUrl !== newUrl
+    return this.props.link.url !== nextProps.link.url
   }
 
   contentInset () {

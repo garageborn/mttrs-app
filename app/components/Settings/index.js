@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DeviceInfo from 'react-native-device-info'
@@ -12,21 +12,17 @@ const messages = defineMessages({
   version: { id: 'settings.version' }
 })
 
-class Settings extends Component {
-  render () {
-    const { intl } = this.props
-
-    return (
-      <View style={styles.container}>
-        <NotificationsSettingsContainer />
-        <RateAppSettingsContainer />
-        <View style={styles.footerContainer}>
-          <Heading size='small' color={smallTextColor} >{intl.formatMessage(messages.version)} {appVersion}</Heading>
-        </View>
-      </View>
-    )
-  }
-}
+const Settings = ({ intl }) => (
+  <View style={styles.container}>
+    <NotificationsSettingsContainer />
+    <RateAppSettingsContainer />
+    <View style={styles.footerContainer}>
+      <Heading size='small' color={smallTextColor}>
+        {intl.formatMessage(messages.version)} {appVersion}
+      </Heading>
+    </View>
+  </View>
+)
 
 Settings.propTypes = {
   intl: PropTypes.shape({

@@ -1,27 +1,28 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image } from 'react-native'
-import { injectIntl } from 'react-intl'
+import { defineMessages, injectIntl } from 'react-intl'
 import BottomTabItem from '../BottomTabItem'
 
-class PopularTabBar extends Component {
-  render () {
-    const { focused, intl } = this.props
-    return (
-      <BottomTabItem
-        active={focused}
-        icon={this.icon}
-        message={intl.formatMessage({ id: 'tabBar.popular' })}
-      />
-    )
-  }
+const messages = defineMessages({
+  label: { id: 'tabBar.popular' }
+})
 
-  get icon () {
-    if (this.props.focused) {
+const PopularTabBar = ({ focused, intl }) => {
+  const getIcon = () => {
+    if (focused) {
       return <Image source={require('./assets/active.png')} />
     } else {
       return <Image source={require('./assets/inactive.png')} />
     }
   }
+
+  return (
+    <BottomTabItem
+      active={focused}
+      icon={getIcon()}
+      message={intl.formatMessage(messages.label)}
+    />
+  )
 }
 
 PopularTabBar.propTypes = {

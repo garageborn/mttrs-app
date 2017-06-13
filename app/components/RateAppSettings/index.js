@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Platform, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
@@ -16,21 +16,18 @@ const messages = defineMessages({
   }
 })
 
-class RateAppSettings extends Component {
-  render () {
-    const { intl, onPress } = this.props
-    const label = intl.formatMessage(messages.label)
-    const description = intl.formatMessage(messages.description)
+const RateAppSettings = ({ intl, onPress }) => {
+  const label = intl.formatMessage(messages.label)
+  const description = intl.formatMessage(messages.description)
 
-    return (
-      <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
-        <View style={styles.container}>
-          <Heading size='regular' color={regularTextColor}>{label}</Heading>
-          <Heading size='small' color={smallTextColor}>{description}</Heading>
-        </View>
-      </Touchable>
-    )
-  }
+  return (
+    <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
+      <View style={styles.container}>
+        <Heading size='regular' color={regularTextColor}>{label}</Heading>
+        <Heading size='small' color={smallTextColor}>{description}</Heading>
+      </View>
+    </Touchable>
+  )
 }
 
 RateAppSettings.propTypes = {

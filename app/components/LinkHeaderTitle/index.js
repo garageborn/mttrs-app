@@ -1,37 +1,19 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import HeaderTitle from '../../components/HeaderTitle'
 import PublisherLogo from '../PublisherLogo'
 import * as cloudinary from '../../common/utils/Cloudinary'
 
-class LinkHeaderTitle extends Component {
-  render () {
-    return <HeaderTitle leftButton logo={this.logo()} title={this.title} subtitle={this.subtitle} />
+const LinkHeaderTitle = ({ navigation }) => {
+  const { link } = navigation.state.params
+  const title = link.publisher.name
+  const subtitle = link.title
+  const iconId = link.publisher.icon_id
+  const getLogo = () => {
+    if (!iconId) return null
+    return <PublisherLogo size={22} source={{uri: cloudinary.id(iconId)}} />
   }
 
-  logo () {
-    if (!this.logoURI) return null
-    return <PublisherLogo size={22} source={{uri: this.logoURI}} />
-  }
-
-  get title () {
-    const { link } = this.props.navigation.state.params
-    return link.publisher.name
-  }
-
-  get subtitle () {
-    const { link } = this.props.navigation.state.params
-    return link.title
-  }
-
-  get iconId () {
-    const { link } = this.props.navigation.state.params
-    return link.publisher.icon_id
-  }
-
-  get logoURI () {
-    if (!this.iconId) return null
-    return cloudinary.id(this.iconId)
-  }
+  return <HeaderTitle leftButton logo={getLogo()} title={title} subtitle={subtitle} />
 }
 
 LinkHeaderTitle.propTypes = {
