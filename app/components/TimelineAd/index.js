@@ -1,21 +1,39 @@
-import React, { PropTypes } from 'react'
-import { View } from 'react-native'
-import _isEmpty from 'lodash/isEmpty'
-import styles from './styles'
+import React, { Component } from 'react'
+import { Platform, View } from 'react-native'
+import { AdMobNativeExpress } from 'react-native-admob'
+import { ADMOB_TIMELINE_AD_ID } from '../../constants/Ads'
+import styles, { bannerWidth, bannerHeight } from './styles'
 
-const TimelineAd = ({ nativeAd }) => {
-  return null
-}
+class TimelineAd extends Component {
+  constructor () {
+    super()
+    this.state = { error: false }
+    this.handleError = this.handleError.bind(this)
+  }
 
-TimelineAd.propTypes = {
-  // nativeAd: PropTypes.shape({
-  //   callToActionText: PropTypes.string,
-  //   coverImage: PropTypes.string,
-  //   description: PropTypes.string,
-  //   icon: PropTypes.string,
-  //   subtitle: PropTypes.string,
-  //   title: PropTypes.string
-  // })
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.state.error !== nextState.error
+  }
+
+  render () {
+    if (Platform.OS === 'ios') return null
+    if (this.state.error) return null
+
+    return (
+      <View style={styles.container}>
+        <AdMobNativeExpress
+          adUnitID={ADMOB_TIMELINE_AD_ID}
+          bannerWidth={bannerWidth}
+          bannerHeight={bannerHeight}
+          didFailToReceiveAdWithError={this.handleError}
+          />
+      </View>
+    )
+  }
+
+  handleError () {
+    this.setState({ error: true })
+  }
 }
 
 export default TimelineAd
