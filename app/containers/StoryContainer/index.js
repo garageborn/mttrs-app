@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Story from '../../components/Story'
 import { NavigationActions } from '../../actions/index'
@@ -6,54 +6,39 @@ import SocialCountModalContainer from '../SocialCountModalContainer'
 import StoryLinksModalContainer from '../StoryLinksModalContainer'
 import StoryDialogModalContainer from '../StoryDialogModalContainer'
 
-class StoryContainer extends Component {
-  constructor (props) {
-    super(props)
-    this.openLink = this.openLink.bind(this)
-    this.handleDialogButtonPress = this.handleDialogButtonPress.bind(this)
-    this.handlePublishersPress = this.handlePublishersPress.bind(this)
-    this.handleSocialCountPress = this.handleSocialCountPress.bind(this)
-  }
+const StoryContainer = ({ dispatch, renderOptions, story }) => {
+  const mainLink = story.main_link
 
-  render () {
-    const { story } = this.props
-    return (
-      <Story
-        story={story}
-        openLink={this.openLink}
-        handleDialogButtonPress={this.handleDialogButtonPress}
-        handlePublishersPress={this.handlePublishersPress}
-        handleSocialCountPress={this.handleSocialCountPress}
-      />
-    )
-  }
+  const openLink = () => { dispatch(NavigationActions.link(story, mainLink)) }
 
-  openLink () {
-    const { dispatch, story } = this.props
-    dispatch(NavigationActions.link(this.props.story, story.main_link))
-  }
-
-  handlePublishersPress () {
-    const { dispatch, renderOptions, story } = this.props
+  const handlePublishersPress = () => {
     if (story.other_links_count) {
       const content = <StoryLinksModalContainer story={story} renderOptions={renderOptions} />
       return dispatch(NavigationActions.storyLinks(story, content))
     } else {
-      return dispatch(NavigationActions.publisher(story.main_link.publisher))
+      return dispatch(NavigationActions.publisher(mainLink.publisher))
     }
   }
 
-  handleSocialCountPress () {
-    const { dispatch, renderOptions, story } = this.props
+  const handleSocialCountPress = () => {
     const content = <SocialCountModalContainer story={story} renderOptions={renderOptions} />
     return dispatch(NavigationActions.socialCount(story, content))
   }
 
-  handleDialogButtonPress () {
-    const { dispatch, story } = this.props
+  const handleDialogButtonPress = () => {
     const content = <StoryDialogModalContainer story={story} />
     return dispatch(NavigationActions.storyDialog(story, content))
   }
+
+  return (
+    <Story
+      story={story}
+      openLink={openLink}
+      handleDialogButtonPress={handleDialogButtonPress}
+      handlePublishersPress={handlePublishersPress}
+      handleSocialCountPress={handleSocialCountPress}
+    />
+  )
 }
 
 StoryContainer.propTypes = {
