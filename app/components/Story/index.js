@@ -1,5 +1,5 @@
 /* eslint-disable no-return-assign */
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import SummaryContainer from '../../containers/SummaryContainer'
 import StoryMainLink from '../StoryMainLink'
@@ -38,17 +38,19 @@ Story.propTypes = {
     headline: PropTypes.string,
     summary: PropTypes.string,
     main_link: PropTypes.shape({
-      image_source_url: PropTypes.string,
-      publisher: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        icon_id: PropTypes.string
-      }).isRequired
+      image_source_url: PropTypes.string
     }).isRequired,
-    other_links_count: PropTypes.number.isRequired,
+    links_count: PropTypes.number.isRequired,
     category: PropTypes.shape({
       name: PropTypes.string.isRequired,
       color: PropTypes.string
-    })
+    }),
+    publishers: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        icon_id: PropTypes.string
+      })
+    ).isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
   handleDialogButtonPress: PropTypes.func.isRequired,

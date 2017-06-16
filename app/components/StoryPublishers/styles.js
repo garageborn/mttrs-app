@@ -20,11 +20,6 @@ const styles = StyleSheet.create({
   publisherLogo: {
     width: 24,
     height: 24
-  },
-
-  restrictContent: {
-    flexDirection: 'row',
-    alignItems: 'center'
   }
 })
 
