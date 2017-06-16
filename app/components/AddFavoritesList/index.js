@@ -22,8 +22,6 @@ class AddFavoritesList extends Component {
   render () {
     const { publishers } = this.props
 
-    console.log(this.props.isComplete)
-
     return (
       <FlatList
         ListFooterComponent={this.renderFooter}

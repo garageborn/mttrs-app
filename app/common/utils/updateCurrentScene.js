@@ -1,4 +1,3 @@
-import _result from 'lodash/result'
 import _noop from 'lodash/noop'
 import { store } from '../../../index'
 
@@ -7,6 +6,7 @@ class UpdateCurrentScene {
     this.component = component
     this.scene = scene
     this.pendingUpdate = false
+    this.isMount = false
     this.storeListener = this.storeListener.bind(this)
 
     if (!this.component.componentWillMount) this.component.componentWillMount = _noop
@@ -23,12 +23,14 @@ class UpdateCurrentScene {
   }
 
   componentWillMount () {
+    this.isMount = true
     this.unsubscribeStoreListener = store.subscribe(this.storeListener)
     return this.originalComponentWillMount()
   }
 
   componentWillUnmount () {
-    _result(this, 'unsubscribeStoreListener()')
+    this.isMount = false
+    this.unsubscribeStoreListener()
     return this.originalComponentWillUnmount()
   }
 
@@ -51,6 +53,7 @@ class UpdateCurrentScene {
   }
 
   storeListener () {
+    if (!this.isMount) return
     if (!this.isCurrentRoute || !this.pendingUpdate) return
     this.pendingUpdate = false
     this.component.forceUpdate()
