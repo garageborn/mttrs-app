@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 import SplashScreen from 'react-native-splash-screen'
+import SafariView from 'react-native-safari-view'
 
 import EventsContainer from './EventsContainer'
 import NavigationContainer from './NavigationContainer'
@@ -14,11 +15,24 @@ require('../config/Sentry')
 class Root extends Component {
   constructor () {
     super()
-    if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
+    this.resetStatusBar = this.resetStatusBar.bind(this)
+    this.changeStatusBar = this.changeStatusBar.bind(this)
+    this.resetStatusBar()
   }
 
   componentDidMount () {
     SplashScreen.hide()
+    this.safariViewShowListener = SafariView.addEventListener('onShow', this.changeStatusBar)
+    this.safariViewDismissListener = SafariView.addEventListener('onDismiss', this.resetStatusBar)
+  }
+
+  componentWillUnmount () {
+    if (this.safariViewShowListener) {
+      SafariView.removeEventListener('onShow', this.safariViewShowSubscription)
+    }
+    if (this.safariViewDismissListener) {
+      SafariView.removeEventListener('onDismiss', this.safariViewShowSubscription)
+    }
   }
 
   render () {
@@ -34,6 +48,14 @@ class Root extends Component {
         </IntlProvider>
       </ApolloProvider>
     )
+  }
+
+  changeStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle('default')
+  }
+
+  resetStatusBar () {
+    if (Platform.OS === 'ios') StatusBar.setBarStyle(STATUS_BAR_COLOR)
   }
 }
 

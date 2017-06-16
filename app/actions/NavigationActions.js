@@ -1,5 +1,8 @@
+ import { Platform } from 'react-native'
+
 import { NavigationActions } from 'react-navigation'
 import _result from 'lodash/result'
+import SafariView from 'react-native-safari-view'
 import { AnalyticsActions, UIActions } from './index'
 
 // AppNavigator
@@ -12,8 +15,8 @@ export function summaries () {
 
 export function link (story, link) {
   return dispatch => {
-    const params = { story: story, link: link }
-    dispatch(NavigationActions.navigate({ routeName: 'link', params }))
+    const method = Platform.select({ ios: iosLink, android: linkScene })
+    dispatch(method(story, link))
   }
 }
 
@@ -101,4 +104,22 @@ export function publisherCategoriesDialog (publisher, content) {
 
 export function closeModal () {
   return dispatch => dispatch(UIActions.closeModal())
+}
+
+function iosLink (story, link) {
+  return dispatch => {
+    const url = link.amp_url || link.url
+    requestAnimationFrame(() => {
+      SafariView.isAvailable()
+        .then(() => SafariView.show({ url }))
+        .catch(() => dispatch(linkScene(story, link))) // Fallback WebView for iOS 8 and earlier
+    })
+  }
+}
+
+function linkScene (story, link) {
+  return dispatch => {
+    const params = { story: story, link: link }
+    dispatch(NavigationActions.navigate({ routeName: 'link', params }))
+  }
 }

@@ -29,6 +29,7 @@
     "react-native-google-analytics-bridge": "^5.0.1",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-onesignal": "^3.0.4",
+    "react-native-safari-view": "^2.0.0",
     "react-native-sentry": "^0.12.10",
     "react-native-share": "^1.0.20",
     "react-native-splash-screen": "^2.1.0",
