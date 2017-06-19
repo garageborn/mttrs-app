@@ -4,7 +4,6 @@ import styles from './styles'
 import image from './assets/image.png'
 
 const StoryPublishersCounter = ({ count }) => {
-  console.log(count)
   if (count <= 0) {
     return (
       <View style={styles.container}>

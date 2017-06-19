@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
+export const smallDevice = Dimensions.get('window').width < 520
 
 const styles = StyleSheet.create({
   lightText: {

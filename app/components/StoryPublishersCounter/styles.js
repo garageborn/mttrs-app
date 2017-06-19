@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
   text: {
     marginRight: 3,
     fontSize: 11,
-    letterSpacing: 14,
     fontWeight: '500'
   }
 })

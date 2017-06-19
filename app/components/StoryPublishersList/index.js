@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import styles from './styles'
 
@@ -8,6 +8,10 @@ const StoryPublishersList = ({ publishers }) => {
       {publishers}
     </View>
   )
+}
+
+StoryPublishersList.propTypes = {
+  publishers: PropTypes.array.isRequired
 }
 
 export default StoryPublishersList

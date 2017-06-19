@@ -4,11 +4,13 @@ import StoryPublishersCounter from '../StoryPublishersCounter'
 import StoryPublishersItem from '../StoryPublishersItem'
 import StoryPublishersList from '../StoryPublishersList'
 import * as cloudinary from '../../common/utils/Cloudinary'
-import styles from './styles'
+import styles, { smallDevice } from './styles'
 
 const StoryPublishers = ({ story }) => {
   const renderCounter = () => {
-    const otherLinksCount = story.links_count - 5
+    let shownPublishersCount = 5
+    if (smallDevice) shownPublishersCount = 3
+    const otherLinksCount = story.links_count - shownPublishersCount
     return <StoryPublishersCounter count={otherLinksCount} />
   }
 
@@ -19,7 +21,9 @@ const StoryPublishers = ({ story }) => {
   }
 
   const renderPublishers = () => {
-    return story.publishers.map((publisher) => renderPublisher(publisher))
+    let { publishers } = story
+    if (smallDevice) publishers = publishers.slice(0, 3)
+    return publishers.map((publisher) => renderPublisher(publisher))
   }
 
   return (

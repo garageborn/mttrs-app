@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 10,
+    marginHorizontal: 10,
     paddingVertical: 12,
     paddingHorizontal: 15,
     backgroundColor: '#F7F7F8',
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 12,
-    letterSpacing: 14,
     fontWeight: '500',
     color: '#666766'
   }
