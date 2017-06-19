@@ -12,7 +12,7 @@ const StoryPublishersItem = ({ source }) => {
 }
 
 StoryPublishersItem.propTypes = {
-  source: PropTypes.string.isRequired
+  source: PropTypes.object.isRequired
 }
 
 export default StoryPublishersItem
