@@ -1,20 +1,21 @@
 import React, { PropTypes } from 'react'
-import { Text, View } from 'react-native'
-import PublisherLogo from '../PublisherLogo'
+import { View } from 'react-native'
+import StoryPublishersCounter from '../StoryPublishersCounter'
+import StoryPublishersItem from '../StoryPublishersItem'
+import StoryPublishersList from '../StoryPublishersList'
 import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
 const StoryPublishers = ({ story }) => {
   const renderCounter = () => {
     const otherLinksCount = story.links_count - story.publishers.length
-    if (otherLinksCount < 1) return
-    return <Text style={styles.darkText}>+{otherLinksCount}</Text>
+    return <StoryPublishersCounter count={otherLinksCount} />
   }
 
   const renderPublisher = (publisher) => {
     if (!publisher.icon_id) return null
     const uri = cloudinary.id(publisher.icon_id)
-    return <PublisherLogo key={publisher.id} source={{ uri }} />
+    return <StoryPublishersItem key={publisher.id} source={{ uri }} />
   }
 
   const renderPublishers = () => {
@@ -22,9 +23,9 @@ const StoryPublishers = ({ story }) => {
   }
 
   return (
-    <View style={styles.publisher}>
+    <View style={styles.container}>
       {renderCounter()}
-      {renderPublishers()}
+      <StoryPublishersList publishers={renderPublishers()} />
     </View>
   )
 }

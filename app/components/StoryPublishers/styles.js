@@ -11,10 +11,14 @@ const styles = StyleSheet.create({
     color: '#666766'
   },
 
-  publisher: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10
+    marginVertical: 10,
+    marginLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#F7F7F8',
+    borderRadius: 40
   },
 
   publisherLogo: {
