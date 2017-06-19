@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, Image, ActivityIndicator } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Success from './components/Success'
 import Error from './components/Error'
 import Button from '../Button'
 import icon from './assets/icon.png'
 import styles from './styles'
+import _noop from 'lodash/noop'
+import _isEmpty from 'lodash/isEmpty'
 
 const messages = defineMessages({
   title: { id: 'publisher.suggestion.title' },
@@ -19,10 +21,6 @@ class PublisherSuggestion extends Component {
     this.onButtonPress = this.onButtonPress.bind(this)
   }
 
-  activityIndicator () {
-    return <ActivityIndicator style={styles.loading} size='small' />
-  }
-
   renderStatus () {
     if (this.props.status === 'success') return <Success />
     if (this.props.status === 'error') return <Error />
@@ -30,7 +28,7 @@ class PublisherSuggestion extends Component {
   }
 
   render () {
-    const { intl, publisher } = this.props
+    const { intl, query } = this.props
     let title = intl.formatMessage(messages.title)
     let subTitle = intl.formatMessage(messages.subTitle)
 
@@ -39,30 +37,23 @@ class PublisherSuggestion extends Component {
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subTitle}>{subTitle}</Text>
         <Image style={styles.icon} source={icon} />
-        <Text style={styles.publisher}>{publisher}</Text>
+        <Text style={styles.publisher}>{query}</Text>
         {this.renderStatus()}
       </View>
     )
   }
 
   renderButton () {
-    const { intl } = this.props
-    let label = intl.formatMessage(messages.sendButton)
+    const { intl, query } = this.props
+    let label = intl.formatMessage(messages.sendButton).toUpperCase()
 
-    if (this.props.query === '') return this.renderInactiveButton(label)
-
-    return (
-      <Button
-        background='danger'
-        content={label.toUpperCase()}
-        onPress={this.onButtonPress}
-        size='regular'
-      />
-    )
-  }
-
-  renderInactiveButton (label) {
-    return <Button background='danger' inactive content={label.toUpperCase()} size='regular' />
+    let options = {}
+    if (_isEmpty(query)) {
+      options = { inactive: true, onPress: _noop }
+    } else {
+      options = { onPress: this.onButtonPress }
+    }
+    return <Button background='danger' content={label} size='regular' {...options} />
   }
 
   onButtonPress () {
@@ -76,7 +67,6 @@ PublisherSuggestion.propTypes = {
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   sendSuggestion: PropTypes.func,
-  publisher: PropTypes.string,
   status: PropTypes.string.isRequired
 }
 

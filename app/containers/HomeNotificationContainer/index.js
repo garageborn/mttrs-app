@@ -6,7 +6,7 @@ import { AnalyticsActions, NavigationActions } from '../../actions/index'
 class HomeNotificationContainer extends Component {
   componentDidMount () {
     const { dispatch, payload } = this.props
-    dispatch(NavigationActions.summaries())
+    dispatch(NavigationActions.popular())
     dispatch(AnalyticsActions.trackEvent(OPEN_NOTIFICATION, payload.body))
   }
 

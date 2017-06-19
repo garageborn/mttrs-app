@@ -2,20 +2,14 @@
 import React from 'react'
 import { TabNavigator, TabBarBottom } from 'react-navigation'
 import PopularScene from '../scenes/PopularScene'
-import SummariesScene from '../scenes/SummariesScene'
+import PublishersScene from '../scenes/PublishersScene'
 import FavoritesScene from '../scenes/FavoritesScene'
 import PopularTabBar from '../components/PopularTabBar'
-import SummariesTabBar from '../components/SummariesTabBar'
+import PublishersTabBar from '../components/PublishersTabBar'
 import FavoritesTabBar from '../components/FavoritesTabBar'
 import styles from '../styles/TabBarBottom'
 
 const TimelineRoutes = {
-  summaries: {
-    screen: SummariesScene,
-    navigationOptions: {
-      tabBarLabel: ({ focused }) => <SummariesTabBar focused={focused} />
-    }
-  },
   popular: {
     screen: PopularScene,
     navigationOptions: {
@@ -28,12 +22,18 @@ const TimelineRoutes = {
     navigationOptions: {
       tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />
     }
+  },
+  publishers: {
+    screen: PublishersScene,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => <PublishersTabBar focused={focused} />
+    }
   }
 }
 
 const TimelineNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'summaries',
+  initialRouteName: 'popular',
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',

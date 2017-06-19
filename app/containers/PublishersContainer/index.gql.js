@@ -14,6 +14,6 @@ query {
 }
 `
 
-export default function (PublishersListContainer) {
-  return graphql(Query)(PublishersListContainer)
+export default function (PublishersContainer) {
+  return graphql(Query)(PublishersContainer)
 }

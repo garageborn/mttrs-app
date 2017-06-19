@@ -3,7 +3,6 @@ import _isEqual from 'lodash/isEqual'
 import PopularTabBarNavigator from '../components/PopularTabBarNavigator'
 import PopularTimelineScene from '../scenes/PopularTimelineScene'
 import { buildCategoryTimelineScene } from '../scenes/CategoryTimelineScene'
-import PublishersScene from '../scenes/PublishersScene'
 
 let instance
 
@@ -39,8 +38,7 @@ class PopularNavigator {
 
     return {
       home: { screen: PopularTimelineScene },
-      ...categoryRoutes,
-      publishers: { screen: PublishersScene }
+      ...categoryRoutes
     }
   }
 
