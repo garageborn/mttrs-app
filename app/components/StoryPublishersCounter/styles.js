@@ -2,8 +2,10 @@ import { StyleSheet } from 'react-native'
 const containerSize = 42
 const borderWidth = 2
 const innerContainer = {
-  width: containerSize - borderWidth,
-  height: (containerSize / 2) - borderWidth
+  width: containerSize - (borderWidth * 2),
+  height: (containerSize / 2) - borderWidth,
+  alignItems: 'center',
+  justifyContent: 'center'
 }
 
 const styles = StyleSheet.create({
@@ -13,7 +15,9 @@ const styles = StyleSheet.create({
     borderRadius: containerSize,
     borderWidth,
     borderColor: '#E9E9E9',
-    marginRight: 5
+    marginRight: 5,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   imageContainer: {
     ...innerContainer,
@@ -23,14 +27,13 @@ const styles = StyleSheet.create({
   textContainer: {
     ...innerContainer,
     backgroundColor: '#F1F1F1',
-    alignItems: 'center',
-    justifyContent: 'center',
     borderBottomLeftRadius: containerSize / 2,
     borderBottomRightRadius: containerSize / 2
   },
   text: {
-    marginRight: 5,
+    marginRight: 3,
     fontSize: 11,
+    letterSpacing: 14,
     fontWeight: '500'
   }
 })

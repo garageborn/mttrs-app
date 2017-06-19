@@ -8,7 +8,7 @@ import styles from './styles'
 
 const StoryPublishers = ({ story }) => {
   const renderCounter = () => {
-    const otherLinksCount = story.links_count - story.publishers.length
+    const otherLinksCount = story.links_count - 5
     return <StoryPublishersCounter count={otherLinksCount} />
   }
 
