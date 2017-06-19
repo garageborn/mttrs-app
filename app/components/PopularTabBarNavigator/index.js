@@ -9,7 +9,6 @@ import styles from './styles'
 import hexRgb from 'hex-rgb'
 
 const topStoriesColor = '#FF5607'
-const publishersColor = '#999'
 
 class PopularTabBarNavigator extends Component {
   constructor () {
@@ -54,11 +53,9 @@ class PopularTabBarNavigator extends Component {
   }
 
   tabContent (tab, index) {
-    const { categories, navigationState, intl } = this.props
+    const { categories, intl } = this.props
     if (index === 0) {
       return { name: intl.formatMessage({id: 'header.topStories'}), color: topStoriesColor }
-    } else if (index === navigationState.routes.length - 1) {
-      return { name: intl.formatMessage({id: 'header.publishers'}), color: publishersColor }
     } else {
       return categories.find((category) => category.slug === tab.routeName)
     }
@@ -68,8 +65,7 @@ class PopularTabBarNavigator extends Component {
     const { categories } = this.props
     return [
       this.convertColor(topStoriesColor),
-      ...categories.map((category) => this.convertColor(category.color)),
-      this.convertColor(publishersColor)
+      ...categories.map((category) => this.convertColor(category.color))
     ]
   }
 

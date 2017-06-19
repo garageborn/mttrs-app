@@ -3,7 +3,7 @@ import { Image } from 'react-native'
 import { injectIntl } from 'react-intl'
 import BottomTabItem from '../BottomTabItem'
 
-const SummariesTabBar = ({ focused, intl }) => {
+const PublishersTabBar = ({ focused, intl }) => {
   const getIcon = () => {
     if (focused) {
       return <Image source={require('./assets/active.png')} />
@@ -16,15 +16,15 @@ const SummariesTabBar = ({ focused, intl }) => {
     <BottomTabItem
       active={focused}
       icon={getIcon()}
-      message={intl.formatMessage({ id: 'tabBar.summaries' })}
+      message={intl.formatMessage({ id: 'tabBar.publishers' })}
     />
   )
 }
 
-SummariesTabBar.propTypes = {
+PublishersTabBar.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
   focused: PropTypes.bool.isRequired
 }
-export default injectIntl(SummariesTabBar)
+export default injectIntl(PublishersTabBar)

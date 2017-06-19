@@ -8,7 +8,7 @@ import PublisherSelector from '../../components/PublisherSelector'
 import Loader from '../../components/PublisherSelectorLoader'
 import { NavigationActions } from '../../actions/index'
 
-class PublisherSelectorContainer extends Component {
+class PublishersContainer extends Component {
   constructor () {
     super()
     this.state = { query: '' }
@@ -45,7 +45,6 @@ class PublisherSelectorContainer extends Component {
     const { loading, error } = this.props.data
 
     if (loading) return <Loader />
-
     if (error) return this.renderError()
 
     return (
@@ -74,7 +73,7 @@ class PublisherSelectorContainer extends Component {
   }
 }
 
-PublisherSelectorContainer.propTypes = {
+PublishersContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   data: PropTypes.shape({
     publishers: PropTypes.array,
@@ -83,5 +82,5 @@ PublisherSelectorContainer.propTypes = {
   })
 }
 
-const PublisherSelectorContainerWithData = withQuery(PublisherSelectorContainer)
-export default connect()(PublisherSelectorContainerWithData)
+const PublishersContainerWithData = withQuery(PublishersContainer)
+export default connect()(PublishersContainerWithData)

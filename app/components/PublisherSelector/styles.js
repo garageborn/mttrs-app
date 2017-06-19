@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F7F7F8',
     flexGrow: 1
   },
-  contentContainer: {
-    height: height - headerHeight - tabBarHeight - searchBarHeight - statusBarHeight
-  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-around'
