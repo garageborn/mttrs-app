@@ -3,10 +3,9 @@ import _result from 'lodash/result'
 import { AnalyticsActions, UIActions } from './index'
 
 // AppNavigator
-export function summaries () {
+export function popular () {
   return dispatch => {
-    dispatch(NavigationActions.navigate({ routeName: 'summaries' }))
-    dispatch(AnalyticsActions.trackScreen('/summaries'))
+    dispatch(NavigationActions.navigate({ routeName: 'popular' }))
   }
 }
 

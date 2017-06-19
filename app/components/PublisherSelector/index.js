@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherSelectorList from '../PublisherSelectorList'
 import PublisherSuggestionTrigger from '../PublisherSuggestionTrigger'
@@ -14,26 +14,16 @@ class PublisherSelector extends Component {
   }
 
   render () {
-    const { emptyInput, handleQuery } = this.props
+    const { query, handleQuery } = this.props
     const { suggestion } = this.state
 
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <PublisherSearch
-            handleQuery={handleQuery}
-            emptyInput={emptyInput}
-            suggestion={suggestion}
-          />
-          <PublisherSuggestionTrigger
-            handlePress={this.handleSuggestionTrigger}
-            active={suggestion}
-          />
+          <PublisherSearch handleQuery={handleQuery} query={query} suggestion={suggestion} />
+          <PublisherSuggestionTrigger onPress={this.handleSuggestionTrigger} active={suggestion} />
         </View>
-        <ScrollView style={styles.contentContainer}>
-          {this.renderListView()}
-          {this.renderSuggestionView()}
-        </ScrollView>
+        {this.renderContent()}
       </View>
     )
   }
@@ -42,22 +32,18 @@ class PublisherSelector extends Component {
     return this.setState({ suggestion: !this.state.suggestion })
   }
 
+  renderContent () {
+    return this.state.suggestion ? this.renderSuggestionView() : this.renderListView()
+  }
+
   renderSuggestionView () {
-    const { query, publishers } = this.props
-    if (publishers.length && !this.state.suggestion) return null
-    return <PublisherSuggestionContainer query={query} publisher={query} />
+    const { query } = this.props
+    return <PublisherSuggestionContainer query={query} />
   }
 
   renderListView () {
-    const { openPublisher, publishers, query } = this.props
-    if (this.state.suggestion && !query.length) return null
-    return (
-      <PublisherSelectorList
-        hasPublishers={this.hasPublishers}
-        publishers={publishers}
-        openPublisher={openPublisher}
-      />
-    )
+    const { openPublisher, publishers } = this.props
+    return <PublisherSelectorList publishers={publishers} openPublisher={openPublisher} />
   }
 }
 

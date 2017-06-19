@@ -5,22 +5,16 @@ import PublisherSuggestion from '../../components/PublisherSuggestion'
 class PublisherSuggestionContainer extends Component {
   constructor () {
     super()
-
     this.sendSuggestion = this.sendSuggestion.bind(this)
-
-    this.state = {
-      status: ''
-    }
+    this.state = { status: '' }
   }
 
   render () {
+    const { query } = this.props
+    const { status } = this.state
+
     return (
-      <PublisherSuggestion
-        query={this.props.query}
-        publisher={this.props.publisher}
-        sendSuggestion={this.sendSuggestion}
-        status={this.state.status}
-      />
+      <PublisherSuggestion query={query} sendSuggestion={this.sendSuggestion} status={status} />
     )
   }
 
@@ -33,7 +27,6 @@ class PublisherSuggestionContainer extends Component {
 
 PublisherSuggestionContainer.propTypes = {
   createPublisherSuggestion: PropTypes.func.isRequired,
-  publisher: PropTypes.string.isRequired,
   query: PropTypes.string.isRequired
 }
 
