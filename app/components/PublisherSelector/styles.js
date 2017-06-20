@@ -1,9 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
-const { height } = Dimensions.get('window')
-const headerHeight = 44
-const tabBarHeight = 49
-const searchBarHeight = 35
-const statusBarHeight = 35
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
