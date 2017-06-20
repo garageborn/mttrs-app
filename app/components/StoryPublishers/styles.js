@@ -1,5 +1,7 @@
 import { Dimensions, StyleSheet } from 'react-native'
-export const smallDevice = Dimensions.get('window').width < 520
+export const smallDevice = Dimensions.get('window').width < 360
+
+console.log(Dimensions.get('window').width)
 
 const styles = StyleSheet.create({
   lightText: {
@@ -16,7 +18,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
-    marginHorizontal: 10,
+    marginLeft: 10,
+    marginRight: 5,
     paddingRight: 10,
     backgroundColor: '#F7F7F8',
     borderRadius: 40

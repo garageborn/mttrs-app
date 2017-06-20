@@ -14,22 +14,25 @@ const StoryPublishers = ({ story }) => {
     return <StoryPublishersCounter count={otherLinksCount} />
   }
 
-  const renderPublisher = (publisher) => {
+  const renderPublisher = (publisher, restricted) => {
     if (!publisher.icon_id) return null
     const uri = cloudinary.id(publisher.icon_id)
-    return <StoryPublishersItem key={publisher.id} source={{ uri }} />
+    return <StoryPublishersItem key={publisher.id} source={{ uri }} restricted={restricted} />
   }
 
-  const renderPublishers = () => {
+  const publishers = () => {
     let { publishers } = story
+    if (publishers.length === 1 && publishers[0].restrict_content) return renderPublisher(publishers[0], true)
     if (smallDevice) publishers = publishers.slice(0, 3)
-    return publishers.map((publisher) => renderPublisher(publisher))
+    return publishers.map((publisher) => renderPublisher(publisher, false))
   }
+
+  const renderPublishers = () => <StoryPublishersList publishers={publishers()} />
 
   return (
     <View style={styles.container}>
       {renderCounter()}
-      <StoryPublishersList publishers={renderPublishers()} />
+      {renderPublishers()}
     </View>
   )
 }

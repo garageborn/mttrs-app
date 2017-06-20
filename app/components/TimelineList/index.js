@@ -67,7 +67,7 @@ class TimelineList extends Component {
     const story = section.item
 
     let components = []
-    // if (this.hasAd(section.index)) components.push(<TimelineAd key={'timelineAd'} />)
+    if (this.hasAd(section.index)) components.push(<TimelineAd key={'timelineAd'} />)
     components.push(
       <StoryContainer
         key={story.id}
