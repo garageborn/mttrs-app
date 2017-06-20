@@ -10,17 +10,17 @@ import FavoritesTabBar from '../components/FavoritesTabBar'
 import styles from '../styles/TabBarBottom'
 
 const TimelineRoutes = {
+  favorites: {
+    screen: FavoritesScene,
+    navigationOptions: {
+      tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />
+    }
+  },
   popular: {
     screen: PopularScene,
     navigationOptions: {
       tabBarLabel: ({ focused }) => <PopularTabBar focused={focused} />,
       header: null
-    }
-  },
-  favorites: {
-    screen: FavoritesScene,
-    navigationOptions: {
-      tabBarLabel: ({ focused }) => <FavoritesTabBar focused={focused} />
     }
   },
   publishers: {
@@ -33,7 +33,7 @@ const TimelineRoutes = {
 
 const TimelineNavigatorConfig = {
   headerMode: 'none',
-  initialRouteName: 'popular',
+  initialRouteName: 'favorites',
   swipeEnabled: false,
   tabBarComponent: ({ ...props }) => <TabBarBottom style={styles} {...props} />,
   tabBarPosition: 'bottom',
