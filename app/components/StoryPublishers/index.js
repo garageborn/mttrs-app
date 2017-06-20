@@ -1,87 +1,52 @@
-import React, { PureComponent, PropTypes } from 'react'
-import { Text, View } from 'react-native'
-import { injectIntl, defineMessages } from 'react-intl'
-import RestrictContentLabel from '../RestrictContentLabel'
-import PublisherLogo from '../PublisherLogo'
+import React, { PropTypes } from 'react'
+import { View } from 'react-native'
+import StoryPublishersCounter from '../StoryPublishersCounter'
+import StoryPublishersItem from '../StoryPublishersItem'
+import StoryPublishersList from '../StoryPublishersList'
 import * as cloudinary from '../../common/utils/Cloudinary'
-import styles from './styles'
+import styles, { smallDevice } from './styles'
 
-const messages = defineMessages({
-  and: {
-    id: 'and'
-  },
-  others: {
-    id: 'storyPublishers.others'
-  }
-})
-
-class StoryPublishers extends PureComponent {
-  render () {
-    return (
-      <View style={styles.publisher}>
-        <PublisherLogo source={this.publisherLogo} />
-        {this.getMainPublisher()}
-        {this.getCounter()}
-      </View>
-    )
+const StoryPublishers = ({ story }) => {
+  const renderCounter = () => {
+    let shownPublishersCount = 5
+    if (smallDevice) shownPublishersCount = 3
+    const otherLinksCount = story.links_count - shownPublishersCount
+    return <StoryPublishersCounter count={otherLinksCount} />
   }
 
-  getRestrictContentLabel () {
-    const { story } = this.props
-    if (story.other_links_count > 0) return
-    if (story.main_link.publisher.restrict_content) return <RestrictContentLabel />
+  const renderPublisher = (publisher, restricted) => {
+    if (!publisher.icon_id) return null
+    const uri = cloudinary.id(publisher.icon_id)
+    return <StoryPublishersItem key={publisher.id} source={{ uri }} restricted={restricted} />
   }
 
-  getMainPublisher () {
-    return (
-      <View style={styles.restrictContent}>
-        <Text style={styles.darkText}> {this.name}</Text>
-        {this.getRestrictContentLabel()}
-      </View>
-    )
+  const publishers = () => {
+    let { publishers } = story
+    if (publishers.length === 1 && publishers[0].restrict_content) return renderPublisher(publishers[0], true)
+    if (smallDevice) publishers = publishers.slice(0, 3)
+    return publishers.map((publisher) => renderPublisher(publisher, false))
   }
 
-  get name () {
-    const { publisher } = this.props.story.main_link
-    return publisher.display_name || publisher.name
-  }
+  const renderPublishers = () => <StoryPublishersList publishers={publishers()} />
 
-  get publisherLogo () {
-    const { main_link } = this.props.story
-    if (!main_link.publisher.icon_id) return
-    const uri = cloudinary.id(main_link.publisher.icon_id)
-    return { uri }
-  }
-
-  getCounter () {
-    const { formatMessage } = this.props.intl
-    const and = formatMessage(messages.and)
-    const othersText = formatMessage(messages.others, {itemCount: this.props.story.other_links_count})
-    let otherLinksCount = this.props.story.other_links_count
-    if (!otherLinksCount) return
-
-    return (
-      <Text style={styles.lightText}> {and}
-        <Text style={styles.darkText}>{othersText}</Text>
-      </Text>
-    )
-  }
+  return (
+    <View style={styles.container}>
+      {renderCounter()}
+      {renderPublishers()}
+    </View>
+  )
 }
 
 StoryPublishers.propTypes = {
-  intl: PropTypes.shape({
-    formatMessage: PropTypes.func.isRequired,
-    locale: PropTypes.string.isRequired
-  }).isRequired,
   story: PropTypes.shape({
-    main_link: PropTypes.shape({
-      publisher: PropTypes.shape({
+    publishers: PropTypes.arrayOf(
+      PropTypes.shape({
         name: PropTypes.string.isRequired,
         icon_id: PropTypes.string
-      }).isRequired
-    }).isRequired,
-    other_links_count: PropTypes.number.isRequired
+      })
+    ).isRequired,
+    links_count: PropTypes.number.isRequired
   }).isRequired
 }
 
-export default injectIntl(StoryPublishers)
+export default StoryPublishers

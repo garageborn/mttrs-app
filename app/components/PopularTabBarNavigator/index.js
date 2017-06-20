@@ -36,7 +36,9 @@ class PopularTabBarNavigator extends Component {
           renderTab={this.renderTab}
           renderOptions={renderOptions}
         />
-        <HeaderSettingsContainer />
+        <View style={styles.buttonContainer}>
+          <HeaderSettingsContainer />
+        </View>
       </View>
     )
   }

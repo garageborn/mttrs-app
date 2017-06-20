@@ -1,7 +1,6 @@
 {
   "addFavorites.button": "PRONTO",
   "addFavorites.heading": "Escolha seus sites favoritos para uma leitura personalizada",
-  "and": "e",
   "categoriesDialog.allCategories": "Todas as categorias",
   "dateFormat": "D [de] MMMM",
   "emptyFavoritesTimeline.button": "ESCOLHER",
@@ -61,7 +60,6 @@
   "storyDialog.addFavorite": "Adicionar aos Favoritos",
   "storyDialog.removeFavorite": "Remover dos Favoritos",
   "storyDialog.share": "Compartilhar a notícia",
-  "storyPublishers.others": " {itemCount, plural, one {mais #} other {mais #}}",
   "summary.showLess": "ver menos",
   "summary.showMore": "ver mais",
   "summary.title": "Resumo do editor",
