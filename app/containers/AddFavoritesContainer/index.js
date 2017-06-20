@@ -6,7 +6,7 @@ import updateCurrentScene from '../../common/utils/updateCurrentScene'
 class AddFavoritesContainer extends Component {
   constructor () {
     super()
-    this.openFavoritesTimeline = this.openFavoritesTimeline.bind(this)
+    this.onComplete = this.onComplete.bind(this)
     updateCurrentScene(this, 'addFavorites')
   }
 
@@ -16,21 +16,16 @@ class AddFavoritesContainer extends Component {
 
   render () {
     const { isComplete } = this.props.favoritePublishers
-    const onPress = this.openFavoritesTimeline
-
-    return (
-      <AddFavoritesListContainer openFavoritesTimeline={onPress} isComplete={isComplete} />
-    )
+    return <AddFavoritesListContainer onComplete={this.onComplete} isComplete={isComplete} />
   }
 
-  openFavoritesTimeline () {
+  onComplete () {
     const { navigation } = this.props
     navigation.goBack()
   }
 }
 
 AddFavoritesContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   favoritePublishers: PropTypes.shape({
     isComplete: PropTypes.bool.isRequired
   }).isRequired,

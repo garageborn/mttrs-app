@@ -33,14 +33,14 @@ class AddFavoritesHeading extends Component {
   }
 
   renderButton () {
-    const { intl, isComplete, openFavoritesTimeline } = this.props
+    const { intl, isComplete, onComplete } = this.props
 
     return (
       <Button
         background={'transparent'}
         inactive={!isComplete}
         content={intl.formatMessage(messages.button)}
-        onPress={openFavoritesTimeline}
+        onPress={onComplete}
         size='small'
       />
     )
@@ -48,7 +48,7 @@ class AddFavoritesHeading extends Component {
 }
 
 AddFavoritesHeading.propTypes = {
-  openFavoritesTimeline: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired,
   isComplete: PropTypes.bool.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired

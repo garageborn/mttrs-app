@@ -9,7 +9,7 @@
     "apollo-client": "^1.4.2",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.25.0",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^7.1.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "cloudinary-core": "^2.1.7",
     "graphql-tag": "^2.4.0",

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
 import { injectIntl, defineMessages } from 'react-intl'
 import Page from '../../components/Page'
-import styles from './styles'
 const image = require('./assets/image.png')
 
 const messages = defineMessages({
@@ -14,24 +13,17 @@ const messages = defineMessages({
   }
 })
 
-const Third = ({ intl }) => {
+const Second = ({ intl }) => {
   let title = intl.formatMessage(messages.title)
   let description = intl.formatMessage(messages.description)
 
-  return (
-    <Page
-      image={image}
-      imageStyles={styles.image}
-      title={title}
-      description={description}
-    />
-  )
+  return <Page image={image} title={title} description={description} />
 }
 
-Third.propTypes = {
+Second.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired
 }
 
-export default injectIntl(Third)
+export default injectIntl(Second)
