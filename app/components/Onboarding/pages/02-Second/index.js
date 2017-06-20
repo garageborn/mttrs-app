@@ -5,11 +5,11 @@ const image = require('./assets/image.png')
 
 const messages = defineMessages({
   title: {
-    id: 'onboarding.third.title'
+    id: 'onboarding.second.title'
   },
 
   description: {
-    id: 'onboarding.third.description'
+    id: 'onboarding.second.description'
   }
 })
 
