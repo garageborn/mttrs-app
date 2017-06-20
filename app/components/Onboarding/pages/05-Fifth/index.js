@@ -1,12 +1,37 @@
 import React, { PropTypes } from 'react'
-import OnboardingAddFavoritesContainer from '../../../../containers/OnboardingAddFavoritesContainer'
+import { injectIntl, defineMessages } from 'react-intl'
+import Page from '../../components/Page'
+import styles from './styles'
+const image = require('./assets/image.png')
 
-const Fifth = ({ onEnd }) => {
-  return <OnboardingAddFavoritesContainer onComplete={onEnd} />
+const messages = defineMessages({
+  title: {
+    id: 'onboarding.fifth.title'
+  },
+
+  description: {
+    id: 'onboarding.fifth.description'
+  }
+})
+
+const Fifth = ({ intl }) => {
+  let title = intl.formatMessage(messages.title)
+  let description = intl.formatMessage(messages.description)
+
+  return (
+    <Page
+      image={image}
+      imageStyles={styles.image}
+      title={title}
+      description={description}
+    />
+  )
 }
 
 Fifth.propTypes = {
-  onEnd: PropTypes.func.isRequired
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired
 }
 
-export default Fifth
+export default injectIntl(Fifth)

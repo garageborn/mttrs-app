@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Modal, Platform, StatusBar } from 'react-native'
 import { connect } from 'react-redux'
 import Onboarding from '../../components/Onboarding'
-import { OnboardingActions } from '../../actions/index'
+import { NavigationActions, OnboardingActions } from '../../actions/index'
 import { STATUS_BAR_COLOR } from '../../constants/Colors'
 
 class OnboardingContainer extends Component {
@@ -36,6 +36,7 @@ class OnboardingContainer extends Component {
   onOnboardingEnd () {
     this.resetStatusBar()
     this.props.dispatch(OnboardingActions.closeOnboarding())
+    this.props.dispatch(NavigationActions.addFavorites())
   }
 
   changeStatusBar () {

@@ -28,7 +28,6 @@ export function getOnboardingStatus () {
     dispatch(this.requestOnboarding())
     AsyncStorage.getItem('showOnboarding', (error, data) => {
       if (error) captureError(error)
-      return dispatch(this.showOnboarding(true))
 
       if (data === null) {
         dispatch(this.showOnboarding(true))

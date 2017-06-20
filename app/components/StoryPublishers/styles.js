@@ -1,8 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native'
 export const smallDevice = Dimensions.get('window').width < 360
 
-console.log(Dimensions.get('window').width)
-
 const styles = StyleSheet.create({
   lightText: {
     fontSize: 14,
