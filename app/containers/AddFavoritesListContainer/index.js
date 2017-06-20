@@ -13,11 +13,17 @@ class AddFavoritesListContainer extends Component {
   }
 
   render () {
-    const { data, isComplete, openFavoritesTimeline } = this.props
+    const { data, isComplete, onComplete } = this.props
     const { loading, publishers } = data
     if (loading) return this.renderLoading()
 
-    return <AddFavoritesList openFavoritesTimeline={openFavoritesTimeline} isComplete={isComplete} publishers={publishers} />
+    return (
+      <AddFavoritesList
+        onComplete={onComplete}
+        isComplete={isComplete}
+        publishers={publishers}
+      />
+    )
   }
 
   renderLoading () {
@@ -31,7 +37,7 @@ AddFavoritesListContainer.propTypes = {
     publishers: PropTypes.any
   }).isRequired,
   isComplete: PropTypes.bool.isRequired,
-  openFavoritesTimeline: PropTypes.func.isRequired
+  onComplete: PropTypes.func.isRequired
 }
 
 export default withQuery(AddFavoritesListContainer)

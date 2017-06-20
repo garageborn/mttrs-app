@@ -12,7 +12,7 @@ const Onboarding = ({ onEnd }) => (
     <Second />
     <Third />
     <Fourth />
-    <Fifth />
+    <Fifth onEnd={onEnd} />
   </PagesWrapper>
 )
 

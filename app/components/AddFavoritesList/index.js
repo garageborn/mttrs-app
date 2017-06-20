@@ -22,8 +22,6 @@ class AddFavoritesList extends Component {
   render () {
     const { publishers } = this.props
 
-    console.log(this.props.isComplete)
-
     return (
       <FlatList
         ListFooterComponent={this.renderFooter}
@@ -41,13 +39,13 @@ class AddFavoritesList extends Component {
   }
 
   renderFooter () {
-    const { isComplete, openFavoritesTimeline } = this.props
-    return <AddFavoritesFooter isComplete={isComplete} onPress={openFavoritesTimeline} />
+    const { isComplete, onComplete } = this.props
+    return <AddFavoritesFooter isComplete={isComplete} onPress={onComplete} />
   }
 
   renderHeader () {
-    const { isComplete, openFavoritesTimeline } = this.props
-    return <AddFavoritesHeading isComplete={isComplete} openFavoritesTimeline={openFavoritesTimeline} />
+    const { isComplete, onComplete } = this.props
+    return <AddFavoritesHeading isComplete={isComplete} onComplete={onComplete} />
   }
 
   renderRow (data) {
@@ -57,7 +55,7 @@ class AddFavoritesList extends Component {
 
 AddFavoritesList.propTypes = {
   isComplete: PropTypes.bool.isRequired,
-  openFavoritesTimeline: PropTypes.func.isRequired,
+  onComplete: PropTypes.func.isRequired,
   publishers: PropTypes.array.isRequired
 }
 

@@ -10,7 +10,7 @@ const FavoritesTitleContainer = (props) => {
     return category.name
   }
 
-  return <HeaderTitle {...props} title={getTitle} />
+  return <HeaderTitle {...props} title={getTitle()} />
 }
 
 const mapStateToProps = state => {
