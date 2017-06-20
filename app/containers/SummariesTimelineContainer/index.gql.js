@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String, $limit: Int!) {
+  query($cursor: Int, $type: String!, $limit: Int!) {
     timeline(cursor: $cursor, type: $type, limit: $limit) {
       date
       stories {
@@ -20,17 +20,22 @@ const Query = gql`
           image_source_url
           publisher { id name display_name icon_id slug restrict_content }
         }
-        links_count
         publishers(limit: 5) { id name display_name icon_id slug restrict_content }
+        links_count
       }
     }
   }
 `
 
-export default function (PopularTimeline) {
+export default function (SummariesTimeline) {
   return graphql(Query, {
     options (props) {
-      return { variables: { ...defaultVariables, type: 'popular' } }
+      return {
+        variables: {
+          ...defaultVariables,
+          type: 'summaries'
+        }
+      }
     }
-  })(PopularTimeline)
+  })(SummariesTimeline)
 }

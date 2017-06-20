@@ -1,7 +1,6 @@
 {
   "addFavorites.button": "DONE",
   "addFavorites.heading": "Choose your favorite sites for personalized reading",
-  "and": "and",
   "categoriesDialog.allCategories": "All categories",
   "dateFormat": "MMMM D",
   "emptyFavoritesTimeline.button": "CHOOSE",
@@ -63,7 +62,6 @@
   "storyDialog.addFavorite": "Add to Favorites",
   "storyDialog.removeFavorite": "Remove from Favorites",
   "storyDialog.share": "Share",
-  "storyPublishers.others": " {itemCount, plural, one {# other} other {# others}}",
   "summary.showLess": "show less",
   "summary.showMore": "show more",
   "summary.title": "Editor's summary",

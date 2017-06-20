@@ -1,22 +1,27 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  shares: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10
+    marginRight: 10,
+    marginLeft: 5,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    backgroundColor: '#F7F7F8',
+    borderRadius: 40
   },
 
-  shareIcon: {
+  icon: {
     width: 8,
     height: 13,
-    marginRight: 3,
-    marginTop: -1
+    marginTop: -1,
+    marginRight: 5
   },
 
   text: {
     fontSize: 12,
-    fontWeight: '400',
+    fontWeight: '500',
     color: '#666766'
   }
 })

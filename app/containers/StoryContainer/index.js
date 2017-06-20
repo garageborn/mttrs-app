@@ -9,14 +9,16 @@ import StoryDialogModalContainer from '../StoryDialogModalContainer'
 const StoryContainer = ({ dispatch, renderOptions, story }) => {
   const mainLink = story.main_link
 
-  const openLink = () => { dispatch(NavigationActions.link(story, mainLink)) }
+  const openLink = () => {
+    dispatch(NavigationActions.link(story, mainLink))
+  }
 
   const handlePublishersPress = () => {
-    if (story.other_links_count) {
+    if (story.publishers.length > 1) {
       const content = <StoryLinksModalContainer story={story} renderOptions={renderOptions} />
       return dispatch(NavigationActions.storyLinks(story, content))
     } else {
-      return dispatch(NavigationActions.publisher(mainLink.publisher))
+      return dispatch(NavigationActions.publisher(story.publishers[0]))
     }
   }
 

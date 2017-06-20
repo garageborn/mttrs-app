@@ -10,8 +10,8 @@ const messages = defineMessages({
 
 const SocialCount = ({ totalSocial, intl }) => {
   return (
-    <View style={styles.shares}>
-      <Image style={styles.shareIcon} source={require('../../assets/icons/icon-hot.png')} />
+    <View style={styles.container}>
+      <Image style={styles.icon} source={require('../../assets/icons/icon-hot.png')} />
       <Text style={styles.text}>{SocialCountFormatter(totalSocial)} </Text>
       <Text style={styles.text}>{intl.formatMessage(messages.shares)}</Text>
     </View>
