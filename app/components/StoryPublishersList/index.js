@@ -11,7 +11,7 @@ const StoryPublishersList = ({ publishers }) => {
 }
 
 StoryPublishersList.propTypes = {
-  publishers: PropTypes.array.isRequired
+  publishers: PropTypes.any.isRequired
 }
 
 export default StoryPublishersList
