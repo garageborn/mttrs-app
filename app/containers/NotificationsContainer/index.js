@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import _isEqual from 'lodash/isEqual'
 import LinkNotificationContainer from '../LinkNotificationContainer'
 import PublisherNotificationContainer from '../PublisherNotificationContainer'
-import CategoryNotificationContainer from '../CategoryNotificationContainer'
 import HomeNotificationContainer from '../HomeNotificationContainer'
 import { NotificationsActions, TenantActions } from '../../actions/index'
 
@@ -47,8 +46,6 @@ class NotificationsContainer extends Component {
         return <LinkNotificationContainer payload={payload} />
       case 'publisher':
         return <PublisherNotificationContainer payload={payload} />
-      case 'category':
-        return <CategoryNotificationContainer payload={payload} />
       default:
         return <HomeNotificationContainer payload={payload} />
     }
