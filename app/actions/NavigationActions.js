@@ -4,12 +4,10 @@ import { AnalyticsActions, UIActions } from './index'
 
 // AppNavigator
 export function root () {
-  console.log('rooooooooot')
   return dispatch => dispatch(favorites())
 }
 
 export function favorites () {
-  console.log(favorites)
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'favorites' }))
   }
