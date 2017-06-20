@@ -1,34 +1,38 @@
 import React, { PropTypes, Component } from 'react'
 import { View, TextInput, Image, Platform, TouchableNativeFeedback } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
+import _isEmpty from 'lodash/isEmpty'
 import icon from './assets/icon.png'
 import close from './assets/close.png'
 import styles, { textColor } from './styles'
 
 const messages = defineMessages({
-  searchPlaceholder: {
-    id: 'search.placeholder'
-  },
-  suggestionPlaceholder: {
-    id: 'publisher.suggestion.placeholder'
-  }
+  searchPlaceholder: { id: 'search.placeholder' },
+  suggestionPlaceholder: { id: 'publisher.suggestion.placeholder' }
 })
 
 class PublisherSearch extends Component {
   constructor () {
     super()
-
     this.clear = this.clear.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return this.props.query !== nextProps.query || this.props.suggestion !== nextProps.suggestion
+  }
+
   clear () {
-    this.refs.textInput.clear()
-    this.refs.textInput.blur()
+    if (this.refs.textInput) {
+      this.refs.textInput.clear()
+      this.refs.textInput.blur()
+    }
     this.props.handleQuery('')
   }
 
   clearButton () {
-    if (Platform.OS === 'ios' || this.props.emptyInput()) return
+    if (Platform.OS === 'ios') return null
+    if (_isEmpty(this.props.query)) return null
+
     return (
       <TouchableNativeFeedback onPress={this.clear}>
         <View style={styles.close}>
@@ -71,7 +75,7 @@ PublisherSearch.propTypes = {
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
   }).isRequired,
-  emptyInput: PropTypes.func.isRequired,
+  query: PropTypes.string.isRequired,
   handleQuery: PropTypes.func.isRequired,
   suggestion: PropTypes.bool.isRequired
 }
