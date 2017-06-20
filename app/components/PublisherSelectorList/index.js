@@ -8,7 +8,6 @@ class PublisherSelectorList extends Component {
   constructor () {
     super()
 
-    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
     this.renderSectionHeader = this.renderSectionHeader.bind(this)
   }
@@ -22,7 +21,6 @@ class PublisherSelectorList extends Component {
         <SectionList
           keyExtractor={this.extractKey}
           sections={this.sections()}
-          shouldItemUpdate={this.shouldItemUpdate}
           renderItem={this.renderRow}
           ItemSeparatorComponent={() => null}
           SectionSeparatorComponent={() => null}
@@ -41,31 +39,28 @@ class PublisherSelectorList extends Component {
   }
 
   renderRow (publisher) {
-    return <PublisherSelectorListItem key={publisher.item.id} publisher={publisher.item} onPress={this.props.openPublisher} />
+    return (
+      <PublisherSelectorListItem
+        key={publisher.item.id}
+        publisher={publisher.item}
+        onPress={this.props.openPublisher}
+      />
+    )
   }
 
   sections () {
     const { publishers } = this.props
-
     let rows = {}
-    let letters = []
 
     publishers.map(publisher => {
       let letter = this.getSection(publisher)
-      if (letters.indexOf(letter) === -1) {
-        letters.push(letter)
-        rows[letter] = []
-      }
+      if (!rows[letter]) rows[letter] = []
       rows[letter].push(publisher)
     })
 
     return Object.keys(rows).map((key) => {
       return { 'key': key, 'data': rows[key] }
     })
-  }
-
-  shouldItemUpdate (props, nextProps) {
-    return props.item.id !== nextProps.item.id
   }
 
   getSection (publisher) {

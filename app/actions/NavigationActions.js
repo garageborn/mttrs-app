@@ -3,6 +3,16 @@ import _result from 'lodash/result'
 import { AnalyticsActions, UIActions } from './index'
 
 // AppNavigator
+export function root () {
+  return dispatch => dispatch(favorites())
+}
+
+export function favorites () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({ routeName: 'favorites' }))
+  }
+}
+
 export function popular () {
   return dispatch => {
     dispatch(NavigationActions.navigate({ routeName: 'popular' }))
