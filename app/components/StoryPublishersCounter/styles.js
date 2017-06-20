@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     ...innerContainer,
+    backgroundColor: '#FFFFFF',
     borderTopLeftRadius: containerSize / 2,
     borderTopRightRadius: containerSize / 2
   },
