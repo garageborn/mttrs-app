@@ -7,10 +7,9 @@ const Component = Platform.select({
   android: TouchableNativeFeedback
 })
 
-const throttledOnPress = (onPress) => _throttle(onPress, 500, { trailing: false })
-
 const Touchable = props => {
-  return <Component {...props} onPress={throttledOnPress(props.onPress)}>{props.children}</Component>
+  const onPress = _throttle(props.onPress, 500, { trailing: false })
+  return <Component {...props} onPress={onPress}>{props.children}</Component>
 }
 
 Touchable.propTypes = {

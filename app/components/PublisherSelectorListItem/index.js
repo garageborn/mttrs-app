@@ -10,23 +10,16 @@ import { stringify } from '../../common/utils/Parser'
 import styles from './styles'
 
 const PublisherSelectorListItem = ({ publisher, onPress }) => {
-  const rightContent = () => {
-    return <Text style={styles.count}>{count()}</Text>
-  }
-
   const count = () => {
     if (!publisher.today_stories_count) return '--'
     return stringify(publisher.today_stories_count)
   }
+  const rightContent = <Text style={styles.count}>{count()}</Text>
 
   return (
-    <Touchable
-      style={styles.touch}
-      onPress={() => onPress(publisher)}
-      underlayColor={WHITE_TRANSPARENT_COLOR}
-    >
+    <Touchable onPress={() => onPress(publisher)} underlayColor={WHITE_TRANSPARENT_COLOR}>
       <View style={styles.container}>
-        <PublisherListItem active publisher={publisher} rightContent={rightContent()} />
+        <PublisherListItem active publisher={publisher} rightContent={rightContent} />
       </View>
     </Touchable>
   )

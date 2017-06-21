@@ -41,8 +41,6 @@ class TimelineList extends Component {
     return (
       <SectionList
         style={styles.container}
-        ItemSeparatorComponent={() => null}
-        SectionSeparatorComponent={() => null}
         ListFooterComponent={this.props.renderFooter}
         keyExtractor={this.extractKey}
         onEndReached={this.props.onEndReached}
