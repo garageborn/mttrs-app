@@ -35,7 +35,7 @@ class StoryDialogModalContainer extends Component {
   renderActions () {
     const { favorites, story } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return <StoryDialog type='modal' story={story} />
+    return <StoryDialog story={story} />
   }
 
   renderLoading () {
