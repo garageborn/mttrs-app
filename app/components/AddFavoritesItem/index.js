@@ -26,8 +26,6 @@ class AddFavoritesItem extends PureComponent {
   render () {
     const { publisher } = this.props
 
-    console.log('AddFavoritesItem.render', publisher.slug)
-
     return (
       <ToggleFavoriteContainer
         publisher={publisher}
