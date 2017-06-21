@@ -116,8 +116,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 300
-        versionName "2.0.39"
+        versionCode 302
+        versionName "2.0.41"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -179,7 +179,7 @@ dependencies {
     }
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.facebook.react:react-native:+'
-    compile 'com.google.firebase:firebase-core:11.0.0'
+    compile 'com.google.firebase:firebase-core:11.0.1'
 }
 
 // Run this once to be able to run the application with BUCK

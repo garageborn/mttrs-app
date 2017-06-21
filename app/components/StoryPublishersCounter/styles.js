@@ -14,13 +14,13 @@ const styles = StyleSheet.create({
     width: containerSize,
     borderRadius: containerSize,
     borderWidth,
+    backgroundColor: '#FFFFFF',
     borderColor: '#E9E9E9',
     alignItems: 'center',
     justifyContent: 'center'
   },
   imageContainer: {
     ...innerContainer,
-    backgroundColor: '#FFFFFF',
     borderTopLeftRadius: containerSize / 2,
     borderTopRightRadius: containerSize / 2
   },
