@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import StoryWebView from '../../components/StoryWebView'
 import LinkHeaderTitle from '../../components/LinkHeaderTitle'
-import HeaderShareButton from '../../components/HeaderShareButton'
+import LinkHeaderRight from '../../components/LinkHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
@@ -78,7 +78,7 @@ LinkScene.propTypes = {
 LinkScene.navigationOptions = props => {
   return {
     headerTitle: <LinkHeaderTitle {...props} />,
-    headerRight: <HeaderShareButton link={props.navigation.state.params.link} />,
+    headerRight: <LinkHeaderRight {...props} />,
     headerLeft: <HeaderLeft {...props} />,
     ...headerStyles
   }

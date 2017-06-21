@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign */
 import React, { PropTypes } from 'react'
 import { View } from 'react-native'
-import SummaryContainer from '../../containers/SummaryContainer'
+import StorySummary from '../StorySummary'
 import StoryMainLink from '../StoryMainLink'
 import StoryMetadata from '../StoryMetadata'
 import styles from './styles'
@@ -11,7 +11,7 @@ const Story = ({ handleDialogButtonPress, handlePublishersPress, handleSocialCou
     const { headline, summary } = story
     if (!headline || !headline.length > 0) return null
     if (!summary || !summary.length > 0) return null
-    return <SummaryContainer story={story} />
+    return <StorySummary onPress={openLink} story={story} />
   }
 
   if (!story) return null

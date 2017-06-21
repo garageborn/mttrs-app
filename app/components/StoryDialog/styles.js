@@ -1,24 +1,24 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
+import dialogStyles from '../../styles/Dialog'
 const { height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-  container: {
+  modal: {
+    ...dialogStyles,
+    borderRadius: 4,
     width: 240,
     alignSelf: 'center',
     padding: 10,
     marginTop: height / 3,
-    marginLeft: 8,
-    borderRadius: 4,
-    backgroundColor: '#FFF',
-    elevation: 2,
-    shadowOffset: {
-      width: 10,
-      height: 10
-    },
-    shadowRadius: 5,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    zIndex: 1
+    marginLeft: 8
+  },
+  untied: {
+    ...dialogStyles,
+    top: Platform.select({
+      ios: 20,
+      android: 10
+    }),
+    right: 10
   }
 })
 
