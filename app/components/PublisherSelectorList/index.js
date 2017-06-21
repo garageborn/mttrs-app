@@ -11,11 +11,11 @@ const PublisherSelectorList = ({ publishers, openPublisher }) => {
     return <PublisherSelectorSectionHeader section={sectionData.section.key} />
   }
 
-  const renderRow = (publisher) => {
+  const renderRow = (row) => {
     return (
       <PublisherSelectorListItem
-        key={publisher.item.id}
-        publisher={publisher.item}
+        key={row.item.id}
+        publisher={row.item}
         onPress={openPublisher}
       />
     )
@@ -46,6 +46,8 @@ const PublisherSelectorList = ({ publishers, openPublisher }) => {
       sections={sections()}
       renderItem={renderRow}
       renderSectionHeader={renderSectionHeader}
+      ItemSeparatorComponent={() => null}
+      SectionSeparatorComponent={() => null}
     />
   )
 }

@@ -7,8 +7,6 @@ import LinearGradient from 'react-native-linear-gradient'
 class StoryLinks extends Component {
   constructor (props) {
     super(props)
-
-    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
   }
 
@@ -32,7 +30,6 @@ class StoryLinks extends Component {
     if (!this.otherLinks || !this.otherLinks.length) return
     return (
       <FlatList
-        shouldItemUpdate={this.shouldItemUpdate}
         keyExtractor={this.extractKey}
         style={styles.linksList}
         data={this.otherLinks}
@@ -55,10 +52,6 @@ class StoryLinks extends Component {
         link={data.item}
       />
     )
-  }
-
-  shouldItemUpdate (props, nextProps) {
-    return props.item.id !== nextProps.item.id
   }
 
   get mainLink () {
