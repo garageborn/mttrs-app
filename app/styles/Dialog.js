@@ -9,5 +9,6 @@ export default {
   },
   shadowRadius: 5,
   shadowColor: '#000',
-  shadowOpacity: 0.2
+  shadowOpacity: 0.2,
+  zIndex: 1
 }
