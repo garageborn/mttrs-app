@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react'
 import HeaderRight from '../HeaderRight'
-import HeaderSettingsContainer from '../../containers/HeaderSettingsContainer'
+import LinkSettingsContainer from '../../containers/LinkSettingsContainer'
 import HeaderSwitchLinkContainer from '../../containers/HeaderSwitchLinkContainer'
 
 const LinkHeaderRight = (props) => {
+  const { renderOptions, story } = props.navigation.state.params
+
   const renderSwitchLink = () => {
-    const { renderOptions, story } = props.navigation.state.params
     if (story.links_count === 1) return null
     return <HeaderSwitchLinkContainer story={story} renderOptions={renderOptions} />
   }
@@ -13,7 +14,7 @@ const LinkHeaderRight = (props) => {
   return (
     <HeaderRight>
       {renderSwitchLink()}
-      <HeaderSettingsContainer />
+      <LinkSettingsContainer story={story} />
     </HeaderRight>
   )
 }
@@ -22,7 +23,10 @@ LinkHeaderRight.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        links_count: PropTypes.number
+        story: PropTypes.shape({
+          links_count: PropTypes.number.isRequired
+        }).isRequired,
+        renderOptions: PropTypes.object
       })
     }).isRequired
   }).isRequired
