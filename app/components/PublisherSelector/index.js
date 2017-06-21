@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherSelectorList from '../PublisherSelectorList'
@@ -6,7 +6,7 @@ import PublisherSuggestionTrigger from '../PublisherSuggestionTrigger'
 import PublisherSuggestionContainer from '../../containers/PublisherSuggestionContainer'
 import styles from './styles'
 
-class PublisherSelector extends Component {
+class PublisherSelector extends PureComponent {
   constructor () {
     super()
     this.handleSuggestionTrigger = this.handleSuggestionTrigger.bind(this)

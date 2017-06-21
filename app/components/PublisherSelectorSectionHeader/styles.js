@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingTop: 4,
     marginBottom: 3,
-    paddingBottom: 3,
-    backgroundColor: '#F7F7F8'
+    paddingBottom: 3
   },
 
   textLeftContainer: {

@@ -1,59 +1,33 @@
-import React, { Component, PropTypes } from 'react'
-import { View, SectionList } from 'react-native'
+import React, { PropTypes } from 'react'
+import { SectionList } from 'react-native'
 import PublisherSelectorListItem from '../PublisherSelectorListItem'
 import PublisherSelectorSectionHeader from '../PublisherSelectorSectionHeader'
 import styles from './styles'
 
-class PublisherSelectorList extends Component {
-  constructor () {
-    super()
+const PublisherSelectorList = ({ publishers, openPublisher }) => {
+  const extractKey = (item, index) => `publisher_${index}`
 
-    this.renderRow = this.renderRow.bind(this)
-    this.renderSectionHeader = this.renderSectionHeader.bind(this)
-  }
-
-  render () {
-    let { publishers } = this.props
-    if (!publishers || !publishers.length) return null
-
-    return (
-      <View style={styles.container}>
-        <SectionList
-          keyExtractor={this.extractKey}
-          sections={this.sections()}
-          renderItem={this.renderRow}
-          ItemSeparatorComponent={() => null}
-          SectionSeparatorComponent={() => null}
-          renderSectionHeader={this.renderSectionHeader}
-        />
-      </View>
-    )
-  }
-
-  extractKey (item, index) {
-    return `publisher_${index}`
-  }
-
-  renderSectionHeader (sectionData) {
+  const renderSectionHeader = (sectionData) => {
     return <PublisherSelectorSectionHeader section={sectionData.section.key} />
   }
 
-  renderRow (publisher) {
+  const renderRow = (row) => {
     return (
       <PublisherSelectorListItem
-        key={publisher.item.id}
-        publisher={publisher.item}
-        onPress={this.props.openPublisher}
+        key={row.item.id}
+        publisher={row.item}
+        onPress={openPublisher}
       />
     )
   }
 
-  sections () {
-    const { publishers } = this.props
+  const getSection = (publisher) => publisher.slug.substring(0, 1).toUpperCase()
+
+  const sections = () => {
     let rows = {}
 
     publishers.map(publisher => {
-      let letter = this.getSection(publisher)
+      let letter = getSection(publisher)
       if (!rows[letter]) rows[letter] = []
       rows[letter].push(publisher)
     })
@@ -63,9 +37,19 @@ class PublisherSelectorList extends Component {
     })
   }
 
-  getSection (publisher) {
-    return publisher.slug.substring(0, 1).toUpperCase()
-  }
+  if (!publishers || !publishers.length) return null
+
+  return (
+    <SectionList
+      style={styles.container}
+      keyExtractor={extractKey}
+      sections={sections()}
+      renderItem={renderRow}
+      renderSectionHeader={renderSectionHeader}
+      ItemSeparatorComponent={() => null}
+      SectionSeparatorComponent={() => null}
+    />
+  )
 }
 
 PublisherSelectorList.propTypes = {
