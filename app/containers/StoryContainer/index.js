@@ -10,7 +10,7 @@ const StoryContainer = ({ dispatch, renderOptions, story }) => {
   const mainLink = story.main_link
 
   const openLink = () => {
-    dispatch(NavigationActions.link(story, mainLink))
+    dispatch(NavigationActions.link(story, mainLink, renderOptions))
   }
 
   const handlePublishersPress = () => {

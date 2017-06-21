@@ -19,9 +19,9 @@ export function popular () {
   }
 }
 
-export function link (story, link) {
+export function link (story, link, renderOptions) {
   return dispatch => {
-    const params = { story: story, link: link }
+    const params = { story, link, renderOptions }
     dispatch(NavigationActions.navigate({ routeName: 'link', params }))
   }
 }

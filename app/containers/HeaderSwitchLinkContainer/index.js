@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import HeaderSwitchLinkButton from '../../components/HeaderSwitchLinkButton'
+import StoryLinksModalContainer from '../StoryLinksModalContainer'
 import { NavigationActions } from '../../actions/index'
 
-class HeaderSettingsContainer extends Component {
+class HeaderSwitchLinkContainer extends Component {
   constructor () {
     super()
     this.onPress = this.onPress.bind(this)
@@ -14,14 +15,16 @@ class HeaderSettingsContainer extends Component {
   }
 
   onPress () {
-    const { dispatch } = this.props
-    debugger
-    dispatch(NavigationActions.storyLinks())
+    const { dispatch, story, renderOptions } = this.props
+    const content = <StoryLinksModalContainer story={story} renderOptions={renderOptions} />
+    dispatch(NavigationActions.storyLinks(story, content))
   }
 }
 
-HeaderSettingsContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired
+HeaderSwitchLinkContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  story: PropTypes.object.isRequired,
+  renderOptions: PropTypes.object
 }
 
-export default connect()(HeaderSettingsContainer)
+export default connect()(HeaderSwitchLinkContainer)
