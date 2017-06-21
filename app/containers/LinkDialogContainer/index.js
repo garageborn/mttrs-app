@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Modal, ActivityIndicator } from 'react-native'
+import { Modal } from 'react-native'
 import { connect } from 'react-redux'
-import CloseButton from '../../components/CloseButton'
 import Dialog from '../../components/Dialog'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
-import styles from '../../styles/Modal'
 
 class StoryDialogModalContainer extends Component {
   constructor (props) {

@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import HeaderSwitchLinkButton from '../../components/HeaderSwitchLinkButton'
 import StoryLinksModalContainer from '../StoryLinksModalContainer'
 import { NavigationActions } from '../../actions/index'
 
-class HeaderSwitchLinkContainer extends Component {
+class HeaderSwitchLinkContainer extends PureComponent {
   constructor () {
     super()
     this.onPress = this.onPress.bind(this)
