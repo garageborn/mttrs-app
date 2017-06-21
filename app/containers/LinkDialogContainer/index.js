@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Modal, ActivityIndicator } from 'react-native'
+import { Modal } from 'react-native'
 import { connect } from 'react-redux'
-import CloseButton from '../../components/CloseButton'
 import Dialog from '../../components/Dialog'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
-import styles from '../../styles/Modal'
 
 class StoryDialogModalContainer extends Component {
   constructor (props) {
@@ -23,10 +21,9 @@ class StoryDialogModalContainer extends Component {
 
   render () {
     return (
-      <Modal animationType={'slide'} transparent visible onRequestClose={this.close}>
-        <Dialog underlayColor={'rgba(0, 0, 0, 0.8)'} closeDialog={this.close}>
+      <Modal transparent visible onRequestClose={this.close}>
+        <Dialog coordinates={{top: 0, right: 0}} closeDialog={this.close}>
           {this.renderActions()}
-          <CloseButton onPress={this.close} />
         </Dialog>
       </Modal>
     )
@@ -35,15 +32,7 @@ class StoryDialogModalContainer extends Component {
   renderActions () {
     const { favorites, story } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return <StoryDialog type='modal' story={story} />
-  }
-
-  renderLoading () {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size='large' color='#FFF' />
-      </View>
-    )
+    return <StoryDialog type='untied' story={story} />
   }
 }
 
