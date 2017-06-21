@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, PureComponent } from 'react'
 import { Image, View } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import Touchable from '../../components/Touchable'
@@ -8,16 +8,12 @@ import styles from './styles'
 const activeImage = require('./assets/active.png')
 const inactiveImage = require('./assets/inactive.png')
 
-class FavoritePublishersItem extends Component {
+class FavoritePublishersItem extends PureComponent {
   constructor (props) {
     super(props)
     this.onPress = this.onPress.bind(this)
     this.handleFavoriteState = this.handleFavoriteState.bind(this)
     this.state = { active: true }
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return this.state.active !== nextState.active
   }
 
   render () {

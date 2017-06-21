@@ -8,7 +8,6 @@ import styles from './styles'
 class FavoritePublishersSelector extends Component {
   constructor (props) {
     super(props)
-    this.shouldItemUpdate = this.shouldItemUpdate.bind(this)
     this.renderRow = this.renderRow.bind(this)
   }
 
@@ -25,7 +24,6 @@ class FavoritePublishersSelector extends Component {
             showsHorizontalScrollIndicator={false}
             keyExtractor={this.extractKey}
             renderItem={this.renderRow}
-            shouldItemUpdate={this.shouldItemUpdate}
             removeClippedSubviews={false}
           />
           <FavoritePublishersNavigationButtonContainer style={styles.buttonContainer} />
@@ -43,10 +41,6 @@ class FavoritePublishersSelector extends Component {
     const { index, item } = data
     const { openPublisher } = this.props
     return <FavoritePublisherSelector rowID={index} publisher={item} onPress={openPublisher} />
-  }
-
-  shouldItemUpdate (props, nextProps) {
-    return props.item.id !== nextProps.item.id
   }
 }
 

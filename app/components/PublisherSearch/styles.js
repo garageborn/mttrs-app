@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
 
   search: {
     position: 'relative',
-    backgroundColor: '#E5E5E5',
-    marginHorizontal: 10,
+    backgroundColor: '#DFE0E6',
     borderRadius: 2
   },
 
