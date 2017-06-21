@@ -16,8 +16,8 @@ class StoryContainer extends PureComponent {
   }
 
   openLink () {
-    const { dispatch, story, renderOptions } = this.props
-    dispatch(NavigationActions.link(story, story.main_link, renderOptions))
+    const { dispatch, story } = this.props
+    dispatch(NavigationActions.link(story, story.main_link))
   }
 
   handlePublishersPress () {

@@ -1,7 +1,7 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native'
-const headerButtonsWidth = 140
+const headerButtonsWidth = 120
 const { width } = Dimensions.get('window')
-const containerWidthBase = 1.30
+const containerWidthBase = 1.20
 
 const containerStyles = {
   flexGrow: 1,

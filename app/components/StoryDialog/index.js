@@ -16,7 +16,7 @@ const messages = defineMessages({
   share: { id: 'storyDialog.share' }
 })
 
-const StoryDialog = ({ intl, story, type }) => {
+const StoryDialog = ({ intl, story }) => {
   const { publisher } = story.main_link
   const publisherName = publisher.display_name || publisher.name
 
@@ -66,7 +66,7 @@ const StoryDialog = ({ intl, story, type }) => {
   }
 
   return (
-    <View style={styles[type]}>
+    <View style={styles.container}>
       {renderFavoriteAction()}
       {renderShareAction()}
     </View>
@@ -85,8 +85,7 @@ StoryDialog.propTypes = {
   }).isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired
-  }).isRequired,
-  type: PropTypes.string.isRequired
+  }).isRequired
 }
 
 export default injectIntl(StoryDialog)
