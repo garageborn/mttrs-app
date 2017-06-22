@@ -31,6 +31,10 @@ class LinkScene extends Component {
     AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
+  componentWillReceiveProps (nextProps) {
+    this.setParams(nextProps)
+  }
+
   handleAppStateChange (appState) {
     this.setState({ appState })
   }
@@ -39,14 +43,23 @@ class LinkScene extends Component {
     this.props.createLinkAccess()
   }
 
+  setParams (nextProps) {
+    if (this.props.data.loading === nextProps.data.loading) return
+    if (nextProps.data.loading) return
+    return this.props.navigation.setParams(nextProps.data)
+  }
+
   render () {
-    const { link, story } = this.props.navigation.state.params
+    const { slug } = this.props.navigation.state.params
+    const { data } = this.props
     if (this.state.appState !== 'active') return null
+    if (data.loading) return null
+
     return (
-      <AnalyticsContainer scene={'link'} screenName={`/link/${link.slug}`}>
+      <AnalyticsContainer scene={'link'} screenName={`/link/${slug}`}>
         <View>
-          <CategoryColor category={story.category} />
-          <StoryWebView link={link} />
+          <CategoryColor category={data.link.category} />
+          <StoryWebView link={data.link} />
         </View>
       </AnalyticsContainer>
     )
@@ -76,11 +89,15 @@ LinkScene.propTypes = {
 }
 
 LinkScene.navigationOptions = props => {
+  const noDataHeader = {
+    ...headerStyles,
+    headerLeft: <HeaderLeft {...props} />
+  }
+  if (!props.screenProps.data) return noDataHeader
   return {
     headerTitle: <LinkHeaderTitle {...props} />,
     headerRight: <LinkHeaderRight {...props} />,
-    headerLeft: <HeaderLeft {...props} />,
-    ...headerStyles
+    ...noDataHeader
   }
 }
 

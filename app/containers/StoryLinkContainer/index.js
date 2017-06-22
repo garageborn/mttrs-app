@@ -27,7 +27,7 @@ class StoryLinkContainer extends Component {
     let { dispatch, story, renderOptions } = this.props
     if (!story) return
     dispatch(NavigationActions.closeModal())
-    dispatch(NavigationActions.link(story, link, renderOptions))
+    dispatch(NavigationActions.link(link.slug, renderOptions))
   }
 
   openPublisher (publisher) {

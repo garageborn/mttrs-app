@@ -24,7 +24,7 @@ LinkHeaderRight.propTypes = {
     state: PropTypes.shape({
       params: PropTypes.shape({
         story: PropTypes.shape({
-          links_count: PropTypes.number.isRequired
+          links_count: PropTypes.number
         }).isRequired,
         renderOptions: PropTypes.object
       })

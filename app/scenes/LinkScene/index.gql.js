@@ -9,12 +9,38 @@ const Mutation = gql`
   }
 `
 
+const Query = gql`
+  query($slug: String!) {
+    link(slug: $slug) {
+      title
+      url
+      amp_url
+      publisher {
+        name
+        icon_id
+      }
+      category {
+        color
+      }
+      story {
+        id
+      }
+    }
+  }
+`
+
 export default function (Link) {
   return graphql(Mutation, {
     props: ({mutate, ownProps}) => ({
       createLinkAccess: () => {
-        return mutate({ variables: { slug: ownProps.navigation.state.params.link.slug } })
+        return mutate({ variables: { slug: ownProps.navigation.state.params.slug } })
       }
     })
-  })(Link)
+  })(
+    graphql(Query, {
+      options (props) {
+        return { variables: { slug: props.navigation.state.params.slug } }
+      }
+    })(Link)
+  )
 }
