@@ -6,6 +6,8 @@ const Query = gql`
     link(slug: $slug) {
       id
       title
+      amp_url
+      url
       publisher {
         id
         name
