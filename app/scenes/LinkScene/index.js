@@ -31,10 +31,6 @@ class LinkScene extends Component {
     AppState.removeEventListener('change', this.handleAppStateChange)
   }
 
-  componentWillReceiveProps (nextProps) {
-    this.setParams(nextProps)
-  }
-
   handleAppStateChange (appState) {
     this.setState({ appState })
   }
@@ -75,7 +71,13 @@ LinkScene.propTypes = {
     })
   }).isRequired,
   createLinkAccess: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    link: PropTypes.shape({
+      category: PropTypes.object
+    })
+  }).isRequired
 }
 
 LinkScene.navigationOptions = props => {
