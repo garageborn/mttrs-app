@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import HeaderSwitchLinkButton from '../../components/HeaderSwitchLinkButton'
 import StoryLinksModalContainer from '../StoryLinksModalContainer'
 import { NavigationActions } from '../../actions/index'
+import _result from 'lodash/result'
 import withQuery from './index.gql'
 
 class HeaderSwitchLinkContainer extends PureComponent {
@@ -14,7 +15,7 @@ class HeaderSwitchLinkContainer extends PureComponent {
   render () {
     const { link, loading } = this.props.data
     if (loading) return null
-    if (link.story.links_count === 1) return null
+    if (_result(link, 'story.links_count') === 1) return null
     return <HeaderSwitchLinkButton onPress={this.onPress} />
   }
 

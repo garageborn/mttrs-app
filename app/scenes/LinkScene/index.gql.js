@@ -12,14 +12,17 @@ const Mutation = gql`
 const Query = gql`
   query($slug: String!) {
     link(slug: $slug) {
+      id
       title
       url
       amp_url
       publisher {
+        id
         name
         icon_id
       }
       category {
+        id
         color
       }
       story {
