@@ -26,7 +26,7 @@ class LinkNotificationContainer extends Component {
     if (data.loading || !data.link) return
 
     InteractionManager.runAfterInteractions(() => {
-      dispatch(NavigationActions.link(data.link.story, data.link))
+      dispatch(NavigationActions.link(data.link.slug))
     })
   }
 }

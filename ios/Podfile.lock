@@ -47,10 +47,10 @@ PODS:
   - Sentry/Core (3.0.12)
   - Sentry/KSCrash (3.0.12):
     - KSCrash/Core (~> 1.15.9)
-  - SentryReactNative (0.12.12):
+  - SentryReactNative (0.12.10):
     - React
-    - Sentry (~> 3.0.9)
-    - Sentry/KSCrash (~> 3.0.9)
+    - Sentry (~> 3.0.8)
+    - Sentry/KSCrash (~> 3.0.8)
   - Yoga (0.45.1.React)
 
 DEPENDENCIES:
@@ -87,7 +87,7 @@ SPEC CHECKSUMS:
   react-native-splash-screen: 4b3b6080654d361ff15689d60cf6e61b82061ccf
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
   Sentry: e94aa5cc27642794a9fc565fc781ec3a0f64aa44
-  SentryReactNative: b4f4dfb5077c9d10d96991a2ccd806c480f1fdb1
+  SentryReactNative: 348fc737f400c030a13d44fa664b470d0e07efae
   Yoga: 89c8738d42a0b46a113acb4e574336d61cba2985
 
 PODFILE CHECKSUM: cd178b71716a8401ddd0e5dbea8bbeadb0db9eff

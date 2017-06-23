@@ -3,8 +3,8 @@ import { View, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import StoryWebView from '../../components/StoryWebView'
-import LinkHeaderTitle from '../../components/LinkHeaderTitle'
-import HeaderShareButton from '../../components/HeaderShareButton'
+import LinkHeaderTitleContainer from '../../containers/LinkHeaderTitleContainer'
+import LinkHeaderRight from '../../components/LinkHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
@@ -40,13 +40,16 @@ class LinkScene extends Component {
   }
 
   render () {
-    const { link, story } = this.props.navigation.state.params
+    const { slug } = this.props.navigation.state.params
+    const { data } = this.props
     if (this.state.appState !== 'active') return null
+    if (data.loading) return null
+
     return (
-      <AnalyticsContainer scene={'link'} screenName={`/link/${link.slug}`}>
+      <AnalyticsContainer scene={'link'} screenName={`/link/${slug}`}>
         <View>
-          <CategoryColor category={story.category} />
-          <StoryWebView link={link} />
+          <CategoryColor category={data.link.category} />
+          <StoryWebView link={data.link} />
         </View>
       </AnalyticsContainer>
     )
@@ -57,30 +60,26 @@ LinkScene.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        link: PropTypes.shape({
-          slug: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired,
-          amp_url: PropTypes.string
-        }).isRequired,
-        story: PropTypes.shape({
-          id: PropTypes.any.isRequired,
-          category: PropTypes.shape({
-            color: PropTypes.string
-          })
-        })
+        slug: PropTypes.string.isRequired
       }).isRequired
     })
   }).isRequired,
   createLinkAccess: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    link: PropTypes.shape({
+      category: PropTypes.object
+    })
+  }).isRequired
 }
 
 LinkScene.navigationOptions = props => {
   return {
-    headerTitle: <LinkHeaderTitle {...props} />,
-    headerRight: <HeaderShareButton link={props.navigation.state.params.link} />,
-    headerLeft: <HeaderLeft {...props} />,
-    ...headerStyles
+    ...headerStyles,
+    headerTitle: <LinkHeaderTitleContainer {...props} />,
+    headerRight: <LinkHeaderRight {...props} />,
+    headerLeft: <HeaderLeft {...props} />
   }
 }
 

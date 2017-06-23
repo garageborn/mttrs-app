@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Modal, ActivityIndicator } from 'react-native'
+import { Modal } from 'react-native'
 import { connect } from 'react-redux'
-import CloseButton from '../../components/CloseButton'
 import Dialog from '../../components/Dialog'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
-import styles from '../../styles/Modal'
 
 class StoryDialogModalContainer extends Component {
   constructor (props) {
@@ -23,27 +21,18 @@ class StoryDialogModalContainer extends Component {
 
   render () {
     return (
-      <Modal animationType={'slide'} transparent visible onRequestClose={this.close}>
-        <Dialog underlayColor={'rgba(0, 0, 0, 0.8)'} closeDialog={this.close}>
+      <Modal transparent visible onRequestClose={this.close}>
+        <Dialog coordinates={{top: 0, right: 0}} closeDialog={this.close}>
           {this.renderActions()}
-          <CloseButton onPress={this.close} />
         </Dialog>
       </Modal>
     )
   }
 
   renderActions () {
-    const { favorites, story } = this.props
+    const { favorites, link } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return <StoryDialog type='modal' link={story.main_link} />
-  }
-
-  renderLoading () {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size='large' color='#FFF' />
-      </View>
-    )
+    return <StoryDialog type='untied' link={link} />
   }
 }
 
@@ -51,8 +40,12 @@ StoryDialogModalContainer.propTypes = {
   favorites: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired
   }),
-  story: PropTypes.shape({
-    main_link: PropTypes.PropTypes.isRequired
+  link: PropTypes.shape({
+    publisher: PropTypes.shape({
+      id: PropTypes.any.isRequired,
+      name: PropTypes.string.isRequired,
+      display_name: PropTypes.string
+    }).isRequired
   }).isRequired,
   dispatch: PropTypes.func
 }
