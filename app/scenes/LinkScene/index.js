@@ -39,12 +39,6 @@ class LinkScene extends Component {
     this.props.createLinkAccess()
   }
 
-  setParams (nextProps) {
-    if (this.props.data.loading === nextProps.data.loading) return
-    if (nextProps.data.loading) return
-    return this.props.navigation.setParams(nextProps.data)
-  }
-
   render () {
     const { slug } = this.props.navigation.state.params
     const { data } = this.props
