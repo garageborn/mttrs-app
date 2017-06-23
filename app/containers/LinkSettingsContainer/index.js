@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import LinkDialogContainer from '../../containers/LinkDialogContainer'
 import HeaderSettingsButton from '../../components/HeaderSettingsButton'
 import { NavigationActions } from '../../actions/index'
+import withQuery from './index.gql'
 
 class LinkSettingsContainer extends PureComponent {
   constructor () {
@@ -15,15 +16,17 @@ class LinkSettingsContainer extends PureComponent {
   }
 
   openSettingsDialog () {
-    const { dispatch, story } = this.props
-    const content = <LinkDialogContainer story={story} />
+    const { dispatch, data } = this.props
+    const content = <LinkDialogContainer link={data.link} />
     dispatch(NavigationActions.settingsDialog(content))
   }
 }
 
 LinkSettingsContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  story: PropTypes.object.isRequired
+  data: PropTypes.shape({
+    link: PropTypes.object
+  }).isRequired
 }
-
-export default connect()(LinkSettingsContainer)
+const LinkSettingsContainerWithData = withQuery(LinkSettingsContainer)
+export default connect()(LinkSettingsContainerWithData)

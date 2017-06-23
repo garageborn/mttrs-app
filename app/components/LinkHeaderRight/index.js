@@ -4,17 +4,12 @@ import LinkSettingsContainer from '../../containers/LinkSettingsContainer'
 import HeaderSwitchLinkContainer from '../../containers/HeaderSwitchLinkContainer'
 
 const LinkHeaderRight = (props) => {
-  const { renderOptions, story } = props.navigation.state.params
-
-  const renderSwitchLink = () => {
-    if (story.links_count === 1) return null
-    return <HeaderSwitchLinkContainer story={story} renderOptions={renderOptions} />
-  }
+  const { renderOptions, slug } = props.navigation.state.params
 
   return (
     <HeaderRight>
-      {renderSwitchLink()}
-      <LinkSettingsContainer story={story} />
+      <HeaderSwitchLinkContainer slug={slug} renderOptions={renderOptions} />
+      <LinkSettingsContainer slug={slug} />
     </HeaderRight>
   )
 }
@@ -23,10 +18,7 @@ LinkHeaderRight.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        story: PropTypes.shape({
-          links_count: PropTypes.number
-        }).isRequired,
-        renderOptions: PropTypes.object
+        slug: PropTypes.string.isRequired
       })
     }).isRequired
   }).isRequired

@@ -3,7 +3,7 @@ import { View, AppState } from 'react-native'
 import { connect } from 'react-redux'
 import withQuery from './index.gql'
 import StoryWebView from '../../components/StoryWebView'
-import LinkHeaderTitle from '../../components/LinkHeaderTitle'
+import LinkHeaderTitleContainer from '../../containers/LinkHeaderTitleContainer'
 import LinkHeaderRight from '../../components/LinkHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
@@ -70,17 +70,7 @@ LinkScene.propTypes = {
   navigation: PropTypes.shape({
     state: PropTypes.shape({
       params: PropTypes.shape({
-        link: PropTypes.shape({
-          slug: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired,
-          amp_url: PropTypes.string
-        }).isRequired,
-        story: PropTypes.shape({
-          id: PropTypes.any.isRequired,
-          category: PropTypes.shape({
-            color: PropTypes.string
-          })
-        })
+        slug: PropTypes.string.isRequired
       }).isRequired
     })
   }).isRequired,
@@ -89,15 +79,11 @@ LinkScene.propTypes = {
 }
 
 LinkScene.navigationOptions = props => {
-  const noDataHeader = {
-    ...headerStyles,
-    headerLeft: <HeaderLeft {...props} />
-  }
-  if (!props.screenProps.data) return noDataHeader
   return {
-    headerTitle: <LinkHeaderTitle {...props} />,
+    ...headerStyles,
+    headerTitle: <LinkHeaderTitleContainer {...props} />,
     headerRight: <LinkHeaderRight {...props} />,
-    ...noDataHeader
+    headerLeft: <HeaderLeft {...props} />
   }
 }
 

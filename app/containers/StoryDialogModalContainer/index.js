@@ -35,7 +35,7 @@ class StoryDialogModalContainer extends Component {
   renderActions () {
     const { favorites, story } = this.props
     if (!favorites.isLoaded) return this.renderLoading()
-    return <StoryDialog type='modal' story={story} />
+    return <StoryDialog type='modal' link={story.main_link} />
   }
 
   renderLoading () {
@@ -52,13 +52,7 @@ StoryDialogModalContainer.propTypes = {
     isLoaded: PropTypes.bool.isRequired
   }),
   story: PropTypes.shape({
-    main_link: PropTypes.shape({
-      publisher: PropTypes.shape({
-        id: PropTypes.any.isRequired,
-        name: PropTypes.string.isRequired,
-        display_name: PropTypes.string
-      }).isRequired
-    }).isRequired
+    main_link: PropTypes.PropTypes.isRequired
   }).isRequired,
   dispatch: PropTypes.func
 }

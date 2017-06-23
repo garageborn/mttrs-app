@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import HeaderSwitchLinkButton from '../../components/HeaderSwitchLinkButton'
 import StoryLinksModalContainer from '../StoryLinksModalContainer'
 import { NavigationActions } from '../../actions/index'
+import withQuery from './index.gql'
 
 class HeaderSwitchLinkContainer extends PureComponent {
   constructor () {
@@ -11,11 +12,15 @@ class HeaderSwitchLinkContainer extends PureComponent {
   }
 
   render () {
+    const { link, loading } = this.props.data
+    if (loading) return null
+    if (link.story.links_count === 1) return null
     return <HeaderSwitchLinkButton onPress={this.onPress} />
   }
 
   onPress () {
-    const { dispatch, story, renderOptions } = this.props
+    const { dispatch, data, renderOptions } = this.props
+    const { story } = data.link
     const content = <StoryLinksModalContainer story={story} renderOptions={renderOptions} />
     dispatch(NavigationActions.storyLinks(story, content))
   }
@@ -23,8 +28,16 @@ class HeaderSwitchLinkContainer extends PureComponent {
 
 HeaderSwitchLinkContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  story: PropTypes.object.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    link: PropTypes.shape({
+      story: PropTypes.shape({
+        links_count: PropTypes.number.isRequired
+      })
+    })
+  }).isRequired,
   renderOptions: PropTypes.object
 }
 
-export default connect()(HeaderSwitchLinkContainer)
+const HeaderSwitchLinkContainerWithData = withQuery(HeaderSwitchLinkContainer)
+export default connect()(HeaderSwitchLinkContainerWithData)

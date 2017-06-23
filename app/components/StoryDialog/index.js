@@ -16,8 +16,8 @@ const messages = defineMessages({
   share: { id: 'storyDialog.share' }
 })
 
-const StoryDialog = ({ intl, story, type }) => {
-  const { publisher } = story.main_link
+const StoryDialog = ({ intl, link, type }) => {
+  const { publisher } = link
   const publisherName = publisher.display_name || publisher.name
 
   const renderFavoriteAction = () => {
@@ -33,7 +33,7 @@ const StoryDialog = ({ intl, story, type }) => {
   const renderShareAction = () => {
     const icon = <Image source={shareIcon} />
     return (
-      <ShareButtonContainer link={story.main_link}>
+      <ShareButtonContainer link={link}>
         <View>
           <DialogButton icon={icon} messages={[intl.formatMessage(messages.share)]} />
         </View>
@@ -74,13 +74,11 @@ const StoryDialog = ({ intl, story, type }) => {
 }
 
 StoryDialog.propTypes = {
-  story: PropTypes.shape({
-    main_link: PropTypes.shape({
-      publisher: PropTypes.shape({
-        id: PropTypes.any.isRequired,
-        name: PropTypes.string.isRequired,
-        display_name: PropTypes.string
-      }).isRequired
+  link: PropTypes.shape({
+    publisher: PropTypes.shape({
+      id: PropTypes.any.isRequired,
+      name: PropTypes.string.isRequired,
+      display_name: PropTypes.string
     }).isRequired
   }).isRequired,
   intl: PropTypes.shape({
