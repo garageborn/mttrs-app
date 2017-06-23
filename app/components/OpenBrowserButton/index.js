@@ -15,7 +15,8 @@ class OpenBrowserButton extends Component {
 
   onPress () {
     const { link } = this.props
-    Linking.openURL(link.url).catch(err => captureError(err))
+    const url = link.amp_url || link.url
+    Linking.openURL(url).catch(err => captureError(err))
   }
 
   render () {
