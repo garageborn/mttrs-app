@@ -1,26 +1,24 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
 import styles from './styles'
 
-const tenantIcon = require('./assets/tenant.png')
+const countrySelectorIcon = require('./assets/tenant.png')
 const settingsIcon = require('./assets/settings.png')
 const messages = defineMessages({
-  mttrs_br: { id: 'settingsDialog.mttrs_br' },
-  mttrs_us: { id: 'settingsDialog.mttrs_us' },
+  changeCountry: { id: 'settingsDialog.changeCountry' },
   settings: { id: 'settingsDialog.settings' }
 })
 
-const SettingsDialog = ({ intl, openSettings, setTenant, tenant }) => {
-  const renderTenantButton = () => {
-    const tenantId = tenant.id
-    const label = intl.formatMessage(messages[tenantId])
-    const icon = <Image source={tenantIcon} />
+const SettingsDialog = ({ intl, openSettings, openCountrySelector, tenant }) => {
+  const renderCountrySelectorButton = () => {
+    const label = intl.formatMessage(messages.changeCountry)
+    const icon = <Image source={countrySelectorIcon} />
 
     return (
-      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={() => setTenant(tenantId)}>
+      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={openCountrySelector}>
         <View>
           <DialogButton icon={icon} messages={[label]} />
         </View>
@@ -43,7 +41,7 @@ const SettingsDialog = ({ intl, openSettings, setTenant, tenant }) => {
 
   return (
     <View style={styles.container}>
-      {renderTenantButton()}
+      {renderCountrySelectorButton()}
       {renderSettingsButton()}
     </View>
   )
@@ -53,7 +51,7 @@ SettingsDialog.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string
   }).isRequired,
-  setTenant: PropTypes.func.isRequired,
+  openCountrySelector: PropTypes.func.isRequired,
   openSettings: PropTypes.func.isRequired
 }
 

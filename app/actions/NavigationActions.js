@@ -50,6 +50,12 @@ export function addFavorites () {
   }
 }
 
+export function countrySelector () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'countrySelector'}))
+  }
+}
+
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
 }
