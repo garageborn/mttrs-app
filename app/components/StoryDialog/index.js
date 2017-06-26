@@ -3,6 +3,7 @@ import { Image, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DialogButton from '../DialogButton'
 import OpenBrowserButton from '../OpenBrowserButton'
+import CopyLinkButtonContainer from '../../containers/CopyLinkButtonContainer'
 import ShareButtonContainer from '../../containers/ShareButtonContainer'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import styles from './styles'
@@ -71,11 +72,17 @@ const StoryDialog = ({ intl, link, type }) => {
     return <OpenBrowserButton link={link} />
   }
 
+  const renderCopyLink = () => {
+    if (type !== 'untied') return null
+    return <CopyLinkButtonContainer link={link} />
+  }
+
   return (
     <View style={styles[type]}>
       {renderFavoriteAction()}
       {renderShareAction()}
       {renderOpenOnBrowser()}
+      {renderCopyLink()}
     </View>
   )
 }

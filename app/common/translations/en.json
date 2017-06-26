@@ -63,6 +63,7 @@
   "storyDialog.removeFavorite": "Remove from Favorites",
   "storyDialog.share": "Share",
   "storyDialog.openBrowser": "Open in Browser",
+  "storyDialog.copyLink": "Copy Link",
   "summary.showLess": "show less",
   "summary.showMore": "show more",
   "summary.title": "Editor's summary",
