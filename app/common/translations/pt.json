@@ -63,6 +63,7 @@
   "storyDialog.removeFavorite": "Remover dos Favoritos",
   "storyDialog.share": "Compartilhar a notícia",
   "storyDialog.openBrowser": "Abrir no navegador",
+  "storyDialog.copyLink": "Copiar Link",
   "summary.showLess": "ver menos",
   "summary.showMore": "ver mais",
   "summary.title": "Resumo do editor",
