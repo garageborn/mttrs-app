@@ -50,9 +50,9 @@ export function addFavorites () {
   }
 }
 
-export function countrySelector () {
+export function tenantSelector () {
   return dispatch => {
-    dispatch(NavigationActions.navigate({routeName: 'countrySelector'}))
+    dispatch(NavigationActions.navigate({routeName: 'tenantSelector'}))
   }
 }
 

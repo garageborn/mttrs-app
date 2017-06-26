@@ -5,20 +5,20 @@ import DialogButton from '../DialogButton'
 import Touchable from '../Touchable'
 import styles from './styles'
 
-const countrySelectorIcon = require('./assets/tenant.png')
+const tenantSelectorIcon = require('./assets/tenant.png')
 const settingsIcon = require('./assets/settings.png')
 const messages = defineMessages({
   changeCountry: { id: 'settingsDialog.changeCountry' },
   settings: { id: 'settingsDialog.settings' }
 })
 
-const SettingsDialog = ({ intl, openSettings, openCountrySelector, tenant }) => {
-  const renderCountrySelectorButton = () => {
+const SettingsDialog = ({ intl, openSettings, openTenantSelector, tenant }) => {
+  const rendertenantSelectorButton = () => {
     const label = intl.formatMessage(messages.changeCountry)
-    const icon = <Image source={countrySelectorIcon} />
+    const icon = <Image source={tenantSelectorIcon} />
 
     return (
-      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={openCountrySelector}>
+      <Touchable underlayColor={'rgba(255, 255, 255, .2)'} onPress={openTenantSelector}>
         <View>
           <DialogButton icon={icon} messages={[label]} />
         </View>
@@ -41,7 +41,7 @@ const SettingsDialog = ({ intl, openSettings, openCountrySelector, tenant }) => 
 
   return (
     <View style={styles.container}>
-      {renderCountrySelectorButton()}
+      {rendertenantSelectorButton()}
       {renderSettingsButton()}
     </View>
   )
@@ -51,7 +51,7 @@ SettingsDialog.propTypes = {
   tenant: PropTypes.shape({
     id: PropTypes.string
   }).isRequired,
-  openCountrySelector: PropTypes.func.isRequired,
+  openTenantSelector: PropTypes.func.isRequired,
   openSettings: PropTypes.func.isRequired
 }
 

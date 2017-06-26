@@ -1,17 +1,17 @@
 import React from 'react'
-import CountrySelectorContainer from '../../containers/CountrySelectorContainer'
+import TenantSelectorContainer from '../../containers/TenantSelectorContainer'
 import HeaderLeft from '../../components/HeaderLeft'
 import HeaderTitle from '../../components/HeaderTitle'
 import headerStyles from '../../styles/Header'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
 
-const CountrySelectorScene = () => (
-  <AnalyticsContainer scene={'countrySelector'} screenName={'/countrySelector'}>
-    <CountrySelectorContainer />
+const TenantSelectorScene = () => (
+  <AnalyticsContainer scene={'tenantSelector'} screenName={'/tenantSelector'}>
+    <TenantSelectorContainer />
   </AnalyticsContainer>
 )
 
-CountrySelectorScene.navigationOptions = props => {
+TenantSelectorScene.navigationOptions = props => {
   return {
     headerLeft: <HeaderLeft {...props} />,
     headerTitle: <HeaderTitle leftButton title={'Change Country'} />,
@@ -19,4 +19,4 @@ CountrySelectorScene.navigationOptions = props => {
   }
 }
 
-export default CountrySelectorScene
+export default TenantSelectorScene

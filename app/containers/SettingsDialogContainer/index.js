@@ -10,7 +10,7 @@ class SettingsDialogContainer extends Component {
   constructor () {
     super()
     this.openSettings = this.openSettings.bind(this)
-    this.openCountrySelector = this.openCountrySelector.bind(this)
+    this.openTenantSelector = this.openTenantSelector.bind(this)
     this.close = this.close.bind(this)
   }
 
@@ -25,7 +25,7 @@ class SettingsDialogContainer extends Component {
             type='modal'
             tenant={this.alternativeTenant}
             openSettings={this.openSettings}
-            openCountrySelector={this.openCountrySelector}
+            openTenantSelector={this.openTenantSelector}
           />
         </Dialog>
       </Modal>
@@ -43,10 +43,10 @@ class SettingsDialogContainer extends Component {
     dispatch(NavigationActions.settings())
   }
 
-  openCountrySelector () {
+  openTenantSelector () {
     const { dispatch } = this.props
     this.close()
-    dispatch(NavigationActions.countrySelector())
+    dispatch(NavigationActions.tenantSelector())
   }
 
   close () {
