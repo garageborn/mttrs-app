@@ -1,11 +1,17 @@
 import React, { PropTypes } from 'react'
-import { View } from 'react-native'
+import { Image, View } from 'react-native'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { COUNTRIES } from '../../constants/Countries'
-import CountryListItem from '../CountryListItem'
+import TenantListItem from '../TenantListItem'
 import Touchable from '../Touchable'
+import activeIcon from './assets/image.png'
 
-const TenantSelector = ({ onPress }) => {
+const TenantSelector = ({ current, onPress }) => {
+  const active = item => current.id === item.tenantId
+
+  const renderRightContent = item =>
+    (active(item) ? <Image source={activeIcon} /> : null)
+
   const renderItem = item => (
     <Touchable
       key={`tenant_${item.tenantId}`}
@@ -13,7 +19,11 @@ const TenantSelector = ({ onPress }) => {
       underlayColor={WHITE_TRANSPARENT_COLOR}
     >
       <View>
-        <CountryListItem country={item} />
+        <TenantListItem
+          active={active(item)}
+          country={item}
+          rightContent={renderRightContent(item)}
+        />
       </View>
     </Touchable>
   )
@@ -28,6 +38,9 @@ const TenantSelector = ({ onPress }) => {
 }
 
 TenantSelector.propTypes = {
+  current: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }).isRequired,
   onPress: PropTypes.func.isRequired
 }
 

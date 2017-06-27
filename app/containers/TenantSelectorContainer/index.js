@@ -10,7 +10,7 @@ class TenantSelectorContainer extends Component {
   }
 
   render () {
-    return <TenantSelector onPress={this.selectTenant} />
+    return <TenantSelector current={this.props.current} onPress={this.selectTenant} />
   }
 
   selectTenant (tenantId) {
@@ -19,7 +19,12 @@ class TenantSelectorContainer extends Component {
 }
 
 TenantSelectorContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  current: PropTypes.object.isRequired
 }
 
-export default connect()(TenantSelectorContainer)
+const mapStateToProps = state => ({
+  current: state.TenantReducer.current
+})
+
+export default connect(mapStateToProps)(TenantSelectorContainer)
