@@ -70,6 +70,7 @@
   "tabBar.popular": "Popular",
   "tabBar.publishers": "Publishers",
   "tags.default": "Highlights",
+  "tenantList.disclaimer": "Icons made by Freepik from www.flaticon.com",
   "times": "{itemCount, plural, one {time} other {times}}",
   "today": "Today",
   "webview.openInBrowser": "Open in browser",

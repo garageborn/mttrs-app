@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react'
-import { Image, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
+import { injectIntl } from 'react-intl'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { COUNTRIES } from '../../constants/Countries'
 import TenantListItem from '../TenantListItem'
 import Touchable from '../Touchable'
 import activeIcon from './assets/image.png'
+import styles from './styles'
 
-const TenantSelector = ({ current, onPress }) => {
+const TenantSelector = ({ intl, current, onPress }) => {
   const active = item => current.id === item.tenantId
 
   const renderRightContent = item =>
@@ -33,6 +35,11 @@ const TenantSelector = ({ current, onPress }) => {
   return (
     <View>
       {renderList()}
+      <View style={styles.disclaimer}>
+        <Text style={styles.disclaimerText}>
+          {intl.formatMessage({ id: 'tenantList.disclaimer' })}
+        </Text>
+      </View>
     </View>
   )
 }
@@ -44,4 +51,4 @@ TenantSelector.propTypes = {
   onPress: PropTypes.func.isRequired
 }
 
-export default TenantSelector
+export default injectIntl(TenantSelector)
