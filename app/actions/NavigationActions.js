@@ -117,12 +117,3 @@ export function publisherCategoriesDialog (publisher, content) {
 export function closeModal () {
   return dispatch => dispatch(UIActions.closeModal())
 }
-
-export function reset () {
-  return dispatch => dispatch(NavigationActions.reset({
-    index: 0,
-    actions: [
-      NavigationActions.navigate({ routeName: 'timeline' })
-    ]
-  }))
-}
