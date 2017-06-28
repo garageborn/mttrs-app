@@ -26,7 +26,7 @@ class LinkNotificationContainer extends Component {
     if (data.loading || !data.link) return
 
     InteractionManager.runAfterInteractions(() => {
-      dispatch(NavigationActions.link(data.link.slug))
+      dispatch(NavigationActions.link(data.slug))
     })
   }
 }
@@ -34,9 +34,7 @@ class LinkNotificationContainer extends Component {
 LinkNotificationContainer.propTypes = {
   payload: PropTypes.shape({
     additionalData: PropTypes.shape({
-      model: PropTypes.shape({
-        slug: PropTypes.string.isRequired
-      }).isRequired
+      model: PropTypes.oneOf([PropTypes.string, PropTypes.object]).isRequired
     }).isRequired
   }).isRequired
 }

@@ -18,7 +18,8 @@ const Query = gql`
 export default function (LinkNotificationContainer) {
   return graphql(Query, {
     options (props) {
-      const { slug } = props.payload.additionalData
+      const { model } = props.payload.additionalData
+      const { slug } = JSON.parse(model)
 
       return {
         variables: { slug }
