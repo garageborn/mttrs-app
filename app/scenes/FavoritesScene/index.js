@@ -9,12 +9,12 @@ import FavoritesTitleContainer from '../../containers/FavoritesTitleContainer'
 import FavoritesHeaderRight from '../../components/FavoritesHeaderRight'
 import Favorites from '../../components/Favorites'
 import headerStyles from '../../styles/Header'
-import updateCurrentScene from '../../common/utils/updateCurrentScene'
+// import updateCurrentScene from '../../common/utils/updateCurrentScene'
 
 class FavoritesScene extends Component {
   constructor () {
     super()
-    updateCurrentScene(this, 'favorites')
+    // updateCurrentScene(this, 'favorites')
   }
 
   componentWillMount () {

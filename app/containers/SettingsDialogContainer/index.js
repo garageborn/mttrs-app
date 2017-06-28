@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import SettingsDialog from '../../components/SettingsDialog'
 import Dialog from '../../components/Dialog'
 import Tenant from '../../common/utils/Tenant'
-import { NavigationActions, TenantActions } from '../../actions/index'
+import { NavigationActions } from '../../actions/index'
 
 class SettingsDialogContainer extends Component {
   constructor () {
     super()
     this.openSettings = this.openSettings.bind(this)
-    this.setTenant = this.setTenant.bind(this)
+    this.openTenantSelector = this.openTenantSelector.bind(this)
     this.close = this.close.bind(this)
   }
 
@@ -25,7 +25,7 @@ class SettingsDialogContainer extends Component {
             type='modal'
             tenant={this.alternativeTenant}
             openSettings={this.openSettings}
-            setTenant={this.setTenant}
+            openTenantSelector={this.openTenantSelector}
           />
         </Dialog>
       </Modal>
@@ -43,10 +43,10 @@ class SettingsDialogContainer extends Component {
     dispatch(NavigationActions.settings())
   }
 
-  setTenant (tenantId) {
+  openTenantSelector () {
     const { dispatch } = this.props
     this.close()
-    dispatch(TenantActions.setCurrent(tenantId))
+    dispatch(NavigationActions.tenantSelector())
   }
 
   close () {
