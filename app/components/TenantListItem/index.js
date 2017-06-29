@@ -1,13 +1,21 @@
 import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import SettingsItem from '../SettingsItem'
-import mttrsBrIcon from './assets/mttrs_br.png'
-import mttrsUsIcon from './assets/mttrs_us.png'
+import iconAR from './assets/mttrs_ar.png'
+import iconBR from './assets/mttrs_br.png'
+import iconCL from './assets/mttrs_cl.png'
+import iconMX from './assets/mttrs_mx.png'
+import iconPT from './assets/mttrs_pt.png'
+import iconUS from './assets/mttrs_us.png'
 import styles from './styles'
 
 const images = {
-  mttrs_br: mttrsBrIcon,
-  mttrs_us: mttrsUsIcon
+  mttrs_ar: iconAR,
+  mttrs_br: iconBR,
+  mttrs_cl: iconCL,
+  mttrs_mx: iconMX,
+  mttrs_pt: iconPT,
+  mttrs_us: iconUS
 }
 
 const TenantListItem = ({ active, country, rightContent }) => {
