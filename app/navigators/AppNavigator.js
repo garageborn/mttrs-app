@@ -7,6 +7,7 @@ import LinkScene from '../scenes/LinkScene'
 import FavoritePublishersScene from '../scenes/FavoritePublishersScene'
 import AddFavoritesScene from '../scenes/AddFavoritesScene'
 import TenantSelectorScene from '../scenes/TenantSelectorScene'
+import NotificationsSettingsScene from '../scenes/NotificationsSettingsScene'
 
 const AppRoutes = {
   publisher: { screen: PublisherScene },
@@ -15,7 +16,8 @@ const AppRoutes = {
   timeline: { screen: TimelineNavigator },
   favoritePublishers: { screen: FavoritePublishersScene },
   addFavorites: { screen: AddFavoritesScene },
-  tenantSelector: { screen: TenantSelectorScene }
+  tenantSelector: { screen: TenantSelectorScene },
+  notifications: { screen: NotificationsSettingsScene }
 }
 
 const AppNavigatorConfig = {
