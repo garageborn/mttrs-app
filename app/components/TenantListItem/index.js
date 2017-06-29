@@ -1,32 +1,34 @@
 import React, { PropTypes } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
+import SettingsItem from '../SettingsItem'
+import iconAR from './assets/mttrs_ar.png'
+import iconBR from './assets/mttrs_br.png'
+import iconCL from './assets/mttrs_cl.png'
+import iconMX from './assets/mttrs_mx.png'
+import iconPT from './assets/mttrs_pt.png'
+import iconUS from './assets/mttrs_us.png'
 import styles from './styles'
-import mttrsBrIcon from './assets/mttrs_br.png'
-import mttrsUsIcon from './assets/mttrs_us.png'
 
 const images = {
-  mttrs_br: mttrsBrIcon,
-  mttrs_us: mttrsUsIcon
+  mttrs_ar: iconAR,
+  mttrs_br: iconBR,
+  mttrs_cl: iconCL,
+  mttrs_mx: iconMX,
+  mttrs_pt: iconPT,
+  mttrs_us: iconUS
 }
 
 const TenantListItem = ({ active, country, rightContent }) => {
-  const containerStyles = active ? styles.containerActive : styles.container
+  const containerStyles = active ? styles.active : null
+  const leftContent = <Image source={images[country.tenantId]} />
   return (
     <View style={containerStyles}>
-      <View style={styles.leftContainer}>
-        <Image source={images[country.tenantId]} />
-        <View style={styles.itemDetails}>
-          <Text style={styles.title}>
-            {country.name}
-          </Text>
-          <Text style={styles.subtitle}>
-            {country.language}
-          </Text>
-        </View>
-      </View>
-      <View style={styles.rightContainer}>
-        {rightContent}
-      </View>
+      <SettingsItem
+        leftContent={leftContent}
+        rightContent={rightContent}
+        title={country.name}
+        subtitle={country.language}
+      />
     </View>
   )
 }

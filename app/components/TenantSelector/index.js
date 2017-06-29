@@ -5,8 +5,8 @@ import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { COUNTRIES } from '../../constants/Countries'
 import TenantListItem from '../TenantListItem'
 import Touchable from '../Touchable'
+import TenantIconsDisclaimer from '../TenantIconsDisclaimer'
 import activeIcon from './assets/image.png'
-import styles from './styles'
 
 const TenantSelector = ({ intl, current, onPress }) => {
   const active = item => current.id === item.tenantId
@@ -35,11 +35,7 @@ const TenantSelector = ({ intl, current, onPress }) => {
   return (
     <View>
       {renderList()}
-      <View style={styles.disclaimer}>
-        <Text style={styles.disclaimerText}>
-          {intl.formatMessage({ id: 'tenantList.disclaimer' })}
-        </Text>
-      </View>
+      <TenantIconsDisclaimer />
     </View>
   )
 }

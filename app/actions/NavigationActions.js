@@ -56,6 +56,12 @@ export function tenantSelector () {
   }
 }
 
+export function notifications () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'notifications'}))
+  }
+}
+
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
 }
@@ -119,12 +125,10 @@ export function closeModal () {
 }
 
 export function reset () {
-  return dispatch => {
-    dispatch(NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'timeline' })
-      ]
-    }))
-  }
+  return dispatch => dispatch(NavigationActions.reset({
+    index: 0,
+    actions: [
+      NavigationActions.navigate({ routeName: 'timeline' })
+    ]
+  }))
 }
