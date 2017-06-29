@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 14,
-    borderTopWidth: 1,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: '#DADADA'
   },

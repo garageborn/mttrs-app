@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
 import { NavigationActions } from '../../actions/index'
@@ -14,7 +15,7 @@ class NotificationSettingsButtonContainer extends Component {
   }
 
   onPress () {
-    this.props.dispatch(NavigationActions.tenantSelector())
+    this.props.dispatch(NavigationActions.notifications())
   }
 
   render () {
@@ -23,18 +24,21 @@ class NotificationSettingsButtonContainer extends Component {
         underlayColor={WHITE_TRANSPARENT_COLOR}
         onPress={() => this.onPress()}
       >
-        <SettingsItem
-          title={this.props.intl.formatMessage({
-            id: 'settingsDialog.changeCountry'
-          })}
-          subtitle={this.props.tenant}
-        />
+        <View>
+          <SettingsItem
+            title={this.props.intl.formatMessage({
+              id: 'settingsDialog.changeCountry'
+            })}
+            subtitle={this.props.tenant}
+          />
+        </View>
       </Touchable>
     )
   }
 }
 
 NotificationSettingsButtonContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   tenant: PropTypes.string.isRequired,
   intl: PropTypes.shape({
     formatMessage: PropTypes.func.isRequired

@@ -56,6 +56,12 @@ export function tenantSelector () {
   }
 }
 
+export function notifications () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'notifications'}))
+  }
+}
+
 export function back () {
   return dispatch => dispatch(NavigationActions.back())
 }

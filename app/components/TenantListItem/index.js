@@ -15,7 +15,12 @@ const TenantListItem = ({ active, country, rightContent }) => {
   const leftContent = <Image source={images[country.tenantId]} />
   return (
     <View style={containerStyles}>
-      <SettingsItem leftContent={leftContent} rightContent={rightContent} title={country.name} subtitle={country.language} />
+      <SettingsItem
+        leftContent={leftContent}
+        rightContent={rightContent}
+        title={country.name}
+        subtitle={country.language}
+      />
     </View>
   )
 }

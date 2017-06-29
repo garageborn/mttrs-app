@@ -8,9 +8,9 @@ const SettingsItem = ({ leftContent, rightContent, title, subtitle }) => {
     ? <Heading size='small' color={smallTextColor}>{subtitle}</Heading>
     : null
 
-  const textContainerStyles = !leftContent
-    ? styles.textContainer
-    : styles.textContainerWithIcon
+  const textContainerStyles = leftContent
+    ? styles.textContainerWithIcon
+    : styles.textContainer
 
   return (
     <View style={styles.container}>
