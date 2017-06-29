@@ -2,9 +2,13 @@ import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import DeviceInfo from 'react-native-device-info'
-import NotificationsSettingsButtonContainer from '../../containers/NotificationsSettingsButtonContainer'
+import NotificationsSettingsButtonContainer
+  from '../../containers/NotificationsSettingsButtonContainer'
+import TenantSelectorSettingsButtonContainer
+  from '../../containers/TenantSelectorSettingsButtonContainer'
 import Heading from '../Heading'
-import RateAppSettingsContainer from '../../containers/RateAppSettingsContainer'
+import RateAppSettingsContainer
+  from '../../containers/RateAppSettingsContainer'
 import styles, { smallTextColor } from './styles'
 
 const appVersion = DeviceInfo.getVersion()
@@ -14,6 +18,7 @@ const messages = defineMessages({
 
 const Settings = ({ intl }) => (
   <View style={styles.container}>
+    <TenantSelectorSettingsButtonContainer />
     <NotificationsSettingsButtonContainer />
     <RateAppSettingsContainer />
     <View style={styles.footerContainer}>

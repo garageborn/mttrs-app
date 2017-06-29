@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-  disclaimer: {
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10
   },
-  disclaimerText: {
+  text: {
     color: '#999999',
     fontSize: 12
   }

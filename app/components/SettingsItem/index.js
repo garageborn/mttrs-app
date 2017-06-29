@@ -29,8 +29,7 @@ const SettingsItem = ({ leftContent, rightContent, title, subtitle }) => {
 SettingsItem.propTypes = {
   leftContent: PropTypes.node,
   rightContent: PropTypes.node,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired
 }
 
 export default SettingsItem

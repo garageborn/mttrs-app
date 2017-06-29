@@ -1,17 +1,24 @@
 import React from 'react'
-import { FlatList } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { COUNTRIES } from '../../constants/Countries'
 import NotificationsSettingsItemContainer
   from '../../containers/NotificationsSettingsItemContainer'
+import TenantIconsDisclaimer
+  from '../TenantIconsDisclaimer'
 
 const NotificationsSettingsList = () => {
-  const extractKey = (item, index) => `notificationSettings_${index}`
+  const extractKey = (item, index) => `nsl_${index}`
 
-  const renderRow = data => (
-    <NotificationsSettingsItemContainer extractKey={extractKey} data={data} />
+  const renderRow = (data, idx) => (
+    <NotificationsSettingsItemContainer data={data} />
   )
 
-  return <FlatList data={COUNTRIES} renderItem={renderRow} />
+  return (
+    <View>
+      <FlatList data={COUNTRIES} keyExtractor={extractKey} renderItem={renderRow} />
+      <TenantIconsDisclaimer />
+    </View>
+  )
 }
 
 export default NotificationsSettingsList
