@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { injectIntl } from 'react-intl'
@@ -8,7 +8,7 @@ import SettingsItem from '../../components/SettingsItem'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { COUNTRIES } from '../../constants/Countries'
 
-class NotificationSettingsButtonContainer extends Component {
+class NotificationSettingsButtonContainer extends PureComponent {
   constructor () {
     super()
     this.onPress = this.onPress.bind(this)
@@ -22,7 +22,7 @@ class NotificationSettingsButtonContainer extends Component {
     return (
       <Touchable
         underlayColor={WHITE_TRANSPARENT_COLOR}
-        onPress={() => this.onPress()}
+        onPress={this.onPress}
       >
         <View>
           <SettingsItem

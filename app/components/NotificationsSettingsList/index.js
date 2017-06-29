@@ -1,22 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { FlatList } from 'react-native'
 import { COUNTRIES } from '../../constants/Countries'
 import NotificationsSettingsItemContainer
   from '../../containers/NotificationsSettingsItemContainer'
 
-class NotificationsSettingsList extends Component {
-  constructor () {
-    super()
-    this.renderItem = this.renderItem.bind(this)
-  }
+const NotificationsSettingsList = () => {
+  const extractKey = (item, index) => `notificationSettings_${index}`
 
-  render () {
-    return <FlatList data={COUNTRIES} renderItem={this.renderItem} />
-  }
+  const renderRow = data => (
+    <NotificationsSettingsItemContainer extractKey={extractKey} data={data} />
+  )
 
-  renderItem (data) {
-    return <NotificationsSettingsItemContainer data={data} />
-  }
+  return <FlatList data={COUNTRIES} renderItem={renderRow} />
 }
 
 export default NotificationsSettingsList

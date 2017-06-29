@@ -16,7 +16,7 @@ export const COUNTRIES = [
   },
   {
     tenantId: 'mttrs_mx',
-    name: 'Mexico',
+    name: 'México',
     language: 'Español'
   },
   {
