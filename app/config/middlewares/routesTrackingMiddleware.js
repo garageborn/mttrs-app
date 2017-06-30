@@ -2,7 +2,12 @@ import { NavigationActions } from 'react-navigation'
 import { RoutesTrackingActions } from '../../actions/index'
 import _isInteger from 'lodash/isInteger'
 
-const actions = [NavigationActions.INIT, NavigationActions.NAVIGATE, NavigationActions.BACK]
+const actions = [
+  NavigationActions.INIT,
+  NavigationActions.NAVIGATE,
+  NavigationActions.BACK,
+  NavigationActions.RESET
+]
 
 export const findRoute = (nav) => {
   const route = nav.routes[nav.index]
