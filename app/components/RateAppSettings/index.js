@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Platform } from 'react-native'
+import { Platform, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
 import SettingsItem from '../SettingsItem'
@@ -21,7 +21,9 @@ const RateAppSettings = ({ intl, onPress }) => {
 
   return (
     <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
-      <SettingsItem title={label} subtitle={description} />
+      <View>
+        <SettingsItem title={label} subtitle={description} />
+      </View>
     </Touchable>
   )
 }
