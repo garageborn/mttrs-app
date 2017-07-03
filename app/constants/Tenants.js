@@ -1,6 +1,6 @@
 export const TENANTS = [
   {
-    host: 'ar.mtt.rs',
+    host: 'argentina.mtt.rs',
     id: 'mttrs_ar',
     language: 'en',
     protocol: 'https'
@@ -12,21 +12,33 @@ export const TENANTS = [
     protocol: 'https'
   },
   {
-    host: 'cl.mtt.rs',
+    host: 'chile.mtt.rs',
     id: 'mttrs_cl',
     language: 'en',
     protocol: 'https'
   },
   {
-    host: 'mx.mtt.rs',
+    host: 'mexico.mtt.rs',
     id: 'mttrs_mx',
     language: 'en',
     protocol: 'https'
   },
   {
-    host: 'pt.mtt.rs',
+    host: 'portugal.mtt.rs',
     id: 'mttrs_pt',
     language: 'pt',
+    protocol: 'https'
+  },
+  {
+    host: 'estadosunidos.mtt.rs',
+    id: 'mttrs_us_es',
+    language: 'es',
+    protocol: 'https'
+  },
+  {
+    host: 'australia.mtt.rs',
+    id: 'mttrs_au',
+    language: 'en',
     protocol: 'https'
   },
   {
