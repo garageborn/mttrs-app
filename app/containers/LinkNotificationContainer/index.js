@@ -31,7 +31,7 @@ class LinkNotificationContainer extends Component {
 LinkNotificationContainer.propTypes = {
   payload: PropTypes.shape({
     additionalData: PropTypes.shape({
-      model: PropTypes.oneOf([PropTypes.string, PropTypes.object]).isRequired
+      model: PropTypes.object.isRequired
     }).isRequired
   }).isRequired
 }
