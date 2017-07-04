@@ -5,8 +5,7 @@ export const smallTextColor = '#999999'
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: '#DADADA'
   }
 })

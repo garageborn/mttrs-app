@@ -2,9 +2,8 @@ import React, { PropTypes } from 'react'
 import { Platform, View } from 'react-native'
 import { injectIntl, defineMessages } from 'react-intl'
 import Touchable from '../Touchable'
-import Heading from '../Heading'
+import SettingsItem from '../SettingsItem'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
-import styles, { regularTextColor, smallTextColor } from './styles'
 
 const messages = defineMessages({
   description: { id: 'rateApp.description' },
@@ -22,15 +21,17 @@ const RateAppSettings = ({ intl, onPress }) => {
 
   return (
     <Touchable onPress={onPress} underlayColor={WHITE_TRANSPARENT_COLOR}>
-      <View style={styles.container}>
-        <Heading size='regular' color={regularTextColor}>{label}</Heading>
-        <Heading size='small' color={smallTextColor}>{description}</Heading>
+      <View>
+        <SettingsItem title={label} subtitle={description} />
       </View>
     </Touchable>
   )
 }
 
 RateAppSettings.propTypes = {
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func.isRequired
+  }).isRequired,
   onPress: PropTypes.func.isRequired
 }
 

@@ -2,7 +2,8 @@ import {
   INIT_ROUTE,
   INIT_POPULAR_ROUTE,
   TRACK_ROUTE,
-  TRACK_POPULAR_ROUTE
+  TRACK_POPULAR_ROUTE,
+  TENANT_RECEIVED
 } from '../constants/ActionTypes'
 import _isEqual from 'lodash/isEqual'
 import _isEmpty from 'lodash/isEmpty'
@@ -75,6 +76,11 @@ export default function (state = defaultState, action) {
       return trackRoute(state, action)
     case TRACK_POPULAR_ROUTE:
       return trackPopularRoute(state, action)
+    case TENANT_RECEIVED:
+      return {
+        ...state,
+        ...defaultState
+      }
     default:
       return state
   }
