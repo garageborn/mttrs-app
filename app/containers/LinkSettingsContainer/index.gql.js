@@ -8,6 +8,7 @@ const Query = gql`
       title
       amp_url
       url
+      slug
       publisher {
         id
         name

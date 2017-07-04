@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     height,
     width,
-    zIndex: 1
+    zIndex: 1,
+    flex: 1
   },
   centered: {
     position: 'absolute',
