@@ -19,7 +19,7 @@ const StoryMainLink = ({ onPress, openDialog, story }) => {
   return (
     <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
       <View style={styles.content}>
-        <StoryImage source={mainLink.image_source_url} story={story} />
+        <StoryImage source={mainLink.image_url} story={story} />
         <View>
           <StoryTitle title={mainLink.title} />
           {renderStoryCategory()}

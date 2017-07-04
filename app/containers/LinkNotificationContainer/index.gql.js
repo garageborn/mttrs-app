@@ -8,7 +8,7 @@ const Query = gql`
       title
       url
       slug
-      image_source_url
+      image_url
       story { id }
       publisher { id name display_name icon_id slug restrict_content }
     }
