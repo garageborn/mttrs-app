@@ -87,7 +87,3 @@ function reloadApp (tenant) {
     })
   }
 }
-
-function getFallbackTenant () {
-  return Tenant.findByCountry(DEVICE_COUNTRY)
-}
