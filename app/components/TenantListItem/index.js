@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Image, View } from 'react-native'
 import SettingsItem from '../SettingsItem'
 import iconAR from './assets/mttrs_ar.png'
+import iconAU from './assets/mttrs_au.png'
 import iconBR from './assets/mttrs_br.png'
 import iconCL from './assets/mttrs_cl.png'
 import iconMX from './assets/mttrs_mx.png'
@@ -11,6 +12,7 @@ import styles from './styles'
 
 const images = {
   mttrs_ar: iconAR,
+  mttrs_au: iconAU,
   mttrs_br: iconBR,
   mttrs_cl: iconCL,
   mttrs_mx: iconMX,
