@@ -61,11 +61,7 @@ function onSetCurrent (previousTenant, tenant) {
 }
 
 function onGetCurrent (storageTenant) {
-  let fallbackTenant = Tenant.findByCountry(DEVICE_COUNTRY)
-
-  if (fallbackTenant.country === 'US') {
-    fallbackTenant = Tenant.findByLanguage(DEVICE_LANGUAGE)
-  }
+  let fallbackTenant = Tenant.findByCountryAndLanguage(DEVICE_COUNTRY, DEVICE_LANGUAGE)
 
   return (dispatch, getState) => {
     if (getState().TenantReducer.isAssigning) return

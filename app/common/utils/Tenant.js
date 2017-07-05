@@ -17,6 +17,11 @@ export default class Tenant {
     return TENANTS.find(tenant => tenant.id === id) || this.defaultTenant
   }
 
+  static findByCountryAndLanguage (country, language) {
+    if (country === 'US') return this.findByLanguage(language)
+    return this.findByCountry(country)
+  }
+
   static findByCountry (country) {
     return TENANTS.find(tenant => tenant.country === country) || this.defaultTenant
   }
