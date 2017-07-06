@@ -4,11 +4,11 @@ export const COUNTRIES = [
     name: 'Argentina',
     language: 'Español'
   },
-  {
-    tenantId: 'mttrs_au',
-    name: 'Australia',
-    language: 'English'
-  },
+  // {
+  //   tenantId: 'mttrs_au',
+  //   name: 'Australia',
+  //   language: 'English'
+  // },
   {
     tenantId: 'mttrs_br',
     name: 'Brasil',

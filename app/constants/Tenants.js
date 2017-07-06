@@ -41,13 +41,13 @@ export const TENANTS = [
     language: 'es',
     protocol: 'https'
   },
-  {
-    host: 'australia.mtt.rs',
-    id: 'mttrs_au',
-    country: 'AU',
-    language: 'en',
-    protocol: 'https'
-  },
+  // {
+  //   host: 'australia.mtt.rs',
+  //   id: 'mttrs_au',
+  //   country: 'AU',
+  //   language: 'en',
+  //   protocol: 'https'
+  // },
   {
     default: true,
     host: 'mtt.rs',
