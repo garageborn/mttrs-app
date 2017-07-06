@@ -16,8 +16,6 @@ const StoryMainLink = ({ onPress, openDialog, story }) => {
     return <StoryCategory category={story.category} />
   }
 
-  console.log(mainLink.image.thumb)
-
   return (
     <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
       <View style={styles.content}>
