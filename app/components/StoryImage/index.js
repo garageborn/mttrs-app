@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { Image, Platform, PixelRatio } from 'react-native'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import Placeholder from './components/Placeholder'
 import styles from './styles'
 
