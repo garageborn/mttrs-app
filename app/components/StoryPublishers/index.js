@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import StoryPublishersCounter from '../StoryPublishersCounter'
 import StoryPublishersItem from '../StoryPublishersItem'
 import StoryPublishersList from '../StoryPublishersList'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import styles, { smallDevice } from './styles'
 
 const StoryPublishers = ({ story }) => {
@@ -15,8 +14,8 @@ const StoryPublishers = ({ story }) => {
   }
 
   const renderPublisher = (publisher, restricted) => {
-    if (!publisher.icon_id) return null
-    const uri = cloudinary.id(publisher.icon_id)
+    if (!publisher.icon.xsmall) return null
+    const uri = publisher.icon.xsmall
     return <StoryPublishersItem key={publisher.id} source={{ uri }} restricted={restricted} />
   }
 
@@ -42,7 +41,9 @@ StoryPublishers.propTypes = {
     publishers: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
-        icon_id: PropTypes.string
+        icon: PropTypes.shape({
+          xsmall: PropTypes.string
+        })
       })
     ).isRequired,
     links_count: PropTypes.number.isRequired

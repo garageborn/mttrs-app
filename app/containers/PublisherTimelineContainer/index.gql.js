@@ -21,10 +21,10 @@ const Query = gql`
           image {
             thumb
           }
-          publisher { id name display_name icon_id slug restrict_content }
+          publisher { id name display_name icon { small } slug restrict_content }
         }
         publishers(limit: 5, publisher_slug: $publisherSlug) {
-          id name display_name icon_id slug restrict_content
+          id name display_name icon { xsmall } slug restrict_content
         }
         links_count
       }

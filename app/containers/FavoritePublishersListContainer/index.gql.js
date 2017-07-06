@@ -7,7 +7,7 @@ query($publisherIds: [Int]) {
   publishers(with_stories: true, order_by_name: true, with_ids: $publisherIds) {
     id
     display_name
-    icon_id
+    image { small }
     name
     slug
   }

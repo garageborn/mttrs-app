@@ -7,7 +7,7 @@ const Query = gql`
       id
       name
       display_name
-      icon_id
+      icon { small }
       slug
     }
   }

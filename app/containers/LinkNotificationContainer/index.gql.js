@@ -12,7 +12,7 @@ const Query = gql`
         thumb
       }
       story { id }
-      publisher { id name display_name icon_id slug restrict_content }
+      publisher { id name display_name icon { small } slug restrict_content }
     }
   }
 `

@@ -6,7 +6,7 @@ query {
   publishers(with_stories: true, order_by_name: true) {
     id
     display_name
-    icon_id
+    icon { medium }
     name
     slug
   }

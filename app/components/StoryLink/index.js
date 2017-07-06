@@ -5,7 +5,6 @@ import Touchable from '../Touchable'
 import RestrictContentLabel from '../RestrictContentLabel'
 import PublisherLogo from '../PublisherLogo'
 import SocialCountFormatter from '../../common/utils/SocialCountFormatter'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import styles from './styles'
 
@@ -16,8 +15,8 @@ const StoryLink = ({ link, linkType, openLink, openPublisher }) => {
   const rowStyle = isHeader ? styles.header : styles.row
   const rowContainerStyle = isHeader ? styles.headerContainer : styles.rowContainer
   const publisherLogo = () => {
-    if (!publisher.icon_id) return
-    return { uri: cloudinary.id(publisher.icon_id) }
+    if (!publisher.icon.small) return
+    return { uri: publisher.icon.small }
   }
   const restrictContentLabel = () => {
     if (!publisher.restrict_content) return null
@@ -62,7 +61,11 @@ const StoryLink = ({ link, linkType, openLink, openPublisher }) => {
 StoryLink.propTypes = {
   link: PropTypes.shape({
     url: PropTypes.string.isRequired,
-    publisher: PropTypes.object.isRequired
+    publisher: PropTypes.shape({
+      icon: PropTypes.shape({
+        small: PropTypes.string
+      })
+    }).isRequired
   }).isRequired,
   openLink: PropTypes.func.isRequired,
   openPublisher: PropTypes.func.isRequired,

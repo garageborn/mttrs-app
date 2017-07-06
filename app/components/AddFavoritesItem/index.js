@@ -3,14 +3,10 @@ import { View } from 'react-native'
 import ToggleFavoriteContainer from '../../containers/ToggleFavoriteContainer'
 import PublisherLogo from '../PublisherLogo'
 import AddFavoritesPublisher from '../AddFavoritesPublisher'
-import * as cloudinary from '../../common/utils/Cloudinary'
 
 class AddFavoritesItem extends PureComponent {
   renderIcon () {
-    const { publisher } = this.props
-    if (!publisher.icon_id) return null
-    const uri = cloudinary.id(publisher.icon_id)
-    return <PublisherLogo size={50} source={{ uri }} />
+    return <PublisherLogo size={50} source={{ uri: this.props.publisher.icon.medium }} />
   }
 
   publisherComponent (active) {
@@ -41,7 +37,9 @@ AddFavoritesItem.propTypes = {
     id: PropTypes.any.isRequired,
     name: PropTypes.string.isRequired,
     display_name: PropTypes.string,
-    icon_id: PropTypes.string
+    icon: PropTypes.shape({
+      medium: PropTypes.string
+    })
   }).isRequired
 }
 

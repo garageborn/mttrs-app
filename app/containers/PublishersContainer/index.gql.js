@@ -5,7 +5,7 @@ const Query = gql`
 query {
   publishers(with_stories: true, order_by_name: true) {
     id
-    icon_id
+    icon { small }
     name
     display_name
     slug

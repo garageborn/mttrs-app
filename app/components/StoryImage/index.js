@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Image, Platform, PixelRatio } from 'react-native'
+import { Image, Platform } from 'react-native'
 import Placeholder from './components/Placeholder'
 import styles from './styles'
 

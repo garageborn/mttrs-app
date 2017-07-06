@@ -74,8 +74,7 @@ FavoritePublishersItem.propTypes = {
   publisher: PropTypes.shape({
     id: PropTypes.any.isRequired,
     name: PropTypes.string.isRequired,
-    display_name: PropTypes.string,
-    icon_id: PropTypes.string
+    display_name: PropTypes.string
   }).isRequired,
   onPress: PropTypes.func.isRequired
 }

@@ -49,8 +49,7 @@ Story.propTypes = {
     }),
     publishers: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        icon_id: PropTypes.string
+        name: PropTypes.string.isRequired
       })
     ).isRequired
   }).isRequired,
