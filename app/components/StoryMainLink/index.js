@@ -16,10 +16,12 @@ const StoryMainLink = ({ onPress, openDialog, story }) => {
     return <StoryCategory category={story.category} />
   }
 
+  console.log(mainLink.image.thumb)
+
   return (
     <Touchable onPress={onPress} activeOpacity={0.7} underlayColor={WHITE_COLOR} >
       <View style={styles.content}>
-        <StoryImage source={mainLink.image_url} story={story} />
+        <StoryImage source={mainLink.image.thumb} story={story} />
         <View>
           <StoryTitle title={mainLink.title} />
           {renderStoryCategory()}
@@ -34,7 +36,11 @@ StoryMainLink.propTypes = {
   onPress: PropTypes.func.isRequired,
   openDialog: PropTypes.func.isRequired,
   story: PropTypes.shape({
-    id: PropTypes.any.isRequired
+    id: PropTypes.any.isRequired,
+    image: PropTypes.shape({
+      thumb: PropTypes.string.isRequired
+    })
+
   }).isRequired
 }
 

@@ -38,7 +38,9 @@ Story.propTypes = {
     headline: PropTypes.string,
     summary: PropTypes.string,
     main_link: PropTypes.shape({
-      image_url: PropTypes.string
+      image: PropTypes.shape({
+        thumb: PropTypes.string
+      })
     }).isRequired,
     links_count: PropTypes.number.isRequired,
     category: PropTypes.shape({
