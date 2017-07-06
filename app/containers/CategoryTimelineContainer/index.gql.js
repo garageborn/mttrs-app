@@ -18,7 +18,9 @@ const Query = gql`
           url
           amp_url
           slug
-          image_url
+          image {
+            thumb
+          }
           publisher { id name display_name icon_id slug restrict_content }
         }
         publishers(limit: 5) { id name display_name icon_id slug restrict_content }

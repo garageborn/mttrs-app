@@ -25,7 +25,7 @@ class StoryImage extends Component {
     if (this.state.status === 'loading') {
       return this.getLoading()
     } else {
-      return this.getImage()
+      return { uri: this.props.source }
     }
   }
 
@@ -48,18 +48,6 @@ class StoryImage extends Component {
         source={this.getSource()}
       />
     )
-  }
-
-  getImage () {
-    let options = {
-      crop: 'fit',
-      dpr: PixelRatio.get(),
-      height: 95,
-      secure: true,
-      type: 'fetch',
-      width: 120
-    }
-    return { uri: cloudinary.url(this.props.source, options) }
   }
 
   getLoading () {

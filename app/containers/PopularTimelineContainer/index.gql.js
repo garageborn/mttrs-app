@@ -17,7 +17,9 @@ const Query = gql`
           url
           amp_url
           slug
-          image_url(format: "95x120")
+          image {
+            thumb
+          }
           publisher { id name display_name icon_id slug restrict_content }
         }
         links_count
