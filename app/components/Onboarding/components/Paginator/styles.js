@@ -11,14 +11,14 @@ const styles = StyleSheet.create({
   },
 
   buttonLeft: {
-    width: 95,
+    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     paddingLeft: 5
   },
 
   buttonRight: {
-    width: 95,
+    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'flex-end'
   },

@@ -2,42 +2,49 @@ export const TENANTS = [
   {
     host: 'argentina.mtt.rs',
     id: 'mttrs_ar',
-    language: 'en',
+    country: 'AR',
+    language: 'es',
     protocol: 'https'
   },
   {
     host: 'mttrs.com.br',
     id: 'mttrs_br',
+    country: 'BR',
     language: 'pt',
     protocol: 'https'
   },
   {
     host: 'chile.mtt.rs',
     id: 'mttrs_cl',
-    language: 'en',
+    country: 'CL',
+    language: 'es',
     protocol: 'https'
   },
   {
     host: 'mexico.mtt.rs',
     id: 'mttrs_mx',
-    language: 'en',
+    country: 'MX',
+    language: 'es',
     protocol: 'https'
   },
   {
     host: 'portugal.mtt.rs',
     id: 'mttrs_pt',
+    country: 'PT',
     language: 'pt',
     protocol: 'https'
   },
   {
     host: 'estadosunidos.mtt.rs',
     id: 'mttrs_us_es',
+    country: 'US',
     language: 'es',
     protocol: 'https'
   },
   {
     host: 'australia.mtt.rs',
     id: 'mttrs_au',
+    country: 'AU',
     language: 'en',
     protocol: 'https'
   },
@@ -45,6 +52,7 @@ export const TENANTS = [
     default: true,
     host: 'mtt.rs',
     id: 'mttrs_us',
+    country: 'US',
     language: 'en',
     protocol: 'https'
   }

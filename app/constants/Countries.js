@@ -5,6 +5,11 @@ export const COUNTRIES = [
     language: 'Español'
   },
   {
+    tenantId: 'mttrs_au',
+    name: 'Australia',
+    language: 'English'
+  },
+  {
     tenantId: 'mttrs_br',
     name: 'Brasil',
     language: 'Português'

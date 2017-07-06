@@ -2,7 +2,7 @@ import { AsyncStorage, InteractionManager } from 'react-native'
 import apolloClient from '../config/apolloClient'
 import Tenant from '../common/utils/Tenant'
 import captureError from '../common/utils/captureError'
-import { DEVICE_LANGUAGE } from '../constants/Locale'
+import { DEVICE_LANGUAGE, DEVICE_COUNTRY } from '../constants/Locale'
 import { ASSIGN_TENANT, REQUEST_TENANT, TENANT_RECEIVED } from '../constants/ActionTypes'
 import { NavigationActions } from '../actions/index'
 
@@ -61,7 +61,8 @@ function onSetCurrent (previousTenant, tenant) {
 }
 
 function onGetCurrent (storageTenant) {
-  const fallbackTenant = Tenant.findByLanguage(DEVICE_LANGUAGE)
+  let fallbackTenant = Tenant.findByCountryAndLanguage(DEVICE_COUNTRY, DEVICE_LANGUAGE)
+
   return (dispatch, getState) => {
     if (getState().TenantReducer.isAssigning) return
 
