@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import PublisherSearch from '../PublisherSearch'
 import PublisherSelectorList from '../PublisherSelectorList'
 import PublisherSuggestionTrigger from '../PublisherSuggestionTrigger'
@@ -9,7 +9,7 @@ import styles from './styles'
 class PublisherSelector extends PureComponent {
   constructor () {
     super()
-    this.handleSuggestionTrigger = this.handleSuggestionTrigger.bind(this)
+    this.handleSuggestion = this.handleSuggestion.bind(this)
     this.state = { suggestion: false }
   }
 
@@ -20,16 +20,16 @@ class PublisherSelector extends PureComponent {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <PublisherSearch handleQuery={handleQuery} query={query} suggestion={suggestion} />
-          <PublisherSuggestionTrigger onPress={this.handleSuggestionTrigger} active={suggestion} />
+          <PublisherSearch handleQuery={handleQuery} query={query} suggestion={suggestion} closeSuggestion={() => this.handleSuggestion(true)} />
+          <PublisherSuggestionTrigger onPress={() => this.handleSuggestion(suggestion)} active={suggestion} />
         </View>
         {this.renderContent()}
       </View>
     )
   }
 
-  handleSuggestionTrigger () {
-    return this.setState({ suggestion: !this.state.suggestion })
+  handleSuggestion (suggestion) {
+    return this.setState({ suggestion: !suggestion })
   }
 
   renderContent () {
@@ -38,12 +38,18 @@ class PublisherSelector extends PureComponent {
 
   renderSuggestionView () {
     const { query } = this.props
+    if (!query.length) return null
     return <PublisherSuggestionContainer query={query} />
   }
 
   renderListView () {
-    const { openPublisher, publishers } = this.props
-    return <PublisherSelectorList publishers={publishers} openPublisher={openPublisher} />
+    const { openPublisher, publishers, query } = this.props
+    return (
+      <ScrollView>
+        <PublisherSelectorList query={query} publishers={publishers} openPublisher={openPublisher} />
+        {this.renderSuggestionView()}
+      </ScrollView>
+    )
   }
 }
 

@@ -19,7 +19,7 @@ class PublisherSuggestionContainer extends Component {
   }
 
   sendSuggestion () {
-    this.props.createPublisherSuggestion(this.props.publisher)
+    this.props.createPublisherSuggestion(this.props.query)
       .then(d => this.setState({ status: 'success' }))
       .catch(e => this.setState({ status: 'error' }))
   }
