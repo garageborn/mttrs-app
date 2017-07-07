@@ -19,7 +19,9 @@ const Query = gql`
       publisher {
         id
         name
-        icon_id
+        icon {
+          xsmall
+        }
       }
       category {
         id

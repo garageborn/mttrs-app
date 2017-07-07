@@ -68,8 +68,7 @@ const linkPropsTypes = PropTypes.shape({
   url: PropTypes.string.isRequired,
   total_social: PropTypes.number.isRequired,
   publisher: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    icon_id: PropTypes.string
+    name: PropTypes.string.isRequired
   }).isRequired
 })
 

@@ -3,15 +3,14 @@
 import React, { PropTypes } from 'react'
 import { View, Text } from 'react-native'
 import PublisherLogo from '../PublisherLogo'
-import * as cloudinary from '../../common/utils/Cloudinary'
 import styles from './styles'
 
 const PublisherListItem = ({ active, publisher, rightContent }) => {
   const leftContainerStyles = active ? styles.leftContainer : styles.leftContainerInactive
 
   const getIcon = () => {
-    if (!publisher.icon_id) return
-    const uri = cloudinary.id(publisher.icon_id)
+    if (!publisher.icon.small) return
+    const uri = publisher.icon.small
     return <PublisherLogo size={30} source={{ uri }} />
   }
 
@@ -34,7 +33,10 @@ PublisherListItem.propTypes = {
   active: PropTypes.bool.isRequired,
   publisher: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    display_name: PropTypes.string
+    display_name: PropTypes.string,
+    icon: PropTypes.shape({
+      small: PropTypes.string
+    })
   }),
   rightContent: PropTypes.element.isRequired
 }

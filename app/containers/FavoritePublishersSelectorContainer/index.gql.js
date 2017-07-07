@@ -8,7 +8,7 @@ query($publisherIds: [Int], $categoryIds: [Int]) {
   publishers(with_stories: true, order_by_name: true, with_ids: $publisherIds, category_ids: $categoryIds) {
     id
     display_name
-    icon_id
+    icon { small }
     name
     slug
   }

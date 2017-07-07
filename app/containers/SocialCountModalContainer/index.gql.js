@@ -13,7 +13,7 @@ const Query = gql`
         amp_url
         slug
         total_social
-        publisher { id name display_name slug icon_id restrict_content }
+        publisher { id name display_name slug icon { small } restrict_content }
       }
       social_counter {
         facebook

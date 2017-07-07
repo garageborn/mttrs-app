@@ -8,9 +8,11 @@ const Query = gql`
       title
       url
       slug
-      image_source_url
+      image {
+        thumb
+      }
       story { id }
-      publisher { id name display_name icon_id slug restrict_content }
+      publisher { id name display_name icon { small } slug restrict_content }
     }
   }
 `
