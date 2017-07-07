@@ -26,6 +26,7 @@ class PublisherSearch extends Component {
       this.refs.textInput.clear()
       this.refs.textInput.blur()
     }
+    this.props.closeSuggestion()
     this.props.handleQuery('')
   }
 

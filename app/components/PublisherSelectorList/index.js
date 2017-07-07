@@ -4,7 +4,7 @@ import PublisherSelectorListItem from '../PublisherSelectorListItem'
 import PublisherSelectorSectionHeader from '../PublisherSelectorSectionHeader'
 import styles from './styles'
 
-const PublisherSelectorList = ({ publishers, openPublisher }) => {
+const PublisherSelectorList = ({ publishers, openPublisher, query }) => {
   const extractKey = (item, index) => `publisher_${index}`
 
   const renderSectionHeader = (sectionData) => {
@@ -39,9 +39,11 @@ const PublisherSelectorList = ({ publishers, openPublisher }) => {
 
   if (!publishers || !publishers.length) return null
 
+  const listStyles = query.length ? styles.containerWithSuggestion : styles.container
+
   return (
     <SectionList
-      style={styles.container}
+      style={listStyles}
       keyExtractor={extractKey}
       sections={sections()}
       renderItem={renderRow}
@@ -54,7 +56,8 @@ const PublisherSelectorList = ({ publishers, openPublisher }) => {
 
 PublisherSelectorList.propTypes = {
   publishers: PropTypes.array.isRequired,
-  openPublisher: PropTypes.func.isRequired
+  openPublisher: PropTypes.func.isRequired,
+  query: PropTypes.string
 }
 
 export default PublisherSelectorList

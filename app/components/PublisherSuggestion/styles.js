@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import TabBarBottom from '../../styles/TabBarBottom'
 
 export const actionColor = '#0B9CFF'
 export const dangerColor = '#FF5607'
@@ -12,7 +13,8 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: TabBarBottom.height
   },
 
   title: {

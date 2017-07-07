@@ -1,11 +1,16 @@
 import { StyleSheet } from 'react-native'
 import TabBarBottom from '../../styles/TabBarBottom'
-
+const container = {
+  flexGrow: 1,
+  paddingHorizontal: 10,
+}
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    paddingHorizontal: 10,
+    ...container,
     marginBottom: TabBarBottom.height
+  },
+  containerWithSuggestions: {
+    ...container
   }
 })
 
