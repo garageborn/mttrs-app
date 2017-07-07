@@ -1,3 +1,4 @@
+import { PixelRatio } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -10,7 +11,7 @@ const Mutation = gql`
 `
 
 const Query = gql`
-  query($slug: String!) {
+  query($dpr: Int, $slug: String!) {
     link(slug: $slug) {
       id
       title
@@ -19,7 +20,7 @@ const Query = gql`
       publisher {
         id
         name
-        icon {
+        icon(dpr: $dpr) {
           xsmall
         }
       }
@@ -44,7 +45,12 @@ export default function (Link) {
   })(
     graphql(Query, {
       options (props) {
-        return { variables: { slug: props.navigation.state.params.slug } }
+        return {
+          variables: {
+            slug: props.navigation.state.params.slug,
+            dpr: PixelRatio.get()
+          }
+        }
       }
     })(Link)
   )

@@ -1,13 +1,14 @@
+import { PixelRatio } from 'react-native'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
 const Query = gql`
-  query($slug: String!) {
+  query($dpr: Int, $slug: String!) {
     publisher(slug: $slug) {
       id
       name
       display_name
-      icon { small }
+      icon(dpr: $dpr) { small }
       slug
     }
   }
@@ -19,7 +20,10 @@ export default function (PublisherNotificationContainer) {
       const { slug } = props.payload.additionalData.model
 
       return {
-        variables: { slug }
+        variables: {
+          dpr: PixelRatio.get(),
+          slug
+        }
       }
     }
   })(PublisherNotificationContainer)

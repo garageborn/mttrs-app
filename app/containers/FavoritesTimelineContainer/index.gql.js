@@ -1,10 +1,11 @@
+import { PixelRatio } from 'react-native'
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 import prepareArrayParam from '../../common/utils/ArrayParam'
 import _result from 'lodash/result'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!, $publisherIds: [Int], $categoryIds: [Int]) {
+  query($cursor: Int, $dpr: Int, $type: String!, $limit: Int!, $publisherIds: [Int], $categoryIds: [Int]) {
     timeline(cursor: $cursor, type: $type, limit: $limit, publisher_ids: $publisherIds, category_ids: $categoryIds) {
       date
       stories {
@@ -19,11 +20,23 @@ const Query = gql`
           url
           amp_url
           slug
-          image { thumb }
-          publisher { id name display_name icon { small } slug restrict_content }
+          image(dpr: $dpr) { thumb }
+          publisher {
+            id
+            name
+            display_name
+            icon(dpr: $dpr) { small }
+            slug
+            restrict_content
+          }
         }
         publishers(limit: 5, publisher_ids: $publisherIds) {
-          id name display_name icon { xsmall } slug restrict_content
+          id
+          name
+          display_name
+          icon(dpr: $dpr) { xsmall }
+          slug
+          restrict_content
         }
         links_count
       }
@@ -42,7 +55,8 @@ export default function (FavoritesTimeline) {
           ...defaultVariables,
           type: 'favorites',
           publisherIds,
-          categoryIds
+          categoryIds,
+          dpr: PixelRatio.get()
         }
       }
     }

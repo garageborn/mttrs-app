@@ -1,9 +1,10 @@
+import { PixelRatio } from 'react-native'
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 import _result from 'lodash/result'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $tagSlug: String) {
+  query($cursor: Int, $dpr: Int, $type: String!, $limit: Int!, $categorySlug: String, $tagSlug: String) {
     timeline(cursor: $cursor, type: $type, limit: $limit, category_slug: $categorySlug, tag_slug: $tagSlug) {
       date
       stories {
@@ -21,9 +22,25 @@ const Query = gql`
           image {
             thumb
           }
-          publisher { id name display_name icon { small } slug restrict_content }
+          publisher {
+            id
+            name
+            display_name
+            icon(dpr: $dpr) {
+              small
+            }
+            slug
+            restrict_content
+          }
         }
-        publishers(limit: 5) { id name display_name icon { xsmall } slug restrict_content }
+        publishers(limit: 5) {
+          id
+          name
+          display_name
+          icon(dpr: $dpr) { xsmall }
+          slug
+          restrict_content
+        }
         links_count
       }
     }
@@ -41,7 +58,8 @@ export default function (CategoryTimelineContainer) {
           ...defaultVariables,
           tagSlug,
           categorySlug,
-          type: 'category'
+          type: 'category',
+          dpr: PixelRatio.get()
         }
       }
     }
