@@ -1,8 +1,9 @@
+import { PixelRatio } from 'react-native'
 import gql from 'graphql-tag'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String, $limit: Int!) {
+  query($cursor: Int, $dpr: Int, $type: String, $limit: Int!) {
     timeline(cursor: $cursor, type: $type, limit: $limit) {
       date
       stories {
@@ -17,13 +18,25 @@ const Query = gql`
           url
           amp_url
           slug
-          image {
-            thumb
+          image(dpr: $dpr) { thumb }
+          publisher {
+            id
+            name
+            display_name
+            icon(dpr: $dpr) { small }
+            slug
+            restrict_content
           }
-          publisher { id name display_name icon { small } slug restrict_content }
         }
         links_count
-        publishers(limit: 5) { id name display_name icon { xsmall } slug restrict_content }
+        publishers(limit: 5) {
+          id
+          name
+          display_name
+          icon(dpr: $dpr) { xsmall }
+          slug
+          restrict_content
+        }
       }
     }
   }
@@ -32,7 +45,13 @@ const Query = gql`
 export default function (PopularTimeline) {
   return graphql(Query, {
     options (props) {
-      return { variables: { ...defaultVariables, type: 'popular' } }
+      return {
+        variables: {
+          ...defaultVariables,
+          dpr: PixelRatio.get(),
+          type: 'popular'
+        }
+      }
     }
   })(PopularTimeline)
 }

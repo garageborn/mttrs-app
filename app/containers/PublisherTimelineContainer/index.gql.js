@@ -3,7 +3,7 @@ import _result from 'lodash/result'
 import graphql, { defaultVariables } from '../TimelineContainer/index.gql'
 
 const Query = gql`
-  query($cursor: Int, $type: String!, $limit: Int!, $categorySlug: String, $publisherSlug: String) {
+  query($cursor: Int, $dpr: Int, $type: String!, $limit: Int!, $categorySlug: String, $publisherSlug: String) {
     timeline(cursor: $cursor, type: $type, limit: $limit, category_slug: $categorySlug, publisher_slug: $publisherSlug) {
       date
       stories {
@@ -18,13 +18,15 @@ const Query = gql`
           url
           amp_url
           slug
-          image {
+          image(dpr: $dpr) {
             thumb
           }
-          publisher { id name display_name icon { small } slug restrict_content }
+          publisher {
+            id name display_name icon(dpr: $dpr) { small } slug restrict_content
+          }
         }
         publishers(limit: 5, publisher_slug: $publisherSlug) {
-          id name display_name icon { xsmall } slug restrict_content
+          id name display_name icon(dpr: $dpr) { xsmall } slug restrict_content
         }
         links_count
       }
