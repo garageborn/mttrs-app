@@ -1,6 +1,7 @@
 import { graphql } from 'react-apollo'
 import _uniqBy from 'lodash/uniqBy'
 import _isArray from 'lodash/isArray'
+import _result from 'lodash/result'
 import makeCancelable from '../../common/utils/makeCancelable'
 
 export const defaultVariables = { limit: 16 }
@@ -16,7 +17,7 @@ const pullToRefresh = ({ fetchMore, variables }) => {
         if (!newTimeline) return previousResult
 
         let timeline = [newTimeline].concat(previousResult.timeline)
-        timeline = _uniqBy(timeline, item => item.date)
+        timeline = _uniqBy(timeline, item => _result(item, 'date'))
         return { timeline: [...timeline] }
       }
     }).then(resolve).catch(reject)
