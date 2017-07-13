@@ -3472,9 +3472,9 @@ react-native-tab-view@^0.0.65:
   dependencies:
     prop-types "^15.5.8"
 
-react-native@0.46.0:
-  version "0.46.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.46.0.tgz#07dd7045ad905433fe5256d32023bbd794f7d1f5"
+react-native@0.46.2:
+  version "0.46.2"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.46.2.tgz#e87a80fa8bb949cbd0562fa11399293852a447aa"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
