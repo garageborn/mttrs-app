@@ -19,7 +19,7 @@ const Query = gql`
           url
           amp_url
           slug
-          image {
+          image(dpr: $dpr) {
             thumb
           }
           publisher {
