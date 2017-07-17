@@ -27,6 +27,12 @@ class PopularNavigator {
 
   buildRoutes () {
     let categoryRoutes = {}
+    const routes = {
+      home: { screen: PopularTimelineScene }
+    }
+
+    if (!this.categories) return routes
+
     this.categories.forEach((category) => {
       categoryRoutes[category.slug] = {
         screen: buildCategoryTimelineScene(category),
@@ -37,7 +43,7 @@ class PopularNavigator {
     })
 
     return {
-      home: { screen: PopularTimelineScene },
+      ...routes,
       ...categoryRoutes
     }
   }
