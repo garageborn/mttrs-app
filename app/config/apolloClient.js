@@ -43,8 +43,9 @@ const errorHandler = {
     if (response.ok) {
       response.clone().json().then(({ errors }) => {
         if (errors) {
-          const message = `${response.url}\n${errors.map(e => e.message).join('\n')}`
-          captureError(message)
+          const message = `$${errors.map(e => e.message).join('\n')}`
+          const context = { url: response.url }
+          captureError(message, context)
         }
       })
     }
