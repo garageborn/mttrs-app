@@ -42,8 +42,8 @@ class LinkScene extends Component {
   render () {
     const { slug } = this.props.navigation.state.params
     const { data } = this.props
-    if (this.state.appState !== 'active') return
-    if (!data.link.category || !data.link || data.loading) return
+    if (this.state.appState !== 'active') return null
+    if (!data.link || data.loading || !data.link.category) return null
 
     return (
       <AnalyticsContainer scene={'link'} screenName={`/link/${slug}`}>
