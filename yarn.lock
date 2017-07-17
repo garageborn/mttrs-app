@@ -3275,9 +3275,9 @@ range-parser@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.0.3.tgz#6872823535c692e2c2a0103826afd82c2e0ff175"
 
-raven-js@^3.16.0:
-  version "3.16.1"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.16.1.tgz#4aab8ba7c57bc261604db970c41c49137340c450"
+raven-js@^3.16.1:
+  version "3.17.0"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.17.0.tgz#779457ac7910512c3c2cc9bb6d0a9eeb59a969ec"
 
 raw-body@~2.1.2:
   version "2.1.7"
@@ -3389,15 +3389,15 @@ react-native-onesignal@^3.0.4:
   dependencies:
     invariant "^2.2.2"
 
-react-native-sentry@^0.12.10:
-  version "0.12.12"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.12.12.tgz#464a4583b43c4679cdfc910433566a5c10c733ee"
+react-native-sentry@^0.14.5:
+  version "0.14.5"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.14.5.tgz#477aeca99a4c36326a64ca575e2b3718a3fb05a6"
   dependencies:
     chalk "^1.1.1"
     glob "7.1.1"
     inquirer "3.0.6"
-    raven-js "^3.16.0"
-    sentry-cli-binary "^1.13.3"
+    raven-js "^3.16.1"
+    sentry-cli-binary "^1.16.0"
     xcode "0.9.3"
 
 react-native-share@^1.0.20:
@@ -3851,7 +3851,7 @@ send@0.13.2:
     range-parser "~1.0.3"
     statuses "~1.2.1"
 
-sentry-cli-binary@^1.13.3:
+sentry-cli-binary@^1.16.0:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/sentry-cli-binary/-/sentry-cli-binary-1.16.0.tgz#10fbdde9e6e86d8a864c96f8adeb97b0064ea427"
   dependencies:

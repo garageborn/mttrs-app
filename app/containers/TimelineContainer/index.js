@@ -58,7 +58,7 @@ class TimelineContainer extends Component {
   }
 
   onEndReached () {
-    const { hasMore, infiniteScroll } = this.props.data
+    const { hasMore, infiniteScroll, variables } = this.props.data
     if (this.isLoadingMore || !hasMore) return
 
     this.isLoadingMore = true
@@ -71,12 +71,12 @@ class TimelineContainer extends Component {
       })
       .catch((error) => {
         this.isLoadingMore = false
-        if (!error.canceled) captureError(error)
+        if (!error.canceled) captureError(error, variables)
       })
   }
 
   onPullToRefresh () {
-    const { pullToRefresh } = this.props.data
+    const { pullToRefresh, variables } = this.props.data
     if (this.isLoadingPullToRefresh) return
 
     this.isLoadingPullToRefresh = true
@@ -89,7 +89,7 @@ class TimelineContainer extends Component {
       })
       .catch((error) => {
         this.isLoadingPullToRefresh = false
-        if (!error.canceled) captureError(error)
+        if (!error.canceled) captureError(error, variables)
       })
   }
 
@@ -140,14 +140,13 @@ TimelineContainer.propTypes = {
     pullToRefresh: PropTypes.func.isRequired,
     items: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
-    hasMore: PropTypes.bool
+    hasMore: PropTypes.bool,
+    variables: PropTypes.object
   }),
-  dispatch: PropTypes.func.isRequired,
   renderOptions: PropTypes.shape({
     timelineType: PropTypes.string,
     publisherSlug: PropTypes.string
-  }),
-  type: PropTypes.string
+  })
 }
 
 export default connect()(TimelineContainer)
