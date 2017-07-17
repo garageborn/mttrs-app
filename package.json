@@ -21,7 +21,7 @@
     "react": "16.0.0-alpha.12",
     "react-apollo": "^1.4.3",
     "react-intl": "^2.3.0",
-    "react-native": "0.46.2",
+    "react-native": "0.46.3",
     "react-native-admob": "git://github.com/alexandrebini/react-native-admob#features/native-express-ad",
     "react-native-device-info": "^0.10.2",
     "react-native-fabric": "0.4.1",
