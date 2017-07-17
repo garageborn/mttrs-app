@@ -34,6 +34,7 @@ class CategoriesDialogContainer extends Component {
 
   renderCategory (category) {
     const { onPress } = this.props
+    if (!category) return
     return <CategoryDialogButton category={category} onPress={onPress} key={category.id} />
   }
 
