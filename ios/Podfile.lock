@@ -16,14 +16,14 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.1)
   - GoogleToolboxForMac/NSData+zlib (2.1.1):
     - GoogleToolboxForMac/Defines (= 2.1.1)
-  - KSCrash/Core (1.15.10):
+  - KSCrash/Core (1.15.11):
     - KSCrash/Reporting/Filters/Basic
-  - KSCrash/Recording (1.15.10):
-    - KSCrash/Recording/Tools (= 1.15.10)
-  - KSCrash/Recording/Tools (1.15.10)
-  - KSCrash/Reporting/Filters/Base (1.15.10):
+  - KSCrash/Recording (1.15.11):
+    - KSCrash/Recording/Tools (= 1.15.11)
+  - KSCrash/Recording/Tools (1.15.11)
+  - KSCrash/Reporting/Filters/Base (1.15.11):
     - KSCrash/Recording
-  - KSCrash/Reporting/Filters/Basic (1.15.10):
+  - KSCrash/Reporting/Filters/Basic (1.15.11):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/Base
   - React (0.46.2):
@@ -42,15 +42,15 @@ PODS:
     - Crashlytics
     - Fabric
     - React
-  - Sentry (3.0.12):
-    - Sentry/Core (= 3.0.12)
-  - Sentry/Core (3.0.12)
-  - Sentry/KSCrash (3.0.12):
+  - Sentry (3.1.2):
+    - Sentry/Core (= 3.1.2)
+  - Sentry/Core (3.1.2)
+  - Sentry/KSCrash (3.1.2):
     - KSCrash/Core (~> 1.15.9)
-  - SentryReactNative (0.12.12):
+  - SentryReactNative (0.14.5):
     - React
-    - Sentry (~> 3.0.9)
-    - Sentry/KSCrash (~> 3.0.9)
+    - Sentry (~> 3.1.2)
+    - Sentry/KSCrash (~> 3.1.2)
   - Yoga (0.46.2.React)
 
 DEPENDENCIES:
@@ -58,7 +58,7 @@ DEPENDENCIES:
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/BatchedBridge (from `../node_modules/react-native`)
   - ReactNativeFabric (from `../node_modules/react-native-fabric`)
-  - Sentry (= 3.0.12)
+  - Sentry (= 3.1.2)
   - SentryReactNative (from `../node_modules/react-native-sentry`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -82,14 +82,14 @@ SPEC CHECKSUMS:
   FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  KSCrash: 2643106940b53515492744f20af9e02cf81b0dbe
+  KSCrash: 7bd106ca4a2247774deeeb587c740ce0207de8f3
   React: e411ac90946fd9f5716de12ae5e9624d162e437c
   react-native-splash-screen: 4b3b6080654d361ff15689d60cf6e61b82061ccf
   ReactNativeFabric: b7d9763b3f8fd580ac208b2af84cca725f4922f4
-  Sentry: e94aa5cc27642794a9fc565fc781ec3a0f64aa44
-  SentryReactNative: b4f4dfb5077c9d10d96991a2ccd806c480f1fdb1
+  Sentry: 5a578891f177e994d89d57effc70adb97bfb29db
+  SentryReactNative: 8f251df76f03c5ee42e702f37a41803709632217
   Yoga: 660d1f0e92d085b3e6b5adc310184a4cd527adcd
 
-PODFILE CHECKSUM: cd178b71716a8401ddd0e5dbea8bbeadb0db9eff
+PODFILE CHECKSUM: 6d1cc2d08f42fc24fda006566e83ffff4dd87989
 
 COCOAPODS: 1.2.1
