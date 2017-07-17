@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
+import { View, ActivityIndicator, Modal } from 'react-native'
 import { connect } from 'react-redux'
 import Dialog from '../../components/Dialog'
 import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
+import styles from '../../styles/Modal'
 
 class StoryDialogModalContainer extends Component {
   constructor (props) {
@@ -17,6 +18,14 @@ class StoryDialogModalContainer extends Component {
 
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
+  }
+
+  renderLoading () {
+    return (
+      <View style={styles.loading}>
+        <ActivityIndicator size='large' color='#FFF' />
+      </View>
+    )
   }
 
   render () {
