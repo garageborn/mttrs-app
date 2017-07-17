@@ -12,6 +12,9 @@ const Query = gql`
         name
         icon(dpr: $dpr) { xsmall }
       }
+      story {
+        id
+      }
     }
   }
 `

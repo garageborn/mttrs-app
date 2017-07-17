@@ -30,7 +30,7 @@ class StoryWebView extends Component {
 
   render () {
     const url = this.props.link.amp_url || this.props.link.url
-
+    if (!url) return null
     return (
       <View style={styles.container}>
         <WebView

@@ -3389,9 +3389,9 @@ react-native-onesignal@^3.0.4:
   dependencies:
     invariant "^2.2.2"
 
-react-native-sentry@^0.14.5:
-  version "0.14.5"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.14.5.tgz#477aeca99a4c36326a64ca575e2b3718a3fb05a6"
+react-native-sentry@^0.14.6:
+  version "0.14.6"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.14.6.tgz#64d1c69565f2ee742ff59dee9b92a9b1a205570b"
   dependencies:
     chalk "^1.1.1"
     glob "7.1.1"
