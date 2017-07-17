@@ -10,7 +10,7 @@ target 'mttrs' do
   pod 'ReactNativeFabric', path: '../node_modules/react-native-fabric'
   pod 'react-native-splash-screen', path: '../node_modules/react-native-splash-screen'
   pod 'SentryReactNative', path: '../node_modules/react-native-sentry'
-  pod 'Sentry', '3.0.12'
+  pod 'Sentry', '3.1.2'
 
   target 'mttrsTests' do
     inherit! :search_paths
