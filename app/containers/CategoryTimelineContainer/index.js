@@ -24,5 +24,11 @@ CategoryTimelineContainer.propTypes = {
   data: PropTypes.object.isRequired
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    selectedTag: state.CategoriesReducer.selectedTags[ownProps.category.id]
+  }
+}
+
 const CategoryTimelineContainerWithData = withQuery(CategoryTimelineContainer)
-export default connect()(CategoryTimelineContainerWithData)
+export default connect(mapStateToProps)(CategoryTimelineContainerWithData)
