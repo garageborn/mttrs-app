@@ -14,8 +14,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     backgroundColor: '#F1F1F1',
-    height: containerHeight,
-    width
+    height: containerHeight
   }
 })
 

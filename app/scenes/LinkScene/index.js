@@ -8,6 +8,7 @@ import LinkHeaderRight from '../../components/LinkHeaderRight'
 import HeaderLeft from '../../components/HeaderLeft'
 import CategoryColor from '../../components/CategoryColor'
 import AnalyticsContainer from '../../containers/AnalyticsContainer'
+import OrientationContainer from '../../containers/OrientationContainer'
 import headerStyles from '../../styles/Header'
 import { NotificationsActions } from '../../actions/index'
 
@@ -48,6 +49,7 @@ class LinkScene extends Component {
     return (
       <AnalyticsContainer scene={'link'} screenName={`/link/${slug}`}>
         <View>
+          <OrientationContainer />
           <CategoryColor category={data.link.category} />
           <StoryWebView link={data.link} />
         </View>

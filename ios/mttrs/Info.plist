@@ -20,6 +20,15 @@
 	<string>2.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1273521846029294</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>264</string>
 	<key>Fabric</key>
@@ -36,8 +45,17 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>1273521846029294</string>
+	<key>FacebookDisplayName</key>
+	<string>Matters</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbauth2</string>
+		<string>fb-messenger-api</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -67,23 +85,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fb1273521846029294</string>
-    </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>1273521846029294</string>
-  <key>FacebookDisplayName</key>
-  <string>Matters</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-      <string>fbauth2</string>
-      <string>fb-messenger-api</string>
-  </array>
 </dict>
 </plist>

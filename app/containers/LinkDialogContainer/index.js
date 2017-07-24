@@ -6,7 +6,7 @@ import StoryDialog from '../../components/StoryDialog'
 import { FavoritePublishersActions, NavigationActions } from '../../actions/index'
 import styles from '../../styles/Modal'
 
-class StoryDialogModalContainer extends Component {
+class LinkDialogContainer extends Component {
   constructor (props) {
     super(props)
     this.close = this.close.bind(this)
@@ -18,14 +18,6 @@ class StoryDialogModalContainer extends Component {
 
   componentWillMount () {
     this.props.dispatch(FavoritePublishersActions.getPublishers())
-  }
-
-  renderLoading () {
-    return (
-      <View style={styles.loading}>
-        <ActivityIndicator size='large' color='#FFF' />
-      </View>
-    )
   }
 
   render () {
@@ -40,12 +32,12 @@ class StoryDialogModalContainer extends Component {
 
   renderActions () {
     const { favorites, link } = this.props
-    if (!favorites.isLoaded) return this.renderLoading()
+    if (!favorites.isLoaded) return null
     return <StoryDialog type='untied' link={link} />
   }
 }
 
-StoryDialogModalContainer.propTypes = {
+LinkDialogContainer.propTypes = {
   favorites: PropTypes.shape({
     isLoaded: PropTypes.bool.isRequired
   }),
@@ -67,4 +59,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(StoryDialogModalContainer)
+export default connect(mapStateToProps)(LinkDialogContainer)
