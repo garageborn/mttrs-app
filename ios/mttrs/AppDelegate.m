@@ -75,5 +75,4 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
     [RCTOneSignal didReceiveRemoteNotification:notification];
 }
-
 @end

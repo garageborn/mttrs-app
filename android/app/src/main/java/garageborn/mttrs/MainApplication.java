@@ -3,6 +3,7 @@ package garageborn.mttrs;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.yamill.orientation.OrientationPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
@@ -42,6 +43,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OrientationPackage(),
           new SplashScreenReactPackage(),
           new RNSentryPackage(MainApplication.this),
           new FabricPackage(),

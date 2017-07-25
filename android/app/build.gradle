@@ -116,8 +116,8 @@ android {
         applicationId "garageborn.mttrs"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 340
-        versionName "2.0.79"
+        versionCode 342
+        versionName "2.0.81"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -164,6 +164,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-orientation')
     compile project(':react-native-admob')
     compile project(':react-native-splash-screen')
     compile project(':react-native-device-info')
