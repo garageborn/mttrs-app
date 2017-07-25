@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import NotificationsContainer from '../NotificationsContainer'
 import OnboardingContainer from '../OnboardingContainer'
+import LinkingContainer from '../LinkingContainer'
 import { View } from 'react-native'
 
 class EventsContainer extends Component {
@@ -9,6 +10,7 @@ class EventsContainer extends Component {
       <View style={{flexGrow: 1}}>
         <NotificationsContainer />
         <OnboardingContainer />
+        <LinkingContainer />
         {this.props.children}
       </View>
     )

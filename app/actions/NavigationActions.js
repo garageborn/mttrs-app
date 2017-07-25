@@ -38,6 +38,12 @@ export function settings () {
   }
 }
 
+export function publishers () {
+  return dispatch => {
+    dispatch(NavigationActions.navigate({routeName: 'publishers'}))
+  }
+}
+
 export function favoritePublishers () {
   return dispatch => {
     dispatch(NavigationActions.navigate({routeName: 'favoritePublishers'}))
