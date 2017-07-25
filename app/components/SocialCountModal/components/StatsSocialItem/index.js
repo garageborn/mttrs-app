@@ -5,7 +5,6 @@ import styles from './styles.js'
 
 const images = {
   facebook: require('./assets/facebook.png'),
-  googlePlus: require('./assets/googlePlus.png'),
   linkedin: require('./assets/linkedin.png'),
   pinterest: require('./assets/pinterest.png'),
   twitter: require('./assets/twitter.png')

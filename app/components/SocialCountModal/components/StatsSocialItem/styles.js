@@ -7,10 +7,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: (width / itemCount) - containerPadding
+    alignItems: 'center'
   },
   image: {
-    marginHorizontal: 8
+    marginHorizontal: 4,
+    height: 30,
+    width: 30
   },
   text: {
     alignSelf: 'center',
