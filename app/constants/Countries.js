@@ -4,19 +4,34 @@ export const COUNTRIES = [
     name: 'Argentina',
     language: 'Español'
   },
-  // {
-  //   tenantId: 'mttrs_au',
-  //   name: 'Australia',
-  //   language: 'English'
-  // },
+  {
+    tenantId: 'mttrs_au',
+    name: 'Australia',
+    language: 'English'
+  },
   {
     tenantId: 'mttrs_br',
     name: 'Brasil',
     language: 'Português'
   },
   {
+    tenantId: 'mttrs_ca',
+    name: 'Canada',
+    language: 'English'
+  },
+  {
     tenantId: 'mttrs_cl',
     name: 'Chile',
+    language: 'Español'
+  },
+  {
+    tenantId: 'mttrs_de',
+    name: 'Deutschland',
+    language: 'Deutsch'
+  },
+  {
+    tenantId: 'mttrs_es',
+    name: 'España',
     language: 'Español'
   },
   {
@@ -30,8 +45,19 @@ export const COUNTRIES = [
     language: 'Português'
   },
   {
+    tenantId: 'mttrs_uk',
+    name: 'United Kingdom',
+    language: 'English'
+  },
+  {
     tenantId: 'mttrs_us',
     name: 'United States of America',
     language: 'English'
+  },
+
+  {
+    tenantId: 'mttrs_us_es',
+    name: 'United States of America',
+    language: 'Español'
   }
 ]
