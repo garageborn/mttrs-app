@@ -8,6 +8,11 @@ import iconCL from './assets/mttrs_cl.png'
 import iconMX from './assets/mttrs_mx.png'
 import iconPT from './assets/mttrs_pt.png'
 import iconUS from './assets/mttrs_us.png'
+import iconDE from './assets/mttrs_de.png'
+import iconUK from './assets/mttrs_uk.png'
+import iconES from './assets/mttrs_es.png'
+import iconUSES from './assets/mttrs_us_es.png'
+import iconCA from './assets/mttrs_ca.png'
 import styles from './styles'
 
 const images = {
@@ -17,7 +22,12 @@ const images = {
   mttrs_cl: iconCL,
   mttrs_mx: iconMX,
   mttrs_pt: iconPT,
-  mttrs_us: iconUS
+  mttrs_us: iconUS,
+  mttrs_de: iconDE,
+  mttrs_uk: iconUK,
+  mttrs_es: iconES,
+  mttrs_us_es: iconUSES,
+  mttrs_ca: iconCA
 }
 
 const TenantListItem = ({ active, country, rightContent }) => {
