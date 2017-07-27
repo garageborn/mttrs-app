@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Image, View } from 'react-native'
+import { Image, View, ScrollView } from 'react-native'
 import { injectIntl } from 'react-intl'
 import { WHITE_TRANSPARENT_COLOR } from '../../constants/TouchUnderlayColors'
 import { COUNTRIES } from '../../constants/Countries'
@@ -33,10 +33,10 @@ const TenantSelector = ({ intl, current, onPress }) => {
   const renderList = () => COUNTRIES.map(item => renderItem(item))
 
   return (
-    <View>
+    <ScrollView>
       {renderList()}
       <TenantIconsDisclaimer />
-    </View>
+    </ScrollView>
   )
 }
 
